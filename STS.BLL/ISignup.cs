@@ -10,6 +10,7 @@ namespace STS.BLL.Interface
 {
     public interface ISignup
     {
+
         Task<TranStatus> ProSignup(SignupModel model);
         Task<List<SignupListModel>> ProLogin();
     }
