@@ -35,6 +35,7 @@ namespace STS
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+            //This is connection string to connect the database..
             STSSetting.ConnectionString = Configuration.GetSection("ConnectionString:STS").Value;
             DependencyResolver(services);
         }
