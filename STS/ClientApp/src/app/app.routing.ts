@@ -149,8 +149,8 @@ export const routes: Routes = [
 
 
   {
-    path: '',
-    component: DefaultLayoutComponent,
+    path: 'sales',
+    component: SalesLayoutComponent,
     data: {
       title: 'Home'
     },
@@ -163,6 +163,26 @@ export const routes: Routes = [
         path: 'product',
         loadChildren: () => import('./sales/product/product.module').then(m => m.ProductModule)
       },
+      {
+        path: 'assign',
+        loadChildren: () => import('./sales/assign/assign.module').then(m => m.AssignModule)
+      },
+      {
+        path: 'client',
+        loadChildren: () => import('./sales/client/client.module').then(m => m.ClientModule)
+      },
+      {
+        path: 'activity',
+        loadChildren: () => import('./sales/activity/activity.module').then(m => m.ActivityModule)
+      },
+      {
+        path: 'map',
+        loadChildren: () => import('./sales/map/map.module').then(m => m.MapModule)
+      },
+      {
+        path: 'demo',
+        loadChildren: () => import('./sales/demo/demo.module').then(m => m.DemoModule)
+      }
      ] },
 
 

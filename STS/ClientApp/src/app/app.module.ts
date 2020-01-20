@@ -22,7 +22,8 @@ import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 
 const APP_CONTAINERS = [
-  DefaultLayoutComponent
+  DefaultLayoutComponent,
+  SalesLayoutComponent
 ];
 
 import {
@@ -42,12 +43,9 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
-import { ProductComponent } from './views/product/product.component';
-import { ClientComponent } from './views/client/client.component';
-import { AssignComponent } from './views/assign/assign.component';
-import { ActivityComponent } from './views/activity/activity.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SalesRegisterComponent } from './sales/register/register.component';
+import { SalesLayoutComponent } from './containerSales';
 
 
 @NgModule({
