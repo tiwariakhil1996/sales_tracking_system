@@ -12,6 +12,8 @@ namespace STS.BLL.Interface
     {
         Task<TranStatus> ProcRegister(UserModel model);
         Task<List<RegisterListModel>> RegisterList();
+
+
     }
 }
 
