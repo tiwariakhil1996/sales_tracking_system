@@ -12,6 +12,7 @@ namespace STS.Model
         public string Password { get; set; }
         public string Cpassword { get; set; }
 
+
     }
 
     //Login
