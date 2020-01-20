@@ -57,6 +57,11 @@ export const navItems: INavData[] = [
     icon: 'icon-map'
   },
   {
+    name: 'Demo',
+    url: '/demo',
+    icon: 'icon-demo'
+  },
+  {
     name: 'Logout',
     url: '/login',
     icon: 'icon-logout'

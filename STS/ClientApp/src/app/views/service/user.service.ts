@@ -8,23 +8,15 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  //MAP
+ 
+  // REGISTER
 
-  addRegister(data) {
-    return this.http.post('/api/SampleData/ProcRegister', data);
+  RegisterService(data) {
+    return this.http.post('/api/User/RegisterUser', data);
   }
 
   RegisterList() {
-    return this.http.get('/api/SampleData/RegisterList');
-  }
-
-  //REGISTER
-  Signup(data) {
-    return this.http.post('/api/User/ProSignup', data);
-  }
-
-  SignupList() {
-    return this.http.get('/api/User/ProLogin');
+    return this.http.get('/api/User/RegisterList');
   }
 
 }

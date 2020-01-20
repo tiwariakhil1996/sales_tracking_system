@@ -10,17 +10,17 @@ using Microsoft.AspNetCore.Mvc;
 namespace STS.Controllers
 {
     [Route("api/[controller]")]
-    public class SampleDataController : Controller
+    public class DemoController : Controller
     {
-        private IUser iuser;
-        public SampleDataController(IUser user)
+        private IDemo idemo;
+        public DemoController(IDemo demo)
         {
-            iuser = user;
+            idemo = demo;
         }
 
         [HttpPost]
-        [Route("ProcRegister")]
-        public async Task<IActionResult> ProcRegister([FromBody]UserModel model)
+        [Route("DemoRegister")]
+        public async Task<IActionResult> DemoRegister([FromBody] DemoRegisterModel model)
         {
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
@@ -28,7 +28,7 @@ namespace STS.Controllers
             try
             {
 
-                transaction = await iuser.ProcRegister(model);
+                transaction = await idemo.DemoRegister(model);
 
             }
             catch (Exception ex)
@@ -40,16 +40,16 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
         [HttpGet]
-        [Route("RegisterList")]
-        public async Task<IActionResult> RegisterList()
+        [Route("DemoLogin")]
+        public async Task<IActionResult> DemoLogin()
         {
             TranStatus transaction = new TranStatus();
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
             try
             {
-                var registerList = await iuser.RegisterList();
-                dctData.Add("RegisterList", registerList);
+                var registerList = await idemo.DemoLogin();
+                dctData.Add("DemoLogin", registerList);
             }
             catch (Exception ex)
             {

@@ -49,6 +49,7 @@ import { ActivityComponent } from './views/activity/activity.component';
 import { HttpClientModule } from '@angular/common/http';
 
 
+
 @NgModule({
   imports: [
     BrowserModule,
