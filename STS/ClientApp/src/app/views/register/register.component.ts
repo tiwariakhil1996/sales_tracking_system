@@ -15,7 +15,7 @@ export class RegisterComponent  implements OnInit{
 
   userDetails: signupModel[] = [];
   constructor(private userService: UserService) {
-    this.Login();
+    // this.Login();
 
 
   }
