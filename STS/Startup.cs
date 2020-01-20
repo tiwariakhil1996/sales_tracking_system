@@ -27,7 +27,7 @@ namespace STS
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-     //       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            // services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
@@ -35,6 +35,9 @@ namespace STS
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            //Database Connectivity
+
             STSSetting.ConnectionString = Configuration.GetSection("ConnectionString:STS").Value;
             DependencyResolver(services);
         }
@@ -42,8 +45,13 @@ namespace STS
         private void DependencyResolver(IServiceCollection services)
         {
             //throw new NotImplementedException();
+
+            //Services
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+           
+            services.AddSingleton<IDemo, DemoServices>();
             services.AddSingleton<IUser, UserServices>();
+            services.AddSingleton<IProduct, ProductServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -85,7 +93,8 @@ namespace STS
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseAngularCliServer(npmScript: "start");
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+                    //spa.UseAngularCliServer(npmScript: "start");
                 }
             });
         }

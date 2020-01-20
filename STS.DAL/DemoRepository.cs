@@ -10,9 +10,9 @@ using STS.Model;
 
 namespace STS.DAL
 {
-    public class SignupRepository : BaseRepository
+    public class DemoRepository : BaseRepository
     {
-        public async Task<TranStatus> ProSignup(SignupModel model)
+        public async Task<TranStatus> DemoRegister(DemoRegisterModel model)
         {
             using (var connection = new SqlConnection(ConnectionString))
 
@@ -20,14 +20,12 @@ namespace STS.DAL
                 await connection.OpenAsync();
                 TranStatus transaction = new TranStatus();
                 DynamicParameters parameter = new DynamicParameters();
-                parameter.Add("@UserName", model.Username);
-                parameter.Add("@Email", model.Email);
+                parameter.Add("@Username", model.Username);
                 parameter.Add("@Password", model.Password);
-                parameter.Add("@Cpassword", model.Cpassword);
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
-                await connection.QueryAsync("ProSignup", parameter, commandType: CommandType.StoredProcedure);
+                await connection.QueryAsync("DemoRegister", parameter, commandType: CommandType.StoredProcedure);
 
                 transaction.returnMessage = parameter.Get<string>("@Message");
                 transaction.code = parameter.Get<int>("@Code");
@@ -36,12 +34,12 @@ namespace STS.DAL
             }
         }
 
-        public async Task<List<SignupListModel>> ProLogin()
+        public async Task<List<DemoLoginModel>> DemoLogin()
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                var result = await connection.QueryAsync<SignupListModel>("ProLogin", commandType: CommandType.StoredProcedure);
+                var result = await connection.QueryAsync<DemoLoginModel>("DemoLogin", commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
             }

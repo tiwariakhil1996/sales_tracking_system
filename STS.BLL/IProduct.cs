@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace STS.BLL.Interface
 {
-    public interface ISignup
+    public interface IProduct
     {
-        Task<TranStatus> ProSignup(SignupModel model);
-        Task<List<SignupListModel>> ProLogin();
+        Task<TranStatus> addProduct(ProductModel model);
+
+        //Task<List<RegisterListModel>> RegisterList();
     }
 }
 

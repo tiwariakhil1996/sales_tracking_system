@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { signupModel } from '../model/model';
 import { UserService } from '../service/user.service';
+import { Router } from '@angular/router';
+import { registerModel } from '../model/model';
 
 
 @Component({
@@ -11,11 +12,11 @@ import { UserService } from '../service/user.service';
 export class RegisterComponent  implements OnInit{
 
   title = 'STS';
-  register = new signupModel();
+  register = new registerModel();
 
-  userDetails: signupModel[] = [];
-  constructor(private userService: UserService) {
-    this.Login();
+  userDetails: registerModel[] = [];
+  constructor(private router: Router, private userService: UserService){
+    // this.Login();
 
 
   }
@@ -24,7 +25,7 @@ export class RegisterComponent  implements OnInit{
   }
 
   // Login() {
-  //   this.userService.SignupList().subscribe((data: any) => {
+  //   this.userService.RegisterList().subscribe((data: any) => {
   //     if (data.Status.code === 0) {
   //       if (data.RegisterList) {
   //         this.userDetails = data.RegisterList;
@@ -36,9 +37,9 @@ export class RegisterComponent  implements OnInit{
   //   });
   // }
 
-  Signup() {
+  submitForm() {
 
-    this.userService.Signup(this.register).subscribe((data: any) => {
+    this.userService.RegisterService(this.register).subscribe((data: any) => {
       if (data.Status.code === 0) {
         alert('Registered sucesfully');
       }
@@ -47,4 +48,8 @@ export class RegisterComponent  implements OnInit{
 
     });
   } 
+
+  loginForm(){
+    this.router.navigate(['/login']);
+  }
 }

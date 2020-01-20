@@ -84,6 +84,10 @@ export const routes: Routes = [
         loadChildren: () => import('./views/map/map.module').then(m => m.MapModule)
       },
       {
+        path: 'demo',
+        loadChildren: () => import('./views/demo/demo.module').then(m => m.DemoModule)
+      },
+      {
         path: 'base',
         loadChildren: () => import('./views/base/base.module').then(m => m.BaseModule)
       },

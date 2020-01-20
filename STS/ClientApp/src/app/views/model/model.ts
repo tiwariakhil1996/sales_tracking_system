@@ -1,20 +1,30 @@
-// For Registering Data
+// demo page
+export class demoModel {
+    id: number;
+    username: string;
+    email: string;
+    password: string;
+    cpassword: string;
+}
 
+
+// register form
 export class registerModel {
     id: number;
     username: string;
     email: string;
-    gender:string;
-    mobile:number;
     password: string;
-    confirmpassword: string;
+    cpassword: string;
 }
 
-
-export class signupModel {
+// product form
+export class productModel {
     id: number;
-    username: string;
-    email: string;
-    password: string;
-    confirmpassword: string;
+    category: string;
+    subcategory: string;
+    productname: string;
+    description: string;
+    price: number;
+    image: any;
+    date: any;
 }
