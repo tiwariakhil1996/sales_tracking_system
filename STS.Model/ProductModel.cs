@@ -15,6 +15,8 @@ namespace STS.Model
         public string Image       { get; set; }
         public string Date        { get; set; }
 
+
+
     }
 
 }
