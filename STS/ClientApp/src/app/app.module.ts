@@ -47,7 +47,7 @@ import { ClientComponent } from './views/client/client.component';
 import { AssignComponent } from './views/assign/assign.component';
 import { ActivityComponent } from './views/activity/activity.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { SalesRegisterComponent } from './sales/register/register.component';
 
 
 @NgModule({
@@ -82,9 +82,9 @@ import { HttpClientModule } from '@angular/common/http';
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent
-    // ActivityComponent
-    // ProductComponent
+    RegisterComponent,
+
+    SalesRegisterComponent
   ],
 
   // providers: [{

@@ -1,6 +1,7 @@
 import { INavData } from '@coreui/angular';
 
 export const navItems: INavData[] = [
+
   {
     name: 'Dashboard',
     url: '/dashboard',
@@ -308,4 +309,6 @@ export const navItems: INavData[] = [
   //   variant: 'danger',
   //   attributes: { target: '_blank', rel: 'noopener' }
   // }
+
+
 ];

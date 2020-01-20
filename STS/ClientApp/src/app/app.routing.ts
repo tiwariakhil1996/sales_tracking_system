@@ -4,13 +4,23 @@ import { Routes, RouterModule } from '@angular/router';
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
 
+
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { ProductComponent } from './views/product/product.component';
 
+
+
+// // Sales
+import { SalesLayoutComponent } from './containerSales';
+import { SalesRegisterComponent } from './sales/register/register.component';
+
+
+
 export const routes: Routes = [
+
   // {
   //   path: '',
   //   redirectTo: 'dashboard',
@@ -49,6 +59,9 @@ export const routes: Routes = [
       title: 'Register Page'
     }
   },
+
+  
+
   // {
   //   path: 'product',
   //   component: ProductComponent,
@@ -121,6 +134,42 @@ export const routes: Routes = [
       }
     ]
   },
+
+
+
+
+
+  {
+    path: 'register',
+    component: SalesRegisterComponent,
+    data: {
+      title: 'Register Page'
+    }
+  },
+
+
+  {
+    path: '',
+    component: DefaultLayoutComponent,
+    data: {
+      title: 'Home'
+    },
+    children: [
+      {
+        path: 'dashboard',
+        loadChildren: () => import('./sales/dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
+      {
+        path: 'product',
+        loadChildren: () => import('./sales/product/product.module').then(m => m.ProductModule)
+      },
+     ] },
+
+
+
+
+
+
   { path: '**', component: P404Component }
 ];
 
