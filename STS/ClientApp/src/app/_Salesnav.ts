@@ -6,15 +6,9 @@ export const SalesnavItems: INavData[] = [
     name: 'Dashboard',
     url: '/sales/dashboard',
     icon: 'icon-speedometer',
-    // badge: {
-    //   variant: 'info',
-    //   text: 'NEW'
-    // }
+
   },
-  // {
-  //   title: true,
-  //   name: 'Forms'
-  // },
+  
   {
     name: 'Add Product',
     url: '/sales/product',
@@ -25,11 +19,7 @@ export const SalesnavItems: INavData[] = [
     url: '/sales/client',
     icon: 'icon-user-follow'
   },
-  // {
-  //   name: 'Assign List',
-  //   url: '/assign',
-  //   icon: 'icon-list'
-  // },
+
   {
     name: 'Activity',
     url: '/sales/activity',
@@ -57,11 +47,11 @@ export const SalesnavItems: INavData[] = [
     url: '/sales/map',
     icon: 'icon-map'
   },
-  {
-    name: 'Demo',
-    url: '/sales/demo',
-    icon: 'icon-demo'
-  },
+  // {
+  //   name: 'Demo',
+  //   url: '/sales/demo',
+  //   icon: 'icon-demo'
+  // },
   {
     name: 'Logout',
     url: '/sales/login',

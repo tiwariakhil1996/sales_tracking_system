@@ -32,7 +32,7 @@ export const navItems: INavData[] = [
   // },
   {
     name: 'Activity',
-    url: 'activity',
+    url: '/admin/activity',
     icon: 'icon-layers',
     children: [
       {

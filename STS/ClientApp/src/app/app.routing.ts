@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-// Import Containers
+// Admin Containers
 import { DefaultLayoutComponent } from './containers';
 
-//admin
 import { P404Component } from './admin/error/404.component';
 import { P500Component } from './admin/error/500.component';
 import { LoginComponent } from './admin/login/login.component';
@@ -13,21 +12,24 @@ import { ProductComponent } from './admin/product/product.component';
 
 
 
-//Sales
 
+// // Sales
 import { SalesLayoutComponent } from './containerSales';
+
 import { SalesRegisterComponent } from './sales/register/register.component';
 import { SalesLoginComponent } from './sales/login/login.component';
 
 
-
 export const routes: Routes = [
 
-  //Admin routing...
-
+  // {
+  //   path: '',
+  //   redirectTo: 'dashboard',
+  //   pathMatch: 'full',
+  // },
   {
     path: '',
-    redirectTo: 'admin/login',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   {
@@ -44,6 +46,10 @@ export const routes: Routes = [
       title: 'Page 500'
     }
   },
+
+
+
+  // --------------------------------------- ADMIN ROUTING -----------------------
   {
     path: 'admin/login',
     component: LoginComponent,
@@ -51,6 +57,7 @@ export const routes: Routes = [
       title: 'Login Page'
     }
   },
+
   {
     path: 'admin/register',
     component: RegisterComponent,
@@ -67,6 +74,10 @@ export const routes: Routes = [
     },
     children: [
     
+      {
+        path: 'dashboard',
+        loadChildren: () => import('./admin/dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
       {
         path: 'product',
         loadChildren: () => import('./admin/product/product.module').then(m => m.ProductModule)
@@ -105,7 +116,7 @@ export const routes: Routes = [
       },
       {
         path: 'dashboard',
-        loadChildren: () => import('./admin/dashboard/dashboard.module').then(m => m.DashboardModule)
+        loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {
         path: 'icons',
@@ -128,14 +139,6 @@ export const routes: Routes = [
 
 
 
-  //sales routing
-  {
-    path: 'sales/login',
-    component: SalesLoginComponent,
-    data: {
-      title: 'Login Page'
-    }
-  },
 
 
   {
@@ -177,11 +180,12 @@ export const routes: Routes = [
       {
         path: 'map',
         loadChildren: () => import('./sales/map/map.module').then(m => m.MapModule)
-      },
-      {
-        path: 'demo',
-        loadChildren: () => import('./sales/demo/demo.module').then(m => m.DemoModule)
       }
+      // {
+      //   path: 'demo',
+      //   loadChildren: () => import('./sales/demo/demo.module').then(m => m.DemoModule)
+      // }
+
      ] },
 
 

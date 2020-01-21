@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { registerModel, LoginModel } from '../model/model';
 import { ToastrService } from 'ngx-toastr';
-import { UserService } from '../service/user.service';
+import { AdminService } from '../../service/admin.service';
+
 
 
 @Component({
@@ -19,16 +20,9 @@ export class LoginComponent implements OnInit {
 
   title = 'STS';
   login = new registerModel();
-  userDetails: registerModel[] = [];
+  adminDetails: registerModel[] = [];
 
-  SignIn=new LoginModel();
- 
-
-  constructor(
-    private router: Router,
-    private userService: UserService,
-     ) {
-
+  constructor(private router: Router, private adminService: AdminService) {
     this.registerList();
 
 
@@ -83,11 +77,12 @@ export class LoginComponent implements OnInit {
   // };   
      
   }
- registerList(){
+
+  registerList(){
     this.userService.RegisterList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.RegisterList) {
-          this.userDetails = data.RegisterList;
+          this.adminDetails = data.RegisterList;
         }
       }
     }, (err) => {

@@ -45,8 +45,10 @@ import { ChartsModule } from 'ng2-charts';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
+//Sales Components
 import { SalesRegisterComponent } from './sales/register/register.component';
 import { SalesLayoutComponent } from './containerSales';
+import { SalesLoginComponent } from './sales/login/login.component';
 
 
 @NgModule({
@@ -84,6 +86,8 @@ import { SalesLayoutComponent } from './containerSales';
     P500Component,
     LoginComponent,
     RegisterComponent,
+
+    //SalesComponents
     SalesRegisterComponent,
     SalesLoginComponent
   ],
