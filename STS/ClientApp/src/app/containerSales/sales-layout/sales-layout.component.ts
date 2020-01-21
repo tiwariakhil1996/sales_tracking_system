@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SalesnavItems } from '../../_Salesnav';
 
+
 @Component({
   selector: 'app-sales-layout',
   templateUrl: './sales-layout.component.html'

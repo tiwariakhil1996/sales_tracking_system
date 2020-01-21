@@ -16,6 +16,7 @@ import { ProductComponent } from './views/product/product.component';
 // // Sales
 import { SalesLayoutComponent } from './containerSales';
 import { SalesRegisterComponent } from './sales/register/register.component';
+import { SalesLoginComponent } from './sales/login/login.component';
 
 
 
@@ -136,7 +137,13 @@ export const routes: Routes = [
   },
 
 
-
+  {
+    path: 'sales/login',
+    component: SalesLoginComponent,
+    data: {
+      title: 'Login Page'
+    }
+  },
 
 
   {

@@ -13,13 +13,13 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="icon-user"></i></span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Username" [(ngModel)]="login.username" name="username"  autocomplete="username" required>
+                    <input type="text" class="form-control" placeholder="Email" [(ngModel)]="signin.email" name="email"  autocomplete="email" required>
                   </div>
                   <div class="input-group mb-4">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="icon-lock"></i></span>
                     </div>
-                    <input type="password" class="form-control" placeholder="Password" [(ngModel)]="login.password" name="password" autocomplete="current-password" required>
+                    <input type="password" class="form-control" placeholder="Password" [(ngModel)]="signin.password" name="password" autocomplete="current-password" required>
                   </div>
                   <div class="row">
                     <div class="col-6">
@@ -52,6 +52,7 @@
 
 <table class="table table-dark">
   <thead>
+    
     <tr>
       <th scope="col">UserID</th>
       <th scope="col">USERNAME</th>
@@ -59,7 +60,9 @@
 
     </tr>
   </thead>
+  
   <tbody>
+
     <tr *ngFor="let user of userDetails">
 
       <td>{{user.id}}</td>
@@ -67,6 +70,6 @@
       <td>{{user.password}}</td>
 
     </tr>
-
   </tbody>
+
 </table>

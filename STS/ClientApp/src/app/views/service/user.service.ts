@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { LoginModel } from '../model/model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,11 @@ export class UserService {
 
   RegisterList() {
     return this.http.get('/api/User/RegisterList');
+  }
+  
+  login(singin:LoginModel){
+
+    return this.http.post('api/UserLogin/Login',LoginModel);
   }
 
 }

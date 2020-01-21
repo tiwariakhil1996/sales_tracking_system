@@ -1,6 +1,6 @@
+import { registerModel } from './../model/model';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { registerModel } from '../model/model';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../service/user.service';
 
@@ -9,7 +9,7 @@ import { UserService } from '../service/user.service';
   selector: 'app-dashboard',
   templateUrl: 'login.component.html'
 })
-export class LoginComponent implements OnInit {
+export class SalesLoginComponent implements OnInit {
 
   // formdata;
   // message: string;
@@ -21,7 +21,11 @@ export class LoginComponent implements OnInit {
   login = new registerModel();
   userDetails: registerModel[] = [];
 
-  constructor(private router: Router, private userService: UserService) {
+  constructor(
+    private router: Router, 
+    private userService: UserService,
+     
+    ) {
     this.registerList();
 
 

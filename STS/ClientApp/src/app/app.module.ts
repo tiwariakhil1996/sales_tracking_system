@@ -1,3 +1,4 @@
+import { SalesLoginComponent } from './sales/login/login.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
@@ -82,7 +83,8 @@ import { SalesLayoutComponent } from './containerSales';
     LoginComponent,
     RegisterComponent,
 
-    SalesRegisterComponent
+    SalesRegisterComponent,
+    SalesLoginComponent
   ],
 
   // providers: [{

@@ -28,3 +28,8 @@ export class productModel {
     image: any;
     date: any;
 }
+//login form
+export class LoginModel{
+    email:string;
+    password:string;
+}
