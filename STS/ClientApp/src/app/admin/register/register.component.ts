@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { UserService } from '../service/user.service';
 import { Router } from '@angular/router';
 import { registerModel } from '../model/model';
+import { AdminService } from '../../service/admin.service';
 
 
 @Component({
@@ -14,8 +14,8 @@ export class RegisterComponent  implements OnInit{
   title = 'STS';
   register = new registerModel();
 
-  userDetails: registerModel[] = [];
-  constructor(private router: Router, private userService: UserService){
+  adminDetails: registerModel[] = [];
+  constructor(private router: Router, private adminService: AdminService){
     // this.Login();
 
 
@@ -39,7 +39,7 @@ export class RegisterComponent  implements OnInit{
 
   submitForm() {
 
-    this.userService.RegisterService(this.register).subscribe((data: any) => {
+    this.adminService.RegisterService(this.register).subscribe((data: any) => {
       if (data.Status.code === 0) {
         alert('Registered sucesfully');
       }
@@ -49,7 +49,11 @@ export class RegisterComponent  implements OnInit{
     });
   } 
 
+  salesForm() {
+    this.router.navigate(['/sales/register']);
+  }
+
   loginForm(){
-    this.router.navigate(['/login']);
+    this.router.navigate(['/admin/login']);
   }
 }

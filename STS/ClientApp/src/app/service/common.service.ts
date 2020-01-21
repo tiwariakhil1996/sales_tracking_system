@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class CommonService {
 
   constructor(private http: HttpClient) { }
 
@@ -13,5 +13,4 @@ export class ProductService {
    addProduct(data) {
     return this.http.post('/api/Product/addProduct', data);
   }
-  
 }

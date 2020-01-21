@@ -1,34 +1,28 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-// Import Containers
+// Admin Containers
 import { DefaultLayoutComponent } from './containers';
 
-
-import { P404Component } from './views/error/404.component';
-import { P500Component } from './views/error/500.component';
-import { LoginComponent } from './views/login/login.component';
-import { RegisterComponent } from './views/register/register.component';
-import { ProductComponent } from './views/product/product.component';
-
+import { P404Component } from './admin/error/404.component';
+import { P500Component } from './admin/error/500.component';
+import { LoginComponent } from './admin/login/login.component';
+import { RegisterComponent } from './admin/register/register.component';
+import { ProductComponent } from './admin/product/product.component';
 
 
-// // Sales
+
+// Sales Containers
 import { SalesLayoutComponent } from './containerSales';
-import { SalesRegisterComponent } from './sales/register/register.component';
 
+import { SalesRegisterComponent } from './sales/register/register.component';
+import { SalesLoginComponent } from './sales/login/login.component';
 
 
 export const routes: Routes = [
-
-  // {
-  //   path: '',
-  //   redirectTo: 'dashboard',
-  //   pathMatch: 'full',
-  // },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: '/sales/login',
     pathMatch: 'full',
   },
   {
@@ -45,102 +39,106 @@ export const routes: Routes = [
       title: 'Page 500'
     }
   },
+
+
+
+  // --------------------------------------- ADMIN ROUTING -----------------------
   {
-    path: 'login',
+    path: 'admin/login',
     component: LoginComponent,
     data: {
       title: 'Login Page'
     }
   },
+
   {
-    path: 'register',
+    path: 'admin/register',
     component: RegisterComponent,
     data: {
       title: 'Register Page'
     }
   },
 
-  
-
-  // {
-  //   path: 'product',
-  //   component: ProductComponent,
-  //   data: {
-  //     title: 'Product Page'
-  //   }
-  // },
   {
-    path: '',
+    path: 'admin',
     component: DefaultLayoutComponent,
     data: {
       title: 'Home'
     },
     children: [
       {
+        path: 'dashboard',
+        loadChildren: () => import('./admin/dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
+      {
         path: 'product',
-        loadChildren: () => import('./views/product/product.module').then(m => m.ProductModule)
+        loadChildren: () => import('./admin/product/product.module').then(m => m.ProductModule)
       },
       {
         path: 'assign',
-        loadChildren: () => import('./views/assign/assign.module').then(m => m.AssignModule)
+        loadChildren: () => import('./admin/assign/assign.module').then(m => m.AssignModule)
       },
       {
         path: 'client',
-        loadChildren: () => import('./views/client/client.module').then(m => m.ClientModule)
+        loadChildren: () => import('./admin/client/client.module').then(m => m.ClientModule)
       },
       {
         path: 'activity',
-        loadChildren: () => import('./views/activity/activity.module').then(m => m.ActivityModule)
+        loadChildren: () => import('./admin/activity/activity.module').then(m => m.ActivityModule)
       },
       {
         path: 'map',
-        loadChildren: () => import('./views/map/map.module').then(m => m.MapModule)
+        loadChildren: () => import('./admin/map/map.module').then(m => m.MapModule)
       },
       {
         path: 'demo',
-        loadChildren: () => import('./views/demo/demo.module').then(m => m.DemoModule)
+        loadChildren: () => import('./admin/demo/demo.module').then(m => m.DemoModule)
       },
       {
         path: 'base',
-        loadChildren: () => import('./views/base/base.module').then(m => m.BaseModule)
+        loadChildren: () => import('./admin/base/base.module').then(m => m.BaseModule)
       },
       {
         path: 'buttons',
-        loadChildren: () => import('./views/buttons/buttons.module').then(m => m.ButtonsModule)
+        loadChildren: () => import('./admin/buttons/buttons.module').then(m => m.ButtonsModule)
       },
       {
         path: 'charts',
-        loadChildren: () => import('./views/chartjs/chartjs.module').then(m => m.ChartJSModule)
-      },
-      {
-        path: 'dashboard',
-        loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
+        loadChildren: () => import('./admin/chartjs/chartjs.module').then(m => m.ChartJSModule)
       },
       {
         path: 'icons',
-        loadChildren: () => import('./views/icons/icons.module').then(m => m.IconsModule)
+        loadChildren: () => import('./admin/icons/icons.module').then(m => m.IconsModule)
       },
       {
         path: 'notifications',
-        loadChildren: () => import('./views/notifications/notifications.module').then(m => m.NotificationsModule)
+        loadChildren: () => import('./admin/notifications/notifications.module').then(m => m.NotificationsModule)
       },
       {
         path: 'theme',
-        loadChildren: () => import('./views/theme/theme.module').then(m => m.ThemeModule)
+        loadChildren: () => import('./admin/theme/theme.module').then(m => m.ThemeModule)
       },
       {
         path: 'widgets',
-        loadChildren: () => import('./views/widgets/widgets.module').then(m => m.WidgetsModule)
+        loadChildren: () => import('./admin/widgets/widgets.module').then(m => m.WidgetsModule)
       }
     ]
   },
 
 
 
-
+  // ------------------------------------------    SALES ROUTING  ---------------------
+  {
+    path: 'sales/login',
+    component: SalesLoginComponent,
+    data: {
+      title: 'Login Page'
+    }
+  },
+  
 
   {
-    path: 'register',
+    path: 'sales/register',
     component: SalesRegisterComponent,
     data: {
       title: 'Register Page'
@@ -178,11 +176,12 @@ export const routes: Routes = [
       {
         path: 'map',
         loadChildren: () => import('./sales/map/map.module').then(m => m.MapModule)
-      },
-      {
-        path: 'demo',
-        loadChildren: () => import('./sales/demo/demo.module').then(m => m.DemoModule)
       }
+      // {
+      //   path: 'demo',
+      //   loadChildren: () => import('./sales/demo/demo.module').then(m => m.DemoModule)
+      // }
+
      ] },
 
 

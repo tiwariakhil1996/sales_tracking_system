@@ -4,8 +4,8 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
-
+export class SalesService {
+  
   constructor(private http: HttpClient) { }
 
  
@@ -13,10 +13,10 @@ export class UserService {
 
   RegisterService(data) {
     return this.http.post('/api/User/RegisterUser', data);
+
   }
 
   RegisterList() {
     return this.http.get('/api/User/RegisterList');
   }
-
 }
