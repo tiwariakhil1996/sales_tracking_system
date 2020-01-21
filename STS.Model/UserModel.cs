@@ -25,4 +25,5 @@ namespace STS.Model
         public string Password { get; set; }
 
     }
+    
 }

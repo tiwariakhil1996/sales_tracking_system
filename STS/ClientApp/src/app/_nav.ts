@@ -4,7 +4,7 @@ export const navItems: INavData[] = [
 
   {
     name: 'Dashboard',
-    url: '/dashboard',
+    url: '/admin/dashboard',
     icon: 'icon-speedometer',
     // badge: {
     //   variant: 'info',
@@ -17,12 +17,12 @@ export const navItems: INavData[] = [
   // },
   {
     name: 'Add Product',
-    url: '/product',
+    url: '/admin/product',
     icon: 'icon-note'
   },
   {
     name: 'Add Client',
-    url: '/client',
+    url: '/admin/client',
     icon: 'icon-user-follow'
   },
   // {
@@ -32,39 +32,39 @@ export const navItems: INavData[] = [
   // },
   {
     name: 'Activity',
-    url: '/activity',
+    url: 'activity',
     icon: 'icon-layers',
     children: [
       {
         name: 'Add Activity',
-        url: '/activity/addactivity',
+        url: '/admin/activity/addactivity',
         icon: 'icon-note',
       },
       {
         name: 'Past Activity',
-        url: '/activity/pastactivity',
+        url: '/admin/activity/pastactivity',
         icon: 'icon-calendar',
       },
       {
         name: 'Current Activity',
-        url: '/activity/currentactivity',
+        url: '/admin/activity/currentactivity',
         icon: 'icon-notebook',
       },
     ]
   },
   {
     name: 'Map',
-    url: '/map',
+    url: '/admin/map',
     icon: 'icon-map'
   },
   {
     name: 'Demo',
-    url: '/demo',
+    url: '/admin/demo',
     icon: 'icon-demo'
   },
   {
     name: 'Logout',
-    url: '/login',
+    url: '/admin/login',
     icon: 'icon-logout'
   },
   // {

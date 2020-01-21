@@ -4,16 +4,17 @@ import { Routes, RouterModule } from '@angular/router';
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
 
+//admin
+import { P404Component } from './admin/error/404.component';
+import { P500Component } from './admin/error/500.component';
+import { LoginComponent } from './admin/login/login.component';
+import { RegisterComponent } from './admin/register/register.component';
+import { ProductComponent } from './admin/product/product.component';
 
-import { P404Component } from './views/error/404.component';
-import { P500Component } from './views/error/500.component';
-import { LoginComponent } from './views/login/login.component';
-import { RegisterComponent } from './views/register/register.component';
-import { ProductComponent } from './views/product/product.component';
 
 
+//Sales
 
-// // Sales
 import { SalesLayoutComponent } from './containerSales';
 import { SalesRegisterComponent } from './sales/register/register.component';
 import { SalesLoginComponent } from './sales/login/login.component';
@@ -22,14 +23,11 @@ import { SalesLoginComponent } from './sales/login/login.component';
 
 export const routes: Routes = [
 
-  // {
-  //   path: '',
-  //   redirectTo: 'dashboard',
-  //   pathMatch: 'full',
-  // },
+  //Admin routing...
+
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'admin/login',
     pathMatch: 'full',
   },
   {
@@ -47,96 +45,90 @@ export const routes: Routes = [
     }
   },
   {
-    path: 'login',
+    path: 'admin/login',
     component: LoginComponent,
     data: {
       title: 'Login Page'
     }
   },
   {
-    path: 'register',
+    path: 'admin/register',
     component: RegisterComponent,
     data: {
       title: 'Register Page'
     }
   },
 
-  
-
-  // {
-  //   path: 'product',
-  //   component: ProductComponent,
-  //   data: {
-  //     title: 'Product Page'
-  //   }
-  // },
   {
-    path: '',
+    path: 'admin',
     component: DefaultLayoutComponent,
     data: {
-      title: 'Home'
+      title: 'Admin'
     },
     children: [
+    
       {
         path: 'product',
-        loadChildren: () => import('./views/product/product.module').then(m => m.ProductModule)
+        loadChildren: () => import('./admin/product/product.module').then(m => m.ProductModule)
       },
       {
         path: 'assign',
-        loadChildren: () => import('./views/assign/assign.module').then(m => m.AssignModule)
+        loadChildren: () => import('./admin/assign/assign.module').then(m => m.AssignModule)
       },
       {
         path: 'client',
-        loadChildren: () => import('./views/client/client.module').then(m => m.ClientModule)
+        loadChildren: () => import('./admin/client/client.module').then(m => m.ClientModule)
       },
       {
         path: 'activity',
-        loadChildren: () => import('./views/activity/activity.module').then(m => m.ActivityModule)
+        loadChildren: () => import('./admin/activity/activity.module').then(m => m.ActivityModule)
       },
       {
         path: 'map',
-        loadChildren: () => import('./views/map/map.module').then(m => m.MapModule)
+        loadChildren: () => import('./admin/map/map.module').then(m => m.MapModule)
       },
       {
         path: 'demo',
-        loadChildren: () => import('./views/demo/demo.module').then(m => m.DemoModule)
+        loadChildren: () => import('./admin/demo/demo.module').then(m => m.DemoModule)
       },
       {
         path: 'base',
-        loadChildren: () => import('./views/base/base.module').then(m => m.BaseModule)
+        loadChildren: () => import('./admin/base/base.module').then(m => m.BaseModule)
       },
       {
         path: 'buttons',
-        loadChildren: () => import('./views/buttons/buttons.module').then(m => m.ButtonsModule)
+        loadChildren: () => import('./admin/buttons/buttons.module').then(m => m.ButtonsModule)
       },
       {
         path: 'charts',
-        loadChildren: () => import('./views/chartjs/chartjs.module').then(m => m.ChartJSModule)
+        loadChildren: () => import('./admin/chartjs/chartjs.module').then(m => m.ChartJSModule)
       },
       {
         path: 'dashboard',
-        loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
+        loadChildren: () => import('./admin/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {
         path: 'icons',
-        loadChildren: () => import('./views/icons/icons.module').then(m => m.IconsModule)
+        loadChildren: () => import('./admin/icons/icons.module').then(m => m.IconsModule)
       },
       {
         path: 'notifications',
-        loadChildren: () => import('./views/notifications/notifications.module').then(m => m.NotificationsModule)
+        loadChildren: () => import('./admin/notifications/notifications.module').then(m => m.NotificationsModule)
       },
       {
         path: 'theme',
-        loadChildren: () => import('./views/theme/theme.module').then(m => m.ThemeModule)
+        loadChildren: () => import('./admin/theme/theme.module').then(m => m.ThemeModule)
       },
       {
         path: 'widgets',
-        loadChildren: () => import('./views/widgets/widgets.module').then(m => m.WidgetsModule)
+        loadChildren: () => import('./admin/widgets/widgets.module').then(m => m.WidgetsModule)
       }
     ]
   },
 
 
+
+  //sales routing
   {
     path: 'sales/login',
     component: SalesLoginComponent,
@@ -147,19 +139,19 @@ export const routes: Routes = [
 
 
   {
-    path: 'register',
+    path: 'sales/register',
     component: SalesRegisterComponent,
     data: {
       title: 'Register Page'
     }
   },
-
+  //sales dashboard
 
   {
     path: 'sales',
     component: SalesLayoutComponent,
     data: {
-      title: 'Home'
+      title: 'sales'
     },
     children: [
       {

@@ -76,7 +76,7 @@ export class SalesLoginComponent implements OnInit {
   }
 
   registerForm() {
-    this.router.navigate(['/register']);
+    this.router.navigate(['sales/register']);
   }
 
   registerList(){

@@ -22,7 +22,7 @@ export class UserService {
   
   login(singin:LoginModel){
 
-    return this.http.post('api/UserLogin/Login',LoginModel);
+    return this.http.post('api/UserController/Login',LoginModel);
   }
 
 }

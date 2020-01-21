@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { registerModel, LoginModel } from '../model/model';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../service/user.service';
-import {FormBuilder,FormGroup,Validators} from '@angular/forms';
 
 
 @Component({
@@ -22,14 +21,12 @@ export class LoginComponent implements OnInit {
   login = new registerModel();
   userDetails: registerModel[] = [];
 
-  signin=new LoginModel();
-  SignInForm:FormGroup;
-  isLoading=false;
+  SignIn=new LoginModel();
+ 
 
   constructor(
     private router: Router,
     private userService: UserService,
-    private FormBuilder:FormBuilder     
      ) {
 
     this.registerList();
@@ -37,14 +34,16 @@ export class LoginComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.SignInForm=this.FormBuilder.group({
-      email:['',[Validators.email,Validators.required]],
-      password:['',Validators.required]
-
-    })
+  
   }
-  get SignInFormData() {return this.SignInForm.controls;}
-
+  // redirect the both register from admin and sales 
+  
+  RegisterAdmin() {
+    this.router.navigate(['admin/register']);
+  }
+  RegisterSales() {
+    this.router.navigate(['sales/register']);
+  }
   // loginForm() {
   //   let isValid = false;
   //   this.registerDetails = JSON.parse(localStorage.getItem('Signup')) || [];
@@ -82,27 +81,9 @@ export class LoginComponent implements OnInit {
   //       this.errorMessage = error.message;    
   //     });    
   // };   
-      if(this.SignInForm.invalid || this.isLoading)
-      {
-        return ;
-      }
-      this.isLoading=true;
-      //call user service for login
-      this.userService.login(this.SignInForm.value).subscribe(x=>{
-        this.isLoading=false;
-        //Redirect to Home page
-        
-      });
-
-
-
+     
   }
-
-  registerForm() {
-    this.router.navigate(['/register']);
-  }
-
-  registerList(){
+ registerList(){
     this.userService.RegisterList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.RegisterList) {

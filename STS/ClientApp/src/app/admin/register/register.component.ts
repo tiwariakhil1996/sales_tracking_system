@@ -23,6 +23,13 @@ export class RegisterComponent  implements OnInit{
 
   ngOnInit() {
   }
+  //Redirect the both login page admin and sales...
+  LoginAdmin(){
+    this.router.navigate(['admin/login']);
+  }
+  LoginSales(){
+    this.router.navigate(['sales/login']);
+  }
 
   // Login() {
   //   this.userService.RegisterList().subscribe((data: any) => {
@@ -49,7 +56,6 @@ export class RegisterComponent  implements OnInit{
     });
   } 
 
-  loginForm(){
-    this.router.navigate(['/login']);
-  }
+
+
 }

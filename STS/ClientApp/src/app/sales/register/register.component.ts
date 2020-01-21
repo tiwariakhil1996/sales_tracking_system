@@ -23,6 +23,12 @@ export class SalesRegisterComponent  implements OnInit{
 
   ngOnInit() {
   }
+  LoginAdmin(){
+    this.router.navigate(['admin/login']);
+  }
+  LoginSales(){
+    this.router.navigate(['sales/login']);
+  }
 
 
   submitForm() {
@@ -37,7 +43,5 @@ export class SalesRegisterComponent  implements OnInit{
     });
   } 
 
-  loginForm(){
-    this.router.navigate(['/login']);
-  }
+  
 }

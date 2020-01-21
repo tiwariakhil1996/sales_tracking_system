@@ -17,10 +17,10 @@ import { AppComponent } from './app.component';
 // Import containers
 import { DefaultLayoutComponent } from './containers';
 
-import { P404Component } from './views/error/404.component';
-import { P500Component } from './views/error/500.component';
-import { LoginComponent } from './views/login/login.component';
-import { RegisterComponent } from './views/register/register.component';
+import { P404Component } from './admin/error/404.component';
+import { P500Component } from './admin/error/500.component';
+import { LoginComponent } from './admin/login/login.component';
+import { RegisterComponent } from './admin/register/register.component';
 
 const APP_CONTAINERS = [
   DefaultLayoutComponent,
@@ -66,6 +66,7 @@ import { SalesLayoutComponent } from './containerSales';
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
+    // this is toaster library
     ToastrModule.forRoot(
       {
         timeOut: 1000,
@@ -73,6 +74,7 @@ import { SalesLayoutComponent } from './containerSales';
         preventDuplicates: false,
       }
     ),
+
     ChartsModule
   ],
   declarations: [
@@ -82,7 +84,6 @@ import { SalesLayoutComponent } from './containerSales';
     P500Component,
     LoginComponent,
     RegisterComponent,
-
     SalesRegisterComponent,
     SalesLoginComponent
   ],
