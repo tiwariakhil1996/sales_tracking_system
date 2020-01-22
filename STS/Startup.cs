@@ -51,6 +51,7 @@ namespace STS
            
             services.AddSingleton<IDemo, DemoServices>();
             services.AddSingleton<IUser, UserServices>();
+            services.AddSingleton<IClient, ClientServices>();
             services.AddSingleton<IProduct, ProductServices>();
         }
 

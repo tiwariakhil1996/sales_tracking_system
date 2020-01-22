@@ -50,6 +50,7 @@ import { SalesLayoutComponent } from './containerSales';
 import { SalesLoginComponent } from './sales/login/login.component';
 
 
+
 @NgModule({
   imports: [
     BrowserModule,

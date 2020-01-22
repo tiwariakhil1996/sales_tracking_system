@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from '../../service/admin.service';
 import { Router } from '@angular/router';
-import { registerModel } from '../model/model';
+import { registerModel } from '../../model/model';
 
 
 @Component({
