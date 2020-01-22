@@ -42,28 +42,28 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
-        //Login
+        //View Products
 
-        //[HttpGet]
-        //[Route("RegisterList")]
-        //public async Task<IActionResult> RegisterList()
-        //{
-        //    TranStatus transaction = new TranStatus();
-        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
-        //    HttpStatusCode statusCode = HttpStatusCode.OK;
-        //    try
-        //    {
-        //        var signupList = await iuser.RegisterList();
-        //        dctData.Add("RegisterList", signupList);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        transaction = CommonHelper.TransactionErrorHandler(ex);
-        //        statusCode = HttpStatusCode.BadRequest;
-        //    }
-        //    dctData.Add("Status", transaction);
-        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
-        //}
+        [HttpGet]
+        [Route("ProductList")]
+        public async Task<IActionResult> ProductList()
+        {
+            TranStatus transaction = new TranStatus();
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                var productList = await iproduct.ProductList();
+                dctData.Add("ProductList", productList);
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
 
     }
 }

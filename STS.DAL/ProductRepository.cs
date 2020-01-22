@@ -12,6 +12,8 @@ namespace STS.DAL
 {
     public class ProductRepository : BaseRepository
     {
+
+        //Add Products
         public async Task<TranStatus> addProduct(ProductModel model)
         {
             using (var connection = new SqlConnection(ConnectionString))
@@ -39,16 +41,18 @@ namespace STS.DAL
             }
         }
 
-        //public async Task<List<RegisterListModel>> RegisterList()
-        //{
-        //    using (var connection = new SqlConnection(ConnectionString))
-        //    {
-        //        connection.Open();
-        //        var result = await connection.QueryAsync<RegisterListModel>("RegisterList", commandType: CommandType.StoredProcedure);
-        //        return result.ToList();
 
-        //    }
-        //}
+        //View Products
+        public async Task<List<ProductListModel>> ProductList()
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<ProductListModel>("ProductList", commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
 
     }
 }
