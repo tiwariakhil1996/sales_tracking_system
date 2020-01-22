@@ -12,7 +12,7 @@ namespace STS.DAL
 {
     public class UserRepository : BaseRepository
     {
-        public async Task<TranStatus> ProcRegister(UserModel model)
+        public async Task<TranStatus> RegisterUser(RegisterModel model)
         {
             using (var connection = new SqlConnection(ConnectionString))
 
@@ -20,12 +20,14 @@ namespace STS.DAL
                 await connection.OpenAsync();
                 TranStatus transaction = new TranStatus();
                 DynamicParameters parameter = new DynamicParameters();
-                parameter.Add("@UserName", model.Username);
+                parameter.Add("@Username", model.Username);
+                parameter.Add("@Email", model.Email);
                 parameter.Add("@Password", model.Password);
+                parameter.Add("@Cpassword", model.Cpassword);
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
-                await connection.QueryAsync("ProcRegister", parameter, commandType: CommandType.StoredProcedure);
+                await connection.QueryAsync("RegisterUser", parameter, commandType: CommandType.StoredProcedure);
 
                 transaction.returnMessage = parameter.Get<string>("@Message");
                 transaction.code = parameter.Get<int>("@Code");

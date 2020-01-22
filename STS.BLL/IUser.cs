@@ -10,10 +10,8 @@ namespace STS.BLL.Interface
 {
     public interface IUser
     {
-        Task<TranStatus> ProcRegister(UserModel model);
+        Task<TranStatus> RegisterUser(RegisterModel model);
         Task<List<RegisterListModel>> RegisterList();
-
-
     }
 }
 

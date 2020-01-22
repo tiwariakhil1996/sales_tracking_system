@@ -11,5 +11,4 @@
 /STS.DAL/obj
 /STS.Model/bin/Debug/netcoreapp3.1
 /STS.Model/obj
-/.vs/STS/DesignTimeBuild/.dtbcache
-/.vs/STS/v16/.suo
+/.vs

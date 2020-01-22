@@ -18,14 +18,14 @@
   </ul>
   <ul class="nav navbar-nav ml-auto">
     <li class="nav-item d-md-down-none">
-      <a class="nav-link" href="#"><i class="icon-bell"></i><span class="badge badge-pill badge-danger">5</span></a>
+      <a class="nav-link" href="/activity/currentactivity"><i class="icon-bell"></i><span class="badge badge-pill badge-danger"></span></a>
     </li>
     <li class="nav-item d-md-down-none">
-      <a class="nav-link" href="#"><i class="icon-list"></i></a>
+      <a class="nav-link" href="/activity/pastactivity"><i class="icon-list"></i></a>
     </li>
     <!-- Location -->
     <li class="nav-item d-md-down-none">
-      <a class="nav-link" href="#"><i class="icon-location-pin"></i></a>
+      <a class="nav-link" href="/map"><i class="icon-location-pin"></i></a>
     </li>
 
     <!-- Profile -->
@@ -63,13 +63,13 @@
     <!-- breaking change 'cui-breadcrumb' -->
     <cui-breadcrumb>
       <!-- Breadcrumb Menu-->
-      <li class="breadcrumb-menu d-md-down-none">
+      <!-- <li class="breadcrumb-menu d-md-down-none">
         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
           <a class="btn" href="#"><i class="icon-speech"></i></a>
           <a class="btn" [routerLink]="['/dashboard']"><i class="icon-graph"></i> &nbsp;Dashboard</a>
           <a class="btn" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>
         </div>
-      </li>
+      </li> -->
     </cui-breadcrumb>
     <!-- deprecation warning for 'app-breadcrumb' -->
     <!--<ol class="breadcrumb">-->
@@ -220,51 +220,7 @@
             <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
             <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
           </div>
-          <hr>
-          <div class="message">
-            <div class="py-3 pb-5 mr-3 float-left">
-              <div class="avatar">
-                <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                <span class="avatar-status badge-success"></span>
-              </div>
-            </div>
-            <div>
-              <small class="text-muted">Lukasz Holeczek</small>
-              <small class="text-muted float-right mt-1">1:52 PM</small>
-            </div>
-            <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-            <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
-          </div>
-          <hr>
-          <div class="message">
-            <div class="py-3 pb-5 mr-3 float-left">
-              <div class="avatar">
-                <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                <span class="avatar-status badge-success"></span>
-              </div>
-            </div>
-            <div>
-              <small class="text-muted">Lukasz Holeczek</small>
-              <small class="text-muted float-right mt-1">1:52 PM</small>
-            </div>
-            <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-            <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
-          </div>
-          <hr>
-          <div class="message">
-            <div class="py-3 pb-5 mr-3 float-left">
-              <div class="avatar">
-                <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                <span class="avatar-status badge-success"></span>
-              </div>
-            </div>
-            <div>
-              <small class="text-muted">Lukasz Holeczek</small>
-              <small class="text-muted float-right mt-1">1:52 PM</small>
-            </div>
-            <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-            <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
-          </div>
+
         </div>
       </tab>
       <tab>
@@ -290,9 +246,6 @@
                 <input type="checkbox" class="switch-input">
                 <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
               </label>
-            </div>
-            <div>
-              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>
             </div>
           </div>
           <div class="aside-options">
@@ -331,11 +284,7 @@
             <div class="progress-bar bg-danger" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
           <small class="text-muted">243GB/256GB</small>
-          <div class="text-uppercase mb-1 mt-2"><small><b>SSD 2 Usage</b></small></div>
-          <div class="progress progress-xs">
-            <div class="progress-bar bg-success" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-          <small class="text-muted">25GB/256GB</small>
+         
         </div>
       </tab>
     </tabset>

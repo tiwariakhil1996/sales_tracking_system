@@ -13,11 +13,11 @@ namespace STS.BLL.Service
 
     {
         UserRepository userRepository = null;
-        public Task<TranStatus> ProcRegister(UserModel model)
+        public Task<TranStatus> RegisterUser(RegisterModel model)
         {
             using (userRepository = new UserRepository())
             {
-                return userRepository.ProcRegister(model);
+                return userRepository.RegisterUser(model);
 
             }
         }

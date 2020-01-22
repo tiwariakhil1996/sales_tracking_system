@@ -12,15 +12,17 @@ namespace STS.Controllers
     [Route("api/[controller]")]
     public class UserController : Controller
     {
-        private ISignup isignup;
-        public UserController(ISignup user)
+        private IUser iuser;
+        public UserController(IUser user)
         {
-            isignup = user;
+            iuser = user;
         }
 
+        //Register
+
         [HttpPost]
-        [Route("ProSignup")]
-        public async Task<IActionResult> ProSignup([FromBody]SignupModel model)
+        [Route("RegisterUser")]
+        public async Task<IActionResult> RegisterUser([FromBody]RegisterModel model)
         {
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
@@ -28,7 +30,7 @@ namespace STS.Controllers
             try
             {
 
-                transaction = await isignup.ProSignup(model);
+                transaction = await iuser.RegisterUser(model);
 
             }
             catch (Exception ex)
@@ -39,17 +41,20 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
+
+        //Login
+
         [HttpGet]
-        [Route("ProLogin")]
-        public async Task<IActionResult> ProLogin()
+        [Route("RegisterList")]
+        public async Task<IActionResult> RegisterList()
         {
             TranStatus transaction = new TranStatus();
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
             try
             {
-                var signupList = await isignup.ProLogin();
-                dctData.Add("ProLogin", signupList);
+                var registerList = await iuser.RegisterList();
+                dctData.Add("RegisterList", registerList);
             }
             catch (Exception ex)
             {
