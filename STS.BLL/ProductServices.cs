@@ -13,21 +13,21 @@ namespace STS.BLL.Service
 
     {
         ProductRepository productRepository = null;
-        public Task<TranStatus> addProduct(ProductModel model)
+        public Task<TranStatus>AddProduct(ProductModel model)
         {
             using (productRepository = new ProductRepository())
             {
-                return productRepository.addProduct(model);
+                return productRepository.AddProduct(model);
 
             }
         }
 
-        //public async Task<List<RegisterListModel>> RegisterList()
-        //{
-        //    using (userRepository = new UserRepository())
-        //    {
-        //        return await userRepository.RegisterList();
-        //    }
-        //}
+        public async Task<List<ProductDetailsModel>>ProductDetails()
+        {
+            using (productRepository = new ProductRepository())
+            {
+                return await productRepository.ProductDetails();
+            }
+        }
     }
 }

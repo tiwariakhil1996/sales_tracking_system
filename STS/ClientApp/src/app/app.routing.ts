@@ -29,7 +29,7 @@ export const routes: Routes = [
   // },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'sales/login',
     pathMatch: 'full',
   },
   {
@@ -115,14 +115,6 @@ export const routes: Routes = [
         loadChildren: () => import('./admin/chartjs/chartjs.module').then(m => m.ChartJSModule)
       },
       {
-        path: 'dashboard',
-        loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
-      },
-      {
-        path: 'icons',
-        loadChildren: () => import('./admin/icons/icons.module').then(m => m.IconsModule)
-      },
-      {
         path: 'notifications',
         loadChildren: () => import('./admin/notifications/notifications.module').then(m => m.NotificationsModule)
       },
@@ -138,7 +130,14 @@ export const routes: Routes = [
   },
 
 
-
+  {
+    path: 'sales/login',
+    component:SalesLoginComponent,
+    data: {
+      title: 'Login Page'
+    }
+  },
+  
 
 
   {
@@ -148,6 +147,7 @@ export const routes: Routes = [
       title: 'Register Page'
     }
   },
+
   //sales dashboard
 
   {

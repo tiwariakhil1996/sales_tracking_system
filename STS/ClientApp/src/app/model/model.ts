@@ -18,14 +18,18 @@ export class registerModel {
 }
 
 // product form
-export class productModel {
-    id: number;
-    category: string;
-    subcategory: string;
-    productname: string;
-    description: string;
-    price: number;
-    image: any;
-    date: any;
+export class ProductModel {
+    ID: number;
+    Category: string;
+    SubCategory: string;
+    ProductName: string;
+    Description: string;
+    Price: string;
+    Image:string;
+    Date:string;
 }
-//Login form
+//login form
+export class LoginModel{
+    email:string;
+    password:string;
+}

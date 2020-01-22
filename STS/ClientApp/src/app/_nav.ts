@@ -15,16 +15,54 @@ export const navItems: INavData[] = [
   //   title: true,
   //   name: 'Forms'
   // },
+  // {
+  //   name: 'Add Product',
+  //   url: '/admin/product',
+  //   icon: 'icon-note'
+  // },
   {
-    name: 'Add Product',
+    name: 'Product',
     url: '/admin/product',
-    icon: 'icon-note'
+    icon: 'icon-note',
+    children: [
+      {
+        name: 'Add Product',
+        url: '/admin/product/addproduct',
+        icon: 'icon-note',
+      },
+      {
+        name: 'View Product',
+        url: '/admin/product/viewproduct',
+        icon: 'icon-note',
+      }
+      
+    ]
   },
+  //client routing..
   {
-    name: 'Add Client',
+    name: 'Client',
     url: '/admin/client',
-    icon: 'icon-user-follow'
+    icon: 'icon-user-follow',
+    children: [
+      {
+        name: 'Add Client',
+        url: '/admin/client/addclient',
+        icon: 'icon-note',
+      },
+      {
+        name: 'View Product',
+        url: '/admin/client/viewclient',
+        icon: 'icon-note',
+      }
+      
+    ]
   },
+  // {
+  //   name: 'Add Client',
+  //   url: '/admin/client',
+  //   icon: 'icon-user-follow'
+  // },
+
   // {
   //   name: 'Assign List',
   //   url: '/assign',

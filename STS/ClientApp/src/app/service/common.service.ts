@@ -8,9 +8,14 @@ export class CommonService {
 
   constructor(private http: HttpClient) { }
 
-   //Product
+   //call the service for AddProduct
 
-   addProduct(data) {
-    return this.http.post('/api/Product/addProduct', data);
+   AddProduct(data) {
+
+    return this.http.post('/api/Product/AddProduct',data);
+  }
+  ProductDetails() {
+    
+    return this.http.get('/api/Product/ProductDetails');
   }
 }

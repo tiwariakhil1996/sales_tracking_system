@@ -12,7 +12,7 @@ namespace STS.DAL
 {
     public class ProductRepository : BaseRepository
     {
-        public async Task<TranStatus> addProduct(ProductModel model)
+        public async Task<TranStatus> AddProduct(ProductModel model)
         {
             using (var connection = new SqlConnection(ConnectionString))
 
@@ -21,8 +21,8 @@ namespace STS.DAL
                 TranStatus transaction = new TranStatus();
                 DynamicParameters parameter = new DynamicParameters();
                 parameter.Add("@Category", model.Category);
-                parameter.Add("@Subcategory", model.Subcategory);
-                parameter.Add("@Productname", model.Productname);
+                parameter.Add("@SubCategory", model.SubCategory);
+                parameter.Add("@ProductName", model.ProductName);
                 parameter.Add("@Description", model.Description);
                 parameter.Add("@Price", model.Price);
                 parameter.Add("@Image", model.Image);
@@ -30,7 +30,7 @@ namespace STS.DAL
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
-                await connection.QueryAsync("addProduct", parameter, commandType: CommandType.StoredProcedure);
+                await connection.QueryAsync("AddProduct", parameter, commandType: CommandType.StoredProcedure);
 
                 transaction.returnMessage = parameter.Get<string>("@Message");
                 transaction.code = parameter.Get<int>("@Code");
@@ -39,16 +39,16 @@ namespace STS.DAL
             }
         }
 
-        //public async Task<List<RegisterListModel>> RegisterList()
-        //{
-        //    using (var connection = new SqlConnection(ConnectionString))
-        //    {
-        //        connection.Open();
-        //        var result = await connection.QueryAsync<RegisterListModel>("RegisterList", commandType: CommandType.StoredProcedure);
-        //        return result.ToList();
+        public async Task<List<ProductDetailsModel>> ProductDetails()
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<ProductDetailsModel>("ProductDetails", commandType: CommandType.StoredProcedure);
+                return result.ToList();
 
-        //    }
-        //}
+            }
+        }
 
     }
 }

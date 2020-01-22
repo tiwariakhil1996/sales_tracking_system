@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { registerModel, LoginModel } from '../model/model';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from '../../service/admin.service';
+import { registerModel } from '../../model/model';
 
 
 
@@ -31,11 +31,11 @@ export class LoginComponent implements OnInit {
   
   }
   // redirect the both register from admin and sales 
-  
-  RegisterAdmin() {
+
+  adminregisterForm() {
     this.router.navigate(['admin/register']);
   }
-  RegisterSales() {
+  salesregisterForm() {
     this.router.navigate(['sales/register']);
   }
   // loginForm() {
@@ -78,8 +78,10 @@ export class LoginComponent implements OnInit {
      
   }
 
+ 
+
   registerList(){
-    this.userService.RegisterList().subscribe((data: any) => {
+    this.adminService.RegisterList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.RegisterList) {
           this.adminDetails = data.RegisterList;

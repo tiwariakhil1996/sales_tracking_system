@@ -21,8 +21,8 @@ namespace STS.Controllers
         //Add Product
 
         [HttpPost]
-        [Route("addProduct")]
-        public async Task<IActionResult> addProduct([FromBody]ProductModel model)
+        [Route("AddProduct")]
+        public async Task<IActionResult> AddProduct([FromBody]ProductModel model)
         {
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
@@ -30,7 +30,7 @@ namespace STS.Controllers
             try
             {
 
-                transaction = await iproduct.addProduct(model);
+                transaction = await iproduct.AddProduct(model);
 
             }
             catch (Exception ex)
@@ -42,28 +42,28 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
-        //Login
+        //Product details
 
-        //[HttpGet]
-        //[Route("RegisterList")]
-        //public async Task<IActionResult> RegisterList()
-        //{
-        //    TranStatus transaction = new TranStatus();
-        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
-        //    HttpStatusCode statusCode = HttpStatusCode.OK;
-        //    try
-        //    {
-        //        var signupList = await iuser.RegisterList();
-        //        dctData.Add("RegisterList", signupList);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        transaction = CommonHelper.TransactionErrorHandler(ex);
-        //        statusCode = HttpStatusCode.BadRequest;
-        //    }
-        //    dctData.Add("Status", transaction);
-        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
-        //}
+        [HttpGet]
+        [Route("ProductDetails")]
+        public async Task<IActionResult> ProductDetails()
+        {
+            TranStatus transaction = new TranStatus();
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                var productlist = await iproduct.ProductDetails();
+                dctData.Add("ProductDetails", productlist);
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
 
     }
 }

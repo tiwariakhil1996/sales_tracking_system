@@ -10,9 +10,10 @@ namespace STS.BLL.Interface
 {
     public interface IProduct
     {
-        Task<TranStatus> addProduct(ProductModel model);
+        Task<TranStatus> AddProduct(ProductModel model);
 
-        //Task<List<RegisterListModel>> RegisterList();
+        Task<List<ProductDetailsModel>> ProductDetails();
+
     }
 }
 
