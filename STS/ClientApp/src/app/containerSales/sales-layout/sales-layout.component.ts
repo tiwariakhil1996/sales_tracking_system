@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { navItems } from '../../sales/_nav';
+import { SalesnavItems } from '../../_Salesnav';
 
 @Component({
   selector: 'app-sales-layout',
@@ -16,7 +16,7 @@ import { navItems } from '../../sales/_nav';
 
 export class SalesLayoutComponent {
   public sidebarMinimized = false;
-  public navItems = navItems;
+  public SalesnavItems = SalesnavItems;
 
   toggleMinimize(e) {
     this.sidebarMinimized = e;
