@@ -14,11 +14,11 @@ namespace STS.BLL.Service
     {
         //Add Products
         ProductRepository productRepository = null;
-        public Task<TranStatus>AddProduct(ProductModel model)
+        public Task<TranStatus> addProduct(ProductModel model)
         {
             using (productRepository = new ProductRepository())
             {
-                return productRepository.AddProduct(model);
+                return productRepository.addProduct(model);
 
             }
         }

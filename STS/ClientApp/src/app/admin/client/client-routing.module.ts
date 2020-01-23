@@ -4,8 +4,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ClientComponent } from './client.component';
-import { AddclientComponent } from './addclient/addclient.component';
-import { ViewclientComponent } from './viewclient/viewclient.component';
+
 
 const routes: Routes = [
   // {

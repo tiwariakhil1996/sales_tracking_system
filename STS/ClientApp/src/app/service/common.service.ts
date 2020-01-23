@@ -10,7 +10,7 @@ export class CommonService {
 
    //call the service for AddProduct
 
-   AddProduct(data) {
+   addProduct(data) {
 
     return this.http.post('/api/Product/AddProduct',data);
   }

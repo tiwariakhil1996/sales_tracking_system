@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   }
   ngOnInit() {
-  
+
   }
   // redirect the both register from admin and sales 
 
@@ -38,43 +38,7 @@ export class LoginComponent implements OnInit {
   salesregisterForm() {
     this.router.navigate(['sales/register']);
   }
-  // loginForm() {
-  //   let isValid = false;
-  //   this.registerDetails = JSON.parse(localStorage.getItem('Signup')) || [];
-  //   this.registerDetails.forEach(element => {
-  //     if (this.loginDetail.userName == element.userName && this.loginDetail.password == element.password) {
-  //       isValid = true;
-  //     }
-  //   });
-
-  //   if (isValid) {
-  //     this.toastr.success('Login Successful', 'Successful', {
-  //       disableTimeOut: false
-  //     });
-  //     this.router.navigate(['/dashboard']);
-  //   } else {
-  //     this.toastr.warning('Please enter valid username and password', 'Warning', {
-  //       disableTimeOut: false
-  //     });
-  //   }
-  // }
-
-  // submitForm() {
-
-  // }
-  //   this.userService.SignupList().subscribe( data => {      
-  //       if(data.Status.code===0)    
-  //       {       
-  //         this.router.navigate(['/dashboard']);  
-  //       }    
-  //       else{    
-  //         this.errorMessage = data.Message;    
-  //       }    
-  //     },    
-  //     error => {    
-  //       this.errorMessage = error.message;    
-  //     });    
-  // };   
+ 
 
 
   submitForm() {
@@ -87,41 +51,18 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/admin/dashboard']);
         }
         else {
-          alert('UnSuccessfully');
+          alert('Admin Login Failed');
           // this.toastrService.warning('please enter the valid email or passsword', 'warning');
         }
       }
     }, (err) => {
     });
   }
-  
-
-  
-
   registerForm() {
     this.router.navigate(['/register']);
   }
 
-  // adminregisterForm(){
-  //   this.router.navigate(['/admin/register']);
-  // }
-
-  // salesregisterForm(){
-  //   this.router.navigate(['/sales/register']);
-  // }
-
-  // registerList(){
-  //   this.adminService.RegisterList().subscribe((data: any) => {
-  //     if (data.Status.code === 0) {
-  //       if (data.RegisterList) {
-  //         this.adminDetails = data.RegisterList;
-  //       }
-  //     }
-  //   }, (err) => {
-
-  //   });
-  // }
-
+  
 }
 
 

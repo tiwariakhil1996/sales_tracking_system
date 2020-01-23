@@ -21,8 +21,8 @@ namespace STS.Controllers
         //Add Product
 
         [HttpPost]
-        [Route("AddProduct")]
-        public async Task<IActionResult> AddProduct([FromBody]ProductModel model)
+        [Route("addProduct")]
+        public async Task<IActionResult> addProduct([FromBody]ProductModel model)
         {
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
@@ -30,7 +30,7 @@ namespace STS.Controllers
             try
             {
 
-                transaction = await iproduct.AddProduct(model);
+                transaction = await iproduct.addProduct(model);
 
             }
             catch (Exception ex)

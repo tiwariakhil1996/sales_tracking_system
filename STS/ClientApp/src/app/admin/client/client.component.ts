@@ -11,6 +11,8 @@ import { clientModel } from '../../model/model';
   styleUrls: ['./client.component.css']
 })
 export class ClientComponent implements OnInit {
+  constructor()
+  {}
 
 
   ngOnInit() {

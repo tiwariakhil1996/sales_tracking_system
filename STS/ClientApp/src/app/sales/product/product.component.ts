@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CommonService } from '../../service/common.service';
 import { productModel } from '../../model/model';
 
+
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -10,8 +11,8 @@ import { productModel } from '../../model/model';
 })
 export class ProductComponent implements OnInit {
 
-  product = new ProductModel();
-  productDetails: ProductModel[] = [];
+  product = new productModel();
+  productDetails: productModel[] = [];
 
   constructor(private router: Router, private productService: CommonService) { }
 
@@ -26,10 +27,8 @@ export class ProductComponent implements OnInit {
     }, (err) => {
 
 
-  //   });
-  // }
+    });
+  }
 
-  // resetForm(){
-
-  // }
+  
 }

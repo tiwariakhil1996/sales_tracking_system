@@ -15,9 +15,6 @@ namespace STS.Model
 
 
     }
-
- 
-
     //Login
     public partial class SalesLoginModel
     {

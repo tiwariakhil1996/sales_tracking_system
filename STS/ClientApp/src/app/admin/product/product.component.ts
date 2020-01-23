@@ -11,8 +11,9 @@ import { productModel } from '../../model/model';
 })
 export class ProductComponent implements OnInit {
 
-  
-
+  product = new productModel();
+  productDetails: productModel[] = [];
+  constructor(private router: Router, private productService: CommonService) { }
   ngOnInit() {
   }
 
