@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { AdminService } from '../../service/admin.service';
 import { Router } from '@angular/router';
-import { registerModel } from '../../model/model';
+import { salesregisterModel } from '../../model/model';
+import { SalesService } from '../../service/sales.service';
 
 
 @Component({
@@ -12,10 +12,10 @@ import { registerModel } from '../../model/model';
 export class SalesRegisterComponent  implements OnInit{
 
   title = 'STS';
-  register = new registerModel();
+  register = new salesregisterModel();
 
-  adminDetails: registerModel[] = [];
-  constructor(private router: Router, private adminService: AdminService){
+  salesDetails: salesregisterModel[] = [];
+  constructor(private router: Router, private salesService: SalesService){
     // this.Login();
 
 
@@ -27,11 +27,13 @@ export class SalesRegisterComponent  implements OnInit{
 
   submitForm() {
 
-    this.adminService.RegisterService(this.register).subscribe((data: any) => {
+    this.salesService.SalesRegisterService(this.register).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        alert('Registered sucesfully');
+        alert('Sales Registered sucesfully');
       }
-    }, (err) => {
+      this.register = new salesregisterModel();
+    } 
+    , (err) => {
 
 
     });

@@ -49,9 +49,9 @@ namespace STS
             //Services
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
            
-            services.AddSingleton<IDemo, DemoServices>();
-            services.AddSingleton<IUser, UserServices>();
+            services.AddSingleton<IAdmin, AdminServices>();
             services.AddSingleton<IClient, ClientServices>();
+            services.AddSingleton<ISales, SalesServices>();
             services.AddSingleton<IProduct, ProductServices>();
         }
 
