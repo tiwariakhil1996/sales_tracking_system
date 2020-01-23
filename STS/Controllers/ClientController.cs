@@ -10,17 +10,19 @@ using Microsoft.AspNetCore.Mvc;
 namespace STS.Controllers
 {
     [Route("api/[controller]")]
-    public class DemoController : Controller
+    public class ClientController : Controller
     {
-        private IDemo idemo;
-        public DemoController(IDemo demo)
+        private IClient iclient;
+        public ClientController(IClient client)
         {
-            idemo = demo;
+            iclient = client;
         }
+
+        //Add Product
 
         [HttpPost]
-        [Route("DemoRegister")]
-        public async Task<IActionResult> DemoRegister([FromBody] DemoRegisterModel model)
+        [Route("addClient")]
+        public async Task<IActionResult> addClient([FromBody]ClientModel model)
         {
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
@@ -28,7 +30,7 @@ namespace STS.Controllers
             try
             {
 
-                transaction = await idemo.DemoRegister(model);
+                transaction = await iclient.addClient(model);
 
             }
             catch (Exception ex)
@@ -39,17 +41,20 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
+
+        //Login
+
         [HttpGet]
-        [Route("DemoLogin")]
-        public async Task<IActionResult> DemoLogin()
+        [Route("ClientList")]
+        public async Task<IActionResult> ClientList()
         {
             TranStatus transaction = new TranStatus();
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
             try
             {
-                var registerList = await idemo.DemoLogin();
-                dctData.Add("DemoLogin", registerList);
+                var clientList = await iclient.ClientList();
+                dctData.Add("ClientList", clientList);
             }
             catch (Exception ex)
             {
@@ -59,6 +64,7 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
+        
 
     }
 }

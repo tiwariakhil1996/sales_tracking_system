@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   adminDetails: registerModel[] = [];
 
   constructor(private router: Router, private adminService: AdminService) {
-    this.registerList();
+    // this.registerList();
 
 
   }
@@ -59,9 +59,9 @@ export class LoginComponent implements OnInit {
   //   }
   // }
 
-  submitForm() {
+  // submitForm() {
 
- 
+  // }
   //   this.userService.SignupList().subscribe( data => {      
   //       if(data.Status.code===0)    
   //       {       
@@ -75,22 +75,52 @@ export class LoginComponent implements OnInit {
   //       this.errorMessage = error.message;    
   //     });    
   // };   
-     
-  }
 
- 
 
-  registerList(){
-    this.adminService.RegisterList().subscribe((data: any) => {
+  submitForm() {
+    this.adminService.AdminLogin(this.login).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        if (data.RegisterList) {
-          this.adminDetails = data.RegisterList;
+        const obj = this.adminDetails.find(item => item.email == this.login.email && item.password == this.login.password);
+        if (!obj) {
+          // this.toastrService.success('login succesfully', 'success');
+          alert('Admin Login Successfully');
+          this.router.navigate(['/admin/dashboard']);
+        }
+        else {
+          alert('UnSuccessfully');
+          // this.toastrService.warning('please enter the valid email or passsword', 'warning');
         }
       }
     }, (err) => {
-
     });
   }
+  
+
+  
+
+  registerForm() {
+    this.router.navigate(['/register']);
+  }
+
+  // adminregisterForm(){
+  //   this.router.navigate(['/admin/register']);
+  // }
+
+  // salesregisterForm(){
+  //   this.router.navigate(['/sales/register']);
+  // }
+
+  // registerList(){
+  //   this.adminService.RegisterList().subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.RegisterList) {
+  //         this.adminDetails = data.RegisterList;
+  //       }
+  //     }
+  //   }, (err) => {
+
+  //   });
+  // }
 
 }
 

@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace STS.BLL.Interface
 {
-    public interface IDemo
+    public interface IClient
     {
-        Task<TranStatus> DemoRegister(DemoRegisterModel model);
-        Task<List<DemoLoginModel>> DemoLogin();
+        Task<TranStatus> addClient(ClientModel model);
+
+        Task<List<ClientListModel>> ClientList();
     }
 }
 

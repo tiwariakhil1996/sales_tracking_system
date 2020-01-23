@@ -4,8 +4,8 @@ import { NgModule } from '@angular/core';
 
 import { ClientRoutingModule } from './client-routing.module';
 import { ClientComponent } from './client.component';
-import { AddclientComponent } from './addclient/addclient.component';
 import { ViewclientComponent } from './viewclient/viewclient.component';
+import { AddclientComponent } from './addclient/addclient.component';
 // Angular
 
 @NgModule({
@@ -15,9 +15,7 @@ import { ViewclientComponent } from './viewclient/viewclient.component';
     ClientRoutingModule
   ],
   declarations: [
-    ClientComponent,
-    AddclientComponent,
-    ViewclientComponent
+    ClientComponent
   ]
 })
 export class ClientModule { }

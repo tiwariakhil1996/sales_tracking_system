@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonService } from '../../service/common.service';
-import { ProductModel } from '../../model/model';
+import { productModel } from '../../model/model';
 
 @Component({
   selector: 'app-product',
@@ -19,17 +19,17 @@ export class ProductComponent implements OnInit {
   }
 
   submitForm(){
-    this.productService.AddProduct(this.product).subscribe((data: any) => {
+    this.productService.addProduct(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
         alert('Product added sucesfully');
       }
     }, (err) => {
 
 
-    });
-  }
+  //   });
+  // }
 
-  resetForm(){
+  // resetForm(){
 
-  }
+  // }
 }

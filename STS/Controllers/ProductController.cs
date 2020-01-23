@@ -42,19 +42,19 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
-        //Product details
+        //View Products
 
         [HttpGet]
-        [Route("ProductDetails")]
-        public async Task<IActionResult> ProductDetails()
+        [Route("ProductList")]
+        public async Task<IActionResult> ProductList()
         {
             TranStatus transaction = new TranStatus();
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
             try
             {
-                var productlist = await iproduct.ProductDetails();
-                dctData.Add("ProductDetails", productlist);
+                var productList = await iproduct.ProductList();
+                dctData.Add("ProductList", productList);
             }
             catch (Exception ex)
             {

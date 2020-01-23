@@ -8,16 +8,40 @@ export const SalesnavItems: INavData[] = [
     icon: 'icon-speedometer',
 
   },
-  
+ 
   {
-    name: 'Add Product',
-    url: '/sales/product',
-    icon: 'icon-note'
+    name: 'Product',
+    url:'/sales/product',
+    icon: 'icon-note',
+    children: [
+      {
+        name: 'Add Product',
+        url: '/sales/product/addproduct',
+        icon: 'icon-note',
+      },
+      {
+        name: 'View Product',
+        url: '/sales/product/viewproduct',
+        icon: 'icon-calendar',
+      }
+    ]
   },
   {
-    name: 'Add Client',
-    url: '/sales/client',
-    icon: 'icon-user-follow'
+    name: 'Client',
+    url:'/sales/client',
+    icon: 'icon-note',
+    children: [
+      {
+        name: 'Add Client',
+        url: '/sales/client/addclient',
+        icon: 'icon-note',
+      },
+      {
+        name: 'View Client',
+        url: '/sales/client/viewclient',
+        icon: 'icon-calendar',
+      }
+    ]
   },
 
   {
@@ -42,11 +66,11 @@ export const SalesnavItems: INavData[] = [
       },
     ]
   },
-  {
-    name: 'Map',
-    url: '/sales/map',
-    icon: 'icon-map'
-  },
+  // {
+  //   name: 'Map',
+  //   url: '/sales/map',
+  //   icon: 'icon-map'
+  // },
   // {
   //   name: 'Demo',
   //   url: '/sales/demo',

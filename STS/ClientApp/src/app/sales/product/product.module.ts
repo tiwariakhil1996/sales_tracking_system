@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 
 import { ProductComponent } from './product.component';
 import { ProductRoutingModule } from './product-routing.module';
+import { AddproductComponent } from './addproduct/addproduct.component';
+import { ViewproductComponent } from './viewproduct/viewproduct.component';
 // Angular
 
 @NgModule({
@@ -13,7 +15,9 @@ import { ProductRoutingModule } from './product-routing.module';
     ProductRoutingModule
   ],
   declarations: [
-    ProductComponent
+    ProductComponent,
+    AddproductComponent,
+    ViewproductComponent
   ]
 })
 export class ProductModule { }

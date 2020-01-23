@@ -1,12 +1,3 @@
-// demo page
-export class demoModel {
-    id: number;
-    username: string;
-    email: string;
-    password: string;
-    cpassword: string;
-}
-
 
 // register form
 export class registerModel {
@@ -17,19 +8,37 @@ export class registerModel {
     cpassword: string;
 }
 
-// product form
-export class ProductModel {
-    ID: number;
-    Category: string;
-    SubCategory: string;
-    ProductName: string;
-    Description: string;
-    Price: string;
-    Image:string;
-    Date:string;
+// register form
+export class salesregisterModel {
+    id: number;
+    salesName: string;
+    email: string;
+    password: string;
+    cpassword: string;
 }
-//login form
-export class LoginModel{
-    email:string;
-    password:string;
+// product form
+export class productModel {
+    id: number;
+    category: string;
+    subcategory: string;
+    productname: string;
+    description: string;
+    price: number;
+    image: string;
+    date: string;
+}
+
+
+// client form
+export class clientModel {
+    id: number;
+    clientName: string;
+    email: string;
+    contact: string;
+    gender: any;
+    address: string;
+    street: string;
+    city: string;
+    postalCode: number;
+    country: string;
 }

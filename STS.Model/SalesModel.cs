@@ -5,9 +5,9 @@ using System.Text;
 namespace STS.Model
 {
      //Register
-    public partial class RegisterModel
+    public partial class SalesModel
     {
-        public string Username { get; set; }
+        public string SalesName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string Cpassword { get; set; }
@@ -16,14 +16,25 @@ namespace STS.Model
 
     }
 
+ 
+
     //Login
-    public partial class RegisterListModel
+    public partial class SalesLoginModel
     {
-        public int ID { get; set; }
-        public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
 
     }
-    
+
+
+    //Display
+
+    //public partial class SalesListModel
+    //{
+    //    public int ID { get; set; }
+    //    public string SalesName { get; set; }
+    //    public string Email { get; set; }
+    //    public string Password { get; set; }
+
+    //}
 }

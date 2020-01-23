@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { SalesService } from '../../service/sales.service';
-import { registerModel } from '../../model/model';
+import { salesregisterModel } from '../../model/model';
+
+
 
 
 @Component({
@@ -18,11 +20,11 @@ export class SalesLoginComponent implements OnInit {
   // constructor(private router: Router, private toastr: ToastrService) { }
 
   title = 'STS';
-  login = new registerModel();
-  salesDetails: registerModel[] = [];
+  login = new salesregisterModel();
+  salesDetails: salesregisterModel[] = [];
 
   constructor(private router: Router, private salesService: SalesService) {
-    this.registerList();
+    // this.registerList();
 
 
   }
@@ -33,26 +35,41 @@ export class SalesLoginComponent implements OnInit {
 
 
   submitForm() {
-
+    this.salesService.SalesLoginService(this.login).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        const obj = this.salesDetails.find(item => item.email == this.login.email && item.password == this.login.password);
+        if (!obj) {
+          // this.toastrService.success('login succesfully', 'success');
+          
+          alert('Sales Login Successfully');
+          this.router.navigate(['/sales/dashboard']);
+        }
+        else {
+          alert('UnSuccessfully');
+          // this.toastrService.warning('please enter the valid email or passsword', 'warning');
+        }
+      }
+    }, (err) => {
+    });
 
 
   }
 
   registerForm() {
-    this.router.navigate(['sales/register']);
+    this.router.navigate(['/register']);
   }
 
-  registerList(){
-    this.salesService.RegisterList().subscribe((data: any) => {
-      if (data.Status.code === 0) {
-        if (data.RegisterList) {
-          this.salesDetails = data.RegisterList;
-        }
-      }
-    }, (err) => {
+  // registerList(){
+  //   this.salesService.SalesRegisterList().subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.RegisterSalesList) {
+  //         this.salesDetails = data.RegisterSalesList;
+  //       }
+  //     }
+  //   }, (err) => {
 
-    });
-  }
+  //   });
+  // }
 
 }
 

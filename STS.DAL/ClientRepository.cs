@@ -10,24 +10,28 @@ using STS.Model;
 
 namespace STS.DAL
 {
-    public class UserRepository : BaseRepository
+    public class ClientRepository : BaseRepository
     {
-        public async Task<TranStatus> RegisterUser(RegisterModel model)
+        public async Task<TranStatus> addClient(ClientModel model)
         {
             using (var connection = new SqlConnection(ConnectionString))
-
             {
                 await connection.OpenAsync();
                 TranStatus transaction = new TranStatus();
                 DynamicParameters parameter = new DynamicParameters();
-                parameter.Add("@Username", model.Username);
+                parameter.Add("@ClientName", model.ClientName);
                 parameter.Add("@Email", model.Email);
-                parameter.Add("@Password", model.Password);
-                parameter.Add("@Cpassword", model.Cpassword);
+                parameter.Add("@Contact", model.Contact);
+                parameter.Add("@Gender", model.Gender);
+                parameter.Add("@Address", model.Address);
+                parameter.Add("@Street", model.Street);
+                parameter.Add("@City", model.City);
+                parameter.Add("@PostalCode", model.PostalCode);
+                parameter.Add("@Country", model.Country);
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
-                await connection.QueryAsync("RegisterUser", parameter, commandType: CommandType.StoredProcedure);
+                await connection.QueryAsync("addClient", parameter, commandType: CommandType.StoredProcedure);
 
                 transaction.returnMessage = parameter.Get<string>("@Message");
                 transaction.code = parameter.Get<int>("@Code");
@@ -36,12 +40,12 @@ namespace STS.DAL
             }
         }
 
-        public async Task<List<RegisterListModel>> RegisterList()
+        public async Task<List<ClientListModel>> ClientList()
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                var result = await connection.QueryAsync<RegisterListModel>("RegisterList", commandType: CommandType.StoredProcedure);
+                var result = await connection.QueryAsync<ClientListModel>("ClientList", commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
             }

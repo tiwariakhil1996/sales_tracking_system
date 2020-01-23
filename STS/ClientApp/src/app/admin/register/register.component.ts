@@ -46,10 +46,11 @@ export class RegisterComponent  implements OnInit{
 
   submitForm() {
 
-    this.adminService.RegisterService(this.register).subscribe((data: any) => {
+    this.adminService.AdminRegisterService(this.register).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        alert('Registered sucesfully');
+        alert('Admin Registered Successfully');
       }
+      this.register = new registerModel();
     }, (err) => {
 
 
