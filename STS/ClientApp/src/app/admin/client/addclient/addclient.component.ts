@@ -27,6 +27,7 @@ export class AddclientComponent implements OnInit {
       if (data.Status.code === 0) {
         alert('Registered sucesfully');
       }
+      this.client = new clientModel();
     }, (err) => {
 
 

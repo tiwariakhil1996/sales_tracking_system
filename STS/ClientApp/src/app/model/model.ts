@@ -1,12 +1,3 @@
-// demo page
-export class demoModel {
-    id: number;
-    username: string;
-    email: string;
-    password: string;
-    cpassword: string;
-}
-
 
 // register form
 export class registerModel {
@@ -17,6 +8,14 @@ export class registerModel {
     cpassword: string;
 }
 
+// register form
+export class salesregisterModel {
+    id: number;
+    salesName: string;
+    email: string;
+    password: string;
+    cpassword: string;
+}
 // product form
 export class productModel {
     id: number;

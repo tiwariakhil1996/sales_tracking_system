@@ -9,14 +9,20 @@ export class SalesService {
   constructor(private http: HttpClient) { }
 
  
-  // REGISTER
+  // Sales REGISTER
 
-  RegisterService(data) {
-    return this.http.post('/api/User/RegisterUser', data);
+  SalesRegisterService(data) {
+    return this.http.post('/api/Sales/RegisterSales', data);
 
   }
 
-  RegisterList() {
-    return this.http.get('/api/User/RegisterList');
+  SalesLoginService(data) {
+    return this.http.post('/api/Sales/SalesLogin', data);
+
   }
+
+
+  // RegisterSalesList() {
+  //   return this.http.get('/api/Sales/RegisterSalesList');
+  // }
 }

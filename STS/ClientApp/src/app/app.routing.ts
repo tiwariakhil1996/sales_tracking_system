@@ -91,10 +91,6 @@ export const routes: Routes = [
         loadChildren: () => import('./admin/map/map.module').then(m => m.MapModule)
       },
       {
-        path: 'demo',
-        loadChildren: () => import('./admin/demo/demo.module').then(m => m.DemoModule)
-      },
-      {
         path: 'base',
         loadChildren: () => import('./admin/base/base.module').then(m => m.BaseModule)
       },

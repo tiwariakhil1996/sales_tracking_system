@@ -59,7 +59,7 @@
                 <div class="form-group row">
                   <label class="col-md-3 col-form-label" for="file-multiple-input">Product Image</label>
                   <div class="col-md-9">
-                    <input type="file" id="image" name="image"  [(ngModel)]="product.image" multiple>
+                    <input class="form-control" type="file" id="image" name="image" accept="image/*" (change)="handleFileInput($event)" multiple>
                   </div>
                 </div>
     
