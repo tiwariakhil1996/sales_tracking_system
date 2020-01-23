@@ -86,11 +86,11 @@ export const navItems: INavData[] = [
     url: '/admin/map',
     icon: 'icon-map'
   },
-  {
-    name: 'Demo',
-    url: '/admin/demo',
-    icon: 'icon-demo'
-  },
+  // {
+  //   name: 'Demo',
+  //   url: '/admin/demo',
+  //   icon: 'icon-demo'
+  // },
   {
     name: 'Logout',
     url: '/admin/login',

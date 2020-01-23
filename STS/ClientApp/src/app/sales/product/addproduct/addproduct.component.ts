@@ -23,6 +23,7 @@ export class AddproductComponent implements OnInit {
       if (data.Status.code === 0) {
         alert('Product added sucesfully');
       }
+      this.product = new productModel();
     }, (err) => {
 
 
