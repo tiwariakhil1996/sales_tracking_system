@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { productModel } from '../../../model/model';
 import { Router } from '@angular/router';
 import { CommonService } from '../../../service/common.service';
+import { DomSanitizer } from '@angular/platform-browser';
+// import {DomSanitizatio.nService} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-addproduct',
@@ -10,15 +12,20 @@ import { CommonService } from '../../../service/common.service';
 })
 export class AddproductComponent implements OnInit {
 
+  errorMessage = '';
+  imageSrc: string = '';
+
   product = new productModel();
   productDetails: productModel[] = [];
 
-  constructor(private router: Router, private productService: CommonService) { }
+
+  constructor(private router: Router, private productService: CommonService,private domSanitizer: DomSanitizer) { }
 
   ngOnInit() {
   }
 
-  submitForm(){
+  submitForm() {
+    this.product.image = this.imageSrc;
     this.productService.addProduct(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
         alert('Product added sucesfully');
@@ -30,45 +37,32 @@ export class AddproductComponent implements OnInit {
     });
   }
 
-  //Image to Base64
+  // Image to Base64
 
-  // handleInputChange(e) {
-  //   var file = e.target.files[0];
-  //   var pattern = /image-*/;
-  //   var reader = new FileReader();
+  handleInputChange(e) {
+    var file = e.target.files[0];
+    var pattern = /image-*/;
+    var reader = new FileReader();
 
-  //   if (!file.type.match(pattern)) {
-  //     alert('invalid format');
-  //     return;
-  //   }
+    if (!file.type.match(pattern)) {
+      alert('invalid format');
+      return;
+    }
 
-  //   reader.onload = this._handleReaderLoaded.bind(this);
-  //   reader.readAsDataURL(file)
-  // }
+    reader.onload = this._handleReaderLoaded.bind(this);
+    reader.readAsDataURL(file)
+  }
 
-  // _handleReaderLoaded(e) {
-  //   let reader = e.target;
-  //   this.imageSrc = reader.result;
-  //   // console.log(this.imageSrc);
-  // }
+  _handleReaderLoaded(e) {
+    const reader = e.target;
+    // this.imageSrc = domSanitizer.bypassSecurityTrustUrl(reader.result);
+    //  console.log(this.imageSrc);S
+    this.imageSrc = reader.result;
+    console.log(this.imageSrc);
+  }
+  
 
-
-  handleFileInput(fileList: FileList) {
-    const preview = document.getElementById('photos-preview');
-    Array.from(fileList).forEach((file: File) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          var image = new Image();
-          image.src = String(reader.result);
-          image.height=100;
-          image.width=100;
-          preview.appendChild(image);
-        }
-        reader.readAsDataURL(file);
-    });
-}
-
-  resetForm(){
+  resetForm() {
 
   }
 

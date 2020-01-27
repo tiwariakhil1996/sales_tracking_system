@@ -22,9 +22,11 @@ export class ViewclientComponent implements OnInit {
   ngOnInit() {
   }
 
-  //Display
 
-  clientList(){
+
+  // Display
+
+  clientList() {
     this.clientService.clientList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.ClientList) {
@@ -36,15 +38,64 @@ export class ViewclientComponent implements OnInit {
     });
   }
 
-  //Edit
+  // Edit
 
-  openBackDropCustomClass(){
-
-  }
-
-
-  //Delete
-  onDelete(){
+  openBackDropCustomClass() {
 
   }
+
+  // oDelete(id: number) {
+  //   if (confirm('Are you sure to delete this record ?') == true) {
+  //     this.clientService.deleteClient(id)
+  //     .subscribe(x => {
+  //       this.clientService.deleteClient(id);
+  //     alert("Deleted Successfully");
+  //     })
+  //   }
+  // }
+
+  // Delete
+  // onDelete(id){
+  //   this.clientService.deleteClient(this.client).subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       const obj = this.clientDetails.find(item => item.id == this.client.id);
+  //       if (!obj) {
+  //         alert('Record deleted Successfully');
+  //       }
+  //       else {
+  //         alert('Record cant be deleted');
+  //       }
+  //     }
+  //   }, (err) => {
+  //   });
+  // }
+
+  onDelete(id: number) {
+
+    // const i = this.clientDetails.findIndex(item => item.id == this.client.id);
+    //     // if (i!==-1) {
+    //     //   this.clientDetails.splice(i,1);
+    //     // }
+    if (confirm('Are you sure to delete this record ?') === true) {
+      this.clientService.deleteClient(id).subscribe(data => {
+        this.clientService.clientList();
+
+      });
+    }
+  }
+
+  deleteClient(id: number) {
+    this.clientService.deleteClient(id).subscribe(data => {
+          console.log(data);
+          this.clientList();
+        },
+        error => console.log(error));
+  }
+
+//   deleteUser(id: number) {
+//     this.clientService.deleteClient(id).pipe(first()).subscribe(() => { 
+//         this.clientList() 
+//     });
+// }
+
 }

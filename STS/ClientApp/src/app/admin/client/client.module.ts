@@ -6,6 +6,7 @@ import { ClientRoutingModule } from './client-routing.module';
 import { ClientComponent } from './client.component';
 import { ViewclientComponent } from './viewclient/viewclient.component';
 import { AddclientComponent } from './addclient/addclient.component';
+
 // Angular
 
 @NgModule({

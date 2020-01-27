@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SalesnavItems } from '../../_Salesnav';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -8,7 +9,7 @@ import { SalesnavItems } from '../../_Salesnav';
 })
 // export class SalesLayoutComponent implements OnInit {
 
-//   constructor() { }
+
 
 //   ngOnInit() {
 //   }
@@ -19,6 +20,8 @@ export class SalesLayoutComponent {
   public sidebarMinimized = false;
   public SalesnavItems = SalesnavItems;
 
+  constructor(private router: Router) { }
+  
   toggleMinimize(e) {
     this.sidebarMinimized = e;
   }
