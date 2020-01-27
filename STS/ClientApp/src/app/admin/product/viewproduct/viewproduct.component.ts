@@ -19,7 +19,7 @@ export class ViewproductComponent implements OnInit {
 
   constructor(private router: Router,
     private productService: CommonService,
-    public sanitizer: DomSanitizer
+    // public sanitizer: DomSanitizer
     // private modalServices: BsModalService,
     // private modalService: NgbModal
     ) {
@@ -75,7 +75,12 @@ export class ViewproductComponent implements OnInit {
 
   // Delete
 
-  onDelete() {
-
+  onDelete(id: number) {
+    if (confirm('Are you sure to delete this record ?') === true) {
+      this.productService.deleteClient(id).subscribe(data => {
+        this.productService.productList();
+        this.productList();
+      });
+    }
   }
 }

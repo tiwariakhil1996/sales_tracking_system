@@ -24,6 +24,7 @@ export class AddclientComponent implements OnInit {
     { states: 'Rajasthan',   cities: ['Jaipur'] },
     { states: 'U.P',         cities: ['Ballia'] },
     { states: 'Duesseldorf', cities: ['Beijing'] },
+    { states: 'Eschborn', cities: ['anbc'] },
   ];
 
   name: Array<any>;
@@ -38,7 +39,7 @@ export class AddclientComponent implements OnInit {
     this.cities = this.stateList.find(con => con.states == count1).cities;
   }
 
-  
+
   client = new clientModel();
 
   clientDetails: clientModel[] = [];

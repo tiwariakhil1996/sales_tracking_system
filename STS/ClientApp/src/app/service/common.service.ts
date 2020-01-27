@@ -19,9 +19,13 @@ export class CommonService {
     return this.http.get('/api/Product/ProductList');
   }
 
+  deleteProduct(id: number) {
+    return this.http.delete('/api/Product/deleteProduct/' + id);
+  }
 
 
 
+  
   // -----------------  Client
 
   addClient(data) {
@@ -31,9 +35,6 @@ export class CommonService {
   clientList() {
     return this.http.get('/api/Client/ClientList');
   }
-
-  //  deleteClient(data) {
-  //   return this.http.post('/api/Client/deleteClient',data);
 
   deleteClient(id: number) {
     return this.http.delete('/api/Client/deleteClient/' + id);
