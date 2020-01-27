@@ -34,15 +34,26 @@ namespace STS.BLL.Service
             }
         }
 
+
         //Update
-        public async Task<Tuple<TranStatus,List<ClientListModel>>> updateClient(long ID, ClientListModel model)
+        public async Task<TranStatus> updateClient(int ID, ClientListModel model)
         {
             using (clientRepository = new ClientRepository())
             {
-                TranStatus tranStatus = new TranStatus();
                 return await clientRepository.updateClient(ID, model);
             }
         }
+
+        ////Update
+        //public async Task<Tuple<TranStatus,List<ClientListModel>>> updateClient(int ID, ClientListModel model)
+        //{
+        //    using (clientRepository = new ClientRepository())
+        //    {
+        //        TranStatus tranStatus = new TranStatus();
+        //        return await clientRepository.updateClient(ID, model);
+        //    }
+        //}
+
 
 
         //Delete

@@ -17,9 +17,12 @@ namespace STS.BLL.Interface
         Task<List<ClientListModel>> ClientList();
 
         //Update
-        Task<Tuple<TranStatus,List<ClientListModel>>> updateClient(long ID, ClientListModel model);
+        Task<TranStatus> updateClient(int ID, ClientListModel model);
 
-      
+        ////Update
+        //Task<Tuple<TranStatus,List<ClientListModel>>> updateClient(int ID, ClientListModel model);
+
+
         //Delete
         Task<TranStatus> deleteClient(int ID);
     }

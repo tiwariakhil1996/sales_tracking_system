@@ -65,22 +65,20 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
-
         //Update
+
         [HttpPut]
-        [Route("updateClient/{id}")]
-        public async Task<IActionResult> UpdatePassword(long ID, [FromBody]ClientListModel model)
+        [Route("updateClient/{ID}")]
+        public async Task<IActionResult> updateClient(int ID, [FromBody]ClientListModel model)
         {
-            TranStatus transaction = new TranStatus();
-            ClientListModel clientList = new ClientListModel();
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
             try
             {
-                Tuple<TranStatus,List<ClientListModel>> result = await iclient.updateClient(ID, model);
-                transaction = result.Item1;
-                //clientList = result.Item2;
-                dctData.Add("ClientList", clientList);
+
+                transaction = await iclient.updateClient(ID, model);
+
             }
             catch (Exception ex)
             {
@@ -90,6 +88,31 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
+
+        ////Update
+        //[HttpPut]
+        //[Route("updateClient/{id}")]
+        //public async Task<IActionResult> updateClient(int ID, [FromBody]ClientListModel model)
+        //{
+        //    TranStatus transaction = new TranStatus();
+        //    ClientListModel clientList = new ClientListModel();
+        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
+        //    HttpStatusCode statusCode = HttpStatusCode.OK;
+        //    try
+        //    {
+        //        Tuple<TranStatus,List<ClientListModel>> result = await iclient.updateClient(ID, model);
+        //        transaction = result.Item1;
+        //        //clientList = result.Item2;
+        //        dctData.Add("ClientList", clientList);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        transaction = CommonHelper.TransactionErrorHandler(ex);
+        //        statusCode = HttpStatusCode.BadRequest;
+        //    }
+        //    dctData.Add("Status", transaction);
+        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        //}
 
 
         //Delete

@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { productModel } from '../../../model/model';
 import { CommonService } from '../../../service/common.service';
 import { Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
-import { DomSanitizer } from '@angular/platform-browser';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-viewproduct',
@@ -12,30 +11,21 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./viewproduct.component.css']
 })
 export class ViewproductComponent implements OnInit {
-
-  // modalRef: BsModalRef;
+  
+  imageSrc: string = '';
+  modalRef: BsModalRef;
   product = new productModel();
   productDetails: productModel[] = [];
 
   constructor(private router: Router,
     private productService: CommonService,
-    // public sanitizer: DomSanitizer
     // private modalServices: BsModalService,
-    // private modalService: NgbModal
+    private modalService: NgbModal
     ) {
         this.productList();
    }
 
   ngOnInit() {
-  }
-
-  openBackDropCustomClass(content, item) {
-
-    //this.product = item;
-    // data show in model use this line and store the data in user and display in ui
-    //this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
-    // this.viewData = JSON.parse(localStorage.getItem('Register')) || [];
-
   }
 
   // Display
@@ -52,35 +42,63 @@ export class ViewproductComponent implements OnInit {
     });
   }
 
-  // Edit
+//Edit
+  openupdatemodal(content, item) {
+    this.product = item;
+    // data show in model use this line and store the data in user and display in ui
+    this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
+    // this.viewData = JSON.parse(localStorage.getItem('Register')) || [];
 
-  onEdit(id) {
-  //   this.registerDetails=JSON.parse(localStorage.getItem("Register"))||[];
-  //  this.registerDetails.forEach((element, index) => {
-  //    console.log(index, element);
+  }
 
-  //    if (this.register.id == element.id) {
-  //        this.registerDetails[index]=this.register;
-  //        localStorage.setItem('Register', JSON.stringify(this.registerDetails));
-  //      // console.log(userIndex);
-  //    }
-
-  //  });
-
-  // this.register = new registerModel();
-  // this.registerImg = new registerImg();
-
- }
-
+  onEdit(id:number) {
+    this.product.image = this.imageSrc;
+    this.productService.updateProduct(id, this.product).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        alert('Product updated sucesfully');
+      }
+      this.product = new productModel();
+      this.productList();
+    }, (err) => {
+    });
+  }
 
   // Delete
 
   onDelete(id: number) {
     if (confirm('Are you sure to delete this record ?') === true) {
-      this.productService.deleteClient(id).subscribe(data => {
+      this.productService.deleteProduct(id).subscribe(data => {
         this.productService.productList();
         this.productList();
       });
     }
   }
+
+
+
+  // Image to Base64
+
+  handleInputChange(e) {
+    var file = e.target.files[0];
+    var pattern = /image-*/;
+    var reader = new FileReader();
+
+    if (!file.type.match(pattern)) {
+      alert('invalid format');
+      return;
+    }
+
+    reader.onload = this._handleReaderLoaded.bind(this);
+    reader.readAsDataURL(file)
+  }
+
+  _handleReaderLoaded(e) {
+    const reader = e.target;
+    // this.imageSrc = domSanitizer.bypassSecurityTrustUrl(reader.result);
+    //  console.log(this.imageSrc);S
+    this.imageSrc = reader.result;
+    // console.log(this.imageSrc);
+  }
+  
+
 }

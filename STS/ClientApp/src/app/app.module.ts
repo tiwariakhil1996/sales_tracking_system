@@ -50,9 +50,8 @@ import { SalesRegisterComponent } from './sales/register/register.component';
 import { SalesLayoutComponent } from './containerSales';
 import { SalesLoginComponent } from './sales/login/login.component';
 import { ModalModule } from 'ngx-bootstrap';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { AlifeFileToBase64Module } from 'alife-file-to-base64';
 
 @NgModule({
   imports: [
@@ -66,14 +65,14 @@ import { AlifeFileToBase64Module } from 'alife-file-to-base64';
     AppHeaderModule,
     AppSidebarModule,
     HttpClientModule,
-    // AlifeFileToBase64Module,
-    // NgbModal,
+    ModalModule.forRoot(),
+    NgbModule,
+    NgbAlertModule,
     // HttpModule,
     ReactiveFormsModule,
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    // ModalModule.forRoot(),
     ToastrModule.forRoot(
       {
         timeOut: 1000,
@@ -90,8 +89,6 @@ import { AlifeFileToBase64Module } from 'alife-file-to-base64';
     P500Component,
     LoginComponent,
     RegisterComponent,
-
-    // SalesComponents
     SalesRegisterComponent,
     SalesLoginComponent
   ],

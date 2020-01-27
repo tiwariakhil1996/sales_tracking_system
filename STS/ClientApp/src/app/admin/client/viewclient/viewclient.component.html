@@ -25,9 +25,11 @@
               <th>Gender</th>
               <th>Address</th>
               <th>Street</th>
+              <th>Country</th>
+              <th>State</th>
               <th>City</th>
               <th>Postalcode</th>
-              <th>Country</th>
+            
               <th>Action</th>
             </tr>
           </thead>
@@ -50,14 +52,89 @@
               <td>{{client.gender}}</td>
               <td>{{client.address}}</td>
               <td>{{client.street}}</td>
+              <td>{{client.country}}</td>
+              <td>{{client.state}}</td>
               <td>{{client.city}}</td>
               <td>{{client.postalCode}}</td>
-              <td>{{client.country}}</td>
+             
       
               <td>
-                  <button type="button" class="btn btn-info" data-toggle="modal" (click)="openBackDropCustomClass()" ><i class="fa fa-edit" aria-hidden="true"></i></button>
+                  <button type="button" class="btn btn-info" data-toggle="modal" (click)="openupdatemodal(content,client)" ><i class="fa fa-edit" aria-hidden="true"></i></button>
+                 
                   <button type="button" class='btn btn-danger' (click)="onDelete(client.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                </td>
+               
+                  <ng-template #content let-modal>
+                <div class="modal-header">
+                  <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT</h4>
+                </div>
+                   <form>
+                       <div class="modal-body" style="color: black;">
+                        <div>
+                          <div class="form-group">
+                           <label for="id">ID</label>
+                             <input type="text" class="form-control"  [(ngModel)]="client.id" name="id" disabled>
+                         </div>
+                         <div class="form-group">
+                           <label for="clientName">Client Name</label>
+                             <input type="text" class="form-control"  [(ngModel)]="client.clientName" name="clientName">
+                         </div>
+                         
+                         <div class="form-group">
+                           <label for="email">Email</label>
+                             <input type="text" class="form-control"  [(ngModel)]="client.email" name="email" >
+                         </div>
+         
+                          <div class="form-group">
+                            <label for="contact">Contact</label>
+                              <input type="text" class="form-control" [(ngModel)]="client.contact" name="contact">
+                         </div>
+
+                          <div class="form-group">
+                             <label for="gender">Gender</label>
+                             <input type="text" class="form-control"  [(ngModel)]="client.gender" name="gender">
+                          </div>
+
+                          <div class="form-group">
+                              <label for="address">Address</label>
+                              <input type="text" class="form-control"  [(ngModel)]="client.address" name="address" >
+                          </div>
+
+                          
+                          <div class="form-group">
+                             <label for="street">Street</label>
+                              <input type="text" class="form-control" [(ngModel)]="client.street" name="street" >
+                          </div>
+
+                          <div class="form-group">
+                             <label for="country">Country</label>
+                              <input type="text" class="form-control" [(ngModel)]="client.country" name="country" >
+                          </div>
+
+                          <div class="form-group">
+                             <label for="state">State</label>
+                              <input type="text" class="form-control" [(ngModel)]="client.state" name="state" >
+                          </div>
+
+                           <div class="form-group">
+                             <label for="city">City</label>
+                             <input type="text" class="form-control"  [(ngModel)]="client.city" name="city" >
+                           </div>
+          
+
+                          <div class="form-group">
+                             <label for="postalCode">Postal Code</label>
+                             <input type="text" class="form-control"  [(ngModel)]="client.postalCode" name="postalCode" >
+                           </div>
+          
+                         
+                     <button type="submit" class="btn btn-success" (click)="onEdit(client.id)">Update</button>
+                     <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal-body">Close</button>
+                    </div>      
+                   </div>
+                 </form>
+           </ng-template>
+
+                  </td>
             </tr>
   
           </tbody>
