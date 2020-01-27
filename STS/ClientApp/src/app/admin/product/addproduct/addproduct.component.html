@@ -12,10 +12,11 @@
                   <label class="col-md-3 col-form-label" for="select1">Category</label>
                   <div class="col-md-9">
                     <input type="text" id="category" name="category" [(ngModel)]="product.category" class="form-control" placeholder="Enter category">
-<!--                   
-                    <select id="category" name="category" class="form-control" placeholder="Country" (change)="changeCountry($event.target.value)" [(ngModel)]="product.category">
+                  
+                    <!-- <select id="category" name="category" class="form-control" placeholder="Country" (change)="changeCountry($event.target.value)" [(ngModel)]="product.category">
                       <option value="0">Select Country</option>
-                      .
+                      <option *ngFor="let count of product" [value]="count.category">{{count.category}}
+                      </option>
                     </select>                    -->
                      <select id="category" name="category" class="form-control">
                       <option value="0">Please category</option>

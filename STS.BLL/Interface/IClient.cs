@@ -21,8 +21,6 @@ namespace STS.BLL.Interface
 
       
         //Delete
-        //Task<TranStatus> deleteClient(ClientListModel model);
-
         Task<TranStatus> deleteClient(int ID);
     }
 }

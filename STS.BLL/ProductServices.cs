@@ -31,5 +31,14 @@ namespace STS.BLL.Service
                 return await productRepository.ProductList();
             }
         }
+
+        //Delete
+        public async Task<TranStatus> deleteProduct(int ID)
+        {
+            using (productRepository = new ProductRepository())
+            {
+                return await productRepository.deleteProduct(ID);
+            }
+        }
     }
 }

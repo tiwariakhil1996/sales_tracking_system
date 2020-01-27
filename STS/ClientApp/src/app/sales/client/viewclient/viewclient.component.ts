@@ -44,7 +44,12 @@ export class ViewclientComponent implements OnInit {
 
 
   //Delete
-  onDelete(){
-
+  onDelete(id: number) {
+    if (confirm('Are you sure to delete this record ?') === true) {
+      this.clientService.deleteClient(id).subscribe(data => {
+        this.clientService.clientList();
+        this.clientList();
+      });
+    }
   }
 }

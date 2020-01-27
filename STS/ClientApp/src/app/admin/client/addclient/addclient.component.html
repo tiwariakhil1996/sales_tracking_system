@@ -59,153 +59,44 @@
                 <div class="form-group">
                   <label for="street">Street</label>
                   <input type="text" class="form-control" id="street" [(ngModel)]="client.street" name="street"  placeholder="Enter street name">
-                 
-                  <!-- ------------------ -->
-                  <!-- <select placeholder="Country"  class="form-control" (change)="changeCountry($event.target.value)" [(ngModel)]="client.country">
-                    <option *ngFor="let count of clientDetails" type="text" name="country" [value]="client.country">{{client.country}}
-                    </option>
-                  </select> -->
-
-                  <!-- <select id="country" name="country" class="form-control">
-                    <option value="">Country</option>
-                  <option *ngFor="let client of clientDetails" value="{{client.Cid}}">{{client.Cname}}</option>
-                  </select>
-                  <select id="state" name="state" class="form-control">
-                    <option value="0">State</option>
-                  </select>
-                  <select id="city" name="city" class="form-control">
-                    <option value="0">City</option>
-                  </select> -->
-                   <!-- ------------------ -->
                 </div>
 
                 <div class="row">
-                  <div class="form-group col-sm-8">
-                    <label for="city">City</label>
-                    <input type="text" class="form-control" id="city" [(ngModel)]="client.city" name="city"  placeholder="Enter your city">
+                  <div class="form-group col-sm-4">
+                    <label for="country">Country</label>
+                    <!-- <input type="text" class="form-control" id="country" [(ngModel)]="client.country" name="country"  placeholder="Country name"> -->
+                    <select class="form-control" id="country" name="country" (change)="changeCountry($event.target.value)" [(ngModel)]="client.country">
+                      <option value="0">Select Country</option>
+                      <option *ngFor="let count of countryList" name="country" [value]="count.name">{{count.name}}
+                      </option>
+                    </select>
                   </div>
+
+                  <div class="form-group col-sm-4">
+                    <label for="state">State</label>
+                    <!-- <input type="text" class="form-control" id="state" [(ngModel)]="client.state" name="state"  placeholder="Enter your state"> -->
+                    <select class="form-control" id="state" name="state" (change)="changeState($event.target.value)" [(ngModel)]="client.state">
+                      <option value="0">Select State</option>
+                      <option *ngFor="let count1 of states" name="state" type="text" [value]="count1">{{count1}} </option>
+                    </select>
+                  </div>
+
+
+                  <div class="form-group col-sm-4">
+                    <label for="city">City</label>
+                    <!-- <input type="text" class="form-control" id="city" [(ngModel)]="client.city" name="city"  placeholder="Enter your city"> -->
+                    <select class="form-control" id="city" name="city" [(ngModel)]="client.city">
+                      <option value="0">Select City</option>
+                      <option *ngFor="let city of cities" type="text" name="city" [value]="city">{{city}} </option>
+                    </select>
+                  </div>
+
                   <div class="form-group col-sm-4">
                     <label for="postalcode">Postal Code</label>
                     <input type="text" class="form-control" id="postalCode" [(ngModel)]="client.postalCode" name="postalCode"  placeholder="Postal Code">
                   </div>
-                </div><!--/.row-->
-                <div class="form-group">
-                  <label for="country">Country</label>
-                  <input type="text" class="form-control" id="country" [(ngModel)]="client.country" name="country"  placeholder="Country name">
                 </div>
 
-                <!-- <div class="form-group row">
-              <label class="col-md-3 col-form-label" for="date-input">Added on</label>
-              <div class="col-md-9">
-                <input class="form-control" id="date-input" type="date" name="date-input" placeholder="date">
-                <span class="help-block">Please enter a valid date</span>
-              </div>
-            </div> -->
-              
-                <!-- <div class="form-group row">
-                  <label class="col-md-3 col-form-label" for="select1">Select</label>
-                  <div class="col-md-9">
-                    <select id="select1" name="select1" class="form-control">
-                      <option value="0">Please select</option>
-                      <option value="1">Option #1</option>
-                      <option value="2">Option #2</option>
-                      <option value="3">Option #3</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-md-3 col-form-label" for="select2">Select Large</label>
-                  <div class="col-md-9">
-                    <select id="select2" name="select2" class="form-control form-control-lg">
-                      <option value="0">Please select</option>
-                      <option value="1">Option #1</option>
-                      <option value="2">Option #2</option>
-                      <option value="3">Option #3</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-md-3 col-form-label" for="select3">Select Small</label>
-                  <div class="col-md-9">
-                    <select id="select3" name="select3" class="form-control form-control-sm">
-                      <option value="0">Please select</option>
-                      <option value="1">Option #1</option>
-                      <option value="2">Option #2</option>
-                      <option value="3">Option #3</option>
-                    </select>
-                  </div>
-                </div> -->
-                <!-- <div class="form-group row">
-                  <label class="col-md-3 col-form-label" for="disabledSelect">Disabled Select</label>
-                  <div class="col-md-9">
-                    <select id="disabledSelect" class="form-control" disabled>
-                      <option value="0">Please select</option>
-                      <option value="1">Option #1</option>
-                      <option value="2">Option #2</option>
-                      <option value="3">Option #3</option>
-                    </select>
-                  </div>
-                </div> -->
-                <!-- <div class="form-group row">
-                  <label class="col-md-3 col-form-label" for="multiple-select">Multiple select</label>
-                  <div class="col-md-9">
-                    <select id="multiple-select" name="multiple-select" class="form-control" size="5" multiple>
-                      <option value="1">Option #1</option>
-                      <option value="2">Option #2</option>
-                      <option value="3">Option #3</option>
-                      <option value="4">Option #4</option>
-                      <option value="5">Option #5</option>
-                      <option value="6">Option #6</option>
-                      <option value="7">Option #7</option>
-                      <option value="8">Option #8</option>
-                      <option value="9">Option #9</option>
-                      <option value="10">Option #10</option>
-                    </select>
-                  </div>
-                </div> -->
-               
-               
-                <!-- <div class="form-group row">
-                  <label class="col-md-3 col-form-label">Checkboxes</label>
-                  <div class="col-md-9 col-form-label">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="option1" id="checkbox1">
-                      <label class="form-check-label" for="checkbox1">
-                        Option 1
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="option1" id="checkbox2">
-                      <label class="form-check-label" for="checkbox2">
-                        Option 2
-                      </label>
-                    </div>
-                    <div class="form-check checkbox">
-                      <input class="form-check-input" type="checkbox" value="option1" id="checkbox3">
-                      <label class="form-check-label" for="checkbox3">
-                        Option 3
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-md-3 col-form-label">Inline Checkboxes</label>
-                  <div class="col-md-9 col-form-label">
-                    <div class="form-check form-check-inline mr-1">
-                      <input class="form-check-input" type="checkbox" id="inline-checkbox1" value="option1">
-                      <label class="form-check-label" for="inline-checkbox1">One</label>
-                    </div>
-                    <div class="form-check form-check-inline mr-1">
-                      <input class="form-check-input" type="checkbox" id="inline-checkbox2" value="option2">
-                      <label class="form-check-label" for="inline-checkbox2">Two</label>
-                    </div>
-                    <div class="form-check form-check-inline mr-1">
-                      <input class="form-check-input" type="checkbox" id="inline-checkbox3" value="option3">
-                      <label class="form-check-label" for="inline-checkbox3">Three</label>
-                    </div>
-                  </div>
-                </div> -->
-               
               </form>
             </div>
             <div class="card-footer">
