@@ -97,7 +97,7 @@ namespace STS.Controllers
         [HttpDelete]
         [Route("deleteClient/{ID}")]
         public async Task<IActionResult> deleteClient(int ID)
-        {
+        {   
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
             TranStatus transaction = new TranStatus();

@@ -1,7 +1,10 @@
+
+
 import { Component, OnInit } from '@angular/core';
 import { clientModel } from '../../../model/model';
 import { CommonService } from '../../../service/common.service';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-viewclient',
@@ -11,10 +14,18 @@ import { Router } from '@angular/router';
 export class ViewclientComponent implements OnInit {
 
 
-  client = new clientModel();
+  client= new clientModel();
   clientDetails: clientModel[] = [];
+  
+  
 
-  constructor(private router: Router, private clientService: CommonService) {
+  constructor(
+    private router: Router,
+    private clientService: CommonService,
+    private modalService: NgbModal,
+
+    
+     ) {
     this.clientList();
 
 
@@ -40,21 +51,16 @@ export class ViewclientComponent implements OnInit {
 
   // Edit
 
-  openBackDropCustomClass() {
+  openBackDropCustomClass(content,clientedit) {
+
+    this.client = clientedit;//data show in model use this line and store the data in user and display in ui
+    this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
+    // this.viewData = JSON.parse(localStorage.getItem('registerDetails')) || [];
 
   }
 
-  // onDelete(id: number) {
-  //   if (confirm('Are you sure to delete this record ?') == true) {
-  //     this.clientService.deleteClient(id)
-  //     .subscribe(x => {
-  //       this.clientService.deleteClient(id);
-  //     alert("Deleted Successfully");
-  //     })
-  //   }
-  // }
 
-
+  //Delete API Logic
   onDelete(id: number) {
     if (confirm('Are you sure to delete this record ?') === true) {
       this.clientService.deleteClient(id).subscribe(data => {
@@ -64,13 +70,7 @@ export class ViewclientComponent implements OnInit {
     }
   }
 
-  deleteClient(id: number) {
-    this.clientService.deleteClient(id).subscribe(data => {
-          console.log(data);
-          this.clientList();
-        },
-        error => console.log(error));
-  }
+  
 
 
 }

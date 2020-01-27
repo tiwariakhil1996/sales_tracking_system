@@ -1,11 +1,9 @@
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -32,14 +30,14 @@ import {
   AppBreadcrumbModule,
   AppHeaderModule,
   AppFooterModule,
-  AppSidebarModule,
+  AppSidebarModule
+ 
 } from '@coreui/angular';
 
 // Import routing module
 import { AppRoutingModule } from './app.routing';
 
 // Import 3rd party components
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -50,6 +48,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { SalesRegisterComponent } from './sales/register/register.component';
 import { SalesLayoutComponent } from './containerSales';
 import { SalesLoginComponent } from './sales/login/login.component';
+import { BsDropdownModule } from 'ngx-bootstrap';
+import { NgbModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { ViewclientComponent } from './admin/client/viewclient/viewclient.component';
+import { AuthGuard } from '../security/auth-guard';
 
 
 @NgModule({
@@ -64,6 +66,10 @@ import { SalesLoginComponent } from './sales/login/login.component';
     AppHeaderModule,
     AppSidebarModule,
     HttpClientModule,
+    NgbModule,
+    NgbAlertModule,
+    
+   
    // AlifeFileToBase64Module,
     // NgbModal,
     // HttpModule,
@@ -72,9 +78,10 @@ import { SalesLoginComponent } from './sales/login/login.component';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     // ModalModule.forRoot(),
+
     ToastrModule.forRoot(
       {
-        timeOut: 1000,
+        timeOut: 2000,
         positionClass: 'toast-top-right',
         preventDuplicates: false,
       }
@@ -90,6 +97,8 @@ import { SalesLoginComponent } from './sales/login/login.component';
     LoginComponent,
     RegisterComponent,
 
+
+
     // SalesComponents
     SalesRegisterComponent,
     SalesLoginComponent
@@ -99,7 +108,7 @@ import { SalesLoginComponent } from './sales/login/login.component';
   //   provide: LocationStrategy,
   //   useClass: HashLocationStrategy
   // }],
-  // providers: [],
+  // providers: [AuthGuard],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

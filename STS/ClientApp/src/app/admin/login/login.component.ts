@@ -1,6 +1,6 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { AdminService } from '../../service/admin.service';
 import { registerModel } from '../../model/model';
 
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   login = new registerModel();
   adminDetails: registerModel[] = [];
 
-  constructor(private router: Router, private adminService: AdminService) {
+  constructor(private router: Router, private adminService: AdminService,private Toastr:ToastrService) {
     // this.registerList();
 
 
@@ -47,17 +47,23 @@ export class LoginComponent implements OnInit {
         const obj = this.adminDetails.find(item => item.email == this.login.email && item.password == this.login.password);
         if (!obj) {
           // this.toastrService.success('login succesfully', 'success');
+          //this.Toastr.success('Login Successfully', 'Success');
+
           alert('Admin Login Successfully');
+          
           this.router.navigate(['/admin/dashboard']);
         }
         else {
           alert('Admin Login Failed');
-          // this.toastrService.warning('please enter the valid email or passsword', 'warning');
+            
+          //this.Toastr.warning('please enter the valid email or passsword', 'warning');
         }
       }
     }, (err) => {
     });
   }
+
+
   registerForm() {
     this.router.navigate(['/register']);
   }

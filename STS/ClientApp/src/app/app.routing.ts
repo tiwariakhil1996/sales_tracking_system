@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, CanActivate, NavigationEnd } from '@angular/router';
 
 // Admin Containers
 import { DefaultLayoutComponent } from './containers';
@@ -17,6 +17,7 @@ import { SalesLayoutComponent } from './containerSales';
 
 import { SalesRegisterComponent } from './sales/register/register.component';
 import { SalesLoginComponent } from './sales/login/login.component';
+import { AuthGuard } from '../security/auth-guard';
 
 
 export const routes: Routes = [
@@ -70,19 +71,23 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: DefaultLayoutComponent,
+
     data: {
       title: 'Admin'
     },
+
     children: [
-    
+
       {
         path: 'dashboard',
         loadChildren: () => import('./admin/dashboard/dashboard.module').then(m => m.DashboardModule)
+        // canActivate: [AuthGuard]
       },
       {
         path: 'product',
         loadChildren: () => import('./admin/product/product.module').then(m => m.ProductModule)
       },
+
       {
         path: 'assign',
         loadChildren: () => import('./admin/assign/assign.module').then(m => m.AssignModule)
@@ -127,15 +132,15 @@ export const routes: Routes = [
   },
 
 
-//-----------------------------------Sales Routing------------------------------------
+  //-----------------------------------Sales Routing------------------------------------
   {
     path: 'sales/login',
-    component:SalesLoginComponent,
+    component: SalesLoginComponent,
     data: {
       title: 'Login Page'
     }
   },
-  
+
   {
     path: 'sales/register',
     component: SalesRegisterComponent,
@@ -156,6 +161,8 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () => import('./sales/dashboard/dashboard.module').then(m => m.DashboardModule)
+        // canActivate: [AuthGuard]
+
       },
       {
         path: 'product',
@@ -182,7 +189,8 @@ export const routes: Routes = [
       //   loadChildren: () => import('./sales/demo/demo.module').then(m => m.DemoModule)
       // }
 
-     ] },
+    ]
+  },
 
 
 
@@ -193,7 +201,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

@@ -17,7 +17,7 @@ import { AddclientComponent } from './addclient/addclient.component';
   ],
   declarations: [
     ClientComponent,
-    //this compenent import reason it is not redirect the both page...
+    //this component import reason it is not redirect the both page...
     ViewclientComponent,
     AddclientComponent
   ]
