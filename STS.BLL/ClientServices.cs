@@ -45,19 +45,7 @@ namespace STS.BLL.Service
         }
 
 
-
-    
-
         //Delete
-        //public Task<TranStatus> deleteClient(ClientListModel model)
-        //{
-        //    using (clientRepository = new ClientRepository())
-        //    {
-        //        return clientRepository.deleteClient(model);
-
-        //    }
-        //}
-
         public async Task<TranStatus> deleteClient(int ID)
         {
             using (clientRepository = new ClientRepository())

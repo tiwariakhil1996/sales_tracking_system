@@ -10,6 +10,35 @@ import { CommonService } from '../../../service/common.service';
 })
 export class AddclientComponent implements OnInit {
 
+  
+  countryList: Array<any> = [
+    { name: 'India' ,  states: ['Maharashtra' ,'Gujarat','Rajasthan', 'U.P']},
+    { name: 'Germany', states: ['Duesseldorf', 'Leinfelden-Echterdingen', 'Eschborn'] },
+    { name: 'Spain',   states: ['Barcelona'] },
+    { name: 'USA',     states: ['Downers Grove'] },
+  ];
+
+  stateList: Array<any> = [
+    { states: 'Maharashtra', cities: ['Duesseldorf', 'Leinfelden-Echterdingen', 'Eschborn'] },
+    { states: 'Gujarat',     cities: ['Ahmedabad'] },
+    { states: 'Rajasthan',   cities: ['Jaipur'] },
+    { states: 'U.P',         cities: ['Ballia'] },
+    { states: 'Duesseldorf', cities: ['Beijing'] },
+  ];
+
+  name: Array<any>;
+  states: Array<any>;
+  cities: Array<any>;
+
+  changeCountry(count) {
+    this.states = this.countryList.find(con => con.name == count).states;
+  }
+
+  changeState(count1) {
+    this.cities = this.stateList.find(con => con.states == count1).cities;
+  }
+
+  
   client = new clientModel();
 
   clientDetails: clientModel[] = [];

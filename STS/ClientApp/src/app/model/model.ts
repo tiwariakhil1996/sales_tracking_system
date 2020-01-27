@@ -38,7 +38,8 @@ export class clientModel {
     gender: any;
     address: string;
     street: string;
+    country: string;
+    state:string;
     city: string;
     postalCode: number;
-    country: string;
 }

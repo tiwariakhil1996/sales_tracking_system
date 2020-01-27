@@ -80,19 +80,39 @@
                 </div>
 
                 <div class="row">
+                  <div class="form-group">
+                    <label for="country">Country</label>
+                    <!-- <input type="text" class="form-control" id="country" [(ngModel)]="client.country" name="country"  placeholder="Country name"> -->
+                    <select class="form-control" placeholder="Country" (change)="changeCountry($event.target.value)" [(ngModel)]="client.country">
+                      <option *ngFor="let count of countryList" type="text" name="country" [value]="count.name">{{count.name}}
+                      </option>
+                    </select>
+                  </div>
+
+                  <div class="form-group col-sm-8">
+                    <label for="state">State</label>
+                    <!-- <input type="text" class="form-control" id="state" [(ngModel)]="client.state" name="state"  placeholder="Enter your state"> -->
+                    <select placeholder="States" (change)="changeState($event.target.value)" [(ngModel)]="client.state">
+                      <option *ngFor="let count1 of states" name="state" type="text" [value]="count1">{{count1}}
+                      </option>
+                    </select>
+                  </div>
+
+
                   <div class="form-group col-sm-8">
                     <label for="city">City</label>
-                    <input type="text" class="form-control" id="city" [(ngModel)]="client.city" name="city"  placeholder="Enter your city">
+                    <!-- <input type="text" class="form-control" id="city" [(ngModel)]="client.city" name="city"  placeholder="Enter your city"> -->
+                    <select placeholder="Anycity" [(ngModel)]="client.city">
+                      <option *ngFor="let city of cities" type="text" name="city" [value]="city">{{city}} </option>
+                    </select>
                   </div>
+
                   <div class="form-group col-sm-4">
                     <label for="postalcode">Postal Code</label>
                     <input type="text" class="form-control" id="postalCode" [(ngModel)]="client.postalCode" name="postalCode"  placeholder="Postal Code">
                   </div>
                 </div><!--/.row-->
-                <div class="form-group">
-                  <label for="country">Country</label>
-                  <input type="text" class="form-control" id="country" [(ngModel)]="client.country" name="country"  placeholder="Country name">
-                </div>
+               
 
                 <!-- <div class="form-group row">
               <label class="col-md-3 col-form-label" for="date-input">Added on</label>
