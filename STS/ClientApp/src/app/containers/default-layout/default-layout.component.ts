@@ -10,9 +10,9 @@ export class DefaultLayoutComponent {
   public sidebarMinimized = false;
   public navItems = navItems;
 
-  constructor(private router: Router) {
- 
-  }
+  constructor(
+    private router: Router
+    ) {}
 
   toggleMinimize(e) {
     this.sidebarMinimized = e;

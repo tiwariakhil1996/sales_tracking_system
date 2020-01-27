@@ -80,7 +80,7 @@ namespace STS.Controllers
             {
                 Tuple<TranStatus,List<ClientListModel>> result = await iclient.updateClient(ID, model);
                 transaction = result.Item1;
-                clientList = result.Item2;
+                //clientList = result.Item2;
                 dctData.Add("ClientList", clientList);
             }
             catch (Exception ex)

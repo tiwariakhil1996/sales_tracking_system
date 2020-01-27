@@ -79,18 +79,19 @@ export class ViewclientComponent implements OnInit {
     if (confirm('Are you sure to delete this record ?') === true) {
       this.clientService.deleteClient(id).subscribe(data => {
         this.clientService.clientList();
+        this.clientList();
+
 
       });
     }
   }
 
-  deleteClient(id: number) {
-    this.clientService.deleteClient(id).subscribe(data => {
-          console.log(data);
-          this.clientList();
-        },
-        error => console.log(error));
-  }
+  // deleteClient(id: number) {
+  //   this.clientService.deleteClient(id).subscribe(data => {
+  //         console.log(data);
+  //       },
+  //       error => console.log(error));
+  // }
 
 //   deleteUser(id: number) {
 //     this.clientService.deleteClient(id).pipe(first()).subscribe(() => { 

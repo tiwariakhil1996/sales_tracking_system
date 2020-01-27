@@ -8,7 +8,6 @@ import { P404Component } from './admin/error/404.component';
 import { P500Component } from './admin/error/500.component';
 import { LoginComponent } from './admin/login/login.component';
 import { RegisterComponent } from './admin/register/register.component';
-import { ProductComponent } from './admin/product/product.component';
 
 
 
@@ -27,6 +26,8 @@ export const routes: Routes = [
   //   redirectTo: 'dashboard',
   //   pathMatch: 'full',
   // },
+
+  //This is default routing and it is first open the sales login ant time... 
   {
     path: '',
     redirectTo: 'sales/login',
@@ -126,6 +127,7 @@ export const routes: Routes = [
   },
 
 
+//-----------------------------------Sales Routing------------------------------------
   {
     path: 'sales/login',
     component:SalesLoginComponent,
@@ -134,8 +136,6 @@ export const routes: Routes = [
     }
   },
   
-
-
   {
     path: 'sales/register',
     component: SalesRegisterComponent,

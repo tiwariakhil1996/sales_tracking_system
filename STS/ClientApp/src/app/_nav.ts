@@ -23,20 +23,42 @@ export const navItems: INavData[] = [
 
 
   {
-    name: 'Add Product',
-    url: '/admin/product',
-    icon: 'icon-note'
+    name: 'Product',
+    url:'/admin/product',
+    icon: 'icon-note',
+    children: [
+      {
+        name: 'Add Product',
+        url: '/admin/product/addproduct',
+        icon: 'icon-note',
+      },
+      {
+        name: 'View Product',
+        url: '/admin/product/viewproduct',
+        icon: 'icon-calendar',
+      }
+    ]
   },
+ 
   {
-    name: 'Add Client',
-    url: '/admin/client',
-    icon: 'icon-user-follow'
+    name: 'Client',
+    url:'/admin/client',
+    icon: 'icon-note',
+    children: [
+      {
+        name: 'Add Client',
+        url: '/admin/client/addclient',
+        icon: 'icon-note',
+      },
+      {
+        name: 'View Client',
+        url: '/admin/client/viewclient',
+        icon: 'icon-calendar',
+      }
+    ]
   },
-  // {
-  //   name: 'Assign List',
-  //   url: '/assign',
-  //   icon: 'icon-list'
-  // },
+
+
   {
     name: 'Activity',
     url: '/admin/activity',

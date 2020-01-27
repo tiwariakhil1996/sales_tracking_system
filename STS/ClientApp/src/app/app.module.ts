@@ -50,10 +50,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SalesRegisterComponent } from './sales/register/register.component';
 import { SalesLayoutComponent } from './containerSales';
 import { SalesLoginComponent } from './sales/login/login.component';
-import { ModalModule } from 'ngx-bootstrap';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { AlifeFileToBase64Module } from 'alife-file-to-base64';
 
 @NgModule({
   imports: [
@@ -67,7 +64,7 @@ import { AlifeFileToBase64Module } from 'alife-file-to-base64';
     AppHeaderModule,
     AppSidebarModule,
     HttpClientModule,
-    // AlifeFileToBase64Module,
+   // AlifeFileToBase64Module,
     // NgbModal,
     // HttpModule,
     ReactiveFormsModule,

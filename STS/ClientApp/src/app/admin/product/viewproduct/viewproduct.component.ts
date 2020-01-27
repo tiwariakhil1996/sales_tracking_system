@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { productModel } from '../../../model/model';
 import { CommonService } from '../../../service/common.service';
 import { Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { DomSanitizer } from '@angular/platform-browser';
 

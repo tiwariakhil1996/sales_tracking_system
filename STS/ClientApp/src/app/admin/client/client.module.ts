@@ -16,7 +16,10 @@ import { AddclientComponent } from './addclient/addclient.component';
     ClientRoutingModule
   ],
   declarations: [
-    ClientComponent
+    ClientComponent,
+    //this compenent import reason it is not redirect the both page...
+    ViewclientComponent,
+    AddclientComponent
   ]
 })
 export class ClientModule { }
