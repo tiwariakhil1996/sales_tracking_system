@@ -59,7 +59,8 @@
                 <div class="form-group row">
                   <label class="col-md-3 col-form-label" for="file-multiple-input">Product Image</label>
                   <div class="col-md-9">
-                    <input type="file" id="image" name="image"  [(ngModel)]="product.image" multiple>
+                    <!-- <input type="file" alife-file-to-base64 (onFileChanged)="onFileChanges($event)" [(fileModel)]="files" /> -->
+                    <input class="form-control" type="file" id="image" name="imageSrc"   accept="image/*" (change)="handleInputChange($event)" multiple>             
                   </div>
                 </div>
     

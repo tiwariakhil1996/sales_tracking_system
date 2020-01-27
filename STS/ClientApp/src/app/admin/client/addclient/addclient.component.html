@@ -59,7 +59,26 @@
                 <div class="form-group">
                   <label for="street">Street</label>
                   <input type="text" class="form-control" id="street" [(ngModel)]="client.street" name="street"  placeholder="Enter street name">
+                 
+                  <!-- ------------------ -->
+                  <!-- <select placeholder="Country"  class="form-control" (change)="changeCountry($event.target.value)" [(ngModel)]="client.country">
+                    <option *ngFor="let count of clientDetails" type="text" name="country" [value]="client.country">{{client.country}}
+                    </option>
+                  </select> -->
+
+                  <!-- <select id="country" name="country" class="form-control">
+                    <option value="">Country</option>
+                  <option *ngFor="let client of clientDetails" value="{{client.Cid}}">{{client.Cname}}</option>
+                  </select>
+                  <select id="state" name="state" class="form-control">
+                    <option value="0">State</option>
+                  </select>
+                  <select id="city" name="city" class="form-control">
+                    <option value="0">City</option>
+                  </select> -->
+                   <!-- ------------------ -->
                 </div>
+
                 <div class="row">
                   <div class="form-group col-sm-8">
                     <label for="city">City</label>

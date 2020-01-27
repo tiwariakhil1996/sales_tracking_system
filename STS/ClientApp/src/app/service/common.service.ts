@@ -8,18 +8,21 @@ export class CommonService {
 
   constructor(private http: HttpClient) { }
 
-   //Product
+  // ---------------  Product
 
-   addProduct(data) {
+  addProduct(data) {
     return this.http.post('/api/Product/addProduct', data);
   }
 
 
-   productList() {
+  productList() {
     return this.http.get('/api/Product/ProductList');
-   }
+  }
 
-  //Client
+
+
+
+  // -----------------  Client
 
   addClient(data) {
     return this.http.post('/api/Client/addClient', data);
@@ -27,5 +30,12 @@ export class CommonService {
 
   clientList() {
     return this.http.get('/api/Client/ClientList');
-   }
+  }
+
+  //  deleteClient(data) {
+  //   return this.http.post('/api/Client/deleteClient',data);
+
+  deleteClient(id: number) {
+    return this.http.delete('/api/Client/deleteClient/' + id);
+  }
 }

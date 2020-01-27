@@ -8,11 +8,14 @@ using System.Threading.Tasks;
 
 namespace STS.BLL.Interface
 {
-    public interface IClient
+    public interface ICountry
     {
-        Task<TranStatus> addClient(ClientModel model);
 
-        Task<List<ClientListModel>> ClientList();
+        //Login
+        //Task<TranStatus> AdminLogin(CountryModel model);
+
+        //Display
+        Task<List<CountryModel>> CountryList();
     }
 }
 

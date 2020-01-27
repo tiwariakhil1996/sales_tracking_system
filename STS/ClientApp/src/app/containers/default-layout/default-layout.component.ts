@@ -26,4 +26,9 @@ export class DefaultLayoutComponent {
     this.router.navigate(['/sales/register']);
   }
 
+  // logout(){
+
+  //       this.username.next(null);
+  // }
+
 }

@@ -13,6 +13,8 @@ namespace STS.BLL.Service
 
     {
         ClientRepository clientRepository = null;
+
+        //Insert
         public Task<TranStatus> addClient(ClientModel model)
         {
             using (clientRepository = new ClientRepository())
@@ -22,11 +24,45 @@ namespace STS.BLL.Service
             }
         }
 
+
+        //Display
         public async Task<List<ClientListModel>> ClientList()
         {
             using (clientRepository = new ClientRepository())
             {
                 return await clientRepository.ClientList();
+            }
+        }
+
+        //Update
+        public async Task<Tuple<TranStatus,List<ClientListModel>>> updateClient(long ID, ClientListModel model)
+        {
+            using (clientRepository = new ClientRepository())
+            {
+                TranStatus tranStatus = new TranStatus();
+                return await clientRepository.updateClient(ID, model);
+            }
+        }
+
+
+
+    
+
+        //Delete
+        //public Task<TranStatus> deleteClient(ClientListModel model)
+        //{
+        //    using (clientRepository = new ClientRepository())
+        //    {
+        //        return clientRepository.deleteClient(model);
+
+        //    }
+        //}
+
+        public async Task<TranStatus> deleteClient(int ID)
+        {
+            using (clientRepository = new ClientRepository())
+            {
+                return await clientRepository.deleteClient(ID);
             }
         }
     }

@@ -44,12 +44,15 @@ import { ChartsModule } from 'ng2-charts';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
-//Sales Components
+
+// Sales Components
 import { SalesRegisterComponent } from './sales/register/register.component';
 import { SalesLayoutComponent } from './containerSales';
 import { SalesLoginComponent } from './sales/login/login.component';
+import { ModalModule } from 'ngx-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-
+import { AlifeFileToBase64Module } from 'alife-file-to-base64';
 
 @NgModule({
   imports: [
@@ -63,11 +66,14 @@ import { SalesLoginComponent } from './sales/login/login.component';
     AppHeaderModule,
     AppSidebarModule,
     HttpClientModule,
+    // AlifeFileToBase64Module,
+    // NgbModal,
     // HttpModule,
     ReactiveFormsModule,
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
+    // ModalModule.forRoot(),
     ToastrModule.forRoot(
       {
         timeOut: 1000,
@@ -85,7 +91,7 @@ import { SalesLoginComponent } from './sales/login/login.component';
     LoginComponent,
     RegisterComponent,
 
-    //SalesComponents
+    // SalesComponents
     SalesRegisterComponent,
     SalesLoginComponent
   ],

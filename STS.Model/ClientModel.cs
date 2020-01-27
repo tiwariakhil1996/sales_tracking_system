@@ -1,4 +1,5 @@
-﻿using System;
+﻿using STS.Common;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -20,9 +21,9 @@ namespace STS.Model
     }
 
     //Client List
-    public partial class ClientListModel
+    public partial class ClientListModel 
     {
-        public string ID { get; set; }
+        public int ID { get; set; }
         public string ClientName { get; set; }
         public string Email { get; set; }
         public string Contact { get; set; }
