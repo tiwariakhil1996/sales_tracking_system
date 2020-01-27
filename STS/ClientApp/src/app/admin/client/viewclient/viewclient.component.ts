@@ -16,16 +16,8 @@ export class ViewclientComponent implements OnInit {
 
   client= new clientModel();
   clientDetails: clientModel[] = [];
-  
-  
 
-  constructor(
-    private router: Router,
-    private clientService: CommonService,
-    private modalService: NgbModal,
-
-    
-     ) {
+  constructor(private router: Router, private clientService: CommonService, private modalService: NgbModal) {
     this.clientList();
 
 
@@ -50,17 +42,36 @@ export class ViewclientComponent implements OnInit {
   }
 
   // Edit
-
-  openBackDropCustomClass(content,clientedit) {
-
-    this.client = clientedit;//data show in model use this line and store the data in user and display in ui
+  openupdatemodal(content, item) {
+    this.client = item;
+    // data show in model use this line and store the data in user and display in ui
     this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
-    // this.viewData = JSON.parse(localStorage.getItem('registerDetails')) || [];
 
+  openBackDropCustomClass() {
+
+  onEdit(id:number) {
+    // this.client.image = this.imageSrc;
+    this.clientService.updateClient(id, this.client).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        alert('Client updated sucesfully');
+      }
+      this.client = new clientModel();
+      this.clientList();
+    }, (err) => {
+    });
   }
 
+  // onDelete(id: number) {
+  //   if (confirm('Are you sure to delete this record ?') == true) {
+  //     this.clientService.deleteClient(id)
+  //     .subscribe(x => {
+  //       this.clientService.deleteClient(id);
+  //     alert("Deleted Successfully");
+  //     })
+  //   }
+  // }
 
-  //Delete API Logic
+
   onDelete(id: number) {
     if (confirm('Are you sure to delete this record ?') === true) {
       this.clientService.deleteClient(id).subscribe(data => {

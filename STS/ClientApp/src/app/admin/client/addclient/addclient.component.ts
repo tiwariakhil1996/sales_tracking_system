@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { clientModel } from '../../../model/model';
 import { Router } from '@angular/router';
 import { CommonService } from '../../../service/common.service';
+import { CountriesService } from '../../../service/countries.service';
 
 @Component({
   selector: 'app-addclient',
@@ -10,7 +11,7 @@ import { CommonService } from '../../../service/common.service';
 })
 export class AddclientComponent implements OnInit {
 
-  
+  //---------------------  Static Country 
   countryList: Array<any> = [
     { name: 'India' ,  states: ['Maharashtra' ,'Gujarat','Rajasthan', 'U.P']},
     { name: 'Germany', states: ['Duesseldorf', 'Leinfelden-Echterdingen', 'Eschborn'] },
@@ -39,30 +40,24 @@ export class AddclientComponent implements OnInit {
     this.cities = this.stateList.find(con => con.states == count1).cities;
   }
 
+//------------------------------
+
+  stateInfo: any[] = [];
+  countryInfo: any[] = [];
+  cityInfo: any[] = [];
 
   client = new clientModel();
-
   clientDetails: clientModel[] = [];
-  constructor(private router: Router, private clientService: CommonService) {
+
+  constructor(private router: Router, private clientService: CommonService,private country:CountriesService) {
     // this.Login();
 
 
   }
   ngOnInit() {
+    this.getCountries();
   }
 
-
-  // changeCountry(count) {
-  //   this.clientService.clientList().subscribe((data: any) => {
-  //     if (data.Status.code === 0) {
-  //       if (data.ClientList) {
-  //         this.clientDetails = data.ClientList;
-  //       }
-  //     }
-  //   }, (err) => {
-
-  //   });
-  // }
 
   submitForm() {
 
@@ -89,5 +84,28 @@ export class AddclientComponent implements OnInit {
   //     Office: ''
   //   }
   // }
+
+  getCountries(){
+    this.country.getJSON().
+    subscribe(
+      data2 => {
+        this.countryInfo=data2.Countries;
+        //console.log('Data:', this.countryInfo);
+      },
+      err => console.log(err),
+      () => console.log('complete')
+    )
+  }
+
+  onChangeCountry(countryValue) {
+    this.stateInfo=this.countryInfo[countryValue].States;
+    this.cityInfo=this.stateInfo[0].Cities;
+    console.log(this.cityInfo);
+  }
+
+  onChangeState(stateValue) {
+    this.cityInfo=this.stateInfo[stateValue].Cities;
+    //console.log(this.cityInfo);
+  }
 
 }

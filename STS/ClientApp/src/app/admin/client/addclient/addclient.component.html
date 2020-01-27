@@ -64,32 +64,49 @@
                 <div class="row">
                   <div class="form-group col-sm-4">
                     <label for="country">Country</label>
-                    <!-- <input type="text" class="form-control" id="country" [(ngModel)]="client.country" name="country"  placeholder="Country name"> -->
-                    <select class="form-control" id="country" name="country" (change)="changeCountry($event.target.value)" [(ngModel)]="client.country">
+              
+                    <!-- STATIC -->
+                    <!-- <select class="form-control" id="country" name="country" (change)="changeCountry($event.target.value)" [(ngModel)]="client.country">
                       <option value="0">Select Country</option>
                       <option *ngFor="let count of countryList" name="country" [value]="count.name">{{count.name}}
                       </option>
-                    </select>
+                    </select> -->
+                    <!-- DYNAMIC -->
+                    <select class="form-control" id="country" name="country" (change)="onChangeCountry($event.target.value)" [(ngModel)]="client.country">
+                      <option value="0">--Select Country--</option>
+                      <option *ngFor="let country of countryInfo; let i = index" name="country" value="{{i}}">{{country.CountryName}}
+                      </option>
+                    </select>  
                   </div>
 
                   <div class="form-group col-sm-4">
                     <label for="state">State</label>
-                    <!-- <input type="text" class="form-control" id="state" [(ngModel)]="client.state" name="state"  placeholder="Enter your state"> -->
-                    <select class="form-control" id="state" name="state" (change)="changeState($event.target.value)" [(ngModel)]="client.state">
+                    <!-- STATIC -->
+               <!-- <select class="form-control" id="state" name="state" (change)="changeState($event.target.value)" [(ngModel)]="client.state">
                       <option value="0">Select State</option>
                       <option *ngFor="let count1 of states" name="state" type="text" [value]="count1">{{count1}} </option>
-                    </select>
+                    </select>  -->
+                    <!-- DYNAMIC -->
+                    <select class="form-control" id="state" name="state" (change)="onChangeState($event.target.value)"  [(ngModel)]="client.state">
+                        <option *ngIf="stateInfo == '' " value="-1">--Select State--</option>
+                        <option *ngFor="let state of stateInfo; let j = index" name="state" value="{{j}}">{{state.StateName}}</option>
+                    </select>  
                   </div>
 
 
                   <div class="form-group col-sm-4">
                     <label for="city">City</label>
-                    <!-- <input type="text" class="form-control" id="city" [(ngModel)]="client.city" name="city"  placeholder="Enter your city"> -->
-                    <select class="form-control" id="city" name="city" [(ngModel)]="client.city">
+                  <!-- STatiC -->
+               <!-- <select class="form-control" id="city" name="city" [(ngModel)]="client.city">
                       <option value="0">Select City</option>
                       <option *ngFor="let city of cities" type="text" name="city" [value]="city">{{city}} </option>
-                    </select>
-                  </div>
+                    </select>  -->
+                    <!-- DYNAMIC-->
+                    <select class="form-control"  id="city" name="city" [(ngModel)]="client.city">
+                         <option *ngIf="cityInfo == ''" value="-1">--Select CIty--</option>
+                         <option *ngFor="let city of cityInfo; let k = index" name="city" value="{{k}}">{{city}}</option>
+                    </select>  
+                    </div>
 
                   <div class="form-group col-sm-4">
                     <label for="postalcode">Postal Code</label>

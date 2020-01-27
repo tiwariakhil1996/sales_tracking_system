@@ -32,6 +32,16 @@ namespace STS.BLL.Service
             }
         }
 
+
+        //Update
+        public async Task<TranStatus> updateProduct(int ID, ProductListModel model)
+        {
+            using (productRepository = new ProductRepository())
+            {
+                return await productRepository.updateProduct(ID, model);
+            }
+        }
+
         //Delete
         public async Task<TranStatus> deleteProduct(int ID)
         {

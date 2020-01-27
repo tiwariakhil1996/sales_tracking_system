@@ -48,10 +48,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { SalesRegisterComponent } from './sales/register/register.component';
 import { SalesLayoutComponent } from './containerSales';
 import { SalesLoginComponent } from './sales/login/login.component';
-import { BsDropdownModule } from 'ngx-bootstrap';
-import { NgbModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
-import { ViewclientComponent } from './admin/client/viewclient/viewclient.component';
-import { AuthGuard } from '../security/auth-guard';
+import { ModalModule } from 'ngx-bootstrap';
+import { NgbModal, NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -66,11 +64,7 @@ import { AuthGuard } from '../security/auth-guard';
     AppHeaderModule,
     AppSidebarModule,
     HttpClientModule,
-    NgbModule,
-    NgbAlertModule,
-    
-   
-   // AlifeFileToBase64Module,
+    // AlifeFileToBase64Module,
     // NgbModal,
     // HttpModule,
     ReactiveFormsModule,
@@ -78,7 +72,6 @@ import { AuthGuard } from '../security/auth-guard';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     // ModalModule.forRoot(),
-
     ToastrModule.forRoot(
       {
         timeOut: 2000,
@@ -96,8 +89,6 @@ import { AuthGuard } from '../security/auth-guard';
     P500Component,
     LoginComponent,
     RegisterComponent,
-
-
 
     // SalesComponents
     SalesRegisterComponent,

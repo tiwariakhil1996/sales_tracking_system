@@ -17,6 +17,9 @@ namespace STS.BLL.Interface
         Task<List<ProductListModel>> ProductList();
 
 
+        //Update Prodcut
+        Task<TranStatus> updateProduct(int ID, ProductListModel model);
+
         //Delete
         Task<TranStatus> deleteProduct(int ID);
     }

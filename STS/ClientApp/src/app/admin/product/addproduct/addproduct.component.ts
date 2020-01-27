@@ -58,7 +58,7 @@ export class AddproductComponent implements OnInit {
     // this.imageSrc = domSanitizer.bypassSecurityTrustUrl(reader.result);
     //  console.log(this.imageSrc);S
     this.imageSrc = reader.result;
-    console.log(this.imageSrc);
+    // console.log(this.imageSrc);
   }
   
 
