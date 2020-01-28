@@ -48,8 +48,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SalesRegisterComponent } from './sales/register/register.component';
 import { SalesLayoutComponent } from './containerSales';
 import { SalesLoginComponent } from './sales/login/login.component';
-import { ModalModule } from 'ngx-bootstrap';
-import { NgbModal, NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -64,14 +63,12 @@ import { NgbModal, NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap'
     AppHeaderModule,
     AppSidebarModule,
     HttpClientModule,
-    // AlifeFileToBase64Module,
-    // NgbModal,
-    // HttpModule,
+    //this module for used the edit popup...
+    NgbModule,
+    NgbAlertModule,
     ReactiveFormsModule,
     PerfectScrollbarModule,
-    // BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    // ModalModule.forRoot(),
     ToastrModule.forRoot(
       {
         timeOut: 2000,

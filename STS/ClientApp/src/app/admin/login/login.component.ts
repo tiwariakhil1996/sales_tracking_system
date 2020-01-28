@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   login = new registerModel();
   adminDetails: registerModel[] = [];
 
-  constructor(private router: Router, private adminService: AdminService,private Toastr:ToastrService) {
+  constructor(private router: Router, private adminService: AdminService, private Toastr: ToastrService) {
     // this.registerList();
 
 
@@ -38,28 +38,24 @@ export class LoginComponent implements OnInit {
   salesregisterForm() {
     this.router.navigate(['sales/register']);
   }
- 
+
 
 
   submitForm() {
     this.adminService.AdminLogin(this.login).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        const obj = this.adminDetails.find(item => item.email == this.login.email && item.password == this.login.password);
-        if (!obj) {
-          // this.toastrService.success('login succesfully', 'success');
-          //this.Toastr.success('Login Successfully', 'Success');
 
-          alert('Admin Login Successfully');
-          
-          this.router.navigate(['/admin/dashboard']);
-        }
-        else {
-          alert('Admin Login Failed');
-            
-          //this.Toastr.warning('please enter the valid email or passsword', 'warning');
-        }
+        alert('Admin Login Successfully');
+
+        this.router.navigate(['/admin/dashboard']);
+      }
+      else {
+
+        alert('Admin Login Failed');
+
       }
     }, (err) => {
+
     });
   }
 
@@ -68,7 +64,7 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/register']);
   }
 
-  
+
 }
 
 

@@ -12,12 +12,11 @@ import { RegisterComponent } from './admin/register/register.component';
 
 
 
-// // Sales
+//Sales
 import { SalesLayoutComponent } from './containerSales';
 
 import { SalesRegisterComponent } from './sales/register/register.component';
 import { SalesLoginComponent } from './sales/login/login.component';
-import { AuthGuard } from '../security/auth-guard';
 
 
 export const routes: Routes = [
@@ -81,7 +80,7 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () => import('./admin/dashboard/dashboard.module').then(m => m.DashboardModule)
-        // canActivate: [AuthGuard]
+  
       },
       {
         path: 'product',
@@ -161,8 +160,7 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () => import('./sales/dashboard/dashboard.module').then(m => m.DashboardModule)
-        // canActivate: [AuthGuard]
-
+     
       },
       {
         path: 'product',
