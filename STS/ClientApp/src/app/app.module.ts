@@ -69,7 +69,7 @@ import { NgbModal, NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap'
     // HttpModule,
     ReactiveFormsModule,
     PerfectScrollbarModule,
-    BsDropdownModule.forRoot(),
+    // BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     // ModalModule.forRoot(),
     ToastrModule.forRoot(

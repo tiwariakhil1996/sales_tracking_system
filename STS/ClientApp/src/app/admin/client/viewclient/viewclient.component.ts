@@ -47,8 +47,7 @@ export class ViewclientComponent implements OnInit {
     // data show in model use this line and store the data in user and display in ui
     this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
 
-  openBackDropCustomClass() {
-
+  }
   onEdit(id:number) {
     // this.client.image = this.imageSrc;
     this.clientService.updateClient(id, this.client).subscribe((data: any) => {

@@ -43,23 +43,23 @@
               </td>
             </tr>
             -->
-            <tr *ngFor="let clientedit of clientDetails,let i = index">
+            <tr *ngFor="let item of clientDetails,let i = index">
                  <td>{{i+1}}</td>
-              <td>{{client.id}}</td>
-              <td>{{client.clientName}}</td>
-              <td>{{client.email}}</td>
-              <td>{{client.contact}}</td>
-              <td>{{client.gender}}</td>
-              <td>{{client.address}}</td>
-              <td>{{client.street}}</td>
-              <td>{{client.country}}</td>
-              <td>{{client.state}}</td>
-              <td>{{client.city}}</td>
-              <td>{{client.postalCode}}</td>
+              <td>{{item.id}}</td>
+              <td>{{item.clientName}}</td>
+              <td>{{item.email}}</td>
+              <td>{{item.contact}}</td>
+              <td>{{item.gender}}</td>
+              <td>{{item.address}}</td>
+              <td>{{item.street}}</td>
+              <td>{{item.country}}</td>
+              <td>{{item.state}}</td>
+              <td>{{item.city}}</td>
+              <td>{{item.postalCode}}</td>
              
       
               <td>
-                  <button type="button" class="btn btn-info" data-toggle="modal" (click)="openBackDropCustomClass()" ><i class="fa fa-edit" aria-hidden="true"></i></button>
+                  <button type="button" class="btn btn-info" data-toggle="modal" (click)="openupdatemodal(content,item)" ><i class="fa fa-edit" aria-hidden="true"></i></button>
                   <button type="button" class='btn btn-danger' (click)="onDelete(client.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
                
                   <ng-template #content let-modal>
@@ -88,7 +88,8 @@
                               <input type="text" class="form-control" [(ngModel)]="client.contact" name="contact">
                          </div>
 
-                          <div class="form-group">
+                         
+                         <div class="form-group">
                              <label for="gender">Gender</label>
                              <input type="text" class="form-control"  [(ngModel)]="client.gender" name="gender">
                           </div>
