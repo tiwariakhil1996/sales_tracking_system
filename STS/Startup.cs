@@ -99,7 +99,6 @@ namespace STS
                     //spa.UseAngularCliServer(npmScript: "start");
                 }
             });
-            STSSetting.ImagePathUrl = env.WebRootPath;
         }
     }
 }

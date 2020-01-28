@@ -29,4 +29,9 @@ export class AdminService {
     return this.http.post('/api/Admin/AdminLogin',data);
   }
 
+  UpdateVendorProfile(data) {
+    return this.http.post('/api/Vendor/UpdateVendorProfile', data)
+  }
+
+
 }

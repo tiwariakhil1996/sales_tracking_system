@@ -12,6 +12,9 @@ namespace STS.DAL
 {
     public class AdminRepository : BaseRepository
     {
+       
+        TranStatus transaction = new TranStatus();
+
         //Register
         public async Task<TranStatus> AdminRegister(AdminRegisterModel model)
         {
@@ -39,28 +42,71 @@ namespace STS.DAL
 
 
         //Login
-        public async Task<TranStatus> AdminLogin(AdminLoginModel model)
+        //public async Task<TranStatus> AdminLogin(AdminLoginModel model)
+        //{
+        //    using (var connection = new SqlConnection(ConnectionString))
+
+        //    {
+        //        await connection.OpenAsync();
+        //        TranStatus transaction = new TranStatus();
+        //        DynamicParameters parameter = new DynamicParameters();
+        //        parameter.Add("@Email", model.Email);
+        //        parameter.Add("@Password", model.Password);
+        //        parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+        //        parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+        //        await connection.QueryAsync("AdminLogin", parameter, commandType: CommandType.StoredProcedure);
+
+        //        transaction.returnMessage = parameter.Get<string>("@Message");
+        //        transaction.code = parameter.Get<int>("@Code");
+        //        return transaction;
+
+        //    }
+        //}
+
+
+       
+        public async Task<Tuple<List<AdminLoginModel>, TranStatus>> AdminLogin(AdminLoginModel model)
         {
             using (var connection = new SqlConnection(ConnectionString))
-
             {
                 await connection.OpenAsync();
-                TranStatus transaction = new TranStatus();
                 DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@ID", model.ID);
+                parameter.Add("@Username", model.Username);
+                parameter.Add("@Email", model.Email);
+                parameter.Add("@Password", model.Password);
+
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                var result = await connection.QueryAsync<AdminLoginModel>("AdminLogin", parameter, commandType: CommandType.StoredProcedure);
+                transaction.returnMessage = parameter.Get<string>("@Message");
+                transaction.code = parameter.Get<int>("@Code");
+                return new Tuple<List<AdminLoginModel>, TranStatus>(result.ToList(), transaction); 
+            }
+        }
+
+
+        //UpdateAdminProfiel
+
+        public async Task<TranStatus> updateAdminProfile(updateProfileModel model)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@ID", model.ID);
+                parameter.Add("@Username", model.Username);
                 parameter.Add("@Email", model.Email);
                 parameter.Add("@Password", model.Password);
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
-
-                await connection.QueryAsync("AdminLogin", parameter, commandType: CommandType.StoredProcedure);
-
+                await connection.QueryAsync("updateAdminProfile", parameter, commandType: CommandType.StoredProcedure);
                 transaction.returnMessage = parameter.Get<string>("@Message");
                 transaction.code = parameter.Get<int>("@Code");
                 return transaction;
-
             }
         }
-
         //Display
         //public async Task<List<AdminLoginModel>> AdminLogin()
         //{

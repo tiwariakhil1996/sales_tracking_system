@@ -5,6 +5,7 @@ import { registerModel, clientModel } from '../../model/model';
 import { CommonService } from '../../service/common.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AdminService } from '../../service/admin.service';
+import { BsModalRef } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,13 +15,18 @@ export class DefaultLayoutComponent {
   public sidebarMinimized = false;
   public navItems = navItems;
 
+  modalRef: BsModalRef;
+  
   register = new registerModel();
   adminDetails: registerModel[] = [];
+  item: any;
+  updateProfile: any;
+
   
-  client = new clientModel();
-  clientDetails: clientModel[] = [];
-  
-  constructor(private router: Router,private adminService: AdminService,private clientService: CommonService, private modalService: NgbModal) {
+  constructor(private router: Router,
+    private adminService: AdminService,
+     private modalService: NgbModal) 
+     {
  
   }
 
@@ -28,13 +34,6 @@ export class DefaultLayoutComponent {
     this.sidebarMinimized = e;
   }
 
-  adminregisterForm(){
-    this.router.navigate(['/admin/register']);
-  }
-
-  salesregisterForm(){
-    this.router.navigate(['/sales/register']);
-  }
 
   adminprofile(content, admin){
    // this.register = admin;
@@ -42,15 +41,39 @@ export class DefaultLayoutComponent {
    // this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
   }
 
-  openupdatemodal(content, item) {
-    this.client = item;
+  openupdatemodal(content, register) {
+    this.register = JSON.parse(localStorage.getItem('loginDetail'));
+    this.item = register;
     // data show in model use this line and store the data in user and display in ui
     this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
 
   }
 
+  // openModal(template: TemplateRef<any>) {
+  //   this.modalRef = this.modalService.show(template, this.config);
+  //   this.adminDetails = JSON.parse(localStorage.getItem('loginDetails')) || [];
+  //   console.log(this.adminDetails);
+  //   this.updateProfile = this.adminDetails.register[0];
+  // }
+
+  // openModal(template: TemplateRef<any>) {
+  //   this.modalRef = this.modalService.show(template, this.config);
+  //   this.adminDetails = JSON.parse(localStorage.getItem('loginDetail')) || [];
+  //   console.log(this.adminDetails);
+  //   this.updateProfile = this.adminDetails.loginDetail[0];
+  // }
+
   onEdit(){
 
+  }
+
+  
+  adminregisterForm(){
+    this.router.navigate(['/admin/register']);
+  }
+
+  salesregisterForm(){
+    this.router.navigate(['/sales/register']);
   }
 
 }

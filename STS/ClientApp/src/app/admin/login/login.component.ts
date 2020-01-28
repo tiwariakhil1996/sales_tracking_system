@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   // constructor(private router: Router, private toastr: ToastrService) { }
 
   title = 'STS';
-  login = new registerModel();
+  loginDetail = new registerModel();
   adminDetails: registerModel[] = [];
 
   constructor(private router: Router, private adminService: AdminService) {
@@ -31,66 +31,10 @@ export class LoginComponent implements OnInit {
 
   }
 
-  // loginForm() {
-  //   let isValid = false;
-  //   this.registerDetails = JSON.parse(localStorage.getItem('Signup')) || [];
-  //   this.registerDetails.forEach(element => {
-  //     if (this.loginDetail.userName == element.userName && this.loginDetail.password == element.password) {
-  //       isValid = true;
-  //     }
-  //   });
-
-  //   if (isValid) {
-  //     this.toastr.success('Login Successful', 'Successful', {
-  //       disableTimeOut: false
-  //     });
-  //     this.router.navigate(['/dashboard']);
-  //   } else {
-  //     this.toastr.warning('Please enter valid username and password', 'Warning', {
-  //       disableTimeOut: false
-  //     });
-  //   }
-  // }
-
-  // submitForm() {
-
-  // }
-  //   this.userService.SignupList().subscribe( data => {      
-  //       if(data.Status.code===0)    
-  //       {       
-  //         this.router.navigate(['/dashboard']);  
-  //       }    
-  //       else{    
-  //         this.errorMessage = data.Message;    
-  //       }    
-  //     },    
-  //     error => {    
-  //       this.errorMessage = error.message;    
-  //     });    
-  // };   
-
-
-  // submitForm() {
-  //   this.adminService.AdminLogin(this.login).subscribe((data: any) => {
-  //     if (data.Status.code === 0) {
-  //       const obj = this.adminDetails.find(item => item.email == this.login.email && item.password == this.login.password);
-       
-  //       if (!obj) {}
-  //         alert('Admin Login Successfully');
-  //         this.router.navigate(['/admin/dashboard']);
-  //       }
-  //       else {
-  //         alert('UnSuccessfully');
-  //       }
-  //     }
-  //   }, (err) => {
-  //   });
-  // }
-
   submitLogin() {
-  this.adminService.AdminLogin(this.login).subscribe((data: any) => {
+  this.adminService.AdminLogin(this.loginDetail).subscribe((data: any) => {
     if (data.Status.code === 0) {
-      localStorage.setItem('loginDetails', JSON.stringify(data));
+      localStorage.setItem('loginDetail', JSON.stringify(data));
       alert('Admin Login Successfully');
       this.router.navigate(['/admin/dashboard']);
     }

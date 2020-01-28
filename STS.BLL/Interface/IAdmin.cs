@@ -14,10 +14,15 @@ namespace STS.BLL.Interface
         Task<TranStatus> AdminRegister(AdminRegisterModel model);
 
         //Login
-        Task<TranStatus> AdminLogin(AdminLoginModel model);
+        //Task<TranStatus> AdminLogin(AdminLoginModel model);
+        Task<Tuple<List<AdminLoginModel>, TranStatus>> AdminLogin(AdminLoginModel model);
+
+        //UpdateAdminProfile
+        Task<TranStatus> updateAdminProfile(updateProfileModel model);
+
+
 
         //Display
         //Task<List<AdminLoginModel>> AdminLogin();
     }
 }
-

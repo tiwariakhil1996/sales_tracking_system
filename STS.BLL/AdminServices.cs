@@ -27,13 +27,31 @@ namespace STS.BLL.Service
 
         // Login
 
-        AdminRepository adminloginRepository = null;
-        public Task<TranStatus> AdminLogin(AdminLoginModel model)
-        {
-            using (adminloginRepository = new AdminRepository())
-            {
-                return adminloginRepository.AdminLogin(model);
+        //AdminRepository adminloginRepository = null;
+        //public Task<TranStatus> AdminLogin(AdminLoginModel model)
+        //{
+        //    using (adminloginRepository = new AdminRepository())
+        //    {
+        //        return adminloginRepository.AdminLogin(model);
 
+        //    }
+        //}
+
+        public Task<Tuple<List<AdminLoginModel>, TranStatus>> AdminLogin(AdminLoginModel model)
+        {
+            using (adminRepository = new AdminRepository())
+            {
+                return adminRepository.AdminLogin(model);
+            }
+        }
+
+
+        //UpdateAdminProfile
+        public Task<TranStatus> updateAdminProfile(updateProfileModel model)
+        {
+            using (adminRepository = new AdminRepository())
+            {
+                return adminRepository.updateAdminProfile(model);
             }
         }
 

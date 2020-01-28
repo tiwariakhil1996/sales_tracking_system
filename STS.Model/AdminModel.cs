@@ -7,6 +7,7 @@ namespace STS.Model
     //Register
     public partial class AdminRegisterModel
     {
+       
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
@@ -19,9 +20,20 @@ namespace STS.Model
     //Login
     public partial class AdminLoginModel
     {
+        public int ID { get; set; }
+        public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
 
+    }
+
+
+    public class updateProfileModel
+    {
+        public int ID { get; set; }
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
     }
 
     //Display

@@ -7,6 +7,5 @@ namespace STS.Common
     public class STSSetting
     {
         public static string ConnectionString = "";
-        public static string ImagePathUrl = "";
     }
 }

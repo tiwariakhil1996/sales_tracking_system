@@ -82,8 +82,8 @@
 
                           <div class="form-group">
                               <label for="image">Image</label>
-                           <!--   <input type="file" class="form-control"  [(ngModel)]="product.image" name="image" >  -->
-                              <input class="form-control" type="file" id="image" name="imageSrc"   accept="image/*" (change)="handleInputChange($event)" multiple>             
+                              <input class="form-control" type="file" id="image"  [(ngModel)]="product.image" name="imageSrc"    accept="image/*" (change)="handleInputChange($event)" multiple>
+                           <!--   <img style="width: 80px; height: 80px;" src={{product.image}} >   -->  
                           </div>
 
                            <div class="form-group">

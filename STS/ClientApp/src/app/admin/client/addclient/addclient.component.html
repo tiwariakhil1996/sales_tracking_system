@@ -85,6 +85,7 @@
                       <option value="0">Select State</option>
                       <option *ngFor="let count1 of states" name="state" type="text" [value]="count1">{{count1}} </option>
                     </select>  -->
+                    
                     <!-- DYNAMIC -->
                     <select class="form-control" id="state" name="state" (change)="onChangeState($event.target.value)"  [(ngModel)]="client.state">
                         <option *ngIf="stateInfo == '' " value="-1">--Select State--</option>
