@@ -42,8 +42,8 @@ export class AddclientComponent implements OnInit {
 
 //------------------------------
 
-  stateInfo: any[] = [];
   countryInfo: any[] = [];
+  stateInfo: any[] = [];
   cityInfo: any[] = [];
 
   client = new clientModel();
@@ -86,7 +86,7 @@ export class AddclientComponent implements OnInit {
   // }
 
   getCountries(){
-    this.country.getJSON().
+    this.country.allCountries().
     subscribe(
       data2 => {
         this.countryInfo=data2.Countries;

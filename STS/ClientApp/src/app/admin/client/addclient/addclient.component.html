@@ -72,10 +72,9 @@
                       </option>
                     </select> -->
                     <!-- DYNAMIC -->
-                    <select class="form-control" id="country" name="country" (change)="onChangeCountry($event.target.value)" [(ngModel)]="client.country">
+                    <select class="form-control" id="country" name="country" (change)="onChangeCountry($event.target.value)" [(ngModel)]="client.country"  >
                       <option value="0">--Select Country--</option>
-                      <option *ngFor="let country of countryInfo; let i = index" name="country" value="{{i}}">{{country.CountryName}}
-                      </option>
+                      <option *ngFor="let country of countryInfo; let i = index" name="country"  value="{{i}}">{{country.CountryName}}</option>
                     </select>  
                   </div>
 

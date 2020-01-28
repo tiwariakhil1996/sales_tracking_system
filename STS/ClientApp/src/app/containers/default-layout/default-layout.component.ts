@@ -1,6 +1,10 @@
-import {Component } from '@angular/core';
+import {Component, TemplateRef } from '@angular/core';
 import { navItems } from '../../_nav';
 import { Router } from '@angular/router';
+import { registerModel, clientModel } from '../../model/model';
+import { CommonService } from '../../service/common.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AdminService } from '../../service/admin.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,7 +14,13 @@ export class DefaultLayoutComponent {
   public sidebarMinimized = false;
   public navItems = navItems;
 
-  constructor(private router: Router) {
+  register = new registerModel();
+  adminDetails: registerModel[] = [];
+  
+  client = new clientModel();
+  clientDetails: clientModel[] = [];
+  
+  constructor(private router: Router,private adminService: AdminService,private clientService: CommonService, private modalService: NgbModal) {
  
   }
 
@@ -26,9 +36,21 @@ export class DefaultLayoutComponent {
     this.router.navigate(['/sales/register']);
   }
 
-  // logout(){
+  adminprofile(content, admin){
+   // this.register = admin;
+    // data show in model use this line and store the data in user and display in ui
+   // this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
+  }
 
-  //       this.username.next(null);
-  // }
+  openupdatemodal(content, item) {
+    this.client = item;
+    // data show in model use this line and store the data in user and display in ui
+    this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
+
+  }
+
+  onEdit(){
+
+  }
 
 }

@@ -70,30 +70,43 @@ export class LoginComponent implements OnInit {
   // };   
 
 
-  submitForm() {
-    this.adminService.AdminLogin(this.login).subscribe((data: any) => {
-      if (data.Status.code === 0) {
-        const obj = this.adminDetails.find(item => item.email == this.login.email && item.password == this.login.password);
-        if (!obj) {
-          // this.toastrService.success('login succesfully', 'success');
-          alert('Admin Login Successfully');
-          this.router.navigate(['/admin/dashboard']);
-        }
-        else {
-          alert('UnSuccessfully');
-          // this.toastrService.warning('please enter the valid email or passsword', 'warning');
-        }
-      }
-    }, (err) => {
-    });
+  // submitForm() {
+  //   this.adminService.AdminLogin(this.login).subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       const obj = this.adminDetails.find(item => item.email == this.login.email && item.password == this.login.password);
+       
+  //       if (!obj) {}
+  //         alert('Admin Login Successfully');
+  //         this.router.navigate(['/admin/dashboard']);
+  //       }
+  //       else {
+  //         alert('UnSuccessfully');
+  //       }
+  //     }
+  //   }, (err) => {
+  //   });
+  // }
+
+  submitLogin() {
+  this.adminService.AdminLogin(this.login).subscribe((data: any) => {
+    if (data.Status.code === 0) {
+      localStorage.setItem('loginDetails', JSON.stringify(data));
+      alert('Admin Login Successfully');
+      this.router.navigate(['/admin/dashboard']);
+    }
+    else {
+      alert('UnSuccessfully');
+    }
+  }, (err) => {
+  });
   }
   
 
   
 
-  registerForm() {
-    this.router.navigate(['/register']);
-  }
+  // registerForm() {
+  //   this.router.navigate(['/register']);
+  // }
 
   // adminregisterForm(){
   //   this.router.navigate(['/admin/register']);
