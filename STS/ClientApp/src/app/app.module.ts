@@ -66,6 +66,7 @@ import { NgbModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
     //this module for used the edit popup...
     NgbModule,
     NgbAlertModule,
+    
     ReactiveFormsModule,
     PerfectScrollbarModule,
     TabsModule.forRoot(),

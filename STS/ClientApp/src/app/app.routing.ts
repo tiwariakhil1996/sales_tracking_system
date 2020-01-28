@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, CanActivate, NavigationEnd } from '@angular/router';
 
+
 // Admin Containers
 import { DefaultLayoutComponent } from './containers';
 
@@ -8,9 +9,6 @@ import { P404Component } from './admin/error/404.component';
 import { P500Component } from './admin/error/500.component';
 import { LoginComponent } from './admin/login/login.component';
 import { RegisterComponent } from './admin/register/register.component';
-
-
-
 
 //Sales
 import { SalesLayoutComponent } from './containerSales';
