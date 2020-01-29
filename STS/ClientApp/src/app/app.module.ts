@@ -51,6 +51,7 @@ import { SalesLayoutComponent } from './containerSales';
 import { SalesLoginComponent } from './sales/login/login.component';
 import { ModalModule } from 'ngx-bootstrap';
 import { NgbModal, NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DemoallapiComponent } from './admin/demoallapi/demoallapi.component';
 
 
 @NgModule({
@@ -90,7 +91,8 @@ import { NgbModal, NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap'
     LoginComponent,
     RegisterComponent,
     SalesRegisterComponent,
-    SalesLoginComponent
+    SalesLoginComponent,
+    DemoallapiComponent
   ],
 
   // providers: [{

@@ -49,7 +49,10 @@
 
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT</h4>
+    <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT PRODUCT  DETAILS</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>CLOSE
+    </button>
   </div>
   <form>
     <div class="modal-body" style="color: black;">
@@ -80,8 +83,9 @@
 
         <div class="form-group">
           <label for="image">Image</label>
-          <input class="form-control" type="file" id="image" name="imageSrc" accept="image/*"
+          <input class="form-control" type="file" id="image" [(ngModel)]="product.image" name="imageSrc" accept="image/*"
             (change)="handleInputChange($event)" multiple>
+          
         </div>
 
         <div class="form-group">
@@ -95,6 +99,9 @@
         </div>
 
         <button type="submit" class="btn btn-success" (click)="onEdit(product.id)">Update</button>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>CLOSE
+        </button>
        
       </div>
    </div>

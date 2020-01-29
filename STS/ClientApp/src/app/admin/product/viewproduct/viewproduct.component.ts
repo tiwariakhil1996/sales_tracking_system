@@ -99,6 +99,4 @@ export class ViewproductComponent implements OnInit {
     this.imageSrc = reader.result;
     // console.log(this.imageSrc);
   }
-  
-
 }

@@ -43,3 +43,11 @@ export class clientModel {
     city: string;
     postalCode: number;
 }
+export class DemoModel{
+    ID:number;
+    Name:string;
+    Email:string;
+    Mobile:string;
+    Address:string;
+    
+}

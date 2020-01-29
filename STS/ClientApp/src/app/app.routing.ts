@@ -1,3 +1,4 @@
+import { DemoallapiComponent } from './admin/demoallapi/demoallapi.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -51,6 +52,14 @@ export const routes: Routes = [
   },
 
   {
+    path: 'admin/demoallapi',
+    component: DemoallapiComponent,
+    data: {
+      title: 'Login Page'
+  }
+  },
+
+  {
     path: 'admin/register',
     component: RegisterComponent,
     data: {
@@ -89,6 +98,7 @@ export const routes: Routes = [
         path: 'map',
         loadChildren: () => import('./admin/map/map.module').then(m => m.MapModule)
       },
+     
       {
         path: 'base',
         loadChildren: () => import('./admin/base/base.module').then(m => m.BaseModule)

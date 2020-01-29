@@ -41,7 +41,7 @@ namespace STS
             STSSetting.ConnectionString = Configuration.GetSection("ConnectionString:STS").Value;
             DependencyResolver(services);
         }
-
+        //Add the Interface and  Service 
         private void DependencyResolver(IServiceCollection services)
         {
             //throw new NotImplementedException();
@@ -53,7 +53,9 @@ namespace STS
             services.AddSingleton<IClient,ClientServices>();
             services.AddSingleton<ISales, SalesServices>();
             services.AddSingleton<IProduct, ProductServices>();
-          
+            services.AddSingleton<IDemo, DemoServices>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
