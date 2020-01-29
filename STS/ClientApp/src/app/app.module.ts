@@ -1,9 +1,10 @@
-
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -30,14 +31,14 @@ import {
   AppBreadcrumbModule,
   AppHeaderModule,
   AppFooterModule,
-  AppSidebarModule
- 
+  AppSidebarModule,
 } from '@coreui/angular';
 
 // Import routing module
 import { AppRoutingModule } from './app.routing';
 
 // Import 3rd party components
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -48,7 +49,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { SalesRegisterComponent } from './sales/register/register.component';
 import { SalesLayoutComponent } from './containerSales';
 import { SalesLoginComponent } from './sales/login/login.component';
-import { NgbModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalModule } from 'ngx-bootstrap';
+import { NgbModal, NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -63,21 +65,21 @@ import { NgbModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
     AppHeaderModule,
     AppSidebarModule,
     HttpClientModule,
-    //this module for used the edit popup...
+    ModalModule.forRoot(),
     NgbModule,
     NgbAlertModule,
-    
+    // HttpModule,
     ReactiveFormsModule,
     PerfectScrollbarModule,
+    BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ToastrModule.forRoot(
       {
-        timeOut: 2000,
+        timeOut: 1000,
         positionClass: 'toast-top-right',
         preventDuplicates: false,
       }
     ),
-
     ChartsModule
   ],
   declarations: [
@@ -87,8 +89,6 @@ import { NgbModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
     P500Component,
     LoginComponent,
     RegisterComponent,
-
-    // SalesComponents
     SalesRegisterComponent,
     SalesLoginComponent
   ],
@@ -97,7 +97,7 @@ import { NgbModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
   //   provide: LocationStrategy,
   //   useClass: HashLocationStrategy
   // }],
-  // providers: [AuthGuard],
+  // providers: [],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

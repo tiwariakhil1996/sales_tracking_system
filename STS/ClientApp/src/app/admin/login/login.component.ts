@@ -46,7 +46,6 @@ export class LoginComponent implements OnInit {
       if (data.Status.code === 0) {
 
         alert('Admin Login Successfully');
-
         this.router.navigate(['/admin/dashboard']);
       }
       else {
@@ -58,9 +57,6 @@ export class LoginComponent implements OnInit {
 
     });
   }
-
-
-  
 
   registerForm() {
     this.router.navigate(['/register']);

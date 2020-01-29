@@ -1,4 +1,4 @@
-import {Component, TemplateRef } from '@angular/core';
+import { Component, TemplateRef } from '@angular/core';
 import { navItems } from '../../_nav';
 import { Router } from '@angular/router';
 import { registerModel, clientModel } from '../../model/model';
@@ -16,30 +16,30 @@ export class DefaultLayoutComponent {
 
   register = new registerModel();
   adminDetails: registerModel[] = [];
-  
+
   client = new clientModel();
   clientDetails: clientModel[] = [];
-  
-  constructor(private router: Router,private adminService: AdminService,private clientService: CommonService, private modalService: NgbModal) {
- 
+
+  constructor(private router: Router, private adminService: AdminService, private clientService: CommonService, private modalService: NgbModal) {
+
   }
 
   toggleMinimize(e) {
     this.sidebarMinimized = e;
   }
 
-  adminregisterForm(){
+  adminregisterForm() {
     this.router.navigate(['/admin/register']);
   }
 
-  salesregisterForm(){
+  salesregisterForm() {
     this.router.navigate(['/sales/register']);
   }
 
-  adminprofile(content, admin){
-   // this.register = admin;
+  adminprofile(content, admin) {
+    // this.register = admin;
     // data show in model use this line and store the data in user and display in ui
-   // this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
+    // this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
   }
 
   openupdatemodal(content, item) {
@@ -49,7 +49,7 @@ export class DefaultLayoutComponent {
 
   }
 
-  onEdit(){
+  onEdit() {
 
   }
 

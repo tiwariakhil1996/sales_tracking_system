@@ -29,6 +29,7 @@ export class AddproductComponent implements OnInit {
     this.productService.addProduct(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
         alert('Product added sucesfully');
+        this.router.navigate(['admin/viewproduct']);
       }
       this.product = new productModel();
     }, (err) => {

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, CanActivate, NavigationEnd } from '@angular/router';
-
+import { Routes, RouterModule } from '@angular/router';
 
 // Admin Containers
 import { DefaultLayoutComponent } from './containers';
@@ -10,7 +9,9 @@ import { P500Component } from './admin/error/500.component';
 import { LoginComponent } from './admin/login/login.component';
 import { RegisterComponent } from './admin/register/register.component';
 
-//Sales
+
+
+// Sales Containers
 import { SalesLayoutComponent } from './containerSales';
 
 import { SalesRegisterComponent } from './sales/register/register.component';
@@ -18,17 +19,9 @@ import { SalesLoginComponent } from './sales/login/login.component';
 
 
 export const routes: Routes = [
-
-  // {
-  //   path: '',
-  //   redirectTo: 'dashboard',
-  //   pathMatch: 'full',
-  // },
-
-  //This is default routing and it is first open the sales login ant time... 
   {
     path: '',
-    redirectTo: 'sales/login',
+    redirectTo: '/sales/login',
     pathMatch: 'full',
   },
   {
@@ -68,23 +61,18 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: DefaultLayoutComponent,
-
     data: {
-      title: 'Admin'
+      title: 'Home'
     },
-
     children: [
-
       {
         path: 'dashboard',
         loadChildren: () => import('./admin/dashboard/dashboard.module').then(m => m.DashboardModule)
-  
       },
       {
         path: 'product',
         loadChildren: () => import('./admin/product/product.module').then(m => m.ProductModule)
       },
-
       {
         path: 'assign',
         loadChildren: () => import('./admin/assign/assign.module').then(m => m.AssignModule)
@@ -114,6 +102,10 @@ export const routes: Routes = [
         loadChildren: () => import('./admin/chartjs/chartjs.module').then(m => m.ChartJSModule)
       },
       {
+        path: 'icons',
+        loadChildren: () => import('./admin/icons/icons.module').then(m => m.IconsModule)
+      },
+      {
         path: 'notifications',
         loadChildren: () => import('./admin/notifications/notifications.module').then(m => m.NotificationsModule)
       },
@@ -129,7 +121,8 @@ export const routes: Routes = [
   },
 
 
-  //-----------------------------------Sales Routing------------------------------------
+
+  // ------------------------------------------    SALES ROUTING  ---------------------
   {
     path: 'sales/login',
     component: SalesLoginComponent,
@@ -137,6 +130,7 @@ export const routes: Routes = [
       title: 'Login Page'
     }
   },
+  
 
   {
     path: 'sales/register',
@@ -146,19 +140,17 @@ export const routes: Routes = [
     }
   },
 
-  //sales dashboard
 
   {
     path: 'sales',
     component: SalesLayoutComponent,
     data: {
-      title: 'sales'
+      title: 'Home'
     },
     children: [
       {
         path: 'dashboard',
         loadChildren: () => import('./sales/dashboard/dashboard.module').then(m => m.DashboardModule)
-     
       },
       {
         path: 'product',
@@ -185,8 +177,7 @@ export const routes: Routes = [
       //   loadChildren: () => import('./sales/demo/demo.module').then(m => m.DemoModule)
       // }
 
-    ]
-  },
+     ] },
 
 
 
@@ -197,7 +188,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [ RouterModule.forRoot(routes) ],
+  exports: [ RouterModule ]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

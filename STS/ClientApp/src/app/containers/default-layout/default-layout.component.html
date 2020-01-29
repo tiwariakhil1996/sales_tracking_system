@@ -1,10 +1,7 @@
-<app-header
-  [navbarBrandRouterLink]="['/admin/dashboard']"
-  [fixed]="true"
+<app-header [navbarBrandRouterLink]="['/admin/dashboard']" [fixed]="true"
   [navbarBrandFull]="{src: 'assets/img/brand/sts.png', width: 89, height: 25, alt: 'Sales Tracking System'}"
   [navbarBrandMinimized]="{src: 'assets/img/logo/Logo.png', width: 30, height: 30, alt: 'Sales Tracking System'}"
-  [sidebarToggler]="'lg'"
-  [asideMenuToggler]="'lg'">
+  [sidebarToggler]="'lg'" [asideMenuToggler]="'lg'">
   <ul class="nav navbar-nav d-md-down-none">
     <li class="nav-item px-3">
       <a class="nav-link" href="/admin/dashboard">Dashboard</a>
@@ -35,109 +32,75 @@
     <!-- Profile -->
 
     <li class="nav-item dropdown" dropdown placement="bottom right">
-      <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
-        <img src="assets/img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com"/>
+      <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
+        dropdownToggle (click)="false">
+        <img src="assets/img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com" />
       </a>
       <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
         <div class="dropdown-header text-center"><strong>Account</strong></div>
-        <a class="dropdown-item" href="#"><i class="fa fa-bell-o"></i> Updates<span class="badge badge-info">42</span></a>
-        <a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i> Messages<span class="badge badge-success">42</span></a>
-        <a class="dropdown-item" href="#"><i class="fa fa-tasks"></i> Tasks<span class="badge badge-danger">42</span></a>
+        <a class="dropdown-item" href="#"><i class="fa fa-bell-o"></i> Updates<span
+            class="badge badge-info">42</span></a>
+        <a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i> Messages<span
+            class="badge badge-success">42</span></a>
+        <a class="dropdown-item" href="#"><i class="fa fa-tasks"></i> Tasks<span
+            class="badge badge-danger">42</span></a>
         <!-- <a class="dropdown-item" href="#"><i class="fa fa-comments"></i> Comment<span class="badge badge-warning">42</span></a> -->
         <div class="dropdown-header text-center"><strong>Settings</strong></div>
-        <!-- <a class="dropdown-item" data-toggle="modal"  data-toggle="modal" (click)="openModal(content,updateProfile)"><i class="fa fa-user"></i> Profile</a> -->
-        <!-- <table class="table table-bordered">
-          <thead>
-            <tr class="table-success">
-              <th>ID</th>
-              <th>Email</th>
-            </tr>
-          </thead>
+        <a class="dropdown-item" data-toggle="modal" data-toggle="modal" (click)="openupdatemodal(content,client)"><i
+            class="fa fa-user"></i> Profile</a>
+
+
+
+        <table class="table table-bordered">
           <tbody>
-        <tr *ngFor="let admin of adminDetails">
-       <td>{{admin.id}}</td>
-       <td>{{admin.email}}</td>
-      </tr>
-    </tbody>
-    </table> -->
-    <table class="table table-bordered">
-      <!-- <thead>
-        <tr class="table-success">
-          <th>Sr.no</th>
-          <th>ID</th>
-          <th>Client Name</th>
-          <th>Email</th>
-          <th>Contact</th>
-          <th>Gender</th>
-          <th>Address</th>
-          <th>Street</th>
-          <th>Country</th>
-          <th>State</th>
-          <th>City</th>
-          <th>Postalcode</th>
-        
-          <th>Action</th>
-        </tr>
-      </thead> -->
-      
-    <tbody>
-        <tr *ngFor="let client of clientDetails">
-          <!-- <td>{{client.id}}</td>
-          <td>{{client.clientName}}</td>
-          <td>{{client.email}}</td>
-          <td>{{client.contact}}</td>
-          <td>{{client.gender}}</td>
-          <td>{{client.address}}</td>
-          <td>{{client.street}}</td>
-          <td>{{client.country}}</td>
-          <td>{{client.state}}</td>
-          <td>{{client.city}}</td>
-          <td>{{client.postalCode}}</td> -->
-         
-  
-          <td>
-              <button type="button" class="btn btn-info" data-toggle="modal" (click)="openupdatemodal(content,client)" ><i class="fa fa-edit" aria-hidden="true"></i></button>
-           
-              <ng-template #content let-modal>
-                <div class="modal-header">
-                   <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT</h4>
+
+            <tr *ngFor="let client of clientDetails">
+              <td>
+
+                <button type="button" class="btn btn-info" data-toggle="modal"
+                  (click)="openupdatemodal(content,client)"></button>
+             </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- this logic for open the popup box(Edit the details) -->
+         <ng-template #content let-modal>
+          <div class="modal-header">
+            <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT</h4>
+          </div>
+          <form>
+            <div class="modal-body" style="color: black;">
+              <div>
+                <div class="form-group">
+                  <label for="id">ID</label>
+                  <input type="text" class="form-control" [(ngModel)]="client.id" name="id" disabled>
                 </div>
-               <form>
-                  <div class="modal-body" style="color: black;">
-                    <div>
-                      <div class="form-group">
-                       <label for="id">ID</label>
-                         <input type="text" class="form-control"  [(ngModel)]="client.id" name="id" disabled>
-                      </div>
 
-                      <div class="form-group">
-                       <label for="email">Email</label>
-                         <input type="text" class="form-control"  [(ngModel)]="client.email" name="email" >
-                      </div>
-     
-                      <div class="form-group">
-                        <label for="contact">Contact</label>
-                          <input type="text" class="form-control" [(ngModel)]="client.contact" name="contact">
-                      </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="text" class="form-control" [(ngModel)]="client.email" name="email">
+                </div>
 
-                     <button type="submit" class="btn btn-success" (click)="onEdit(client.id)">Update</button>
-                     <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal-body">Close</button>
-                     </div>      
-                   </div>
-                </form>
-       </ng-template>
+                <div class="form-group">
+                  <label for="contact">Contact</label>
+                  <input type="text" class="form-control" [(ngModel)]="client.contact" name="contact">
+                </div>
 
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    
-       
+                <button type="submit" class="btn btn-success" (click)="onEdit(client.id)">Update</button>
+                <button type="button" class="btn btn-outline-info waves-effect ml-auto"
+                  data-dismiss="modal-body">Close</button>
+              </div>
+            </div>
+          </form>
+        </ng-template>
+
 
 
         <!-- <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Setting</a>
         <a class="dropdown-item" href="#"><i class="fa fa-usd"></i> Payments<span class="badge badge-dark">42</span></a> -->
-        <a class="dropdown-item" href="#"><i class="fa fa-file"></i> Projects<span class="badge badge-primary">42</span></a>
+        <a class="dropdown-item" href="#"><i class="fa fa-file"></i> Projects<span
+            class="badge badge-primary">42</span></a>
         <div class="divider"></div>
         <!-- <a class="dropdown-item" href="#"><i class="fa fa-shield"></i> Lock account</a> -->
         <a class="dropdown-item" href="#"><i class="fa fa-lock"></i> Logout</a>
@@ -146,7 +109,8 @@
   </ul>
 </app-header>
 <div class="app-body">
-  <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" [minimized]="sidebarMinimized" (minimizedChange)="toggleMinimize($event)">
+  <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" [minimized]="sidebarMinimized"
+    (minimizedChange)="toggleMinimize($event)">
     <app-sidebar-nav [navItems]="navItems" [perfectScrollbar] [disabled]="appSidebar.minimized"></app-sidebar-nav>
     <app-sidebar-minimizer></app-sidebar-minimizer>
   </app-sidebar>
@@ -166,15 +130,15 @@
     </cui-breadcrumb>
     <!-- deprecation warning for 'app-breadcrumb' -->
     <!--<ol class="breadcrumb">-->
-      <!--<app-breadcrumb></app-breadcrumb>-->
-      <!--&lt;!&ndash; Breadcrumb Menu&ndash;&gt;-->
-      <!--<li class="breadcrumb-menu d-md-down-none">-->
-        <!--<div class="btn-group" role="group" aria-label="Button group with nested dropdown">-->
-          <!--<a class="btn" href="#"><i class="icon-speech"></i></a>-->
-          <!--<a class="btn" [routerLink]="['/dashboard']"><i class="icon-graph"></i> &nbsp;Dashboard</a>-->
-          <!--<a class="btn" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>-->
-        <!--</div>-->
-      <!--</li>-->
+    <!--<app-breadcrumb></app-breadcrumb>-->
+    <!--&lt;!&ndash; Breadcrumb Menu&ndash;&gt;-->
+    <!--<li class="breadcrumb-menu d-md-down-none">-->
+    <!--<div class="btn-group" role="group" aria-label="Button group with nested dropdown">-->
+    <!--<a class="btn" href="#"><i class="icon-speech"></i></a>-->
+    <!--<a class="btn" [routerLink]="['/dashboard']"><i class="icon-graph"></i> &nbsp;Dashboard</a>-->
+    <!--<a class="btn" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>-->
+    <!--</div>-->
+    <!--</li>-->
     <!--</ol>-->
     <div class="container-fluid">
       <router-outlet></router-outlet>
@@ -323,11 +287,13 @@
 
           <div class="aside-options">
             <div class="clearfix mt-4">
-              <button type="button" class="btn btn-brand btn-facebook mr-1" style="margin-bottom: 4px" (click)="adminregisterForm()">
+              <button type="button" class="btn btn-brand btn-facebook mr-1" style="margin-bottom: 4px"
+                (click)="adminregisterForm()">
                 <i class="fa fa-facebook"></i>
                 <span>Admin Register</span>
               </button>
-              <button type="button" class="btn btn-brand btn-facebook mr-1" style="margin-bottom: 4px" (click)="salesregisterForm()">
+              <button type="button" class="btn btn-brand btn-facebook mr-1" style="margin-bottom: 4px"
+                (click)="salesregisterForm()">
                 <i class="fa fa-facebook"></i>
                 <span>Sales Register</span>
               </button>
@@ -405,6 +371,6 @@
 
 <!-- Footer -->
 <app-footer>
-  <span><a href="admin/dashboard">Sale Tracking System</a> &copy; 2020 </span>
-  <span class="ml-auto">Powered by <a href="admin/dashboard">VDS</a></span>
+  <span><a href="admin/dashboard">Sale Tracking System</a> &copy;2020 </span>
+  <span class="ml-auto">Powered by <a href="admin/dashboard">STS</a></span>
 </app-footer>
