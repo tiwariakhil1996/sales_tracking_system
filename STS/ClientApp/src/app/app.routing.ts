@@ -20,9 +20,14 @@ import { SalesLoginComponent } from './sales/login/login.component';
 
 
 export const routes: Routes = [
+  // {
+  //   path: '',
+  //   redirectTo: '/sales/login',
+  //   pathMatch: 'full',
+  // },
   {
     path: '',
-    redirectTo: '/sales/login',
+    redirectTo: '/admin/login',
     pathMatch: 'full',
   },
   {
@@ -49,14 +54,6 @@ export const routes: Routes = [
     data: {
       title: 'Login Page'
     }
-  },
-
-  {
-    path: 'admin/demoallapi',
-    component: DemoallapiComponent,
-    data: {
-      title: 'Login Page'
-  }
   },
 
   {
@@ -97,6 +94,18 @@ export const routes: Routes = [
       {
         path: 'map',
         loadChildren: () => import('./admin/map/map.module').then(m => m.MapModule)
+      },
+      {
+        path: 'demoallapi',
+        loadChildren: () => import('./admin/demoallapi/demoallapi.module').then(m => m.DemoallapiModule)
+      },
+      {
+        path: 'category',
+        loadChildren: () => import('./admin/category/category.module').then(m => m.CategoryModule)
+      },
+      {
+        path: 'subcategory',
+        loadChildren: () => import('./admin/subcategory/subcategory.module').then(m => m.SubcategoryModule)
       },
      
       {

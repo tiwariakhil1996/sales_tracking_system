@@ -21,7 +21,7 @@ export const navItems: INavData[] = [
   //   icon: 'icon-note'
   // },
 
-
+// Product side bar routing
   {
     name: 'Product',
     url:'/admin/product',
@@ -39,6 +39,8 @@ export const navItems: INavData[] = [
       }
     ]
   },
+  
+  //Client side bar  routing
  
   {
     name: 'Client',
@@ -58,7 +60,7 @@ export const navItems: INavData[] = [
     ]
   },
 
-
+// Activity side bar routing
   {
     name: 'Activity',
     url: '/admin/activity',
@@ -81,6 +83,64 @@ export const navItems: INavData[] = [
       },
     ]
   },
+  //Demo side bar routing 
+  {
+    name: 'Demo All API',
+    url: '/admin/demoallapi',
+    icon: 'icon-layers',
+    children: [
+      {
+        name: 'Add Demo',
+        url: '/admin/demoallapi/adddemo',
+        icon: 'icon-note',
+      },
+      {
+        name: 'View Demo',
+        url: '/admin/demoallapi/viewdemo',
+        icon: 'icon-calendar',
+      },
+      
+    ]
+  },
+  //category side bar menu routing
+  {
+    name: 'Category',
+    url: '/admin/category',
+    icon: 'icon-layers',
+    children: [
+      {
+        name: 'Add Category',
+        url: '/admin/category/addcategory',
+        icon: 'icon-note',
+      },
+      {
+        name: 'View Category',
+        url: '/admin/category/viewcategory',
+        icon: 'icon-calendar',
+      },
+      
+    ]
+  },
+   //Subcategory side bar menu routing
+   {
+    name: 'Subcategory',
+    url: '/admin/subcategory',
+    icon: 'icon-layers',
+    children: [
+      {
+        name: 'Add Subcategory',
+        url: '/admin/subcategory/addsubcategory',
+        icon: 'icon-note',
+      },
+      {
+        name: 'View Subcategory',
+        url: '/admin/subcategory/viewsubcategory',
+        icon: 'icon-calendar',
+      },
+      
+    ]
+  },
+
   {
     name: 'Map',
     url: '/admin/map',

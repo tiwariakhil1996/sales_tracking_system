@@ -11,5 +11,12 @@ export class CurrentactivityComponent implements OnInit {
 
   ngOnInit() {
   }
+  openBackDropCustomClass(){
+
+  }
+  onDelete(){
+    
+  }
+
 
 }

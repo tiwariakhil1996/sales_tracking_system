@@ -13,8 +13,8 @@ namespace STS.BLL.Interface
         //Add Products
         Task<TranStatus> AddDemo(DemoModel model);
 
-        ////View Products
-        //Task<List<ProductListModel>> ProductList();
+        //View Demo
+        Task<List<DemoListModel>> DemoList();
 
 
         ////Update Prodcut

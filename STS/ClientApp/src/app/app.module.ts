@@ -52,6 +52,12 @@ import { SalesLoginComponent } from './sales/login/login.component';
 import { ModalModule } from 'ngx-bootstrap';
 import { NgbModal, NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DemoallapiComponent } from './admin/demoallapi/demoallapi.component';
+import { CategoryComponent } from './admin/category/category.component';
+import { AddcategoryComponent } from './admin/category/addcategory/addcategory.component';
+import { ViewcategoryComponent } from './admin/category/viewcategory/viewcategory.component';
+import { SubcategoryComponent } from './admin/subcategory/subcategory.component';
+import { AddsubcategoryComponent } from './admin/subcategory/addsubcategory/addsubcategory.component';
+import { ViewsubcategoryComponent } from './admin/subcategory/viewsubcategory/viewsubcategory.component';
 
 
 @NgModule({
@@ -92,7 +98,7 @@ import { DemoallapiComponent } from './admin/demoallapi/demoallapi.component';
     RegisterComponent,
     SalesRegisterComponent,
     SalesLoginComponent,
-    DemoallapiComponent
+    
   ],
 
   // providers: [{

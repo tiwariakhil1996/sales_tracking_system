@@ -11,5 +11,11 @@ export class PastactivityComponent implements OnInit {
 
   ngOnInit() {
   }
+  openBackDropCustomClass(){
+    
+  }
+  onDelete(){
+
+  }
 
 }

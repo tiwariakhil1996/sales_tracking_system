@@ -23,14 +23,14 @@ namespace STS.BLL.Service
             }
         }
 
-        ////View Products
-        //public async Task<List<ProductListModel>> ProductList()
-        //{
-        //    using (productRepository = new ProductRepository())
-        //    {
-        //        return await productRepository.ProductList();
-        //    }
-        //}
+        //View Demo
+        public async Task<List<DemoListModel>> DemoList()
+        {
+            using (demoRepository = new DemoRepository())
+            {
+                return await demoRepository.DemoList();
+            }
+        }
 
 
         ////Update

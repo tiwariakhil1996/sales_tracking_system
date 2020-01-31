@@ -13,4 +13,9 @@ export class DemoService {
     addDemo(data){
         return this.http.post('/api/Demo/AddDemo',data);
     }
+    demoList(){
+        return this.http.get('/api/Demo/DemoList');
+    }
+   
+    
 }

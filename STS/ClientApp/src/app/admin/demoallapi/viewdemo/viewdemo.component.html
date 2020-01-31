@@ -1,0 +1,93 @@
+<div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        Demo Details
+      </div>
+      <div class="card-body table-responsive">
+        <table class="table table-bordered ">
+          <thead>
+            <tr >
+              <th>Sr.no</th>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Mobile</th>
+              <th>Addres</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+          
+            <tr *ngFor="let item of DemoDetails;let i = index;">
+              
+              <td>{{i+1}}</td>
+              <td>{{item.id}}</td>
+              <td>{{item.name}}</td>
+              <td>{{item.email}}</td>
+              <td>{{item.mobile}}</td>
+              <td>{{item.address}}</td>
+              
+              <td>
+  
+                <button type="button" class="btn btn-primary" data-toggle="modal"
+                  (click)="openupdatemodal(content,item)"><i class="fa fa-edit" aria-hidden="true"></i></button>
+  
+                <button class='btn btn-danger' type="button" (click)="onDelete(item.id)"><i class="fa fa-trash"
+                    aria-hidden="true"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT DEMO DETAILS</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>CLOSE
+    </button>
+  </div>
+  <form>
+    <div class="modal-body" style="color: black;">
+      <div>
+        <div class="form-group">
+          <label for="id">ID</label>
+          <input type="text" class="form-control" [(ngModel)]="Demo.id" name="id" disabled>
+        </div>
+        <div class="form-group">
+          <label for="category">Name</label>
+          <input type="text" class="form-control" [(ngModel)]="Demo.name" name="category">
+        </div>
+
+        <div class="form-group">
+          <label for="subcategory">Email</label>
+          <input type="text" class="form-control" [(ngModel)]="Demo.email" name="subcategory">
+        </div>
+
+        <div class="form-group">
+          <label for="productname">Mobile</label>
+          <input type="text" class="form-control" [(ngModel)]="Demo.mobile" name="productname">
+        </div>
+
+        <div class="form-group">
+          <label for="description">Addresss</label>
+          <input type="text" class="form-control" [(ngModel)]="Demo.address" name="description">
+        </div>
+
+        
+
+        <button type="submit" class="btn btn-success" (click)="onEdit(Demo.id)">Update</button>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>CLOSE
+        </button>
+       
+      </div>
+   </div>
+   </form>
+</ng-template>
+  
+
+   
+  

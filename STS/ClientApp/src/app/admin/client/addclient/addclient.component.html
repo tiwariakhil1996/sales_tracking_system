@@ -74,7 +74,7 @@
                     <!-- DYNAMIC -->
                     <select class="form-control" id="country" name="country" (change)="onChangeCountry($event.target.value)" [(ngModel)]="client.country"  >
                       <option value="0">--Select Country--</option>
-                      <option *ngFor="let country of countryInfo; let i = index" name="country"  value="{{i}}">{{country.CountryName}}</option>
+                      <option *ngFor="let country of countryInfo; let i = index;" name="country"  value="{{i}}">{{country.CountryName}}</option>
                     </select>  
                   </div>
 
@@ -86,10 +86,10 @@
                       <option *ngFor="let count1 of states" name="state" type="text" [value]="count1">{{count1}} </option>
                     </select>  -->
                     <!-- DYNAMIC -->
-                    <select class="form-control" id="state" name="state" (change)="onChangeState($event.target.value)"  [(ngModel)]="client.state">
+                    <!-- <select class="form-control" id="state" name="state" (change)="onChangeState($event.target.value)"  [(ngModel)]="client.state">
                         <option *ngIf="stateInfo == '' " value="-1">--Select State--</option>
-                        <option *ngFor="let state of stateInfo; let j = index" name="state" value="{{j}}">{{state.StateName}}</option>
-                    </select>  
+                        <option *ngFor="let state of stateInfo; let j = index;" name="state" value="{{j}}">{{state.StateName}}</option>
+                    </select>   -->
                   </div>
 
 
@@ -101,10 +101,10 @@
                       <option *ngFor="let city of cities" type="text" name="city" [value]="city">{{city}} </option>
                     </select>  -->
                     <!-- DYNAMIC-->
-                    <select class="form-control"  id="city" name="city" [(ngModel)]="client.city">
+                    <!-- <select class="form-control"  id="city" name="city" [(ngModel)]="client.city">
                          <option *ngIf="cityInfo == ''" value="-1">--Select CIty--</option>
-                         <option *ngFor="let city of cityInfo; let k = index" name="city" value="{{k}}">{{city}}</option>
-                    </select>  
+                         <option *ngFor="let city of cityInfo; let k = index;" name="city" value="{{k}}">{{city}}</option>
+                    </select>   -->
                     </div>
 
                   <div class="form-group col-sm-4">

@@ -27,8 +27,6 @@ export class productModel {
     image: string;
     date: string;
 }
-
-
 // client form
 export class clientModel {
     id: number;
@@ -43,11 +41,22 @@ export class clientModel {
     city: string;
     postalCode: number;
 }
+
 export class DemoModel{
-    ID:number;
-    Name:string;
-    Email:string;
-    Mobile:string;
-    Address:string;
-    
+    id:number;
+    name:string;
+    email:string;
+    mobile:string;
+    address:string;
+}
+export class CategoryModel{
+    id:number;
+    category:string;
+    status:string;
+}
+export class SubcategoryModel{
+    id:number;
+    category_id:number;
+    subcategory:string;
+    status:string;
 }

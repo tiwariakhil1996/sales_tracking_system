@@ -31,16 +31,16 @@ namespace STS.DAL
                 return transaction;
             }
         }
-        ////View Products
-        //public async Task<List<ProductListModel>> ProductList()
-        //{
-        //    using (var connection = new SqlConnection(ConnectionString))
-        //    {
-        //        connection.Open();
-        //        var result = await connection.QueryAsync<ProductListModel>("ProductList", commandType: CommandType.StoredProcedure);
-        //        return result.ToList();
-        //    }
-        //}
+        //View Demo
+        public async Task<List<DemoListModel>> DemoList()
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<DemoListModel>("DemoList", commandType: CommandType.StoredProcedure);
+                return result.ToList();
+            }
+        }
 
         ////Update
         //public async Task<TranStatus> updateProduct(int ID, ProductListModel model)

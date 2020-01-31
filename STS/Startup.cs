@@ -54,7 +54,8 @@ namespace STS
             services.AddSingleton<ISales, SalesServices>();
             services.AddSingleton<IProduct, ProductServices>();
             services.AddSingleton<IDemo, DemoServices>();
-
+            services.AddSingleton<ICategory, CategoryServices>();
+            services.AddSingleton<ISubcategory, SubcategoryServices>();
 
         }
 

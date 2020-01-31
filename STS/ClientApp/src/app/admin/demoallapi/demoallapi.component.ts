@@ -11,32 +11,15 @@ import { Component, OnInit } from '@angular/core';
 export class DemoallapiComponent implements OnInit {
 
 
-  Demo=new DemoModel();
-  DemoDetails:DemoModel[]=[];
+  
   constructor(
-    private DemoService:DemoService,
-    private router:Router
+   
   ) { }
 
   ngOnInit() {
   }
 
-  submitForm(){
-      this.DemoService.addDemo(this.Demo).subscribe((data:any)=>{
-        if (data.Status.code===0) {
-
-          alert('Add Demo Successfully');
-          // this.router.navigate(["/admin/demoallapi"]);
-        }
-        this.Demo=new DemoModel();
-      },(err)=>{
-
-      });
-  }
-
-  resetForm(){
-
-  }
+  
   
 
 }
