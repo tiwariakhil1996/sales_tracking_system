@@ -7,6 +7,8 @@ namespace STS.Model
     public partial class ProductModel
     {
         public string Category { get; set; }
+        public int category_id { get; set; }
+        public int subcategory_id { get; set; }
         public string Subcategory { get; set; }
         public string Productname { get; set; }
         public string Description { get; set; }
@@ -18,6 +20,8 @@ namespace STS.Model
     public partial class ProductListModel
     {
         public int ID { get; set; }
+        public int category_id { get; set; }
+        public int subcategory_id { get; set; }
         public string Category { get; set; }
         public string Subcategory { get; set; }
         public string Productname { get; set; }

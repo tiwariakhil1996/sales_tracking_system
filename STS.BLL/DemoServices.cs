@@ -33,22 +33,22 @@ namespace STS.BLL.Service
         }
 
 
-        ////Update
-        //public async Task<TranStatus> updateProduct(int ID, ProductListModel model)
-        //{
-        //    using (productRepository = new ProductRepository())
-        //    {
-        //        return await productRepository.updateProduct(ID, model);
-        //    }
-        //}
+        //Update
+        public async Task<TranStatus> updateDemo(int ID, DemoListModel model)
+        {
+            using (demoRepository = new DemoRepository())
+            {
+                return await demoRepository.updateDemo(ID, model);
+            }
+        }
 
-        ////Delete
-        //public async Task<TranStatus> deleteProduct(int ID)
-        //{
-        //    using (productRepository = new ProductRepository())
-        //    {
-        //        return await productRepository.deleteProduct(ID);
-        //    }
-        //}
+        //Delete
+        public async Task<TranStatus> deleteDemo(int ID)
+        {
+            using (demoRepository = new DemoRepository())
+            {
+                return await demoRepository.deleteDemo(ID);
+            }
+        }
     }
 }

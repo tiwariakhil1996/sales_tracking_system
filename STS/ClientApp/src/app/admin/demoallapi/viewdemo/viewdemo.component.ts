@@ -54,11 +54,25 @@ export class ViewdemoComponent implements OnInit {
     this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
     // this.viewData = JSON.parse(localStorage.getItem('Register')) || [];
   }
-  onDelete(ID:number){
-
+  onDelete(id: number) {
+    if (confirm('Are you sure to delete this  demo?') === true) {
+      this.demoService.deleteDemo(id).subscribe(data => {
+        this.demoService.demoList();
+        this.demoList();
+      });
+    }
   }
-  onEdit(ID:number){
-
+  
+  onEdit(id:number) {
+    // this.client.image = this.imageSrc;
+    this.demoService.updateDemo(id, this.Demo).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        alert('Demo updated sucesfully');
+      }
+      this.Demo = new DemoModel();
+      this.demoList();
+    }, (err) => {
+    });
   }
   
 }

@@ -17,11 +17,11 @@ namespace STS.BLL.Interface
         Task<List<DemoListModel>> DemoList();
 
 
-        ////Update Prodcut
-        //Task<TranStatus> updateProduct(int ID, ProductListModel model);
+        //Update Demo
+        Task<TranStatus> updateDemo(int ID, DemoListModel model);
 
-        ////Delete
-        //Task<TranStatus> deleteProduct(int ID);
+        //Delete
+        Task<TranStatus> deleteDemo(int ID);
     }
 }
 

@@ -13,6 +13,7 @@ namespace STS.Controllers
     public class DemoController : Controller
     {
         private IDemo idemo;
+        //this is constructor class and declare the constructor variable name
         public DemoController(IDemo demo)
         {
             idemo = demo;
@@ -67,51 +68,51 @@ namespace STS.Controllers
 
         ////Update
 
-        //[HttpPut]
-        //[Route("updateProduct/{ID}")]
-        //public async Task<IActionResult> updateProduct(int ID , [FromBody]ProductListModel model)
-        //{
-        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
-        //    HttpStatusCode statusCode = HttpStatusCode.OK;
-        //    TranStatus transaction = new TranStatus();
-        //    try
-        //    {
+        [HttpPut]
+        [Route("updateDemo/{ID}")]
+        public async Task<IActionResult> updateDemo(int ID, [FromBody]DemoListModel model)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
 
-        //        transaction = await iproduct.updateProduct(ID,model);
+                transaction = await idemo.updateDemo(ID, model);
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        transaction = CommonHelper.TransactionErrorHandler(ex);
-        //        statusCode = HttpStatusCode.BadRequest;
-        //    }
-        //    dctData.Add("Status", transaction);
-        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
-        //}
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
 
 
-        ////Delete
-        //[HttpDelete]
-        //[Route("deleteProduct/{ID}")]
-        //public async Task<IActionResult> deleteProduct(int ID)
-        //{
-        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
-        //    HttpStatusCode statusCode = HttpStatusCode.OK;
-        //    TranStatus transaction = new TranStatus();
-        //    try
-        //    {
+        //Delete
+        [HttpDelete]
+        [Route("deleteDemo/{ID}")]
+        public async Task<IActionResult> deleteDemo(int ID)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
 
-        //        transaction = await iproduct.deleteProduct(ID);
+                transaction = await idemo.deleteDemo(ID);
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        transaction = CommonHelper.TransactionErrorHandler(ex);
-        //        statusCode = HttpStatusCode.BadRequest;
-        //    }
-        //    dctData.Add("Status", transaction);
-        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
-        //}
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
 
     }
 }

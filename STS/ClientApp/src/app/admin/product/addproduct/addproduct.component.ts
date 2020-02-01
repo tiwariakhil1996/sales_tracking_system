@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { productModel } from '../../../model/model';
+import { productModel, CategoryModel, SubcategoryModel } from '../../../model/model';
 import { Router } from '@angular/router';
 import { CommonService } from '../../../service/common.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
 // import {DomSanitizatio.nService} from '@angular/platform-browser';
 
 @Component({
@@ -15,11 +16,26 @@ export class AddproductComponent implements OnInit {
   errorMessage = '';
   imageSrc: string = '';
 
+  Category=new CategoryModel();
+  CategoryDetail:CategoryModel[]=[];
+
+  Subcategory=new SubcategoryModel();
+  SubcategoryDetails:SubcategoryModel[]=[];
+
   product = new productModel();
   productDetails: productModel[] = [];
 
 
-  constructor(private router: Router, private productService: CommonService,private domSanitizer: DomSanitizer) { }
+  constructor(
+    private router: Router, 
+    private productService: CommonService,
+    private domSanitizer: DomSanitizer,
+    private subcategory:CategorySubcategoryService ) 
+    { 
+      this.categoryList();
+      // this.subcategoryList();
+      
+    }
 
   ngOnInit() {
   }
@@ -29,7 +45,7 @@ export class AddproductComponent implements OnInit {
     this.productService.addProduct(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
         alert('Product added sucesfully');
-        this.router.navigate(['admin/viewproduct']);
+        this.router.navigate(['admin/product/viewproduct']);
       }
       this.product = new productModel();
     }, (err) => {
@@ -37,6 +53,42 @@ export class AddproductComponent implements OnInit {
 
     });
   }
+  //category display in the dropdown 
+
+  onSelect(event) {
+
+    this.SubcategoryDetails = this.SubcategoryDetails.filter(item =>item.category_id == event.target.value);
+     this.subcategoryList();
+  }
+
+  categoryList() {
+ 
+    this.subcategory.categoryList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.CategoryList) {
+          this.CategoryDetail = data.CategoryList;
+        
+        }
+      }
+    }, (err) => {
+      
+      console.log(this.CategoryDetail); 
+    });
+  }
+  subcategoryList() {
+    this.subcategory.subcategoryList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.SubcategoryList) {
+          this.SubcategoryDetails = data.SubcategoryList;
+        }
+      }
+
+    }, (err) => {
+
+    });
+  }
+
+
 
   // Image to Base64
 

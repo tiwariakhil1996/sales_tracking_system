@@ -43,14 +43,16 @@ export class LoginComponent implements OnInit {
 
   submitForm() {
     this.adminService.AdminLogin(this.login).subscribe((data: any) => {
-      if (data.Status.code === 0) {
+      if (data.Status.code === 1) {
 
-        alert('Admin Login Successfully');
+         alert('Admin Login Successfully');
         this.router.navigate(['/admin/dashboard']);
       }
-      else {
+      else{
 
         alert('Admin Login Failed');
+        this.router.navigate(['/admin/login']);
+
 
       }
     }, (err) => {

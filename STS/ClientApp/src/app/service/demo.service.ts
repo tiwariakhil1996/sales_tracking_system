@@ -16,6 +16,15 @@ export class DemoService {
     demoList(){
         return this.http.get('/api/Demo/DemoList');
     }
+    
+    deleteDemo(id: number) {
+         return this.http.delete('/api/Demo/deleteDemo/' + id);
+     }
+    updateDemo(id: number,data:any) {
+        return this.http.put('/api/Demo/updateDemo/'+id, data);
+     }
+
+
    
     
 }

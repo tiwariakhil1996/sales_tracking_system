@@ -19,8 +19,10 @@ export class salesregisterModel {
 // product form
 export class productModel {
     id: number;
-    category: string;
-    subcategory: string;
+    category:string;
+    subcategory:string;
+    category_id:number;
+    subcategory_id:number;
     productname: string;
     description: string;
     price: number;

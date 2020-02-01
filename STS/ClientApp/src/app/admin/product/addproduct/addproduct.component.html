@@ -8,38 +8,60 @@
             <div class="card-body">
               <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
            
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                   <label class="col-md-3 col-form-label" for="select1">Category</label>
                   <div class="col-md-9">
                     <input type="text" id="category" name="category" [(ngModel)]="product.category" class="form-control" placeholder="Enter category">
                   
-                    <!-- <select id="category" name="category" class="form-control" placeholder="Country" (change)="changeCountry($event.target.value)" [(ngModel)]="product.category">
+                    <select id="category" name="category" class="form-control" placeholder="Country" (change)="changeCountry($event.target.value)" [(ngModel)]="product.category">
                       <option value="0">Select Country</option>
                       <option *ngFor="let count of product" [value]="count.category">{{count.category}}
                       </option>
-                    </select>                    -->
-                     <!-- <select id="category" name="category" class="form-control">
+                    </select>                    
+                      <select id="category" name="category" class="form-control">
                       <option value="0">Please category</option>
                       <option value="1">Option #1</option>
                       <option value="2">Option #2</option>
                       <option value="3">Option #3</option>
-                    </select> -->
+                    </select>
                    
                   </div>
+                </div> -->
+                <div class="form-group row">
+                  <label class="col-md-3 col-form-label" for="select1">Category Name</label>
+                  <div class="col-md-9">
+                      <select name="category" id="category" class="form-control" [(ngModel)]="product.category_id" (change)="onSelect($event.target.value)" >
+                          <option [ngValue]="undefined" selected>Select category</option>
+                          <option *ngFor="let item of CategoryDetail;" name="category" value={{item.id}} [ngValue]="item.id" >{{item.category}}</option>
+                          <!-- <option *ngFor="let item of CategoryDetail;let i=index;" name="category" [value]="item" value="{{item}}">{{item}}</option> -->
+                      </select>
+                   </div>
+                </div>
+             
+
+                <div class="form-group row">
+                  <label class="col-md-3 col-form-label" for="select1">Subategory Name</label>
+                  <div class="col-md-9">
+                      <select name="category" id="subcategory" class="form-control" [(ngModel)]="product.subcategory_id" >
+                          <option [ngValue]="undefined" selected>Select Subcategory</option>
+                          <option *ngFor="let item of SubcategoryDetails;" name="subcategory" value={{item.id}} [ngValue]="item.id" >{{item.subcategory}}</option>
+                          <!-- <option *ngFor="let item of CategoryDetail;let i=index;" name="category" [value]="item" value="{{item}}">{{item}}</option> -->
+                      </select>
+                   </div>
                 </div>
     
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                   <label class="col-md-3 col-form-label" for="select1">Sub Category</label>
                   <div class="col-md-9">
-                    <input type="text" id="subcategory" name="subcategory" [(ngModel)]="product.subcategory" class="form-control" placeholder="Enter subcategory">
-                    <!-- <select id="select1" name="select1" class="form-control">
+                    <input type="text" id="subcategory" name="subcategory" [(ngModel)]="product.subcategory_id" class="form-control" placeholder="Enter subcategory">
+                    <select id="select1" name="select1" class="form-control">
                       <option value="0">Please select</option>
                       <option value="1">Option #1</option>
                       <option value="2">Option #2</option>
                       <option value="3">Option #3</option>
-                    </select> -->
+                    </select>
                   </div>
-                </div>
+                </div> -->
     
                 <div class="form-group row">
                   <label class="col-md-3 col-form-label" for="text-input">Product Name</label>
