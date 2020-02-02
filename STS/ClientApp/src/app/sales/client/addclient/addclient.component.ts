@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { clientModel } from '../../../model/model';
+import { clientModel, countryModel, stateModel, cityModel } from '../../../model/model';
 import { Router } from '@angular/router';
 import { CommonService } from '../../../service/common.service';
+import { Country } from '../../../service/country';
+import { State } from '../../../service/state';
+import { City } from '../../../service/city';
+import { SelectService } from '../../../service/select.service';
 
 @Component({
   selector: 'app-addclient',
@@ -11,27 +15,92 @@ import { CommonService } from '../../../service/common.service';
 export class AddclientComponent implements OnInit {
 
   client = new clientModel();
-
   clientDetails: clientModel[] = [];
-  constructor(private router: Router, private clientService: CommonService){
-    // this.Login();
+  
+  country = new countryModel();
+  countryDetails: countryModel[] = [];
+
+  state = new stateModel();
+  stateDetails: stateModel[] = [];
+
+  
+  city = new cityModel();
+  cityDetails: cityModel[] = [];
 
 
+  constructor(private router: Router, private clientService: CommonService, private selectService: SelectService){
+
+    this.countryList();
+  
   }
+  
   ngOnInit() {
+
+   
   }
 
   submitForm() {
-
     this.clientService.addClient(this.client).subscribe((data: any) => {
       if (data.Status.code === 0) {
         alert('Registered sucesfully');
       }
       this.client = new clientModel();
     }, (err) => {
-
+ 
 
     });
   } 
 
+ 
+  
+  countryList() {
+    this.clientService.countryList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.CountryList) {
+          this.countryDetails = data.CountryList;
+        
+        }
+      }
+    }, (err) => {
+      
+      console.log(err); 
+    });
+  }
+
+
+  onCountryChange(cid) {
+    this.stateList(cid);
+    
+    
+  }
+
+  onStatechange(sid){
+    this.cityList(sid);
+  }
+
+  stateList(cnid) {
+    this.clientService.stateList(cnid).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.StateList) {
+          this.stateDetails = data.StateList;
+        }
+      }
+    }, (err) => {
+      
+      console.log(err); 
+    });
+  }
+
+  cityList(stid) {
+    this.clientService.cityList(stid).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.cityList) {
+          this.cityDetails = data.cityList;
+        }
+      }
+    }, (err) => {
+      
+      console.log(err); 
+    });
+  }
 }

@@ -21,6 +21,10 @@ export class SalesService {
 
   }
 
+  UpdateSalesProfile(data) {
+    return this.http.post('/api/Sales/updateSalesProfile', data)
+  }
+
 
   // RegisterSalesList() {
   //   return this.http.get('/api/Sales/RegisterSalesList');

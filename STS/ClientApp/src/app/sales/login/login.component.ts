@@ -20,12 +20,12 @@ export class SalesLoginComponent implements OnInit {
   // constructor(private router: Router, private toastr: ToastrService) { }
 
   title = 'STS';
-  login = new salesregisterModel();
+  loginDetail = new salesregisterModel();
   salesDetails: salesregisterModel[] = [];
 
   constructor(private router: Router, private salesService: SalesService) {
     // this.registerList();
-
+     this.logout();
 
   }
   ngOnInit() {
@@ -34,27 +34,45 @@ export class SalesLoginComponent implements OnInit {
 
 
 
-  submitForm() {
-    this.salesService.SalesLoginService(this.login).subscribe((data: any) => {
-      if (data.Status.code === 0) {
-        const obj = this.salesDetails.find(item => item.email == this.login.email && item.password == this.login.password);
-        if (!obj) {
-          // this.toastrService.success('login succesfully', 'success');
+  // submitForm() {
+  //   this.salesService.SalesLoginService(this.login).subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       const obj = this.salesDetails.find(item => item.email == this.login.email && item.password == this.login.password);
+  //       if (!obj) {
+  //         // this.toastrService.success('login succesfully', 'success');
           
-          alert('Sales Login Successfully');
-          this.router.navigate(['/sales/dashboard']);
-        }
-        else {
-          alert('UnSuccessfully');
-          // this.toastrService.warning('please enter the valid email or passsword', 'warning');
-        }
+  //         alert('Sales Login Successfully');
+  //         this.router.navigate(['/sales/dashboard']);
+  //       }
+  //       else {
+  //         alert('UnSuccessfully');
+  //         // this.toastrService.warning('please enter the valid email or passsword', 'warning');
+  //       }
+  //     }
+  //   }, (err) => {
+  //   });
+  // }
+
+
+  submitLogin() {
+    this.salesService.SalesLoginService(this.loginDetail).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        localStorage.setItem('salesLogin', JSON.stringify(data.loginDetail[0] || {}));
+        alert('Sales Login Successfully');
+        this.router.navigate(['/sales/dashboard']);
+      }
+      else {
+        alert('UnSuccessfully');
       }
     }, (err) => {
     });
+    }
 
-
-  }
-
+    logout() {
+      localStorage.removeItem('salesLogin');
+    }
+  
+    
   registerForm() {
     this.router.navigate(['/sales/register']);
   }

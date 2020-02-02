@@ -5,14 +5,14 @@
         <div class="col-md-6 mx-auto">
           <div class="card mx-4">
             <div class="card-body p-4">
-              <form>
+        
                 <h1>Admin Register</h1>
                 <p class="text-muted">Create your account</p>
 
                 <!-- <div class="form-group row">
                   <label class="col-md-3 col-form-label" for="file-input">Upload Profile Pic</label>
                   <div class="col-md-9">
-                    <input class="form-control" type="file" id="fileChooser" name="imageSrc" accept="image/*"/>
+                    <input class="form-control" type="file" id="image" name="imageSrc"   accept="image/*" (change)="handleInputChange($event)">             
                   </div>
                 </div> -->
 
@@ -22,35 +22,34 @@
                   </div>
                   <input type="text" class="form-control" placeholder="Enter Username" [(ngModel)]="register.username"  name="username"  >
                 </div>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">@</span>
-                  </div>
-                  <input type="text" class="form-control" placeholder="Enter Email"  [(ngModel)]="register.email"  name="email" >
-                </div>
-
-            <!-- <div class="input-group mb-3">
+               
+            <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="icon-user"></i></span>
               </div>
               <div class="col-md-9 col-form-label">
                 <div class="form-check form-check-inline mr-1" id="inline-radios">
-                  <input class="form-check-input" type="radio" name="gender" id="male" value="Male">
+                  <input class="form-check-input" type="radio" name="gender" id="male" [(ngModel)]="register.gender"  value="Male">
                   <label class="form-check-label" for="Male">Male</label>
                 </div>
                 <div class="form-check form-check-inline mr-1">
-                  <input class="form-check-input" type="radio" name="gender" id="female" value="Female">
+                  <input class="form-check-input" type="radio" name="gender" id="female" [(ngModel)]="register.gender"  value="Female">
                   <label class="form-check-label" for="Female">Female</label>
                 </div>
               </div>
-            </div> -->
-
-            <!-- <div class="input-group mb-3">
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">@</span>
+              </div>
+              <input type="text" class="form-control" placeholder="Enter Email"  [(ngModel)]="register.email"  name="email" >
+            </div>
+            <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="icon-phone"></i></span>
               </div>
-              <input type="tel" class="form-control" placeholder="Mobile no."[(ngModel)]="register.mobile"  name="mobile" autocomplete="new-mobile" required>
-            </div> -->
+              <input type="tel" class="form-control" placeholder="Enter Mobile no."[(ngModel)]="register.mobile"  name="mobile" autocomplete="new-mobile" required>
+            </div>
 
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
@@ -58,27 +57,30 @@
                   </div>
                   <input type="password" class="form-control" placeholder="Password"  [(ngModel)]="register.password"  name="password" >
                 </div>
+             
                 <div class="input-group mb-4">
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="icon-lock"></i></span>
                   </div>
                   <input type="password" class="form-control" placeholder="Repeat password"  [(ngModel)]="register.cpassword"  name="cpassword" >
                 </div>
-                <button type="submit" class="btn btn-block btn-success" (click)="submitForm()">Create Account</button>
+              
+                <!-- <button type="submit" class="btn btn-block btn-success" (click)="submitForm()">Create Account</button> -->
                 <!-- <button type="submit" class="btn btn-block btn-warning" (click)="salesForm()">Sales Register</button> -->
-                <button type="button" class="btn btn-block btn-danger" (click)="loginForm()">Login</button>
-              </form>
+                <!-- <button type="button" class="btn btn-block btn-danger" (click)="loginForm()">Login</button> -->
             </div>
-            <!-- <div class="card-footer p-4">
+            <div class="card-footer p-4">
               <div class="row">
                 <div class="col-6">
-                  <button class="btn btn-block btn-facebook" type="button"><span>facebook</span></button>
+                  <button type="submit" class="btn btn-block btn-success" (click)="submitForm()">Register</button>
+                  <!-- <button class="btn btn-block btn-facebook" type="button"><span>facebook</span></button> -->
                 </div>
                 <div class="col-6">
-                  <button class="btn btn-block btn-twitter" type="button"><span>twitter</span></button>
+                  <button type="button" class="btn btn-block btn-danger" (click)="loginForm()">Login</button>
+                  <!-- <button class="btn btn-block btn-twitter" type="button"><span>twitter</span></button> -->
                 </div>
               </div>
-            </div> -->
+            </div>
           </div>
         </div>
       </div>

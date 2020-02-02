@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { activityModel } from '../../../model/model';
 
 @Component({
   selector: 'app-addactivity',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddactivityComponent implements OnInit {
 
+  activity = new activityModel()
+  activityDetails: activityModel[]=[];
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  changeCategory(){
+    
+  }
 }

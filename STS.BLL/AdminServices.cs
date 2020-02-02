@@ -47,14 +47,21 @@ namespace STS.BLL.Service
 
 
         //UpdateAdminProfile
-        public Task<TranStatus> updateAdminProfile(updateProfileModel model)
+        //public Task<TranStatus> updateAdminProfile(updateProfileModel model)
+        //{
+        //    using (adminRepository = new AdminRepository())
+        //    {
+        //        return adminRepository.updateAdminProfile(model);
+        //    }
+        //}
+
+        public Task<Tuple<List<updateProfileModel>, TranStatus>> updateAdminProfile(updateProfileModel model)
         {
             using (adminRepository = new AdminRepository())
             {
                 return adminRepository.updateAdminProfile(model);
             }
         }
-
 
         // Display
         //public async Task<List<AdminLoginModel>> AdminLogin()

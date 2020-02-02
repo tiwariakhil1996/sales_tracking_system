@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { clientModel } from '../../../model/model';
 import { CommonService } from '../../../service/common.service';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-viewclient',
@@ -14,11 +15,10 @@ export class ViewclientComponent implements OnInit {
   client = new clientModel();
   clientDetails: clientModel[] = [];
 
-  constructor(private router: Router, private clientService: CommonService) {
+  constructor(private router: Router, private clientService: CommonService,private modalService: NgbModal) {
     this.clientList();
-
-
   }
+  
   ngOnInit() {
   }
 
@@ -36,11 +36,25 @@ export class ViewclientComponent implements OnInit {
     });
   }
 
-  //Edit
+// Edit
+openupdatemodal(content, item) {
+  this.client = JSON.parse(JSON.stringify(item));
+  // data show in model use this line and store the data in user and display in ui
+  this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
 
-  openBackDropCustomClass(){
+}
 
-  }
+onEdit(id:number) {
+  // this.client.image = this.imageSrc;
+  this.clientService.updateClient(id, this.client).subscribe((data: any) => {
+    if (data.Status.code === 0) {
+      alert('Client updated sucesfully');
+    }
+    this.client = new clientModel();
+    this.clientList();
+  }, (err) => {
+  });
+}
 
 
   //Delete

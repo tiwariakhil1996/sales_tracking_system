@@ -12,6 +12,9 @@ namespace STS.Controllers
     [Route("api/[controller]")]
     public class SalesController : Controller
     {
+
+        TranStatus transaction = new TranStatus();
+
         private ISales isales;
         public SalesController(ISales sales)
         {
@@ -45,18 +48,42 @@ namespace STS.Controllers
 
         //Login
 
+        //[HttpPost]
+        //[Route("SalesLogin")]
+        //public async Task<IActionResult> SalesLogin([FromBody] SalesLoginModel model)
+        //{
+        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
+        //    HttpStatusCode statusCode = HttpStatusCode.OK;
+        //    TranStatus transaction = new TranStatus();
+        //    try
+        //    {
+
+        //        transaction = await isales.SalesLogin(model);
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        transaction = CommonHelper.TransactionErrorHandler(ex);
+        //        statusCode = HttpStatusCode.BadRequest;
+        //    }
+        //    dctData.Add("Status", transaction);
+        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        //}
+
+
+
         [HttpPost]
         [Route("SalesLogin")]
-        public async Task<IActionResult> SalesLogin([FromBody] SalesLoginModel model)
+        public async Task<IActionResult> SalesLogin([FromBody]SalesLoginModel model)
         {
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
-            TranStatus transaction = new TranStatus();
             try
             {
-
-                transaction = await isales.SalesLogin(model);
-
+                var result = await isales.SalesLogin(model);
+                var loginDetail = result.Item1;
+                transaction = result.Item2;
+                dctData.Add("loginDetail", loginDetail);
             }
             catch (Exception ex)
             {
@@ -68,6 +95,34 @@ namespace STS.Controllers
         }
 
 
+        //UpdateSalesProfile
+        [HttpPost]
+        [Route("updateSalesProfile")]
+        public async Task<IActionResult> updateSalesProfile([FromBody]updateSalesModel model)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+
+                model.Image = CommonHelper.SaveImage(HttpContext, "Images\\SalesProfile", model.Image, true, model.ImageExtn);
+                //transaction = await isales.updateSalesProfile(model);
+
+                var result = await isales.updateSalesProfile(model);
+                var loginDetail = result.Item1;
+                transaction = result.Item2;
+                dctData.Add("loginDetail", loginDetail);
+               
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+
+        }
         //Display
 
         //[HttpGet]

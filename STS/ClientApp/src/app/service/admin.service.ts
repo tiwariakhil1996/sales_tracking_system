@@ -11,14 +11,6 @@ export class AdminService {
  
   // REGISTER
 
-  // RegisterService(data) {
-  //   return this.http.post('/api/User/RegisterUser', data);
-
-  // }
-
-  // RegisterList() {
-  //   return this.http.get('/api/User/RegisterList');
-  // }
 
   AdminRegisterService(data) {
     return this.http.post('/api/Admin/AdminRegister', data);
@@ -29,8 +21,8 @@ export class AdminService {
     return this.http.post('/api/Admin/AdminLogin',data);
   }
 
-  UpdateVendorProfile(data) {
-    return this.http.post('/api/Vendor/UpdateVendorProfile', data)
+  UpdateAdminProfile(data) {
+    return this.http.post('/api/Admin/updateAdminProfile', data)
   }
 
 

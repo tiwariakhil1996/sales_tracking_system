@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
+import { clientModel, productModel, salesregisterModel, activityModel } from '../../model/model';
+import { Router } from '@angular/router';
+import { CommonService } from '../../service/common.service';
 
 
 @Component({
@@ -9,6 +12,22 @@ import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 export class DashboardComponent implements OnInit {
 
   radioModel: string = 'Month';
+
+  client = new clientModel();
+  clientDetails: clientModel[] = [];
+  totalClient: any = null;
+
+  product = new productModel();
+  productDetails: productModel[] = [];
+  totalProduct:any ;
+
+  sales=new salesregisterModel();
+  salesDetails: salesregisterModel[]=[];
+  totalSales:any;
+
+  activity= new activityModel();
+  activityDetails: activityModel[]=[];
+  totalActivity: any;
 
   // lineChart1
   public lineChart1Data: Array<any> = [
@@ -242,7 +261,7 @@ export class DashboardComponent implements OnInit {
       mode: 'index',
       position: 'nearest',
       callbacks: {
-        labelColor: function(tooltipItem, chart) {
+        labelColor: function (tooltipItem, chart) {
           return { backgroundColor: chart.data.datasets[tooltipItem.datasetIndex].borderColor };
         }
       }
@@ -255,7 +274,7 @@ export class DashboardComponent implements OnInit {
           drawOnChartArea: false,
         },
         ticks: {
-          callback: function(value: any) {
+          callback: function (value: any) {
             return value.charAt(0);
           }
         }
@@ -378,6 +397,21 @@ export class DashboardComponent implements OnInit {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
+  constructor(private router: Router, private clientService: CommonService) {
+
+  }
+  
+  clientList() {
+    this.clientService.clientList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.ClientList) {
+          this.clientDetails = data.ClientList;
+        }
+      }
+    }, (err) => {
+    });
+  }
+
   ngOnInit(): void {
     // generate random values for mainChart
     for (let i = 0; i <= this.mainChartElements; i++) {
@@ -385,5 +419,10 @@ export class DashboardComponent implements OnInit {
       this.mainChartData2.push(this.random(80, 100));
       this.mainChartData3.push(65);
     }
+    this.totalClient = this.clientDetails.length;
+    this.totalProduct = this.productDetails.length;
+    this.totalActivity = this.activityDetails.length;
+    this.totalSales = this.salesDetails.length;
   }
+
 }

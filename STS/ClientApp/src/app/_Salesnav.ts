@@ -66,16 +66,12 @@ export const SalesnavItems: INavData[] = [
       },
     ]
   },
-  // {
-  //   name: 'Map',
-  //   url: '/sales/map',
-  //   icon: 'icon-map'
-  // },
-  // {
-  //   name: 'Demo',
-  //   url: '/sales/demo',
-  //   icon: 'icon-demo'
-  // },
+  {
+    name: 'Map',
+    url: '/sales/map',
+    icon: 'icon-map'
+  },
+
   {
     name: 'Logout',
     url: '/sales/login',

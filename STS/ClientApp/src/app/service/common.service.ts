@@ -44,4 +44,36 @@ export class CommonService {
   updateClient(id: number,data:any) {
     return this.http.put('/api/Client/updateClient/'+id, data);
   }
+
+//  -------------Other -----------------------------------
+  // ------------ Country
+
+  countryList() {
+    return this.http.get('/api/Other/CountryList');
+  }
+
+ stateList(cnid) {
+    return this.http.get('/api/Other/StateList/' + cnid);
+  }
+
+ cityList(stid) {
+    return this.http.get('/api/Other/CityList/' + stid);
+  }
+
+
+  addCategory(data){
+    return this.http.post('api/Other/addCategory',data);
+  }
+
+  categoryList() {
+    return this.http.get('/api/Other/CategoryList');
+  }
+
+  addSubategory(data){
+    return this.http.post('api/Other/addSubcategory',data);
+  }
+
+  subcategoryList(catid) {
+    return this.http.get('/api/Other/SubcategoryList/' + catid);
+  }
 }

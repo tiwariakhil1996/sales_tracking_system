@@ -35,7 +35,7 @@ import {
 } from '@coreui/angular';
 
 // Import routing module
-import { AppRoutingModule } from './app.routing';
+import { AppRoutingModule, routes } from './app.routing';
 
 // Import 3rd party components
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -51,6 +51,7 @@ import { SalesLayoutComponent } from './containerSales';
 import { SalesLoginComponent } from './sales/login/login.component';
 import { ModalModule } from 'ngx-bootstrap';
 import { NgbModal, NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -80,6 +81,7 @@ import { NgbModal, NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap'
         preventDuplicates: false,
       }
     ),
+    RouterModule.forRoot(routes),
     ChartsModule
   ],
   declarations: [

@@ -97,13 +97,19 @@ namespace STS.Controllers
         //UpdateAdminProfile
         [HttpPost]
         [Route("updateAdminProfile")]
-        public async Task<IActionResult> updateAdminProfile([FromBody]updateProfileModel modle)
+        public async Task<IActionResult> updateAdminProfile([FromBody]updateProfileModel model)
         {
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
             try
             {
-                transaction = await iadmin.updateAdminProfile(modle);
+                model.Image = CommonHelper.SaveImage(HttpContext, "Images\\AdminProfile", model.Image, true, model.ImageExtn);
+                //transaction = await iadmin.updateAdminProfile(model);
+
+                var result = await iadmin.updateAdminProfile(model);
+                var loginDetail = result.Item1;
+                transaction = result.Item2;
+                dctData.Add("loginDetail", loginDetail);
             }
             catch (Exception ex)
             {
@@ -113,7 +119,6 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
-
 
         // Display
 

@@ -53,7 +53,8 @@ namespace STS
             services.AddSingleton<IClient,ClientServices>();
             services.AddSingleton<ISales, SalesServices>();
             services.AddSingleton<IProduct, ProductServices>();
-          
+            services.AddSingleton<IOther, OtherServices>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

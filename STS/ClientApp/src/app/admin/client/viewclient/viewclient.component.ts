@@ -3,6 +3,9 @@ import { clientModel } from '../../../model/model';
 import { CommonService } from '../../../service/common.service';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Country } from '../../../service/country';
+import { State } from '../../../service/state';
+import { City } from '../../../service/city';
 
 @Component({
   selector: 'app-viewclient',
@@ -15,6 +18,13 @@ export class ViewclientComponent implements OnInit {
   client = new clientModel();
   clientDetails: clientModel[] = [];
 
+
+  // selectedCountry: Country = new Country(2, 'Brazil');
+  // selectedState: State = new State(8,3, 'Gujarat');
+  // countries: Country[];
+  // States: State[];
+  // Cities: City[];
+  
   constructor(private router: Router, private clientService: CommonService, private modalService: NgbModal) {
     this.clientList();
 
@@ -67,6 +77,16 @@ export class ViewclientComponent implements OnInit {
       });
     }
   }
+
+
+
+// onSelect(cid) {
+//     this.stateDetails = this.clientService.stateList().filter((item) => item.cid == cid);
+//   }
+
+//   onState(stateid) {
+//     this.cities = this.clientService.cityList().filter((item) => item.stateid == stateid);
+//   }
 
 
 }

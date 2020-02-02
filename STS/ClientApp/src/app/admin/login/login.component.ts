@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, private adminService: AdminService) {
     // this.registerList();
 
+    this. logout();
 
   }
   ngOnInit() {
@@ -34,7 +35,7 @@ export class LoginComponent implements OnInit {
   submitLogin() {
   this.adminService.AdminLogin(this.loginDetail).subscribe((data: any) => {
     if (data.Status.code === 0) {
-      localStorage.setItem('loginDetail', JSON.stringify(data));
+      localStorage.setItem('adminLogin', JSON.stringify(data.loginDetail[0] || {}));
       alert('Admin Login Successfully');
       this.router.navigate(['/admin/dashboard']);
     }
@@ -45,7 +46,9 @@ export class LoginComponent implements OnInit {
   });
   }
   
-
+  logout() {
+    localStorage.removeItem('adminLogin');
+  }
   
 
   // registerForm() {

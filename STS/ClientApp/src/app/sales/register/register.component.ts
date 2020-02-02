@@ -12,8 +12,9 @@ import { SalesService } from '../../service/sales.service';
 export class SalesRegisterComponent  implements OnInit{
 
   title = 'STS';
-  register = new salesregisterModel();
+  imageSrc: string = '';
 
+  register = new salesregisterModel();
   salesDetails: salesregisterModel[] = [];
   constructor(private router: Router, private salesService: SalesService){
     // this.Login();
@@ -26,7 +27,7 @@ export class SalesRegisterComponent  implements OnInit{
 
 
   submitForm() {
-
+    this.register.image = this.imageSrc;
     this.salesService.SalesRegisterService(this.register).subscribe((data: any) => {
       if (data.Status.code === 0) {
         alert('Sales Registered sucesfully');
@@ -38,6 +39,29 @@ export class SalesRegisterComponent  implements OnInit{
 
     });
   } 
+
+     // Image to Base64
+
+     handleInputChange(e) {
+      var file = e.target.files[0];
+      var pattern = /image-*/;
+      var reader = new FileReader();
+  
+      if (!file.type.match(pattern)) {
+        alert('invalid format');
+        return;
+      }
+  
+      reader.onload = this._handleReaderLoaded.bind(this);
+      reader.readAsDataURL(file)
+    }
+  
+    _handleReaderLoaded(e) {
+      const reader = e.target;
+      //  console.log(this.imageSrc);
+      this.imageSrc = reader.result;
+      console.log(this.imageSrc);
+    }
 
   adminForm() {
     this.router.navigate(['/register']);
