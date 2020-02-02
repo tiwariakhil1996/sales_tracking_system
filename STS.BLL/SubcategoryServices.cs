@@ -24,11 +24,11 @@ namespace STS.BLL.Service
         }
 
         //View Subcategory
-        public async Task<List<SubcategoryListModel>> SubcategoryList()
+        public async Task<List<SubcategoryListModel>> SubcategoryList(int catId)
         {
             using (subcategoryRepository = new SubcategoryRepository())
             {
-                return await subcategoryRepository.SubcategoryList();
+                return await subcategoryRepository.SubcategoryList(catId);
             }
         }
 

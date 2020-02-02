@@ -45,15 +45,15 @@ namespace STS.Controllers
         //View Subcategory
 
         [HttpGet]
-        [Route("SubcategoryList")]
-        public async Task<IActionResult> SubcategoryList()
+        [Route("SubcategoryList/{id}")]
+        public async Task<IActionResult> SubcategoryList(int id)
         {
             TranStatus transaction = new TranStatus();
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
             try
             {
-                var subcategoryList = await isubcategory.SubcategoryList();
+                var subcategoryList = await isubcategory.SubcategoryList(id);
                 dctData.Add("SubcategoryList", subcategoryList);
             }
             catch (Exception ex)

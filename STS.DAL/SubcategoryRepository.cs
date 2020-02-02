@@ -31,12 +31,15 @@ namespace STS.DAL
             }
         }
         //View Subcategory
-        public async Task<List<SubcategoryListModel>> SubcategoryList()
+        public async Task<List<SubcategoryListModel>> SubcategoryList(int catId)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                var result = await connection.QueryAsync<SubcategoryListModel>("SubcategoryList", commandType: CommandType.StoredProcedure);
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@category_id", catId);
+                var result = await connection.QueryAsync<SubcategoryListModel>("SubcategoryList", parameter, commandType: CommandType.StoredProcedure);
                 return result.ToList();
             }
         }

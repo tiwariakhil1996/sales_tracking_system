@@ -16,36 +16,39 @@ export class AddproductComponent implements OnInit {
   errorMessage = '';
   imageSrc: string = '';
 
-  Category=new CategoryModel();
-  CategoryDetail:CategoryModel[]=[];
+  Category = new CategoryModel();
+  CategoryDetail: CategoryModel[] = [];
 
-  Subcategory=new SubcategoryModel();
-  SubcategoryDetails:SubcategoryModel[]=[];
+  Subcategory = new SubcategoryModel();
+  SubcategoryDetails: SubcategoryModel[] = [];
 
   product = new productModel();
   productDetails: productModel[] = [];
 
 
   constructor(
-    private router: Router, 
+    private router: Router,
     private productService: CommonService,
     private domSanitizer: DomSanitizer,
-    private subcategory:CategorySubcategoryService ) 
-    { 
-      this.categoryList();
-      // this.subcategoryList();
-      
-    }
+    private subcategory: CategorySubcategoryService) {
+    this.categoryList();
+    // this.subcategoryList();
+
+  }
 
   ngOnInit() {
   }
 
   submitForm() {
     this.product.image = this.imageSrc;
+    this.product.category_id = Number(this.product.category_id);
+    this.product.subcategory_id = Number(this.product.subcategory_id);
+    this.product.image = this.imageSrc;
     this.productService.addProduct(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
         alert('Product added sucesfully');
-        this.router.navigate(['admin/product/viewproduct']);
+
+        // this.router.navigate(['admin/product/viewproduct']);
       }
       this.product = new productModel();
     }, (err) => {
@@ -55,28 +58,30 @@ export class AddproductComponent implements OnInit {
   }
   //category display in the dropdown 
 
-  onSelect(event) {
+  onSelect(id) {
+    // console.log(id);
 
-    this.SubcategoryDetails = this.SubcategoryDetails.filter(item =>item.category_id == event.target.value);
-     this.subcategoryList();
+    // this.SubcategoryDetails = this.SubcategoryDetails.filter(item => item.category_id == id);
+    // console.log(this.SubcategoryDetails);
+    this.subcategoryList(id);
   }
 
   categoryList() {
- 
+
     this.subcategory.categoryList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.CategoryList) {
           this.CategoryDetail = data.CategoryList;
-        
+
         }
       }
     }, (err) => {
-      
-      console.log(this.CategoryDetail); 
+
+      console.log(this.CategoryDetail);
     });
   }
-  subcategoryList() {
-    this.subcategory.subcategoryList().subscribe((data: any) => {
+  subcategoryList(catId) {
+    this.subcategory.subcategoryList(catId).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.SubcategoryList) {
           this.SubcategoryDetails = data.SubcategoryList;
@@ -113,7 +118,7 @@ export class AddproductComponent implements OnInit {
     this.imageSrc = reader.result;
     // console.log(this.imageSrc);
   }
-  
+
 
   resetForm() {
 

@@ -1,33 +1,33 @@
 <div class="animated fadeIn">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card">
-          <div class="card-header">
-            <strong>Add Category</strong>
-          </div>
-          <div class="card-body">
-            <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-  
-              <div class="form-group row">
-                <label class="col-md-3 col-form-label" for="select1">Categoy Name</label>
-                <div class="col-md-9">
-                  <input type="text" id="category" name="category" [(ngModel)]="Category.category" class="form-control"
-                    placeholder="Enter Category Name">
-                  </div>
-              </div>
-  
-              <div class="form-group row">
-                <label class="col-md-3 col-form-label" for="select1">Status</label>
-                <div class="col-md-9">
-                    <select name="status" class="form-control" [(ngModel)]="Category.status" >
-                      <option [ngValue]="undefined"  selected>Select status</option>
-                      <option value="y">shown</option>
-                      <option value="n">Hidden</option>
-                  </select>
-                 </div>
-              </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>Add Category</strong>
+        </div>
+        <div class="card-body">
+          <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
 
-              <!-- <div class="row">
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="select1">Categoy Name</label>
+              <div class="col-md-9">
+                <input type="text" id="category" name="category" [(ngModel)]="Category.category" class="form-control"
+                  placeholder="Enter Category Name">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="select1">Status</label>
+              <div class="col-md-9">
+                <select name="status" class="form-control" [(ngModel)]="Category.status">
+                  <option [ngValue]="undefined" selected>Select status</option>
+                  <option value="y">shown</option>
+                  <option value="n">Hidden</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- <div class="row">
                 <div class="form-group col-sm-4">
                   <label for="status">Status</label>
                     <select class="form-control" id="status" name="status"  [(ngModel)]="Category.status">
@@ -38,26 +38,26 @@
                 </div>
               </div>
                -->
-            </form>
-          </div>
-          <div class="card-footer">
-            <button type="submit" class="btn btn-sm btn-primary" (click)="submitForm()"><i class="fa fa-dot-circle-o"></i>
-              Submit</button>
-            <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
-              Reset</button>
-          </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button type="submit" class="btn btn-sm btn-primary" (click)="submitForm()"><i class="fa fa-dot-circle-o"></i>
+            Submit</button>
+          <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
+            Reset</button>
         </div>
       </div>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-      <!-- <div class="animated fadeIn">
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- <div class="animated fadeIn">
             <div class="row">
                 <div class="col-md-6">
                   <div class="card">
@@ -136,4 +136,3 @@
                     </div>
                   </div>
                 </div> -->
-  

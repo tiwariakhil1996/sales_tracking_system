@@ -14,7 +14,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class ViewclientComponent implements OnInit {
 
 
-  client= new clientModel();
+  client = new clientModel();
   clientDetails: clientModel[] = [];
 
   constructor(private router: Router, private clientService: CommonService, private modalService: NgbModal) {
@@ -36,19 +36,17 @@ export class ViewclientComponent implements OnInit {
           this.clientDetails = data.ClientList;
         }
       }
-    }, (err) => {
-
-    });
+    }, (err) => { console.log(err); });
   }
 
   // Edit
   openupdatemodal(content, item) {
-    this.client = item;
+    this.client = JSON.parse(JSON.stringify(item));
     // data show in model use this line and store the data in user and display in ui
     this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
 
   }
-  onEdit(id:number) {
+  onEdit(id: number) {
     // this.client.image = this.imageSrc;
     this.clientService.updateClient(id, this.client).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -80,7 +78,7 @@ export class ViewclientComponent implements OnInit {
     }
   }
 
-  
+
 
 
 }

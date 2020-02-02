@@ -14,7 +14,7 @@ namespace STS.BLL.Interface
         Task<TranStatus> AddSubcategory(SubcategoryModel model);
 
         //View Subcategory
-        Task<List<SubcategoryListModel>> SubcategoryList();
+        Task<List<SubcategoryListModel>> SubcategoryList(int id);
 
 
 

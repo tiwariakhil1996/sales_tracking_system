@@ -10,7 +10,7 @@ export class CategorySubcategoryService {
 
   // ---------------  Category
 
-   addCategory(data) {
+  addCategory(data) {
     return this.http.post('/api/Category/AddCategory', data);
   }
   categoryList() {
@@ -22,8 +22,8 @@ export class CategorySubcategoryService {
   addSubcategory(data) {
     return this.http.post('/api/Subcategory/AddSubcategory', data);
   }
-  subcategoryList() {
-    return this.http.get('/api/Subcategory/SubcategoryList');
+  subcategoryList(catId) {
+    return this.http.get('/api/Subcategory/SubcategoryList/' + catId);
   }
 
 
