@@ -72,4 +72,18 @@ export class AddactivityComponent implements OnInit {
   }
 
 
+  submitForm() {
+    this.activityService.addActivity(this.activity).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        alert('Activity added sucesfully');
+      }
+      this.activity = new activityModel();
+    }, (err) => {
+
+       console.log(err);
+
+    });
+  }
+
+
 }

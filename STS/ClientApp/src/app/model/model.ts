@@ -70,15 +70,17 @@ export class clientModel {
 }
  //activity
 export class activityModel{
-   pid:number;
+    aid:number;
+   productId:number;
    productname:string;
-   cid:number;
+   clientId:number;
    clientName:string;
-   sid:number;
+   salesId:number;
    salesName:string;
+   contact:number;
    address:string;
-   latlong:string;
-   appointmentdate:string;
+   latLong:string;
+   appointmentDate:string;
 }
 
 export class countryModel{

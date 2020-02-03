@@ -48,13 +48,13 @@ export class AddproductComponent implements OnInit {
   // this.viewData = JSON.parse(localStorage.getItem('Register')) || [];
 
 }
-  openupdatemodal1(content1) {
-    // this.product;
-  // data show in model use this line and store the data in user and display in ui
-  this.modalService.open(content1, { backdropClass: 'light-blue-backdrop' });
-  // this.viewData = JSON.parse(localStorage.getItem('Register')) || [];
+//   openupdatemodal1(content1) {
+//     // this.product;
+//   // data show in model use this line and store the data in user and display in ui
+//   this.modalService.open(content1, { backdropClass: 'light-blue-backdrop' });
+//   // this.viewData = JSON.parse(localStorage.getItem('Register')) || [];
 
-}
+// }
 
   addCategory(){
     this.productService.addCategory(this.category).subscribe((data: any) => {

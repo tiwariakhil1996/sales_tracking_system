@@ -14,7 +14,7 @@
                     <option value="0" selected>Select category</option>
                     <option *ngFor="let item of categoryDetails;" name="cname" value={{item.cid}}>{{item.cname}}</option>
                   </select>&nbsp;&nbsp;
-                  <button type="button" class="btn btn-primary" data-toggle="modal" (click)="openupdatemodal(content1)" ><i class="fa fa-edit" aria-hidden="true">Insert new Category</i></button>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" (click)="openupdatemodal(content)" ><i class="fa fa-edit" aria-hidden="true">Insert new Category</i></button>
               </div>     
               </div>
               <div class="col-sm-6">
@@ -24,7 +24,7 @@
                   <option value="0" selected>Select subcategory</option>
                   <option *ngFor="let item of subcategoryDetails;" name="sname" value={{item.sid}} >{{item.sname}}</option>
                  </select>&nbsp;&nbsp;
-                 <button type="button" class="btn btn-primary" data-toggle="modal" (click)="openupdatemodal1(content)" ><i class="fa fa-edit" aria-hidden="true">Insert new Subcategory</i></button>
+                 <button type="button" class="btn btn-primary" data-toggle="modal" (click)="openupdatemodal(content)" ><i class="fa fa-edit" aria-hidden="true">Insert new Subcategory</i></button>
                </div>  
                </div>   
             </div>
@@ -69,7 +69,7 @@
      
 <!-- Model to Insert Category  -->       
         
-  <ng-template #content1 let-modal>
+  <ng-template #content let-modal>
     <div class="modal-header">
       <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT</h4>
       <div>
@@ -115,9 +115,11 @@
               <div class="col-sm-6">
                 <label class="text-input">Subcategory</label>            
                 <input type="text" id="sname" name="sname" [(ngModel)]="subcategory.sname" class="form-control" placeholder="Enter Subcategory">         
+                <div class="card-footer">
                 <button style="float: right;" type="submit" class="btn btn-sm btn-success" (click)="addSubcategory()">Submit</button>
               <!-- <button type="submit" style="float: right;" class="btn btn-sm btn-success" (click)="addCategory()">Insert Category</button>         -->
-             <button type="button" class="btn btn-outline-info waves-effect ml-auto" (click)="modal.dismiss('Cross click')">Cancel</button> 
+                 <button type="button" class="btn btn-outline-info waves-effect ml-auto" (click)="modal.dismiss('Cross click')">Cancel</button> 
+                </div>
                 </div>      
             </div>
 </ng-template>

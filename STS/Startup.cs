@@ -55,6 +55,7 @@ namespace STS
             services.AddSingleton<ISales, SalesServices>();
             services.AddSingleton<IProduct, ProductServices>();
             services.AddSingleton<IOther, OtherServices>();
+            services.AddSingleton<IActivity, ActivityServices>();
 
         }
 

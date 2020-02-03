@@ -79,4 +79,15 @@ export class CommonService {
   subcategoryList(catid) {
     return this.http.get('/api/Other/SubcategoryList/' + catid);
   }
+
+// ----------------------- ACTIVITY ------------------
+
+addActivity(data){
+  return this.http.post('api/Activity/addActivity',data);
+}
+
+activityList() {
+  return this.http.get('/api/Activity/ActivityList');
+}
+
 }
