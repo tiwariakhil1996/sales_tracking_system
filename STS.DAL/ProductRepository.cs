@@ -54,8 +54,8 @@ namespace STS.DAL
                 TranStatus transaction = new TranStatus();
                 DynamicParameters parameter = new DynamicParameters();
                 parameter.Add("@ID",ID);
-                parameter.Add("@Category", model.Category);
-                parameter.Add("@Subcategory", model.Subcategory);
+                parameter.Add("@category_id", model.category_id);
+                parameter.Add("@subcategory_id", model.subcategory_id);
                 parameter.Add("@Productname", model.Productname);
                 parameter.Add("@Description", model.Description);
                 parameter.Add("@Price", model.Price);

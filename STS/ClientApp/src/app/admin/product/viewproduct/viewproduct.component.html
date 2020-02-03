@@ -21,7 +21,7 @@
         </thead>
         <tbody>
         
-          <tr *ngFor="let item of productDetails,let i=index">
+          <tr *ngFor="let item of productDetails;let i=index;">
             <td>{{i+1}}</td>
             <td>{{item.id}}</td>
             <td>{{item.category}}</td>
@@ -47,7 +47,8 @@
 </div>
 
 
-<ng-template #content let-modal>
+<ng-template #content let-modal >
+  
   <div class="modal-header">
     <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT PRODUCT  DETAILS</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -57,23 +58,28 @@
   <form>
     <div class="modal-body" style="color: black;">
       <div>
-        <div class="form-group">
-          <label for="id">ID</label>
-          <input type="text" class="form-control" [(ngModel)]="product.id" name="id" disabled>
-        </div>
-        <div class="form-group">
-          <label for="category">Category</label>
-          <input type="text" class="form-control" [(ngModel)]="product.category" name="category">
-        </div>
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" [(ngModel)]="product.id" name="id" disabled>
+          </div>
+          <div class="col-sm-6">
+            <label for="category">Category</label>
+            <input type="text" class="form-control" [(ngModel)]="product.category" name="category">
+          </div>
+      </div>
+      
 
-        <div class="form-group">
-          <label for="subcategory">Subcategory</label>
-          <input type="text" class="form-control" [(ngModel)]="product.subcategory" name="subcategory">
-        </div>
-
-        <div class="form-group">
-          <label for="productname">ProductName</label>
-          <input type="text" class="form-control" [(ngModel)]="product.productname" name="productname">
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <label for="subcategory">Subcategory</label>
+            <input type="text" class="form-control" [(ngModel)]="product.subcategory" name="subcategory">
+          </div>
+ 
+           <div class="col-sm-6">
+            <label for="productname">ProductName</label>
+            <input type="text" class="form-control" [(ngModel)]="product.productname" name="productname">
+           </div>
         </div>
 
         <div class="form-group">
@@ -99,6 +105,7 @@
         </div>
 
         <button type="submit" class="btn btn-success" (click)="onEdit(product.id)">Update</button>
+
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>CLOSE
         </button>
@@ -106,5 +113,6 @@
       </div>
    </div>
    </form>
+   
 </ng-template>
   

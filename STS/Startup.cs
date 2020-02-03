@@ -29,11 +29,13 @@ namespace STS
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
-
+            ////this logic is convert the string to int when i am passed the category_id it is pass the as string but category_id is int then this service
+            //is convert the string to int..
             services.AddControllers()
                            .AddNewtonsoftJson();
 
             services.AddControllersWithViews();
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {

@@ -24,6 +24,7 @@ export class AddactivityComponent implements OnInit {
   }
 
   ngOnInit() {
+    
   }
 
   productList() {
@@ -45,5 +46,8 @@ export class AddactivityComponent implements OnInit {
         }
       }
     }, (err) => { console.log(err); });
+  }
+  selectDate($scope, $filter){
+    $scope.date_Rdv = $filter('date')(Date.now(), 'yyyy-MM-dd');
   }
 }

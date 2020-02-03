@@ -12,7 +12,7 @@
             <div class="form-group row">
               <label class="col-md-3 col-form-label" for="select1">Category Name</label>
               <div class="col-md-9">
-                <select name="category" class="form-control" [(ngModel)]="product.category_id" (change)="onSelect($event.target.value)">
+                <select class="form-control" [(ngModel)]="product.category_id" (change)="onSelect($event.target.value)">
                   <option [value]="undefined" selected>Select category</option>
                   <option *ngFor="let item of CategoryDetail" name="category" value={{item.id}}>
                     {{item.category}}
@@ -23,7 +23,7 @@
             <div class="form-group row">
               <label class="col-md-3 col-form-label" for="select1">Subategory Name</label>
               <div class="col-md-9">
-                <select name="subcategory"  class="form-control" [(ngModel)]="product.subcategory_id">
+                <select  class="form-control" [(ngModel)]="product.subcategory_id">
                   <option [ngValue]="undefined" selected>Select Subcategory</option>
                   <option *ngFor="let item of SubcategoryDetails;" name="subcategory" value={{item.id}}
                   >{{item.subcategory}}</option>

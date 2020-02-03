@@ -44,7 +44,7 @@ export class ViewproductComponent implements OnInit {
 
 //Edit
   openupdatemodal(content, item) {
-    this.product = item;
+    this.product =JSON.parse(JSON.stringify(item));
     // data show in model use this line and store the data in user and display in ui
     this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
     // this.viewData = JSON.parse(localStorage.getItem('Register')) || [];
