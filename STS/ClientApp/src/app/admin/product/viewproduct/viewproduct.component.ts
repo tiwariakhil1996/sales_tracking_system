@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { productModel } from '../../../model/model';
+import { productModel, categoryDataModel, subcategoryDataModel } from '../../../model/model';
 import { CommonService } from '../../../service/common.service';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
@@ -17,12 +17,20 @@ export class ViewproductComponent implements OnInit {
   product = new productModel();
   productDetails: productModel[] = [];
 
+   
+  category = new categoryDataModel();
+  categoryDetails: categoryDataModel[]=[];
+
+  subcategory = new subcategoryDataModel();
+  subcategoryDetails: subcategoryDataModel[]=[];
+  
   constructor(private router: Router,
     private productService: CommonService,
     // private modalServices: BsModalService,
     private modalService: NgbModal
     ) {
         this.productList();
+        this.categoryList();
    }
 
   ngOnInit() {
@@ -75,6 +83,39 @@ export class ViewproductComponent implements OnInit {
   }
 
 
+  categoryList() {
+    this.productService.categoryList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.CategoryList) {
+          this.categoryDetails = data.CategoryList;
+        
+        }
+      }
+    }, (err) => {
+      
+      console.log(this.categoryDetails); 
+    });
+  }
+  
+  
+  onCategoryChange(cid) {
+    // this.subcategoryDetails = this.subcategoryDetails.filter(item => item.cid == cid);
+    this.subcategoryList(cid);
+  }
+  
+  subcategoryList(catid) {
+    this.productService.subcategoryList(catid).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.SubcategoryList) {
+          this.subcategoryDetails = data.SubcategoryList;
+        }
+      }
+    }, (err) => {
+      
+      console.log(this.subcategoryDetails); 
+    });
+  }
+  
 
   // Image to Base64
   

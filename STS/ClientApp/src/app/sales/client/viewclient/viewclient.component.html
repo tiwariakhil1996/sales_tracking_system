@@ -1,46 +1,3 @@
-<!-- 
-
-<table class="table table-dark">
-    <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Client Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Contact</th>
-        <th scope="col">Gender</th>
-        <th scope="col">Address</th>
-        <th scope="col">Street</th>
-        <th scope="col">City</th>
-        <th scope="col">Postalcode</th>
-        <th scope="col">Country</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let client of clientDetails">
-  
-        <td>{{client.id}}</td>
-        <td>{{client.clientName}}</td>
-        <td>{{client.email}}</td>
-        <td>{{client.contact}}</td>
-        <td>{{client.gender}}</td>
-        <td>{{client.address}}</td>
-        <td>{{client.street}}</td>
-        <td>{{client.city}}</td>
-        <td>{{client.postalCode}}</td>
-        <td>{{client.country}}</td>
-
-        <td>
-            <button type="button" class="btn btn-primary" data-toggle="modal" (click)="openBackDropCustomClass()" >EDIT </button>
-            <button class='btn btn-info' type="button" (click)="onDelete()">DELETE</button>
-          </td>
-      </tr>
-  
-    </tbody>
-  </table> -->
-
-
-
 
   
   <div class="col-lg-12">
@@ -54,6 +11,7 @@
         <table class="table table-bordered">
           <thead>
             <tr class="table-success">
+              <th>SR.no</th>
               <th>ID</th>
               <th>Client Name</th>
               <th>Email</th>
@@ -61,24 +19,17 @@
               <th>Gender</th>
               <th>Address</th>
               <th>Street</th>
+              <th>Country</th>
+              <th>State</th>
               <th>City</th>
               <th>Postalcode</th>
-              <th>Country</th>
+              
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <!-- <tr>
-              <td>Pompeius René</td>
-              <td>2012/01/01</td>
-              <td>Member</td>
-              <td>
-                <span class="badge badge-success">Active</span>
-              </td>
-            </tr>
-            -->
-            <tr *ngFor="let client of clientDetails">
-  
+              <tr *ngFor="let client of clientDetails;let i = index;">
+                <td>{{i+1}}</td>
               <td>{{client.id}}</td>
               <td>{{client.clientName}}</td>
               <td>{{client.email}}</td>
@@ -97,13 +48,19 @@
                  
                   <button type="button" class='btn btn-danger' (click)="onDelete(client.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
               
-                  <ng-template #content let-modal>
+           <ng-template #content let-modal>
                     <div class="modal-header">
                       <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
                     </div>
+                    
+                  <!-- </div>
+                </div> -->
                            <div class="modal-body" style="color: black;">
                             <div>
-                              <div class="form-group">
+                              <!-- <div class="form-group">
                                <label for="id">ID</label>
                                  <input type="text" class="form-control"  [(ngModel)]="client.id" name="id" disabled>
                              </div>
@@ -157,11 +114,97 @@
                               <div class="form-group">
                                  <label for="postalCode">Postal Code</label>
                                  <input type="text" class="form-control"  [(ngModel)]="client.postalCode" name="postalCode" >
-                               </div>
+                               </div> -->
               
-                             
+                               <div class="form-group row">
+                                <div class="col-sm-6" hidden>
+                                <label for="id">ID</label>
+                                  <input type="text" class="form-control"  [(ngModel)]="client.id" name="id" disabled>
+                               </div>
+                              </div>
+                              
+                              <div class="form-group">
+                                <label for="clientName">Client Name</label>
+                                  <input type="text" class="form-control"  [(ngModel)]="client.clientName" name="clientName">
+                              </div>
+    
+                             <div class="form-group">
+                               <label for="email">Email</label>
+                                 <input type="text" class="form-control"  [(ngModel)]="client.email" name="email" >
+                             </div>
+             
+                             <div class="form-group row">
+                              <div class="col-sm-6">
+                                <label for="contact">Contact</label>
+                                  <input type="text" class="form-control" [(ngModel)]="client.contact" name="contact">
+                             </div>
+    
+                             <div class="col-sm-6">
+                                 <!-- <label for="gender">Gender</label>
+                                 <input type="text" class="form-control"  [(ngModel)]="client.gender" name="gender"> -->
+                                 <label class="col-md-3 col-form-label" for="inline-radios">Gender</label>
+                                 <div class="col-md-9 col-form-label">
+                                  <div class="form-check form-check-inline mr-1" id="inline-radios">
+                                  <input class="form-check-input" type="radio" [(ngModel)]="client.gender" name="gender"  id="Male" value="Male">
+                                  <label class="form-check-label" for="Male">Male</label>
+                                  </div>
+                                  <div class="form-check form-check-inline mr-1">
+                                   <input class="form-check-input" type="radio" [(ngModel)]="client.gender" name="gender"  id="Female" value="Female">
+                                  <label class="form-check-label" for="Female">Female</label>
+                                  </div>
+                               </div>
+                              </div>
+                             </div>
+    
+                              <div class="form-group">
+                                  <label for="address">Address</label>
+                                  <input type="text" class="form-control"  [(ngModel)]="client.address" name="address" >
+                              </div>
+    
+                              
+                              <div class="form-group row">
+                                <div class="col-sm-6">
+                                 <label for="street">Street</label>
+                                  <input type="text" class="form-control" [(ngModel)]="client.street" name="street" >
+                              </div>
+    
+                              <div class="col-sm-6">
+                                 <label for="country">Country</label>
+                                  <!-- <input type="text" class="form-control" [(ngModel)]="client.cname" name="country" > -->
+                                  <select class="form-control" id="country" name="country" [(ngModel)]="client.cid" (change)="onCountryChange($event.target.value)">
+                                    <option value="0" selected>Select Country</option>
+                                    <option *ngFor="let country of countryDetails" value={{country.cid}}>{{country.cname}}</option>
+                                    </select> 
+                                </div>
+                              </div> 
+                              <div class="form-group row">
+                                <div class="col-sm-6">
+                                 <label for="state">State</label>
+                                  <!-- <input type="text" class="form-control" [(ngModel)]="client.sname" name="state" > -->
+                                  <select  class="form-control" id="state" name="state"  [(ngModel)]="client.sid" (change)="onStatechange($event.target.value)">
+                                    <option value="0" selected>Select State</option>
+                                    <option *ngFor="let state of stateDetails " value= {{state.sid}}>{{state.sname}}</option>
+                                  </select>
+                                </div>
+    
+                               
+                                  <div class="col-sm-6">
+                                 <label for="city">City</label>
+                                 <!-- <input type="text" class="form-control"  [(ngModel)]="client.cityname" name="city" > -->
+                                 <select  class="form-control"  [(ngModel)]="client.cityid" >
+                                  <option value="0" selected>Select City</option>
+                                  <option *ngFor="let city of cityDetails " value= {{city.cityid}}>{{city.cityname}}</option>
+                                </select>
+                                </div>
+                              </div>
+    
+                              <div class="form-group">
+                                 <label for="postalCode">Postal Code</label>
+                                 <input type="text" class="form-control"  [(ngModel)]="client.postalCode" name="postalCode" >
+                               </div>
+                               
                          <button type="submit" class="btn btn-success" (click)="onEdit(client.id)">Update</button>
-                         <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal-body">Close</button>
+                         <button type="button" class="btn btn-outline-info waves-effect ml-auto"  (click)="modal.dismiss('Cross click')">Cancel</button>
                         </div>      
                        </div>
                </ng-template>

@@ -6,77 +6,28 @@
               <strong>Add Products</strong> 
             </div>
             <div class="card-body">
-
-              
-            <!-- <div class="form-group row">
-                  <div class="col-sm-6">
-                     <label class="text-input">Category</label>       
-                       <input type="text" id="cname" name="cname" [(ngModel)]="category.cname" class="form-control" placeholder="Enter category">
-                        <button type="submit" style="float: right;" class="btn btn-sm btn-success" (click)="addCategory()">Add</button>                    
-                   </div>
-                   <div class="col-sm-6">
-                    <label class="text-input">Subcategory</label>            
-                      <input type="text" id="sname" name="sname" [(ngModel)]="subcategory.sname" class="form-control" placeholder="Enter Subcategory">         
-                      <button style="float: right;" type="submit" class="btn btn-sm btn-success" (click)="addSubategory()">Add</button>
-                    </div>
-            </div> -->
-
-               <!-- <div class="form-group row">
+              <div class="form-group row">
                 <div class="col-sm-6">
-                  <select name="cid" class="form-control" [(ngModel)]="category.cid"  (click)="onCategoryChange($event.target.value)" >
-                    <option value="0" selected>Select category</option>
-                    <option *ngFor="let item of categoryDetails;" name="cname" value={{item.cid}}>{{item.cname}}</option>
-                  </select>
-                  </div>
-                  
-                     <div class="col-sm-6">
-                        <select name="cid" class="form-control" [(ngModel)]="subcategory.sid"  >
-                            <option value="0" selected>Select subcategory</option>
-                            <option *ngFor="let item of subcategoryDetails;" name="sname" value={{item.sid}} >{{item.sname}}</option>
-                        </select>
-                     </div>
-                        
-                </div> -->
-                   
-         
                   <label class="text-input">Category</label>  
                 <div class="form-inline">              
                   <select name="cid" class="form-control" [(ngModel)]="product.cid"  (click)="onCategoryChange($event.target.value)" >
                     <option value="0" selected>Select category</option>
                     <option *ngFor="let item of categoryDetails;" name="cname" value={{item.cid}}>{{item.cname}}</option>
-                  </select>
-                       <button type="submit" style="float: right;" class="btn btn-sm btn-success" (click)="addCategory()">Insert Category</button>                    
-                </div>     
-           
-                <label class="text-input">Subcategory Product</label> 
+                  </select>&nbsp;&nbsp;
+                  <button type="button" class="btn btn-primary" data-toggle="modal" (click)="openupdatemodal(content1)" ><i class="fa fa-edit" aria-hidden="true">Insert new Category</i></button>
+              </div>     
+              </div>
+              <div class="col-sm-6">
+                <label class="text-input">Subcategory</label> 
               <div class="form-inline">              
                 <select name="sid" class="form-control" [(ngModel)]="product.sid"  >
                   <option value="0" selected>Select subcategory</option>
                   <option *ngFor="let item of subcategoryDetails;" name="sname" value={{item.sid}} >{{item.sname}}</option>
-                 </select>
-                 <button style="float: right;" type="submit" class="btn btn-sm btn-success" (click)="addSubategory()">Insert Subcategory</button>
-               </div>     
-          
-
-                 <!-- <div class="form-group row">
-                  <div class="col-sm-6">
-                    <label class="text-input">Category Product</label>  
-                    <select name="cid" class="form-control" [(ngModel)]="product.cid"  (click)="onCategoryChange($event.target.value)" >
-                      <option value="0" selected>Select category</option>
-                      <option *ngFor="let item of categoryDetails;" name="cname" value={{item.cid}}>{{item.cname}}</option>
-                    </select>
-                    </div>
-                    
-                       <div class="col-sm-6">
-                        <label class="text-input">Subcategory Product</label>  
-                          <select name="sid" class="form-control" [(ngModel)]="product.sid"  >
-                              <option value="0" selected>Select subcategory</option>
-                              <option *ngFor="let item of subcategoryDetails;" name="sname" value={{item.sid}} >{{item.sname}}</option>
-                          </select>
-                       </div>
-                          
-                  </div>
-                      -->
+                 </select>&nbsp;&nbsp;
+                 <button type="button" class="btn btn-primary" data-toggle="modal" (click)="openupdatemodal1(content)" ><i class="fa fa-edit" aria-hidden="true">Insert new Subcategory</i></button>
+               </div>  
+               </div>   
+            </div>
 
                  <div class="form-group row">
                     <div class="col-sm-6">
@@ -103,11 +54,10 @@
     
                 <div class="col-sm-6">
                   <label class="text-input">Added on</label>
-                    <input class="form-control" id="date" type="date" name="date" [(ngModel)]="product.date" placeholder="Select Date">
+                    <input class="form-control" id="date" type="date" name="date" [(ngModel)]="product.date"> 
+                 <!-- <label class="form-control" id="date" type="date" name="date" [(ngModel)]="product.date">   {{currentDate | date:'dd-MM-yyyy'}} </label> -->
                   </div>
                 </div>
-
-             
             </div>
             <div class="card-footer">
               <button type="submit" class="btn btn-sm btn-primary" (click)="submitForm()"><i class="fa fa-dot-circle-o"></i> Submit</button>
@@ -115,6 +65,59 @@
             </div>
           </div>
         </div>
+   
+     
+<!-- Model to Insert Category  -->       
+        
+  <ng-template #content1 let-modal>
+    <div class="modal-header">
+      <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT</h4>
+      <div>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+       </div>
+           <div class="modal-body" style="color: black;">
+            <div>
+              <div class="col-sm-6">
+                <label class="text-input">Category</label>       
+                  <input type="text" id="cname" name="cname" [(ngModel)]="category.cname" class="form-control" placeholder="Enter category">
+                   <button type="submit" style="float: right;" class="btn btn-sm btn-success" (click)="addCategory()">Submit</button>                    
+              </div>
+                </div>
+        <button type="button" class="btn btn-outline-info waves-effect ml-auto"(click)="modal.dismiss('Cross click')">Cancel</button> 
+       </div>    
+</ng-template>
     
-    
-    
+<!-- Model to Insert Subcategory  -->
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT</h4>
+      <div>
+        <!-- <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()"> -->
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+       </div>
+           <div class="modal-body" style="color: black;">
+            <div>
+              <div class="col-sm-6">
+               <label for="category">Category</label>
+                 <!-- <input type="text" class="form-control"  [(ngModel)]="product.cname" name="category"> -->
+                 <select name="cid" class="form-control" [(ngModel)]="subcategory.cid"  (click)="onCategoryChange($event.target.value)" >
+                  <option value="0" selected>Select category</option>
+                  <option *ngFor="let item of categoryDetails;" name="cname" value={{item.cid}}>{{item.cname}}</option>
+                </select>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <label class="text-input">Subcategory</label>            
+                <input type="text" id="sname" name="sname" [(ngModel)]="subcategory.sname" class="form-control" placeholder="Enter Subcategory">         
+                <button style="float: right;" type="submit" class="btn btn-sm btn-success" (click)="addSubcategory()">Submit</button>
+              <!-- <button type="submit" style="float: right;" class="btn btn-sm btn-success" (click)="addCategory()">Insert Category</button>         -->
+             <button type="button" class="btn btn-outline-info waves-effect ml-auto" (click)="modal.dismiss('Cross click')">Cancel</button> 
+                </div>      
+            </div>
+</ng-template>

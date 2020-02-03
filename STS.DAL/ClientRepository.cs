@@ -70,9 +70,9 @@ namespace STS.DAL
                 parameter.Add("@Gender", model.Gender);
                 parameter.Add("@Address", model.Address);
                 parameter.Add("@Street", model.Street);
-                parameter.Add("@Cname", model.Cname);           
-                parameter.Add("@Sname", model.Sname);           
-                parameter.Add("@Cityname", model.Cityname);
+                parameter.Add("@Cid", model.Cid);
+                parameter.Add("@Sid", model.Sid);
+                parameter.Add("@Cityid", model.Cityid);
                 parameter.Add("@PostalCode", model.PostalCode);
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);

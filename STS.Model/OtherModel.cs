@@ -14,7 +14,7 @@ namespace STS.Model
     {
         public int Sid { get; set; }
         public string Sname { get; set; }
-        public string Cid { get; set; }
+        public int Cid { get; set; }
 
     }
 

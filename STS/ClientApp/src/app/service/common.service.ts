@@ -30,6 +30,9 @@ export class CommonService {
   // -----------------  Client
 
   addClient(data) {
+    const headers = new Headers( { 'Content-Type': 'application/json' });
+
+    // const options = new RequestOptions(  );
     return this.http.post('/api/Client/addClient', data);
   }
 
@@ -69,7 +72,7 @@ export class CommonService {
     return this.http.get('/api/Other/CategoryList');
   }
 
-  addSubategory(data){
+  addSubcategory(data){
     return this.http.post('api/Other/addSubcategory',data);
   }
 
