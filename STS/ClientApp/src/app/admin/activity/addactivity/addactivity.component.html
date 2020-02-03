@@ -30,15 +30,15 @@
                 </div>
 
                 <div class="form-group row">
-                  <label class="col-md-3 col-form-label" for="select1">Salesman Name</label>
+                  <label class="col-md-3 col-form-label" for="select1">Sales Name</label>
                   <div class="col-md-9">
-                      <select name="productname" class="form-control" [(ngModel)]="Addactivity.sales_id" >
-                          <option [ngValue]="undefined" selected>Select Salesman Name</option>
-                          <option *ngFor="let item of SalesDetails;" name="productname" [ngValue]="item.id">{{item.salesName}}</option>
-                          <!-- <option *ngFor="let item of CategoryDetail;let i=index;" name="category" [value]="item" value="{{item}}">{{item}}</option> -->
+                      <select name="clientName" class="form-control" [(ngModel)]="Addactivity.sales_id" >
+                          <option [ngValue]="undefined" selected>Select Sales Name</option>
+                          <option *ngFor="let item of salesDetails;" name="salesName" [ngValue]="item.id">{{item.salesName}}</option>
                       </select>
                    </div>
                 </div>
+
                 <div class="form-group row">
                   <label class="col-md-3 col-form-label" for="text-input">Lat Long</label>
                   <div class="col-md-9">

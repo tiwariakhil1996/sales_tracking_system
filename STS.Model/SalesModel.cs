@@ -26,12 +26,12 @@ namespace STS.Model
 
     //Display
 
-    //public partial class SalesListModel
-    //{
-    //    public int ID { get; set; }
-    //    public string SalesName { get; set; }
-    //    public string Email { get; set; }
-    //    public string Password { get; set; }
+    public partial class SalesListmodel
+    {
+        public int id { get; set; }
+        public string salesname { get; set; }
+        public string email { get; set; }
+        public string password { get; set; }
 
-    //}
+    }
 }

@@ -67,6 +67,7 @@ export class AddactivityModel{
     product_id:number;
     client_id:number;
     sales_id:number;
+    salesName:string;
     lat_long:string;
     appoitnment_date:string;
 

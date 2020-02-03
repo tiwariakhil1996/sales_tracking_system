@@ -44,4 +44,9 @@ export class CommonService {
   updateClient(id: number,data:any) {
     return this.http.put('/api/Client/updateClient/'+id, data);
   }
+
+  // //API for sales
+  // salesList() {
+  //   return this.http.get('/api/Sales/RegisterSalesList');
+  // }
 }

@@ -17,9 +17,9 @@ namespace STS.BLL.Interface
         //Login
         Task<TranStatus> SalesLogin(SalesLoginModel model);
 
-        //Display
+       // Display
 
-        //Task<List<SalesListModel>> RegisterSalesList();
+        Task<List<SalesListmodel>> RegisterSalesList();
     }
 }
 

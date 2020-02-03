@@ -22,7 +22,7 @@ export class SalesService {
   }
 
 
-  // RegisterSalesList() {
-  //   return this.http.get('/api/Sales/RegisterSalesList');
-  // }
+  salesList() {
+    return this.http.get('/api/Sales/RegisterSalesList');
+  }
 }
