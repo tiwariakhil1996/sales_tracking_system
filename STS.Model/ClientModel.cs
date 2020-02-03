@@ -14,9 +14,10 @@ namespace STS.Model
         public string Gender { get; set; }
         public string Address { get; set; }
         public string Street { get; set; }
-        public string Country { get; set; }
-        public string State { get; set; }
-        public string City { get; set; }
+
+        public int Cid { get; set; }
+        public int Sid { get; set; }
+        public int Cityid { get; set; }
         public string PostalCode { get; set; }
 
 
@@ -32,9 +33,11 @@ namespace STS.Model
         public string Gender { get; set; }
         public string Address { get; set; }
         public string Street { get; set; }
-        public string Country { get; set; }
-        public string State { get; set; }
-        public string City { get; set; }
+    
+        public string Cname { get; set; }
+      
+        public string Sname { get; set; }
+        public string Cityname { get; set; }
         public string PostalCode { get; set; }
       
 

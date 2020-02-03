@@ -24,7 +24,7 @@ export const navItems: INavData[] = [
 // Product side bar routing
   {
     name: 'Product',
-    url:'/admin/product',
+    url: '/admin/product',
     icon: 'icon-note',
     children: [
       {
@@ -39,12 +39,10 @@ export const navItems: INavData[] = [
       }
     ]
   },
-  
-  //Client side bar  routing
  
   {
     name: 'Client',
-    url:'/admin/client',
+    url: '/admin/client',
     icon: 'icon-note',
     children: [
       {
@@ -155,6 +153,7 @@ export const navItems: INavData[] = [
     name: 'Logout',
     url: '/admin/login',
     icon: 'icon-logout'
+
   },
 
 
@@ -387,7 +386,7 @@ export const navItems: INavData[] = [
   // }
 
 
-  
+
   // {
   //   name: 'Disabled',
   //   url: '/admin/dashboard',

@@ -2,8 +2,12 @@
 // register form
 export class registerModel {
     id: number;
+    image:string;
+    ImageExtn: string;
     username: string;
     email: string;
+    gender:string;
+    mobile: number;
     password: string;
     cpassword: string;
 }
@@ -11,24 +15,42 @@ export class registerModel {
 // register form
 export class salesregisterModel {
     id: number;
+    image: string;
     salesName: string;
     email: string;
+    gender:string;
+    mobile:string;
+    adharcard:string;
+    address:string;
     password: string;
     cpassword: string;
 }
 // product form
 export class productModel {
     id: number;
-    category:string;
-    subcategory:string;
-    category_id:number;
-    subcategory_id:number;
+    cid: string;
+    cname: string;
+    sid: string;
+    sname: string;
     productname: string;
     description: string;
     price: number;
     image: string;
+    ImageExtn: string;
     date: string;
 }
+
+export class categoryDataModel{
+   cid:number;
+   cname:string;
+}
+
+export class subcategoryDataModel{
+   sid:number;
+   sname:string;
+   cid:number;
+}
+
 // client form
 export class clientModel {
     id: number;
@@ -38,37 +60,52 @@ export class clientModel {
     gender: any;
     address: string;
     street: string;
-    country: string;
-    state:string;
-    city: string;
+    cid: number;
+    cname:string;
+    sid:number;
+    sname:string;
+    cityid: number;
+    cityname:string;
     postalCode: number;
 }
+ //activity
+export class activityModel{
+   pid:number;
+   productname:string;
+   cid:number;
+   clientName:string;
+   sid:number;
+   salesName:string;
+   address:string;
+   latlong:string;
+   appointmentdate:string;
+}
 
-export class DemoModel{
-    id:number;
-    name:string;
-    email:string;
-    mobile:string;
-    address:string;
+export class countryModel{
+    cid:number;
+    cname:string;
 }
-export class CategoryModel{
-    id:number;
-    category:string;
-    status:string;
-}
-export class SubcategoryModel{
-    id:number;
-    category_id:number;
-    subcategory:string;
-    status:string;
-}
-export class AddactivityModel{
-    id:number;
-    product_id:number;
-    client_id:number;
-    sales_id:number;
-    salesName:string;
-    lat_long:string;
-    appoitnment_date:string;
 
+export class stateModel{
+    sid:number;
+    sname:number;
+    cid:number;
 }
+
+export class cityModel{
+    cityid:number;
+    cityname:string;
+    sid:number;
+}
+
+// export class countryListModel{
+//     cid:number;
+//     cname:string;
+
+//     sid:number;
+//     sname:number;
+
+//     cityid:number;
+//     cityname:string;
+
+// }

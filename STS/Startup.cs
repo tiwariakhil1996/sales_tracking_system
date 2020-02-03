@@ -65,6 +65,8 @@ namespace STS
             services.AddSingleton<IClient,ClientServices>();
             services.AddSingleton<ISales, SalesServices>();
             services.AddSingleton<IProduct, ProductServices>();
+            services.AddSingleton<IOther, OtherServices>();
+
             services.AddSingleton<IDemo, DemoServices>();
             services.AddSingleton<ICategory, CategoryServices>();
             services.AddSingleton<ISubcategory, SubcategoryServices>();
@@ -114,7 +116,6 @@ namespace STS
                     //spa.UseAngularCliServer(npmScript: "start");
                 }
             });
-            STSSetting.ImagePathUrl = env.WebRootPath;
         }
     }
 }

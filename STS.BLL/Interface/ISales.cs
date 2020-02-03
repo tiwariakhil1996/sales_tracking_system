@@ -15,7 +15,14 @@ namespace STS.BLL.Interface
 
 
         //Login
-        Task<TranStatus> SalesLogin(SalesLoginModel model);
+        //Task<TranStatus> SalesLogin(SalesLoginModel model);
+
+        Task<Tuple<List<SalesLoginModel>, TranStatus>> SalesLogin(SalesLoginModel model);
+
+
+        //UpdateAdminProfile
+        //Task<TranStatus> updateSalesProfile(updateSalesModel model);
+        Task<Tuple<List<updateSalesModel>, TranStatus>> updateSalesProfile(updateSalesModel model);
 
        // Display
 

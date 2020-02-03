@@ -1,1 +1,22 @@
 <p>map works!</p>
+
+
+<button (click)="toggle()" id="bt">
+    {{buttonName}}
+</button>
+
+<ng-container *ngIf="show">
+    <div style="margin: 0 auto;text-align: left;">
+        <div>
+            <label>Name:</label>
+            <div><input id="tbname" name="yourname" /></div>
+        </div>
+        <div>
+            <label>Email Address:</label>
+            <div><input name="email" id="email" /></div></div>
+        <div>
+            <label>Additional Information (optional):</label>
+            <div><textarea rows="5" cols="46"></textarea></div>
+        </div>
+    </div>
+</ng-container>

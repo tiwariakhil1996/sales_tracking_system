@@ -29,7 +29,8 @@ namespace STS.Controllers
             TranStatus transaction = new TranStatus();
             try
             {
-
+                
+                model.Image = CommonHelper.SaveImage(HttpContext, "Images\\Product", model.Image, true, model.ImageExtn);
                 transaction = await iproduct.addProduct(model);
 
             }
@@ -76,7 +77,7 @@ namespace STS.Controllers
             TranStatus transaction = new TranStatus();
             try
             {
-
+                model.Image = CommonHelper.SaveImage(HttpContext, "Images\\Product", model.Image, true, model.ImageExtn);
                 transaction = await iproduct.updateProduct(ID,model);
 
             }

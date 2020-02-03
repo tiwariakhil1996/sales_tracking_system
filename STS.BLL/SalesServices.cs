@@ -27,13 +27,40 @@ namespace STS.BLL.Service
 
         // Login
 
-        SalesRepository salesloginRepository = null;
-        public Task<TranStatus> SalesLogin(SalesLoginModel model)
-        {
-            using (salesloginRepository = new SalesRepository())
-            {
-                return salesloginRepository.SalesLogin(model);
+        //SalesRepository salesloginRepository = null;
+        //public Task<TranStatus> SalesLogin(SalesLoginModel model)
+        //{
+        //    using (salesloginRepository = new SalesRepository())
+        //    {
+        //        return salesloginRepository.SalesLogin(model);
 
+        //    }
+        //}
+
+        public Task<Tuple<List<SalesLoginModel>, TranStatus>> SalesLogin(SalesLoginModel model)
+        {
+            using (salesRepository = new SalesRepository())
+            {
+                return salesRepository.SalesLogin(model);
+            }
+
+        }
+
+
+        //UpdateSalesProfile
+        //public Task<TranStatus> updateSalesProfile(updateSalesModel model)
+        //{
+        //    using (salesRepository = new SalesRepository())
+        //    {
+        //        return salesRepository.updateSalesProfile(model);
+        //    }
+        //}
+
+        public Task<Tuple<List<updateSalesModel>, TranStatus>> updateSalesProfile(updateSalesModel model)
+        {
+            using (salesRepository = new SalesRepository())
+            {
+                return salesRepository.updateSalesProfile(model);
             }
         }
 

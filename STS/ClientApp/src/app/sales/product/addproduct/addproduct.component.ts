@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { productModel } from '../../../model/model';
+import { productModel, categoryDataModel, subcategoryDataModel } from '../../../model/model';
 import { Router } from '@angular/router';
 import { CommonService } from '../../../service/common.service';
 
@@ -16,13 +16,84 @@ export class AddproductComponent implements OnInit {
   product = new productModel();
   productDetails: productModel[] = [];
 
-  constructor(private router: Router, private productService: CommonService) { }
+  category = new categoryDataModel();
+  categoryDetails: categoryDataModel[]=[];
+
+  subcategory = new subcategoryDataModel();
+  subcategoryDetails: subcategoryDataModel[]=[];
+
+  constructor(private router: Router, private productService: CommonService) {
+    this.categoryList();
+    // this.subcategoryList();
+   }
 
   ngOnInit() {
+     
   }
 
-  submitForm(){
-    this.product.image = this.imageSrc;
+
+  addCategory(){
+    this.productService.addCategory(this.category).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        alert('Category added sucesfully');
+        this.categoryList();
+      }
+      this.category = new categoryDataModel();
+    }, (err) => {
+
+    });
+  }
+
+    
+  categoryList() {
+    this.productService.categoryList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.CategoryList) {
+          this.categoryDetails = data.CategoryList;
+        
+        }
+      }
+    }, (err) => {
+      
+      console.log(this.categoryDetails); 
+    });
+  }
+
+
+  onCategoryChange(cid) {
+    // this.subcategoryDetails = this.subcategoryDetails.filter(item => item.cid == cid);
+    this.subcategoryList(cid);
+  }
+
+
+  addSubategory(){
+    this.productService.addSubategory(this.subcategory).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        alert('Subcategory added sucesfully');
+        // this.subcategoryList(cid);
+      }
+      this.subcategory = new subcategoryDataModel();
+    }, (err) => {
+
+    });
+
+  }
+
+  subcategoryList(catid) {
+    this.productService.subcategoryList(catid).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.SubcategoryList) {
+          this.subcategoryDetails = data.SubcategoryList;
+        }
+      }
+    }, (err) => {
+      
+      console.log(this.subcategoryDetails); 
+    });
+  }
+
+  submitForm() {
+    // this.product.image = this.imageSrc;
     this.productService.addProduct(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
         alert('Product added sucesfully');
@@ -34,31 +105,35 @@ export class AddproductComponent implements OnInit {
     });
   }
 
-   // Image to Base64
 
-   handleInputChange(e) {
-    var file = e.target.files[0];
-    var pattern = /image-*/;
-    var reader = new FileReader();
 
-    if (!file.type.match(pattern)) {
-      alert('invalid format');
-      return;
-    }
 
-    reader.onload = this._handleReaderLoaded.bind(this);
-    reader.readAsDataURL(file)
+
+
+
+  // Image to Base64
+
+  handleFileInput(fileList: FileList) {
+    const preview = document.getElementById('photos-preview');
+    Array.from(fileList).forEach((file: File) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const image = new Image();
+        image.src = String(reader.result);
+        const imageDetail = String(reader.result).split(';base64,');
+        this.product.image = imageDetail[1];
+        this.product.ImageExtn = '.' + imageDetail[0].replace('data:image/', '');
+        image.height = 100;
+        image.width = 100;
+        preview.appendChild(image);
+      };
+      reader.readAsDataURL(file);
+      console.log(file);
+
+    });
   }
 
-  _handleReaderLoaded(e) {
-    const reader = e.target;
-    // this.imageSrc = domSanitizer.bypassSecurityTrustUrl(reader.result);
-    //  console.log(this.imageSrc);S
-    this.imageSrc = reader.result;
-    console.log(this.imageSrc);
-  }
-  
-  resetForm(){
+  resetForm() {
 
   }
 

@@ -15,6 +15,7 @@
             <th>Description</th>
             <th>Price</th>
             <th>Image</th>
+            <!-- <th></th> -->
             <th>Date</th>
             <th>Action</th>
           </tr>
@@ -40,59 +41,76 @@
                   aria-hidden="true"></i></button>
             </td>
           </tr>
+          -->
+          <tr *ngFor="let item of productDetails;let i=index;" >
+            <td >{{i+1}}</td>
+            <td >{{item.id}}</td>
+            <td >{{item.cname}}</td>
+            <td >{{item.sname}}</td>
+            <td>{{item.productname}}</td>
+            <td >{{item.description}}</td>
+            <td >{{item.price}}</td>
+             <!-- <img style="width: 80px; height: 80px;" src={{item.image}}> -->
+            <td style='text-align:center'><img style="max-width: 50px; max-height: 50px;" [src]="'assets/img/Images/Product'+item.image"></td>
+            
+            <td >{{item.date}}</td>
+            <td >
+              <button type="button" class="btn btn-primary" data-toggle="modal" (click)="openupdatemodal(content,item)" ><i class="fa fa-edit" aria-hidden="true"></i></button>
+            
+              <button class='btn btn-danger' type="button" (click)="onDelete(item.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
   </div>
 </div>
-
-
-<ng-template #content let-modal >
-  
-  <div class="modal-header">
-    <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT PRODUCT  DETAILS</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-    <span aria-hidden="true">&times;</span>CLOSE
-    </button>
-  </div>
-  <form>
-    <div class="modal-body" style="color: black;">
-      <div>
-        <div class="form-group row">
-          <div class="col-sm-6">
-            <label for="id">ID</label>
-            <input type="text" class="form-control" [(ngModel)]="product.id" name="id" disabled>
-          </div>
-          <div class="col-sm-6">
-            <label for="category">Category</label>
-            <input type="text" class="form-control" [(ngModel)]="product.category" name="category">
-          </div>
-      </div>
-      
-
-        <div class="form-group row">
-          <div class="col-sm-6">
-            <label for="subcategory">Subcategory</label>
-            <input type="text" class="form-control" [(ngModel)]="product.subcategory" name="subcategory">
-          </div>
  
-           <div class="col-sm-6">
-            <label for="productname">ProductName</label>
-            <input type="text" class="form-control" [(ngModel)]="product.productname" name="productname">
-           </div>
-        </div>
+
+  <ng-template #content let-modal>
+                <div class="modal-header">
+                  <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT</h4>
+                  <div>
+                    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                </div>
+            
+                   <form>
+                       <div class="modal-body" style="color: black;">
+                        <div>
+                          <div class="form-group">
+                           <label for="id">ID</label>
+                             <input type="text" class="form-control"  [(ngModel)]="product.id" name="id" disabled>
+                         </div>
+                         <div class="form-group">
+                           <label for="category">Category</label>
+                             <input type="text" class="form-control"  [(ngModel)]="product.cname" name="category">
+                         </div>
+                         
+                         <div class="form-group">
+                           <label for="subcategory">Subcategory</label>
+                             <input type="text" class="form-control"  [(ngModel)]="product.sname" name="subcategory" >
+                         </div>
+         
+                          <div class="form-group">
+                            <label for="productname">ProductName</label>
+                              <input type="text" class="form-control" [(ngModel)]="product.productname" name="productname">
+                         </div>
 
         <div class="form-group">
           <label for="description">Description</label>
           <input type="text" class="form-control" [(ngModel)]="product.description" name="description">
         </div>
 
-        <div class="form-group">
-          <label for="image">Image</label>
-          <input class="form-control" type="file" id="image"  name="imageSrc" accept="image/*"
-            (change)="handleInputChange($event)" multiple>
-          
-        </div>
+                          <div class="form-group">
+                              <label for="image">Image</label>
+                              <!-- <input class="form-control" type="file" id="image"  [(ngModel)]="product.image" name="image"    accept="image/*" (change)="handleInputChange($event)" multiple> -->
+                              <input class="form-control" type="file" id="fileupload" name="image"  multiple (change)="handleFileInput($event.target.files)" [(ngModel)]="product.image" />          
+
+                              <!--   <img style="width: 80px; height: 80px;" src={{product.image}} >   -->  
+                          </div>
 
         <div class="form-group">
           <label for="price">Price</label>
@@ -104,15 +122,9 @@
           <input type="text" class="form-control" [(ngModel)]="product.date" name="date">
         </div>
 
-        <button type="submit" class="btn btn-success" (click)="onEdit(product.id)">Update</button>
-
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>CLOSE
-        </button>
-       
-      </div>
-   </div>
-   </form>
-   
-</ng-template>
-  
+                     <button type="submit" class="btn btn-success" (click)="onEdit(product.id)">Update</button>
+                 <!--    <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal-body">Close</button>  -->
+                    </div>      
+                   </div>
+                 </form>
+           </ng-template>

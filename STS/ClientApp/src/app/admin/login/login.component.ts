@@ -19,12 +19,13 @@ export class LoginComponent implements OnInit {
   // constructor(private router: Router, private toastr: ToastrService) { }
 
   title = 'STS';
-  login = new registerModel();
+  loginDetail = new registerModel();
   adminDetails: registerModel[] = [];
 
   constructor(private router: Router, private adminService: AdminService, private Toastr: ToastrService) {
     // this.registerList();
 
+    this. logout();
 
   }
   ngOnInit() {
@@ -32,37 +33,45 @@ export class LoginComponent implements OnInit {
   }
   // redirect the both register from admin and sales 
 
-  adminregisterForm() {
-    this.router.navigate(['admin/register']);
+  submitLogin() {
+  this.adminService.AdminLogin(this.loginDetail).subscribe((data: any) => {
+    if (data.Status.code === 0) {
+      localStorage.setItem('adminLogin', JSON.stringify(data.loginDetail[0] || {}));
+      alert('Admin Login Successfully');
+      this.router.navigate(['/admin/dashboard']);
+    }
+    else {
+      alert('UnSuccessfully');
+    }
+  }, (err) => {
+  });
   }
-  salesregisterForm() {
-    this.router.navigate(['sales/register']);
+  
+  logout() {
+    localStorage.removeItem('adminLogin');
   }
+  
 
+  // registerForm() {
+  //   this.router.navigate(['/register']);
+  // }
 
+  // adminregisterForm(){
+  //   this.router.navigate(['/admin/register']);
+  // }
 
-  submitForm() {
-    this.adminService.AdminLogin(this.login).subscribe((data: any) => {
-      if (data.Status.code === 1) {
+  // salesregisterForm(){
+  //   this.router.navigate(['/sales/register']);
+  // }
 
-         alert('Admin Login Successfully');
-        this.router.navigate(['/admin/dashboard']);
-      }
-      else{
-
-        alert('Admin Login Failed');
-        this.router.navigate(['/admin/login']);
-
-
-      }
-    }, (err) => {
-
-    });
-  }
-
-  registerForm() {
-    this.router.navigate(['/register']);
-  }
+  // registerList(){
+  //   this.adminService.RegisterList().subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.RegisterList) {
+  //         this.adminDetails = data.RegisterList;
+  //       }
+  //     }
+  //   }, (err) => {
 
 
 }

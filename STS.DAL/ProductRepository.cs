@@ -19,8 +19,8 @@ namespace STS.DAL
                 await connection.OpenAsync();
                 TranStatus transaction = new TranStatus();
                 DynamicParameters parameter = new DynamicParameters();
-                parameter.Add("@category_id", model.category_id);
-                parameter.Add("@subcategory_id", model.subcategory_id);
+                parameter.Add("@Cid", model.Cid);
+                parameter.Add("@Sid", model.Sid);
                 parameter.Add("@Productname", model.Productname);
                 parameter.Add("@Description", model.Description);
                 parameter.Add("@Price", model.Price);
@@ -54,8 +54,8 @@ namespace STS.DAL
                 TranStatus transaction = new TranStatus();
                 DynamicParameters parameter = new DynamicParameters();
                 parameter.Add("@ID",ID);
-                parameter.Add("@category_id", model.category_id);
-                parameter.Add("@subcategory_id", model.subcategory_id);
+                parameter.Add("@Cid", model.Cid);
+                parameter.Add("@Sid", model.Sid);
                 parameter.Add("@Productname", model.Productname);
                 parameter.Add("@Description", model.Description);
                 parameter.Add("@Price", model.Price);

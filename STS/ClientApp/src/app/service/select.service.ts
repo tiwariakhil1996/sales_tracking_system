@@ -32,7 +32,8 @@ export class SelectService {
 
   getCities() {
     return [
-      new City(1, 8, 'Surat' )
+      new City(1, 8, 'Surat' ),
+      new City(2, 4, 'Sawai' )
      ];
    }
 

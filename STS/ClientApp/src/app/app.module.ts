@@ -35,7 +35,7 @@ import {
 } from '@coreui/angular';
 
 // Import routing module
-import { AppRoutingModule } from './app.routing';
+import { AppRoutingModule, routes } from './app.routing';
 
 // Import 3rd party components
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -87,6 +87,7 @@ import { ViewsubcategoryComponent } from './admin/subcategory/viewsubcategory/vi
         preventDuplicates: false,
       }
     ),
+    RouterModule.forRoot(routes),
     ChartsModule
   ],
   declarations: [
