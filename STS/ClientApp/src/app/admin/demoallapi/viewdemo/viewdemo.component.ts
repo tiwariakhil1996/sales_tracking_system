@@ -12,6 +12,7 @@ export class ViewdemoComponent implements OnInit {
 
   Demo=new DemoModel();
   DemoDetails:DemoModel[]=[];
+  
   constructor(
     private demoService:DemoService,
     private modalService:NgbModal

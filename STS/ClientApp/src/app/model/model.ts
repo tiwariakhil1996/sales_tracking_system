@@ -101,14 +101,24 @@ export class cityModel{
     sid:number;
 }
 
-// export class countryListModel{
-//     cid:number;
-//     cname:string;
+export class CategoryModel{
+    id:number;
+    category:string;
+    status:string;
 
-//     sid:number;
-//     sname:number;
+}
+export class SubcategoryModel{
+    id:number;
+    category_id:number;
+    subcategory:string;
+    status:string ;
 
-//     cityid:number;
-//     cityname:string;
 
-// }
+}
+export class DemoModel{
+    id:number;
+    name:string;
+    email:string;
+    mobile:string;
+    address:string;
+}

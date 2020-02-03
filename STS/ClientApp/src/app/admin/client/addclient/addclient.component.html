@@ -1,116 +1,86 @@
-
 <div class="animated fadeIn">
-    <div class="row">
-        <div class="col-md-12">
-          <div class="card">
-            <div class="card-header">
-              <strong>Add Client</strong>
-            </div>
-            <div class="card-body">
-
-                <div class="form-group row">
-                 <div class="col-sm-6">
-                   <label for="text-input">Client Name</label>
-                    <input type="text" id="clientName" name="clientName" [(ngModel)]="client.clientName"  class="form-control" placeholder="Enter client name">
-                  </div>
-                  <div class="col-sm-6">
-                    <label  for="email-input">Email Input</label>
-                    <input type="email" id="email" name="email" [(ngModel)]="client.email"  class="form-control" placeholder="Enter Email" autocomplete="email">
-                  </div>
-                </div>
-
-
-                <div class="form-group row">
-                  <div class="col-sm-6">
-                    <label for="contact">Contact no.</label>
-                    <input type="text" class="form-control" id="contact" [(ngModel)]="client.contact " name="contact " placeholder="Enter contact no.">
-                  </div>
-
-                  <div class="col-sm-6">
-                    <label class="col-md-3 col-form-label" for="inline-radios">Gender</label>
-                      <div class="col-md-9 col-form-label">
-                       <div class="form-check form-check-inline mr-1" id="inline-radios">
-                       <input class="form-check-input" type="radio" [(ngModel)]="client.gender" name="gender"  id="Male" value="Male">
-                       <label class="form-check-label" for="Male">Male</label>
-                       </div>
-                       <div class="form-check form-check-inline mr-1">
-                        <input class="form-check-input" type="radio" [(ngModel)]="client.gender" name="gender"  id="Female" value="Female">
-                       <label class="form-check-label" for="Female">Female</label>
-                       </div>
-                    </div>
-                </div>
-                </div>
-
-               <div class="form-group row">
-                <div class="col-sm-6">
-                  <label for="address">Address</label>
-                  <input type="text" class="form-control" id="address" [(ngModel)]="client.address" name="address"  placeholder="Enter address">
+  <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <strong>Add Client</strong>
+          </div>
+          <div class="card-body">
+              <div class="form-group row">
+               <div class="col-sm-6">
+                 <label for="text-input">Client Name</label>
+                  <input type="text" id="clientName" name="clientName" [(ngModel)]="client.clientName"  class="form-control" placeholder="Enter client name">
                 </div>
                 <div class="col-sm-6">
-                  <label for="street">Street</label>
-                  <input type="text" class="form-control" id="street" [(ngModel)]="client.street" name="street"  placeholder="Enter street name">
+                  <label  for="email-input">Email Input</label>
+                  <input type="email" id="email" name="email" [(ngModel)]="client.email"  class="form-control" placeholder="Enter Email" autocomplete="email">
                 </div>
               </div>
-
-                <div class="form-group row">
-                  <div class="col-sm-3">
-                    <label for="country">Country</label>
+              <div class="form-group row">
+                <div class="col-sm-6">
+                  <label for="contact">Contact no.</label>
+                  <input type="text" class="form-control" id="contact" [(ngModel)]="client.contact " name="contact " placeholder="Enter contact no.">
+                </div>
+                <div class="col-sm-6">
+                  <label class="col-md-3 col-form-label" for="inline-radios">Gender</label>
+                    <div class="col-md-9 col-form-label">
+                     <div class="form-check form-check-inline mr-1" id="inline-radios">
+                     <input class="form-check-input" type="radio" [(ngModel)]="client.gender" name="gender"  id="Male" value="Male">
+                     <label class="form-check-label" for="Male">Male</label>
+                     </div>
+                     <div class="form-check form-check-inline mr-1">
+                      <input class="form-check-input" type="radio" [(ngModel)]="client.gender" name="gender"  id="Female" value="Female">
+                     <label class="form-check-label" for="Female">Female</label>
+                     </div>
+                  </div>
+              </div>
+              </div>
+             <div class="form-group row">
+              <div class="col-sm-6">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" id="address" [(ngModel)]="client.address" name="address"  placeholder="Enter address">
+              </div>
+              <div class="col-sm-6">
+                <label for="street">Street</label>
+                <input type="text" class="form-control" id="street" [(ngModel)]="client.street" name="street"  placeholder="Enter street name">
+              </div>
+            </div>
+              <div class="form-group row">
+                <div class="col-sm-3">
+                  <label for="country">Country</label>
+           
+                  <select class="form-control" id="country" name="country" [(ngModel)]="client.cid" (change)="onCountryChange($event.target.value)">
+                    <option value="0" selected>Select Country</option>
+                    <option *ngFor="let country of countryDetails" value={{country.cid}}>{{country.cname}}</option>
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                  <label for="state">State</label>
+                  <select  class="form-control" id="state" name="state"  [(ngModel)]="client.sid" (change)="onStatechange($event.target.value)">
+                    <option value="0" selected>Select State</option>
+                    <option *ngFor="let state of stateDetails " value= {{state.sid}}>{{state.sname}}</option>
+                  </select>
+                </div>
               
-                    <!-- STATIC -->
-                    <!-- <select class="form-control" id="country" name="country" (change)="changeCountry($event.target.value)" [(ngModel)]="client.country">
-                      <option value="0">Select Country</option>
-                      <option *ngFor="let count of countryList" name="country" [value]="count.name">{{count.name}}
-                      </option>
-                    </select> -->
-                    <!-- DYNAMIC -->
-                    <select class="form-control" id="country" name="country" (change)="onChangeCountry($event.target.value)" [(ngModel)]="client.country"  >
-                      <option value="0">--Select Country--</option>
-                      <option *ngFor="let country of countryInfo; let i = index" name="country"  value="{{i}}">{{country.CountryName}}</option>
-                    </select>  
-                  </div>
-
                   <div class="col-sm-3">
-                    <label for="state">State</label>
-                    <!-- STATIC -->
-               <!-- <select class="form-control" id="state" name="state" (change)="changeState($event.target.value)" [(ngModel)]="client.state">
-                      <option value="0">Select State</option>
-                      <option *ngFor="let count1 of states" name="state" type="text" [value]="count1">{{count1}} </option>
-                    </select>  -->
-                    <!-- DYNAMIC -->
-                    <select class="form-control" id="state" name="state" (change)="onChangeState($event.target.value)"  [(ngModel)]="client.state">
-                        <option *ngIf="stateInfo == '' " value="-1">--Select State--</option>
-                        <option *ngFor="let state of stateInfo; let j = index" name="state" value="{{j}}">{{state.StateName}}</option>
-                    </select>  
-                  </div>
-
-
-                  <div class="form-group col-sm-4">
                     <label for="city">City</label>
-                  <!-- STatiC -->
-               <!-- <select class="form-control" id="city" name="city" [(ngModel)]="client.city">
-                      <option value="0">Select City</option>
-                      <option *ngFor="let city of cities" type="text" name="city" [value]="city">{{city}} </option>
-                    </select>  -->
-                    <!-- DYNAMIC-->
-                    <select class="form-control"  id="city" name="city" [(ngModel)]="client.city">
-                         <option *ngIf="cityInfo == ''" value="-1">--Select CIty--</option>
-                         <option *ngFor="let city of cityInfo; let k = index" name="city" value="{{k}}">{{city}}</option>
-                    </select>  
-                    </div>
-
-                  <div class="form-group col-sm-4">
-                    <label for="postalcode">Postal Code</label>
-                    <input type="text" class="form-control" id="postalCode" [(ngModel)]="client.postalCode" name="postalCode"  placeholder="Postal Code">
-                  </div>
+                      <select  class="form-control" id="city" name="city" [(ngModel)]="client.cityid" >
+                        <option value="0" selected>Select City</option>
+                        <option *ngFor="let city of cityDetails " value= {{city.cityid}}>{{city.cityname}}</option>
+                      </select>
+                   </div>
+      
+                <div class="col-sm-3">
+                  <label for="postalcode">Postal Code</label>
+                  <input type="text" class="form-control" id="postalCode" [(ngModel)]="client.postalCode" name="postalCode"  placeholder="Postal Code">
                 </div>
-            
-       
               </div>
-            <div class="card-footer">
-              <button type="submit" class="btn btn-sm btn-primary" (click)="submitForm()"><i class="fa fa-dot-circle-o"></i> Submit</button>
-              <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+          
+     
             </div>
-
+          <div class="card-footer">
+            <button type="submit" class="btn btn-sm btn-primary" (click)="submitForm()"><i class="fa fa-dot-circle-o"></i> Submit</button>
+            <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
           </div>
         </div>
-
+      </div>

@@ -1,142 +1,109 @@
-import { CategoryModel, SubcategoryModel, productModel } from './../../../model/model';
-
 import { Component, OnInit } from '@angular/core';
+import { productModel, categoryDataModel, subcategoryDataModel } from '../../../model/model';
 import { Router } from '@angular/router';
 import { CommonService } from '../../../service/common.service';
-import { DomSanitizer } from '@angular/platform-browser';
-import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
-
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 // import {DomSanitizatio.nService} from '@angular/platform-browser';
-
 @Component({
   selector: 'app-addproduct',
   templateUrl: './addproduct.component.html',
   styleUrls: ['./addproduct.component.css']
 })
 export class AddproductComponent implements OnInit {
-
   errorMessage = '';
   imageSrc: string = '';
-
-  Category = new CategoryModel();
-  CategoryDetail: CategoryModel[] = [];
-
-  Subcategory = new SubcategoryModel();
-  SubcategoryDetails: SubcategoryModel[] = [];
-
+  modalRef: BsModalRef;
+  // myDate = new Date();
+  currentDate = new Date();
   product = new productModel();
   productDetails: productModel[] = [];
-
- 
-  constructor(
-    private router: Router,
-    private productService: CommonService,
-    private subcategory: CategorySubcategoryService) {
+  category = new categoryDataModel();
+  categoryDetails: categoryDataModel[]=[];
+  subcategory = new subcategoryDataModel();
+  subcategoryDetails: subcategoryDataModel[]=[];
+  constructor(private router: Router, private productService: CommonService,private modalServices: BsModalService,    private modalService: NgbModal) {
     this.categoryList();
     // this.subcategoryList();
-
-  }
-
-  
+    // this.myDate = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
+    
+   }
   ngOnInit() {
-     
+   
   }
-
-
+  
+  openupdatemodal(content) {
+  // data show in model use this line and store the data in user and display in ui
+  this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
+  // this.viewData = JSON.parse(localStorage.getItem('Register')) || [];
+}
+//   openupdatemodal1(content1) {
+//     // this.product;
+//   // data show in model use this line and store the data in user and display in ui
+//   this.modalService.open(content1, { backdropClass: 'light-blue-backdrop' });
+//   // this.viewData = JSON.parse(localStorage.getItem('Register')) || [];
+// }
   addCategory(){
-    this.productService.addCategory(this.Category).subscribe((data: any) => {
+    this.productService.addCategory(this.category).subscribe((data: any) => {
       if (data.Status.code === 0) {
         alert('Category added sucesfully');
         this.categoryList();
       }
-      this.Category = new CategoryModel();
+      this.category = new categoryDataModel();
     }, (err) => {
-
     });
   }
-
     
-  
-
+  categoryList() {
+    this.productService.categoryList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.CategoryList) {
+          this.categoryDetails = data.CategoryList;
+        
+        }
+      }
+    }, (err) => {
+      
+      console.log(this.categoryDetails); 
+    });
+  }
   onCategoryChange(cid) {
     // this.subcategoryDetails = this.subcategoryDetails.filter(item => item.cid == cid);
     this.subcategoryList(cid);
   }
-
-
-  addSubategory(){
+  addSubcategory(){
     this.productService.addSubategory(this.subcategory).subscribe((data: any) => {
       if (data.Status.code === 0) {
         alert('Subcategory added sucesfully');
         // this.subcategoryList(cid);
       }
-      this.Subcategory = new SubcategoryModel();
+      this.subcategory = new subcategoryDataModel();
     }, (err) => {
-
     });
-
   }
-
   subcategoryList(catid) {
     this.productService.subcategoryList(catid).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.SubcategoryList) {
-          this.SubcategoryDetails = data.SubcategoryList;
+          this.subcategoryDetails = data.SubcategoryList;
         }
       }
     }, (err) => {
       
-      console.log(this.SubcategoryDetails); 
+      console.log(this.subcategoryDetails); 
     });
   }
-
   submitForm() {
     // this.product.image = this.imageSrc;
     this.productService.addProduct(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
         alert('Product added sucesfully');
-
-        // this.router.navigate(['admin/product/viewproduct']);
       }
       this.product = new productModel();
     }, (err) => {
-
-
     });
   }
-  //category display in the dropdown 
-
-  onSelect(id) {
-    // console.log(id);
-
-    // this.SubcategoryDetails = this.SubcategoryDetails.filter(item => item.category_id == id);
-    // console.log(this.SubcategoryDetails);
-    this.subcategoryList(id);
-  }
-
-  categoryList() {
-
-    this.subcategory.categoryList().subscribe((data: any) => {
-      if (data.Status.code === 0) {
-        if (data.CategoryList) {
-          this.CategoryDetail = data.CategoryList;
-
-        }
-      }
-    }, (err) => {
-
-      console.log(this.CategoryDetail);
-    });
-  }
- 
-
-
-
-
-
-
   // Image to Base64
-
   handleFileInput(fileList: FileList) {
     const preview = document.getElementById('photos-preview');
     Array.from(fileList).forEach((file: File) => {
@@ -153,13 +120,8 @@ export class AddproductComponent implements OnInit {
       };
       reader.readAsDataURL(file);
       console.log(file);
-
     });
   }
-
   resetForm() {
-
   }
-
-
 }

@@ -1,51 +1,63 @@
-import { SalesService } from './../../../service/sales.service';
 import { Component, OnInit } from '@angular/core';
-import { activityModel } from '../../../model/model';
-
+import { activityModel, productModel, clientModel, salesregisterModel } from '../../../model/model';
+import { CommonService } from '../../../service/common.service';
+import { Router } from '@angular/router';
+import { SalesService } from '../../../service/sales.service';
 @Component({
   selector: 'app-addactivity',
   templateUrl: './addactivity.component.html',
   styleUrls: ['./addactivity.component.css']
 })
-export class AddactivityComponent implements OnInit {
 
-  activity = new activityModel()
+export class AddactivityComponent implements OnInit {
+  activity = new activityModel();
   activityDetails: activityModel[]=[];
 
-  constructor() { }
+  sales = new salesregisterModel();
+  salesDetails: salesregisterModel[]=[];
 
-  constructor(private productService: CommonService,private salesService:SalesService) { 
+  product = new productModel();
+  productDetails: productModel[] = [];
+
+  client = new clientModel();
+  clientDetails: clientModel[] = [];
+  
+  constructor(private router: Router,private activityService: CommonService,  private salesService: SalesService,) {
     this.productList();
     this.clientList();
-    this.salesList();
-  }
-
+    this.SalesList();
+   }
   ngOnInit() {
-    
   }
-
+ 
   productList() {
-    this.productService.productList().subscribe((data: any) => {
+    this.activityService.productList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.ProductList) {
           this.productDetails = data.ProductList;
         }
       }
     }, (err) => {
-
     });
   }
- clientList() {
-    this.productService.clientList().subscribe((data: any) => {
+  clientList() {
+    this.activityService.clientList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.ClientList) {
           this.clientDetails = data.ClientList;
         }
       }
-    }, (err) => { console.log(err); });
+    }, (err) => {
+    });
   }
-
-  changeCategory(){
-    
+  SalesList(){
+    this.salesService.SalesList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.RegisteredSalesList) {
+          this.salesDetails = data.RegisteredSalesList;
+        }
+      }
+    }, (err) => {
+    });
   }
 }

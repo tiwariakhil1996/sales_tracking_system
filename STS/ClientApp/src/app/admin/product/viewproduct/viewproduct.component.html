@@ -21,27 +21,7 @@
           </tr>
         </thead>
         <tbody>
-        
-          <tr *ngFor="let item of productDetails;let i=index;">
-            <td>{{i+1}}</td>
-            <td>{{item.id}}</td>
-            <td>{{item.category}}</td>
-            <td>{{item.subcategory}}</td>
-            <td>{{item.productname}}</td>
-            <td>{{item.description}}</td>
-            <td>{{item.price}}</td>
-            <img style="width: 80px; height: 80px;" src={{item.image}}>
-            <td>{{item.date}}</td>
-            <td>
-
-              <button type="button" class="btn btn-primary" data-toggle="modal"
-                (click)="openupdatemodal(content,item)"><i class="fa fa-edit" aria-hidden="true"></i></button>
-
-              <button class='btn btn-danger' type="button" (click)="onDelete(item.id)"><i class="fa fa-trash"
-                  aria-hidden="true"></i></button>
-            </td>
-          </tr>
-          -->
+  
           <tr *ngFor="let item of productDetails;let i=index;" >
             <td >{{i+1}}</td>
             <td >{{item.id}}</td>
