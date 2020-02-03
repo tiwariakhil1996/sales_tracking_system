@@ -77,9 +77,12 @@ export class activityModel{
    sid:number;
    salesName:string;
    address:string;
+   contact:number;
    latlong:string;
    appointmentdate:string;
+
 }
+
 
 export class countryModel{
     cid:number;

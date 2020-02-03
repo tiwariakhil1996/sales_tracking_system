@@ -1,7 +1,10 @@
+import { CategoryModel, SubcategoryModel, productModel } from './../../../model/model';
+
 import { Component, OnInit } from '@angular/core';
-import { productModel, categoryDataModel, subcategoryDataModel } from '../../../model/model';
 import { Router } from '@angular/router';
 import { CommonService } from '../../../service/common.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
 
 // import {DomSanitizatio.nService} from '@angular/platform-browser';
 
@@ -24,58 +27,36 @@ export class AddproductComponent implements OnInit {
   product = new productModel();
   productDetails: productModel[] = [];
 
-  category = new categoryDataModel();
-  categoryDetails: categoryDataModel[]=[];
-
-  subcategory = new subcategoryDataModel();
-  subcategoryDetails: subcategoryDataModel[]=[];
+ 
   constructor(
     private router: Router,
     private productService: CommonService,
-    private domSanitizer: DomSanitizer,
     private subcategory: CategorySubcategoryService) {
     this.categoryList();
     // this.subcategoryList();
 
   }
 
-  constructor(private router: Router, private productService: CommonService) {
-    this.categoryList();
-    // this.subcategoryList();
-   }
-
+  
   ngOnInit() {
      
   }
 
 
   addCategory(){
-    this.productService.addCategory(this.category).subscribe((data: any) => {
+    this.productService.addCategory(this.Category).subscribe((data: any) => {
       if (data.Status.code === 0) {
         alert('Category added sucesfully');
         this.categoryList();
       }
-      this.category = new categoryDataModel();
+      this.Category = new CategoryModel();
     }, (err) => {
 
     });
   }
 
     
-  categoryList() {
-    this.productService.categoryList().subscribe((data: any) => {
-      if (data.Status.code === 0) {
-        if (data.CategoryList) {
-          this.categoryDetails = data.CategoryList;
-        
-        }
-      }
-    }, (err) => {
-      
-      console.log(this.categoryDetails); 
-    });
-  }
-
+  
 
   onCategoryChange(cid) {
     // this.subcategoryDetails = this.subcategoryDetails.filter(item => item.cid == cid);
@@ -89,7 +70,7 @@ export class AddproductComponent implements OnInit {
         alert('Subcategory added sucesfully');
         // this.subcategoryList(cid);
       }
-      this.subcategory = new subcategoryDataModel();
+      this.Subcategory = new SubcategoryModel();
     }, (err) => {
 
     });
@@ -100,12 +81,12 @@ export class AddproductComponent implements OnInit {
     this.productService.subcategoryList(catid).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.SubcategoryList) {
-          this.subcategoryDetails = data.SubcategoryList;
+          this.SubcategoryDetails = data.SubcategoryList;
         }
       }
     }, (err) => {
       
-      console.log(this.subcategoryDetails); 
+      console.log(this.SubcategoryDetails); 
     });
   }
 
@@ -147,19 +128,7 @@ export class AddproductComponent implements OnInit {
       console.log(this.CategoryDetail);
     });
   }
-  subcategoryList(category_id) {
-    this.subcategory.subcategoryList(category_id).subscribe((data: any) => {
-      if (data.Status.code === 0) {
-        if (data.SubcategoryList) {
-          this.SubcategoryDetails = data.SubcategoryList;
-        }
-      }
-
-    }, (err) => {
-
-    });
-  }
-
+ 
 
 
 

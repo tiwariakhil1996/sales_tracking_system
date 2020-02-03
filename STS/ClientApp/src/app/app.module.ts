@@ -87,7 +87,6 @@ import { ViewsubcategoryComponent } from './admin/subcategory/viewsubcategory/vi
         preventDuplicates: false,
       }
     ),
-    RouterModule.forRoot(routes),
     ChartsModule
   ],
   declarations: [
