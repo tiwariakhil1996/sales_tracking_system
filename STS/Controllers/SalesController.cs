@@ -125,26 +125,26 @@ namespace STS.Controllers
         }
         //Display
 
-        //[HttpGet]
-        //[Route("RegisterSalesList")]
-        //public async Task<IActionResult> RegisterSalesList()
-        //{
-        //    TranStatus transaction = new TranStatus();
-        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
-        //    HttpStatusCode statusCode = HttpStatusCode.OK;
-        //    try
-        //    {
-        //        var registerList = await isales.RegisterSalesList();
-        //        dctData.Add("RegisterSalesList", registerList);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        transaction = CommonHelper.TransactionErrorHandler(ex);
-        //        statusCode = HttpStatusCode.BadRequest;
-        //    }
-        //    dctData.Add("Status", transaction);
-        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
-        //}
+        [HttpGet]
+        [Route("RegisteredSalesList")]
+        public async Task<IActionResult> RegisteredSalesList()
+        {
+            TranStatus transaction = new TranStatus();
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                var registerList = await isales.RegisteredSalesList();
+                dctData.Add("RegisteredSalesList", registerList);
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
 
     }
 }

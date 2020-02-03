@@ -97,15 +97,3 @@ export class cityModel{
     cityname:string;
     sid:number;
 }
-
-// export class countryListModel{
-//     cid:number;
-//     cname:string;
-
-//     sid:number;
-//     sname:number;
-
-//     cityid:number;
-//     cityname:string;
-
-// }

@@ -98,8 +98,8 @@ export class AddclientComponent implements OnInit {
   cityList(stid) {
     this.clientService.cityList(stid).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        if (data.cityList) {
-          this.cityDetails = data.cityList;
+        if (data.CityList) {
+          this.cityDetails = data.CityList;
         }
       }
     }, (err) => {
