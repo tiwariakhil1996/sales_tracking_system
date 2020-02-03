@@ -12,7 +12,6 @@ namespace STS.Model
       
        
     }
-
     //SubcategoryList
     public partial class SubcategoryListModel
     {
@@ -22,3 +21,4 @@ namespace STS.Model
         public string status { get; set; }
     }
 }
+

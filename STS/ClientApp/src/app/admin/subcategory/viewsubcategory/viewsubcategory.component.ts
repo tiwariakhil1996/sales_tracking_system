@@ -15,27 +15,29 @@ export class ViewsubcategoryComponent implements OnInit {
   Subcategory=new SubcategoryModel();
   SubcategoryDetails:SubcategoryModel[]=[];
 
+
   constructor(
     private subcategory:CategorySubcategoryService,
   ) {
-    this.subcategoryList(this.SubcategoryDetails);
+     
+      this.subcategoryList(this.SubcategoryDetails);
    }
 
-  ngOnInit() {
-  }
 
-  subcategoryList(catID) {
-    this.subcategory.subcategoryList(catID).subscribe((data: any) => {
+  ngOnInit() {
+     
+  }
+  subcategoryList(category_id) {
+    
+    this.subcategory.subcategoryList(category_id).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.SubcategoryList) {
           this.SubcategoryDetails = data.SubcategoryList;
+  
         }
       }
-
-    }, (err) => {
+   }, (err) => {
 
     });
   }
-
-
 }

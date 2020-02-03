@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AddactivityModel, productModel, clientModel } from '../../../model/model';
+import { CommonService } from '../../../service/common.service';
 
 @Component({
   selector: 'app-addactivity',
@@ -7,9 +9,41 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddactivityComponent implements OnInit {
 
-  constructor() { }
+  Addactivity= new AddactivityModel();
+  AddactivityDetails:AddactivityModel[]=[];
+  
+  product = new productModel();
+  productDetails: productModel[] = [];
+
+  client = new clientModel();
+  clientDetails: clientModel[] = [];
+
+  constructor(private productService: CommonService) { 
+    this.productList();
+    this.clientList();
+  }
 
   ngOnInit() {
   }
 
+  productList() {
+    this.productService.productList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.ProductList) {
+          this.productDetails = data.ProductList;
+        }
+      }
+    }, (err) => {
+
+    });
+  }
+ clientList() {
+    this.productService.clientList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.ClientList) {
+          this.clientDetails = data.ClientList;
+        }
+      }
+    }, (err) => { console.log(err); });
+  }
 }

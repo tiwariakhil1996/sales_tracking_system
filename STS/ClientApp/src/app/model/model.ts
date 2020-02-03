@@ -62,3 +62,12 @@ export class SubcategoryModel{
     subcategory:string;
     status:string;
 }
+export class AddactivityModel{
+    id:number;
+    product_id:number;
+    client_id:number;
+    sales_id:number;
+    lat_long:string;
+    appoitnment_date:string;
+
+}

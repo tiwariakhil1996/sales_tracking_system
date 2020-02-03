@@ -22,9 +22,9 @@ export class CategorySubcategoryService {
   addSubcategory(data) {
     return this.http.post('/api/Subcategory/AddSubcategory', data);
   }
-  subcategoryList(catId) {
-    return this.http.get('/api/Subcategory/SubcategoryList/' + catId);
-  }
+  subcategoryList(category_id) {
+    return this.http.get('/api/Subcategory/SubcategoryList/' + category_id);
+  } 
 
 
   // productList() {

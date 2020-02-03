@@ -9,26 +9,27 @@ using System.Threading.Tasks;
 
 namespace STS.BLL.Service
 {
-    public class SubcategoryServices : ISubcategory
+    public class AddactivityServices : IAddactivity
 
     {
         //Add Products
-        SubcategoryRepository subcategoryRepository = null;
-        public Task<TranStatus> AddSubcategory(SubcategoryModel model)
+        AddactivityRepository addactivityRepository = null;
+        public Task<TranStatus> Addactivity(AddactivityModel model)
         {
-            using (subcategoryRepository = new SubcategoryRepository())
+            using (addactivityRepository = new AddactivityRepository())
             {
-                return subcategoryRepository.AddSubcategory(model);
+                return addactivityRepository.Addactivity(model);
 
             }
         }
 
-        //View Subcategory
-        public async Task<List<SubcategoryListModel>> SubcategoryList(int category_id)
+       
+        //View Products
+        public async Task<List<AddactivityListModel>> AddactivityList()
         {
-            using (subcategoryRepository = new SubcategoryRepository())
+            using (addactivityRepository = new AddactivityRepository())
             {
-                return await subcategoryRepository.SubcategoryList(category_id);
+                return await addactivityRepository.AddactivityList();
             }
         }
 

@@ -8,7 +8,7 @@
             <div class="card-body">
               <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
            
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                   <label class="col-md-3 col-form-label" for="select1">Product Name</label>
                   <div class="col-md-9">
                     <select id="select1" name="select1" class="form-control">
@@ -18,6 +18,38 @@
                       <option value="3">Option #3</option>
                     </select>
                   </div>
+                </div> -->
+                <div class="form-group row">
+                  <label class="col-md-3 col-form-label" for="select1">Product Name</label>
+                  <div class="col-md-9">
+                      <select name="productname" class="form-control" [(ngModel)]="Addactivity.product_id" >
+                          <option [ngValue]="undefined" selected>Select Product Name</option>
+                          <option *ngFor="let item of productDetails;" name="productname" [ngValue]="item.id">{{item.productname}}</option>
+                          <!-- <option *ngFor="let item of CategoryDetail;let i=index;" name="category" [value]="item" value="{{item}}">{{item}}</option> -->
+                      </select>
+                   </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-md-3 col-form-label" for="select1">Client Name</label>
+                  <div class="col-md-9">
+                      <select name="clientName" class="form-control" [(ngModel)]="Addactivity.client_id" >
+                          <option [ngValue]="undefined" selected>Select client Name</option>
+                          <option *ngFor="let item of clientDetails;" name="clientName" [ngValue]="item.id">{{item.clientName}}</option>
+                          <!-- <option *ngFor="let item of CategoryDetail;let i=index;" name="category" [value]="item" value="{{item}}">{{item}}</option> -->
+                      </select>
+                   </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-md-3 col-form-label" for="select1">Category Name</label>
+                  <div class="col-md-9">
+                      <select name="productname" class="form-control" [(ngModel)]="Addactivity.product_id" >
+                          <option [ngValue]="undefined" selected>Select Product Name</option>
+                          <option *ngFor="let item of productDetails;" name="productname" [ngValue]="item.id">{{item.productname}}</option>
+                          <!-- <option *ngFor="let item of CategoryDetail;let i=index;" name="category" [value]="item" value="{{item}}">{{item}}</option> -->
+                      </select>
+                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-md-3 col-form-label" for="select1">Client Name</label>

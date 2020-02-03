@@ -11,7 +11,8 @@ using STS.BLL.Interface;
 using Microsoft.AspNetCore.Http;
 using STS.BLL.Service;
 using System;
-
+using Newtonsoft.Json.Serialization;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace STS
 {
@@ -27,7 +28,10 @@ namespace STS
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
+
+            services.AddControllers()
+                           .AddNewtonsoftJson();
 
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
@@ -45,8 +49,12 @@ namespace STS
         private void DependencyResolver(IServiceCollection services)
         {
             //throw new NotImplementedException();
-
+            //services.AddMvc()
+            //.AddJsonOptions(option => option.JsonSerializerOptions = new DefaultContractResolver());
             //Services
+
+           
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
            
             services.AddSingleton<IAdmin, AdminServices>();

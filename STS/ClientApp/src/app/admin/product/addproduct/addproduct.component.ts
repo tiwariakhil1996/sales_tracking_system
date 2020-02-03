@@ -41,8 +41,10 @@ export class AddproductComponent implements OnInit {
 
   submitForm() {
     this.product.image = this.imageSrc;
-    this.product.category_id = Number(this.product.category_id);
-    this.product.subcategory_id = Number(this.product.subcategory_id);
+    //this is convert the string to number...
+    // this.product.category_id = Number(this.product.category_id);
+    // this.product.subcategory_id = Number(this.product.subcategory_id);
+
     this.product.image = this.imageSrc;
     this.productService.addProduct(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -80,8 +82,8 @@ export class AddproductComponent implements OnInit {
       console.log(this.CategoryDetail);
     });
   }
-  subcategoryList(catId) {
-    this.subcategory.subcategoryList(catId).subscribe((data: any) => {
+  subcategoryList(category_id) {
+    this.subcategory.subcategoryList(category_id).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.SubcategoryList) {
           this.SubcategoryDetails = data.SubcategoryList;
