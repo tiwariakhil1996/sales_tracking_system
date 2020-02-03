@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { clientModel } from '../../../model/model';
+import { clientModel, cityModel, stateModel, countryModel } from '../../../model/model';
 import { CommonService } from '../../../service/common.service';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -15,8 +15,19 @@ export class ViewclientComponent implements OnInit {
   client = new clientModel();
   clientDetails: clientModel[] = [];
 
+  country= new countryModel();
+  countryDetails: countryModel[]=[];
+
+  state= new stateModel();
+  stateDetails: stateModel[]=[];
+
+  city = new cityModel();
+  cityDetails: cityModel[]=[];
+  
   constructor(private router: Router, private clientService: CommonService,private modalService: NgbModal) {
     this.clientList();
+
+    this.countryList();
   }
   
   ngOnInit() {
@@ -66,4 +77,55 @@ onEdit(id:number) {
       });
     }
   }
+
+  
+  countryList() {
+    this.clientService.countryList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.CountryList) {
+          this.countryDetails = data.CountryList;
+        
+        }
+      }
+    }, (err) => {
+      
+      console.log(err); 
+    });
+  }
+
+  onCountryChange(cid) {
+    this.stateList(cid); 
+  }
+
+  
+  onStatechange(sid){
+    this.cityList(sid);
+  }
+
+  stateList(cnid) {
+    this.clientService.stateList(cnid).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.StateList) {
+          this.stateDetails = data.StateList;
+        }
+      }
+    }, (err) => {
+      
+      console.log(err); 
+    });
+  }
+
+  cityList(stid) {
+    this.clientService.cityList(stid).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.cityList) {
+          this.cityDetails = data.cityList;
+        }
+      }
+    }, (err) => {
+      
+      console.log(err); 
+    });
+  }
+
 }

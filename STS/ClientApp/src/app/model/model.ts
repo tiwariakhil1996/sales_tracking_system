@@ -70,17 +70,17 @@ export class clientModel {
 }
  //activity
 export class activityModel{
-   pid:number;
+    aid:number;
+   productId:number;
    productname:string;
-   cid:number;
+   clientId:number;
    clientName:string;
-   sid:number;
+   salesId:number;
    salesName:string;
-   address:string;
    contact:number;
-   latlong:string;
-   appointmentdate:string;
-
+   address:string;
+   latLong:string;
+   appointmentDate:string;
 }
 
 
@@ -101,24 +101,14 @@ export class cityModel{
     sid:number;
 }
 
-export class CategoryModel{
-    id:number;
-    category:string;
-    status:string;
+// export class countryListModel{
+//     cid:number;
+//     cname:string;
 
-}
-export class SubcategoryModel{
-    id:number;
-    category_id:number;
-    subcategory:string;
-    status:string ;
+//     sid:number;
+//     sname:number;
 
+//     cityid:number;
+//     cityname:string;
 
-}
-export class DemoModel{
-    id:number;
-    name:string;
-    email:string;
-    mobile:string;
-    address:string;
-}
+// }

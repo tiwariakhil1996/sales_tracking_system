@@ -88,16 +88,16 @@
 
                     <select  class="form-control" id="state" name="state"  [(ngModel)]="client.sid" (change)="onStatechange($event.target.value)">
                       <option value="0" selected>Select State</option>
-                      <option *ngFor="let state of stateDetails " value= {{state.sid}}>{{state.sname}}</option>
+                      <option *ngFor="let state of stateDetails" value= {{state.sid}}>{{state.sname}}</option>
                     </select>
 
                   </div>
                 
                     <div class="col-sm-3">
                       <label for="city">City</label>
-                        <select  class="form-control"  [(ngModel)]="client.cityid" >
+                        <select  class="form-control" name="sid" [(ngModel)]="client.cityid" >
                           <option value="0" selected>Select City</option>
-                          <option *ngFor="let city of cityDetails " value= {{city.cityid}}>{{city.cityname}}</option>
+                          <option *ngFor="let city of cityDetails" name="cityname" value= {{city.cityid}}>{{city.cityname}}</option>
                         </select>
 
                      </div>

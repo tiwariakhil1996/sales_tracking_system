@@ -126,16 +126,16 @@ namespace STS.Controllers
         //Display
 
         [HttpGet]
-        [Route("RegisterSalesList")]
-        public async Task<IActionResult> RegisterSalesList()
+        [Route("RegisteredSalesList")]
+        public async Task<IActionResult> RegisteredSalesList()
         {
             TranStatus transaction = new TranStatus();
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
             try
             {
-                var registerList = await isales.RegisterSalesList();
-                dctData.Add("RegisterSalesList", registerList);
+                var registerList = await isales.RegisteredSalesList();
+                dctData.Add("RegisteredSalesList", registerList);
             }
             catch (Exception ex)
             {

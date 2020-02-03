@@ -66,8 +66,8 @@ export class AddproductComponent implements OnInit {
   }
 
 
-  addSubategory(){
-    this.productService.addSubategory(this.subcategory).subscribe((data: any) => {
+  addSubcategory(){
+    this.productService.addSubcategory(this.subcategory).subscribe((data: any) => {
       if (data.Status.code === 0) {
         alert('Subcategory added sucesfully');
         // this.subcategoryList(cid);

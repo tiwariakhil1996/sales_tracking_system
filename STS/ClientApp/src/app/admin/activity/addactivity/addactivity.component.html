@@ -1,68 +1,95 @@
 <div class="animated fadeIn">
-  <div class="row">
-      <div class="col-md-12">
-        <div class="card">
-          <div class="card-header">
-            <strong>Add Activity</strong> 
-          </div>
-          <div class="card-body">
-            <div class="form-group row">
-              <div class="col-md-9">
-              <label for="select1">Product Name</label>
-                  <select name="productname" class="form-control" [(ngModel)]="activity.pid" >
-                      <option [ngValue]="undefined" selected>Select Product Name</option>
-                      <option *ngFor="let item of productDetails;" name="productname" [ngValue]="item.id">{{item.productname}}</option>
-                      <!-- <option *ngFor="let item of CategoryDetail;let i=index;" name="category" [value]="item" value="{{item}}">{{item}}</option> -->
-                  </select>
-               </div>
+    <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <strong>Add Activity</strong> 
             </div>
-            <div class="form-group row">
-              <div class="col-md-9">
-              <label  for="select1">Client Name</label>
-                  <select name="clientName" class="form-control" [(ngModel)]="activity.cid" >
-                      <option [ngValue]="undefined" selected>Select client Name</option>
-                      <option *ngFor="let item of clientDetails;" name="clientName" [ngValue]="item.id">{{item.clientName}}</option>
+            <div class="card-body">
+
+              <div class="form-group row">
+                <div class="col-md-6">
+                <label for="select1">Product Name</label>
+                    <select name="productname" class="form-control" [(ngModel)]="activity.productId" >
+                        <option [ngValue]="undefined" selected>Select Product Name</option>
+                        <option *ngFor="let item of productDetails;" name="productname" [ngValue]="item.id">{{item.productname}}</option>
+                        <!-- <option *ngFor="let item of CategoryDetail;let i=index;" name="category" [value]="item" value="{{item}}">{{item}}</option> -->
+                    </select>
+                 </div>
+                 <div class="col-md-6">
+                  <label  for="select1">Client Name</label>
+                      <select name="clientName" class="form-control" [(ngModel)]="activity.clientId" >
+                          <option [ngValue]="undefined" selected>Select client Name</option>
+                          <option *ngFor="let item of clientDetails;" name="clientName" [ngValue]="item.id">{{item.clientName}}</option>
+                      </select>
+                   </div>
+              </div>
+
+              <!-- <div class="form-group row">
+                <div class="col-md-9">
+                <label  for="select1">Client Name</label>
+                    <select name="clientName" class="form-control" [(ngModel)]="activity.clientId" >
+                        <option [ngValue]="undefined" selected>Select client Name</option>
+                        <option *ngFor="let item of clientDetails;" name="clientName" [ngValue]="item.id">{{item.clientName}}</option>
+                    </select>
+                 </div>
+              </div> -->
+ 
+              <div class="form-group row">
+              <div class="col-md-6">
+              <label  for="select1">Sales Name</label>
+                  <select name="clientName" class="form-control" [(ngModel)]="activity.salesId" >
+                      <option [ngValue]="undefined" selected>Select Sales Name</option>
+                      <option *ngFor="let item of salesDetails;" name="salesName" [ngValue]="item.id">{{item.salesName}}</option>
                   </select>
                </div>
+               <div class="col-sm-6">
+                <label for="contact">Contact no.</label>
+                <input type="text" class="form-control" id="contact" [(ngModel)]="activity.contact " name="contact " placeholder="Enter contact no.">
+              </div>
+            </div>
+            <!-- <div class="form-group row">
+              <div class="col-sm-6">
+                <label for="contact">Contact no.</label>
+                <input type="text" class="form-control" id="contact" [(ngModel)]="activity.contact " name="contact " placeholder="Enter contact no.">
+              </div>
+            </div> -->
+            <div class="form-group row">
+              <div class="col-sm-6">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" id="address" [(ngModel)]="activity.address" name="address"  placeholder="Enter address">
+              </div>
+              <div class="col-sm-6">
+                <label for="latlong">LAT/LONG</label>
+                <input type="text" class="form-control" id="latlong" [(ngModel)]="activity.latLong" name="latlong"  placeholder="Enter address">
+              </div>
             </div>
 
-            <div class="form-group row">
-            <div class="col-md-9">
-            <label  for="select1">Sales Name</label>
-                <select name="clientName" class="form-control" [(ngModel)]="activity.sid" >
-                    <option [ngValue]="undefined" selected>Select Sales Name</option>
-                    <option *ngFor="let item of salesDetails;" name="salesName" [ngValue]="item.id">{{item.salesName}}</option>
-                </select>
-             </div>
-          </div>
-          <div class="form-group row">
+            <!-- <div class="form-group row">
+              <div class="col-sm-6">
+                <label for="latlong">LAT/LONG</label>
+                <input type="text" class="form-control" id="latlong" [(ngModel)]="activity.latlong" name="latlong"  placeholder="Enter address">
+              </div>
+            </div> -->
+
             <div class="col-sm-6">
-              <label for="contact">Contact no.</label>
-              <input type="text" class="form-control" id="contact" [(ngModel)]="activity.contact " name="contact " placeholder="Enter contact no.">
+              <label class="text-input">Appointment Date</label>
+                <input class="form-control" id="date" type="date" name="appointmentDate" [(ngModel)]="activity.appointmentDate"> 
+             <!-- <label class="form-control" id="date" type="date" name="date" [(ngModel)]="product.date">   {{currentDate | date:'dd-MM-yyyy'}} </label> -->
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-6">
-              <label for="address">Address</label>
-              <input type="text" class="form-control" id="address" [(ngModel)]="activity.address" name="address"  placeholder="Enter address">
             </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-6">
-              <label for="address">LAT/LONG</label>
-              <input type="text" class="form-control" id="latlong" [(ngModel)]="activity.latlong" name="latlong"  placeholder="Enter address">
+            <div class="card-footer">
+              <button type="submit" class="btn btn-sm btn-primary"  (click)="submitForm()"><i class="fa fa-dot-circle-o"></i> Submit</button>
+              <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
             </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="text-input">Added on</label>
-              <input class="form-control" id="date" type="date" name="appointmentdate" [(ngModel)]="activity.appointmentdate"> 
-           <!-- <label class="form-control" id="date" type="date" name="date" [(ngModel)]="product.date">   {{currentDate | date:'dd-MM-yyyy'}} </label> -->
-            </div>
-          </div>
-          </div>
-          <div class="card-footer">
-            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
-            <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
           </div>
         </div>
-      </div>
+    
+    
+    
+    
+    
+    
+    
+  

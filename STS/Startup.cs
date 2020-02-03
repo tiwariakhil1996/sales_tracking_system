@@ -11,8 +11,6 @@ using STS.BLL.Interface;
 using Microsoft.AspNetCore.Http;
 using STS.BLL.Service;
 using System;
-using Newtonsoft.Json.Serialization;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace STS
 {
@@ -42,7 +40,8 @@ namespace STS
             {
                 configuration.RootPath = "ClientApp/dist";
             });
-
+            services.AddControllers()
+                .AddNewtonsoftJson();
             //Database Connectivity
 
             STSSetting.ConnectionString = Configuration.GetSection("ConnectionString:STS").Value;
@@ -66,6 +65,7 @@ namespace STS
             services.AddSingleton<ISales, SalesServices>();
             services.AddSingleton<IProduct, ProductServices>();
             services.AddSingleton<IOther, OtherServices>();
+            services.AddSingleton<IActivity, ActivityServices>();
 
             services.AddSingleton<IDemo, DemoServices>();
             services.AddSingleton<ICategory, CategoryServices>();

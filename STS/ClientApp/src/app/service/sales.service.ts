@@ -27,6 +27,6 @@ export class SalesService {
 
 
   SalesList() {
-    return this.http.get('/api/Sales/RegisterSalesList');
+    return this.http.get('/api/Sales/RegisteredSalesList');
   }
 }

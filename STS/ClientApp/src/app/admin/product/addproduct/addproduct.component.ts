@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { CommonService } from '../../../service/common.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+
+
 // import {DomSanitizatio.nService} from '@angular/platform-browser';
 @Component({
   selector: 'app-addproduct',
@@ -16,33 +18,40 @@ export class AddproductComponent implements OnInit {
   modalRef: BsModalRef;
   // myDate = new Date();
   currentDate = new Date();
+
   product = new productModel();
   productDetails: productModel[] = [];
   category = new categoryDataModel();
   categoryDetails: categoryDataModel[]=[];
   subcategory = new subcategoryDataModel();
   subcategoryDetails: subcategoryDataModel[]=[];
+
   constructor(private router: Router, private productService: CommonService,private modalServices: BsModalService,    private modalService: NgbModal) {
     this.categoryList();
     // this.subcategoryList();
     // this.myDate = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
     
    }
+
   ngOnInit() {
    
   }
   
+
   openupdatemodal(content) {
   // data show in model use this line and store the data in user and display in ui
   this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
   // this.viewData = JSON.parse(localStorage.getItem('Register')) || [];
+
 }
 //   openupdatemodal1(content1) {
 //     // this.product;
 //   // data show in model use this line and store the data in user and display in ui
 //   this.modalService.open(content1, { backdropClass: 'light-blue-backdrop' });
 //   // this.viewData = JSON.parse(localStorage.getItem('Register')) || [];
+
 // }
+
   addCategory(){
     this.productService.addCategory(this.category).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -71,8 +80,10 @@ export class AddproductComponent implements OnInit {
     // this.subcategoryDetails = this.subcategoryDetails.filter(item => item.cid == cid);
     this.subcategoryList(cid);
   }
+
+
   addSubcategory(){
-    this.productService.addSubategory(this.subcategory).subscribe((data: any) => {
+    this.productService.addSubcategory(this.subcategory).subscribe((data: any) => {
       if (data.Status.code === 0) {
         alert('Subcategory added sucesfully');
         // this.subcategoryList(cid);

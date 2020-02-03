@@ -39,7 +39,11 @@ namespace STS.Model
         public string Sname { get; set; }
         public string Cityname { get; set; }
         public string PostalCode { get; set; }
-      
+
+        public int Cid { get; set; }
+        public int Sid { get; set; }
+        public int Cityid { get; set; }
+
 
     }
 }

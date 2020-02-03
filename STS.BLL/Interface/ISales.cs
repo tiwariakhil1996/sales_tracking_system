@@ -26,7 +26,7 @@ namespace STS.BLL.Interface
 
        // Display
 
-        Task<List<SalesListmodel>> RegisterSalesList();
+        Task<List<SalesListModel>> RegisteredSalesList();
     }
 }
 

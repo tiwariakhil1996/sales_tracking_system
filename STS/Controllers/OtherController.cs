@@ -145,8 +145,8 @@ namespace STS.Controllers
             HttpStatusCode statusCode = HttpStatusCode.OK;
             try
             {
-                var countryList = await iother.StateList(cid);
-                dctData.Add("StateList", countryList);
+                var stateList = await iother.StateList(cid);
+                dctData.Add("StateList", stateList);
             }
             catch (Exception ex)
             {
@@ -166,8 +166,8 @@ namespace STS.Controllers
             HttpStatusCode statusCode = HttpStatusCode.OK;
             try
             {
-                var countryList = await iother.CityList(sid);
-                dctData.Add("CityList", countryList);
+                var cityList = await iother.CityList(sid);
+                dctData.Add("CityList", cityList);
             }
             catch (Exception ex)
             {

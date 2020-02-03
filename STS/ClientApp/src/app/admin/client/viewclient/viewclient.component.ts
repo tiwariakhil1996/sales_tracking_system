@@ -1,7 +1,7 @@
 
 
 import { Component, OnInit } from '@angular/core';
-import { clientModel } from '../../../model/model';
+import { clientModel, countryModel, stateModel, cityModel } from '../../../model/model';
 import { CommonService } from '../../../service/common.service';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -20,16 +20,19 @@ export class ViewclientComponent implements OnInit {
   client = new clientModel();
   clientDetails: clientModel[] = [];
 
+  country= new countryModel();
+  countryDetails: countryModel[]=[];
 
-  // selectedCountry: Country = new Country(2, 'Brazil');
-  // selectedState: State = new State(8,3, 'Gujarat');
-  // countries: Country[];
-  // States: State[];
-  // Cities: City[];
+  state= new stateModel();
+  stateDetails: stateModel[]=[];
+
+  city = new cityModel();
+  cityDetails: cityModel[]=[];
   
   constructor(private router: Router, private clientService: CommonService, private modalService: NgbModal) {
     this.clientList();
 
+    this.countryList();
 
   }
   ngOnInit() {
@@ -89,14 +92,53 @@ export class ViewclientComponent implements OnInit {
   }
 
 
+  countryList() {
+    this.clientService.countryList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.CountryList) {
+          this.countryDetails = data.CountryList;
+        
+        }
+      }
+    }, (err) => {
+      
+      console.log(err); 
+    });
+  }
 
-// onSelect(cid) {
-//     this.stateDetails = this.clientService.stateList().filter((item) => item.cid == cid);
-//   }
+  onCountryChange(cid) {
+    this.stateList(cid); 
+  }
 
-//   onState(stateid) {
-//     this.cities = this.clientService.cityList().filter((item) => item.stateid == stateid);
-//   }
+  
+  onStatechange(sid){
+    this.cityList(sid);
+  }
 
+  stateList(cnid) {
+    this.clientService.stateList(cnid).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.StateList) {
+          this.stateDetails = data.StateList;
+        }
+      }
+    }, (err) => {
+      
+      console.log(err); 
+    });
+  }
+
+  cityList(stid) {
+    this.clientService.cityList(stid).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.cityList) {
+          this.cityDetails = data.cityList;
+        }
+      }
+    }, (err) => {
+      
+      console.log(err); 
+    });
+  }
 
 }

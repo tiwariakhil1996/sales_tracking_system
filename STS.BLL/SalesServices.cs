@@ -64,12 +64,12 @@ namespace STS.BLL.Service
             }
         }
 
-       // Display
-        public async Task<List<SalesListmodel>> RegisterSalesList()
+        //Display
+        public async Task<List<SalesListModel>> RegisteredSalesList()
         {
             using (salesRepository = new SalesRepository())
             {
-                return await salesRepository.RegisterSalesList();
+                return await salesRepository.RegisteredSalesList();
             }
         }
     }

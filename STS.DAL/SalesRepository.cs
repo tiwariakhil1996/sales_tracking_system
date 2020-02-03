@@ -175,12 +175,12 @@ namespace STS.DAL
         //}
 
         //Display
-        public async Task<List<SalesListmodel>> RegisterSalesList()
+        public async Task<List<SalesListModel>> RegisteredSalesList()
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                var result = await connection.QueryAsync<SalesListmodel>("RegisterSalesList", commandType: CommandType.StoredProcedure);
+                var result = await connection.QueryAsync<SalesListModel>("RegisteredSalesList", commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
             }
