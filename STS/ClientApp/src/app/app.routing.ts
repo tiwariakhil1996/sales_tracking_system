@@ -92,6 +92,10 @@ export const routes: Routes = [
         loadChildren: () => import('./admin/activity/activity.module').then(m => m.ActivityModule)
       },
       {
+        path: 'newcomponents',
+        loadChildren: () => import('./admin/newcomponents/newcomponents.module').then(m => m.NewcomponentsModule)
+      },
+      {
         path: 'map',
         loadChildren: () => import('./admin/map/map.module').then(m => m.MapModule)
       },

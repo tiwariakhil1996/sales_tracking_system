@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+
 namespace STS.Model
 {
-    //addProduct
+     //addProduct
     public partial class ProductModel
     {
         public int Cid    { get; set; }
-        public int  Sid { get; set; }
+        public int Sid { get; set; }
         public string Productname { get; set; }
         public string Description { get; set; }
         public int Price       { get; set; }
@@ -15,7 +16,9 @@ namespace STS.Model
         public string ImageExtn { get; set; }
         public string Date        { get; set; }
     }
+
     //ProductList
+
     public partial class ProductListModel
     {
         public int ID { get; set; }

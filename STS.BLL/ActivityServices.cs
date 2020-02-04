@@ -36,13 +36,13 @@ namespace STS.BLL.Service
 
 
         //Update
-        //public async Task<TranStatus> updateClient(int ID, ClientListModel model)
-        //{
-        //    using (clientRepository = new ClientRepository())
-        //    {
-        //        return await clientRepository.updateClient(ID, model);
-        //    }
-        //}
+        public async Task<TranStatus> updateActivity(int Aid, ActivityListModel model)
+        {
+            using (activityRepository = new ActivityRepository())
+            {
+                return await activityRepository.updateActivity(Aid, model);
+            }
+        }
 
         ////Update
         //public async Task<Tuple<TranStatus,List<ClientListModel>>> updateClient(int ID, ClientListModel model)
@@ -57,12 +57,12 @@ namespace STS.BLL.Service
 
 
         //Delete
-        //public async Task<TranStatus> deleteClient(int ID)
-        //{
-        //    using (clientRepository = new ClientRepository())
-        //    {
-        //        return await clientRepository.deleteClient(ID);
-        //    }
-        //}
+        public async Task<TranStatus> deleteActivity(int Aid)
+        {
+            using (activityRepository = new ActivityRepository())
+            {
+                return await activityRepository.deleteActivity(Aid);
+            }
+        }
     }
 }

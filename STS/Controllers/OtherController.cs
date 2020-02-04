@@ -66,6 +66,54 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
+        //Update
+
+        [HttpPut]
+        [Route("updateCategory/{Cid}")]
+        public async Task<IActionResult> updateCategory(int Cid, [FromBody]CategoryListModel model)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+               
+                transaction = await iother.updateCategory(Cid, model);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+        //Delete Category
+
+        [HttpDelete]
+        [Route("deleteCategory/{Cid}")]
+        public async Task<IActionResult> deleteCategory(int Cid)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+
+                transaction = await iother.deleteCategory(Cid);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
         //Add Subcategory
 
         [HttpPost]
@@ -101,8 +149,8 @@ namespace STS.Controllers
             HttpStatusCode statusCode = HttpStatusCode.OK;
             try
             {
-                var categoryList = await iother.SubcategoryList(cid);
-                dctData.Add("SubcategoryList", categoryList);
+                var subcategoryList = await iother.SubcategoryList(cid);
+                dctData.Add("SubcategoryList", subcategoryList);
             }
             catch (Exception ex)
             {
@@ -113,7 +161,81 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
-        //Display
+        //View Subcategory
+
+        [HttpGet]
+        [Route("ViewSubcategoryList")]
+        public async Task<IActionResult> ViewSubcategoryList()
+        {
+            TranStatus transaction = new TranStatus();
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                var viewsubcategoryList = await iother.ViewSubcategoryList();
+                dctData.Add("ViewSubcategoryList", viewsubcategoryList);
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+
+        //Update
+
+        [HttpPut]
+        [Route("updateSubcategory/{Sid}")]
+        public async Task<IActionResult> updateSubcategory(int Sid, [FromBody]SubcategoryListModel model)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+
+                transaction = await iother.updateSubcategory(Sid, model);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+
+        //Delete Subcategory
+
+        [HttpDelete]
+        [Route("deleteSubcategory/{Sid}")]
+        public async Task<IActionResult> deleteSubcategory(int Sid)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+
+                transaction = await iother.deleteSubcategory(Sid);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+
+        //Display Country
 
         [HttpGet]
         [Route("CountryList")]

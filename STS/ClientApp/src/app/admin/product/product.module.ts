@@ -15,7 +15,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     FormsModule,
     ProductRoutingModule
-
   ],
   declarations: [
     ProductComponent,
