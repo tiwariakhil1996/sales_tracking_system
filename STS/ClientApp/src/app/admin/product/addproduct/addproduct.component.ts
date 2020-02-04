@@ -88,10 +88,11 @@ export class AddproductComponent implements OnInit {
         alert('Subcategory added sucesfully');
         // this.subcategoryList(cid);
       }
-      this.subcategory = new subcategoryDataModel();
+       this.subcategory = new subcategoryDataModel();
     }, (err) => {
     });
   }
+
   subcategoryList(catid) {
     this.productService.subcategoryList(catid).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -101,7 +102,7 @@ export class AddproductComponent implements OnInit {
       }
     }, (err) => {
       
-      console.log(this.subcategoryDetails); 
+      // console.log(this.subcategoryDetails); 
     });
   }
   submitForm() {

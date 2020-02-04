@@ -27,7 +27,7 @@ namespace STS.Model
         public string Username { get; set; }
         public string Gender { get; set; }
         public string Email { get; set; }
-        public string Mobile { get; set; }
+        public int Mobile { get; set; }
         public string Password { get; set; }
 
     }
@@ -42,7 +42,7 @@ namespace STS.Model
         public string Username { get; set; }
         public string Gender { get; set; }
         public string Email { get; set; }
-        public string Mobile { get; set; }
+        public int Mobile { get; set; }
         public string Password { get; set; }
     }
 

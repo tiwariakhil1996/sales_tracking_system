@@ -62,9 +62,7 @@ export class CommonService {
  cityList(stid) {
     return this.http.get('/api/Other/CityList/' + stid);
   }
-
-
-  addCategory(data){
+ addCategory(data){
     return this.http.post('api/Other/addCategory',data);
   }
 
@@ -80,12 +78,12 @@ export class CommonService {
     return this.http.get('/api/Other/SubcategoryList/' + catid);
   }
 
+
 // ----------------------- ACTIVITY ------------------
 
 addActivity(data){
   return this.http.post('api/Activity/addActivity',data);
 }
-
 activityList() {
   return this.http.get('/api/Activity/ActivityList');
 }

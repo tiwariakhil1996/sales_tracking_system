@@ -138,6 +138,5 @@ export class ViewproductComponent implements OnInit {
 
     });
   }
-  
 
 }

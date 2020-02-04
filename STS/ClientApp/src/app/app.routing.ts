@@ -99,14 +99,7 @@ export const routes: Routes = [
         path: 'demoallapi',
         loadChildren: () => import('./admin/demoallapi/demoallapi.module').then(m => m.DemoallapiModule)
       },
-      {
-        path: 'category',
-        loadChildren: () => import('./admin/category/category.module').then(m => m.CategoryModule)
-      },
-      {
-        path: 'subcategory',
-        loadChildren: () => import('./admin/subcategory/subcategory.module').then(m => m.SubcategoryModule)
-      },
+      
      
       {
         path: 'base',

@@ -100,45 +100,8 @@ export const navItems: INavData[] = [
       
     ]
   },
-  //category side bar menu routing
-  {
-    name: 'Category',
-    url: '/admin/category',
-    icon: 'icon-layers',
-    children: [
-      {
-        name: 'Add Category',
-        url: '/admin/category/addcategory',
-        icon: 'icon-note',
-      },
-      {
-        name: 'View Category',
-        url: '/admin/category/viewcategory',
-        icon: 'icon-calendar',
-      },
-      
-    ]
-  },
-   //Subcategory side bar menu routing
-   {
-    name: 'Subcategory',
-    url: '/admin/subcategory',
-    icon: 'icon-layers',
-    children: [
-      {
-        name: 'Add Subcategory',
-        url: '/admin/subcategory/addsubcategory',
-        icon: 'icon-note',
-      },
-      {
-        name: 'View Subcategory',
-        url: '/admin/subcategory/viewsubcategory',
-        icon: 'icon-calendar',
-      },
-      
-    ]
-  },
-
+ 
+  
   {
     name: 'Map',
     url: '/admin/map',

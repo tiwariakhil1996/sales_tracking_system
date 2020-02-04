@@ -42,8 +42,8 @@ namespace STS
             });
             services.AddControllers()
                 .AddNewtonsoftJson();
-            //Database Connectivity
 
+            //Database Connectivity
             STSSetting.ConnectionString = Configuration.GetSection("ConnectionString:STS").Value;
             DependencyResolver(services);
             
@@ -66,10 +66,8 @@ namespace STS
             services.AddSingleton<IProduct, ProductServices>();
             services.AddSingleton<IOther, OtherServices>();
             services.AddSingleton<IActivity, ActivityServices>();
-
             services.AddSingleton<IDemo, DemoServices>();
-            services.AddSingleton<ICategory, CategoryServices>();
-            services.AddSingleton<ISubcategory, SubcategoryServices>();
+           
 
         }
 

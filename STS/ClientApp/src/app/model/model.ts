@@ -1,5 +1,5 @@
 
-// register form
+// register admin form
 export class registerModel {
     id: number;
     image:string;
@@ -7,12 +7,12 @@ export class registerModel {
     username: string;
     email: string;
     gender:string;
-    mobile: number;
+    mobile: string;
     password: string;
     cpassword: string;
 }
 
-// register form
+// register sales form
 export class salesregisterModel {
     id: number;
     image: string;
@@ -28,9 +28,9 @@ export class salesregisterModel {
 // product form
 export class productModel {
     id: number;
-    cid: string;
+    cid: number;
     cname: string;
-    sid: string;
+    sid: number;
     sname: string;
     productname: string;
     description: string;
@@ -56,7 +56,7 @@ export class clientModel {
     id: number;
     clientName: string;
     email: string;
-    contact: string;
+    contact: string;//procedure and table in the int
     gender: any;
     address: string;
     street: string;
@@ -70,7 +70,7 @@ export class clientModel {
 }
  //activity
 export class activityModel{
-    aid:number;
+   aid:number;
    productId:number;
    productname:string;
    clientId:number;
@@ -100,15 +100,12 @@ export class cityModel{
     cityname:string;
     sid:number;
 }
+// this is demo model....demo model in the all api perform do it.. 
+export class DemoModel{
+    id:number;
+    name:string;
+    email:string;
+    mobile:string;
+    address:string;
+}
 
-// export class countryListModel{
-//     cid:number;
-//     cname:string;
-
-//     sid:number;
-//     sname:number;
-
-//     cityid:number;
-//     cityname:string;
-
-// }
