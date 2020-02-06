@@ -29,6 +29,11 @@ namespace STS.BLL.Interface
         //Update Category
         Task<TranStatus> updateCategory(int Cid, CategoryListModel model);
 
+        //Active Deactive Category
+        Task<TranStatus> ChangeStatusCategory(int id);
+
+
+
         //Delete Category
         Task<TranStatus> deleteCategory(int Cid);
 
