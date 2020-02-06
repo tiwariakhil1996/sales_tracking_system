@@ -72,6 +72,15 @@ namespace STS.BLL.Service
             {
                 return await otherRepository.updateCategory(Cid, model);
             }
+        
+
+        //Change Status Category
+        public async Task<TranStatus> ChangeStatusCategory(int id)
+        {
+            using (otherRepository = new OtherRepository())
+            {
+                return await otherRepository.ChangeStatusCategory(id);
+            }
         }
 
         //Delete Category
