@@ -29,7 +29,7 @@ export class AddproductComponent implements OnInit {
   subcategory = new subcategoryDataModel();
   subcategoryDetails: subcategoryDataModel[]=[];
 
-  constructor(private router: Router, private productService: CommonService,private modalServices: BsModalService,    private modalService: NgbModal) {
+  constructor(private router: Router, private productService: CommonService,private modalServices: BsModalService,private modalService: NgbModal) {
     this.categoryList();
     // this.subcategoryList();
     // this.myDate = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
@@ -53,8 +53,6 @@ export class AddproductComponent implements OnInit {
       console.log(this.categoryDetails); 
     });
   }
-
-
   onCategoryChange(cid) {
     // this.subcategoryDetails = this.subcategoryDetails.filter(item => item.cid == cid);
     this.subcategoryList(cid);
@@ -72,6 +70,7 @@ export class AddproductComponent implements OnInit {
       console.log(this.subcategoryDetails); 
     });
   }
+  
 
   submitForm() {
     // this.product.image = this.imageSrc;

@@ -10,7 +10,7 @@
               <div class="form-group row">
                 <div class="col-md-6">
                 <label for="select1">Product Name</label>
-                    <select name="productname" class="form-control" [(ngModel)]="activity.productId" >
+                    <select name="productname" class="form-control" [(ngModel)]="activity.productid" >
                         <option [ngValue]="undefined" selected>Select Product Name</option>
                         <option *ngFor="let item of productDetails;" name="productname" [ngValue]="item.id">{{item.productname}}</option>
                         <!-- <option *ngFor="let item of CategoryDetail;let i=index;" name="category" [value]="item" value="{{item}}">{{item}}</option> -->
@@ -18,7 +18,7 @@
                  </div>
                  <div class="col-md-6">
                   <label  for="select1">Client Name</label>
-                      <select name="clientName" class="form-control" [(ngModel)]="activity.clientId" >
+                      <select name="clientName" class="form-control" [(ngModel)]="activity.clientid" >
                           <option [ngValue]="undefined" selected>Select client Name</option>
                           <option *ngFor="let item of clientDetails;" name="clientName" [ngValue]="item.id">{{item.clientName}}</option>
                       </select>
@@ -38,7 +38,7 @@
               <div class="form-group row">
               <div class="col-md-6">
               <label  for="select1">Sales Name</label>
-                  <select name="clientName" class="form-control" [(ngModel)]="activity.salesId" >
+                  <select name="clientName" class="form-control" [(ngModel)]="activity.salesid" >
                       <option [ngValue]="undefined" selected>Select Sales Name</option>
                       <option *ngFor="let item of salesDetails;" name="salesName" [ngValue]="item.id">{{item.salesName}}</option>
                   </select>
@@ -74,7 +74,7 @@
 
             <div class="col-sm-6">
               <label class="text-input">Appointment Date</label>
-                <input class="form-control" id="date" type="date" name="appointmentDate" [(ngModel)]="activity.appointmentDate"> 
+                <input class="form-control" id="date" type="date" name="appointmentDate" [(ngModel)]="activity.appointmentdate"> 
              <!-- <label class="form-control" id="date" type="date" name="date" [(ngModel)]="product.date">   {{currentDate | date:'dd-MM-yyyy'}} </label> -->
               </div>
             </div>

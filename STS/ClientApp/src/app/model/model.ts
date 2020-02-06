@@ -71,16 +71,16 @@ export class clientModel {
  //activity
 export class activityModel{
    aid:number;
-   productId:number;
+   productid:number;
    productname:string;
-   clientId:number;
-   clientName:string;
-   salesId:number;
-   salesName:string;
+   clientid:number;
+   clientname:string;
+   salesid:number;
+   salesname:string;
    contact:number;
    address:string;
    latLong:string;
-   appointmentDate:string;
+   appointmentdate:string;
 }
 
 
