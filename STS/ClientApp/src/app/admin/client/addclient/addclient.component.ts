@@ -266,4 +266,9 @@ validateMobile(mobileField) {
     });
   }
 
+
+  viewClientForm(){
+    this.router.navigate(['/admin/client/viewclient']);
+
+  }
 }

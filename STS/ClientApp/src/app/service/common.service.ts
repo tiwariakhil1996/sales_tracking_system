@@ -84,6 +84,9 @@ export class CommonService {
     return this.http.put('/api/Other/ChangeStatusCategory/' + id, null);
   }
 
+  active_deactive_CategoryList(){
+    return this.http.get('/api/Other/CategoryList_ActiveDeactive');
+  }
   // ---------------------------SUBCATEGORY ---------------------------------------
 
 

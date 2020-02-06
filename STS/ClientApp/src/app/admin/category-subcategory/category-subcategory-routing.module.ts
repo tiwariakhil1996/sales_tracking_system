@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { NewcomponentsComponent } from './newcomponents.component';
 import { AddcategoryComponent } from './addcategory/addcategory.component';
 import { AddsubcategoryComponent } from './addsubcategory/addsubcategory.component';
 import { ViewcategoryComponent } from './viewcategory/viewcategory.component';
 import { ViewsubcategoryComponent } from './viewsubcategory/viewsubcategory.component';
+import { CategorySubcategoryComponent } from './category-subcategory.component';
+
 
 
 const routes: Routes = [
@@ -13,18 +14,18 @@ const routes: Routes = [
   {
     path: '',
     data: {
-      title: 'NewComponents'
+      title: 'CategorySubcategoryComponent'
     },
     children: [
       {
         path: '',
-        redirectTo: 'newcomponents'
+        redirectTo: 'category-subcategory'
       },
       {
-        path: 'newcomponents',
-        component: NewcomponentsComponent,
+        path: 'category-subcategory',
+        component: CategorySubcategoryComponent,
         data: {
-          title: 'NewComponents'
+          title: 'CategorySubcategoryComponent'
         }
       },
       {
@@ -65,4 +66,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class NewcomponentsRoutingModule {}
+export class CategorySubcategoryRoutingModule {}

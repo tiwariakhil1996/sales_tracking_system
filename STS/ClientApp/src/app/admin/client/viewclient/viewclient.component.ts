@@ -79,7 +79,7 @@ export class ViewclientComponent implements OnInit {
   onDelete(id: number) {
     if (confirm('Are you sure to delete this record ?') === true) {
       this.clientService.deleteClient(id).subscribe(data => {
-        this.clientService.clientList();
+        // this.clientService.clientList();
         this.clientList();
       });
     }
@@ -133,6 +133,12 @@ export class ViewclientComponent implements OnInit {
       
       console.log(err); 
     });
+  }
+
+
+  
+  addnewClient(){
+    this.router.navigate(['/admin/client/addclient']);
   }
 
 }

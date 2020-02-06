@@ -12,28 +12,28 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./viewproduct.component.css']
 })
 export class ViewproductComponent implements OnInit {
-  
+
   imageSrc: string = '';
   modalRef: BsModalRef;
   product = new productModel();
   productDetails: productModel[] = [];
 
-   
+
   category = new categoryDataModel();
-  categoryDetails: categoryDataModel[]=[];
+  categoryDetails: categoryDataModel[] = [];
 
   subcategory = new subcategoryDataModel();
-  subcategoryDetails: subcategoryDataModel[]=[];
-  
+  subcategoryDetails: subcategoryDataModel[] = [];
+
   constructor(private router: Router,
     private productService: CommonService,
     private toastr: ToastrService,
     // private modalServices: BsModalService,
     private modalService: NgbModal
-    ) {
-        this.productList();
-        this.categoryList();
-   }
+  ) {
+    this.productList();
+    this.categoryList();
+  }
 
   ngOnInit() {
   }
@@ -52,40 +52,40 @@ export class ViewproductComponent implements OnInit {
     });
   }
 
-//Edit
+  //Edit
   openupdatemodal(content, item) {
-      this.product = JSON.parse(JSON.stringify(item));
+    this.product = JSON.parse(JSON.stringify(item));
     // data show in model use this line and store the data in user and display in ui
     this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
     // this.viewData = JSON.parse(localStorage.getItem('Register')) || [];
 
   }
 
-  onEdit(id:number) {
-     
+  onEdit(id: number) {
+
     let strError = '';
 
     if (!this.product.cid) {
       strError += strError = '- Please select category';
     }
     else
-    if (!this.product.sid) {
-      strError += strError = '' ? '' : '<br/>';
-      strError += '- Please select subcategory';
-    }
+      if (!this.product.sid) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += '- Please select subcategory';
+      }
 
 
     if (!this.product.productname) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter productname';
     }
-    else{
+    else {
       if (!this.validateProductname(this.product.productname)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Product name should only contain alphabets & number';
       }
     }
-  
+
     if (!this.product.price) {
       strError += strError = '' ? '' : '<br/>';
       strError += strError = '- Please enter price';
@@ -101,7 +101,7 @@ export class ViewproductComponent implements OnInit {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter description';
     }
-    else{
+    else {
       if (!this.validateProductname(this.product.description)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Description  should only contain alphabets & number';
@@ -128,7 +128,7 @@ export class ViewproductComponent implements OnInit {
       });
       return false;
     }
-  
+
 
 
     this.productService.updateProduct(id, this.product).subscribe((data: any) => {
@@ -137,7 +137,7 @@ export class ViewproductComponent implements OnInit {
         this.toastr.success('Product updated sucesfully', 'Successful', {
           disableTimeOut: false
         });
-      }  
+      }
       else {
         // alert("Not Matched");
         this.toastr.warning('Please fill the remaining fields', 'Warning', {
@@ -153,7 +153,7 @@ export class ViewproductComponent implements OnInit {
   }
 
 
-  
+
   productnameValidation() {
     let isValid = false;
     if (!this.validateProductname(this.product.productname)) {
@@ -171,7 +171,7 @@ export class ViewproductComponent implements OnInit {
   }
 
   validateProductname(productnameField) {
-    var reg = /^[A-Za-z0-9]+$/;
+    const reg = /^[A-Za-z0-9]+$/;
     return reg.test(productnameField) == false ? false : true;
   }
 
@@ -179,8 +179,7 @@ export class ViewproductComponent implements OnInit {
     let isValid = false;
     if (!this.validateprice(this.product.price)) {
       isValid = true;
-    }
-    ;
+    };
 
     if (isValid) {
       this.toastr.warning('Please enter price correctly', 'Warning', {
@@ -191,8 +190,8 @@ export class ViewproductComponent implements OnInit {
 
   }
   validateprice(priceField) {
-    var reg = /^[0-9]+$/;
-    return reg.test(priceField) == false ? false : true;
+    const reg = /^[0-9]+$/;
+    return reg.test(priceField) === false ? false : true;
   }
 
 
@@ -214,21 +213,21 @@ export class ViewproductComponent implements OnInit {
       if (data.Status.code === 0) {
         if (data.CategoryList) {
           this.categoryDetails = data.CategoryList;
-        
+
         }
       }
     }, (err) => {
-      
-      console.log(this.categoryDetails); 
+
+      console.log(this.categoryDetails);
     });
   }
-  
-  
+
+
   onCategoryChange(cid) {
     // this.subcategoryDetails = this.subcategoryDetails.filter(item => item.cid == cid);
     this.subcategoryList(cid);
   }
-  
+
   subcategoryList(catid) {
     this.productService.subcategoryList(catid).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -237,14 +236,14 @@ export class ViewproductComponent implements OnInit {
         }
       }
     }, (err) => {
-      
-      console.log(this.subcategoryDetails); 
+
+      console.log(this.subcategoryDetails);
     });
   }
-  
+
 
   // Image to Base64
-  
+
   handleFileInput(fileList: FileList) {
     const preview = document.getElementById('photos-preview');
     Array.from(fileList).forEach((file: File) => {
@@ -265,4 +264,8 @@ export class ViewproductComponent implements OnInit {
     });
   }
 
+
+  addnewProduct() {
+    this.router.navigate(['/admin/product/addproduct']);
+  }
 }

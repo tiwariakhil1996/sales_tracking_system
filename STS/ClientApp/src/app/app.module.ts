@@ -53,6 +53,8 @@ import { ModalModule } from 'ngx-bootstrap';
 import { NgbModal, NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 
+
+
 // import { NewcomponentsComponent } from './admin/newcomponents/newcomponents.component';
 
 

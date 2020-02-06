@@ -84,6 +84,15 @@ namespace STS.BLL.Service
             }
         }
 
+        // Active Deactive Category List
+        public async Task<List<CategoryListModel>> CategoryList_ActiveDeactive()
+        {
+            using (otherRepository = new OtherRepository())
+            {
+                return await otherRepository.CategoryList_ActiveDeactive();
+            }
+        }
+
         //Delete Category
         public async Task<TranStatus> deleteCategory(int Cid)
         {

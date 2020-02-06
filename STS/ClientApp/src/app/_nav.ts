@@ -21,47 +21,57 @@ export const navItems: INavData[] = [
   //   icon: 'icon-note'
   // },
 
-
-  {
-    name: 'Product',
-    url: '/admin/product',
-    icon: 'icon-note',
-    children: [
-      {
-        name: 'Add Product',
-        url: '/admin/product/addproduct',
-        icon: 'icon-note',
-      },
-      {
-        name: 'View Product',
+     {
+        name: 'Product',
         url: '/admin/product/viewproduct',
         icon: 'icon-calendar',
-      }
-    ]
-  },
+      },
+
+  // {
+  //   name: 'Product',
+  //   url: '/admin/product',
+  //   icon: 'icon-note',
+  //   children: [
+  //     {
+  //       name: 'Add Product',
+  //       url: '/admin/product/addproduct',
+  //       icon: 'icon-note',
+  //     },
+  //     {
+  //       name: 'View Product',
+  //       url: '/admin/product/viewproduct',
+  //       icon: 'icon-calendar',
+  //     }
+  //   ]
+  // },
   {
     name: 'Sales',
     url: '/admin/salesdata',
     icon: 'icon-map'
   },
 
-  {
-    name: 'Client',
-    url: '/admin/client',
-    icon: 'icon-note',
-    children: [
-      {
-        name: 'Add Client',
-        url: '/admin/client/addclient',
-        icon: 'icon-note',
-      },
-      {
-        name: 'View Client',
+     {
+        name: 'Client',
         url: '/admin/client/viewclient',
         icon: 'icon-calendar',
-      }
-    ]
-  },
+      },
+  // {
+  //   name: 'Client',
+  //   url: '/admin/client',
+  //   icon: 'icon-note',
+  //   children: [
+  //     {
+  //       name: 'Add Client',
+  //       url: '/admin/client/addclient',
+  //       icon: 'icon-note',
+  //     },
+  //     {
+  //       name: 'View Client',
+  //       url: '/admin/client/viewclient',
+  //       icon: 'icon-calendar',
+  //     }
+  //   ]
+  // },
 
 
   {
@@ -92,34 +102,44 @@ export const navItems: INavData[] = [
     icon: 'icon-map'
   },
 
-  
   {
-    name: 'Customize',
-    url: '/admin/newcompomnents',
-    icon: 'icon-layers',
-    children: [
-      {
-        name: 'Add Category',
-        url: '/admin/newcomponents/addcategory',
-        icon: 'icon-note',
-      },
-      {
-        name: 'View Category',
-        url: '/admin/newcomponents/viewcategory',
-        icon: 'icon-note',
-      },
-      {
-        name: 'Add Subcategory',
-        url: '/admin/newcomponents/addsubcategory',
-        icon: 'icon-calendar',
-      },   
-      {
-        name: 'View Subcategory',
-        url: '/admin/newcomponents/viewsubcategory',
-        icon: 'icon-calendar',
-      },
-    ]
+    name: 'Category',
+    url: '/admin/category-subcategory/viewcategory',
+    icon: 'icon-note',
   },
+  {
+    name: 'Subcategory',
+    url: '/admin/category-subcategory/viewsubcategory',
+    icon: 'icon-calendar',
+  },
+
+  // {
+  //   name: 'Customize',
+  //   url: '/admin/category-subcategory',
+  //   icon: 'icon-layers',
+  //   children: [
+  //     {
+  //       name: 'Add Category',
+  //       url: '/admin/category-subcategory/addcategory',
+  //       icon: 'icon-note',
+  //     },
+  //     {
+  //       name: 'View Category',
+  //       url: '/admin/category-subcategory/viewcategory',
+  //       icon: 'icon-note',
+  //     },
+  //     {
+  //       name: 'Add Subcategory',
+  //       url: '/admin/category-subcategory/addsubcategory',
+  //       icon: 'icon-calendar',
+  //     },   
+  //     {
+  //       name: 'View Subcategory',
+  //       url: '/admin/category-subcategory/viewsubcategory',
+  //       icon: 'icon-calendar',
+  //     },
+  //   ]
+  // },
 
 
   {

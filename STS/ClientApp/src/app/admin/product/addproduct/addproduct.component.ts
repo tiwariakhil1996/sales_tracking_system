@@ -32,7 +32,8 @@ export class AddproductComponent implements OnInit {
   subcategoryDetails: subcategoryDataModel[]=[];
 
   constructor(private router: Router,private toastr: ToastrService, private productService: CommonService,private modalServices: BsModalService,    private modalService: NgbModal) {
-    this.categoryList();
+    // this.categoryList();
+    this.active_deactive_CategoryList();
  
    }
 
@@ -55,6 +56,19 @@ export class AddproductComponent implements OnInit {
     });
   }
 
+  active_deactive_CategoryList(){
+    this.productService.active_deactive_CategoryList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.CategoryList_ActiveDeactive) {
+          this.categoryDetails = data.CategoryList_ActiveDeactive;
+        
+        }
+      }
+    }, (err) => {
+      
+      console.log(this.categoryDetails); 
+    });
+  }
 
   onCategoryChange(cid) {
     // this.subcategoryDetails = this.subcategoryDetails.filter(item => item.cid == cid);
@@ -147,7 +161,7 @@ export class AddproductComponent implements OnInit {
     this.productService.addProduct(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
         // alert('Product added sucesfully');
-        this.toastr.success('Product added sucesfully', 'Successful', {
+        this.toastr.success('Product added succesfully', 'Successful', {
           disableTimeOut: false
         });
         this.product = new productModel();
@@ -242,5 +256,11 @@ export class AddproductComponent implements OnInit {
      this.product.date=null;
   }
 
+
+  viewProductForm(){
+    this.router.navigate(['/admin/product/viewproduct']);
+
+
+  }
 
 }

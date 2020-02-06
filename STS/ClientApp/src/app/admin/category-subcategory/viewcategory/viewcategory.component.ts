@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CommonService } from '../../../service/common.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-viewcategory',
@@ -20,7 +21,8 @@ export class ViewcategoryComponent implements OnInit {
     private router: Router,
     private commonService: CommonService,
     private modalServices: BsModalService,
-    private modalService: NgbModal) {
+    private modalService: NgbModal,
+    private toastr: ToastrService) {
     this.categoryList();
   }
 
@@ -54,7 +56,10 @@ export class ViewcategoryComponent implements OnInit {
     // this.product.image = this.imageSrc;
     this.commonService.updateCategory(cid, this.category).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        alert('Category updated sucesfully');
+        // alert('Category updated sucesfully');
+        this.toastr.success('Category updated succesfully', 'Successful', {
+          disableTimeOut: false
+        });
       }
       this.category = new categoryDataModel();
       this.categoryList();
@@ -67,19 +72,20 @@ export class ViewcategoryComponent implements OnInit {
   deleteCategory(cid: number) {
     if (confirm('Are you sure to delete this record ?') === true) {
       this.commonService.deleteCategory(cid).subscribe(data => {
-        // this.commonService.categoryList();
         this.categoryList();
       });
     }
   }
+
   changeStatus(id: number) {
     console.log(id);
-    
     this.commonService.changeStatus(id).subscribe(data => {
-      // this.commonService.categoryList();
       this.categoryList();
     });
-
   }
 
+  addnewCategory(){
+    this.router.navigate(['/admin/category-subcategory/addcategory']);
+
+  }
 }

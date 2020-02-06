@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonService } from '../../../service/common.service';
 import { categoryDataModel, subcategoryDataModel } from '../../../model/model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-addsubcategory',
@@ -17,7 +18,7 @@ export class AddsubcategoryComponent implements OnInit {
   subcategory = new subcategoryDataModel();
   subcategoryDetails: subcategoryDataModel[]=[];
   
-  constructor(private router: Router, private productService: CommonService,) {
+  constructor(private router: Router, private toastr: ToastrService,private productService: CommonService,) {
     this.categoryList();
    }
 
@@ -43,8 +44,11 @@ export class AddsubcategoryComponent implements OnInit {
   addSubcategory(){
     this.productService.addSubcategory(this.subcategory).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        alert('Subcategory added sucesfully');
+        // alert('Subcategory added sucesfully');
         // this.subcategoryList(cid);
+        this.toastr.success('Subcategory added succesfully', 'Successful', {
+          disableTimeOut: false
+        });
       }
       this.subcategory = new subcategoryDataModel();
     }, (err) => {
@@ -66,4 +70,9 @@ export class AddsubcategoryComponent implements OnInit {
     });
   }
 
+
+  viewSubcategoryForm(){
+    this.router.navigate(['/admin/category-subcategory/viewsubcategory']);
+
+  }
 }

@@ -92,11 +92,9 @@ export const routes: Routes = [
         loadChildren: () => import('./admin/map/map.module').then(m => m.MapModule)
       },
       {
-        path: 'newcomponents',
-        loadChildren: () => import('./admin/newcomponents/newcomponents.module').then(m => m.NewcomponentsModule)
+        path: 'category-subcategory',
+        loadChildren: () => import('./admin/category-subcategory/category-subcategory.module').then(m => m.CategorySubcategoryModule)
       },
-
-      
       {
         path: 'base',
         loadChildren: () => import('./admin/base/base.module').then(m => m.BaseModule)

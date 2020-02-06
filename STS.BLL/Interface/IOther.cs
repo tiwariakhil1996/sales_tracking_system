@@ -19,6 +19,9 @@ namespace STS.BLL.Interface
 
         Task<List<CityModel>> CityList(int sid);
 
+        //----------------------------------------------------------------   CATEGORY  ------------------------------------
+
+
         //Add Category
         Task<TranStatus> addCategory(CategoryModel model);
 
@@ -32,8 +35,15 @@ namespace STS.BLL.Interface
         //Active Deactive Category
         Task<TranStatus> ChangeStatusCategory(int id);
 
+        //Display Category
+        Task<List<CategoryListModel>> CategoryList_ActiveDeactive();
+
+
         //Delete Category
         Task<TranStatus> deleteCategory(int Cid);
+
+
+        //-----------------------------------------------------------------------   SUBCATEGORY  ---------------------------------------
 
         // Add Subcategory
         Task<TranStatus> addSubcategory(SubcategoryModel model);

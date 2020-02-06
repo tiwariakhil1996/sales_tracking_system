@@ -129,6 +129,20 @@ namespace STS.DAL
                 transaction.returnMessage = parameter.Get<string>("@Message");
                 transaction.code = parameter.Get<int>("@Code");
                 return transaction;
+
+            }
+        }
+
+
+        // Active Deactive Category
+        public async Task<List<CategoryListModel>> CategoryList_ActiveDeactive()
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<CategoryListModel>("CategoryList_ActiveDeactive", commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
             }
         }
 
