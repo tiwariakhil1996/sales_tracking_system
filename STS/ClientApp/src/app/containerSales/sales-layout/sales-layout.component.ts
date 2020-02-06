@@ -8,7 +8,7 @@ import { salesregisterModel } from '../../model/model';
 
 
 @Component({
-  selector: 'app-sales-layout',
+  selector: 'app-dashboard',
   templateUrl: './sales-layout.component.html'
 })
 export class SalesLayoutComponent {

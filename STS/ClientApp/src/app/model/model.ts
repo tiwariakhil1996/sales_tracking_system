@@ -46,9 +46,12 @@ export class categoryDataModel{
 }
 
 export class subcategoryDataModel{
+   cid:number;
+   cname:string;
    sid:number;
    sname:string;
-   cid:number;
+
+  
 }
 
 // client form
@@ -71,16 +74,16 @@ export class clientModel {
  //activity
 export class activityModel{
    aid:number;
-   productid:number;
+   productId:number;
    productname:string;
-   clientid:number;
-   clientname:string;
-   salesid:number;
-   salesname:string;
-   contact:number;
+   clientId:number;
+   clientName:string;
+   salesId:number;
+   salesName:string;
+   contact:string;
    address:string;
    latLong:string;
-   appointmentdate:string;
+   appointmentDate:string;
 }
 
 

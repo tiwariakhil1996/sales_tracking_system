@@ -12,10 +12,7 @@ namespace STS.Model
         public int SalesID { get; set; }
         public string ClientID { get; set; }
        
-        public int Contact { get; set; }
-     
-        public string Address { get; set; }
-       
+        public string Contact { get; set; }
         public string LatLong { get; set; }
 
         public string AppointmentDate { get; set; }
@@ -33,9 +30,7 @@ namespace STS.Model
         public string ClientID { get; set; }
         public string ClientName { get; set; }
 
-        public int Contact { get; set; }
-
-        public string Address { get; set; }
+        public string Contact { get; set; }
 
         public string LatLong { get; set; }
 

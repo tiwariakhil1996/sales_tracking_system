@@ -67,12 +67,13 @@ export class CommonService {
   viewsubcategoryList() {
     return this.http.get('/api/Other/ViewSubcategoryList/');
   }
-  updateSubcategory(sid: number, data:any) {
-    return this.http.put('/api/Other/updateSubcategory/'+ sid, data);
-  }
   deleteSubcategory(sid:number){
     return this.http.delete('/api/Other/deleteSubcategory/' + sid);
   }
+  updateSubcategory(sid: number, data:any) {
+    return this.http.put('/api/Other/updateSubcategory/'+ sid, data);
+  }
+  
 // ----------------------- ACTIVITY ------------------
 addActivity(data){
   return this.http.post('api/Activity/addActivity',data);
@@ -86,4 +87,5 @@ deleteActivity(aid: number) {
 updateActivity(aid: number,data:any) {
   return this.http.put('/api/Activity/updateActivity/' + aid,data);
 }
+
 }

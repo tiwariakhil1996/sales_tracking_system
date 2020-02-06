@@ -74,9 +74,10 @@ import { NgbModal, NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap'
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
+
     ToastrModule.forRoot(
       {
-        timeOut: 1000,
+        timeOut: 2000,
         positionClass: 'toast-top-right',
         preventDuplicates: false,
       }

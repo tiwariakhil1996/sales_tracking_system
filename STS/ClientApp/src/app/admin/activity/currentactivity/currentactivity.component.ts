@@ -23,19 +23,6 @@ export class CurrentactivityComponent implements OnInit {
 
   }
   
-
-
-// Delete
-
-// onDelete(id: number) {
-//   if (confirm('Are you sure to delete this record ?') === true) {
-//     this.productService.deleteProduct(id).subscribe(data => {
-//       this.productService.productList();
-//       this.productList();
-//     });
-//   }
-// }
-
 activityList() {
   this.activityService.activityList().subscribe((data: any) => {
     if (data.Status.code === 0) {
@@ -47,5 +34,16 @@ activityList() {
 
   });
 }
+
+// Delete
+onDelete(aid: number) {
+  if (confirm('Are you sure to delete this record ?') === true) {
+    this.activityService.deleteActivity(aid).subscribe(data => {
+      this.activityService.activityList();
+      this.activityList();
+    });
+  }
+}
+
 
 }

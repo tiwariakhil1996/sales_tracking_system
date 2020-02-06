@@ -1,112 +1,71 @@
-
 <div class="col-lg-12">
-    <div class="card">
-      <div class="card-header">
-       
-         Category Details
-      </div>
-      <!-- <div style="overflow-x:auto;"> -->
-      <div class="card-body table-responsive">
-        <table class="table table-bordered ">
-          <thead>
-            <tr class="table-success">
-              <th>Sr.no</th>
-              <th>ID</th>
-              <th>Category</th>
-             
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-           
-            <tr *ngFor="let item of categoryDetails;let i=index;" >
-              <td >{{i+1}}</td>
-              <td >{{item.cid}}</td>
-              <td >{{item.cname}}</td>
-         
-              
-              <!-- <td >{{item.date}}</td> -->
-              <td >
-                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" (click)="openupdatemodal(content,item)" ><i class="fa fa-edit" aria-hidden="true"></i></button> -->
-              
-                <button class='btn btn-danger' type="button" (click)="deleteCategory(item.cid)"><i class="fa fa-trash" aria-hidden="true"></i></button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  <div class="card">
+    <div class="card-header">
+      Category Details
+    </div>
+    <!-- <div style="overflow-x:auto;"> this css used for making responsive form -->
+    <div class="card-body table-responsive">
+      <table class="table table-bordered btn-center ">
+        <thead>
+          <tr class="table-success">
+            <th>Sr.no</th>
+            <th>ID</th>
+            <th>Category</th>
+            <th>Action</th>
+            <th>IsActive</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr *ngFor="let item of categoryDetails;let i=index;">
+            <td>{{i+1}}</td>
+            <td>{{item.cid}}</td>
+            <td>{{item.cname}}</td>
+            <td>
+              <button type="button" class="btn btn-primary" data-toggle="modal"
+                (click)="openupdatemodal(content,item)"><i class="fa fa-edit" aria-hidden="true"></i></button>
+              <button class='btn btn-danger' type="button" (click)="deleteCategory(item.cid)"><i class="fa fa-trash"
+                  aria-hidden="true"></i></button>
+            </td>
+            <td>
+              <button class="btn btn-success" type="button"><i class="fa fa-check-circle"
+                  aria-hidden="true"></i></button>
+              <button class="btn btn-danger" type="button"><i class="fa fa-times-circle"
+                  aria-hidden="true"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
-   
-  
-    <!-- <ng-template #content let-modal>
-                  <div class="modal-header">
-                    <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT</h4>
-                    <div>
-                      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                      </div>
-                  </div>
-              
-                    
-                         <div class="modal-body" style="color: black;">
-                          <div>
-                            <div class="form-group" hidden>
-                             <label for="id">ID</label>
-                               <input type="text" class="form-control"  [(ngModel)]="product.id" name="id" disabled>
-                           </div>
-                           <div class="form-group row">
-                            <div class="col-sm-6">
-                             <label for="category">Category</label>
-                               <select name="cid" class="form-control" [(ngModel)]="product.cid"  (click)="onCategoryChange($event.target.value)" >
-                                <option value="0" selected>Select category</option>
-                                <option *ngFor="let item of categoryDetails;" name="cname" value={{item.cid}}>{{item.cname}}</option>
-                              </select>
-                              </div>
-                            <div class="col-sm-6">
-                             <label for="subcategory">Subcategory</label>
-                               <select name="cid" class="form-control" [(ngModel)]="product.sid"  >
-                                <option value="0" selected>Select subcategory</option>
-                                <option *ngFor="let item of subcategoryDetails;" name="sname" value={{item.sid}} >{{item.sname}}</option>
-                            </select>
-                              </div>
-                           </div>
-  
-                           <div class="form-group row">
-                            <div class="col-sm-6">
-                            <label for="image">Image</label>
-                            <input class="form-control" type="file" id="fileupload" name="image"  multiple (change)="handleFileInput($event.target.files)" [(ngModel)]="product.image" />          
-  
-                           </div>
-  
-                           <div class="col-sm-6">
-                              <label for="productname">ProductName</label>
-                                <input type="text" class="form-control" [(ngModel)]="product.productname" name="productname">
-                           </div>
-                           </div>
-                            <div class="form-group">
-                               <label for="description">Description</label>
-                               <input type="text" class="form-control"  [(ngModel)]="product.description" name="description">
-                            </div>
-  
-                           
-  
-                            <div class="form-group row">
-                              <div class="col-sm-6">
-                               <label for="price">Price</label>
-                               <input type="text" class="form-control"  [(ngModel)]="product.price" name="price" >
-                             </div>
-            
-                             <div class="col-sm-6">
-                               <label for="date">Date</label>
-                                <input type="text" class="form-control" [(ngModel)]="product.date" name="date" >
-                            </div>
-                          </div>
-                       <button type="submit" class="btn btn-success" (click)="onEdit(product.id)">Update</button>
-                      <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal-body" (click)="modal.dismiss('Cross click')">Cancel</button> 
-                      </div>      
-                     </div>
-               
-             </ng-template>
-   -->
+</div>
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT</h4>
+    <div>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="modal-body" style="color: black;">
+    <div>
+      <div class="form-group" hidden>
+        <label for="cid">ID</label>
+        <input type="text" class="form-control" [(ngModel)]="category.cid" name="cid" disabled>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <label for="cname">Category Name</label>
+          <input type="text" class="form-control" [(ngModel)]="category.cname" name="cname">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success" (click)="onEdit(category.cid)">Update</button>
+      <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal-body" (click)="modal.dismiss('Cross click')">Cancel</button>
+    </div>
+  </div>
+
+</ng-template>

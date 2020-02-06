@@ -53,6 +53,7 @@ export class AddproductComponent implements OnInit {
       console.log(this.categoryDetails); 
     });
   }
+  
   onCategoryChange(cid) {
     // this.subcategoryDetails = this.subcategoryDetails.filter(item => item.cid == cid);
     this.subcategoryList(cid);
@@ -108,6 +109,14 @@ export class AddproductComponent implements OnInit {
   }
 
   resetForm() {
+    this.product.cid=null;
+    this.product.sid=null;
+    this.product.productname=null;
+    this.product.description=null;
+    this.product.price=null;
+    this.product.image=null;
+    this.product.date=null;
+
 
   }
 

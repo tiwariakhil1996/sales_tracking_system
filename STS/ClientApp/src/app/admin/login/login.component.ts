@@ -34,14 +34,27 @@ export class LoginComponent implements OnInit {
   // redirect the both register from admin and sales 
 
   submitLogin() {
-  this.adminService.AdminLogin(this.loginDetail).subscribe((data: any) => {
+    
+    this.adminService.AdminLogin(this.loginDetail).subscribe((data: any) => {
     if (data.Status.code === 0) {
       localStorage.setItem('adminLogin', JSON.stringify(data.loginDetail[0] || {}));
-      alert('Admin Login Successfully');
+      // alert('Admin Login Successfully');
+      this.Toastr.success('Login Successful', 'Successful', {
+        disableTimeOut: false,
+        timeOut:3000,
+
+      });
       this.router.navigate(['/admin/dashboard']);
+
     }
     else {
-      alert('UnSuccessfully');
+
+      // alert('UnSuccessfully');
+       this.Toastr.warning('Please enter valid uname and pass', 'Warning', {
+        disableTimeOut: false,
+        timeOut:3000,
+
+      });
     }
   }, (err) => {
   });

@@ -159,7 +159,7 @@ namespace STS.DAL
 
        
 
-        // Display Subcategory
+        // Display Subcategory selected by category and display the subcategory
         public async Task<List<SubcategoryListModel>> SubcategoryList(int catid)
         {
             using (var connection = new SqlConnection(ConnectionString))
@@ -174,7 +174,7 @@ namespace STS.DAL
             }
         }
 
-        //View Subcategory
+        //Display Subcategory
         public async Task<List<SubcategoryListModel>>   ViewSubcategoryList()
         {
             using (var connection = new SqlConnection(ConnectionString))
@@ -198,7 +198,10 @@ namespace STS.DAL
                 TranStatus transaction = new TranStatus();
                 DynamicParameters parameter = new DynamicParameters();
                 parameter.Add("@Sid", Sid);
+                parameter.Add("@Cid", model.Cid);
                 parameter.Add("@Sname", model.Sname);
+
+            
 
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);

@@ -17,9 +17,6 @@ namespace STS.Model
         public int Cid { get; set; }
 
     }
-
- 
-
     public partial class CityModel
     {
 
@@ -50,8 +47,10 @@ namespace STS.Model
 
     public partial class SubcategoryListModel
     {
+        public int Cid { get; set; }
+        public string Cname { get; set; }
         public int Sid { get; set; }
         public string Sname { get; set; }
-        public int Cid { get; set; }
+       
     }
 }
