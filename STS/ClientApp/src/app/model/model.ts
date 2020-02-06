@@ -43,6 +43,7 @@ export class productModel {
 export class categoryDataModel{
    cid:number;
    cname:string;
+   isActive:boolean;
 }
 
 export class subcategoryDataModel{

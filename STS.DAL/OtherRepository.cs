@@ -112,7 +112,7 @@ namespace STS.DAL
 
             }
         }
-        //Change Status Category
+        //Change Status Category this is all code is update
         public async Task<TranStatus> ChangeStatusCategory(int id)
         {
             using (var connection = new SqlConnection(ConnectionString))

@@ -37,6 +37,17 @@ export class ViewcategoryComponent implements OnInit {
       }
     );
   }
+  //change status
+  changeStatus(id: number) {
+    console.log(id);
+   this.commonService.changeStatus(id).subscribe(data => {
+      // this.commonService.categoryList();
+      this.categoryList();
+      console.log( this.categoryDetails);
+      
+    });
+
+  }
 
   // Delete
 

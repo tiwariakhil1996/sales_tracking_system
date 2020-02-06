@@ -57,6 +57,9 @@ export class CommonService {
   updateCategory(cid: number, data:any) {
     return this.http.put('/api/Other/updateCategory/'+ cid, data);
   }
+  changeStatus(id: number) {
+    return this.http.put('/api/Other/ChangeStatusCategory/' + id, null);
+  }
 // ---------------------------SUBCATEGORY ---------------------------------------
   addSubcategory(data){
     return this.http.post('api/Other/addSubcategory',data);
