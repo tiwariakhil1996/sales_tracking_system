@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AssignComponent } from './assign.component';
+import { ViewsubcategoryComponent } from './viewsubcategory.component';
 
-describe('AssignComponent', () => {
-  let component: AssignComponent;
-  let fixture: ComponentFixture<AssignComponent>;
+describe('ViewsubcategoryComponent', () => {
+  let component: ViewsubcategoryComponent;
+  let fixture: ComponentFixture<ViewsubcategoryComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AssignComponent ]
+      declarations: [ ViewsubcategoryComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AssignComponent);
+    fixture = TestBed.createComponent(ViewsubcategoryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

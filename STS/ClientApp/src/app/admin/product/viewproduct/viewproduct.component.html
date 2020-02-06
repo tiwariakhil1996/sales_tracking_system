@@ -1,13 +1,13 @@
 
 <div class="col-lg-12">
   <div class="card">
-    <div class="card-header">
+    <div class="card-header color font">
      
        Product Details
     </div>
     <!-- <div style="overflow-x:auto;"> -->
     <div class="card-body table-responsive">
-      <table class="table table-bordered ">
+      <table class="table table-bordered btn-center">
         <thead>
           <tr class="table-success">
             <th>Sr.no</th>
@@ -42,7 +42,7 @@
             <td >{{item.description}}</td>
             <td >{{item.price}}</td>
              <!-- <img style="width: 80px; height: 80px;" src={{item.image}}> -->
-            <td style='text-align:center padding=justify'><img style="max-width: 50px; max-height: 50px;" [src]="'assets/img/Images/Product'+item.image"></td>
+            <td style='text-align:center'><img style="max-width: 115px; max-height: 64px;" [src]="'assets/img/Images/Product/'+item.image"></td>
             
             <td >{{item.date}}</td>
             <td >
@@ -78,7 +78,6 @@
                          <div class="form-group row">
                           <div class="col-sm-6">
                            <label for="category">Category</label>
-                             <!-- <input type="text" class="form-control"  [(ngModel)]="product.cname" name="category"> -->
                              <select name="cid" class="form-control" [(ngModel)]="product.cid"  (click)="onCategoryChange($event.target.value)" >
                               <option value="0" selected>Select category</option>
                               <option *ngFor="let item of categoryDetails;" name="cname" value={{item.cid}}>{{item.cname}}</option>
@@ -86,8 +85,7 @@
                             </div>
                           <div class="col-sm-6">
                            <label for="subcategory">Subcategory</label>
-                             <!-- <input type="text" class="form-control"  [(ngModel)]="product.sname" name="subcategory" > -->
-                             <select name="cid" class="form-control" [(ngModel)]="product.sid"  >
+                             <select name="sid" class="form-control" [(ngModel)]="product.sid" >
                               <option value="0" selected>Select subcategory</option>
                               <option *ngFor="let item of subcategoryDetails;" name="sname" value={{item.sid}} >{{item.sname}}</option>
                           </select>

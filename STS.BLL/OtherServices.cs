@@ -65,6 +65,34 @@ namespace STS.BLL.Service
             }
         }
 
+        //Update Category
+        public async Task<TranStatus> updateCategory(int Cid, CategoryListModel model)
+        {
+            using (otherRepository = new OtherRepository())
+            {
+                return await otherRepository.updateCategory(Cid, model);
+            }
+        }
+
+
+        //Change Status Category
+        public async Task<TranStatus> ChangeStatusCategory(int id)
+        {
+            using (otherRepository = new OtherRepository())
+            {
+                return await otherRepository.ChangeStatusCategory(id);
+            }
+        }
+
+        //Delete Category
+        public async Task<TranStatus> deleteCategory(int Cid)
+        {
+            using (otherRepository = new OtherRepository())
+            {
+                return await otherRepository.deleteCategory(Cid);
+            }
+        }
+
         //Add Subcategory
 
         public Task<TranStatus> addSubcategory(SubcategoryModel model)
@@ -82,6 +110,33 @@ namespace STS.BLL.Service
             using (otherRepository = new OtherRepository())
             {
                 return await otherRepository.SubcategoryList(catid);
+            }
+        }
+
+        //View Subcategory
+        public async Task<List<SubcategoryListModel>> ViewSubcategoryList()
+        {
+            using (otherRepository = new OtherRepository())
+            {
+                return await otherRepository.ViewSubcategoryList();
+            }
+        }
+
+        //Update Subcategory
+        public async Task<TranStatus> updateSubcategory(int Sid, SubcategoryListModel model)
+        {
+            using (otherRepository = new OtherRepository())
+            {
+                return await otherRepository.updateSubcategory(Sid, model);
+            }
+        }
+
+        //Delete Subcategory
+        public async Task<TranStatus> deleteSubcategory(int Sid)
+        {
+            using (otherRepository = new OtherRepository())
+            {
+                return await otherRepository.deleteSubcategory(Sid);
             }
         }
     }

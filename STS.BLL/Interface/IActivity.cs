@@ -17,14 +17,14 @@ namespace STS.BLL.Interface
         Task<List<ActivityListModel>> ActivityList();
 
         //Update
-        //Task<TranStatus> updateClient(int ID, ClientListModel model);
+        Task<TranStatus> updateActivity(int Aid, ActivityListModel model);
 
         ////Update
         //Task<Tuple<TranStatus,List<ClientListModel>>> updateClient(int ID, ClientListModel model);
 
 
         //Delete
-        //Task<TranStatus> deleteClient(int ID);
+        Task<TranStatus> deleteActivity(int Aid);
     }
 }
 

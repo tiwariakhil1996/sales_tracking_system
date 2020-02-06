@@ -25,8 +25,10 @@ namespace STS.BLL.Interface
         Task<Tuple<List<updateSalesModel>, TranStatus>> updateSalesProfile(updateSalesModel model);
 
         //Display
-
         Task<List<SalesListModel>> RegisteredSalesList();
+
+        //Delete
+        Task<TranStatus> deleteSales(int ID);
     }
 }
 

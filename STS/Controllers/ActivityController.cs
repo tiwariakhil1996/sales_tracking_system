@@ -67,52 +67,52 @@ namespace STS.Controllers
 
         //Update
 
-        //[HttpPut]
-        //[Route("updateClient/{ID}")]
-        //public async Task<IActionResult> updateClient(int ID, [FromBody]ClientListModel model)
-        //{
-        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
-        //    HttpStatusCode statusCode = HttpStatusCode.OK;
-        //    TranStatus transaction = new TranStatus();
-        //    try
-        //    {
+        [HttpPut]
+        [Route("updateActivity/{Aid}")]
+        public async Task<IActionResult> updateActivity(int Aid, [FromBody]ActivityListModel model)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
 
-        //        transaction = await iclient.updateClient(ID, model);
+                transaction = await iactivity.updateActivity(Aid, model);
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        transaction = CommonHelper.TransactionErrorHandler(ex);
-        //        statusCode = HttpStatusCode.BadRequest;
-        //    }
-        //    dctData.Add("Status", transaction);
-        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
-        //}
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
 
 
 
         //Delete
-        //[HttpDelete]
-        //[Route("deleteClient/{ID}")]
-        //public async Task<IActionResult> deleteClient(int ID)
-        //{
-        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
-        //    HttpStatusCode statusCode = HttpStatusCode.OK;
-        //    TranStatus transaction = new TranStatus();
-        //    try
-        //    {
+        [HttpDelete]
+        [Route("deleteActivity/{Aid}")]
+        public async Task<IActionResult> deleteActivity(int AID)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
 
-        //        transaction = await iclient.deleteClient(ID);
+                transaction = await iactivity.deleteActivity(AID);
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        transaction = CommonHelper.TransactionErrorHandler(ex);
-        //        statusCode = HttpStatusCode.BadRequest;
-        //    }
-        //    dctData.Add("Status", transaction);
-        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
-        //}
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
 
     }
 }

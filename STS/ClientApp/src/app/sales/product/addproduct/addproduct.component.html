@@ -1,87 +1,83 @@
 <div class="animated fadeIn">
   <div class="row">
-      <div class="col-md-12">
-        <div class="card">
-          <div class="card-header">
-            <strong>Add Products</strong> 
-          </div>
-          <div class="card-body">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>Add Products</strong>
+        </div>
+        <div class="card-body">
 
           <div class="form-group row">
-                <!-- <div class="col-sm-6">
-                   <label class="text-input">Category</label>       
-                     <input type="text" id="cname" name="cname" [(ngModel)]="category.cname" class="form-control" placeholder="Enter category">
-                      <button type="submit" style="float: right;" class="btn btn-sm btn-success" (click)="addCategory()">Add</button>                    
-                 </div> -->
-                 <!-- <div class="col-sm-6">
-                  <label class="text-input">Subcategory</label>            
-                    <input type="text" id="sname" name="sname" [(ngModel)]="subcategory.sname" class="form-control" placeholder="Enter Subcategory">         
-                    <button style="float: right;" type="submit" class="btn btn-sm btn-success" (click)="addSubategory()">Add</button>
-                  </div> -->
+
           </div>
 
-             <div class="form-group row">
-              <div class="col-sm-6">
-                <label class="text-input">Category</label>      
-                <select name="cid" class="form-control" [(ngModel)]="product.cid"  (click)="onCategoryChange($event.target.value)" >
-                  <option value="0" selected>Select category</option>
-                  <option *ngFor="let item of categoryDetails;" name="cname" value={{item.cid}}>{{item.cname}}</option>
-                </select>
-                </div>
-                
-                   <div class="col-sm-6">
-                    <label class="text-input">Subcategory</label>   
-                      <select name="cid" class="form-control" [(ngModel)]="product.sid"  >
-                          <option value="0" selected>Select subcategory</option>
-                          <option *ngFor="let item of subcategoryDetails;" name="sname" value={{item.sid}} >{{item.sname}}</option>
-                      </select>
-                   </div>
-                      
-              </div>
-                 
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <label class="text-input">Category</label>
+              <select name="cid" class="form-control" [(ngModel)]="product.cid"
+                (click)="onCategoryChange($event.target.value)">
+                <option value="0" selected>Select category</option>
+                <option *ngFor="let item of categoryDetails;" name="cname" value={{item.cid}}>{{item.cname}}</option>
+              </select>
+            </div>
 
+            <div class="col-sm-6">
+              <label class="text-input">Subcategory</label>
+              <select name="cid" class="form-control" [(ngModel)]="product.sid">
+                <option value="0" selected>Select subcategory</option>
+                <option *ngFor="let item of subcategoryDetails;" name="sname" value={{item.sid}}>{{item.sname}}</option>
+              </select>
+            </div>
 
-               <!-- <span class="help-block">This is a help text</span> -->
-
-      
-
-               <div class="form-group row">
-                  <div class="col-sm-6">
-                    <label class="text-input">Product Name</label>
-                      <input type="text" id="productname" name="productname" [(ngModel)]="product.productname"  class="form-control" placeholder="Enter product name">
-                 
-                    <label class="text-input">Product Price</label>       
-                        <input type="text" id="price" name="price"  [(ngModel)]="product.price" class="form-control" placeholder="..">                
-                  </div>
-
-                   <div class="col-sm-6">
-                    <label class="textarea-input">Product Description</label>
-                      <textarea id="description" name="description"  [(ngModel)]="product.description" rows="5" class="form-control" placeholder="Content.."></textarea>
-                    </div>
-                  </div>
-  
-       
-  
-            <div class="form-group row">
-              <div class="col-sm-6">
-                <label class="text-input">Product Image</label>            
-                  <input class="form-control" type="file" id="fileupload" name="image"  multiple (change)="handleFileInput($event.target.files)" [(ngModel)]="product.image" />                      
-              </div>
-  
-              <div class="col-sm-6">
-                <label class="text-input">Added on</label>
-                  <input class="form-control" id="date" type="date" name="date" [(ngModel)]="product.date" placeholder="Select Date">
-                </div>
-              </div>
-
-           
           </div>
-          <div class="card-footer">
-            <button type="submit" class="btn btn-sm btn-primary" (click)="submitForm()"><i class="fa fa-dot-circle-o"></i> Submit</button>
-            <button type="reset" class="btn btn-sm btn-danger" (click)="resetForm()"><i class="fa fa-ban"></i> Reset</button>
+
+
+
+          <!-- <span class="help-block">This is a help text</span> -->
+
+
+
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <label class="text-input">Product Name</label>
+              <input type="text" id="productname" name="productname" [(ngModel)]="product.productname"
+                class="form-control" placeholder="Enter product name">
+
+              <label class="text-input">Product Price</label>
+              <input type="text" id="price" name="price" [(ngModel)]="product.price" class="form-control"
+                placeholder="..">
+            </div>
+
+            <div class="col-sm-6">
+              <label class="textarea-input">Product Description</label>
+              <textarea id="description" name="description" [(ngModel)]="product.description" rows="5"
+                class="form-control" placeholder="Content.."></textarea>
+            </div>
           </div>
+
+
+
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <label class="text-input">Product Image</label>
+              <input class="form-control" type="file" id="fileupload" name="image" multiple
+                (change)="handleFileInput($event.target.files)" [(ngModel)]="product.image" />
+            </div>
+
+            <div class="col-sm-6">
+              <label class="text-input">Added on</label>
+              <input class="form-control" id="date" type="date" name="date" [(ngModel)]="product.date"
+                placeholder="Select Date">
+            </div>
+          </div>
+
+
+        </div>
+        <div class="card-footer">
+          <button type="submit" class="btn btn-sm btn-primary" (click)="submitForm()"><i class="fa fa-dot-circle-o"></i>
+            Submit</button>
+          <button type="reset" class="btn btn-sm btn-danger" (click)="resetForm()"><i class="fa fa-ban"></i>
+            Reset</button>
         </div>
       </div>
-  
-  
-  
+    </div>

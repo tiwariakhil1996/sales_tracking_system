@@ -13,8 +13,6 @@ namespace STS.Model
         public string ClientID { get; set; }
        
         public string Contact { get; set; }
-     
-        public string Address { get; set; }
        
         public string LatLong { get; set; }
 
@@ -25,6 +23,7 @@ namespace STS.Model
     public partial class ActivityListModel
     {
         public int Aid { get; set; }
+        public int ProductID { get; set; }
         public string Productname { get; set; }
       
         public int SalesID { get; set; }
@@ -34,7 +33,6 @@ namespace STS.Model
 
         public string Contact { get; set; }
 
-        public string Address { get; set; }
 
         public string LatLong { get; set; }
 

@@ -65,6 +65,7 @@ export const routes: Routes = [
     data: {
       title: 'Home'
     },
+    // canActivate: [AuthGuard],
     children: [
       {
         path: 'dashboard',
@@ -75,8 +76,8 @@ export const routes: Routes = [
         loadChildren: () => import('./admin/product/product.module').then(m => m.ProductModule)
       },
       {
-        path: 'assign',
-        loadChildren: () => import('./admin/assign/assign.module').then(m => m.AssignModule)
+        path: 'salesdata',
+        loadChildren: () => import('./admin/salesdata/salesdata.module').then(m => m.SalesdataModule)
       },
       {
         path: 'client',
@@ -90,6 +91,12 @@ export const routes: Routes = [
         path: 'map',
         loadChildren: () => import('./admin/map/map.module').then(m => m.MapModule)
       },
+      {
+        path: 'newcomponents',
+        loadChildren: () => import('./admin/newcomponents/newcomponents.module').then(m => m.NewcomponentsModule)
+      },
+
+      
       {
         path: 'base',
         loadChildren: () => import('./admin/base/base.module').then(m => m.BaseModule)
@@ -173,10 +180,7 @@ export const routes: Routes = [
         path: 'map',
         loadChildren: () => import('./sales/map/map.module').then(m => m.MapModule)
       }
-      // {
-      //   path: 'demo',
-      //   loadChildren: () => import('./sales/demo/demo.module').then(m => m.DemoModule)
-      // }
+     
 
      ] },
 

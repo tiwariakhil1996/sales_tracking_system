@@ -39,6 +39,11 @@ export const navItems: INavData[] = [
       }
     ]
   },
+  {
+    name: 'Sales',
+    url: '/admin/salesdata',
+    icon: 'icon-map'
+  },
 
   {
     name: 'Client',
@@ -86,11 +91,37 @@ export const navItems: INavData[] = [
     url: '/admin/map',
     icon: 'icon-map'
   },
-  // {
-  //   name: 'Demo',
-  //   url: '/admin/demo',
-  //   icon: 'icon-demo'
-  // },
+
+  
+  {
+    name: 'Customize',
+    url: '/admin/newcompomnents',
+    icon: 'icon-layers',
+    children: [
+      {
+        name: 'Add Category',
+        url: '/admin/newcomponents/addcategory',
+        icon: 'icon-note',
+      },
+      {
+        name: 'View Category',
+        url: '/admin/newcomponents/viewcategory',
+        icon: 'icon-note',
+      },
+      {
+        name: 'Add Subcategory',
+        url: '/admin/newcomponents/addsubcategory',
+        icon: 'icon-calendar',
+      },   
+      {
+        name: 'View Subcategory',
+        url: '/admin/newcomponents/viewsubcategory',
+        icon: 'icon-calendar',
+      },
+    ]
+  },
+
+
   {
     name: 'Logout',
     url: '/admin/login',

@@ -23,7 +23,7 @@ export class SalesLoginComponent implements OnInit {
   loginDetail = new salesregisterModel();
   salesDetails: salesregisterModel[] = [];
 
-  constructor(private router: Router, private salesService: SalesService) {
+  constructor(private router: Router, private salesService: SalesService,private toastr: ToastrService) {
     // this.registerList();
      this.logout();
 
@@ -58,11 +58,19 @@ export class SalesLoginComponent implements OnInit {
     this.salesService.SalesLoginService(this.loginDetail).subscribe((data: any) => {
       if (data.Status.code === 0) {
         localStorage.setItem('salesLogin', JSON.stringify(data.loginDetail[0] || {}));
-        alert('Sales Login Successfully');
+        // alert('Sales Login Successfully');
+        this.toastr.success('Login Successful', 'Successful', {
+          disableTimeOut: false
+        });
+
         this.router.navigate(['/sales/dashboard']);
       }
       else {
-        alert('UnSuccessfully');
+        // alert('UnSuccessfully');
+
+        this.toastr.warning('Please enter valid username and password', 'Warning', {
+          disableTimeOut: false
+        });
       }
     }, (err) => {
     });

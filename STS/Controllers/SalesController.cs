@@ -32,7 +32,6 @@ namespace STS.Controllers
             TranStatus transaction = new TranStatus();
             try
             {
-
                 transaction = await isales.RegisterSales(model);
 
             }
@@ -46,6 +45,7 @@ namespace STS.Controllers
         }
 
 
+      
         //Login
 
         //[HttpPost]
@@ -102,6 +102,7 @@ namespace STS.Controllers
         {
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
             try
             {
 
@@ -146,5 +147,28 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
+
+        //Delete
+        [HttpDelete]
+        [Route("deleteSales/{ID}")]
+        public async Task<IActionResult> deleteSales(int ID)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+
+                transaction = await isales.deleteSales(ID);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
     }
 }

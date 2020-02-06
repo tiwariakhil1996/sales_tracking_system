@@ -48,6 +48,7 @@
     "core-js": "^2.6.11",
     "flag-icon-css": "^3.4.5",
     "font-awesome": "^4.7.0",
+    "material-icons": "^0.3.1",
     "moment": "^2.24.0",
     "mutationobserver-shim": "^0.3.3",
     "ng-modal": "^1.0.2",

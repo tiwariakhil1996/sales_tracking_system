@@ -92,6 +92,65 @@ namespace STS.DAL
             }
         }
 
+        //Update Category
+        public async Task<TranStatus> updateCategory(int Cid, CategoryListModel model)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@Cid", Cid);
+                parameter.Add("@Cname", model.Cname);
+              
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                await connection.QueryAsync("updateCategory", parameter, commandType: CommandType.StoredProcedure);
+                transaction.returnMessage = parameter.Get<string>("@Message");
+                transaction.code = parameter.Get<int>("@Code");
+                return transaction;
+
+            }
+        }
+
+        //Change Status Category
+        public async Task<TranStatus> ChangeStatusCategory(int id)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@Cid", id);
+
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                await connection.QueryAsync("ChangeStatusCategory", parameter, commandType: CommandType.StoredProcedure);
+                transaction.returnMessage = parameter.Get<string>("@Message");
+                transaction.code = parameter.Get<int>("@Code");
+                return transaction;
+            }
+        }
+
+        //Delete Category
+        public async Task<TranStatus> deleteCategory(int Cid)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@Cid", Cid);
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                await connection.QueryAsync("deleteCategory", parameter, commandType: CommandType.StoredProcedure);
+                transaction.returnMessage = parameter.Get<string>("@Message");
+                transaction.code = parameter.Get<int>("@Code");
+                return transaction;
+
+            }
+        }
 
         //Insert SubCategory
         public async Task<TranStatus> addSubcategory(SubcategoryModel model)
@@ -116,6 +175,8 @@ namespace STS.DAL
             }
         }
 
+       
+
         // Display Subcategory
         public async Task<List<SubcategoryListModel>> SubcategoryList(int catid)
         {
@@ -127,6 +188,62 @@ namespace STS.DAL
                 parameter.Add("@Cid", catid);
                 var result = await connection.QueryAsync<SubcategoryListModel>("SubcategoryList",parameter, commandType: CommandType.StoredProcedure);
                 return result.ToList();
+
+            }
+        }
+
+        //View Subcategory
+        public async Task<List<SubcategoryListModel>>   ViewSubcategoryList()
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                var result = await connection.QueryAsync<SubcategoryListModel>("ViewSubcategoryList", commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
+
+
+        //Update Subcategory
+        public async Task<TranStatus> updateSubcategory(int Sid, SubcategoryListModel model)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@Sid", Sid);
+                parameter.Add("@Sname", model.Sname);
+
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                await connection.QueryAsync("updateSubcategory", parameter, commandType: CommandType.StoredProcedure);
+                transaction.returnMessage = parameter.Get<string>("@Message");
+                transaction.code = parameter.Get<int>("@Code");
+                return transaction;
+
+            }
+        }
+
+        //Delete Subcategory
+        public async Task<TranStatus> deleteSubcategory(int Sid)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@Sid", Sid);
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                await connection.QueryAsync("deleteSubcategory", parameter, commandType: CommandType.StoredProcedure);
+                transaction.returnMessage = parameter.Get<string>("@Message");
+                transaction.code = parameter.Get<int>("@Code");
+                return transaction;
 
             }
         }

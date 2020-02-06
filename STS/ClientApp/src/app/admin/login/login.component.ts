@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   loginDetail = new registerModel();
   adminDetails: registerModel[] = [];
 
-  constructor(private router: Router, private adminService: AdminService) {
+  constructor(private router: Router, private adminService: AdminService, private toastr: ToastrService) {
     // this.registerList();
 
     this. logout();
@@ -31,16 +31,27 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
 
   }
+ 
 
   submitLogin() {
+  
+
   this.adminService.AdminLogin(this.loginDetail).subscribe((data: any) => {
     if (data.Status.code === 0) {
       localStorage.setItem('adminLogin', JSON.stringify(data.loginDetail[0] || {}));
-      alert('Admin Login Successfully');
+      // alert('Admin Login Successfully');
+
+        this.toastr.success('Login Successful', 'Successful', {
+          disableTimeOut: false
+        });
+
       this.router.navigate(['/admin/dashboard']);
     }
     else {
-      alert('UnSuccessfully');
+      // alert('UnSuccessfully');
+      this.toastr.warning('Please enter valid username and password', 'Warning', {
+        disableTimeOut: false
+      });
     }
   }, (err) => {
   });
@@ -51,29 +62,6 @@ export class LoginComponent implements OnInit {
   }
   
 
-  // registerForm() {
-  //   this.router.navigate(['/register']);
-  // }
-
-  // adminregisterForm(){
-  //   this.router.navigate(['/admin/register']);
-  // }
-
-  // salesregisterForm(){
-  //   this.router.navigate(['/sales/register']);
-  // }
-
-  // registerList(){
-  //   this.adminService.RegisterList().subscribe((data: any) => {
-  //     if (data.Status.code === 0) {
-  //       if (data.RegisterList) {
-  //         this.adminDetails = data.RegisterList;
-  //       }
-  //     }
-  //   }, (err) => {
-
-  //   });
-  // }
 
 }
 

@@ -25,11 +25,31 @@ namespace STS.BLL.Interface
         //Display Category
         Task<List<CategoryListModel>> CategoryList();
 
+
+        //Update Category
+        Task<TranStatus> updateCategory(int Cid, CategoryListModel model);
+
+        //Active Deactive Category
+        Task<TranStatus> ChangeStatusCategory(int id);
+
+        //Delete Category
+        Task<TranStatus> deleteCategory(int Cid);
+
         // Add Subcategory
         Task<TranStatus> addSubcategory(SubcategoryModel model);
 
         //Display Subcategory
         Task<List<SubcategoryListModel>> SubcategoryList(int cid);
+
+        //View Subcategory
+        Task<List<SubcategoryListModel>> ViewSubcategoryList();
+
+        //Update Subcategory
+        Task<TranStatus> updateSubcategory(int Sid, SubcategoryListModel model);
+
+
+        //Delete Subcategory
+        Task<TranStatus> deleteSubcategory(int Sid);
 
     }
 }

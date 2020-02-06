@@ -14,6 +14,8 @@ namespace STS.DAL
     {
         TranStatus transaction = new TranStatus();
 
+
+        // Register
         public async Task<TranStatus> RegisterSales(SalesModel model)
         {
             using (var connection = new SqlConnection(ConnectionString))
@@ -25,9 +27,9 @@ namespace STS.DAL
             
                 parameter.Add("@SalesName", model.SalesName);
                 parameter.Add("@Email", model.Email);
-              
                 parameter.Add("@Password", model.Password);
                 parameter.Add("@Cpassword", model.Cpassword);
+
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
@@ -40,62 +42,10 @@ namespace STS.DAL
             }
         }
 
-        //public async Task<TranStatus> RegisterSales(SalesModel model)
-        //{
-        //    using (var connection = new SqlConnection(ConnectionString))
-
-        //    {
-        //        await connection.OpenAsync();
-        //        TranStatus transaction = new TranStatus();
-        //        DynamicParameters parameter = new DynamicParameters();
-        //        parameter.Add("@Image", model.Image);
-        //        parameter.Add("@SalesName", model.SalesName);
-        //        parameter.Add("@Email", model.Email);
-        //        parameter.Add("@Gender", model.Gender);
-        //        parameter.Add("@Mobile", model.Mobile);
-        //        parameter.Add("@Adharcard", model.Adharcard);
-        //        parameter.Add("@Address", model.Address);
-        //        parameter.Add("@Password", model.Password);
-        //        parameter.Add("@Cpassword", model.Cpassword);
-        //        parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
-        //        parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
-
-        //        await connection.QueryAsync("RegisterSales", parameter, commandType: CommandType.StoredProcedure);
-
-        //        transaction.returnMessage = parameter.Get<string>("@Message");
-        //        transaction.code = parameter.Get<int>("@Code");
-        //        return transaction;
-
-        //    }
-        //}
-
+       
 
 
         //Login
-        //public async Task<TranStatus> SalesLogin(SalesLoginModel model)
-        //{
-        //    using (var connection = new SqlConnection(ConnectionString))
-
-        //    {
-        //        await connection.OpenAsync();
-        //        TranStatus transaction = new TranStatus();
-        //        DynamicParameters parameter = new DynamicParameters();
-        //        parameter.Add("@ID", model.ID);
-        //        parameter.Add("@SalesName", model.SalesName);
-        //        parameter.Add("@Email", model.Email);
-        //        parameter.Add("@Password", model.Password);
-        //        parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
-        //        parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
-
-        //        await connection.QueryAsync("SalesLogin", parameter, commandType: CommandType.StoredProcedure);
-
-        //        transaction.returnMessage = parameter.Get<string>("@Message");
-        //        transaction.code = parameter.Get<int>("@Code");
-        //        return transaction;
-
-        //    }
-        //}
-
         public async Task<Tuple<List<SalesLoginModel>, TranStatus>> SalesLogin(SalesLoginModel model)
         {
             using (var connection = new SqlConnection(ConnectionString))
@@ -182,6 +132,27 @@ namespace STS.DAL
                 connection.Open();
                 var result = await connection.QueryAsync<SalesListModel>("RegisteredSalesList", commandType: CommandType.StoredProcedure);
                 return result.ToList();
+
+            }
+        }
+
+        //Delete
+        public async Task<TranStatus> deleteSales(int ID)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@ID", ID);
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                //await connection.QueryMultipleAsync(nameof(deleteClient), parameter, commandType: CommandType.StoredProcedure);
+                await connection.QueryAsync("deleteSales", parameter, commandType: CommandType.StoredProcedure);
+                transaction.returnMessage = parameter.Get<string>("@Message");
+                transaction.code = parameter.Get<int>("@Code");
+                return transaction;
 
             }
         }
