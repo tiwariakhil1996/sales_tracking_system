@@ -29,6 +29,7 @@ export class ViewcategoryComponent implements OnInit {
       if (data.Status.code === 0) {
         if (data.CategoryList) {
           this.categoryDetails = data.CategoryList;
+          //This is display the IsActive  value true and false..
           console.log(this.categoryDetails);
         }
       }
