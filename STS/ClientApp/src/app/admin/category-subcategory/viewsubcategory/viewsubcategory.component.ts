@@ -91,8 +91,16 @@ export class ViewsubcategoryComponent implements OnInit {
     }
   }
 
+  changeSubcategoryStatus(id: number) {
+    console.log(id);
+    this.categoryService.changeStatus(id).subscribe(data => {
+      this.viewsubcategoryList();
+    });
+  }
+
   addnewSubategory() {
     this.router.navigate(['/admin/category-subcategory/addsubcategory']);
 
   }
+
 }

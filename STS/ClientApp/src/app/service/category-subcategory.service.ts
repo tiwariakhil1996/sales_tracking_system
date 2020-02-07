@@ -56,6 +56,11 @@ export class CategorySubcategoryService {
   updateSubcategory(sid: number, data: any) {
     return this.http.put('/api/Category_Subcategory/updateSubcategory/' + sid, data);
   }
+  
+  changeSubcategoryStatus(id: number) {
+    return this.http.put('/api/Category_Subcategory/ChangeStatusSubcategory/' + id, null);
+  }
+
 
 
   deleteSubcategory(sid: number) {

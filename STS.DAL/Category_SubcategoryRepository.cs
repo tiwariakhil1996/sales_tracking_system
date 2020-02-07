@@ -87,6 +87,7 @@ namespace STS.DAL
 
             }
         }
+       
 
 
         // Active Deactive Category
@@ -215,8 +216,26 @@ namespace STS.DAL
 
             }
         }
+        //Change Status subcategory
+        public async Task<TranStatus> ChangeStatusSubcategory(int id)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@Sid", id);
 
-   
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                await connection.QueryAsync("ChangeStatusSubcategory", parameter, commandType: CommandType.StoredProcedure);
+                transaction.returnMessage = parameter.Get<string>("@Message");
+                transaction.code = parameter.Get<int>("@Code");
+                return transaction;
+
+            }
+        }
+
 
 
     }

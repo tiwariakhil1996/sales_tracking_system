@@ -48,6 +48,9 @@ namespace STS.BLL.Interface
 
         //Update Subcategory
         Task<TranStatus> updateSubcategory(int Sid, SubcategoryListModel model);
+        //Active Deactive Subcategory
+        Task<TranStatus> ChangeStatusSubcategory(int id);
+
 
 
         //Delete Subcategory

@@ -114,6 +114,14 @@ namespace STS.BLL.Service
                 return await categoryRepository.updateSubcategory(Sid, model);
             }
         }
+        //Change Status SubCategory
+        public async Task<TranStatus> ChangeStatusSubcategory(int id)
+        {
+            using (categoryRepository = new Category_SubcategoryRepository())
+            {
+                return await categoryRepository.ChangeStatusSubcategory(id);
+            }
+        }
 
         //Delete Subcategory
         public async Task<TranStatus> deleteSubcategory(int Sid)
