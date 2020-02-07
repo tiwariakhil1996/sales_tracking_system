@@ -8,16 +8,8 @@ using System.Threading.Tasks;
 
 namespace STS.BLL.Interface
 {
-    public interface IOther
+    public interface ICategory_Subcategory
     {
-        
-
-        //Display Country
-        Task<List<CountryModel>> CountryList();
-
-        Task<List<StateModel>> StateList(int cid);
-
-        Task<List<CityModel>> CityList(int sid);
 
         //----------------------------------------------------------------   CATEGORY  ------------------------------------
 

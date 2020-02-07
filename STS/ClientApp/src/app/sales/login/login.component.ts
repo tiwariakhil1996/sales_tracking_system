@@ -2,10 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { SalesService } from '../../service/sales.service';
-import { salesregisterModel } from '../../model/model';
-
-
-
+import { salesregisterModel } from '../../model/sales';
 
 @Component({
   selector: 'app-dashboard',

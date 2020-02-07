@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { categoryDataModel } from '../../../model/model';
 import { Router } from '@angular/router';
-import { CommonService } from '../../../service/common.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
+import { categoryDataModel } from '../../../model/category-subcategory';
 
 @Component({
   selector: 'app-viewcategory',
@@ -19,7 +19,7 @@ export class ViewcategoryComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private commonService: CommonService,
+    private categoryService: CategorySubcategoryService,
     private modalServices: BsModalService,
     private modalService: NgbModal,
     private toastr: ToastrService) {
@@ -30,7 +30,7 @@ export class ViewcategoryComponent implements OnInit {
   }
 
   categoryList() {
-    this.commonService.categoryList().subscribe((data: any) => {
+    this.categoryService.categoryList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.CategoryList) {
           this.categoryDetails = data.CategoryList;
@@ -54,7 +54,7 @@ export class ViewcategoryComponent implements OnInit {
 
   updateCategory(cid: number) {
     // this.product.image = this.imageSrc;
-    this.commonService.updateCategory(cid, this.category).subscribe((data: any) => {
+    this.categoryService.updateCategory(cid, this.category).subscribe((data: any) => {
       if (data.Status.code === 0) {
         // alert('Category updated sucesfully');
         this.toastr.success('Category updated succesfully', 'Successful', {
@@ -71,7 +71,7 @@ export class ViewcategoryComponent implements OnInit {
 
   deleteCategory(cid: number) {
     if (confirm('Are you sure to delete this record ?') === true) {
-      this.commonService.deleteCategory(cid).subscribe(data => {
+      this.categoryService.deleteCategory(cid).subscribe(data => {
         this.categoryList();
       });
     }
@@ -79,7 +79,7 @@ export class ViewcategoryComponent implements OnInit {
 
   changeStatus(id: number) {
     console.log(id);
-    this.commonService.changeStatus(id).subscribe(data => {
+    this.categoryService.changeStatus(id).subscribe(data => {
       this.categoryList();
     });
   }

@@ -6,7 +6,6 @@ import { NgModule } from '@angular/core';
 import { ActivityRoutingModule } from './activity-routing.module';
 import { ActivityComponent } from './activity.component';
 import { AddactivityComponent } from './addactivity/addactivity.component';
-import { PastactivityComponent } from './pastactivity/pastactivity.component';
 import { CurrentactivityComponent } from './currentactivity/currentactivity.component';
 // Angular
 
@@ -19,7 +18,6 @@ import { CurrentactivityComponent } from './currentactivity/currentactivity.comp
   declarations: [
     ActivityComponent,
     AddactivityComponent,
-    PastactivityComponent,
     CurrentactivityComponent
   ]
 })

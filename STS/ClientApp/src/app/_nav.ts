@@ -76,74 +76,32 @@ export const navItems: INavData[] = [
 // Activity side bar routing
   {
     name: 'Activity',
-    url: '/admin/activity',
-    icon: 'icon-layers',
-    children: [
-      {
-        name: 'Add Activity',
-        url: '/admin/activity/addactivity',
-        icon: 'icon-note',
-      },
-      {
-        name: 'Past Activity',
-        url: '/admin/activity/pastactivity',
-        icon: 'icon-calendar',
-      },
-      {
-        name: 'Current Activity',
-        url: '/admin/activity/currentactivity',
-        icon: 'icon-notebook',
-      },
-    ]
+    url: '/admin/activity/currentactivity',
+    icon: 'icon-notebook',
   },
-  //Demo side bar routing 
-  {
-    name: 'Demo All API',
-    url: '/admin/demoallapi',
-    icon: 'icon-layers',
-    children: [
-      {
-        name: 'Add Demo',
-        url: '/admin/demoallapi/adddemo',
-        icon: 'icon-note',
-      },
-      {
-        name: 'View Demo',
-        url: '/admin/demoallapi/viewdemo',
-        icon: 'icon-calendar',
-      },
-      
-    ]
-  },
-  {
-    name: 'Add Components',
-    url: '/admin/newcompomnents',
-    icon: 'icon-layers',
-    children: [
-      {
-        name: 'Add Category',
-        url: '/admin/newcomponents/addcategory',
-        icon: 'icon-note',
-      },
-      {
-        name: 'View Category',
-        url: '/admin/newcomponents/viewcategory',
-        icon: 'icon-note',
-      },
-      {
-        name: 'Add Subcategory',
-        url: '/admin/newcomponents/addsubcategory',
-        icon: 'icon-calendar',
-      },   
-      {
-        name: 'View Subcategory',
-        url: '/admin/newcomponents/viewsubcategory',
-        icon: 'icon-calendar',
-      },
-    ]
-  },
- 
-  
+
+  // {
+  //   name: 'Activity',
+  //   url: '/admin/activity',
+  //   icon: 'icon-layers',
+  //   children: [
+  //     {
+  //       name: 'Add Activity',
+  //       url: '/admin/activity/addactivity',
+  //       icon: 'icon-note',
+  //     },
+  //     {
+  //       name: 'Past Activity',
+  //       url: '/admin/activity/pastactivity',
+  //       icon: 'icon-calendar',
+  //     },
+  //     {
+  //       name: 'Current Activity',
+  //       url: '/admin/activity/currentactivity',
+  //       icon: 'icon-notebook',
+  //     },
+  //   ]
+  // },
   {
     name: 'Map',
     url: '/admin/map',
@@ -180,7 +138,7 @@ export const navItems: INavData[] = [
   //       name: 'Add Subcategory',
   //       url: '/admin/category-subcategory/addsubcategory',
   //       icon: 'icon-calendar',
-  //     },   
+  //     },
   //     {
   //       name: 'View Subcategory',
   //       url: '/admin/category-subcategory/viewsubcategory',

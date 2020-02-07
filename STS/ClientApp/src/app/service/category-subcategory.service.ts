@@ -8,53 +8,58 @@ export class CategorySubcategoryService {
 
   constructor(private http: HttpClient) { }
 
-  // ---------------  Category
-
+  
+  // ---------------------------- CATEGORY ---------------------------------------
   addCategory(data) {
-    return this.http.post('/api/Category/AddCategory', data);
+    return this.http.post('api/Category_Subcategory/addCategory', data);
   }
+
   categoryList() {
-    return this.http.get('/api/Category/CategoryList');
+    return this.http.get('/api/Category_Subcategory/CategoryList');
   }
 
-  //------------------Subcategory
-
-  addSubcategory(data) {
-    return this.http.post('/api/Subcategory/AddSubcategory', data);
+  deleteCategory(cid: number) {
+    return this.http.delete('/api/Category_Subcategory/deleteCategory/' + cid);
   }
-  subcategoryList(category_id) {
-    return this.http.get('/api/Subcategory/SubcategoryList/' + category_id);
-  } 
+
+  updateCategory(cid: number, data: any) {
+    return this.http.put('/api/Category_Subcategory/updateCategory/' + cid, data);
+  }
+
+  changeStatus(id: number) {
+    return this.http.put('/api/Category_Subcategory/ChangeStatusCategory/' + id, null);
+  }
+
+  active_deactive_CategoryList(){
+    return this.http.get('/api/Category_Subcategory/CategoryList_ActiveDeactive');
+  }
 
 
-  // productList() {
-  //   return this.http.get('/api/Product/ProductList');
-  // }
-
-  // deleteProduct(id: number) {
-  //   return this.http.delete('/api/Product/deleteProduct/' + id);
-  // }
-
-  // updateProduct(id: number, data:any) {
-  //   return this.http.put('/api/Product/updateProduct/'+ id, data);
-  // }
 
 
-  // // -----------------  Client
 
-  // addClient(data) {
-  //   return this.http.post('/api/Client/addClient', data);
-  // }
+   // ---------------------------SUBCATEGORY ---------------------------------------
 
-  // clientList() {
-  //   return this.http.get('/api/Client/ClientList');
-  // }
 
-  // deleteClient(id: number) {
-  //   return this.http.delete('/api/Client/deleteClient/' + id);
-  // }
+   addSubcategory(data) {
+    return this.http.post('api/Category_Subcategory/addSubcategory', data);
+  }
 
-  // updateClient(id: number,data:any) {
-  //   return this.http.put('/api/Client/updateClient/'+id, data);
-  // }
+  subcategoryList(catid) {
+    return this.http.get('/api/Category_Subcategory/SubcategoryList/' + catid);
+  }
+
+  viewsubcategoryList() {
+    return this.http.get('/api/Category_Subcategory/ViewSubcategoryList/');
+  }
+
+  updateSubcategory(sid: number, data: any) {
+    return this.http.put('/api/Category_Subcategory/updateSubcategory/' + sid, data);
+  }
+
+
+  deleteSubcategory(sid: number) {
+    return this.http.delete('/api/Category_Subcategory/deleteSubcategory/' + sid);
+  }
+
 }

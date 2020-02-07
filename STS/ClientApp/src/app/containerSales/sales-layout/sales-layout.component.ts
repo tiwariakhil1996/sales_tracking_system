@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { SalesService } from '../../service/sales.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { salesregisterModel } from '../../model/model';
+import { salesregisterModel } from '../../model/sales';
 
 
 @Component({

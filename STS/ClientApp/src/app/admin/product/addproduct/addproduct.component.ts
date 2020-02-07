@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { productModel, categoryDataModel, subcategoryDataModel } from '../../../model/model';
 import { Router } from '@angular/router';
-import { CommonService } from '../../../service/common.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
+import { ProductService } from '../../../service/product.service';
+import { productModel } from '../../../model/product';
+import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
 
 
 
@@ -30,8 +32,13 @@ export class AddproductComponent implements OnInit {
   subcategory = new subcategoryDataModel();
   subcategoryDetails: subcategoryDataModel[]=[];
 
-  constructor(private router: Router,private toastr: ToastrService, private productService: CommonService,private modalServices: BsModalService,    private modalService: NgbModal) {
-    // this.categoryList();
+  constructor(private router: Router,
+    private toastr: ToastrService,
+    private productService: ProductService,
+    private modalServices: BsModalService,
+    private modalService: NgbModal,
+    private categoryService: CategorySubcategoryService) {
+
     this.active_deactive_CategoryList();
  
    }
@@ -42,7 +49,7 @@ export class AddproductComponent implements OnInit {
   
 
   categoryList() {
-    this.productService.categoryList().subscribe((data: any) => {
+    this.categoryService.categoryList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.CategoryList) {
           this.categoryDetails = data.CategoryList;
@@ -56,7 +63,7 @@ export class AddproductComponent implements OnInit {
   }
 
   active_deactive_CategoryList(){
-    this.productService.active_deactive_CategoryList().subscribe((data: any) => {
+    this.categoryService.active_deactive_CategoryList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.CategoryList_ActiveDeactive) {
           this.categoryDetails = data.CategoryList_ActiveDeactive;
@@ -76,7 +83,7 @@ export class AddproductComponent implements OnInit {
 
 
   subcategoryList(catid) {
-    this.productService.subcategoryList(catid).subscribe((data: any) => {
+    this.categoryService.subcategoryList(catid).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.SubcategoryList) {
           this.subcategoryDetails = data.SubcategoryList;
