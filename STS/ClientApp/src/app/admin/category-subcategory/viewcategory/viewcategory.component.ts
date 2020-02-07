@@ -34,7 +34,7 @@ export class ViewcategoryComponent implements OnInit {
       if (data.Status.code === 0) {
         if (data.CategoryList) {
           this.categoryDetails = data.CategoryList;
-          console.log(this.categoryDetails);
+          // console.log(this.categoryDetails);
         }
       }
     }, (err) => {

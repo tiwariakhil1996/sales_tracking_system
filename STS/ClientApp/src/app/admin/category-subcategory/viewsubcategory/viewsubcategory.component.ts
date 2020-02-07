@@ -54,7 +54,7 @@ export class ViewsubcategoryComponent implements OnInit {
         if (data.ViewSubcategoryList) {
           this.subcategoryDetails = data.ViewSubcategoryList;
           //This console is display the IsActive value true and false with all details.
-          console.log(this.subcategoryDetails);
+          // console.log(this.subcategoryDetails);
         }
       }
     }, (err) => {

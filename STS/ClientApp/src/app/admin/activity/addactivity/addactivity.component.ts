@@ -16,9 +16,9 @@ import { clientModel } from '../../../model/client';
 })
 export class AddactivityComponent implements OnInit {
   activity = new activityModel();
-  activityDetails: activityModel[]=[];
+  activityDetails: activityModel[] = [];
   sales = new salesregisterModel();
-  salesDetails: salesregisterModel[]=[];
+  salesDetails: salesregisterModel[] = [];
   product = new productModel();
   productDetails: productModel[] = [];
   client = new clientModel();
@@ -33,10 +33,10 @@ export class AddactivityComponent implements OnInit {
     this.productList();
     this.clientList();
     this.SalesList();
-   }
+  }
   ngOnInit() {
   }
- 
+
   productList() {
     this.productService.productList().subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -57,7 +57,7 @@ export class AddactivityComponent implements OnInit {
     }, (err) => {
     });
   }
-  SalesList(){
+  SalesList() {
     this.salesService.SalesList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.RegisteredSalesList) {
@@ -74,21 +74,22 @@ export class AddactivityComponent implements OnInit {
       }
       this.activity = new activityModel();
     }, (err) => {
-    
+
     });
   }
 
+
+
   resetForm() {
-    this.activity.productId=null;
-    this.activity.clientId=null;
-    this.activity.salesId=null;
-    this.activity.contact=null;
-    this.activity.latLong=null;
-    this.activity.appointmentDate=null;
+    this.activity.productId = null;
+    this.activity.clientId = null;
+    this.activity.salesId = null;
+    this.activity.contact = null;
+    this.activity.latLong = null;
+    this.activity.appointmentDate = null;
   }
 
-  
-  viewActivityForm(){
+  viewActivityForm() {
     this.router.navigate(['/admin/activity/currentactivity']);
   }
 

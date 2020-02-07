@@ -138,7 +138,6 @@ export class AddclientComponent implements OnInit {
           timeOut: 2000
         });
       }
-      this.client = new clientModel();
     }, (err) => {
  
 
@@ -258,8 +257,8 @@ validateMobile(mobileField) {
   cityList(stid) {
     this.country_state_cityService.cityList(stid).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        if (data.cityList) {
-          this.cityDetails = data.cityList;
+        if (data.CityList) {
+          this.cityDetails = data.CityList;
         }
       }
     }, (err) => {
