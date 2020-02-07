@@ -59,14 +59,21 @@
         </div>
        </div>
            <div class="modal-body" style="color: black;">
+
+            <div class="col-sm-6">
+              <label class="text-input">Category</label>   
+            <select name="cid" class="form-control" [(ngModel)]="subcategory.cid" >
+              <option value="0" selected>Select category</option>
+              <option *ngFor="let item of categoryDetails;" name="cname" value={{item.cid}}>{{item.cname}}</option>
+            </select>
+            </div>
+
               <div class="col-sm-6">
                 <label class="text-input">Subcategory</label>            
                 <input type="text" id="sname" name="sname" [(ngModel)]="subcategory.sname" class="form-control" placeholder="Enter Subcategory">         
 
                   <button style="float: right;" type="submit" class="btn btn-sm btn-success" (click)="updateSubcategory(subcategory.sid)">Submit</button>
                   <button type="button" style="float: right;" class="btn btn-sm btn-danger" (click)="modal.dismiss('Cross click')">Cancel</button> 
-
-         
                 </div>      
             </div>
 </ng-template>
