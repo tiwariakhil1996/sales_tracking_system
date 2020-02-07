@@ -1,7 +1,8 @@
 import { DemoService } from './../../../service/demo.service';
 import { Component, OnInit } from '@angular/core';
-import { DemoModel } from '../../../model/model';
+
 import { Router } from '@angular/router';
+import { DemoModel } from '../../../model/demo';
 
 @Component({
   selector: 'app-adddemo',

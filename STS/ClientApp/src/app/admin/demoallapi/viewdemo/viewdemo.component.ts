@@ -1,7 +1,7 @@
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DemoService } from './../../../service/demo.service';
 import { Component, OnInit } from '@angular/core';
-import { DemoModel } from '../../../model/model';
+import { DemoModel } from '../../../model/demo';
 
 @Component({
   selector: 'app-viewdemo',

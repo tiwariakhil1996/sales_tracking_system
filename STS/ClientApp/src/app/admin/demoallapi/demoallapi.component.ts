@@ -1,6 +1,3 @@
-import { NavigationEnd, Router } from '@angular/router';
-import { DemoService } from './../../service/demo.service';
-import { DemoModel } from './../../model/model';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -18,8 +15,5 @@ export class DemoallapiComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  
-  
 
 }
