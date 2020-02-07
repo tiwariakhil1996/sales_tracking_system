@@ -17,8 +17,7 @@ export class RegisterComponent  implements OnInit{
 
   register = new registerModel();
   adminDetails: registerModel[] = [];
-  constructor(private router: Router, private adminService: AdminService,private Toastr:ToastrService){
-    // this.Login();
+  constructor(private router: Router, private adminService: AdminService,private toastr: ToastrService){
 
 
   }
@@ -47,69 +46,66 @@ export class RegisterComponent  implements OnInit{
   // }
 
   submitForm() {
-    let strError = '';
+    // this.register.image = this.imageSrc;
     
+    let strError = '';
 
-    //username
     if (!this.register.username) {
-      strError += strError = '' ? '' : '<br/>';
-      strError += '- Please enter valid username';
+      strError += '- Please enter username';
     }
     else {
-      if (!this.validateusername(this.register.username)) {
+      if (!this.validateName(this.register.username)) {
         strError += strError = '' ? '' : '<br/>';
-        strError += strError = '- Username should contain @ and . ';
+        strError += strError = '- First name should be in alphabets';
       }
     }
-
-    //email
-    if (!this.register.email) {
-      strError += strError = '' ? '' : '<br/>';
-      strError += '- Please enter valid email id';
-    }
-    else {
-      if (!this.validateemail(this.register.email)) {
-        strError += strError = '' ? '' : '<br/>';
-        strError += strError = '- Email should contain @ and . ';
-      }
-    }
-
 
     if (!this.register.gender) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please select gender';
     }
 
-    if (!this.register.mobile) {
+
+    if (!this.register.email) {
       strError += strError = '' ? '' : '<br/>';
-      strError += '- Please enter valid mobile number.';
+      strError += '- Please enter valid email id';
     }
     else {
-      if (!this.validatemobile(this.register.mobile)) {
+      if (!this.validateEmail(this.register.email)) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += strError = '- Email should contain @ and . ';
+      }
+    }
+
+    if (!this.register.mobile) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please enter valid mobile no.';
+    }
+    else {
+      if (!this.validateMobile(this.register.mobile)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Mobile no should be of 10 digits';
       }
     }
-    // Password validation
 
     if (!this.register.password) {
       strError += '- Please enter valid password';
     }
+   
     else {
-      
-      //console.log(this.passwordvalidation(this.registerDetail.password));
-      
-      if (!this.passwordvalidation(this.register.password)) {
+      if (!this.passwordValidation(this.register.password)) {
         strError += strError = '' ? '' : '<br/>';
-        strError += strError = '- Your password must be between 6 and 20 characters at least one uppercase and one lowercase letter_one number digit one special character like $, #, @, !,%,^,&,*,(,)';
+        strError += strError = '- Your password must be between 6 and 20 characters _at least one uppercase and one lowercase letter_one number digit_ one special character like $, #, @, !,%,^,&,*,(,)   ';
       }
-      
+     
+     
     }
 
+
     if (strError !== '') {
-      this.Toastr.warning(strError, 'Warning', {
+      this.toastr.warning(strError, 'Warning', {
         disableTimeOut: false,
-        timeOut: 5000,
+        timeOut: 2000,
         enableHtml: true,
         progressBar: true,
         closeButton: true,
@@ -117,123 +113,119 @@ export class RegisterComponent  implements OnInit{
       return false;
     }
 
-   
-    if (this.register.password == this.register.cpassword) {
-        this.adminService.AdminRegisterService(this.register).subscribe((data: any) => {
+  if (this.register.password == this.register.cpassword) {
+
+    this.adminService.AdminRegisterService(this.register).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        //  alert('Admin Registered Successfully');
-         this.Toastr.success('Admin Registration Successful', 'Successful', {
+        // alert('Admin Registered Successfully');
+        this.toastr.success('Registration Successful', 'Successful', {
           disableTimeOut: false,
           timeOut: 2000
         });
-        this.register = new registerModel();        
-      }else{
-        this.Toastr.info('This email id already register!', 'info', {
+        this.register = new registerModel();
+      } 
+      else {
+        // alert("Not Matched");
+        this.toastr.info('This email id is already registered', 'Info', {
           disableTimeOut: false,
-          timeOut:3000
-  
+          timeOut: 2000
         });
-       }
-
+      }
+     
+     
     }, (err) => {
 
-    });
-  }
-  else{
-    this.Toastr.error('Password and ConfirmPassword didnt match', 'error', {
-      disableTimeOut: false,
-      timeOut:3000
 
     });
-   }
-  
-}
-
-//Username validation
-usernameValidation() {
-  let isValid = false;
-  if (!this.validateusername(this.register.username)) {
-    isValid = true;
   }
-  if (isValid) {
-    this.Toastr.warning('Please enter the correct username', 'Warning', {
+  else {
+    this.toastr.error('Password & Confirm Password didnt match', 'Error', {
       disableTimeOut: false,
       timeOut: 2000
     });
   }
-}
-validateusername(emailField) {
-  var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-  return reg.test(emailField) == false ? false : true;
-}
+  } 
 
-// Email validation 
+  firstnameValidation() {
+    let isValid = false;
+    if (!this.validateName(this.register.username)) {
+      // alert('Please enter valid name.')
+      // this.errorMessage="Please enter valid first name";
+      isValid = true;
+    }
+    ;
+
+    if (isValid) {
+      this.toastr.warning('Please enter username correctly', 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
+
+  }
+
+  
+
+  validateName(nameField) {
+    var reg = /^[A-Za-z]+$/;
+    return reg.test(nameField) == false ? false : true;
+  }
+
+// Email Validation
+
 checkEmailValidation() {
   let isValid = false;
-  if (!this.validateemail(this.register.email)) {
+  if (!this.validateEmail(this.register.email)) {
+    // alert('Please enter valid email.')
+    // this.errorMessage="Please enter valid email";
+    //  return false;
     isValid = true;
   }
+  ;
   if (isValid) {
-    this.Toastr.warning('Please enter the valid email id', 'Warning', {
+    this.toastr.warning('Please enter valid email id', 'Warning', {
       disableTimeOut: false,
       timeOut: 2000
     });
   }
+
 }
-validateemail(emailField) {
+
+validateEmail(emailField) {
   var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
   return reg.test(emailField) == false ? false : true;
 }
 
-//mobile validation 
-mobilevalidation() {
+
+// Mobile no.  Validation
+
+mobValidation() {
   let isValid = false;
-  if (!this.validatemobile(this.register.mobile)) {
-    // alert('Please enter valid mobile no..')
+  if (!this.validateMobile(this.register.mobile)) {
+   
     isValid = true;
   }
+  ;
   if (isValid) {
-    this.Toastr.warning('Please enter the mobile number correctly', 'Warning', {
+    this.toastr.warning('Please enter valid mobile number', 'Warning', {
       disableTimeOut: false,
       timeOut: 2000
     });
   }
 }
-validatemobile(mobileField) {
+
+validateMobile(mobileField) {
   var reg = /^\d{10}$/;
   return reg.test(mobileField) == false ? false : true;
 }
 
-// Password Validation
 
-passwordvalidation(passwordField) {
+passwordValidation(passwordField) {
   var reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-  return reg.test(passwordField);
+  return reg.test(passwordField) == false ? false : true;
 }
 
-   // Image to Base64
-
-  //  handleInputChange(e) {
-  //   var file = e.target.files[0];
-  //   var pattern = /image-*/;
-  //   var reader = new FileReader();
-
-  //   if (!file.type.match(pattern)) {
-  //     alert('invalid format');
-  //     return;
-  //   }
-
-  //   reader.onload = this._handleReaderLoaded.bind(this);
-  //   reader.readAsDataURL(file)
-  // }
-
-  // _handleReaderLoaded(e) {
-  //   const reader = e.target;
-  //   //  console.log(this.imageSrc);
-  //   this.imageSrc = reader.result;
-  //   // console.log(this.imageSrc);
-  // }
-
+  
   handleFileInput(fileList: FileList) {
     const preview = document.getElementById('photos-preview');
     Array.from(fileList).forEach((file: File) => {

@@ -53,7 +53,6 @@ import { ModalModule } from 'ngx-bootstrap';
 import { NgbModal, NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
-
 @NgModule({
   imports: [
     BrowserModule,
@@ -92,8 +91,7 @@ import { NgbModal, NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap'
     LoginComponent,
     RegisterComponent,
     SalesRegisterComponent,
-    SalesLoginComponent,
-    
+    SalesLoginComponent
   ],
 
   // providers: [{

@@ -57,7 +57,7 @@
              
 
                     <select class="form-control" id="country" name="country" [(ngModel)]="client.cid" (change)="onCountryChange($event.target.value)">
-                      <option value="0" selected>Select Country</option>
+                      <option [ngValue]="undefined"  selected>Select Country</option>
                       <option *ngFor="let country of countryDetails" value={{country.cid}}>{{country.cname}}</option>
                       </select>
 
@@ -67,7 +67,7 @@
                     <label for="state">State</label>
 
                     <select  class="form-control" id="state" name="state"  [(ngModel)]="client.sid" (change)="onStatechange($event.target.value)">
-                      <option value="0" selected>Select State</option>
+                      <option [ngValue]="undefined"  selected>Select State</option>
                       <option *ngFor="let state of stateDetails " value= {{state.sid}}>{{state.sname}}</option>
                     </select>
 
@@ -76,7 +76,7 @@
                     <div class="col-sm-3">
                       <label for="city">City</label>
                         <select  class="form-control" id="city" name="city" [(ngModel)]="client.cityid" >
-                          <option value="0" selected>Select City</option>
+                          <option [ngValue]="undefined"  selected>Select City</option>
                           <option *ngFor="let city of cityDetails " value= {{city.cityid}}>{{city.cityname}}</option>
                         </select>
                      </div>
@@ -91,6 +91,8 @@
               </div>
             <div class="card-footer">
               <button type="submit" class="btn btn-sm btn-primary" (click)="submitForm()"><i class="fa fa-dot-circle-o"></i> Submit</button>
+              <button type="submit" class="btn btn-sm btn-primary" (click)="viewClientForm()">View</button>
+
               <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
             </div>
 

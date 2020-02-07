@@ -1,3 +1,22 @@
-.btn-center tr td:last-child{
-  text-align:center;
+/* td{
+    text-align: center;
+  } */
+
+  .color{
+      background-color: lightskyblue;
+  }
+
+  /* .font{
+    font-size: medium;
+  } */
+
+  .btn-center tr td:last-child{
+    text-align: center;
 }
+  
+/* 
+.wrapper{
+  max-width: 800px;
+  max-height: 400px;
+  min-width: 200;
+} */

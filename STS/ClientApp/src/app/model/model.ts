@@ -2,12 +2,12 @@
 // register admin form
 export class registerModel {
     id: number;
-    image:string;
+    image: string;
     ImageExtn: string;
     username: string;
     email: string;
-    gender:string;
-    mobile: string;
+    gender: string;
+    mobile: number;
     password: string;
     cpassword: string;
 }
@@ -18,10 +18,10 @@ export class salesregisterModel {
     image: string;
     salesName: string;
     email: string;
-    gender:string;
-    mobile:string;
-    adharcard:string;
-    address:string;
+    gender: string;
+    mobile: string;
+    adharcard: string;
+    address: string;
     password: string;
     cpassword: string;
 }
@@ -40,19 +40,17 @@ export class productModel {
     date: string;
 }
 
-export class categoryDataModel{
-   cid:number;
-   cname:string;
-   isActive:boolean;
+export class categoryDataModel {
+    cid: number;
+    cname: string;
+    isActive: boolean;
 }
 
-export class subcategoryDataModel{
-   cid:number;
-   cname:string;
-   sid:number;
-   sname:string;
-
-  
+export class subcategoryDataModel {
+    sid: number;
+    sname: string;
+    cid: number;
+    cname: string;
 }
 
 // client form
@@ -65,44 +63,43 @@ export class clientModel {
     address: string;
     street: string;
     cid: number;
-    cname:string;
-    sid:number;
-    sname:string;
+    cname: string;
+    sid: number;
+    sname: string;
     cityid: number;
-    cityname:string;
+    cityname: string;
     postalCode: number;
 }
- //activity
-export class activityModel{
-   aid:number;
-   productId:number;
-   productname:string;
-   clientId:number;
-   clientName:string;
-   salesId:number;
-   salesName:string;
-   contact:string;
-   address:string;
-   latLong:string;
-   appointmentDate:string;
+//activity
+export class activityModel {
+    aid: number;
+    productId: number;
+    productname: string;
+    clientId: number;
+    clientName: string;
+    salesId: number;
+    salesName: string;
+    contact: String;
+    address: string;
+    latLong: string;
+    appointmentDate: string;
 }
 
-
-export class countryModel{
-    cid:number;
-    cname:string;
+export class countryModel {
+    cid: number;
+    cname: string;
 }
 
-export class stateModel{
-    sid:number;
-    sname:number;
-    cid:number;
+export class stateModel {
+    sid: number;
+    sname: number;
+    cid: number;
 }
 
-export class cityModel{
-    cityid:number;
-    cityname:string;
-    sid:number;
+export class cityModel {
+    cityid: number;
+    cityname: string;
+    sid: number;
 }
 // this is demo model....demo model in the all api perform do it.. 
 export class DemoModel{

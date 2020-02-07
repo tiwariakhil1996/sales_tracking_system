@@ -24,7 +24,7 @@ namespace STS.DAL
                 await connection.OpenAsync();
                 TranStatus transaction = new TranStatus();
                 DynamicParameters parameter = new DynamicParameters();
-              
+             
                 parameter.Add("@Username", model.Username);
                 parameter.Add("@Gender", model.Gender);
                 parameter.Add("@Email", model.Email);
@@ -104,8 +104,8 @@ namespace STS.DAL
                 parameter.Add("@Image", model.Image);
                 parameter.Add("@Username", model.Username);
                 parameter.Add("@Gender", model.Gender);
-                parameter.Add("@Email", model.Email);
                 parameter.Add("@Mobile", model.Mobile);
+             
 
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);

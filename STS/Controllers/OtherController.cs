@@ -77,7 +77,7 @@ namespace STS.Controllers
             TranStatus transaction = new TranStatus();
             try
             {
-               
+
                 transaction = await iother.updateCategory(Cid, model);
 
             }
@@ -90,7 +90,7 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
-        //Active Deactive IsActive 
+        //Active Deactive
 
         [HttpPut]
         [Route("ChangeStatusCategory/{id}")]
@@ -103,6 +103,29 @@ namespace STS.Controllers
             {
                 transaction = await iother.ChangeStatusCategory(id);
 
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+        //Active Deactive Category List 
+
+        [HttpGet]
+        [Route("CategoryList_ActiveDeactive")]
+        public async Task<IActionResult> CategoryList_ActiveDeactive()
+        {
+            TranStatus transaction = new TranStatus();
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                var categoryList = await iother.CategoryList_ActiveDeactive();
+                dctData.Add("CategoryList_ActiveDeactive", categoryList);
             }
             catch (Exception ex)
             {

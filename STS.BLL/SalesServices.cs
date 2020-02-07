@@ -72,5 +72,14 @@ namespace STS.BLL.Service
                 return await salesRepository.RegisteredSalesList();
             }
         }
+
+        //Delete
+        public async Task<TranStatus> deleteSales(int ID)
+        {
+            using (salesRepository = new SalesRepository())
+            {
+                return await salesRepository.deleteSales(ID);
+            }
+        }
     }
 }

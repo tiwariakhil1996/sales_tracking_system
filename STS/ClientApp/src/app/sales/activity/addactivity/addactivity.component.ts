@@ -84,4 +84,13 @@ export class AddactivityComponent implements OnInit {
     });
   }
   
+  resetForm() {
+    this.activity.productId=null;
+    this.activity.clientId=null;
+    this.activity.salesId=null;
+    this.activity.contact=null;
+    this.activity.latLong=null;
+    this.activity.appointmentDate=null;
+  }
+  
 }

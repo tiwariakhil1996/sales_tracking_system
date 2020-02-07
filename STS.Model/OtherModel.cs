@@ -38,7 +38,6 @@ namespace STS.Model
         public bool IsActive { get; set; }
 
 
-
     }
     public partial class SubcategoryModel
     {
@@ -54,6 +53,6 @@ namespace STS.Model
         public string Cname { get; set; }
         public int Sid { get; set; }
         public string Sname { get; set; }
-       
+        public int Cid { get; set; }
     }
 }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CommonService } from '../../../service/common.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -29,17 +30,17 @@ export class AddproductComponent implements OnInit {
   subcategory = new subcategoryDataModel();
   subcategoryDetails: subcategoryDataModel[]=[];
 
-  constructor(private router: Router, private productService: CommonService,private modalServices: BsModalService,private modalService: NgbModal) {
-    this.categoryList();
-    // this.subcategoryList();
-    // this.myDate = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
-    
+  constructor(private router: Router,private toastr: ToastrService, private productService: CommonService,private modalServices: BsModalService,    private modalService: NgbModal) {
+    // this.categoryList();
+    this.active_deactive_CategoryList();
+ 
    }
 
   ngOnInit() {
    
   }
   
+
   categoryList() {
     this.productService.categoryList().subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -53,11 +54,26 @@ export class AddproductComponent implements OnInit {
       console.log(this.categoryDetails); 
     });
   }
-  
+
+  active_deactive_CategoryList(){
+    this.productService.active_deactive_CategoryList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.CategoryList_ActiveDeactive) {
+          this.categoryDetails = data.CategoryList_ActiveDeactive;
+        
+        }
+      }
+    }, (err) => {
+      
+      console.log(this.categoryDetails); 
+    });
+  }
+
   onCategoryChange(cid) {
     // this.subcategoryDetails = this.subcategoryDetails.filter(item => item.cid == cid);
     this.subcategoryList(cid);
   }
+
 
   subcategoryList(catid) {
     this.productService.subcategoryList(catid).subscribe((data: any) => {
@@ -71,20 +87,141 @@ export class AddproductComponent implements OnInit {
       console.log(this.subcategoryDetails); 
     });
   }
-  
 
   submitForm() {
-    // this.product.image = this.imageSrc;
+    
+    let strError = '';
+
+    if (!this.product.cid) {
+      strError += strError = '- Please select category';
+    }
+    else
+    if (!this.product.sid) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please select subcategory';
+    }
+
+
+    if (!this.product.productname) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please enter productname';
+    }
+    else{
+      if (!this.validateProductname(this.product.productname)) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += strError = '- Product name should only contain alphabets & number';
+      }
+    }
+  
+    if (!this.product.price) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += strError = '- Please enter price';
+    }
+    else {
+      if (!this.validateprice(this.product.price)) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += strError = '- Price should be in numbers';
+      }
+    }
+
+    if (!this.product.description) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please enter description';
+    }
+    else{
+      if (!this.validateProductname(this.product.description)) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += strError = '- Description  should only contain alphabets & number';
+      }
+    }
+
+    if (!this.product.image) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please select image';
+    }
+
+    if (!this.product.date) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please select date';
+    }
+
+    if (strError !== '') {
+      this.toastr.warning(strError, 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000,
+        enableHtml: true,
+        progressBar: true,
+        closeButton: true,
+      });
+      return false;
+    }
+  
+
     this.productService.addProduct(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        alert('Product added sucesfully');
+        // alert('Product added sucesfully');
+        this.toastr.success('Product added succesfully', 'Successful', {
+          disableTimeOut: false
+        });
+        this.product = new productModel();
       }
-      this.product = new productModel();
+      else {
+        // alert("Not Matched");
+        this.toastr.warning('Please fill the remaining fields', 'Warning', {
+          disableTimeOut: false,
+          timeOut: 2000
+        });
+      }
+    
+      
     }, (err) => {
 
 
     });
   }
+
+
+  productnameValidation() {
+    let isValid = false;
+    if (!this.validateProductname(this.product.productname)) {
+      isValid = true;
+    }
+    ;
+
+    if (isValid) {
+      this.toastr.warning('Please enter productname correctly', 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
+
+  }
+
+  validateProductname(productnameField) {
+    var reg = /^[A-Za-z0-9]+$/;
+    return reg.test(productnameField) == false ? false : true;
+  }
+
+  priceValidation() {
+    let isValid = false;
+    if (!this.validateprice(this.product.price)) {
+      isValid = true;
+    }
+    ;
+
+    if (isValid) {
+      this.toastr.warning('Please enter price correctly', 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
+
+  }
+  validateprice(priceField) {
+    var reg = /^[0-9]+$/;
+    return reg.test(priceField) == false ? false : true;
+  }
+
 
   // Image to Base64
 
@@ -109,16 +246,20 @@ export class AddproductComponent implements OnInit {
   }
 
   resetForm() {
-    this.product.cid=null;
-    this.product.sid=null;
-    this.product.productname=null;
-    this.product.description=null;
-    this.product.price=null;
-    this.product.image=null;
-    this.product.date=null;
+     this.product.cid=null;
+     this.product.sid=null;
+     this.product.productname=null;
+     this.product.price=null;
+     this.product.description=null;
+     this.product.image=null;
+     this.product.date=null;
+  }
+
+
+  viewProductForm(){
+    this.router.navigate(['/admin/product/viewproduct']);
 
 
   }
-
 
 }

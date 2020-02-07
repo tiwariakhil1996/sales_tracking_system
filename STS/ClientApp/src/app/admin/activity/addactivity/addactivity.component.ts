@@ -17,8 +17,9 @@ export class AddactivityComponent implements OnInit {
   productDetails: productModel[] = [];
   client = new clientModel();
   clientDetails: clientModel[] = [];
-  
-  constructor(private router: Router,private activityService: CommonService,  private salesService: SalesService,) {
+
+  constructor(private router: Router,private activityService: CommonService,  private salesService: SalesService) {
+
     this.productList();
     this.clientList();
     this.SalesList();
@@ -66,4 +67,14 @@ export class AddactivityComponent implements OnInit {
     
     });
   }
+
+  resetForm() {
+    this.activity.productId=null;
+    this.activity.clientId=null;
+    this.activity.salesId=null;
+    this.activity.contact=null;
+    this.activity.latLong=null;
+    this.activity.appointmentDate=null;
+  }
+
 }

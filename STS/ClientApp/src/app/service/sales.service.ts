@@ -29,4 +29,9 @@ export class SalesService {
   SalesList() {
     return this.http.get('/api/Sales/RegisteredSalesList');
   }
+
+  
+  deleteSales(id: number) {
+    return this.http.delete('/api/Sales/deleteSales/' + id);
+  }
 }

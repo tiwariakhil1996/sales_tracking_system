@@ -72,14 +72,24 @@ namespace STS.BLL.Service
             {
                 return await otherRepository.updateCategory(Cid, model);
             }
-        }        
+        }
 
-        //Change Status IsActive and DeActive Category
+
+        //Change Status Category
         public async Task<TranStatus> ChangeStatusCategory(int id)
         {
             using (otherRepository = new OtherRepository())
             {
                 return await otherRepository.ChangeStatusCategory(id);
+            }
+        }
+
+        // Active Deactive Category List
+        public async Task<List<CategoryListModel>> CategoryList_ActiveDeactive()
+        {
+            using (otherRepository = new OtherRepository())
+            {
+                return await otherRepository.CategoryList_ActiveDeactive();
             }
         }
 

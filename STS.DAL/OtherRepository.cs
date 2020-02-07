@@ -112,7 +112,8 @@ namespace STS.DAL
 
             }
         }
-        //Change Status Category this is all code is update
+
+        //Change Status Category
         public async Task<TranStatus> ChangeStatusCategory(int id)
         {
             using (var connection = new SqlConnection(ConnectionString))
@@ -128,9 +129,22 @@ namespace STS.DAL
                 transaction.returnMessage = parameter.Get<string>("@Message");
                 transaction.code = parameter.Get<int>("@Code");
                 return transaction;
+
             }
         }
 
+
+        // Active Deactive Category
+        public async Task<List<CategoryListModel>> CategoryList_ActiveDeactive()
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<CategoryListModel>("CategoryList_ActiveDeactive", commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
 
         //Delete Category
         public async Task<TranStatus> deleteCategory(int Cid)
@@ -175,9 +189,7 @@ namespace STS.DAL
             }
         }
 
-       
-
-        // Display Subcategory selected by category and display the subcategory
+        // Display Subcategory
         public async Task<List<SubcategoryListModel>> SubcategoryList(int catid)
         {
             using (var connection = new SqlConnection(ConnectionString))
@@ -202,51 +214,6 @@ namespace STS.DAL
                 DynamicParameters parameter = new DynamicParameters();
                 var result = await connection.QueryAsync<SubcategoryListModel>("ViewSubcategoryList", commandType: CommandType.StoredProcedure);
                 return result.ToList();
-
-            }
-        }
-
-
-        //Update Subcategory
-        public async Task<TranStatus> updateSubcategory(int Sid, SubcategoryListModel model)
-        {
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                await connection.OpenAsync();
-                TranStatus transaction = new TranStatus();
-                DynamicParameters parameter = new DynamicParameters();
-                parameter.Add("@Sid", Sid);
-                parameter.Add("@Cid", model.Cid);
-                parameter.Add("@Sname", model.Sname);
-
-            
-
-                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
-                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
-                await connection.QueryAsync("updateSubcategory", parameter, commandType: CommandType.StoredProcedure);
-                transaction.returnMessage = parameter.Get<string>("@Message");
-                transaction.code = parameter.Get<int>("@Code");
-                return transaction;
-
-            }
-        }
-
-        //Delete Subcategory
-        public async Task<TranStatus> deleteSubcategory(int Sid)
-        {
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                await connection.OpenAsync();
-                TranStatus transaction = new TranStatus();
-                DynamicParameters parameter = new DynamicParameters();
-                parameter.Add("@Sid", Sid);
-                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
-                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
-
-                await connection.QueryAsync("deleteSubcategory", parameter, commandType: CommandType.StoredProcedure);
-                transaction.returnMessage = parameter.Get<string>("@Message");
-                transaction.code = parameter.Get<int>("@Code");
-                return transaction;
 
             }
         }

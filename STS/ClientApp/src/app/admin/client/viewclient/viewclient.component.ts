@@ -8,6 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Country } from '../../../service/country';
 import { State } from '../../../service/state';
 import { City } from '../../../service/city';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-viewclient',
@@ -29,7 +30,7 @@ export class ViewclientComponent implements OnInit {
   city = new cityModel();
   cityDetails: cityModel[]=[];
   
-  constructor(private router: Router, private clientService: CommonService, private modalService: NgbModal) {
+  constructor(private router: Router, private toastr: ToastrService, private clientService: CommonService, private modalService: NgbModal) {
     this.clientList();
 
     this.countryList();
@@ -63,7 +64,10 @@ export class ViewclientComponent implements OnInit {
     // this.client.image = this.imageSrc;
     this.clientService.updateClient(id, this.client).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        alert('Client updated sucesfully');
+        // alert('Client updated sucesfully');
+        this.toastr.success('Client updated sucesfully', 'Successful', {
+          disableTimeOut: false
+        });
       }
       this.client = new clientModel();
       this.clientList();
@@ -85,7 +89,7 @@ export class ViewclientComponent implements OnInit {
   onDelete(id: number) {
     if (confirm('Are you sure to delete this record ?') === true) {
       this.clientService.deleteClient(id).subscribe(data => {
-        this.clientService.clientList();
+        // this.clientService.clientList();
         this.clientList();
       });
     }
@@ -139,6 +143,12 @@ export class ViewclientComponent implements OnInit {
       
       console.log(err); 
     });
+  }
+
+
+  
+  addnewClient(){
+    this.router.navigate(['/admin/client/addclient']);
   }
 
 }

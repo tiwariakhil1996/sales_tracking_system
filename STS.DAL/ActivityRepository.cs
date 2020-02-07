@@ -24,6 +24,7 @@ namespace STS.DAL
                 parameter.Add("@SalesID", model.SalesID);
                 parameter.Add("@ClientID", model.ClientID);
                 parameter.Add("@Contact", model.Contact);
+               
                 parameter.Add("@LatLong", model.LatLong);
                 parameter.Add("@AppointmentDate", model.AppointmentDate);
                
