@@ -84,7 +84,7 @@ export class ViewcategoryComponent implements OnInit {
     });
   }
 
-  addnewCategory(){
+  addnewCategory() {
     this.router.navigate(['/admin/category-subcategory/addcategory']);
 
   }

@@ -28,10 +28,10 @@ export class AddproductComponent implements OnInit {
   productDetails: productModel[] = [];
 
   category = new categoryDataModel();
-  categoryDetails: categoryDataModel[]=[];
+  categoryDetails: categoryDataModel[] = [];
 
   subcategory = new subcategoryDataModel();
-  subcategoryDetails: subcategoryDataModel[]=[];
+  subcategoryDetails: subcategoryDataModel[] = [];
 
   constructor(private router: Router,
     private toastr: ToastrService,
@@ -41,39 +41,39 @@ export class AddproductComponent implements OnInit {
     private categoryService: CategorySubcategoryService) {
 
     this.active_deactive_CategoryList();
- 
-   }
+
+  }
 
   ngOnInit() {
-   
+
   }
-  
+
 
   categoryList() {
     this.categoryService.categoryList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.CategoryList) {
           this.categoryDetails = data.CategoryList;
-        
+
         }
       }
     }, (err) => {
-      
-      console.log(this.categoryDetails); 
+
+      console.log(this.categoryDetails);
     });
   }
 
-  active_deactive_CategoryList(){
+  active_deactive_CategoryList() {
     this.categoryService.active_deactive_CategoryList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.CategoryList_ActiveDeactive) {
           this.categoryDetails = data.CategoryList_ActiveDeactive;
-        
+
         }
       }
     }, (err) => {
-      
-      console.log(this.categoryDetails); 
+
+      console.log(this.categoryDetails);
     });
   }
 
@@ -91,41 +91,38 @@ export class AddproductComponent implements OnInit {
         }
       }
     }, (err) => {
-      
-      console.log(this.subcategoryDetails); 
+
+      console.log(this.subcategoryDetails);
     });
   }
 
   submitForm() {
-    
+
     let strError = '';
 
     if (!this.product.cid) {
       strError += strError = '- Please select category';
-    }
-    else
-    if (!this.product.sid) {
-      strError += strError = '' ? '' : '<br/>';
-      strError += '- Please select subcategory';
-    }
+    } else
+      if (!this.product.sid) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += '- Please select subcategory';
+      }
 
 
     if (!this.product.productname) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter productname';
-    }
-    else{
+    } else {
       if (!this.validateProductname(this.product.productname)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Product name should only contain alphabets & number';
       }
     }
-  
+
     if (!this.product.price) {
       strError += strError = '' ? '' : '<br/>';
       strError += strError = '- Please enter price';
-    }
-    else {
+    } else {
       if (!this.validateprice(this.product.price)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Price should be in numbers';
@@ -135,8 +132,7 @@ export class AddproductComponent implements OnInit {
     if (!this.product.description) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter description';
-    }
-    else{
+    } else {
       if (!this.validateProductname(this.product.description)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Description  should only contain alphabets & number';
@@ -163,7 +159,7 @@ export class AddproductComponent implements OnInit {
       });
       return false;
     }
-  
+
 
     this.productService.addProduct(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -172,16 +168,15 @@ export class AddproductComponent implements OnInit {
           disableTimeOut: false
         });
         this.product = new productModel();
-      }
-      else {
+      } else {
         // alert("Not Matched");
         this.toastr.warning('Please fill the remaining fields', 'Warning', {
           disableTimeOut: false,
           timeOut: 2000
         });
       }
-    
-      
+
+
     }, (err) => {
 
 
@@ -194,7 +189,6 @@ export class AddproductComponent implements OnInit {
     if (!this.validateProductname(this.product.productname)) {
       isValid = true;
     }
-    ;
 
     if (isValid) {
       this.toastr.warning('Please enter productname correctly', 'Warning', {
@@ -206,8 +200,8 @@ export class AddproductComponent implements OnInit {
   }
 
   validateProductname(productnameField) {
-    var reg = /^[A-Za-z0-9]+$/;
-    return reg.test(productnameField) == false ? false : true;
+    const reg = /^[A-Za-z0-9]+$/;
+    return reg.test(productnameField) === false ? false : true;
   }
 
   priceValidation() {
@@ -215,7 +209,6 @@ export class AddproductComponent implements OnInit {
     if (!this.validateprice(this.product.price)) {
       isValid = true;
     }
-    ;
 
     if (isValid) {
       this.toastr.warning('Please enter price correctly', 'Warning', {
@@ -226,8 +219,8 @@ export class AddproductComponent implements OnInit {
 
   }
   validateprice(priceField) {
-    var reg = /^[0-9]+$/;
-    return reg.test(priceField) == false ? false : true;
+    const reg = /^[0-9]+$/;
+    return reg.test(priceField) === false ? false : true;
   }
 
 
@@ -254,20 +247,18 @@ export class AddproductComponent implements OnInit {
   }
 
   resetForm() {
-     this.product.cid=null;
-     this.product.sid=null;
-     this.product.productname=null;
-     this.product.price=null;
-     this.product.description=null;
-     this.product.image=null;
-     this.product.date=null;
+    this.product.cid = null;
+    this.product.sid = null;
+    this.product.productname = null;
+    this.product.price = null;
+    this.product.description = null;
+    this.product.image = null;
+    this.product.date = null;
   }
 
 
-  viewProductForm(){
+  viewProductForm() {
     this.router.navigate(['/admin/product/viewproduct']);
-
-
   }
 
 }
