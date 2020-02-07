@@ -26,6 +26,7 @@ export class ViewsubcategoryComponent implements OnInit {
     private modalService: NgbModal) {
     this.categoryList();
     this.viewsubcategoryList();
+
   }
 
 
@@ -52,6 +53,7 @@ export class ViewsubcategoryComponent implements OnInit {
       if (data.Status.code === 0) {
         if (data.ViewSubcategoryList) {
           this.subcategoryDetails = data.ViewSubcategoryList;
+          console.log(this.subcategoryDetails);
         }
       }
     }, (err) => {
@@ -95,7 +97,7 @@ export class ViewsubcategoryComponent implements OnInit {
     console.log(id);
     this.categoryService.ChangeStatusSubcategory(id).subscribe(data => {
       this.viewsubcategoryList();
-      console.log(this.subcategoryDetails);
+
     });
   }
  
