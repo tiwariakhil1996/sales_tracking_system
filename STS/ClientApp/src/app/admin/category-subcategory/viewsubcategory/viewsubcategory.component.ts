@@ -101,8 +101,6 @@ export class ViewsubcategoryComponent implements OnInit {
 
     });
   }
-
-
   addnewSubategory() {
     this.router.navigate(['/admin/category-subcategory/addsubcategory']);
 
