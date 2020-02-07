@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { productModel, categoryDataModel, subcategoryDataModel } from '../../../model/model';
-import { CommonService } from '../../../service/common.service';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
+import { ProductService } from '../../../service/product.service';
+import { productModel } from '../../../model/product';
+import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
 
 @Component({
   selector: 'app-viewproduct',
@@ -26,9 +28,9 @@ export class ViewproductComponent implements OnInit {
   subcategoryDetails: subcategoryDataModel[] = [];
 
   constructor(private router: Router,
-    private productService: CommonService,
+    private productService: ProductService,
     private toastr: ToastrService,
-    // private modalServices: BsModalService,
+    private categoryService: CategorySubcategoryService,
     private modalService: NgbModal
   ) {
     this.productList();
@@ -209,7 +211,7 @@ export class ViewproductComponent implements OnInit {
 
 
   categoryList() {
-    this.productService.categoryList().subscribe((data: any) => {
+    this.categoryService.categoryList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.CategoryList) {
           this.categoryDetails = data.CategoryList;
@@ -229,7 +231,7 @@ export class ViewproductComponent implements OnInit {
   }
 
   subcategoryList(catid) {
-    this.productService.subcategoryList(catid).subscribe((data: any) => {
+    this.categoryService.subcategoryList(catid).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.SubcategoryList) {
           this.subcategoryDetails = data.SubcategoryList;

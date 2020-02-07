@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { salesregisterModel } from '../../model/model';
 import { SalesService } from '../../service/sales.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BsModalRef } from 'ngx-bootstrap';
+import { salesregisterModel } from '../../model/sales';
 
 @Component({
   selector: 'app-salesdata',
@@ -17,7 +17,9 @@ export class SalesdataComponent implements OnInit {
   sales = new salesregisterModel();
   salesDetails: salesregisterModel[]=[];
   
-  constructor(private salesService: SalesService,private modalService: NgbModal,private toastr: ToastrService) { 
+  constructor(private salesService: SalesService,
+    private modalService: NgbModal,
+    private toastr: ToastrService) { 
     this.SalesList();
   }
 

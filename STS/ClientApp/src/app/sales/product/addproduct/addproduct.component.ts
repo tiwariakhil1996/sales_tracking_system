@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { productModel, categoryDataModel, subcategoryDataModel } from '../../../model/model';
 import { Router } from '@angular/router';
-import { CommonService } from '../../../service/common.service';
 import { ToastrService } from 'ngx-toastr';
+import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
+import { ProductService } from '../../../service/product.service';
+import { productModel } from '../../../model/product';
+import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
 
 @Component({
   selector: 'app-addproduct',
@@ -23,9 +25,11 @@ export class AddproductComponent implements OnInit {
   subcategory = new subcategoryDataModel();
   subcategoryDetails: subcategoryDataModel[]=[];
 
-  constructor(private router: Router,private toastr: ToastrService, private productService: CommonService) {
+  constructor(private router: Router,
+    private toastr: ToastrService,
+    private productService: ProductService,
+    private categoryService: CategorySubcategoryService) {
     this.categoryList();
-    // this.subcategoryList();
    }
 
   ngOnInit() {
@@ -34,7 +38,7 @@ export class AddproductComponent implements OnInit {
 
 
   addCategory(){
-    this.productService.addCategory(this.category).subscribe((data: any) => {
+    this.categoryService.addCategory(this.category).subscribe((data: any) => {
       if (data.Status.code === 0) {
         alert('Category added sucesfully');
         this.categoryList();
@@ -47,7 +51,7 @@ export class AddproductComponent implements OnInit {
 
     
   categoryList() {
-    this.productService.categoryList().subscribe((data: any) => {
+    this.categoryService.categoryList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.CategoryList) {
           this.categoryDetails = data.CategoryList;
@@ -68,7 +72,7 @@ export class AddproductComponent implements OnInit {
 
 
   addSubcategory(){
-    this.productService.addSubcategory(this.subcategory).subscribe((data: any) => {
+    this.categoryService.addSubcategory(this.subcategory).subscribe((data: any) => {
       if (data.Status.code === 0) {
         alert('Subcategory added sucesfully');
         // this.subcategoryList(cid);
@@ -81,7 +85,7 @@ export class AddproductComponent implements OnInit {
   }
 
   subcategoryList(catid) {
-    this.productService.subcategoryList(catid).subscribe((data: any) => {
+    this.categoryService.subcategoryList(catid).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.SubcategoryList) {
           this.subcategoryDetails = data.SubcategoryList;

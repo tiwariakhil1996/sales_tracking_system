@@ -10,13 +10,15 @@ using Microsoft.AspNetCore.Mvc;
 namespace STS.Controllers
 {
     [Route("api/[controller]")]
-    public class OtherController : Controller
+    public class Category_SubcategoryController : Controller
     {
-        private IOther iother;
-        public OtherController(IOther other)
+        private ICategory_Subcategory icategory;
+        public Category_SubcategoryController(ICategory_Subcategory category)
         {
-            iother = other;
+            icategory = category;
         }
+
+        //---------------------------------------------------------------   CATEGORY   --------------------------------
 
         //Add Category
 
@@ -30,7 +32,7 @@ namespace STS.Controllers
             try
             {
 
-                transaction = await iother.addCategory(model);
+                transaction = await icategory.addCategory(model);
 
             }
             catch (Exception ex)
@@ -54,7 +56,7 @@ namespace STS.Controllers
             HttpStatusCode statusCode = HttpStatusCode.OK;
             try
             {
-                var categoryList = await iother.CategoryList();
+                var categoryList = await icategory.CategoryList();
                 dctData.Add("CategoryList", categoryList);
             }
             catch (Exception ex)
@@ -78,7 +80,7 @@ namespace STS.Controllers
             try
             {
 
-                transaction = await iother.updateCategory(Cid, model);
+                transaction = await icategory.updateCategory(Cid, model);
 
             }
             catch (Exception ex)
@@ -101,7 +103,7 @@ namespace STS.Controllers
             TranStatus transaction = new TranStatus();
             try
             {
-                transaction = await iother.ChangeStatusCategory(id);
+                transaction = await icategory.ChangeStatusCategory(id);
 
             }
             catch (Exception ex)
@@ -124,7 +126,7 @@ namespace STS.Controllers
             HttpStatusCode statusCode = HttpStatusCode.OK;
             try
             {
-                var categoryList = await iother.CategoryList_ActiveDeactive();
+                var categoryList = await icategory.CategoryList_ActiveDeactive();
                 dctData.Add("CategoryList_ActiveDeactive", categoryList);
             }
             catch (Exception ex)
@@ -149,7 +151,7 @@ namespace STS.Controllers
             try
             {
 
-                transaction = await iother.deleteCategory(Cid);
+                transaction = await icategory.deleteCategory(Cid);
 
             }
             catch (Exception ex)
@@ -160,6 +162,10 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
+
+
+        //-----------------------------------------------------------------------------  SUBCATEGORY    -------------------------------------
+
 
         //Add Subcategory
 
@@ -173,7 +179,7 @@ namespace STS.Controllers
             try
             {
 
-                transaction = await iother.addSubcategory(model);
+                transaction = await icategory.addSubcategory(model);
 
             }
             catch (Exception ex)
@@ -196,7 +202,7 @@ namespace STS.Controllers
             HttpStatusCode statusCode = HttpStatusCode.OK;
             try
             {
-                var subcategoryList = await iother.SubcategoryList(cid);
+                var subcategoryList = await icategory.SubcategoryList(cid);
                 dctData.Add("SubcategoryList", subcategoryList);
             }
             catch (Exception ex)
@@ -219,7 +225,7 @@ namespace STS.Controllers
             HttpStatusCode statusCode = HttpStatusCode.OK;
             try
             {
-                var viewsubcategoryList = await iother.ViewSubcategoryList();
+                var viewsubcategoryList = await icategory.ViewSubcategoryList();
                 dctData.Add("ViewSubcategoryList", viewsubcategoryList);
             }
             catch (Exception ex)
@@ -244,7 +250,7 @@ namespace STS.Controllers
             try
             {
 
-                transaction = await iother.updateSubcategory(Sid, model);
+                transaction = await icategory.updateSubcategory(Sid, model);
 
             }
             catch (Exception ex)
@@ -269,74 +275,8 @@ namespace STS.Controllers
             try
             {
 
-                transaction = await iother.deleteSubcategory(Sid);
+                transaction = await icategory.deleteSubcategory(Sid);
 
-            }
-            catch (Exception ex)
-            {
-                transaction = CommonHelper.TransactionErrorHandler(ex);
-                statusCode = HttpStatusCode.BadRequest;
-            }
-            dctData.Add("Status", transaction);
-            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
-        }
-
-
-        //Display Country
-
-        [HttpGet]
-        [Route("CountryList")]
-        public async Task<IActionResult> CountryList()
-        {
-            TranStatus transaction = new TranStatus();
-            Dictionary<String, Object> dctData = new Dictionary<string, object>();
-            HttpStatusCode statusCode = HttpStatusCode.OK;
-            try
-            {
-                var countryList = await iother.CountryList();
-                dctData.Add("CountryList", countryList);
-            }
-            catch (Exception ex)
-            {
-                transaction = CommonHelper.TransactionErrorHandler(ex);
-                statusCode = HttpStatusCode.BadRequest;
-            }
-            dctData.Add("Status", transaction);
-            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
-        }
-
-        [HttpGet]
-        [Route("StateList/{cid}")]
-        public async Task<IActionResult> StateList(int cid)
-        {
-            TranStatus transaction = new TranStatus();
-            Dictionary<String, Object> dctData = new Dictionary<string, object>();
-            HttpStatusCode statusCode = HttpStatusCode.OK;
-            try
-            {
-                var stateList = await iother.StateList(cid);
-                dctData.Add("StateList", stateList);
-            }
-            catch (Exception ex)
-            {
-                transaction = CommonHelper.TransactionErrorHandler(ex);
-                statusCode = HttpStatusCode.BadRequest;
-            }
-            dctData.Add("Status", transaction);
-            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
-        }
-
-        [HttpGet]
-        [Route("CityList/{sid}")]
-        public async Task<IActionResult> CityList(int sid)
-        {
-            TranStatus transaction = new TranStatus();
-            Dictionary<String, Object> dctData = new Dictionary<string, object>();
-            HttpStatusCode statusCode = HttpStatusCode.OK;
-            try
-            {
-                var cityList = await iother.CityList(sid);
-                dctData.Add("CityList", cityList);
             }
             catch (Exception ex)
             {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommonService } from '../../service/common.service';
-import { productModel } from '../../model/model';
+import { ProductService } from '../../service/product.service';
+import { productModel } from '../../model/product';
 
 @Component({
   selector: 'app-product',
@@ -13,7 +13,7 @@ export class ProductComponent implements OnInit {
   product = new productModel();
   productDetails: productModel[] = [];
 
-  constructor(private router: Router, private productService: CommonService) { }
+  constructor(private router: Router, private productService: ProductService) { }
 
   ngOnInit() {
   }

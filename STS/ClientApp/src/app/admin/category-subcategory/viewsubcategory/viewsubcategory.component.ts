@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommonService } from '../../../service/common.service';
-import { subcategoryDataModel } from '../../../model/model';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
+import { subcategoryDataModel } from '../../../model/category-subcategory';
 
 @Component({
   selector: 'app-viewsubcategory',
@@ -17,7 +17,10 @@ export class ViewsubcategoryComponent implements OnInit {
   subcategory = new subcategoryDataModel();
   subcategoryDetails: subcategoryDataModel[]=[];
   
-  constructor(private router: Router, private commonService: CommonService,private modalServices: BsModalService,private modalService: NgbModal) { 
+  constructor(private router: Router,
+    private categoryService: CategorySubcategoryService,
+    private modalServices: BsModalService,
+    private modalService: NgbModal) { 
     this.viewsubcategoryList();
   }
 
@@ -27,7 +30,7 @@ export class ViewsubcategoryComponent implements OnInit {
 
   
   viewsubcategoryList() {
-    this.commonService.viewsubcategoryList().subscribe((data: any) => {
+    this.categoryService.viewsubcategoryList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.ViewSubcategoryList) {
           this.subcategoryDetails = data.ViewSubcategoryList;
@@ -51,7 +54,7 @@ export class ViewsubcategoryComponent implements OnInit {
 
   updateSubcategory(sid:number) {
     // this.product.image = this.imageSrc;
-    this.commonService.updateSubcategory(sid, this.subcategory).subscribe((data: any) => {
+    this.categoryService.updateSubcategory(sid, this.subcategory).subscribe((data: any) => {
       if (data.Status.code === 0) {
         alert('Subcategory updated sucesfully');
       }
@@ -63,8 +66,8 @@ export class ViewsubcategoryComponent implements OnInit {
 
   deleteSubcategory(sid: number) {
     if (confirm('Are you sure to delete this record ?') === true) {
-      this.commonService.deleteSubcategory(sid).subscribe(data => {
-        this.commonService.viewsubcategoryList();
+      this.categoryService.deleteSubcategory(sid).subscribe(data => {
+        this.categoryService.viewsubcategoryList();
         this.viewsubcategoryList();
       });
     }

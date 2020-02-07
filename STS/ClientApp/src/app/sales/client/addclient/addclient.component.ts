@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { clientModel, countryModel, stateModel, cityModel } from '../../../model/model';
 import { Router } from '@angular/router';
-import { CommonService } from '../../../service/common.service';
-import { Country } from '../../../service/country';
-import { State } from '../../../service/state';
-import { City } from '../../../service/city';
-import { SelectService } from '../../../service/select.service';
+
 import { ToastrService } from 'ngx-toastr';
+import { CountryStateCityService } from '../../../service/country-state-city.service';
+import { ClientService } from '../../../service/client.service';
+import { clientModel } from '../../../model/client';
+import { countryModel, stateModel, cityModel } from '../../../model/country-state-city';
 
 @Component({
   selector: 'app-addclient',
@@ -29,7 +28,10 @@ export class AddclientComponent implements OnInit {
   cityDetails: cityModel[] = [];
 
 
-  constructor(private router: Router, private toastr: ToastrService, private clientService: CommonService, private selectService: SelectService){
+  constructor(private router: Router,
+    private toastr: ToastrService,
+    private clientService: ClientService,
+    private country_state_cityService: CountryStateCityService){
 
     this.countryList();
   
@@ -216,7 +218,7 @@ validateMobile(mobileField) {
 }
   
   countryList() {
-    this.clientService.countryList().subscribe((data: any) => {
+    this.country_state_cityService.countryList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.CountryList) {
           this.countryDetails = data.CountryList;
@@ -241,7 +243,7 @@ validateMobile(mobileField) {
   }
 
   stateList(cnid) {
-    this.clientService.stateList(cnid).subscribe((data: any) => {
+    this.country_state_cityService.stateList(cnid).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.StateList) {
           this.stateDetails = data.StateList;
@@ -254,7 +256,7 @@ validateMobile(mobileField) {
   }
 
   cityList(stid) {
-    this.clientService.cityList(stid).subscribe((data: any) => {
+    this.country_state_cityService.cityList(stid).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.cityList) {
           this.cityDetails = data.cityList;

@@ -1,13 +1,15 @@
 import { Component, TemplateRef } from '@angular/core';
 import { navItems } from '../../_nav';
 import { Router } from '@angular/router';
-import { registerModel, productModel, salesregisterModel } from '../../model/model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AdminService } from '../../service/admin.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
-import { CommonService } from '../../service/common.service';
 import { ToastrService } from 'ngx-toastr';
 import { SalesService } from '../../service/sales.service';
+import { ProductService } from '../../service/product.service';
+import { registerModel } from '../../model/admin';
+import { salesregisterModel } from '../../model/sales';
+import { productModel } from '../../model/product';
 
 @Component({
   selector: 'app-dashboard',
@@ -35,7 +37,7 @@ export class DefaultLayoutComponent {
   constructor(private router: Router,
     private adminService: AdminService,
     private modalService: NgbModal,
-    private productService: CommonService,
+    private productService: ProductService,
     private modalServices: BsModalService,
     private toastr: ToastrService,
     private salesService: SalesService) {

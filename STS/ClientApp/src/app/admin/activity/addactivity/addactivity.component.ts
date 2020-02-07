@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { activityModel, productModel, clientModel, salesregisterModel } from '../../../model/model';
-import { CommonService } from '../../../service/common.service';
 import { Router } from '@angular/router';
 import { SalesService } from '../../../service/sales.service';
+import { ProductService } from '../../../service/product.service';
+import { ActivityService } from '../../../service/activity.service';
+import { ClientService } from '../../../service/client.service';
+import { salesregisterModel } from '../../../model/sales';
+import { activityModel } from '../../../model/activity';
+import { productModel } from '../../../model/product';
+import { clientModel } from '../../../model/client';
 
 @Component({
   selector: 'app-addactivity',
@@ -23,7 +28,11 @@ export class AddactivityComponent implements OnInit {
   client = new clientModel();
   clientDetails: clientModel[] = [];
 
-  constructor(private router: Router,private activityService: CommonService,  private salesService: SalesService) {
+  constructor(private router: Router,
+    private activityService: ActivityService,
+    private clientService: ClientService,
+    private salesService: SalesService,
+    private productService: ProductService) {
 
     this.productList();
     this.clientList();
@@ -35,7 +44,7 @@ export class AddactivityComponent implements OnInit {
 
  
   productList() {
-    this.activityService.productList().subscribe((data: any) => {
+    this.productService.productList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.ProductList) {
           this.productDetails = data.ProductList;
@@ -48,7 +57,7 @@ export class AddactivityComponent implements OnInit {
 
 
   clientList() {
-    this.activityService.clientList().subscribe((data: any) => {
+    this.clientService.clientList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.ClientList) {
           this.clientDetails = data.ClientList;
@@ -92,6 +101,11 @@ export class AddactivityComponent implements OnInit {
     this.activity.contact=null;
     this.activity.latLong=null;
     this.activity.appointmentDate=null;
+  }
+
+  
+  viewActivityForm(){
+    this.router.navigate(['/admin/activity/currentactivity']);
   }
 
 }

@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { activityModel, salesregisterModel, productModel, clientModel } from '../../../model/model';
-import { CommonService } from '../../../service/common.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SalesService } from '../../../service/sales.service';
+import { ProductService } from '../../../service/product.service';
+import { ClientService } from '../../../service/client.service';
+import { ActivityService } from '../../../service/activity.service';
+import { activityModel } from '../../../model/activity';
+import { salesregisterModel } from '../../../model/sales';
+import { productModel } from '../../../model/product';
+import { clientModel } from '../../../model/client';
 
 @Component({
   selector: 'app-currentactivity',
@@ -23,7 +28,11 @@ export class CurrentactivityComponent implements OnInit {
   client = new clientModel();
   clientDetails: clientModel[] = [];
   
-  constructor(private activityService:CommonService,private modalService: NgbModal,private salesService:SalesService) { 
+  constructor(private clienService:ClientService,
+    private activityService: ActivityService,
+    private modalService: NgbModal,
+    private salesService:SalesService,
+    private productService: ProductService) { 
     this.activityList();
     this.productList();
     this.clientList();
@@ -82,7 +91,7 @@ this.activityService.updateActivity(aid, this.activity).subscribe((data: any) =>
 // Display
 
 productList() {
-  this.activityService.productList().subscribe((data: any) => {
+  this.productService.productList().subscribe((data: any) => {
     if (data.Status.code === 0) {
       if (data.ProductList) {
         this.productDetails = data.ProductList;
@@ -94,7 +103,7 @@ productList() {
 }
 
 clientList() {
-  this.activityService.clientList().subscribe((data: any) => {
+  this.clienService.clientList().subscribe((data: any) => {
     if (data.Status.code === 0) {
       if (data.ClientList) {
         this.clientDetails = data.ClientList;

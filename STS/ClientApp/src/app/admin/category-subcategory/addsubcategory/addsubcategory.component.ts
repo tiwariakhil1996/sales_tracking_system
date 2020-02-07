@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommonService } from '../../../service/common.service';
-import { categoryDataModel, subcategoryDataModel } from '../../../model/model';
 import { ToastrService } from 'ngx-toastr';
+import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
+import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
 
 @Component({
   selector: 'app-addsubcategory',
@@ -18,7 +18,9 @@ export class AddsubcategoryComponent implements OnInit {
   subcategory = new subcategoryDataModel();
   subcategoryDetails: subcategoryDataModel[]=[];
   
-  constructor(private router: Router, private toastr: ToastrService,private productService: CommonService,) {
+  constructor(private router: Router,
+    private toastr: ToastrService,
+    private categoryService: CategorySubcategoryService,) {
     this.categoryList();
    }
 
@@ -26,7 +28,7 @@ export class AddsubcategoryComponent implements OnInit {
   }
    
   categoryList() {
-    this.productService.categoryList().subscribe((data: any) => {
+    this.categoryService.categoryList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.CategoryList) {
           this.categoryDetails = data.CategoryList;
@@ -42,7 +44,7 @@ export class AddsubcategoryComponent implements OnInit {
 
 
   addSubcategory(){
-    this.productService.addSubcategory(this.subcategory).subscribe((data: any) => {
+    this.categoryService.addSubcategory(this.subcategory).subscribe((data: any) => {
       if (data.Status.code === 0) {
         // alert('Subcategory added sucesfully');
         // this.subcategoryList(cid);
@@ -58,7 +60,7 @@ export class AddsubcategoryComponent implements OnInit {
   }
 
   subcategoryList(catid) {
-    this.productService.subcategoryList(catid).subscribe((data: any) => {
+    this.categoryService.subcategoryList(catid).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.SubcategoryList) {
           this.subcategoryDetails = data.SubcategoryList;

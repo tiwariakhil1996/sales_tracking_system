@@ -54,8 +54,9 @@ namespace STS
             services.AddSingleton<IClient,ClientServices>();
             services.AddSingleton<ISales, SalesServices>();
             services.AddSingleton<IProduct, ProductServices>();
-            services.AddSingleton<IOther, OtherServices>();
+            services.AddSingleton<ICategory_Subcategory, Category_SubcategoryServices>();
             services.AddSingleton<IActivity, ActivityServices>();
+            services.AddSingleton<ICountry_State_City, Country_State_CityServices>();
 
         }
 

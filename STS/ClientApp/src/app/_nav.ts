@@ -76,26 +76,32 @@ export const navItems: INavData[] = [
 
   {
     name: 'Activity',
-    url: '/admin/activity',
-    icon: 'icon-layers',
-    children: [
-      {
-        name: 'Add Activity',
-        url: '/admin/activity/addactivity',
-        icon: 'icon-note',
-      },
-      {
-        name: 'Past Activity',
-        url: '/admin/activity/pastactivity',
-        icon: 'icon-calendar',
-      },
-      {
-        name: 'Current Activity',
-        url: '/admin/activity/currentactivity',
-        icon: 'icon-notebook',
-      },
-    ]
+    url: '/admin/activity/currentactivity',
+    icon: 'icon-notebook',
   },
+
+  // {
+  //   name: 'Activity',
+  //   url: '/admin/activity',
+  //   icon: 'icon-layers',
+  //   children: [
+  //     {
+  //       name: 'Add Activity',
+  //       url: '/admin/activity/addactivity',
+  //       icon: 'icon-note',
+  //     },
+  //     {
+  //       name: 'Past Activity',
+  //       url: '/admin/activity/pastactivity',
+  //       icon: 'icon-calendar',
+  //     },
+  //     {
+  //       name: 'Current Activity',
+  //       url: '/admin/activity/currentactivity',
+  //       icon: 'icon-notebook',
+  //     },
+  //   ]
+  // },
   {
     name: 'Map',
     url: '/admin/map',
@@ -132,7 +138,7 @@ export const navItems: INavData[] = [
   //       name: 'Add Subcategory',
   //       url: '/admin/category-subcategory/addsubcategory',
   //       icon: 'icon-calendar',
-  //     },   
+  //     },
   //     {
   //       name: 'View Subcategory',
   //       url: '/admin/category-subcategory/viewsubcategory',

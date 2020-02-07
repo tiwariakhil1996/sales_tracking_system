@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { clientModel, countryModel, stateModel, cityModel } from '../../../model/model';
 import { Router } from '@angular/router';
-import { CommonService } from '../../../service/common.service';
-import { CountriesService } from '../../../service/countries.service';
-import { SelectService } from '../../../service/select.service';
 import { ToastrService } from 'ngx-toastr';
+import { CountryStateCityService } from '../../../service/country-state-city.service';
+import { ClientService } from '../../../service/client.service';
+import { clientModel } from '../../../model/client';
+import { countryModel, stateModel, cityModel } from '../../../model/country-state-city';
 
 @Component({
   selector: 'app-addclient',
@@ -31,7 +31,10 @@ export class AddclientComponent implements OnInit {
   cityDetails: cityModel[] = [];
 
 
-  constructor(private router: Router, private toastr: ToastrService, private clientService: CommonService, private selectService: SelectService) {
+  constructor(private router: Router,
+     private toastr: ToastrService,
+     private clientService: ClientService,
+     private country_state_cityService: CountryStateCityService) {
 
     this.countryList();
 
@@ -47,8 +50,7 @@ export class AddclientComponent implements OnInit {
 
     if (!this.client.clientName) {
       strError += strError = '- Please enter clientname';
-    }
-    else
+    } else
     if (!this.validateName(this.client.clientName)) {
       strError += strError = '' ? '' : '<br/>';
       strError += strError = '- Client name should only contain alphabets';
@@ -57,8 +59,7 @@ export class AddclientComponent implements OnInit {
     if (!this.client.email) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter valid email id';
-    }
-    else {
+    } else {
       if (!this.validateEmail(this.client.email)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Email should contain @ and . ';
@@ -68,14 +69,12 @@ export class AddclientComponent implements OnInit {
     if (!this.client.contact) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter valid mobile no.';
-    }
-    else {
+    } else {
       if (!this.validateMobile(this.client.contact)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Mobile no should be of 10 digits';
       }
     }
-  
     if (!this.client.gender) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please select gender';
@@ -94,12 +93,11 @@ export class AddclientComponent implements OnInit {
     if (!this.client.cid) {
       strError += strError = '' ? '' : '<br/>';
       strError += strError = '- Please select country';
-    }
-    else
+    } else
     if (!this.client.sid) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please select state';
-    }else
+    } else
     if (!this.client.cityid) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please select city';
@@ -120,7 +118,7 @@ export class AddclientComponent implements OnInit {
       });
       return false;
     }
-  
+
 
     this.clientService.addClient(this.client).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -129,8 +127,7 @@ export class AddclientComponent implements OnInit {
           disableTimeOut: false
         });
         this.client = new clientModel();
-      }
-      else {
+      } else {
         // alert("Not Matched");
         this.toastr.info('This email id is already registered', 'Info', {
           disableTimeOut: false,
@@ -149,7 +146,6 @@ export class AddclientComponent implements OnInit {
     if (!this.validateName(this.client.clientName)) {
       isValid = true;
     }
-    ;
 
     if (isValid) {
       this.toastr.warning('Please enter clientname correctly', 'Warning', {
@@ -160,11 +156,11 @@ export class AddclientComponent implements OnInit {
 
   }
 
-  
+
 
   validateName(nameField) {
-    var reg = /^[A-Za-z]+$/;
-    return reg.test(nameField) == false ? false : true;
+    const reg = /^[A-Za-z]+$/;
+    return reg.test(nameField) === false ? false : true;
   }
 
 // Email Validation
@@ -172,12 +168,8 @@ export class AddclientComponent implements OnInit {
 checkEmailValidation() {
   let isValid = false;
   if (!this.validateEmail(this.client.email)) {
-    // alert('Please enter valid email.')
-    // this.errorMessage="Please enter valid email";
-    //  return false;
     isValid = true;
   }
-  ;
   if (isValid) {
     this.toastr.warning('Please enter valid email id', 'Warning', {
       disableTimeOut: false,
@@ -188,8 +180,8 @@ checkEmailValidation() {
 }
 
 validateEmail(emailField) {
-  var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-  return reg.test(emailField) == false ? false : true;
+  const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+  return reg.test(emailField) === false ? false : true;
 }
 
 // Mobile no.  Validation
@@ -197,10 +189,8 @@ validateEmail(emailField) {
 mobValidation() {
   let isValid = false;
   if (!this.validateMobile(this.client.contact)) {
-   
     isValid = true;
   }
-  ;
   if (isValid) {
     this.toastr.warning('Please enter valid mobile number', 'Warning', {
       disableTimeOut: false,
@@ -210,13 +200,13 @@ mobValidation() {
 }
 
 validateMobile(mobileField) {
-  var reg = /^\d{10}$/;
-  return reg.test(mobileField) == false ? false : true;
+  const reg = /^\d{10}$/;
+  return reg.test(mobileField) === false ? false : true;
 }
 
 
   countryList() {
-    this.clientService.countryList().subscribe((data: any) => {
+    this.country_state_cityService.countryList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.CountryList) {
           this.countryDetails = data.CountryList;
@@ -241,7 +231,7 @@ validateMobile(mobileField) {
   }
 
   stateList(cnid) {
-    this.clientService.stateList(cnid).subscribe((data: any) => {
+    this.country_state_cityService.stateList(cnid).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.StateList) {
           this.stateDetails = data.StateList;
@@ -254,7 +244,7 @@ validateMobile(mobileField) {
   }
 
   cityList(stid) {
-    this.clientService.cityList(stid).subscribe((data: any) => {
+    this.country_state_cityService.cityList(stid).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.CityList) {
           this.cityDetails = data.CityList;
@@ -267,7 +257,7 @@ validateMobile(mobileField) {
   }
 
 
-  viewClientForm(){
+  viewClientForm() {
     this.router.navigate(['/admin/client/viewclient']);
 
   }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from '../../service/admin.service';
-import { registerModel } from '../../model/model';
+import { registerModel } from '../../model/admin';
 
 
 
@@ -11,12 +11,6 @@ import { registerModel } from '../../model/model';
   templateUrl: 'login.component.html'
 })
 export class LoginComponent implements OnInit {
-
-  // formdata;
-  // message: string;
-  // loginDetail: any = new loginModel();
-  // registerDetails: registerModel[] = [];
-  // constructor(private router: Router, private toastr: ToastrService) { }
 
   title = 'STS';
   loginDetail = new registerModel();

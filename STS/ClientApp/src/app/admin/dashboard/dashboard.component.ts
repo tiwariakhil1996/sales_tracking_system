@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
-import { clientModel, productModel, salesregisterModel, activityModel } from '../../model/model';
 import { Router } from '@angular/router';
-import { CommonService } from '../../service/common.service';
+import { ClientService } from '../../service/client.service';
+import { clientModel } from '../../model/client';
+import { productModel } from '../../model/product';
+import { salesregisterModel } from '../../model/sales';
+import { activityModel } from '../../model/activity';
+
 
 
 @Component({
@@ -397,7 +401,7 @@ export class DashboardComponent implements OnInit {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  constructor(private router: Router, private clientService: CommonService) {
+  constructor(private router: Router, private clientService: ClientService) {
 
   }
   

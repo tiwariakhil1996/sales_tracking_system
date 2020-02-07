@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { clientModel, cityModel, stateModel, countryModel } from '../../../model/model';
-import { CommonService } from '../../../service/common.service';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CountryStateCityService } from '../../../service/country-state-city.service';
+import { ClientService } from '../../../service/client.service';
+import { clientModel } from '../../../model/client';
+import { countryModel, stateModel, cityModel } from '../../../model/country-state-city';
 
 @Component({
   selector: 'app-viewclient',
@@ -24,7 +26,10 @@ export class ViewclientComponent implements OnInit {
   city = new cityModel();
   cityDetails: cityModel[]=[];
   
-  constructor(private router: Router, private clientService: CommonService,private modalService: NgbModal) {
+  constructor(private router: Router,
+    private clientService: ClientService,
+    private modalService: NgbModal,
+    private country_state_cityService: CountryStateCityService) {
     this.clientList();
 
     this.countryList();
@@ -80,7 +85,7 @@ onEdit(id:number) {
 
   
   countryList() {
-    this.clientService.countryList().subscribe((data: any) => {
+    this.country_state_cityService.countryList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.CountryList) {
           this.countryDetails = data.CountryList;
@@ -103,7 +108,7 @@ onEdit(id:number) {
   }
 
   stateList(cnid) {
-    this.clientService.stateList(cnid).subscribe((data: any) => {
+    this.country_state_cityService.stateList(cnid).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.StateList) {
           this.stateDetails = data.StateList;
@@ -116,7 +121,7 @@ onEdit(id:number) {
   }
 
   cityList(stid) {
-    this.clientService.cityList(stid).subscribe((data: any) => {
+    this.country_state_cityService.cityList(stid).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.cityList) {
           this.cityDetails = data.cityList;
