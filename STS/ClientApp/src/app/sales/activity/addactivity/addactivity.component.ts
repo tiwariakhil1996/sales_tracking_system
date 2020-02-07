@@ -102,4 +102,8 @@ export class AddactivityComponent implements OnInit {
     this.activity.appointmentDate=null;
   }
   
+  viewActivityForm(){
+    this.router.navigate(['/sales/activity/currentactivity']);
+  }
+
 }

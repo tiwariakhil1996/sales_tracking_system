@@ -71,6 +71,6 @@ namespace STS.Model
         public string Adharcard { get; set; }
         public string Address { get; set; }
 
-
+       
     }
 }

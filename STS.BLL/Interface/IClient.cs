@@ -25,6 +25,15 @@ namespace STS.BLL.Interface
 
         //Delete
         Task<TranStatus> deleteClient(int ID);
+
+
+        //Change Status Client
+        Task<TranStatus> ChangeStatusClient(int id);
+
+        //Display Active Deactive Client
+        Task<List<ClientListModel>> ClientList_ActiveDeactive();
+
+
     }
 }
 

@@ -24,8 +24,9 @@ export class ViewsubcategoryComponent implements OnInit {
     private categoryService: CategorySubcategoryService,
     private modalServices: BsModalService,
     private modalService: NgbModal) {
-    this.categoryList();
+  
     this.viewsubcategoryList();
+    this.categoryList();
   }
 
 
@@ -45,6 +46,8 @@ export class ViewsubcategoryComponent implements OnInit {
       console.log(this.categoryDetails);
     });
   }
+
+  
 
 
   viewsubcategoryList() {
@@ -89,6 +92,13 @@ export class ViewsubcategoryComponent implements OnInit {
         this.viewsubcategoryList();
       });
     }
+  }
+
+  changeStatus(id: number) {
+    console.log(id);
+    this.categoryService.changesubcategoryStatus(id).subscribe(data => {
+      this.viewsubcategoryList();
+    });
   }
 
   addnewSubategory() {

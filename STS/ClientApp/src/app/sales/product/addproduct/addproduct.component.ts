@@ -266,4 +266,9 @@ export class AddproductComponent implements OnInit {
  }
 
 
+ viewProductForm() {
+  this.router.navigate(['/sales/product/viewproduct']);
+}
+
+
 }

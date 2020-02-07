@@ -64,5 +64,24 @@ namespace STS.BLL.Service
                 return await clientRepository.deleteClient(ID);
             }
         }
+
+        //Change Status Client
+        public async Task<TranStatus> ChangeStatusClient(int id)
+        {
+            using (clientRepository = new ClientRepository())
+            {
+                return await clientRepository.ChangeStatusClient(id);
+            }
+        }
+
+        // Display  Active Deactive Client List
+        public async Task<List<ClientListModel>> ClientList_ActiveDeactive()
+        {
+            using (clientRepository = new ClientRepository())
+            {
+                return await clientRepository.ClientList_ActiveDeactive();
+            }
+        }
+
     }
 }

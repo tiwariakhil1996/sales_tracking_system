@@ -33,5 +33,6 @@ namespace STS.Model
         public string Sname { get; set; }
         public int Cid { get; set; }
         public string Cname { get; set; }
+        public bool IsActive { get; set; }
     }
 }

@@ -34,8 +34,10 @@ export class AddactivityComponent implements OnInit {
     private salesService: SalesService,
     private productService: ProductService) {
 
-    this.productList();
-    this.clientList();
+    // this.productList();
+    this.active_ProductList();
+    // this.clientList();
+    this.active_ClientList();
     this.SalesList();
    }
 
@@ -55,18 +57,41 @@ export class AddactivityComponent implements OnInit {
     });
   }
 
-
-  clientList() {
-    this.clientService.clientList().subscribe((data: any) => {
+  active_ProductList() {
+    this.productService.active_ProductList().subscribe((data: any) => {
       if (data.Status.code === 0) {
-        if (data.ClientList) {
-          this.clientDetails = data.ClientList;
+        if (data.ProductList_ActiveDeactive) {
+          this.productDetails = data.ProductList_ActiveDeactive;
         }
       }
     }, (err) => {
 
     });
   }
+
+  active_ClientList() {
+    this.clientService.active_ClientList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.ClientList_ActiveDeactive) {
+          this.clientDetails = data.ClientList_ActiveDeactive;
+        }
+      }
+    }, (err) => {
+
+    });
+  }
+
+  // clientList() {
+  //   this.clientService.clientList().subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.ClientList) {
+  //         this.clientDetails = data.ClientList;
+  //       }
+  //     }
+  //   }, (err) => {
+
+  //   });
+  // }
 
   SalesList(){
     this.salesService.SalesList().subscribe((data: any) => {

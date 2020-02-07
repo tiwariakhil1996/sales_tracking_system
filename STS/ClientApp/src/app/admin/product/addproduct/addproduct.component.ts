@@ -40,7 +40,7 @@ export class AddproductComponent implements OnInit {
     private modalService: NgbModal,
     private categoryService: CategorySubcategoryService) {
 
-    this.active_deactive_CategoryList();
+    this.active_CategoryList();
 
   }
 
@@ -49,22 +49,22 @@ export class AddproductComponent implements OnInit {
   }
 
 
-  categoryList() {
-    this.categoryService.categoryList().subscribe((data: any) => {
-      if (data.Status.code === 0) {
-        if (data.CategoryList) {
-          this.categoryDetails = data.CategoryList;
+  // categoryList() {
+  //   this.categoryService.categoryList().subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.CategoryList) {
+  //         this.categoryDetails = data.CategoryList;
 
-        }
-      }
-    }, (err) => {
+  //       }
+  //     }
+  //   }, (err) => {
 
-      console.log(this.categoryDetails);
-    });
-  }
+  //     console.log(this.categoryDetails);
+  //   });
+  // }
 
-  active_deactive_CategoryList() {
-    this.categoryService.active_deactive_CategoryList().subscribe((data: any) => {
+  active_CategoryList() {
+    this.categoryService.active_CategoryList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.CategoryList_ActiveDeactive) {
           this.categoryDetails = data.CategoryList_ActiveDeactive;
@@ -76,6 +76,21 @@ export class AddproductComponent implements OnInit {
       console.log(this.categoryDetails);
     });
   }
+
+  active_SubcategoryList() {
+    this.categoryService.active_SubcategoryList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.SubcategoryList_ActiveDeactive) {
+          this.categoryDetails = data.SubcategoryList_ActiveDeactive;
+
+        }
+      }
+    }, (err) => {
+
+      console.log(this.categoryDetails);
+    });
+  }
+
 
   onCategoryChange(cid) {
     // this.subcategoryDetails = this.subcategoryDetails.filter(item => item.cid == cid);
