@@ -10,5 +10,6 @@ export class subcategoryDataModel {
     sname: string;
     cid: number;
     cname: string;
+    isActive: boolean;
 }
 

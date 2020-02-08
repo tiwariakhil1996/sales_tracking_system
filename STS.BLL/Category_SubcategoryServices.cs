@@ -132,15 +132,7 @@ namespace STS.BLL.Service
             }
         }
 
-        //Change Status Subcategory
-        public async Task<TranStatus> ChangeStatusSubcategory(int id)
-        {
-            using (categoryRepository = new Category_SubcategoryRepository())
-            {
-                return await categoryRepository.ChangeStatusSubcategory(id);
-            }
-        }
-
+        
         // Display  Active Deactive Subategory List
         public async Task<List<SubcategoryListModel>> SubcategoryList_ActiveDeactive()
         {
