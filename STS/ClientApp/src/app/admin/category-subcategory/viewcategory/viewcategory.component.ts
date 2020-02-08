@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
 import { categoryDataModel } from '../../../model/category-subcategory';
+import { registerModel } from '../../../model/admin';
 
 @Component({
   selector: 'app-viewcategory',
@@ -13,6 +14,8 @@ import { categoryDataModel } from '../../../model/category-subcategory';
 })
 export class ViewcategoryComponent implements OnInit {
 
+  adminDetails: registerModel = new registerModel();
+  
   modalRef: BsModalRef;
   category = new categoryDataModel();
   categoryDetails: categoryDataModel[] = [];
@@ -34,7 +37,7 @@ export class ViewcategoryComponent implements OnInit {
       if (data.Status.code === 0) {
         if (data.CategoryList) {
           this.categoryDetails = data.CategoryList;
-          // console.log(this.categoryDetails);
+          console.log(this.categoryDetails);
         }
       }
     }, (err) => {
@@ -53,7 +56,11 @@ export class ViewcategoryComponent implements OnInit {
 
 
   updateCategory(cid: number) {
-    // this.product.image = this.imageSrc;
+    this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.category.id =this.adminDetails.id;
+    console.log(this.category.id);
+    
+
     this.categoryService.updateCategory(cid, this.category).subscribe((data: any) => {
       if (data.Status.code === 0) {
         // alert('Category updated sucesfully');
@@ -70,15 +77,19 @@ export class ViewcategoryComponent implements OnInit {
   // Delete
 
   deleteCategory(cid: number) {
-    if (confirm('Are you sure to delete this record ?') === true) {
+    // if (confirm('Are you sure to delete this record ?') === true) {
       this.categoryService.deleteCategory(cid).subscribe(data => {
         this.categoryList();
       });
-    }
+    // }
+    this.toastr.success('Category deleted Successful', 'Successful', {
+      disableTimeOut: false,
+      timeOut: 2000
+    });
   }
 
   changeStatus(id: number) {
-    // console.log(id);
+    console.log(id);
     this.categoryService.changeStatus(id).subscribe(data => {
       this.categoryList();
     });

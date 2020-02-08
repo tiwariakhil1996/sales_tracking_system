@@ -9,6 +9,9 @@ namespace STS.Model
     public partial class CategoryModel
     {
         public string Cname { get; set; }
+        public int Id { get; set; }
+
+
 
     }
 
@@ -26,6 +29,7 @@ namespace STS.Model
         public string Sname { get; set; }
 
         public int Cid { get; set; }
+        public int Id { get; set; }
     }
 
     public partial class SubcategoryListModel

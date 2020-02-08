@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
+import { registerModel } from '../../../model/admin';
 
 @Component({
   selector: 'app-addsubcategory',
@@ -11,7 +12,8 @@ import { categoryDataModel, subcategoryDataModel } from '../../../model/category
 })
 export class AddsubcategoryComponent implements OnInit {
 
-
+  adminDetails: registerModel = new registerModel();
+  
   category = new categoryDataModel();
   categoryDetails: categoryDataModel[]=[];
 
@@ -56,6 +58,11 @@ export class AddsubcategoryComponent implements OnInit {
   }
 
   addSubcategory(){
+    this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.subcategory.id =this.adminDetails.id;
+    console.log(this.subcategory.id);
+    
+
     this.categoryService.addSubcategory(this.subcategory).subscribe((data: any) => {
       if (data.Status.code === 0) {
         // alert('Subcategory added sucesfully');
