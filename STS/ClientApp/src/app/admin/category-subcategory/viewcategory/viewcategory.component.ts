@@ -14,6 +14,7 @@ import { registerModel } from '../../../model/admin';
 })
 export class ViewcategoryComponent implements OnInit {
 
+  register = new registerModel();
   adminDetails: registerModel = new registerModel();
   
   modalRef: BsModalRef;
@@ -56,9 +57,10 @@ export class ViewcategoryComponent implements OnInit {
 
 
   updateCategory(cid: number) {
+
     this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
-    this.category.id =this.adminDetails.id;
-    console.log(this.category.id);
+    this.category.modifiedby =this.adminDetails.id;
+    console.log(this.category.modifiedby);
     
 
     this.categoryService.updateCategory(cid, this.category).subscribe((data: any) => {

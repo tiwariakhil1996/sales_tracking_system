@@ -11,7 +11,7 @@ import { registerModel } from '../../../model/admin';
   styleUrls: ['./addsubcategory.component.css']
 })
 export class AddsubcategoryComponent implements OnInit {
-
+  register = new registerModel();
   adminDetails: registerModel = new registerModel();
   
   category = new categoryDataModel();
@@ -58,9 +58,10 @@ export class AddsubcategoryComponent implements OnInit {
   }
 
   addSubcategory(){
+    // This logic for stored the CreatedBy admin id in a table
     this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
-    this.subcategory.id =this.adminDetails.id;
-    console.log(this.subcategory.id);
+    this.subcategory.createdby =this.adminDetails.id;
+    // console.log(this.subcategory.createdby);
     
 
     this.categoryService.addSubcategory(this.subcategory).subscribe((data: any) => {

@@ -26,9 +26,11 @@ export class AddcategoryComponent implements OnInit {
   }
 
   addCategory() {
+
+    //This logic for stored the CreatedBy admin id in a table
     this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
-    this.category.id =this.adminDetails.id;
-    console.log(this.category.id);
+    this.category.createdby =this.adminDetails.id;
+    // console.log(this.category.createdby);
     
 
     this.categoryService.addCategory(this.category).subscribe((data: any) => {
