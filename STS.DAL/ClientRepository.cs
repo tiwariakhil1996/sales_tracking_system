@@ -138,5 +138,38 @@ namespace STS.DAL
         }
 
 
+        //Change Status Client
+        public async Task<TranStatus> ChangeStatusClient(int id)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@ID", id);
+
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                await connection.QueryAsync("ChangeStatusClient", parameter, commandType: CommandType.StoredProcedure);
+                transaction.returnMessage = parameter.Get<string>("@Message");
+                transaction.code = parameter.Get<int>("@Code");
+                return transaction;
+
+            }
+        }
+
+
+        // Display Active Deactive Client
+        public async Task<List<ClientListModel>> ClientList_ActiveDeactive()
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<ClientListModel>("ClientList_ActiveDeactive", commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+
+        }
     }
 }

@@ -23,5 +23,14 @@ export class ProductService {
   updateProduct(id: number, data: any) {
     return this.http.put('/api/Product/updateProduct/' + id, data);
   }
+
+  changeStatus(id: number) {
+    return this.http.put('/api/Product/ChangeStatusProduct/' + id, null);
+  }
+
+  active_ProductList(){
+    return this.http.get('/api/Product/ProductList_ActiveDeactive');
+  }
+
   
 }

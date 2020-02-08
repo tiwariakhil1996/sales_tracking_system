@@ -32,5 +32,7 @@ namespace STS.Model
         public string Image { get; set; }
         public string ImageExtn { get; set; }
         public string Date { get; set; }
+        public bool IsActive { get; set; }
+
     }
 }

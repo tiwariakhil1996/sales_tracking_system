@@ -26,4 +26,13 @@ export class ClientService {
   updateClient(id: number, data: any) {
     return this.http.put('/api/Client/updateClient/' + id, data);
   }
+
+  changeStatus(id: number) {
+    return this.http.put('/api/Client/ChangeStatusClient/' + id, null);
+  }
+
+  active_ClientList(){
+    return this.http.get('/api/Client/ClientList_ActiveDeactive');
+  }
+
 }

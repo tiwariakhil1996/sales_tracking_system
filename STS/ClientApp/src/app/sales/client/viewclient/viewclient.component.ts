@@ -133,4 +133,18 @@ onEdit(id:number) {
     });
   }
 
+
+  changeStatus(id: number) {
+    console.log(id);
+    this.clientService.changeStatus(id).subscribe(data => {
+      this.clientList();
+    });
+  }
+
+    
+  addnewClient(){
+    this.router.navigate(['/sales/client/addclient']);
+  }
+
+
 }

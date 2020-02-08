@@ -19,14 +19,14 @@
             <th>Description</th>
             <th>Price</th>
             <th>Image</th>
-            <!-- <th></th> -->
             <th>Date</th>
             <th>Action</th>
+            <th>IsActive</th>
           </tr>
         </thead>
         <tbody>
           <!-- <tr>
-            <td>Pompeius RenÃ©</td>
+            <td>Pompeius René</td>
             <td>2012/01/01</td>
             <td>Member</td>
             <td>
@@ -34,11 +34,11 @@
             </td>
           </tr>
           -->
-          <tr *ngFor="let item of productDetails;let i=index;">
-            <td>{{i+1}}</td>
-            <td>{{item.id}}</td>
-            <td>{{item.cname}}</td>
-            <td>{{item.sname}}</td>
+          <tr *ngFor="let item of productDetails;let i=index;" >
+            <td >{{i+1}}</td>
+            <td >{{item.id}}</td>
+            <td >{{item.cname}}</td>
+            <td >{{item.sname}}</td>
             <td>{{item.productname}}</td>
             <td >{{item.description}}</td>
             <td >{{item.price}}</td>
@@ -46,10 +46,16 @@
             <td style='text-align:center'><img style="max-width: 115px; max-height: 64px;" [src]="'assets/img/Images/Product/'+item.image"></td>
             
             <td >{{item.date}}</td>
+           
             <td >
-              <button type="button" class="btn btn-primary" data-toggle="modal" (click)="openupdatemodal(content,item)" ><i class="fa fa-edit" aria-hidden="true"></i></button>
-            
+              <button type="button" class="btn btn-primary" data-toggle="modal" (click)="openupdatemodal(content,item)" ><i class="fa fa-edit" aria-hidden="true"></i></button>       
               <button class='btn btn-danger' type="button" (click)="onDelete(item.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            </td>
+            <td>
+              <button *ngIf="item.isActive" class='btn btn-success' type="button" (click)="changeStatus(item.id)"><i
+                  class="fa fa-check-circle"></i></button>
+              <button *ngIf="!item.isActive" class='btn btn-danger' type="button" (click)="changeStatus(item.id)"><i
+                  class="fa fa-times"></i></button>
             </td>
           </tr>
         </tbody>

@@ -57,7 +57,7 @@ namespace STS.BLL.Service
             }
         }
 
-        // Active Deactive Category List
+        // Display  Active Deactive Category List
         public async Task<List<CategoryListModel>> CategoryList_ActiveDeactive()
         {
             using (categoryRepository = new Category_SubcategoryRepository())
@@ -131,5 +131,25 @@ namespace STS.BLL.Service
                 return await categoryRepository.deleteSubcategory(Sid);
             }
         }
+
+        //Change Status Subcategory
+        public async Task<TranStatus> ChangeStatusSubcategory(int id)
+        {
+            using (categoryRepository = new Category_SubcategoryRepository())
+            {
+                return await categoryRepository.ChangeStatusSubcategory(id);
+            }
+        }
+
+        // Display  Active Deactive Subategory List
+        public async Task<List<SubcategoryListModel>> SubcategoryList_ActiveDeactive()
+        {
+            using (categoryRepository = new Category_SubcategoryRepository())
+            {
+                return await categoryRepository.SubcategoryList_ActiveDeactive();
+            }
+        }
+
+
     }
 }

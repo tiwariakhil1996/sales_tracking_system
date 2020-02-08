@@ -22,6 +22,15 @@ namespace STS.BLL.Interface
 
         //Delete
         Task<TranStatus> deleteProduct(int ID);
+
+
+        //Change Status Product
+        Task<TranStatus> ChangeStatusProduct(int id);
+
+
+        //Display Active Deactive Category
+        Task<List<ProductListModel>> ProductList_ActiveDeactive();
+
     }
 }
 

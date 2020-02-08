@@ -8,6 +8,8 @@ import { activityModel } from '../../../model/activity';
 import { salesregisterModel } from '../../../model/sales';
 import { productModel } from '../../../model/product';
 import { clientModel } from '../../../model/client';
+import { Route } from '@angular/compiler/src/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-currentactivity',
@@ -32,7 +34,8 @@ export class CurrentactivityComponent implements OnInit {
     private activityService: ActivityService,
     private modalService: NgbModal,
     private salesService:SalesService,
-    private productService: ProductService) { 
+    private productService: ProductService,
+    private router: Router) { 
     this.activityList();
     this.productList();
     this.clientList();
@@ -125,4 +128,10 @@ SalesList(){
 
   });
 }
+
+addnewActivity() {
+  this.router.navigate(['/sales/activity/addactivity']);
+
+}
+
 }

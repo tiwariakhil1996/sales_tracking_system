@@ -27,7 +27,7 @@ namespace STS.BLL.Interface
         //Active Deactive Category
         Task<TranStatus> ChangeStatusCategory(int id);
 
-        //Display Category
+        //Display Active Deactive Category
         Task<List<CategoryListModel>> CategoryList_ActiveDeactive();
 
 
@@ -55,6 +55,12 @@ namespace STS.BLL.Interface
 
         //Delete Subcategory
         Task<TranStatus> deleteSubcategory(int Sid);
+
+        //Active Deactive Subategory
+        Task<TranStatus> ChangeStatusSubcategory(int id);
+
+        //Display Active Deactive Subcategory
+        Task<List<SubcategoryListModel>> SubcategoryList_ActiveDeactive();
 
     }
 }

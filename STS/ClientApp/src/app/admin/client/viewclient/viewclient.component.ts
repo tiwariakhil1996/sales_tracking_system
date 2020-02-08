@@ -149,7 +149,12 @@ export class ViewclientComponent implements OnInit {
     });
   }
 
-
+  changeStatus(id: number) {
+    console.log(id);
+    this.clientService.changeStatus(id).subscribe(data => {
+      this.clientList();
+    });
+  }
   
   addnewClient(){
     this.router.navigate(['/admin/client/addclient']);

@@ -86,6 +86,5 @@ export class ViewcategoryComponent implements OnInit {
 
   addnewCategory() {
     this.router.navigate(['/admin/category-subcategory/addcategory']);
-
   }
 }

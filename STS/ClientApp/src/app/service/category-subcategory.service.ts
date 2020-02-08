@@ -30,7 +30,7 @@ export class CategorySubcategoryService {
     return this.http.put('/api/Category_Subcategory/ChangeStatusCategory/' + id, null);
   }
 
-  active_deactive_CategoryList(){
+  active_CategoryList(){
     return this.http.get('/api/Category_Subcategory/CategoryList_ActiveDeactive');
   }
 
@@ -61,6 +61,14 @@ export class CategorySubcategoryService {
   }
   ChangeStatusSubcategory(id: number) {
     return this.http.put('/api/Category_Subcategory/ChangeStatusSubcategory/' + id, null);
+  }
+
+  changesubcategoryStatus(id: number) {
+    return this.http.put('/api/Category_Subcategory/ChangeStatusSubcategory/' + id, null);
+  }
+
+  active_SubcategoryList(){
+    return this.http.get('/api/Category_Subcategory/SubcategoryList_ActiveDeactive');
   }
 
 }

@@ -34,7 +34,8 @@ export class ViewproductComponent implements OnInit {
     private modalService: NgbModal
   ) {
     this.productList();
-    this.categoryList();
+    // this.categoryList();
+    this.active_deactive_CategoryList();
   }
 
   ngOnInit() {
@@ -224,6 +225,19 @@ export class ViewproductComponent implements OnInit {
     });
   }
 
+  active_deactive_CategoryList() {
+    this.categoryService.active_CategoryList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.CategoryList_ActiveDeactive) {
+          this.categoryDetails = data.CategoryList_ActiveDeactive;
+
+        }
+      }
+    }, (err) => {
+
+      console.log(this.categoryDetails);
+    });
+  }
 
   onCategoryChange(cid) {
     // this.subcategoryDetails = this.subcategoryDetails.filter(item => item.cid == cid);
@@ -266,6 +280,13 @@ export class ViewproductComponent implements OnInit {
     });
   }
 
+  
+  changeStatus(id: number) {
+    console.log(id);
+    this.productService.changeStatus(id).subscribe(data => {
+      this.productList();
+    });
+  }
 
   addnewProduct() {
     this.router.navigate(['/admin/product/addproduct']);

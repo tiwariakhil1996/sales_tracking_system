@@ -5,7 +5,7 @@ using System.Text;
 
 namespace STS.Model
 {
-     //addProduct
+     //addClient
     public partial class ClientModel
     {
         public string ClientName { get; set; }
@@ -44,6 +44,6 @@ namespace STS.Model
         public int Sid { get; set; }
         public int Cityid { get; set; }
 
-
+        public bool IsActive { get; set; }
     }
 }

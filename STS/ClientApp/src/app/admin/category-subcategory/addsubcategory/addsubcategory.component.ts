@@ -21,27 +21,39 @@ export class AddsubcategoryComponent implements OnInit {
   constructor(private router: Router,
     private toastr: ToastrService,
     private categoryService: CategorySubcategoryService,) {
-    this.categoryList();
+    this.active_CategoryList();
    }
 
   ngOnInit() {
   }
    
-  categoryList() {
-    this.categoryService.categoryList().subscribe((data: any) => {
-      if (data.Status.code === 0) {
-        if (data.CategoryList) {
-          this.categoryDetails = data.CategoryList;
+  // categoryList() {
+  //   this.categoryService.categoryList().subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.CategoryList) {
+  //         this.categoryDetails = data.CategoryList;
         
+  //       }
+  //     }
+  //   }, (err) => {
+      
+  //     console.log(this.categoryDetails); 
+  //   });
+  // }
+
+  active_CategoryList() {
+    this.categoryService.active_CategoryList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.CategoryList_ActiveDeactive) {
+          this.categoryDetails = data.CategoryList_ActiveDeactive;
+
         }
       }
     }, (err) => {
-      
-      console.log(this.categoryDetails); 
+
+      console.log(this.categoryDetails);
     });
   }
-
-
 
   addSubcategory(){
     this.categoryService.addSubcategory(this.subcategory).subscribe((data: any) => {

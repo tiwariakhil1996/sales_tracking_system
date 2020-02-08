@@ -4,6 +4,8 @@
     <div class="card-header">
       <!-- <i class="fa fa-align-justify"></i> -->
        Product Details
+       <button type="submit" style="float: right;" class="btn btn-sm btn-success"
+      (click)="addnewProduct()"><i class="fa fa-plus">Add</i></button>
     </div>
     <div style="overflow-x:auto;">
     <div class="card-body">
@@ -20,6 +22,7 @@
             <th>Image</th>
             <th>Date</th>
             <th>Action</th>
+            <th>IsActive</th>
           </tr>
         </thead>
         <tbody>
@@ -41,11 +44,17 @@
          <td>{{item.description}}</td>
          <td>{{item.price}}</td>
          <!-- <img style="width: 80px; height: 80px;" src={{item.image}} > -->
-         <td style='text-align:center'><img style="max-width: 50px; max-height: 50px;" [src]="'assets/img/Images/Product'+item.image"></td>
+         <td style='text-align:center'><img style="max-width: 50px; max-height: 50px;" [src]="'assets/img/Images/Product/'+item.image"></td>
          <td>{{item.date}}</td>
             <td>
               <button type="button" class="btn btn-primary" data-toggle="modal" (click)="openupdatemodal(content,item)" ><i class="fa fa-edit" aria-hidden="true"></i></button>
               <button class='btn btn-danger' type="button" (click)="onDelete(item.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            </td>
+            <td>
+              <button *ngIf="item.isActive" class='btn btn-success' type="button" (click)="changeStatus(item.id)"><i
+                  class="fa fa-check-circle"></i></button>
+              <button *ngIf="!item.isActive" class='btn btn-danger' type="button" (click)="changeStatus(item.id)"><i
+                  class="fa fa-times"></i></button>
             </td>
           </tr>
 

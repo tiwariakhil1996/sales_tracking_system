@@ -266,4 +266,9 @@ validateMobile(mobileField) {
       console.log(err); 
     });
   }
+
+  viewClientForm() {
+    this.router.navigate(['/sales/client/viewclient']);
+
+  }
 }

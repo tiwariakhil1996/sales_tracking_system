@@ -24,9 +24,8 @@ export class ViewsubcategoryComponent implements OnInit {
     private categoryService: CategorySubcategoryService,
     private modalServices: BsModalService,
     private modalService: NgbModal) {
-    this.categoryList();
+  
     this.viewsubcategoryList();
-
   }
 
 
@@ -46,6 +45,8 @@ export class ViewsubcategoryComponent implements OnInit {
       console.log(this.categoryDetails);
     });
   }
+
+  
 
 
   viewsubcategoryList() {

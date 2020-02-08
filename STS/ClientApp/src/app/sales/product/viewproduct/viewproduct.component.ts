@@ -264,4 +264,16 @@ onDelete(id: number) {
     });
   }
 }
+
+changeStatus(id: number) {
+  console.log(id);
+  this.productService.changeStatus(id).subscribe(data => {
+    this.categoryList();
+  });
+}
+
+addnewProduct() {
+  this.router.navigate(['/sales/product/addproduct']);
+}
+
 }

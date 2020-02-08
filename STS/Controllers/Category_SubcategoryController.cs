@@ -92,7 +92,7 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
-        //Active Deactive
+        //Active Deactive Category
 
         [HttpPut]
         [Route("ChangeStatusCategory/{id}")]
@@ -115,7 +115,7 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
-        //Active Deactive Category List 
+        // Display Active Deactive Category List 
 
         [HttpGet]
         [Route("CategoryList_ActiveDeactive")]
@@ -299,6 +299,54 @@ namespace STS.Controllers
 
                 transaction = await icategory.deleteSubcategory(Sid);
 
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+
+        //Active Deactive Subcategory
+
+        [HttpPut]
+        [Route("ChangeStatusSubcategory/{id}")]
+        public async Task<IActionResult> ChangeStatusSubcategory(int id)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+                transaction = await icategory.ChangeStatusSubcategory(id);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+
+        // Display Active Deactive Subategory List 
+
+        [HttpGet]
+        [Route("SubcategoryList_ActiveDeactive")]
+        public async Task<IActionResult> SubcategoryList_ActiveDeactive()
+        {
+            TranStatus transaction = new TranStatus();
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                var categoryList = await icategory.SubcategoryList_ActiveDeactive();
+                dctData.Add("SubcategoryList_ActiveDeactive", categoryList);
             }
             catch (Exception ex)
             {
