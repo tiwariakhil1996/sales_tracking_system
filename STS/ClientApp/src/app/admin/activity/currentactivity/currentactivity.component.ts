@@ -10,6 +10,7 @@ import { productModel } from '../../../model/product';
 import { clientModel } from '../../../model/client';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { registerModel } from '../../../model/admin';
 
 @Component({
   selector: 'app-currentactivity',
@@ -17,6 +18,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./currentactivity.component.css']
 })
 export class CurrentactivityComponent implements OnInit {
+
+  adminDetails: registerModel = new registerModel();
 
   activity = new activityModel();
   activityDetails: activityModel[] = [];
@@ -85,6 +88,10 @@ export class CurrentactivityComponent implements OnInit {
   }
 
   onEdit(aid: number) {
+    this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.activity.modifiedby = this.adminDetails.id;
+    console.log(this.activity.modifiedby);
+
     this.activityService.updateActivity(aid, this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
         // alert('Activity updated sucesfully');

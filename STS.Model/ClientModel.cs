@@ -19,6 +19,7 @@ namespace STS.Model
         public int Sid { get; set; }
         public int Cityid { get; set; }
         public string PostalCode { get; set; }
+        public int Createdby { get; set; }
 
 
     }
@@ -43,7 +44,7 @@ namespace STS.Model
         public int Cid { get; set; }
         public int Sid { get; set; }
         public int Cityid { get; set; }
-
         public bool IsActive { get; set; }
+        public int Modifiedby { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace STS.Model
     public partial class CategoryModel
     {
         public string Cname { get; set; }
-        public int Id { get; set; }
+        public int Createdby { get; set; }
 
     }
 
@@ -18,6 +18,7 @@ namespace STS.Model
         public int Cid { get; set; }
         public string Cname { get; set; }
         public bool IsActive { get; set; }
+        public int Modifiedby { get; set; }
 
     }
     public partial class SubcategoryModel
@@ -26,6 +27,7 @@ namespace STS.Model
         public string Sname { get; set; }
 
         public int Cid { get; set; }
+        public int Createdby { get; set; }
     }
 
     public partial class SubcategoryListModel
@@ -35,5 +37,6 @@ namespace STS.Model
         public int Cid { get; set; }
         public string Cname { get; set; }
         public bool IsActive { get; set; }
+        public int Modifiedby { get; set; }
     }
 }

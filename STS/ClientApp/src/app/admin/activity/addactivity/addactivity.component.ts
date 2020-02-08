@@ -9,6 +9,7 @@ import { activityModel } from '../../../model/activity';
 import { productModel } from '../../../model/product';
 import { clientModel } from '../../../model/client';
 import { ToastrService } from 'ngx-toastr';
+import { registerModel } from '../../../model/admin';
 
 @Component({
   selector: 'app-addactivity',
@@ -17,6 +18,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AddactivityComponent implements OnInit {
 
+  adminDetails: registerModel = new registerModel();
+  
   activity = new activityModel();
   activityDetails: activityModel[]=[];
 
@@ -109,6 +112,10 @@ export class AddactivityComponent implements OnInit {
 
 
   submitForm() {
+    this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.activity.createdby = this.adminDetails.id;
+    console.log(this.activity.createdby);
+
     this.activityService.addActivity(this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
         // alert('Activity added sucesfully');

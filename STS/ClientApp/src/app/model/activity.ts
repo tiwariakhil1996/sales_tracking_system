@@ -14,5 +14,8 @@ export class activityModel {
     latitude: string;
     longitude: string;
     appointmentDate: string;
+
+    createdby: number;
+    modifiedby: number;
 }
 

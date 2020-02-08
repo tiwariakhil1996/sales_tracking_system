@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
 import { categoryDataModel } from '../../../model/category-subcategory';
+import { registerModel } from '../../../model/admin';
 
 @Component({
   selector: 'app-viewcategory',
@@ -13,6 +14,8 @@ import { categoryDataModel } from '../../../model/category-subcategory';
 })
 export class ViewcategoryComponent implements OnInit {
 
+  adminDetails: registerModel = new registerModel();
+  
   modalRef: BsModalRef;
   category = new categoryDataModel();
   categoryDetails: categoryDataModel[] = [];
@@ -53,7 +56,11 @@ export class ViewcategoryComponent implements OnInit {
 
 
   updateCategory(cid: number) {
-    // this.product.image = this.imageSrc;
+    this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.category.modifiedby = this.adminDetails.id;
+    console.log(this.category.modifiedby);
+    
+
     this.categoryService.updateCategory(cid, this.category).subscribe((data: any) => {
       if (data.Status.code === 0) {
         // alert('Category updated sucesfully');

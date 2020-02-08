@@ -15,5 +15,8 @@ export class productModel {
     ImageExtn: string;
     date: string;
     isActive:boolean;
+
+    createdby:number;
+    modifiedby:number;
 }
 

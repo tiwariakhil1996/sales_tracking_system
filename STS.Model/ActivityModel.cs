@@ -18,6 +18,7 @@ namespace STS.Model
         public string Longitude { get; set; }
 
         public string AppointmentDate { get; set; }
+        public int Createdby { get; set; }
 
     }
 
@@ -39,6 +40,7 @@ namespace STS.Model
         public string Longitude { get; set; }
 
         public string AppointmentDate { get; set; }
+        public int Modifiedby { get; set; }
 
 
     }

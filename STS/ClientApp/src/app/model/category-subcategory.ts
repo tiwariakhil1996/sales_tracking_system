@@ -3,7 +3,8 @@ export class categoryDataModel {
     cid: number;
     cname: string;
     isActive: boolean;
-    id: number;
+    createdby: number;
+    modifiedby:number;
 }
 
 export class subcategoryDataModel {
@@ -11,6 +12,8 @@ export class subcategoryDataModel {
     sname: string;
     cid: number;
     cname: string;
-    isActive:boolean;
+    isActive: boolean;
+    createdby: number;
+    modifiedby:number;
 }
 

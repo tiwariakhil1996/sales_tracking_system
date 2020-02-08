@@ -9,6 +9,7 @@ import { CountryStateCityService } from '../../../service/country-state-city.ser
 import { ClientService } from '../../../service/client.service';
 import { clientModel } from '../../../model/client';
 import { countryModel, stateModel, cityModel } from '../../../model/country-state-city';
+import { registerModel } from '../../../model/admin';
 
 @Component({
   selector: 'app-viewclient',
@@ -16,6 +17,8 @@ import { countryModel, stateModel, cityModel } from '../../../model/country-stat
   styleUrls: ['./viewclient.component.css']
 })
 export class ViewclientComponent implements OnInit {
+
+  adminDetails: registerModel = new registerModel();
 
 
   client = new clientModel();
@@ -68,7 +71,10 @@ export class ViewclientComponent implements OnInit {
   }
 
   onEdit(id:number) {
-    // this.client.image = this.imageSrc;
+    this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.client.modifiedby = this.adminDetails.id;
+    console.log(this.client.modifiedby);
+
     this.clientService.updateClient(id, this.client).subscribe((data: any) => {
       if (data.Status.code === 0) {
         // alert('Client updated sucesfully');
