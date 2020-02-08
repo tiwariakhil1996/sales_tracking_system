@@ -31,28 +31,28 @@ const routes: Routes = [
         path: 'addcategory',
         component: AddcategoryComponent,
         data: {
-          title: 'Add_Category'
+          title: 'Add Category'
         }
       },
       {
         path: 'addsubcategory',
         component: AddsubcategoryComponent,
         data: {
-          title: 'Add_Subcategory'
+          title: 'Add Subcategory'
         }
       },
       {
         path: 'viewcategory',
         component: ViewcategoryComponent,
         data: {
-          title: 'View_Category'
+          title: 'View Category'
         }
       },
       {
         path: 'viewsubcategory',
         component: ViewsubcategoryComponent,
         data: {
-          title: 'View_Subcategory'
+          title: 'View Subcategory'
         }
       },
     ]
