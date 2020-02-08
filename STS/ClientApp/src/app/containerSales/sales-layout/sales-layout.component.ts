@@ -17,21 +17,20 @@ export class SalesLayoutComponent {
 
   imageSrc: string = '';
   modalRef: BsModalRef;
-  
+
   loginDetail = new salesregisterModel();
   // salesDetails: salesregisterModel[] = [];
   salesDetails: salesregisterModel = new salesregisterModel();
   item: any;
   updateProfile: any;
-  
+
   constructor(private router: Router,
     private salesService: SalesService,
     private modalService: NgbModal,
-    private modalServices: BsModalService) 
-    { 
-    
-    }
-  
+    private modalServices: BsModalService) {
+
+  }
+
   toggleMinimize(e) {
     this.sidebarMinimized = e;
   }
@@ -45,7 +44,7 @@ export class SalesLayoutComponent {
   }
 
 
-  updatesalesProfile(){
+  updatesalesProfile() {
     // this.updateProfile.image = this.imageSrc;
     this.salesService.UpdateSalesProfile(this.updateProfile).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -75,32 +74,32 @@ export class SalesLayoutComponent {
 
     });
   }
-    // Image to Base64
+  // Image to Base64
 
-    // handleInputChange(e) {
-    //   var file = e.target.files[0];
-    //   var pattern = /image-*/;
-    //   var reader = new FileReader();
-  
-    //   if (!file.type.match(pattern)) {
-    //     alert('invalid format');
-    //     return;
-    //   }
-  
-    //   reader.onload = this._handleReaderLoaded.bind(this);
-    //   reader.readAsDataURL(file)
-    // }
-  
-    // _handleReaderLoaded(e) {
-    //   const reader = e.target;
-    //   //  console.log(this.imageSrc);
-    //   this.imageSrc = reader.result;
-    //   // console.log(this.imageSrc);
-    // }
+  // handleInputChange(e) {
+  //   var file = e.target.files[0];
+  //   var pattern = /image-*/;
+  //   var reader = new FileReader();
+
+  //   if (!file.type.match(pattern)) {
+  //     alert('invalid format');
+  //     return;
+  //   }
+
+  //   reader.onload = this._handleReaderLoaded.bind(this);
+  //   reader.readAsDataURL(file)
+  // }
+
+  // _handleReaderLoaded(e) {
+  //   const reader = e.target;
+  //   //  console.log(this.imageSrc);
+  //   this.imageSrc = reader.result;
+  //   // console.log(this.imageSrc);
+  // }
 
 
-    logout() {
-      // remove user from local storage to log user out
-      localStorage.removeItem('salesLogin');
+  logout() {
+    // remove user from local storage to log user out
+    localStorage.removeItem('salesLogin');
   }
 }

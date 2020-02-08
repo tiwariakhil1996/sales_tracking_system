@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-// import { Country } from '../../../service/country';
-// import { State } from '../../../service/state';
-// import { City } from '../../../service/city';
 import { ToastrService } from 'ngx-toastr';
 import { CountryStateCityService } from '../../../service/country-state-city.service';
 import { ClientService } from '../../../service/client.service';
@@ -21,22 +18,21 @@ export class ViewclientComponent implements OnInit {
   client = new clientModel();
   clientDetails: clientModel[] = [];
 
-  country= new countryModel();
-  countryDetails: countryModel[]=[];
+  country = new countryModel();
+  countryDetails: countryModel[] = [];
 
-  state= new stateModel();
-  stateDetails: stateModel[]=[];
+  state = new stateModel();
+  stateDetails: stateModel[] = [];
 
   city = new cityModel();
-  cityDetails: cityModel[]=[];
-  
+  cityDetails: cityModel[] = [];
+
   constructor(private router: Router,
     private toastr: ToastrService,
     private clientService: ClientService,
     private modalService: NgbModal,
     private country_state_cityService: CountryStateCityService) {
     this.clientList();
-
     this.countryList();
 
   }
@@ -105,21 +101,21 @@ export class ViewclientComponent implements OnInit {
       if (data.Status.code === 0) {
         if (data.CountryList) {
           this.countryDetails = data.CountryList;
-        
+
         }
       }
     }, (err) => {
-      
-      console.log(err); 
+
+      console.log(err);
     });
   }
 
   onCountryChange(cid) {
-    this.stateList(cid); 
+    this.stateList(cid);
   }
 
-  
-  onStatechange(sid){
+
+  onStatechange(sid) {
     this.cityList(sid);
   }
 
@@ -131,8 +127,8 @@ export class ViewclientComponent implements OnInit {
         }
       }
     }, (err) => {
-      
-      console.log(err); 
+
+      console.log(err);
     });
   }
 
@@ -144,8 +140,8 @@ export class ViewclientComponent implements OnInit {
         }
       }
     }, (err) => {
-      
-      console.log(err); 
+
+      console.log(err);
     });
   }
 
@@ -155,8 +151,8 @@ export class ViewclientComponent implements OnInit {
       this.clientList();
     });
   }
-  
-  addnewClient(){
+
+  addnewClient() {
     this.router.navigate(['/admin/client/addclient']);
   }
 

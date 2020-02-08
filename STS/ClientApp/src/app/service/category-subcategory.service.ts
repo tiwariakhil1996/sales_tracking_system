@@ -62,11 +62,6 @@ export class CategorySubcategoryService {
   ChangeStatusSubcategory(id: number) {
     return this.http.put('/api/Category_Subcategory/ChangeStatusSubcategory/' + id, null);
   }
-
-  changesubcategoryStatus(id: number) {
-    return this.http.put('/api/Category_Subcategory/ChangeStatusSubcategory/' + id, null);
-  }
-
   active_SubcategoryList(){
     return this.http.get('/api/Category_Subcategory/SubcategoryList_ActiveDeactive');
   }

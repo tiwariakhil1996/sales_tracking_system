@@ -282,7 +282,7 @@ export class ViewproductComponent implements OnInit {
 
   
   changeStatus(id: number) {
-    console.log(id);
+    // console.log(id);
     this.productService.changeStatus(id).subscribe(data => {
       this.productList();
     });

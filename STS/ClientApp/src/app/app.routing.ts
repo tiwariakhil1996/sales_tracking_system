@@ -107,36 +107,6 @@ export const routes: Routes = [
       {
         path: 'demoallapi',
         loadChildren: () => import('./admin/demoallapi/demoallapi.module').then(m => m.DemoallapiModule)
-      },
-      
-     
-      {
-        path: 'base',
-        loadChildren: () => import('./admin/base/base.module').then(m => m.BaseModule)
-      },
-      {
-        path: 'buttons',
-        loadChildren: () => import('./admin/buttons/buttons.module').then(m => m.ButtonsModule)
-      },
-      {
-        path: 'charts',
-        loadChildren: () => import('./admin/chartjs/chartjs.module').then(m => m.ChartJSModule)
-      },
-      {
-        path: 'icons',
-        loadChildren: () => import('./admin/icons/icons.module').then(m => m.IconsModule)
-      },
-      {
-        path: 'notifications',
-        loadChildren: () => import('./admin/notifications/notifications.module').then(m => m.NotificationsModule)
-      },
-      {
-        path: 'theme',
-        loadChildren: () => import('./admin/theme/theme.module').then(m => m.ThemeModule)
-      },
-      {
-        path: 'widgets',
-        loadChildren: () => import('./admin/widgets/widgets.module').then(m => m.WidgetsModule)
       }
     ]
   },
@@ -151,7 +121,7 @@ export const routes: Routes = [
       title: 'Login Page'
     }
   },
-  
+
 
   {
     path: 'sales/register',
@@ -193,9 +163,10 @@ export const routes: Routes = [
         path: 'map',
         loadChildren: () => import('./sales/map/map.module').then(m => m.MapModule)
       }
-     
 
-     ] },
+
+    ]
+  },
 
 
 
@@ -206,7 +177,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

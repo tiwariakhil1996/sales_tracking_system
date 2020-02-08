@@ -3,8 +3,8 @@
     <div class="card-header">
       <!-- <i class="fa fa-align-justify"></i>  -->
       Client Details
-      <button type="submit" style="float: right;" class="btn btn-sm btn-success"
-      (click)="addnewClient()"><i class="fa fa-plus">Add</i></button>
+      <button type="submit" style="float: right;" class="btn btn-sm btn-success" (click)="addnewClient()"><i
+          class="fa fa-plus">Add</i></button>
     </div>
     <div style="overflow-x:auto;">
       <div class="card-body">
@@ -28,15 +28,6 @@
             </tr>
           </thead>
           <tbody>
-            <!-- <tr>
-              <td>Pompeius René</td>
-              <td>2012/01/01</td>
-              <td>Member</td>
-              <td>
-                <span class="badge badge-success">Active</span>
-              </td>
-            </tr>
-            -->
             <tr *ngFor="let item of clientDetails;let i = index;">
               <td>{{i+1}}</td>
               <td>{{item.id}}</td>
@@ -50,8 +41,6 @@
               <td>{{item.sname}}</td>
               <td>{{item.cityname}}</td>
               <td>{{item.postalCode}}</td>
-
-
               <td>
                 <button type="button" class="btn btn-info" data-toggle="modal"
                   (click)="openupdatemodal(content,item)"><i class="fa fa-edit" aria-hidden="true"></i></button>
@@ -106,13 +95,13 @@
           <label class="col-md-3 col-form-label" for="inline-radios">Gender</label>
           <div class="col-md-9 col-form-label">
             <div class="form-check form-check-inline mr-1" id="inline-radios">
-              <input class="form-check-input" type="radio" [(ngModel)]="client.gender" name="gender"
-                id="Male" value="Male">
+              <input class="form-check-input" type="radio" [(ngModel)]="client.gender" name="gender" id="Male"
+                value="Male">
               <label class="form-check-label" for="Male">Male</label>
             </div>
             <div class="form-check form-check-inline mr-1">
-              <input class="form-check-input" type="radio" [(ngModel)]="client.gender" name="gender"
-                id="Female" value="Female">
+              <input class="form-check-input" type="radio" [(ngModel)]="client.gender" name="gender" id="Female"
+                value="Female">
               <label class="form-check-label" for="Female">Female</label>
             </div>
           </div>
@@ -173,16 +162,4 @@
     </div>
   </div>
 
-                </ng-template>
-
-              </td>
-            </tr>
-
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- </div> -->
-<!--/.col-->
+</ng-template>

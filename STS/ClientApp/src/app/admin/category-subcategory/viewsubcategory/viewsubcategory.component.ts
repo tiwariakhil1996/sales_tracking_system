@@ -24,7 +24,7 @@ export class ViewsubcategoryComponent implements OnInit {
     private categoryService: CategorySubcategoryService,
     private modalServices: BsModalService,
     private modalService: NgbModal) {
-  
+
     this.viewsubcategoryList();
   }
 
@@ -46,7 +46,7 @@ export class ViewsubcategoryComponent implements OnInit {
     });
   }
 
-  
+
 
 
   viewsubcategoryList() {
@@ -96,7 +96,7 @@ export class ViewsubcategoryComponent implements OnInit {
   }
 
   ChangeStatusSubcategory(id: number) {
-    console.log(id);
+    // console.log(id);
     this.categoryService.ChangeStatusSubcategory(id).subscribe(data => {
       this.viewsubcategoryList();
 

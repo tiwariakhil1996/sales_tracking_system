@@ -69,6 +69,7 @@ export class ViewcategoryComponent implements OnInit {
     console.log(id);
     this.categoryService.changeStatus(id).subscribe(data => {
       this.categoryList();
+      
     });
   }
   addnewCategory() {
