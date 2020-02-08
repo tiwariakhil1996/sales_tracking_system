@@ -34,7 +34,9 @@ export class ViewproductComponent implements OnInit {
     private modalService: NgbModal,
     private categoryService: CategorySubcategoryService) {
     this.productList();
-    this.categoryList();
+    // this.categoryList();
+    this.active_deactive_CategoryList();
+
 
 
   }
@@ -52,6 +54,20 @@ export class ViewproductComponent implements OnInit {
       }
     }, (err) => {
 
+    });
+  }
+  
+  active_deactive_CategoryList() {
+    this.categoryService.active_CategoryList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.CategoryList_ActiveDeactive) {
+          this.categoryDetails = data.CategoryList_ActiveDeactive;
+
+        }
+      }
+    }, (err) => {
+
+      console.log(this.categoryDetails);
     });
   }
 
@@ -257,12 +273,16 @@ handleFileInput(fileList: FileList) {
 // Delete
 
 onDelete(id: number) {
-  if (confirm('Are you sure to delete this record ?') === true) {
+  // if (confirm('Are you sure to delete this record ?') === true) {
     this.productService.deleteProduct(id).subscribe(data => {
-      this.productService.productList();
+      // this.productService.productList();
       this.productList();
     });
-  }
+  // }
+  this.toastr.success('Product is deleted Successful', 'Successful', {
+    disableTimeOut: false,
+    timeOut: 2000
+  });
 }
 
 changeStatus(id: number) {

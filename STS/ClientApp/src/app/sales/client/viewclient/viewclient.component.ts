@@ -5,6 +5,7 @@ import { CountryStateCityService } from '../../../service/country-state-city.ser
 import { ClientService } from '../../../service/client.service';
 import { clientModel } from '../../../model/client';
 import { countryModel, stateModel, cityModel } from '../../../model/country-state-city';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-viewclient',
@@ -29,7 +30,8 @@ export class ViewclientComponent implements OnInit {
   constructor(private router: Router,
     private clientService: ClientService,
     private modalService: NgbModal,
-    private country_state_cityService: CountryStateCityService) {
+    private country_state_cityService: CountryStateCityService,
+    private toastr: ToastrService) {
     this.clientList();
 
     this.countryList();
@@ -75,12 +77,16 @@ onEdit(id:number) {
 
   //Delete
   onDelete(id: number) {
-    if (confirm('Are you sure to delete this record ?') === true) {
+    // if (confirm('Are you sure to delete this record ?') === true) {
       this.clientService.deleteClient(id).subscribe(data => {
         this.clientService.clientList();
         this.clientList();
       });
-    }
+    // }
+    this.toastr.success('Client is deleted Successful', 'Successful', {
+      disableTimeOut: false,
+      timeOut: 2000
+    });
   }
 
   

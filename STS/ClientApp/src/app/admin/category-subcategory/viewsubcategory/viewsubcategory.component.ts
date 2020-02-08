@@ -4,6 +4,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
 import { subcategoryDataModel, categoryDataModel } from '../../../model/category-subcategory';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-viewsubcategory',
@@ -23,7 +24,8 @@ export class ViewsubcategoryComponent implements OnInit {
   constructor(private router: Router,
     private categoryService: CategorySubcategoryService,
     private modalServices: BsModalService,
-    private modalService: NgbModal) {
+    private modalService: NgbModal,
+    private toastr: ToastrService) {
   
     this.viewsubcategoryList();
     this.categoryList();
@@ -86,12 +88,16 @@ export class ViewsubcategoryComponent implements OnInit {
   }
 
   deleteSubcategory(sid: number) {
-    if (confirm('Are you sure to delete this record ?') === true) {
+    // if (confirm('Are you sure to delete this record ?') === true) {
       this.categoryService.deleteSubcategory(sid).subscribe(data => {
         this.categoryService.viewsubcategoryList();
         this.viewsubcategoryList();
       });
-    }
+    // }
+    this.toastr.success('Subcategory is deleted Successful', 'Successful', {
+      disableTimeOut: false,
+      timeOut: 2000
+    });
   }
 
   changeStatus(id: number) {

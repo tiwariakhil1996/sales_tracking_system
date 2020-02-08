@@ -3,6 +3,7 @@ export class categoryDataModel {
     cid: number;
     cname: string;
     isActive: boolean;
+    id: number;
 }
 
 export class subcategoryDataModel {

@@ -83,12 +83,15 @@ export class ViewclientComponent implements OnInit {
   }
 
   onDelete(id: number) {
-    if (confirm('Are you sure to delete this record ?') === true) {
+    // if (confirm('Are you sure to delete this record ?') === true) {
       this.clientService.deleteClient(id).subscribe(data => {
-        // this.clientService.clientList();
         this.clientList();
       });
-    }
+    // }
+    this.toastr.success('Client is deleted Successful', 'Successful', {
+      disableTimeOut: false,
+      timeOut: 2000
+    });
   }
 
 

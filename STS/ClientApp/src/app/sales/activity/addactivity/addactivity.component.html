@@ -39,20 +39,26 @@
           </div>
 
           <div class="form-group row">
-           
             <div class="col-sm-6">
-              <label for="latlong">LAT/LONG</label>
-              <input type="text" class="form-control" id="latlong" [(ngModel)]="activity.latLong" name="latlong"  placeholder="Enter address">
+              <label for="lat">Latitude</label>
+              <input type="text" class="form-control" id="lat" [(ngModel)]="activity.latitude" name="lat"
+                placeholder="Enter latitude">
             </div>
-
-            
-           <div class="col-sm-6">
-            <label class="text-input">Appointment Date</label>
-              <input class="form-control" id="date" type="date" name="appointmentDate" [(ngModel)]="activity.appointmentDate"> 
+            <div class="col-sm-6">
+              <label for="long">Longitude</label>
+              <input type="text" class="form-control" id="long" [(ngModel)]="activity.longitude" name="long"
+                placeholder="Enter longitude">
             </div>
           </div>
-
+          
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <label class="text-input">Appointment Date</label>
+              <input class="form-control" id="date" type="date" name="appointmentDate"
+                [(ngModel)]="activity.appointmentDate">
+            </div>
           </div>
+        </div>
         
         
           <div class="card-footer">

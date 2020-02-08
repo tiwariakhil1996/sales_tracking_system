@@ -6,7 +6,7 @@
   [sidebarToggler]="'lg'">
   <ul class="nav navbar-nav d-md-down-none">
     <li class="nav-item px-3">
-      <a class="nav-link" href="/sales/dashboard">Dashboard</a>
+      <a class="nav-link" href="/sales/dashboard">Home</a>
     </li>
     <!-- <li class="nav-item px-3">
       <a class="nav-link" href="/sales/login">Users</a>
@@ -46,82 +46,7 @@
 
         <a class="dropdown-item" data-toggle="modal"  data-toggle="modal" (click)="openModal(template)"><i class="fa fa-user"></i> Profile</a>
       
-        <ng-template #template>
-          <!-- <div style="overflow-y: scroll;height: calc(100vh - 74px);"> -->
-               <div class="modal-header">
-                <div class="card-header">
-                  <strong>Sales Profile</strong>
-                </div>
-                 <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-                   <span aria-hidden="true">&times;</span>
-                 </button>
-               </div>
-               <div class="modal-body">
-                 <div class="form-row">
-                   <div class="form-group col-md-6">
-                     <label for="image">Profile Pic</label><br>
-                     <img *ngIf="imageSrc" [src]="imageSrc" style="width: 80px; height: 80px;" >
-                     <input class="form-control" type="file" id="fileupload" name="image"  multiple (change)="handleFileInput($event.target.files)" [(ngModel)]="updateProfile.image" />          
-                   </div>
-       
-                   <div class="form-group col-md-6">
-                     <label for="salesName">Username</label>
-                     <input type="sales" class="form-control" id="salesName" placeholder="Enter the Username"  [(ngModel)]="updateProfile.salesName"  name="salesName" >
-                   </div>
-       
-                   <div class="form-group col-md-6">
-                     <div class="input-group-prepend">
-                      <label for="gender">Gender</label>
-                     </div>
-                     <div class="col-md-9 col-form-label">
-                       <div class="form-check form-check-inline mr-1" id="inline-radios">
-                         <input class="form-check-input" type="radio" name="gender" id="male" [(ngModel)]="updateProfile.gender"  value="Male">
-                         <label class="form-check-label" for="Male">Male</label>
-                       </div>
-                       <div class="form-check form-check-inline mr-1">
-                         <input class="form-check-input" type="radio" name="gender" id="female" [(ngModel)]="updateProfile.gender"  value="Female">
-                         <label class="form-check-label" for="Female">Female</label>
-                       </div>
-                     </div>
-                   </div>
-             
-                  
-                   <div class="form-group col-md-6">
-                     <label for="email">Email</label>
-                     <input type="email" class="form-control" id="email" placeholder="email"  [(ngModel)]="updateProfile.email" name="email" disabled>
-                   </div>
-                 </div>
-       
-                 <div class="form-row">
-                   <div class="form-group col-md-6">
-                     <label for="mobile">Mobile</label>
-                     <input type="mobile" class="form-control" id="mobile" placeholder="Enter the mobile"  [(ngModel)]="updateProfile.mobile"  name="mobile">
-                   </div>
 
-               
-                  <div class="form-group col-md-6">
-                    <label for="adharcard">Adhar Card</label>
-                    <input type="text" class="form-control"  id="adharcard" placeholder="Enter Adhar Card Detail"[(ngModel)]="updateProfile.adharcard"  name="adharcard" required>
-                  </div>
-                </div>
-
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="addrress">Address</label>
-                    <textarea id="address" name="address"  [(ngModel)]="updateProfile.address" rows="5" class="form-control" placeholder="Enter your address"></textarea>
-                  </div>
-                </div>
-
-                 <!-- <div style="justify-content: center;display: flex;">
-                   <button type="submit" class="btn btn-primary" (click)="updateadminProfile()">Update</button> 
-                 </div> -->
-
-                 <div class="card-footer">
-                  <button type="submit" class="btn btn-sm btn-success" (click)="updatesalesProfile()"><i class="fa fa-dot-circle-o"></i> Update</button>
-                </div>
-               </div>
-              <!-- </div> -->
-             </ng-template>
 
         <!-- <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Setting</a>
         <a class="dropdown-item" href="#"><i class="fa fa-usd"></i> Payments<span class="badge badge-dark">42</span></a> -->
@@ -139,7 +64,6 @@
     <app-sidebar-nav [navItems]="SalesnavItems" [perfectScrollbar] [disabled]="appSidebar.minimized"></app-sidebar-nav>
     <app-sidebar-minimizer></app-sidebar-minimizer>
   </app-sidebar>
-  <!-- Main content -->
   <main class="main">
     <cui-breadcrumb>
 
@@ -147,27 +71,7 @@
     <div class="container-fluid">
       <router-outlet></router-outlet>
     </div>
-    <!-- /.container-fluid -->
   </main>
-
-  
-<!-- Option Menu -->
-  <!-- <app-aside [fixed]="true" [display]="false" [ngClass]="'test'">
-    <tabset>
-  
-      <tab>
-        <ng-template tabHeading><i class="icon-settings"></i></ng-template>
-        <div class="p-3">
-
-
-          <div class="aside-options">
-            <div class="clearfix mt-4"> 
-            </div>
-          </div>
-        </div>
-      </tab>
-    </tabset>
-  </app-aside> -->
 </div>
 
 <!-- Footer -->
@@ -175,3 +79,82 @@
   <span><a href="sales/dashboard">Sale Tracking System</a> &copy; 2020 </span>
   <span class="ml-auto">Powered by <a href="sales/dashboard">VDS</a></span>
 </app-footer>
+
+
+
+<ng-template #template>
+  <!-- <div style="overflow-y: scroll;height: calc(100vh - 74px);"> -->
+       <div class="modal-header">
+        <div class="card-header">
+          <strong>Sales Profile</strong>
+        </div>
+         <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       <div class="modal-body">
+         <div class="form-row">
+           <div class="form-group col-md-6">
+             <label for="image">Profile Pic</label><br>
+             <img *ngIf="imageSrc" [src]="imageSrc" style="width: 80px; height: 80px;" >
+             <input class="form-control" type="file" id="fileupload" name="image"  multiple (change)="handleFileInput($event.target.files)" [(ngModel)]="updateProfile.image" />          
+           </div>
+
+           <div class="form-group col-md-6">
+             <label for="salesName">Username</label>
+             <input type="sales" class="form-control" id="salesName" placeholder="Enter the Username"  [(ngModel)]="updateProfile.salesName"  name="salesName" >
+           </div>
+
+           <div class="form-group col-md-6">
+             <div class="input-group-prepend">
+              <label for="gender">Gender</label>
+             </div>
+             <div class="col-md-9 col-form-label">
+               <div class="form-check form-check-inline mr-1" id="inline-radios">
+                 <input class="form-check-input" type="radio" name="gender" id="male" [(ngModel)]="updateProfile.gender"  value="Male">
+                 <label class="form-check-label" for="Male">Male</label>
+               </div>
+               <div class="form-check form-check-inline mr-1">
+                 <input class="form-check-input" type="radio" name="gender" id="female" [(ngModel)]="updateProfile.gender"  value="Female">
+                 <label class="form-check-label" for="Female">Female</label>
+               </div>
+             </div>
+           </div>
+     
+          
+           <div class="form-group col-md-6">
+             <label for="email">Email</label>
+             <input type="email" class="form-control" id="email" placeholder="email"  [(ngModel)]="updateProfile.email" name="email" disabled>
+           </div>
+         </div>
+
+         <div class="form-row">
+           <div class="form-group col-md-6">
+             <label for="mobile">Mobile</label>
+             <input type="mobile" class="form-control" id="mobile" placeholder="Enter the mobile"  [(ngModel)]="updateProfile.mobile"  name="mobile">
+           </div>
+
+       
+          <div class="form-group col-md-6">
+            <label for="adharcard">Adhar Card</label>
+            <input type="text" class="form-control"  id="adharcard" placeholder="Enter Adhar Card Detail"[(ngModel)]="updateProfile.adharcard"  name="adharcard" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="addrress">Address</label>
+            <textarea id="address" name="address"  [(ngModel)]="updateProfile.address" rows="5" class="form-control" placeholder="Enter your address"></textarea>
+          </div>
+        </div>
+
+         <!-- <div style="justify-content: center;display: flex;">
+           <button type="submit" class="btn btn-primary" (click)="updateadminProfile()">Update</button> 
+         </div> -->
+
+         <div class="card-footer">
+          <button type="submit" class="btn btn-sm btn-success" (click)="updatesalesProfile()"><i class="fa fa-dot-circle-o"></i> Update</button>
+        </div>
+       </div>
+      <!-- </div> -->
+     </ng-template>

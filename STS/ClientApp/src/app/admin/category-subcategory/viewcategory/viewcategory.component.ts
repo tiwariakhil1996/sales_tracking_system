@@ -70,11 +70,15 @@ export class ViewcategoryComponent implements OnInit {
   // Delete
 
   deleteCategory(cid: number) {
-    if (confirm('Are you sure to delete this record ?') === true) {
+    // if (confirm('Are you sure to delete this record ?') === true) {
       this.categoryService.deleteCategory(cid).subscribe(data => {
         this.categoryList();
       });
-    }
+    // }
+    this.toastr.success('Category deleted Successful', 'Successful', {
+      disableTimeOut: false,
+      timeOut: 2000
+    });
   }
 
   changeStatus(id: number) {

@@ -25,7 +25,8 @@ namespace STS.DAL
                 parameter.Add("@ClientID", model.ClientID);
                 parameter.Add("@Contact", model.Contact);
                
-                parameter.Add("@LatLong", model.LatLong);
+                parameter.Add("@Latitude", model.Latitude);
+                parameter.Add("@Longitude", model.Longitude);
                 parameter.Add("@AppointmentDate", model.AppointmentDate);
                
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
@@ -90,7 +91,8 @@ namespace STS.DAL
                 parameter.Add("@SalesID", model.SalesID);
                 parameter.Add("@ClientID", model.ClientID);
                 parameter.Add("@Contact", model.Contact);
-                parameter.Add("@LatLong", model.LatLong);
+                parameter.Add("@Latitude", model.Latitude);
+                parameter.Add("@Longitude", model.Longitude);
                 parameter.Add("@AppointmentDate", model.AppointmentDate);
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);

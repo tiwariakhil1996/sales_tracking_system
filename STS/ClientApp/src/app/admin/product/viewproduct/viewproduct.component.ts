@@ -202,12 +202,16 @@ export class ViewproductComponent implements OnInit {
   // Delete
 
   onDelete(id: number) {
-    if (confirm('Are you sure to delete this record ?') === true) {
+    // if (confirm('Are you sure to delete this record ?') === true) {
       this.productService.deleteProduct(id).subscribe(data => {
         this.productService.productList();
         this.productList();
       });
-    }
+    // }
+    this.toastr.success('Product deleted Successful', 'Successful', {
+      disableTimeOut: false,
+      timeOut: 2000
+    });
   }
 
 

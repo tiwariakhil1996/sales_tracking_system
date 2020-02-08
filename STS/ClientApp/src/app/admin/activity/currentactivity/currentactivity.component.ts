@@ -9,6 +9,7 @@ import { salesregisterModel } from '../../../model/sales';
 import { productModel } from '../../../model/product';
 import { clientModel } from '../../../model/client';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-currentactivity',
@@ -34,7 +35,8 @@ export class CurrentactivityComponent implements OnInit {
     private clientService: ClientService,
     private modalService: NgbModal,
     private salesService: SalesService,
-    private productService: ProductService) {
+    private productService: ProductService,
+    private toastr: ToastrService) {
     this.activityList();
     this.productList();
     this.clientList();
@@ -48,12 +50,16 @@ export class CurrentactivityComponent implements OnInit {
   // Delete
 
   onDelete(aid: number) {
-    if (confirm('Are you sure to delete this record ?') === true) {
+    // if (confirm('Are you sure to delete this record ?') === true) {
       this.activityService.deleteActivity(aid).subscribe(data => {
-        this.activityService.activityList();
+        // this.activityService.activityList();
         this.activityList();
       });
-    }
+      this.toastr.success('Activity is deleted Successful', 'Successful', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    // }
   }
 
   activityList() {
@@ -81,7 +87,11 @@ export class CurrentactivityComponent implements OnInit {
   onEdit(aid: number) {
     this.activityService.updateActivity(aid, this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        alert('Activity updated sucesfully');
+        // alert('Activity updated sucesfully');
+        this.toastr.success('Activity is updated sucesfully', 'Successful', {
+          disableTimeOut: false,
+          timeOut: 2000
+        });
       }
       this.activity = new activityModel();
       this.activityList();

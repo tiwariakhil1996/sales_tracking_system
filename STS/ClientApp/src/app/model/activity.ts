@@ -11,7 +11,8 @@ export class activityModel {
     salesName: string;
     contact: String;
     address: string;
-    latLong: string;
+    latitude: string;
+    longitude: string;
     appointmentDate: string;
 }
 

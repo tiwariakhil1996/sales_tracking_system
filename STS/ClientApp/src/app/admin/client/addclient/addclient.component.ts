@@ -14,9 +14,9 @@ import { countryModel, stateModel, cityModel } from '../../../model/country-stat
 export class AddclientComponent implements OnInit {
 
 
-  countryInfo: any[] = [];
-  stateInfo: any[] = [];
-  cityInfo: any[] = [];
+  // countryInfo: any[] = [];
+  // stateInfo: any[] = [];
+  // cityInfo: any[] = [];
 
   client = new clientModel();
   clientDetails: clientModel[] = [];

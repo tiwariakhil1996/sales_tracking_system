@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
 import { categoryDataModel } from '../../../model/category-subcategory';
+import { registerModel } from '../../../model/admin';
 
 @Component({
   selector: 'app-addcategory',
@@ -10,24 +11,32 @@ import { categoryDataModel } from '../../../model/category-subcategory';
   styleUrls: ['./addcategory.component.css']
 })
 export class AddcategoryComponent implements OnInit {
-
+  
+  register = new registerModel();
+  adminDetails: registerModel = new registerModel();
 
   category = new categoryDataModel();
-  categoryDetails: categoryDataModel[]=[];
-  
-  constructor(private router:Router,private toastr: ToastrService,private categoryService:CategorySubcategoryService) { }
+  categoryDetails: categoryDataModel[] = [];
+
+  constructor(private router: Router,
+    private toastr: ToastrService,
+    private categoryService: CategorySubcategoryService) { }
 
   ngOnInit() {
   }
 
-  addCategory(){
+  addCategory() {
+    this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.category.id =this.adminDetails.id;
+    console.log(this.category.id);
+    
+
     this.categoryService.addCategory(this.category).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        // alert('Category added sucesfully');
-        // this.categoryList();
         this.toastr.success('Category added succesfully', 'Successful', {
           disableTimeOut: false
         });
+        this.categoryList();
       }
       this.category = new categoryDataModel();
     }, (err) => {
@@ -35,9 +44,23 @@ export class AddcategoryComponent implements OnInit {
     });
   }
 
-  viewCategoryForm(){
-    this.router.navigate(['/admin/category-subcategory/viewcategory']);
+  categoryList() {
+    this.categoryService.categoryList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.CategoryList) {
+          this.categoryDetails = data.CategoryList;
+          console.log(this.categoryDetails);
+        }
+      }
+    }, (err) => {
 
+      console.log(this.categoryDetails);
+    });
+  }
+
+  
+  viewCategoryForm() {
+    this.router.navigate(['/admin/category-subcategory/viewcategory']);
   }
 
 }

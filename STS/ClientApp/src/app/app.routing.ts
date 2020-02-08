@@ -100,14 +100,6 @@ export const routes: Routes = [
         loadChildren: () => import('./admin/base/base.module').then(m => m.BaseModule)
       },
       {
-        path: 'buttons',
-        loadChildren: () => import('./admin/buttons/buttons.module').then(m => m.ButtonsModule)
-      },
-      {
-        path: 'charts',
-        loadChildren: () => import('./admin/chartjs/chartjs.module').then(m => m.ChartJSModule)
-      },
-      {
         path: 'icons',
         loadChildren: () => import('./admin/icons/icons.module').then(m => m.IconsModule)
       },

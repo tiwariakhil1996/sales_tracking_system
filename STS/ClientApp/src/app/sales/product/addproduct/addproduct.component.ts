@@ -29,7 +29,9 @@ export class AddproductComponent implements OnInit {
     private toastr: ToastrService,
     private productService: ProductService,
     private categoryService: CategorySubcategoryService) {
-    this.categoryList();
+    // this.categoryList();
+    this.active_CategoryList();
+
    }
 
   ngOnInit() {
@@ -40,8 +42,11 @@ export class AddproductComponent implements OnInit {
   addCategory(){
     this.categoryService.addCategory(this.category).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        alert('Category added sucesfully');
-        this.categoryList();
+        // alert('Category added sucesfully');
+        this.toastr.success('Category added succesfully', 'Successful', {
+          disableTimeOut: false
+        });
+        this. active_CategoryList();
       }
       this.category = new categoryDataModel();
     }, (err) => {
@@ -50,20 +55,47 @@ export class AddproductComponent implements OnInit {
   }
 
     
-  categoryList() {
-    this.categoryService.categoryList().subscribe((data: any) => {
-      if (data.Status.code === 0) {
-        if (data.CategoryList) {
-          this.categoryDetails = data.CategoryList;
+  // categoryList() {
+  //   this.categoryService.categoryList().subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.CategoryList) {
+  //         this.categoryDetails = data.CategoryList;
         
+  //       }
+  //     }
+  //   }, (err) => {
+      
+  //     console.log(this.categoryDetails); 
+  //   });
+  // }
+
+  active_CategoryList() {
+    this.categoryService.active_CategoryList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.CategoryList_ActiveDeactive) {
+          this.categoryDetails = data.CategoryList_ActiveDeactive;
+
         }
       }
     }, (err) => {
-      
-      console.log(this.categoryDetails); 
+
+      console.log(this.categoryDetails);
     });
   }
 
+  active_SubcategoryList() {
+    this.categoryService.active_SubcategoryList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.SubcategoryList_ActiveDeactive) {
+          this.categoryDetails = data.SubcategoryList_ActiveDeactive;
+
+        }
+      }
+    }, (err) => {
+
+      console.log(this.categoryDetails);
+    });
+  }
 
   onCategoryChange(cid) {
     // this.subcategoryDetails = this.subcategoryDetails.filter(item => item.cid == cid);

@@ -9,6 +9,7 @@ namespace STS.Model
     public partial class CategoryModel
     {
         public string Cname { get; set; }
+        public int Id { get; set; }
 
     }
 
