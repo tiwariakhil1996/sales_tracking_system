@@ -9,7 +9,7 @@ export class registerModel {
     username: string;
     email: string;
     gender: string;
-    mobile: number;
+    mobile: string;
     password: string;
     cpassword: string;
 }
