@@ -11,16 +11,13 @@ import { clientModel } from '../../../model/client';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { registerModel } from '../../../model/admin';
-
 @Component({
   selector: 'app-currentactivity',
   templateUrl: './currentactivity.component.html',
   styleUrls: ['./currentactivity.component.css']
 })
 export class CurrentactivityComponent implements OnInit {
-
   user = new registerModel();
-
   activity = new activityModel();
   activityDetails: activityModel[] = [];
   sales = new salesregisterModel();
@@ -56,7 +53,6 @@ export class CurrentactivityComponent implements OnInit {
       });
     // }
   }
-
   activityList() {
     this.activityService.activityList().subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -74,11 +70,11 @@ export class CurrentactivityComponent implements OnInit {
     this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
     // this.viewData = JSON.parse(localStorage.getItem('Register')) || [];
   }
+  
   onEdit(aid: number) {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.activity.modifiedby = this.user.id;
     console.log(this.activity.modifiedby);
-
     this.activityService.updateActivity(aid, this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
         // alert('Activity updated sucesfully');

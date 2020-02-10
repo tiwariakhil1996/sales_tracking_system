@@ -72,6 +72,7 @@ namespace STS.BLL.Service
                 return await salesRepository.ChangeStatusSales(id);
             }
         }
+       
 
 
         //Display

@@ -52,6 +52,16 @@ namespace STS.BLL.Service
                 return await activityRepository.updateActivity(Aid, model);
             }
         }
+        //Change status InProgress
+        public async Task<TranStatus> ChangeStatusInProgress(int id )
+        {
+            using (activityRepository = new ActivityRepository())
+            {
+                return await activityRepository.ChangeStatusInProgress(id);
+            }
+        }
+
+        
 
         ////Update
         //public async Task<Tuple<TranStatus,List<ClientListModel>>> updateClient(int ID, ClientListModel model)

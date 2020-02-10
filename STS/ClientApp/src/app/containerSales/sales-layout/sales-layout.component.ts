@@ -60,6 +60,11 @@ export class SalesLayoutComponent {
     });
   }
 
+
+
+
+
+
   handleFileInput(fileList: FileList) {
     const preview = document.getElementById('photos-preview');
     Array.from(fileList).forEach((file: File) => {

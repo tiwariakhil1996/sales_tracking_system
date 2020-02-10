@@ -147,6 +147,7 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
+        
 
 
         //Display Active Deactive Sales List 

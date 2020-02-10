@@ -10,45 +10,35 @@ import { productModel } from '../../../model/product';
 import { clientModel } from '../../../model/client';
 import { ToastrService } from 'ngx-toastr';
 import { registerModel } from '../../../model/admin';
-
 @Component({
   selector: 'app-addactivity',
   templateUrl: './addactivity.component.html',
   styleUrls: ['./addactivity.component.css']
 })
 export class AddactivityComponent implements OnInit {
-
   user = new registerModel();
-
   activity = new activityModel();
   activityDetails: activityModel[] = [];
-
   sales = new salesregisterModel();
   salesDetails: salesregisterModel[] = [];
-
   product = new productModel();
   productDetails: productModel[] = [];
   client = new clientModel();
   clientDetails: clientModel[] = [];
-
   constructor(private router: Router,
     private activityService: ActivityService,
     private clientService: ClientService,
     private salesService: SalesService,
     private productService: ProductService,
     private toastr: ToastrService) {
-
     // this.productList();
     this.active_ProductList();
     // this.clientList();
     this.active_ClientList();
     this.SalesList();
   }
-
   ngOnInit() {
   }
-
-
   productList() {
     this.productService.productList().subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -59,7 +49,6 @@ export class AddactivityComponent implements OnInit {
     }, (err) => {
     });
   }
-
   active_ProductList() {
     this.productService.active_ProductList().subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -68,10 +57,8 @@ export class AddactivityComponent implements OnInit {
         }
       }
     }, (err) => {
-
     });
   }
-
   active_ClientList() {
     this.clientService.active_ClientList().subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -82,7 +69,6 @@ export class AddactivityComponent implements OnInit {
     }, (err) => {
     });
   }
-
   // clientList() {
   //   this.clientService.clientList().subscribe((data: any) => {
   //     if (data.Status.code === 0) {
@@ -91,10 +77,8 @@ export class AddactivityComponent implements OnInit {
   //       }
   //     }
   //   }, (err) => {
-
   //   });
   // }
-
   SalesList() {
     this.salesService.SalesList().subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -109,7 +93,7 @@ export class AddactivityComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.activity.createdby = this.user.id;
     console.log(this.activity.createdby);
-
+    
     this.activityService.addActivity(this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
         // alert('Activity added sucesfully');
@@ -120,14 +104,9 @@ export class AddactivityComponent implements OnInit {
       }
       this.activity = new activityModel();
     }, (err) => {
-
       console.log(err);
-
     });
   }
-
-
-
   resetForm() {
     this.activity.productId = null;
     this.activity.clientId = null;
@@ -137,10 +116,7 @@ export class AddactivityComponent implements OnInit {
     this.activity.longitude = null;
     this.activity.appointmentDate = null;
   }
-
-
   viewActivityForm() {
     this.router.navigate(['/admin/activity/currentactivity']);
   }
-
 }

@@ -43,6 +43,8 @@ namespace STS.Model
         public int Modifiedby { get; set; }
 
         public int userId { get; set; }
+        public bool Status { get; set; }
+
     }
 
     }

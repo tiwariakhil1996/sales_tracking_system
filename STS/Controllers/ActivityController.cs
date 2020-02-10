@@ -42,7 +42,7 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
-    
+
 
         //Display
 
@@ -129,6 +129,29 @@ namespace STS.Controllers
             {
 
                 transaction = await iactivity.deleteActivity(AID);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+        //Change Status InProgress
+
+        [HttpPut]
+        [Route("ChangeStatusInProgress/{id}")]
+        public async Task<IActionResult> ChangeStatusInProgress(int id)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+                transaction = await iactivity.ChangeStatusInProgress(id);
 
             }
             catch (Exception ex)

@@ -42,4 +42,5 @@ export class SalesService {
   active_SalesList(){
     return this.http.get('/api/Sales/SalesList_ActiveDeactive');
   }
+  
 }

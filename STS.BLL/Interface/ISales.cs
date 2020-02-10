@@ -26,6 +26,7 @@ namespace STS.BLL.Interface
 
         //Change Status Sales
         Task<TranStatus> ChangeStatusSales(int id);
+        
 
         //Display
         Task<List<SalesListModel>> RegisteredSalesList();

@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, private adminService: AdminService, private toastr: ToastrService) {
     // this.registerList();
 
-    this. logout();
+    this.logout();
 
   }
   ngOnInit() {

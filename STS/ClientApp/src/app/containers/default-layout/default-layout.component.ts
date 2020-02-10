@@ -57,6 +57,9 @@ export class DefaultLayoutComponent {
     console.log(this.adminDetails);
     this.updateProfile = this.adminDetails;
   }
+  
+
+
 
   updateadminProfile() {
 
@@ -114,6 +117,9 @@ export class DefaultLayoutComponent {
     }, (err) => {
     });
   }
+  
+  
+
 
 
   firstnameValidation() {

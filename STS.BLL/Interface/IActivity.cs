@@ -26,6 +26,9 @@ namespace STS.BLL.Interface
 
         //Delete
         Task<TranStatus> deleteActivity(int Aid);
+
+        //Change Status InProgress
+        Task<TranStatus> ChangeStatusInProgress(int id);
     }
 }
 

@@ -27,4 +27,9 @@ export class ActivityService {
   each_sales_activityList(data) {
     return this.http.post('/api/Activity/each_sales_activityList', data);
   }
+
+  changeStatusInProgress(id: number) {
+    return this.http.put('/api/Activity/changeStatusInProgress/' + id, null);
+  }
+
 }

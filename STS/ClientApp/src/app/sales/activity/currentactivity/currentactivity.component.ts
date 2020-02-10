@@ -40,11 +40,12 @@ export class CurrentactivityComponent implements OnInit {
     private productService: ProductService,
     private router: Router,
     private toastr: ToastrService) { 
-    // this.activityList();
-    // this.productList();
-    // this.clientList();
-    // this.SalesList();
-   this.activityList();
+    this.activityList();
+    this.productList();
+    this.clientList();
+    this.SalesList();
+
+
   }
 
   
@@ -57,7 +58,7 @@ onDelete(aid: number) {
   // if (confirm('Are you sure to delete this record ?') === true) {
     this.activityService.deleteActivity(aid).subscribe(data => {
       // this.activityService.activityList();
-      // this.activityList();
+       this.activityList();
     });
   // }
   this.toastr.success('Activity is deleted Successful', 'Successful', {
@@ -180,5 +181,12 @@ addnewActivity() {
   this.router.navigate(['/sales/activity/addactivity']);
 
 }
+changeStatusInProgress(aid: number) {
+  console.log(aid);
+  this.activityService.changeStatusInProgress(aid).subscribe(data => {
+    this.activityList();
+  });
+}
+
 
 }
