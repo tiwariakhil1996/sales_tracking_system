@@ -11,9 +11,8 @@ import { registerModel } from '../../../model/admin';
   styleUrls: ['./addcategory.component.css']
 })
 export class AddcategoryComponent implements OnInit {
-  
-  register = new registerModel();
-  adminDetails: registerModel = new registerModel();
+
+  user = new registerModel();
 
   category = new categoryDataModel();
   categoryDetails: categoryDataModel[] = [];
@@ -26,10 +25,10 @@ export class AddcategoryComponent implements OnInit {
   }
 
   addCategory() {
-    this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
-    this.category.createdby =this.adminDetails.id;
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.category.createdby = this.user.id;
     console.log(this.category.createdby);
-    
+
 
     this.categoryService.addCategory(this.category).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -37,6 +36,11 @@ export class AddcategoryComponent implements OnInit {
           disableTimeOut: false
         });
         this.categoryList();
+      }  else {
+        this.toastr.warning('Cannot add duplicate Category', 'Info', {
+          disableTimeOut: false,
+          timeOut: 2000
+        });
       }
       this.category = new categoryDataModel();
     }, (err) => {
@@ -58,7 +62,7 @@ export class AddcategoryComponent implements OnInit {
     });
   }
 
-  
+
   viewCategoryForm() {
     this.router.navigate(['/admin/category-subcategory/viewcategory']);
   }

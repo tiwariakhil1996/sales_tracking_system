@@ -15,7 +15,7 @@ import { registerModel } from '../../../model/admin';
 export class AddclientComponent implements OnInit {
 
 
-  adminDetails: registerModel = new registerModel();
+  user = new registerModel();
 
   client = new clientModel();
   clientDetails: clientModel[] = [];
@@ -119,8 +119,8 @@ export class AddclientComponent implements OnInit {
     }
 
 
-    this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
-    this.client.createdby = this.adminDetails.id;
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.client.createdby = this.user.id;
     console.log(this.client.createdby);
 
 

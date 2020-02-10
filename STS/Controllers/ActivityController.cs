@@ -42,6 +42,8 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
+    
+
         //Display
 
         [HttpGet]
@@ -64,6 +66,30 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
+
+
+        // Display each sales List Individually
+        [HttpPost]
+        [Route("each_sales_activityList")]
+        public async Task<IActionResult> each_sales_activityList([FromBody]ActivityListModel model)
+        {
+            TranStatus transaction = new TranStatus();
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                var activityList = await iactivity.each_sales_activityList(model);
+                dctData.Add("each_sales_activityList", activityList);
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
 
         //Update
 

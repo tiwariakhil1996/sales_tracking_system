@@ -7,6 +7,7 @@ import { CategorySubcategoryService } from '../../../service/category-subcategor
 import { ProductService } from '../../../service/product.service';
 import { productModel } from '../../../model/product';
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
+import { salesregisterModel } from '../../../model/sales';
 
 @Component({
   selector: 'app-viewproduct',
@@ -18,6 +19,8 @@ export class ViewproductComponent implements OnInit {
   imageSrc: string = '';
   modalRef: BsModalRef;
 
+  user = new salesregisterModel();
+  
   product = new productModel();
   productDetails: productModel[] = [];
 
@@ -150,6 +153,9 @@ onEdit(id:number) {
     return false;
   }
 
+  this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+  this.product.modifiedby = this.user.id;
+  console.log(this.product.modifiedby);
 
   this.productService.updateProduct(id, this.product).subscribe((data: any) => {
     if (data.Status.code === 0) {

@@ -16,11 +16,12 @@ namespace STS.BLL.Interface
         //Display
         Task<List<ActivityListModel>> ActivityList();
 
+
+        // Display each sales List Individually
+        Task<List<ActivityListModel>> each_sales_activityList(ActivityListModel model);
+
         //Update
         Task<TranStatus> updateActivity(int Aid, ActivityListModel model);
-
-        ////Update
-        //Task<Tuple<TranStatus,List<ClientListModel>>> updateClient(int ID, ClientListModel model);
 
 
         //Delete

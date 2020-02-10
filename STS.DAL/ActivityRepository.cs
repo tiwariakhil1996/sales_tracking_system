@@ -42,6 +42,7 @@ namespace STS.DAL
         }
 
 
+
         //Display
         public async Task<List<ActivityListModel>> ActivityList()
         {
@@ -49,6 +50,24 @@ namespace STS.DAL
             {
                 connection.Open();
                 var result = await connection.QueryAsync<ActivityListModel>("ActivityList", commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
+
+
+
+        // Display each sales List Individually
+        public async Task<List<ActivityListModel>> each_sales_activityList(ActivityListModel model)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@SalesID", model.userId);
+
+                var result = await connection.QueryAsync<ActivityListModel>("each_sales_activityList", parameter, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
             }

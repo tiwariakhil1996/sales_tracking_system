@@ -18,21 +18,20 @@ import { registerModel } from '../../../model/admin';
 })
 export class ViewclientComponent implements OnInit {
 
-  adminDetails: registerModel = new registerModel();
-
+  user = new registerModel();
 
   client = new clientModel();
   clientDetails: clientModel[] = [];
 
-  country= new countryModel();
-  countryDetails: countryModel[]=[];
+  country = new countryModel();
+  countryDetails: countryModel[] = [];
 
-  state= new stateModel();
-  stateDetails: stateModel[]=[];
+  state = new stateModel();
+  stateDetails: stateModel[] = [];
 
   city = new cityModel();
-  cityDetails: cityModel[]=[];
-  
+  cityDetails: cityModel[] = [];
+
   constructor(private router: Router,
     private toastr: ToastrService,
     private clientService: ClientService,
@@ -70,9 +69,9 @@ export class ViewclientComponent implements OnInit {
 
   }
 
-  onEdit(id:number) {
-    this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
-    this.client.modifiedby = this.adminDetails.id;
+  onEdit(id: number) {
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.client.modifiedby = this.user.id;
     console.log(this.client.modifiedby);
 
     this.clientService.updateClient(id, this.client).subscribe((data: any) => {
@@ -90,9 +89,9 @@ export class ViewclientComponent implements OnInit {
 
   onDelete(id: number) {
     // if (confirm('Are you sure to delete this record ?') === true) {
-      this.clientService.deleteClient(id).subscribe(data => {
-        this.clientList();
-      });
+    this.clientService.deleteClient(id).subscribe(data => {
+      this.clientList();
+    });
     // }
     this.toastr.success('Client is deleted Successful', 'Successful', {
       disableTimeOut: false,
@@ -106,21 +105,21 @@ export class ViewclientComponent implements OnInit {
       if (data.Status.code === 0) {
         if (data.CountryList) {
           this.countryDetails = data.CountryList;
-        
+
         }
       }
     }, (err) => {
-      
-      console.log(err); 
+
+      console.log(err);
     });
   }
 
   onCountryChange(cid) {
-    this.stateList(cid); 
+    this.stateList(cid);
   }
 
-  
-  onStatechange(sid){
+
+  onStatechange(sid) {
     this.cityList(sid);
   }
 
@@ -132,8 +131,8 @@ export class ViewclientComponent implements OnInit {
         }
       }
     }, (err) => {
-      
-      console.log(err); 
+
+      console.log(err);
     });
   }
 
@@ -145,8 +144,8 @@ export class ViewclientComponent implements OnInit {
         }
       }
     }, (err) => {
-      
-      console.log(err); 
+
+      console.log(err);
     });
   }
 
@@ -156,8 +155,8 @@ export class ViewclientComponent implements OnInit {
       this.clientList();
     });
   }
-  
-  addnewClient(){
+
+  addnewClient() {
     this.router.navigate(['/admin/client/addclient']);
   }
 

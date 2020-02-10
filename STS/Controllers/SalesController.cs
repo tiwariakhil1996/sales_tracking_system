@@ -124,6 +124,55 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
 
         }
+
+        //Change Status 
+
+        [HttpPut]
+        [Route("ChangeStatusSales/{id}")]
+        public async Task<IActionResult> ChangeStatusSales(int id)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+                transaction = await isales.ChangeStatusSales(id);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+
+        //Display Active Deactive Sales List 
+
+        [HttpGet]
+        [Route("SalesList_ActiveDeactive")]
+        public async Task<IActionResult> SalesList_ActiveDeactive()
+        {
+            TranStatus transaction = new TranStatus();
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                var registerList = await isales.SalesList_ActiveDeactive();
+                dctData.Add("SalesList_ActiveDeactive", registerList);
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+
         //Display
 
         [HttpGet]
@@ -146,6 +195,7 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
+
 
 
         //Delete

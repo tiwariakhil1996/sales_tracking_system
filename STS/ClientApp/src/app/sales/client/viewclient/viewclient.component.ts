@@ -6,6 +6,7 @@ import { ClientService } from '../../../service/client.service';
 import { clientModel } from '../../../model/client';
 import { countryModel, stateModel, cityModel } from '../../../model/country-state-city';
 import { ToastrService } from 'ngx-toastr';
+import { salesregisterModel } from '../../../model/sales';
 
 @Component({
   selector: 'app-viewclient',
@@ -14,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ViewclientComponent implements OnInit {
 
+  user = new salesregisterModel();
 
   client = new clientModel();
   clientDetails: clientModel[] = [];
@@ -63,10 +65,17 @@ openupdatemodal(content, item) {
 }
 
 onEdit(id:number) {
-  // this.client.image = this.imageSrc;
+  this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+  this.client.modifiedby = this.user.id;
+  console.log(this.client.modifiedby);
+
   this.clientService.updateClient(id, this.client).subscribe((data: any) => {
     if (data.Status.code === 0) {
-      alert('Client updated sucesfully');
+      // alert('Client updated sucesfully');
+      this.toastr.success('Client updated Successful', 'Successful', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
     }
     this.client = new clientModel();
     this.clientList();
@@ -129,8 +138,8 @@ onEdit(id:number) {
   cityList(stid) {
     this.country_state_cityService.cityList(stid).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        if (data.cityList) {
-          this.cityDetails = data.cityList;
+        if (data.CityList) {
+          this.cityDetails = data.CityList;
         }
       }
     }, (err) => {

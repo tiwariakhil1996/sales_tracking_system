@@ -16,7 +16,7 @@ export class ViewsubcategoryComponent implements OnInit {
 
   modalRef: BsModalRef;
   
-  adminDetails: registerModel = new registerModel();
+  user  = new registerModel();
 
   category = new categoryDataModel();
   categoryDetails: categoryDataModel[] = [];
@@ -79,8 +79,8 @@ export class ViewsubcategoryComponent implements OnInit {
 
 
   updateSubcategory(sid: number) {
-    this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
-    this.subcategory.modifiedby = this.adminDetails.id;
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.subcategory.modifiedby = this.user.id;
     console.log(this.subcategory.modifiedby);
 
     this.categoryService.updateSubcategory(sid, this.subcategory).subscribe((data: any) => {

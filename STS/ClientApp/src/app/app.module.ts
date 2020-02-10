@@ -13,6 +13,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
 import { AppComponent } from './app.component';
 
+
 // Import containers
 import { DefaultLayoutComponent } from './containers';
 
@@ -52,10 +53,12 @@ import { SalesLoginComponent } from './sales/login/login.component';
 import { ModalModule } from 'ngx-bootstrap';
 import { NgbModal, NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
+import { AuthGuard } from './auth.guard';
+import { AuthService } from './auth.service';
+import { from } from 'rxjs';
+import { SalesService } from './sales.service';
+import { SalesGuard } from './sales.guard';
 
-
-
-// import { NewcomponentsComponent } from './admin/newcomponents/newcomponents.component';
 
 
 @NgModule({
@@ -103,7 +106,7 @@ import { RouterModule } from '@angular/router';
   //   provide: LocationStrategy,
   //   useClass: HashLocationStrategy
   // }],
-  // providers: [],
+  providers: [AuthGuard, AuthService, SalesGuard, SalesService],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

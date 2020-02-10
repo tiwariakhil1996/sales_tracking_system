@@ -42,7 +42,6 @@ namespace STS.DAL
             }
         }
 
-
         //View Products
         public async Task<List<ProductListModel>> ProductList()
         {

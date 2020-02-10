@@ -42,6 +42,7 @@ namespace STS.Model
         public string AppointmentDate { get; set; }
         public int Modifiedby { get; set; }
 
-
+        public int userId { get; set; }
     }
+
     }

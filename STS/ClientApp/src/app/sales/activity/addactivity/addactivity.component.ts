@@ -16,6 +16,9 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./addactivity.component.css']
 })
 export class AddactivityComponent implements OnInit {
+   
+  user = new salesregisterModel();
+
   activity = new activityModel();
   activityDetails: activityModel[]=[];
 
@@ -109,6 +112,10 @@ export class AddactivityComponent implements OnInit {
 
 
   submitForm() {
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.activity.createdby = this.user.id;
+    console.log(this.activity.createdby);
+
     this.activityService.addActivity(this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
         // alert('Activity added sucesfully');

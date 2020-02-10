@@ -12,34 +12,34 @@ import { registerModel } from '../../../model/admin';
 })
 export class AddsubcategoryComponent implements OnInit {
 
-  adminDetails: registerModel = new registerModel();
-  
+  user = new registerModel();
+
   category = new categoryDataModel();
-  categoryDetails: categoryDataModel[]=[];
+  categoryDetails: categoryDataModel[] = [];
 
   subcategory = new subcategoryDataModel();
-  subcategoryDetails: subcategoryDataModel[]=[];
-  
+  subcategoryDetails: subcategoryDataModel[] = [];
+
   constructor(private router: Router,
     private toastr: ToastrService,
-    private categoryService: CategorySubcategoryService,) {
+    private categoryService: CategorySubcategoryService, ) {
     this.active_CategoryList();
-   }
+  }
 
   ngOnInit() {
   }
-   
+
   // categoryList() {
   //   this.categoryService.categoryList().subscribe((data: any) => {
   //     if (data.Status.code === 0) {
   //       if (data.CategoryList) {
   //         this.categoryDetails = data.CategoryList;
-        
+
   //       }
   //     }
   //   }, (err) => {
-      
-  //     console.log(this.categoryDetails); 
+
+  //     console.log(this.categoryDetails);
   //   });
   // }
 
@@ -57,11 +57,11 @@ export class AddsubcategoryComponent implements OnInit {
     });
   }
 
-  addSubcategory(){
-    this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
-    this.subcategory.createdby =this.adminDetails.id;
+  addSubcategory() {
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.subcategory.createdby = this.user.id;
     console.log(this.subcategory.createdby);
-    
+
 
     this.categoryService.addSubcategory(this.subcategory).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -86,13 +86,13 @@ export class AddsubcategoryComponent implements OnInit {
         }
       }
     }, (err) => {
-      
-      console.log(this.subcategoryDetails); 
+
+      console.log(this.subcategoryDetails);
     });
   }
 
 
-  viewSubcategoryForm(){
+  viewSubcategoryForm() {
     this.router.navigate(['/admin/category-subcategory/viewsubcategory']);
 
   }

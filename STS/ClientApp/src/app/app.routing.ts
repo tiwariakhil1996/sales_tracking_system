@@ -17,6 +17,8 @@ import { SalesLayoutComponent } from './containerSales';
 
 import { SalesRegisterComponent } from './sales/register/register.component';
 import { SalesLoginComponent } from './sales/login/login.component';
+import { AuthGuard } from './auth.guard';
+import { SalesGuard } from './sales.guard';
 
 
 export const routes: Routes = [
@@ -62,10 +64,10 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: DefaultLayoutComponent,
+    canActivate: [AuthGuard],
     data: {
       title: 'Home'
     },
-    // canActivate: [AuthGuard],
     children: [
       {
         path: 'dashboard',
@@ -142,6 +144,7 @@ export const routes: Routes = [
   {
     path: 'sales',
     component: SalesLayoutComponent,
+    canActivate: [SalesGuard],
     data: {
       title: 'Home'
     },
@@ -155,10 +158,6 @@ export const routes: Routes = [
         loadChildren: () => import('./sales/product/product.module').then(m => m.ProductModule)
       },
       {
-        path: 'assign',
-        loadChildren: () => import('./sales/assign/assign.module').then(m => m.AssignModule)
-      },
-      {
         path: 'client',
         loadChildren: () => import('./sales/client/client.module').then(m => m.ClientModule)
       },
@@ -170,8 +169,6 @@ export const routes: Routes = [
         path: 'map',
         loadChildren: () => import('./sales/map/map.module').then(m => m.MapModule)
       }
-     
-
      ] },
 
 

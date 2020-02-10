@@ -5,6 +5,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { SalesService } from '../../service/sales.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { salesregisterModel } from '../../model/sales';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,21 +17,21 @@ export class SalesLayoutComponent {
 
   imageSrc: string = '';
   modalRef: BsModalRef;
-  
+
   loginDetail = new salesregisterModel();
   // salesDetails: salesregisterModel[] = [];
   salesDetails: salesregisterModel = new salesregisterModel();
   item: any;
   updateProfile: any;
-  
+
   constructor(private router: Router,
     private salesService: SalesService,
     private modalService: NgbModal,
-    private modalServices: BsModalService) 
-    { 
-    
-    }
-  
+    private modalServices: BsModalService,
+    private toastr: ToastrService) {
+
+  }
+
   toggleMinimize(e) {
     this.sidebarMinimized = e;
   }
@@ -44,11 +45,14 @@ export class SalesLayoutComponent {
   }
 
 
-  updatesalesProfile(){
+  updatesalesProfile() {
     // this.updateProfile.image = this.imageSrc;
     this.salesService.UpdateSalesProfile(this.updateProfile).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        alert("Profile updated successfully");
+        // alert("Profile updated successfully");
+        this.toastr.success('Profile updated successfully', 'Successful', {
+          disableTimeOut: false
+        });
         localStorage.setItem('salesLogin', JSON.stringify(data.loginDetail[0] || {}));
       }
     }, (err) => {
@@ -74,32 +78,9 @@ export class SalesLayoutComponent {
 
     });
   }
-    // Image to Base64
 
-    // handleInputChange(e) {
-    //   var file = e.target.files[0];
-    //   var pattern = /image-*/;
-    //   var reader = new FileReader();
-  
-    //   if (!file.type.match(pattern)) {
-    //     alert('invalid format');
-    //     return;
-    //   }
-  
-    //   reader.onload = this._handleReaderLoaded.bind(this);
-    //   reader.readAsDataURL(file)
-    // }
-  
-    // _handleReaderLoaded(e) {
-    //   const reader = e.target;
-    //   //  console.log(this.imageSrc);
-    //   this.imageSrc = reader.result;
-    //   // console.log(this.imageSrc);
-    // }
-
-
-    logout() {
-      // remove user from local storage to log user out
-      localStorage.removeItem('salesLogin');
+  logout() {
+    // remove user from local storage to log user out
+    localStorage.removeItem('salesLogin');
   }
 }

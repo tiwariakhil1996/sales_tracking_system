@@ -18,13 +18,13 @@ import { registerModel } from '../../../model/admin';
 })
 export class AddactivityComponent implements OnInit {
 
-  adminDetails: registerModel = new registerModel();
-  
+  user = new registerModel();
+
   activity = new activityModel();
-  activityDetails: activityModel[]=[];
+  activityDetails: activityModel[] = [];
 
   sales = new salesregisterModel();
-  salesDetails: salesregisterModel[]=[];
+  salesDetails: salesregisterModel[] = [];
 
   product = new productModel();
   productDetails: productModel[] = [];
@@ -44,12 +44,12 @@ export class AddactivityComponent implements OnInit {
     // this.clientList();
     this.active_ClientList();
     this.SalesList();
-   }
+  }
 
   ngOnInit() {
   }
 
- 
+
   productList() {
     this.productService.productList().subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -98,7 +98,7 @@ export class AddactivityComponent implements OnInit {
   //   });
   // }
 
-  SalesList(){
+  SalesList() {
     this.salesService.SalesList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.RegisteredSalesList) {
@@ -112,8 +112,8 @@ export class AddactivityComponent implements OnInit {
 
 
   submitForm() {
-    this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
-    this.activity.createdby = this.adminDetails.id;
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.activity.createdby = this.user.id;
     console.log(this.activity.createdby);
 
     this.activityService.addActivity(this.activity).subscribe((data: any) => {
@@ -127,23 +127,23 @@ export class AddactivityComponent implements OnInit {
       this.activity = new activityModel();
     }, (err) => {
 
-       console.log(err);
+      console.log(err);
 
     });
   }
 
   resetForm() {
-    this.activity.productId=null;
-    this.activity.clientId=null;
-    this.activity.salesId=null;
-    this.activity.contact=null;
-    this.activity.latitude=null;
-    this.activity.longitude=null;
-    this.activity.appointmentDate=null;
+    this.activity.productId = null;
+    this.activity.clientId = null;
+    this.activity.salesId = null;
+    this.activity.contact = null;
+    this.activity.latitude = null;
+    this.activity.longitude = null;
+    this.activity.appointmentDate = null;
   }
 
-  
-  viewActivityForm(){
+
+  viewActivityForm() {
     this.router.navigate(['/admin/activity/currentactivity']);
   }
 

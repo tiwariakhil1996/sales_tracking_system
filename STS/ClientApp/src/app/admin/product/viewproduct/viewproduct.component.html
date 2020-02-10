@@ -13,7 +13,7 @@
         <thead>
           <tr class="table-success">
             <th>Sr.no</th>
-            <th>ID</th>
+            <!-- <th>ID</th> -->
             <th>Category</th>
             <th>Subcategory</th>
             <th>ProductName</th>
@@ -28,7 +28,7 @@
         <tbody>
           <tr *ngFor="let item of productDetails;let i=index;" >
             <td >{{i+1}}</td>
-            <td >{{item.id}}</td>
+            <!-- <td >{{item.id}}</td> -->
             <td >{{item.cname}}</td>
             <td >{{item.sname}}</td>
             <td>{{item.productname}}</td>
@@ -45,7 +45,7 @@
             </td>
             <td>
               <button *ngIf="item.isActive" class='btn btn-success' type="button" (click)="changeStatus(item.id)"><i
-                  class="fa fa-check-circle"></i></button>
+                  class="fa fa-check-circle" ></i></button>
               <button *ngIf="!item.isActive" class='btn btn-danger' type="button" (click)="changeStatus(item.id)"><i
                   class="fa fa-times"></i></button>
             </td>

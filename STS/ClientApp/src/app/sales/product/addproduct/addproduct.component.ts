@@ -5,6 +5,7 @@ import { CategorySubcategoryService } from '../../../service/category-subcategor
 import { ProductService } from '../../../service/product.service';
 import { productModel } from '../../../model/product';
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
+import { salesregisterModel } from '../../../model/sales';
 
 @Component({
   selector: 'app-addproduct',
@@ -16,6 +17,8 @@ export class AddproductComponent implements OnInit {
   errorMessage = '';
   imageSrc: string = '';
 
+  user = new salesregisterModel();
+  
   product = new productModel();
   productDetails: productModel[] = [];
 
@@ -106,7 +109,10 @@ export class AddproductComponent implements OnInit {
   addSubcategory(){
     this.categoryService.addSubcategory(this.subcategory).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        alert('Subcategory added sucesfully');
+        // alert('Subcategory added sucesfully');
+        this.toastr.success('Subcategory added sucesfully', 'Successful', {
+          disableTimeOut: false
+        });
         // this.subcategoryList(cid);
       }
       this.subcategory = new subcategoryDataModel();
@@ -195,8 +201,12 @@ export class AddproductComponent implements OnInit {
       });
       return false;
     }
-  
 
+  
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.product.createdby = this.user.id;
+    console.log(this.product.createdby);
+  
     this.productService.addProduct(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
         // alert('Product added sucesfully');

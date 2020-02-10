@@ -19,7 +19,7 @@ import { registerModel } from '../../../model/admin';
 })
 export class CurrentactivityComponent implements OnInit {
 
-  adminDetails: registerModel = new registerModel();
+  user = new registerModel();
 
   activity = new activityModel();
   activityDetails: activityModel[] = [];
@@ -88,8 +88,8 @@ export class CurrentactivityComponent implements OnInit {
   }
 
   onEdit(aid: number) {
-    this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
-    this.activity.modifiedby = this.adminDetails.id;
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.activity.modifiedby = this.user.id;
     console.log(this.activity.modifiedby);
 
     this.activityService.updateActivity(aid, this.activity).subscribe((data: any) => {
