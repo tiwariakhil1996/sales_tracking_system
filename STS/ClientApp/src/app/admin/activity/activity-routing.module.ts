@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ActivityComponent } from './activity.component';
 import { AddactivityComponent } from './addactivity/addactivity.component';
 import { CurrentactivityComponent } from './currentactivity/currentactivity.component';
+import { AuthGuard } from '../../auth.guard';
 
 
 const routes: Routes = [

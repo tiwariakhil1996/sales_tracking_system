@@ -14,7 +14,7 @@
           <thead>
             <tr class="table-success">
               <th>SR.no</th>
-              <th>ID</th>
+              <!-- <th>ID</th> -->
               <th>Client Name</th>
               <th>Email</th>
               <th>Contact</th>
@@ -31,9 +31,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let client of clientDetails;let i = index;">
-              <td>{{i+1}}</td>
-              <td>{{client.id}}</td>
+              <tr *ngFor="let client of clientDetails;let i = index;">
+                <td>{{i+1}}</td>
+              <!-- <td>{{client.id}}</td> -->
               <td>{{client.clientName}}</td>
               <td>{{client.email}}</td>
               <td>{{client.contact}}</td>

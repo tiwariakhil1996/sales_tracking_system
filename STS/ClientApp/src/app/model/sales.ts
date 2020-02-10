@@ -12,4 +12,6 @@ export class salesregisterModel {
     address: string;
     password: string;
     cpassword: string;
+
+    isActive:boolean;
 }

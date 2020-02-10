@@ -14,9 +14,8 @@ import { registerModel } from '../../../model/admin';
 })
 export class ViewcategoryComponent implements OnInit {
 
-  register = new registerModel();
-  adminDetails: registerModel = new registerModel();
-  
+  user = new registerModel();
+
   modalRef: BsModalRef;
   category = new categoryDataModel();
   categoryDetails: categoryDataModel[] = [];
@@ -57,11 +56,10 @@ export class ViewcategoryComponent implements OnInit {
 
 
   updateCategory(cid: number) {
-
-    this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
-    this.category.modifiedby =this.adminDetails.id;
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.category.modifiedby = this.user.id;
     console.log(this.category.modifiedby);
-    
+
 
     this.categoryService.updateCategory(cid, this.category).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -80,9 +78,9 @@ export class ViewcategoryComponent implements OnInit {
 
   deleteCategory(cid: number) {
     // if (confirm('Are you sure to delete this record ?') === true) {
-      this.categoryService.deleteCategory(cid).subscribe(data => {
-        this.categoryList();
-      });
+    this.categoryService.deleteCategory(cid).subscribe(data => {
+      this.categoryList();
+    });
     // }
     this.toastr.success('Category deleted Successful', 'Successful', {
       disableTimeOut: false,

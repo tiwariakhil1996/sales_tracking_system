@@ -19,7 +19,7 @@ export class ViewproductComponent implements OnInit {
   imageSrc: string = '';
   modalRef: BsModalRef;
 
-  adminDetails: registerModel = new registerModel();
+  user = new registerModel();
 
   product = new productModel();
   productDetails: productModel[] = [];
@@ -59,7 +59,7 @@ export class ViewproductComponent implements OnInit {
     });
   }
 
-  //Edit
+  // Edit
   openupdatemodal(content, item) {
     this.product = JSON.parse(JSON.stringify(item));
     // data show in model use this line and store the data in user and display in ui
@@ -74,8 +74,7 @@ export class ViewproductComponent implements OnInit {
 
     if (!this.product.cid) {
       strError += strError = '- Please select category';
-    }
-    else
+    } else
       if (!this.product.sid) {
         strError += strError = '' ? '' : '<br/>';
         strError += '- Please select subcategory';
@@ -85,8 +84,7 @@ export class ViewproductComponent implements OnInit {
     if (!this.product.productname) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter productname';
-    }
-    else {
+    } else {
       if (!this.validateProductname(this.product.productname)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Product name should only contain alphabets & number';
@@ -96,8 +94,7 @@ export class ViewproductComponent implements OnInit {
     if (!this.product.price) {
       strError += strError = '' ? '' : '<br/>';
       strError += strError = '- Please enter price';
-    }
-    else {
+    } else {
       if (!this.validateprice(this.product.price)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Price should be in numbers';
@@ -107,8 +104,7 @@ export class ViewproductComponent implements OnInit {
     if (!this.product.description) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter description';
-    }
-    else {
+    } else {
       if (!this.validateProductname(this.product.description)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Description  should only contain alphabets & number';
@@ -136,8 +132,8 @@ export class ViewproductComponent implements OnInit {
       return false;
     }
 
-    this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
-    this.product.modifiedby = this.adminDetails.id;
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.product.modifiedby = this.user.id;
     console.log(this.product.modifiedby);
 
 
@@ -147,8 +143,7 @@ export class ViewproductComponent implements OnInit {
         this.toastr.success('Product updated sucesfully', 'Successful', {
           disableTimeOut: false
         });
-      }
-      else {
+      } else {
         // alert("Not Matched");
         this.toastr.warning('Please fill the remaining fields', 'Warning', {
           disableTimeOut: false,
@@ -169,7 +164,6 @@ export class ViewproductComponent implements OnInit {
     if (!this.validateProductname(this.product.productname)) {
       isValid = true;
     }
-    ;
 
     if (isValid) {
       this.toastr.warning('Please enter productname correctly', 'Warning', {
@@ -182,14 +176,14 @@ export class ViewproductComponent implements OnInit {
 
   validateProductname(productnameField) {
     const reg = /^[A-Za-z0-9]+$/;
-    return reg.test(productnameField) == false ? false : true;
+    return reg.test(productnameField) === false ? false : true;
   }
 
   priceValidation() {
     let isValid = false;
     if (!this.validateprice(this.product.price)) {
       isValid = true;
-    };
+    }
 
     if (isValid) {
       this.toastr.warning('Please enter price correctly', 'Warning', {
@@ -210,10 +204,10 @@ export class ViewproductComponent implements OnInit {
 
   onDelete(id: number) {
     // if (confirm('Are you sure to delete this record ?') === true) {
-      this.productService.deleteProduct(id).subscribe(data => {
-        this.productService.productList();
-        this.productList();
-      });
+    this.productService.deleteProduct(id).subscribe(data => {
+      this.productService.productList();
+      this.productList();
+    });
     // }
     this.toastr.success('Product deleted Successful', 'Successful', {
       disableTimeOut: false,
@@ -222,19 +216,19 @@ export class ViewproductComponent implements OnInit {
   }
 
 
-  categoryList() {
-    this.categoryService.categoryList().subscribe((data: any) => {
-      if (data.Status.code === 0) {
-        if (data.CategoryList) {
-          this.categoryDetails = data.CategoryList;
+  // categoryList() {
+  //   this.categoryService.categoryList().subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.CategoryList) {
+  //         this.categoryDetails = data.CategoryList;
 
-        }
-      }
-    }, (err) => {
+  //       }
+  //     }
+  //   }, (err) => {
 
-      console.log(this.categoryDetails);
-    });
-  }
+  //     console.log(this.categoryDetails);
+  //   });
+  // }
 
   active_deactive_CategoryList() {
     this.categoryService.active_CategoryList().subscribe((data: any) => {
@@ -291,7 +285,7 @@ export class ViewproductComponent implements OnInit {
     });
   }
 
-  
+
   changeStatus(id: number) {
     // console.log(id);
     this.productService.changeStatus(id).subscribe(data => {

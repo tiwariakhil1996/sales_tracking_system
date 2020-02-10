@@ -64,6 +64,16 @@ namespace STS.BLL.Service
             }
         }
 
+        //Change Status Sales
+        public async Task<TranStatus> ChangeStatusSales(int id)
+        {
+            using (salesRepository = new SalesRepository())
+            {
+                return await salesRepository.ChangeStatusSales(id);
+            }
+        }
+
+
         //Display
         public async Task<List<SalesListModel>> RegisteredSalesList()
         {
@@ -72,6 +82,16 @@ namespace STS.BLL.Service
                 return await salesRepository.RegisteredSalesList();
             }
         }
+
+        // Display  Active Deactive Sales List
+        public async Task<List<SalesListModel>> SalesList_ActiveDeactive()
+        {
+            using (salesRepository = new SalesRepository())
+            {
+                return await salesRepository.SalesList_ActiveDeactive();
+            }
+        }
+
 
         //Delete
         public async Task<TranStatus> deleteSales(int ID)

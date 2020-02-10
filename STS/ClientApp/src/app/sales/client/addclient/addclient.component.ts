@@ -6,6 +6,7 @@ import { CountryStateCityService } from '../../../service/country-state-city.ser
 import { ClientService } from '../../../service/client.service';
 import { clientModel } from '../../../model/client';
 import { countryModel, stateModel, cityModel } from '../../../model/country-state-city';
+import { salesregisterModel } from '../../../model/sales';
 
 @Component({
   selector: 'app-addclient',
@@ -13,6 +14,8 @@ import { countryModel, stateModel, cityModel } from '../../../model/country-stat
   styleUrls: ['./addclient.component.css']
 })
 export class AddclientComponent implements OnInit {
+
+  user = new salesregisterModel();
 
   client = new clientModel();
   clientDetails: clientModel[] = [];
@@ -122,7 +125,10 @@ export class AddclientComponent implements OnInit {
       return false;
     }
   
-
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.client.createdby = this.user.id;
+    console.log(this.client.createdby);
+  
     this.clientService.addClient(this.client).subscribe((data: any) => {
       if (data.Status.code === 0) {
         // alert('Registered sucesfully');

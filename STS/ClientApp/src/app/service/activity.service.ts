@@ -24,5 +24,7 @@ export class ActivityService {
     return this.http.put('/api/Activity/updateActivity/' + aid, data);
   }
 
-  
+  each_sales_activityList(data) {
+    return this.http.post('/api/Activity/each_sales_activityList', data);
+  }
 }

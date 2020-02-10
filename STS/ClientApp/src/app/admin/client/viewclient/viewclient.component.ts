@@ -15,8 +15,7 @@ import { registerModel } from '../../../model/admin';
 })
 export class ViewclientComponent implements OnInit {
 
-  adminDetails: registerModel = new registerModel();
-
+  user = new registerModel();
 
   client = new clientModel();
   clientDetails: clientModel[] = [];
@@ -64,9 +63,9 @@ export class ViewclientComponent implements OnInit {
 
   }
 
-  onEdit(id:number) {
-    this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
-    this.client.modifiedby = this.adminDetails.id;
+  onEdit(id: number) {
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.client.modifiedby = this.user.id;
     console.log(this.client.modifiedby);
 
     this.clientService.updateClient(id, this.client).subscribe((data: any) => {
@@ -95,9 +94,9 @@ export class ViewclientComponent implements OnInit {
 
   onDelete(id: number) {
     // if (confirm('Are you sure to delete this record ?') === true) {
-      this.clientService.deleteClient(id).subscribe(data => {
-        this.clientList();
-      });
+    this.clientService.deleteClient(id).subscribe(data => {
+      this.clientList();
+    });
     // }
     this.toastr.success('Client is deleted Successful', 'Successful', {
       disableTimeOut: false,

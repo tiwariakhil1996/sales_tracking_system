@@ -34,4 +34,12 @@ export class SalesService {
   deleteSales(id: number) {
     return this.http.delete('/api/Sales/deleteSales/' + id);
   }
+
+  changeStatus(id: number) {
+    return this.http.put('/api/Sales/ChangeStatusSales/' + id, null);
+  }
+
+  active_SalesList(){
+    return this.http.get('/api/Sales/SalesList_ActiveDeactive');
+  }
 }

@@ -4,7 +4,7 @@ import { SalesService } from '../../../service/sales.service';
 import { ProductService } from '../../../service/product.service';
 import { ClientService } from '../../../service/client.service';
 import { ActivityService } from '../../../service/activity.service';
-import { activityModel } from '../../../model/activity';
+import { activityModel} from '../../../model/activity';
 import { salesregisterModel } from '../../../model/sales';
 import { productModel } from '../../../model/product';
 import { clientModel } from '../../../model/client';
@@ -18,6 +18,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./currentactivity.component.css']
 })
 export class CurrentactivityComponent implements OnInit {
+
+  user = new salesregisterModel();
 
   activity = new activityModel();
   activityDetails: activityModel[]=[];
@@ -38,11 +40,11 @@ export class CurrentactivityComponent implements OnInit {
     private productService: ProductService,
     private router: Router,
     private toastr: ToastrService) { 
-    this.activityList();
+    // this.activityList();
     // this.productList();
     // this.clientList();
     // this.SalesList();
-   
+   this.activityList();
   }
 
   
@@ -55,7 +57,7 @@ onDelete(aid: number) {
   // if (confirm('Are you sure to delete this record ?') === true) {
     this.activityService.deleteActivity(aid).subscribe(data => {
       // this.activityService.activityList();
-      this.activityList();
+      // this.activityList();
     });
   // }
   this.toastr.success('Activity is deleted Successful', 'Successful', {
@@ -64,18 +66,49 @@ onDelete(aid: number) {
   });
 }
 
+// activityList() {
+//   this.activityService.activityList().subscribe((data: any) => {
+//     if (data.Status.code === 0) {
+//       if (data.ActivityList) {
+//         this.activityDetails = data.ActivityList;
+//       }
+//     }
+//   }, (err) => {
+
+//   });
+// }
+
+// subcategoryList(catid) {
+//   this.categoryService.subcategoryList(catid).subscribe((data: any) => {
+//     if (data.Status.code === 0) {
+//       if (data.SubcategoryList) {
+//         this.subcategoryDetails = data.SubcategoryList;
+//       }
+//     }
+//   }, (err) => {
+
+//     console.log(this.subcategoryDetails);
+//   });
+// }
+
+
 activityList() {
-  this.activityService.activityList().subscribe((data: any) => {
+  this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+  this.activity.userid = this.user.id;
+  console.log(this.activity.userid);
+
+  this.activityService.each_sales_activityList(this.activity).subscribe((data: any) => {
     if (data.Status.code === 0) {
-      if (data.ActivityList) {
-        this.activityDetails = data.ActivityList;
+      if (data.each_sales_activityList) {
+        this.activityDetails = data.each_sales_activityList;
+        console.log(this.activityDetails);
+        
       }
     }
   }, (err) => {
 
   });
 }
-
 
 //Edit
 openupdatemodal(content, item) {
@@ -87,6 +120,10 @@ this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
 }
 
 onEdit(aid:number) {
+  this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+  this.activity.modifiedby = this.user.id;
+  console.log(this.activity.modifiedby);
+  
 this.activityService.updateActivity(aid, this.activity).subscribe((data: any) => {
   if (data.Status.code === 0) {
     // alert('Activity updated sucesfully');
@@ -96,7 +133,7 @@ this.activityService.updateActivity(aid, this.activity).subscribe((data: any) =>
     });
   }
   this.activity = new activityModel();
-  this.activityList();
+  // this.activityList();
 }, (err) => {
 });
 }

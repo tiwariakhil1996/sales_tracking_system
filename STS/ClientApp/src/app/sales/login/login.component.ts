@@ -63,10 +63,13 @@ export class SalesLoginComponent implements OnInit {
         this.router.navigate(['/sales/dashboard']);
       }
       else {
-        // alert('UnSuccessfully');
-
-        this.toastr.warning('Please enter valid username and password', 'Warning', {
-          disableTimeOut: false
+        // this.toastr.warning('Please enter valid username and password', 'Warning', {
+        //   disableTimeOut: false,
+        //   timeOut: 2000
+        // });
+        this.toastr.warning('Either your username and password didnt matched or This account is temporarily blocked', 'Warning', {
+          disableTimeOut: false,
+          timeOut: 2000
         });
       }
     }, (err) => {

@@ -35,6 +35,15 @@ namespace STS.BLL.Service
         }
 
 
+        // Display each sales List Individually
+        public async Task<List<ActivityListModel>> each_sales_activityList(ActivityListModel model)
+        {
+            using (activityRepository = new ActivityRepository())
+            {
+                return await activityRepository.each_sales_activityList(model);
+            }
+        }
+
         //Update
         public async Task<TranStatus> updateActivity(int Aid, ActivityListModel model)
         {

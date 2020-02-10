@@ -24,7 +24,7 @@ export class AddproductComponent implements OnInit {
   // myDate = new Date();
   currentDate = new Date();
 
-  adminDetails: registerModel = new registerModel();
+  user = new registerModel();
 
   product = new productModel();
   productDetails: productModel[] = [];
@@ -177,8 +177,8 @@ export class AddproductComponent implements OnInit {
       return false;
     }
 
-    this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
-    this.product.createdby = this.adminDetails.id;
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.product.createdby = this.user.id;
     console.log(this.product.createdby);
 
     this.productService.addProduct(this.product).subscribe((data: any) => {
