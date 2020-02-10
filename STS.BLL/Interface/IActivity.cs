@@ -24,8 +24,31 @@ namespace STS.BLL.Interface
         Task<TranStatus> updateActivity(int Aid, ActivityListModel model);
 
 
+        //Update updateInprogress
+        Task<TranStatus> updateInprogress(int Aid, ActivityListModel model);
+
+        //Update updateToFollowup
+        Task<TranStatus> updateToFollowup(int Aid, ActivityListModel model);
+
+        //Update updateToClose
+        Task<TranStatus> updateToClose(int Aid, ActivityListModel model);
+
+        //Update updateToCancel
+        Task<TranStatus> updateToCancel(int Aid, ActivityListModel model);
+
         //Delete
         Task<TranStatus> deleteActivity(int Aid);
+
+
+        ////Change Status Activity InProgress
+        //Task<TranStatus> ChangeStatusActivity_Inprogress(int aid);
+
+        ////Change Status Activity Followup
+        //Task<TranStatus> ChangeStatusActivity_Followup(int aid);
+
+        ////Change Status Activity Close
+        //Task<TranStatus> ChangeStatusActivity_Close(int aid);
     }
+
 }
 

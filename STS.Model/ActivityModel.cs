@@ -20,6 +20,7 @@ namespace STS.Model
         public string AppointmentDate { get; set; }
         public int Createdby { get; set; }
 
+
     }
 
     public partial class ActivityListModel
@@ -43,6 +44,8 @@ namespace STS.Model
         public int Modifiedby { get; set; }
 
         public int userId { get; set; }
+        public bool status { get; set; }
+        public string Statusname { get; set; }
     }
 
     }

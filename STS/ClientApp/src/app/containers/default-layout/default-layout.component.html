@@ -33,7 +33,11 @@
     <li class="nav-item dropdown" dropdown placement="bottom right">
       <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
         <img src="assets/img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com"/>
-             <!-- <img  *ngFor="let item of updateProfile" src={{item.imageSrc}} class="img-avatar"/> -->
+        <!-- <img  style="max-width: 115px; max-height: 64px;"   src="'assets/img/avatars/'+item.image" class="img-avatar" alt="admin@bootstrapmaster.com"/> -->
+
+        <!-- <img style="max-width: 115px; max-height: 64px;" [src]="'assets/img/Images/AdminProfile/'+item.image"> -->
+
+        <!-- <img  *ngFor="let item of updateProfile" src={{item.imageSrc}} class="img-avatar"/> -->
           <!-- <div *ngFor="let i of adminDetails">
           <img  [src]="'assets/img/Images/AdminProfile'+i.image" class="img-avatar" alt="image"/>
             </div> -->

@@ -53,6 +53,46 @@ namespace STS.BLL.Service
             }
         }
 
+
+
+        //Update updateInprogress
+        public async Task<TranStatus> updateInprogress(int Aid, ActivityListModel model)
+        {
+            using (activityRepository = new ActivityRepository())
+            {
+                return await activityRepository.updateInprogress(Aid, model);
+            }
+        }
+
+
+        //Update updateToFollowup
+        public async Task<TranStatus> updateToFollowup(int Aid, ActivityListModel model)
+        {
+            using (activityRepository = new ActivityRepository())
+            {
+                return await activityRepository.updateToFollowup(Aid, model);
+            }
+        }
+
+        //Update updateToClose
+        public async Task<TranStatus> updateToClose(int Aid, ActivityListModel model)
+        {
+            using (activityRepository = new ActivityRepository())
+            {
+                return await activityRepository.updateToClose(Aid, model);
+            }
+        }
+
+        //Update updateToCancel
+        public async Task<TranStatus> updateToCancel(int Aid, ActivityListModel model)
+        {
+            using (activityRepository = new ActivityRepository())
+            {
+                return await activityRepository.updateToCancel(Aid, model);
+            }
+        }
+
+
         ////Update
         //public async Task<Tuple<TranStatus,List<ClientListModel>>> updateClient(int ID, ClientListModel model)
         //{
@@ -73,5 +113,32 @@ namespace STS.BLL.Service
                 return await activityRepository.deleteActivity(Aid);
             }
         }
+
+        ////Change Status Activity Inprogress
+        //public async Task<TranStatus> ChangeStatusActivity_Inprogress(int aid)
+        //{
+        //    using (activityRepository = new ActivityRepository())
+        //    {
+        //        return await activityRepository.ChangeStatusActivity_Inprogress(aid);
+        //    }
+        //}
+
+        ////Change Status Activity Followup
+        //public async Task<TranStatus> ChangeStatusActivity_Followup(int aid)
+        //{
+        //    using (activityRepository = new ActivityRepository())
+        //    {
+        //        return await activityRepository.ChangeStatusActivity_Followup(aid);
+        //    }
+        //}
+
+        ////Change Status Activity Close
+        //public async Task<TranStatus> ChangeStatusActivity_Close(int aid)
+        //{
+        //    using (activityRepository = new ActivityRepository())
+        //    {
+        //        return await activityRepository.ChangeStatusActivity_Close(aid);
+        //    }
+        //}
     }
 }

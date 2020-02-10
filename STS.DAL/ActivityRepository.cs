@@ -124,6 +124,153 @@ namespace STS.DAL
             }
         }
 
+
+        //Update updateInprogress
+        public async Task<TranStatus> updateInprogress(int Aid, ActivityListModel model)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@Aid", Aid);
+                parameter.Add("@Status", model.status);
+              
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                await connection.QueryAsync("updateInprogress", parameter, commandType: CommandType.StoredProcedure);
+                transaction.returnMessage = parameter.Get<string>("@Message");
+                transaction.code = parameter.Get<int>("@Code");
+                return transaction;
+
+            }
+        }
+
+
+        //Update updateToFollowup
+        public async Task<TranStatus> updateToFollowup(int Aid, ActivityListModel model)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@Aid", Aid);
+                parameter.Add("@Status", model.status);
+
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                await connection.QueryAsync("updateToFollowup", parameter, commandType: CommandType.StoredProcedure);
+                transaction.returnMessage = parameter.Get<string>("@Message");
+                transaction.code = parameter.Get<int>("@Code");
+                return transaction;
+
+            }
+        }
+
+
+        //Update updateToClose
+        public async Task<TranStatus> updateToClose(int Aid, ActivityListModel model)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@Aid", Aid);
+                parameter.Add("@Status", model.status);
+
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                await connection.QueryAsync("updateToClose", parameter, commandType: CommandType.StoredProcedure);
+                transaction.returnMessage = parameter.Get<string>("@Message");
+                transaction.code = parameter.Get<int>("@Code");
+                return transaction;
+
+            }
+        }
+
+        //Update updateToCancel
+        public async Task<TranStatus> updateToCancel(int Aid, ActivityListModel model)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@Aid", Aid);
+                parameter.Add("@Status", model.status);
+
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                await connection.QueryAsync("updateToCancel", parameter, commandType: CommandType.StoredProcedure);
+                transaction.returnMessage = parameter.Get<string>("@Message");
+                transaction.code = parameter.Get<int>("@Code");
+                return transaction;
+
+            }
+        }
+
+        ////Change Status Activity InProgress
+        //public async Task<TranStatus> ChangeStatusActivity_Inprogress(int aid)
+        //{
+        //    using (var connection = new SqlConnection(ConnectionString))
+        //    {
+        //        await connection.OpenAsync();
+        //        TranStatus transaction = new TranStatus();
+        //        DynamicParameters parameter = new DynamicParameters();
+        //        parameter.Add("@Aid", aid);
+
+        //        parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+        //        parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+        //        await connection.QueryAsync("ChangeStatusActivity_Inprogress", parameter, commandType: CommandType.StoredProcedure);
+        //        transaction.returnMessage = parameter.Get<string>("@Message");
+        //        transaction.code = parameter.Get<int>("@Code");
+        //        return transaction;
+
+        //    }
+        //}
+
+        ////Change Status Activity Followup
+        //public async Task<TranStatus> ChangeStatusActivity_Followup(int aid)
+        //{
+        //    using (var connection = new SqlConnection(ConnectionString))
+        //    {
+        //        await connection.OpenAsync();
+        //        TranStatus transaction = new TranStatus();
+        //        DynamicParameters parameter = new DynamicParameters();
+        //        parameter.Add("@Aid", aid);
+
+        //        parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+        //        parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+        //        await connection.QueryAsync("ChangeStatusActivity_Followup", parameter, commandType: CommandType.StoredProcedure);
+        //        transaction.returnMessage = parameter.Get<string>("@Message");
+        //        transaction.code = parameter.Get<int>("@Code");
+        //        return transaction;
+
+        //    }
+        //}
+
+        ////Change Status Activity Close
+        //public async Task<TranStatus> ChangeStatusActivity_Close(int aid)
+        //{
+        //    using (var connection = new SqlConnection(ConnectionString))
+        //    {
+        //        await connection.OpenAsync();
+        //        TranStatus transaction = new TranStatus();
+        //        DynamicParameters parameter = new DynamicParameters();
+        //        parameter.Add("@Aid", aid);
+
+        //        parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+        //        parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+        //        await connection.QueryAsync("ChangeStatusActivity_Close", parameter, commandType: CommandType.StoredProcedure);
+        //        transaction.returnMessage = parameter.Get<string>("@Message");
+        //        transaction.code = parameter.Get<int>("@Code");
+        //        return transaction;
+
+        //    }
+        //}
+
         ////Update
         //public async Task<Tuple<TranStatus,List<ClientListModel>>> updateClient(int ID, ClientListModel model)
         //{
