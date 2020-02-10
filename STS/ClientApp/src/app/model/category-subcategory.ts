@@ -13,8 +13,7 @@ export class subcategoryDataModel {
     cid: number;
     cname: string;
     isActive: boolean;
-    createdby:number;
+    createdby: number;
     modifiedby:number;
-
 }
 

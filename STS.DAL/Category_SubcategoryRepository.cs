@@ -23,8 +23,8 @@ namespace STS.DAL
                 TranStatus transaction = new TranStatus();
                 DynamicParameters parameter = new DynamicParameters();
                 parameter.Add("@Cname", model.Cname);
-                parameter.Add("@Createdby", model.createdby);
-
+                parameter.Add("@Createdby", model.Createdby);
+             
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
@@ -59,9 +59,8 @@ namespace STS.DAL
                 DynamicParameters parameter = new DynamicParameters();
                 parameter.Add("@Cid", Cid);
                 parameter.Add("@Cname", model.Cname);
-                parameter.Add("@Modifiedby", model.modifiedby);
-
-
+                parameter.Add("@Modifiedby", model.Modifiedby);
+              
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
                 await connection.QueryAsync("updateCategory", parameter, commandType: CommandType.StoredProcedure);
@@ -138,7 +137,7 @@ namespace STS.DAL
                 DynamicParameters parameter = new DynamicParameters();
                 parameter.Add("@Sname", model.Sname);
                 parameter.Add("@Cid", model.Cid);
-                parameter.Add("@Createdby", model.createdby);
+                parameter.Add("@Createdby", model.Createdby);
 
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
@@ -193,8 +192,7 @@ namespace STS.DAL
                 parameter.Add("@Sid", Sid);
                 parameter.Add("@Sname", model.Sname);
                 parameter.Add("@Cid", model.Cid);
-                parameter.Add("@Modifiedby", model.modifiedby);
-
+                parameter.Add("@Modifiedby", model.Modifiedby);
 
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);

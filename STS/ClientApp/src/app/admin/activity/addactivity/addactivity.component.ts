@@ -8,6 +8,8 @@ import { salesregisterModel } from '../../../model/sales';
 import { activityModel } from '../../../model/activity';
 import { productModel } from '../../../model/product';
 import { clientModel } from '../../../model/client';
+import { ToastrService } from 'ngx-toastr';
+import { registerModel } from '../../../model/admin';
 
 @Component({
   selector: 'app-addactivity',
@@ -15,6 +17,9 @@ import { clientModel } from '../../../model/client';
   styleUrls: ['./addactivity.component.css']
 })
 export class AddactivityComponent implements OnInit {
+
+  adminDetails: registerModel = new registerModel();
+  
   activity = new activityModel();
   activityDetails: activityModel[] = [];
   sales = new salesregisterModel();
@@ -28,7 +33,8 @@ export class AddactivityComponent implements OnInit {
     private activityService: ActivityService,
     private clientService: ClientService,
     private salesService: SalesService,
-    private productService: ProductService) {
+    private productService: ProductService,
+    private toastr: ToastrService) {
 
     // this.productList();
     this.active_ProductList();
@@ -96,9 +102,17 @@ export class AddactivityComponent implements OnInit {
     });
   }
   submitForm() {
+    this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.activity.createdby = this.adminDetails.id;
+    console.log(this.activity.createdby);
+
     this.activityService.addActivity(this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        alert('Activity added sucesfully');
+        // alert('Activity added sucesfully');
+        this.toastr.success('Activity is added Successfully', 'Successful', {
+          disableTimeOut: false,
+          timeOut: 2000
+        });
       }
       this.activity = new activityModel();
     }, (err) => {
@@ -109,12 +123,13 @@ export class AddactivityComponent implements OnInit {
 
 
   resetForm() {
-    this.activity.productId = null;
-    this.activity.clientId = null;
-    this.activity.salesId = null;
-    this.activity.contact = null;
-    this.activity.latLong = null;
-    this.activity.appointmentDate = null;
+    this.activity.productId=null;
+    this.activity.clientId=null;
+    this.activity.salesId=null;
+    this.activity.contact=null;
+    this.activity.latitude=null;
+    this.activity.longitude=null;
+    this.activity.appointmentDate=null;
   }
 
   viewActivityForm() {

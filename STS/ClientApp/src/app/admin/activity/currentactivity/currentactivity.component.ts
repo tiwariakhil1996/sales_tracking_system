@@ -9,12 +9,18 @@ import { salesregisterModel } from '../../../model/sales';
 import { productModel } from '../../../model/product';
 import { clientModel } from '../../../model/client';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { registerModel } from '../../../model/admin';
+
 @Component({
   selector: 'app-currentactivity',
   templateUrl: './currentactivity.component.html',
   styleUrls: ['./currentactivity.component.css']
 })
 export class CurrentactivityComponent implements OnInit {
+
+  adminDetails: registerModel = new registerModel();
+
   activity = new activityModel();
   activityDetails: activityModel[] = [];
   sales = new salesregisterModel();
@@ -28,7 +34,8 @@ export class CurrentactivityComponent implements OnInit {
     private clientService: ClientService,
     private modalService: NgbModal,
     private salesService: SalesService,
-    private productService: ProductService) {
+    private productService: ProductService,
+    private toastr: ToastrService) {
     this.activityList();
     this.productList();
     this.clientList();
@@ -38,13 +45,18 @@ export class CurrentactivityComponent implements OnInit {
   }
   // Delete
   onDelete(aid: number) {
-    if (confirm('Are you sure to delete this record ?') === true) {
+    // if (confirm('Are you sure to delete this record ?') === true) {
       this.activityService.deleteActivity(aid).subscribe(data => {
-        this.activityService.activityList();
+        // this.activityService.activityList();
         this.activityList();
       });
-    }
+      this.toastr.success('Activity is deleted Successful', 'Successful', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    // }
   }
+
   activityList() {
     this.activityService.activityList().subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -63,9 +75,17 @@ export class CurrentactivityComponent implements OnInit {
     // this.viewData = JSON.parse(localStorage.getItem('Register')) || [];
   }
   onEdit(aid: number) {
+    this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.activity.modifiedby = this.adminDetails.id;
+    console.log(this.activity.modifiedby);
+
     this.activityService.updateActivity(aid, this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        alert('Activity updated sucesfully');
+        // alert('Activity updated sucesfully');
+        this.toastr.success('Activity is updated sucesfully', 'Successful', {
+          disableTimeOut: false,
+          timeOut: 2000
+        });
       }
       this.activity = new activityModel();
       this.activityList();

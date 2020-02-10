@@ -8,6 +8,7 @@ import { productModel } from '../../../model/product';
 import { salesregisterModel } from '../../../model/sales';
 import { activityModel } from '../../../model/activity';
 import { clientModel } from '../../../model/client';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-addactivity',
@@ -31,10 +32,13 @@ export class AddactivityComponent implements OnInit {
     private activityService: ActivityService,
     private clientService: ClientService,
     private salesService: SalesService,
-    private productService: ProductService) {
+    private productService: ProductService,
+    private toastr: ToastrService) {
 
-    this.productList();
-    this.clientList();
+   // this.productList();
+   this.active_ProductList();
+   // this.clientList();
+   this.active_ClientList();
     this.SalesList();
    }
 
@@ -54,18 +58,42 @@ export class AddactivityComponent implements OnInit {
     });
   }
 
-
-  clientList() {
-    this.clientService.clientList().subscribe((data: any) => {
+  active_ProductList() {
+    this.productService.active_ProductList().subscribe((data: any) => {
       if (data.Status.code === 0) {
-        if (data.ClientList) {
-          this.clientDetails = data.ClientList;
+        if (data.ProductList_ActiveDeactive) {
+          this.productDetails = data.ProductList_ActiveDeactive;
         }
       }
     }, (err) => {
 
     });
   }
+
+
+  active_ClientList() {
+    this.clientService.active_ClientList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.ClientList_ActiveDeactive) {
+          this.clientDetails = data.ClientList_ActiveDeactive;
+        }
+      }
+    }, (err) => {
+
+    });
+  }
+
+  // clientList() {
+  //   this.clientService.clientList().subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.ClientList) {
+  //         this.clientDetails = data.ClientList;
+  //       }
+  //     }
+  //   }, (err) => {
+
+  //   });
+  // }
 
   SalesList(){
     this.salesService.SalesList().subscribe((data: any) => {
@@ -83,7 +111,11 @@ export class AddactivityComponent implements OnInit {
   submitForm() {
     this.activityService.addActivity(this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        alert('Activity added sucesfully');
+        // alert('Activity added sucesfully');
+        this.toastr.success('Activity is added Successfully', 'Successful', {
+          disableTimeOut: false,
+          timeOut: 2000
+        });
       }
       this.activity = new activityModel();
     }, (err) => {
@@ -98,9 +130,12 @@ export class AddactivityComponent implements OnInit {
     this.activity.clientId=null;
     this.activity.salesId=null;
     this.activity.contact=null;
-    this.activity.latLong=null;
+    this.activity.latitude=null;
+    this.activity.longitude=null;
     this.activity.appointmentDate=null;
   }
+
+  
   
   viewActivityForm(){
     this.router.navigate(['/sales/activity/currentactivity']);

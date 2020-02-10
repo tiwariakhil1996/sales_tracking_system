@@ -87,7 +87,10 @@ export class ViewsubcategoryComponent implements OnInit {
 
     this.categoryService.updateSubcategory(sid, this.subcategory).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        alert('Subcategory updated sucesfully');
+        // alert('Subcategory updated sucesfully');
+        this.toastr.success('Subcategory updated succesfully', 'Successful', {
+          disableTimeOut: false
+        });
       }
       this.subcategory = new subcategoryDataModel();
       this.viewsubcategoryList();

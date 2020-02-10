@@ -26,6 +26,7 @@ namespace STS.DAL
                 parameter.Add("@Price", model.Price);
                 parameter.Add("@Image", model.Image);
                 parameter.Add("@Date", model.Date);
+                parameter.Add("@Createdby", model.Createdby);
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
                 await connection.QueryAsync("addProduct", parameter, commandType: CommandType.StoredProcedure);
@@ -61,6 +62,7 @@ namespace STS.DAL
                 parameter.Add("@Price", model.Price);
                 parameter.Add("@Image", model.Image);
                 parameter.Add("@Date", model.Date);
+                parameter.Add("@Modifiedby", model.Modifiedby);
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
                 await connection.QueryAsync("updateProduct", parameter, commandType: CommandType.StoredProcedure);

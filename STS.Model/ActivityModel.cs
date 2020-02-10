@@ -14,9 +14,11 @@ namespace STS.Model
        
         public string Contact { get; set; }
        
-        public string LatLong { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
 
         public string AppointmentDate { get; set; }
+        public int Createdby { get; set; }
 
     }
 
@@ -34,9 +36,11 @@ namespace STS.Model
         public string Contact { get; set; }
 
 
-        public string LatLong { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
 
         public string AppointmentDate { get; set; }
+        public int Modifiedby { get; set; }
 
 
     }

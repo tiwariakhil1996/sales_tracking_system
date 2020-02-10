@@ -3,9 +3,9 @@ import { INavData } from '@coreui/angular';
 export const SalesnavItems: INavData[] = [
 
   {
-    name: 'Dashboard',
+    name: 'Home',
     url: '/sales/dashboard',
-    icon: 'icon-speedometer',
+    icon: 'icon-home',
 
   },
 

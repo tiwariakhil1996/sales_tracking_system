@@ -7,6 +7,7 @@ import { CategorySubcategoryService } from '../../../service/category-subcategor
 import { ProductService } from '../../../service/product.service';
 import { productModel } from '../../../model/product';
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
+import { registerModel } from '../../../model/admin';
 
 
 
@@ -22,6 +23,8 @@ export class AddproductComponent implements OnInit {
   modalRef: BsModalRef;
   // myDate = new Date();
   currentDate = new Date();
+
+  adminDetails: registerModel = new registerModel();
 
   product = new productModel();
   productDetails: productModel[] = [];
@@ -174,6 +177,9 @@ export class AddproductComponent implements OnInit {
       return false;
     }
 
+    this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.product.createdby = this.adminDetails.id;
+    console.log(this.product.createdby);
 
     this.productService.addProduct(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {

@@ -17,4 +17,7 @@ export class clientModel {
     cityname: string;
     postalCode: number;
     isActive:boolean;
+
+    createdby:number;
+    modifiedby: number;
 }

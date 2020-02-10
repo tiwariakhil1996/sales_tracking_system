@@ -7,6 +7,7 @@ import { CategorySubcategoryService } from '../../../service/category-subcategor
 import { ProductService } from '../../../service/product.service';
 import { productModel } from '../../../model/product';
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
+import { registerModel } from '../../../model/admin';
 
 @Component({
   selector: 'app-viewproduct',
@@ -17,6 +18,9 @@ export class ViewproductComponent implements OnInit {
 
   imageSrc: string = '';
   modalRef: BsModalRef;
+
+  adminDetails: registerModel = new registerModel();
+
   product = new productModel();
   productDetails: productModel[] = [];
 
@@ -132,6 +136,9 @@ export class ViewproductComponent implements OnInit {
       return false;
     }
 
+    this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.product.modifiedby = this.adminDetails.id;
+    console.log(this.product.modifiedby);
 
 
     this.productService.updateProduct(id, this.product).subscribe((data: any) => {
@@ -202,12 +209,16 @@ export class ViewproductComponent implements OnInit {
   // Delete
 
   onDelete(id: number) {
-    if (confirm('Are you sure to delete this record ?') === true) {
+    // if (confirm('Are you sure to delete this record ?') === true) {
       this.productService.deleteProduct(id).subscribe(data => {
         this.productService.productList();
         this.productList();
       });
-    }
+    // }
+    this.toastr.success('Product deleted Successful', 'Successful', {
+      disableTimeOut: false,
+      timeOut: 2000
+    });
   }
 
 

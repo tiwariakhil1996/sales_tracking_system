@@ -5,6 +5,7 @@ import { CountryStateCityService } from '../../../service/country-state-city.ser
 import { ClientService } from '../../../service/client.service';
 import { clientModel } from '../../../model/client';
 import { countryModel, stateModel, cityModel } from '../../../model/country-state-city';
+import { registerModel } from '../../../model/admin';
 
 @Component({
   selector: 'app-addclient',
@@ -14,9 +15,7 @@ import { countryModel, stateModel, cityModel } from '../../../model/country-stat
 export class AddclientComponent implements OnInit {
 
 
-  countryInfo: any[] = [];
-  stateInfo: any[] = [];
-  cityInfo: any[] = [];
+  adminDetails: registerModel = new registerModel();
 
   client = new clientModel();
   clientDetails: clientModel[] = [];
@@ -118,6 +117,11 @@ export class AddclientComponent implements OnInit {
       });
       return false;
     }
+
+
+    this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.client.createdby = this.adminDetails.id;
+    console.log(this.client.createdby);
 
 
     this.clientService.addClient(this.client).subscribe((data: any) => {

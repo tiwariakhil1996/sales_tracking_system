@@ -6,6 +6,7 @@ import { CountryStateCityService } from '../../../service/country-state-city.ser
 import { ClientService } from '../../../service/client.service';
 import { clientModel } from '../../../model/client';
 import { countryModel, stateModel, cityModel } from '../../../model/country-state-city';
+import { registerModel } from '../../../model/admin';
 
 @Component({
   selector: 'app-viewclient',
@@ -13,6 +14,8 @@ import { countryModel, stateModel, cityModel } from '../../../model/country-stat
   styleUrls: ['./viewclient.component.css']
 })
 export class ViewclientComponent implements OnInit {
+
+  adminDetails: registerModel = new registerModel();
 
 
   client = new clientModel();
@@ -60,8 +63,12 @@ export class ViewclientComponent implements OnInit {
     this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
 
   }
-  onEdit(id: number) {
-    // this.client.image = this.imageSrc;
+
+  onEdit(id:number) {
+    this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.client.modifiedby = this.adminDetails.id;
+    console.log(this.client.modifiedby);
+
     this.clientService.updateClient(id, this.client).subscribe((data: any) => {
       if (data.Status.code === 0) {
         // alert('Client updated sucesfully');
@@ -87,12 +94,15 @@ export class ViewclientComponent implements OnInit {
 
 
   onDelete(id: number) {
-    if (confirm('Are you sure to delete this record ?') === true) {
+    // if (confirm('Are you sure to delete this record ?') === true) {
       this.clientService.deleteClient(id).subscribe(data => {
-        // this.clientService.clientList();
         this.clientList();
       });
-    }
+    // }
+    this.toastr.success('Client is deleted Successful', 'Successful', {
+      disableTimeOut: false,
+      timeOut: 2000
+    });
   }
 
 
