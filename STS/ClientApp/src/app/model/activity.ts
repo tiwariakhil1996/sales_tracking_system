@@ -18,7 +18,9 @@ export class activityModel {
     createdby: number;
     modifiedby: number;
     userid: number;
-    status:boolean;
+
+    status: boolean;
+    statusname:string;
 }
 
 

@@ -34,9 +34,10 @@ export class CurrentactivityComponent implements OnInit {
     private productService: ProductService,
     private toastr: ToastrService) {
     this.activityList();
-    this.productList();
-    this.clientList();
-    this.SalesList();
+    // this.productList();
+    // this.clientList();
+    // this.SalesList();
+
   }
   ngOnInit() {
   }

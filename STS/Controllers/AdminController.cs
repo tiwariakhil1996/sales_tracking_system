@@ -103,7 +103,9 @@ namespace STS.Controllers
             HttpStatusCode statusCode = HttpStatusCode.OK;
             try
             {
-                model.Image = CommonHelper.SaveImage(HttpContext, "Images\\AdminProfile", model.Image, true, model.ImageExtn);
+                //model.Image = CommonHelper.SaveImage(HttpContext, "Images\\AdminProfile", model.Image, true, model.ImageExtn);
+                model.Image = CommonHelper.SaveImage(HttpContext, "avatars", model.Image, true, model.ImageExtn);
+
                 //transaction = await iadmin.updateAdminProfile(model);
 
                 var result = await iadmin.updateAdminProfile(model);

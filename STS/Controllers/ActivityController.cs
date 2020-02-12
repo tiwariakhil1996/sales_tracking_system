@@ -117,6 +117,105 @@ namespace STS.Controllers
 
 
 
+
+        //Update updateInprogress
+
+        [HttpPut]
+        [Route("updateInprogress/{Aid}")]
+        public async Task<IActionResult> updateInprogress(int Aid, [FromBody]ActivityListModel model)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+
+                transaction = await iactivity.updateInprogress(Aid, model);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+        //Update updateToFollowup
+
+        [HttpPut]
+        [Route("updateToFollowup/{Aid}")]
+        public async Task<IActionResult> updateToFollowup(int Aid, [FromBody]ActivityListModel model)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+
+                transaction = await iactivity.updateToFollowup(Aid, model);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+
+        //Update updateToClose
+
+        [HttpPut]
+        [Route("updateToClose/{Aid}")]
+        public async Task<IActionResult> updateToClose(int Aid, [FromBody]ActivityListModel model)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+
+                transaction = await iactivity.updateToClose(Aid, model);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+
+        //Update updateToCancel
+
+        [HttpPut]
+        [Route("updateToCancel/{Aid}")]
+        public async Task<IActionResult> updateToCancel(int Aid, [FromBody]ActivityListModel model)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+
+                transaction = await iactivity.updateToCancel(Aid, model);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
         //Delete
         [HttpDelete]
         [Route("deleteActivity/{Aid}")]
@@ -140,28 +239,74 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
-        //Change Status InProgress
 
-        [HttpPut]
-        [Route("ChangeStatusInProgress/{id}")]
-        public async Task<IActionResult> ChangeStatusInProgress(int id)
-        {
-            Dictionary<String, Object> dctData = new Dictionary<string, object>();
-            HttpStatusCode statusCode = HttpStatusCode.OK;
-            TranStatus transaction = new TranStatus();
-            try
-            {
-                transaction = await iactivity.ChangeStatusInProgress(id);
+        ////Change Status To Inpregress
 
-            }
-            catch (Exception ex)
-            {
-                transaction = CommonHelper.TransactionErrorHandler(ex);
-                statusCode = HttpStatusCode.BadRequest;
-            }
-            dctData.Add("Status", transaction);
-            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
-        }
+        //[HttpPut]
+        //[Route("ChangeStatusActivity_Inprogress/{aid}")]
+        //public async Task<IActionResult> ChangeStatusActivity_Inprogress(int aid)
+        //{
+        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
+        //    HttpStatusCode statusCode = HttpStatusCode.OK;
+        //    TranStatus transaction = new TranStatus();
+        //    try
+        //    {
+        //        transaction = await iactivity.ChangeStatusActivity_Inprogress(aid);
 
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        transaction = CommonHelper.TransactionErrorHandler(ex);
+        //        statusCode = HttpStatusCode.BadRequest;
+        //    }
+        //    dctData.Add("Status", transaction);
+        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        //}
+
+        ////Change Status To Followup
+
+        //[HttpPut]
+        //[Route("ChangeStatusActivity_Followup/{aid}")]
+        //public async Task<IActionResult> ChangeStatusActivity_Followup(int aid)
+        //{
+        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
+        //    HttpStatusCode statusCode = HttpStatusCode.OK;
+        //    TranStatus transaction = new TranStatus();
+        //    try
+        //    {
+        //        transaction = await iactivity.ChangeStatusActivity_Followup(aid);
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        transaction = CommonHelper.TransactionErrorHandler(ex);
+        //        statusCode = HttpStatusCode.BadRequest;
+        //    }
+        //    dctData.Add("Status", transaction);
+        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        //}
+
+        ////Change Status To Close
+
+        //[HttpPut]
+        //[Route("ChangeStatusActivity_Close/{aid}")]
+        //public async Task<IActionResult> ChangeStatusActivity_Close(int aid)
+        //{
+        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
+        //    HttpStatusCode statusCode = HttpStatusCode.OK;
+        //    TranStatus transaction = new TranStatus();
+        //    try
+        //    {
+        //        transaction = await iactivity.ChangeStatusActivity_Close(aid);
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        transaction = CommonHelper.TransactionErrorHandler(ex);
+        //        statusCode = HttpStatusCode.BadRequest;
+        //    }
+        //    dctData.Add("Status", transaction);
+        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        //}
     }
 }

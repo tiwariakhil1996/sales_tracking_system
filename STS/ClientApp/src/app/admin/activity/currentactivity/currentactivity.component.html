@@ -43,7 +43,11 @@
             <td>{{item.latitude}}</td>
             <td>{{item.longitude}}</td>
             <td>{{item.appointmentDate}}</td>
-            <td> </td>
+            <td>       
+              <span class="badge badge-pill badge-success">{{item.statusname}}</span>
+              <!-- <button  class='btn btn-success' type="button" disabled><i>{{item.statusname}}</i></button> -->
+             </td>
+
             <td>
               <button type="button" class="btn btn-primary" data-toggle="modal"
                 (click)="openupdatemodal(content,item)"><i class="fa fa-edit" aria-hidden="true"></i></button>
