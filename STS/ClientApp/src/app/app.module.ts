@@ -58,6 +58,7 @@ import { AuthService } from './auth.service';
 import { from } from 'rxjs';
 import { SalesService } from './sales.service';
 import { SalesGuard } from './sales.guard';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 
 
@@ -89,7 +90,8 @@ import { SalesGuard } from './sales.guard';
       }
     ),
     RouterModule.forRoot(routes),
-    ChartsModule
+    ChartsModule,
+    TooltipModule.forRoot()
   ],
   declarations: [
     AppComponent,

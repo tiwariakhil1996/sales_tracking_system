@@ -130,7 +130,7 @@ export const routes: Routes = [
       title: 'Login Page'
     }
   },
-  
+
 
   {
     path: 'sales/register',

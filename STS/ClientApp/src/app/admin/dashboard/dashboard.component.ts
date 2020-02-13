@@ -7,6 +7,9 @@ import { clientModel } from '../../model/client';
 import { productModel } from '../../model/product';
 import { salesregisterModel } from '../../model/sales';
 import { activityModel } from '../../model/activity';
+import { ProductService } from '../../service/product.service';
+import { SalesService } from '../../service/sales.service';
+import { ActivityService } from '../../service/activity.service';
 
 
 
@@ -401,18 +404,69 @@ export class DashboardComponent implements OnInit {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  constructor(private router: Router, private clientService: ClientService) {
-
+  constructor(private router: Router,
+    private clientService: ClientService,
+    private productService: ProductService,
+    private salesService: SalesService,
+    private activityService: ActivityService) {
+    this.productList();
+    this.clientList();
+    this.SalesList();
+    this.activityList();
   }
-  
+  productList() {
+    this.productService.productList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.ProductList) {
+          this.productDetails = data.ProductList;
+          this.totalProduct = this.productDetails.length;
+          console.log( this.totalProduct );
+        }
+      }
+    }, (err) => {
+
+    });
+  }
+
   clientList() {
     this.clientService.clientList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.ClientList) {
           this.clientDetails = data.ClientList;
+          // console.log( this.clientDetails.length);
+           this.totalClient = this.clientDetails.length;
+           console.log( this.totalClient );
         }
       }
     }, (err) => {
+    });
+  }
+
+  SalesList() {
+    this.salesService.SalesList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.RegisteredSalesList) {
+          this.salesDetails = data.RegisteredSalesList;
+          this.totalSales = this.salesDetails.length;
+          console.log( this.totalSales );
+        }
+      }
+    }, (err) => {
+
+    });
+  }
+
+  activityList() {
+    this.activityService.activityList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.ActivityList) {
+          this.activityDetails = data.ActivityList;
+          this.totalActivity = this.activityDetails.length;
+          console.log( this.totalActivity );
+        }
+      }
+    }, (err) => {
+
     });
   }
 
@@ -423,10 +477,12 @@ export class DashboardComponent implements OnInit {
       this.mainChartData2.push(this.random(80, 100));
       this.mainChartData3.push(65);
     }
-    this.totalClient = this.clientDetails.length;
-    this.totalProduct = this.productDetails.length;
-    this.totalActivity = this.activityDetails.length;
-    this.totalSales = this.salesDetails.length;
+    
   }
+
+
+    // this.totalProduct = this.productDetails.length;
+    // this.totalActivity = this.activityDetails.length;
+    // this.totalSales = this.salesDetails.length;
 
 }
