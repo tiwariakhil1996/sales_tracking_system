@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { ToastrService } from 'ngx-toastr';
 import { CountryStateCityService } from '../../../service/country-state-city.service';
 import { ClientService } from '../../../service/client.service';
@@ -50,6 +51,7 @@ export class ViewclientComponent implements OnInit {
       if (data.Status.code === 0) {
         if (data.ClientList) {
           this.clientDetails = data.ClientList;
+          // console.log( this.clientDetails);
         }
       }
     }, (err) => { console.log(err); });

@@ -35,7 +35,8 @@ export class ViewproductComponent implements OnInit {
     private productService: ProductService,
     private toastr: ToastrService,
     private categoryService: CategorySubcategoryService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    
   ) {
     this.productList();
     // this.categoryList();
