@@ -119,24 +119,29 @@ export class CurrentactivityComponent implements OnInit {
 
   }
 
-  onEdit(aid: number) {
-    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
-    this.activity.modifiedby = this.user.id;
-    console.log(this.activity.modifiedby);
-
-    this.activityService.updateActivity(aid, this.activity).subscribe((data: any) => {
-      if (data.Status.code === 0) {
-        // alert('Activity updated sucesfully');
-        this.toastr.success('Activity is updated sucesfully', 'Successful', {
-          disableTimeOut: false,
-          timeOut: 2000
-        });
-      }
-      this.activity = new activityModel();
-      // this.activityList();
-    }, (err) => {
-    });
+  open(content1) {
+    this.modalService.open(content1, {ariaLabelledBy: 'modal-basic-title'})
   }
+
+  
+  // onEdit(aid: number) {
+  //   this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+  //   this.activity.modifiedby = this.user.id;
+  //   console.log(this.activity.modifiedby);
+
+  //   this.activityService.updateActivity(aid, this.activity).subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       // alert('Activity updated sucesfully');
+  //       this.toastr.success('Activity is updated sucesfully', 'Successful', {
+  //         disableTimeOut: false,
+  //         timeOut: 2000
+  //       });
+  //     }
+  //     this.activity = new activityModel();
+  //     // this.activityList();
+  //   }, (err) => {
+  //   });
+  // }
 
   // Display
 
@@ -183,33 +188,6 @@ export class CurrentactivityComponent implements OnInit {
 
 
 
-  // changeStatus_ToInprogress(aid: number) {
-  //   console.log(aid);
-  //   this.activityService.changeStatus_ToInprogress(aid).subscribe(data => {
-  //     this.activityList();
-  //   });
-  // }
-
-  // changeStatus_ToFollowup(aid: number) {
-  //   console.log(aid);
-  //   this.activityService.changeStatus_ToFollowup(aid).subscribe(data => {
-  //     this.activityList();
-  //   });
-  // }
-  // changeStatus_ToClose(aid: number) {
-  //   console.log(aid);
-  //   this.activityService.changeStatus_ToClose(aid).subscribe(data => {
-  //     this.activityList();
-  //   });
-  // }
-  // changeStatus_ToCancel(aid: number) {
-  //   console.log(aid);
-  //   this.activityService.changeStatus_ToCancel(aid).subscribe(data => {
-  //     this.activityList();
-  //   });
-  // }
-
-
   update_Inprogress(aid: number) {
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.activity.modifiedby = this.user.id;
@@ -227,10 +205,27 @@ export class CurrentactivityComponent implements OnInit {
       this.activityList();
     }, (err) => {
     });
+
+
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.activity.user_id = this.user.id;
+    console.log(this.activity.user_id);
+
+    this.activityService.activity_history(aid, this.activity).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+      
+        this.toastr.success('Activity History', 'Successful', {
+          disableTimeOut: false,
+          timeOut: 2000
+        });
+      }
+    }, (err) => {
+    });
   }
 
 
   update_ToFollowup(aid: number) {
+
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.activity.modifiedby = this.user.id;
     console.log(this.activity.modifiedby);

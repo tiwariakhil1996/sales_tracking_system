@@ -13,6 +13,8 @@
           <tr class="table-success">
             <th>Sr.no</th>
             <!-- <th>ID</th> -->
+            <th>Title</th>
+            <th>Description</th>
             <th>Product</th>
             <th>Client</th>
             <!-- <th>Sales</th> -->
@@ -25,18 +27,12 @@
           </tr>
         </thead>
         <tbody>
-          <!-- <tr>
-              <td>Pompeius René</td>
-              <td>2012/01/01</td>
-              <td>Member</td>
-              <td>
-                <span class="badge badge-success">Active</span>
-              </td>
-            </tr>
-            -->
+ 
           <tr *ngFor="let item of activityDetails;let i=index;">
             <td>{{i+1}}</td>
             <!-- <td >{{item.aid}}</td> -->
+            <td>{{item.title}}</td>
+            <td>{{item.description}}</td>
             <td>{{item.productname}}</td>
             <td>{{item.clientName}}</td>
             <!-- <td>{{item.salesName}}</td> -->
@@ -66,7 +62,7 @@
 
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT</h4>
+    <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">Activity Details</h4>
     <div>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
@@ -76,6 +72,19 @@
 
   <div class="modal-body" style="color: black;">
     <div>
+
+      <div class="form-group row">
+        <div class="col-md-6">
+          <label >Title</label>
+          <input type="text" id="title" name="title" [(ngModel)]="activity.title"  class="form-control" disabled>
+
+        </div>
+        <div class="col-md-6">
+          <label >Description</label>
+          <input type="text" id="description" name="description" [(ngModel)]="activity.description"  class="form-control" disabled >
+
+        </div>
+      </div>
 
 
       <div class="form-group row">
@@ -103,120 +112,55 @@
         </div>
       </div>
 
-      <div class="form-group row">
-        <div class="col-sm-6">
-          <label for="latitude">Latitude</label>
-          <input type="text" class="form-control" id="latitude" [(ngModel)]="activity.latitude" name="latitude"
-            disabled>
-        </div>
-        <div class="col-sm-6">
-          <label for="longitude">Longitude</label>
-          <input type="text" class="form-control" id="longitude" [(ngModel)]="activity.longitude" name="longitude"
-            disabled>
-        </div>
-
-      </div>
 
     </div>
 
-    <button class='btn btn-success' type="button" (click)="update_Inprogress(activity.aid)"><i>Inprogress</i></button>
-    <button class='btn btn-warning' type="button" (click)="update_ToFollowup(activity.aid)"><i>Followup</i></button>
-    <button class='btn btn-dark' type="button" (click)="update_ToClose(activity.aid)"><i>Close</i></button>
-    <button class='btn btn-danger' type="button" (click)="update_ToCancel(activity.aid)"><i>Cancel</i></button>
+      <div *ngIf="(activity.status == 1)">
+        <button class='btn btn-success' type="button" (click)="update_Inprogress(activity.aid)"><i>Inprogress</i></button>
+        <button class='btn btn-danger' type="button" (click)="update_ToCancel(activity.aid)"><i>Cancel</i></button>
+    </div>
+    
+    <div *ngIf="(activity.status == 2)">
+        <button  class='btn btn-warning'  data-toggle="modal"
+        (click)="open(content1)" type="button"><i>Followup</i></button>
+    </div>
 
-
-    <!-- <button *ngIf="activity.status" class='btn btn-success' type="button" (click)="changeStatus_ToInprogress(activity.aid)"><i >Inprogress</i></button>
-    <button *ngIf="activity.status" class='btn btn-warning' type="button" (click)="changeStatus_ToFollowup(activity.aid)"><i >Followup</i></button>
-    <button *ngIf="activity.status" class='btn btn-dark' type="button" (click)="changeStatus_ToClose(activity.aid)"><i >Close</i></button>
-    <button *ngIf="activity.status" class='btn btn-danger' type="button" (click)="changeStatus_ToCancel(activity.aid)"><i >Cancel</i></button> -->
-
-    <!-- <button type="submit" class="btn btn-warning">Followup</button>
-    <button type="submit" class="btn btn-dark">Close</button>
-    <button type="submit" class="btn btn-danger">Cancel</button> -->
-
-
-
-
-    <!-- <button type="submit" class="btn btn-success" (click)="onEdit(activity.aid)">Update</button> -->
-    <!-- <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal-body" (click)="modal.dismiss('Cross click')">Cancel</button>  -->
+    <div *ngIf="(activity.status == 2 || activity.status == 3 )">
+      <button class='btn btn-dark' type="button" (click)="update_ToClose(activity.aid)"><i>Close</i></button>
+    </div>
+  
   </div>
 </ng-template>
 
 
-<!-- <ng-template #content let-modal>
-    <div class="modal-header">
-      <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT</h4>
-      <div>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-          <span aria-hidden="true">&times;</span>
-        </button>
+<ng-template #content1 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Followup</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <!-- <form> -->
+      <div class="form-group">
+        <label for="date">Next Appointment Date</label>
+        <div class="input-group">
+          <input class="form-control" id="date" type="date" name="appointmentDate"
+          [(ngModel)]="activity.appointmentDate">
         </div>
-    </div>
 
-           <div class="modal-body" style="color: black;">
-            <div>
-             
-
-              <div class="form-group row">
-                <div class="col-md-6">
-                <label for="select1">Product Name</label>
-                    <select name="productname" class="form-control" [(ngModel)]="activity.productId" >
-                        <option [ngValue]="undefined" selected>Select Product Name</option>
-                        <option *ngFor="let item of productDetails;" name="productname" [ngValue]="item.id">{{item.productname}}</option>
-                    </select>
-                 </div>
-                 <div class="col-md-6">
-                  <label  for="select1">Client Name</label>
-                      <select name="clientName" class="form-control" [(ngModel)]="activity.clientId" >
-                          <option [ngValue]="undefined" selected>Select client Name</option>
-                          <option *ngFor="let item of clientDetails;" name="clientName" [ngValue]="item.id">{{item.clientName}}</option>
-                      </select>
-                   </div>
-              </div>
-
-           
- 
-              <div class="form-group row">
-              <div class="col-md-6">
-              <label  for="select1">Sales Name</label>
-                  <select name="clientName" class="form-control" [(ngModel)]="activity.salesId" >
-                      <option [ngValue]="undefined" selected>Select Sales Name</option>
-                      <option *ngFor="let item of salesDetails;" name="salesName" [ngValue]="item.id">{{item.salesName}}</option>
-                  </select>
-               </div>
-               <div class="col-sm-6">
-                <label for="contact">Contact no.</label>
-                <input type="text" class="form-control" id="contact" [(ngModel)]="activity.contact " name="contact " placeholder="Enter contact no.">
-              </div>
-            </div>
-        
-            <div class="form-group row">
-              <div class="col-sm-6">
-                <label for="latitude">Latitude</label>
-                <input type="text" class="form-control" id="latitude" [(ngModel)]="activity.latitude" name="latitude"
-                  placeholder="Enter latitude">
-              </div>
-              <div class="col-sm-6">
-                <label for="longitude">Longitude</label>
-                <input type="text" class="form-control" id="longitude" [(ngModel)]="activity.longitude" name="longitude"
-                  placeholder="Enter longitude">
-              </div>
-      
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-6">
-                <label class="text-input">Appointment Date</label>
-                <input class="form-control" id="date" type="date" name="appointmentDate"
-                  [(ngModel)]="activity.appointmentDate">
-              </div>
-            </div>
+        <div class="form-group">
+          <label class="textarea-input">Description</label>
+          <div class="input-group">
+            <textarea id="description" name="description"  [(ngModel)]="activity.followup_description" rows="5" class="form-control" placeholder="Enter description"></textarea>
+         </div>
           </div>
-      
-             
+      </div>
+    <!-- </form> -->
+  </div>
+  <div class="modal-footer">
+    <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button> -->
+    <button type="button" class="btn btn-outline-dark" (click)="update_ToFollowup(activity.aid)">Submit</button>
 
-         <button type="submit" class="btn btn-success" (click)="onEdit(activity.aid)">Update</button>
-        <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal-body" (click)="modal.dismiss('Cross click')">Cancel</button> 
-        </div>      
-     
- 
-</ng-template> -->
+  </div>
+</ng-template>

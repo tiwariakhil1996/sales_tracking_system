@@ -50,7 +50,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SalesRegisterComponent } from './sales/register/register.component';
 import { SalesLayoutComponent } from './containerSales';
 import { SalesLoginComponent } from './sales/login/login.component';
-import { ModalModule } from 'ngx-bootstrap';
+import { ModalModule, PaginationModule } from 'ngx-bootstrap';
 import { NgbModal, NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from './auth.guard';
@@ -59,7 +59,6 @@ import { from } from 'rxjs';
 import { SalesService } from './sales.service';
 import { SalesGuard } from './sales.guard';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-
 
 
 @NgModule({
@@ -73,6 +72,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     AppFooterModule,
     AppHeaderModule,
     AppSidebarModule,
+    PaginationModule,
     HttpClientModule,
     ModalModule.forRoot(),
     NgbModule,

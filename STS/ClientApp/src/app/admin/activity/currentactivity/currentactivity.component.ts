@@ -18,6 +18,8 @@ import { registerModel } from '../../../model/admin';
   styleUrls: ['./currentactivity.component.css']
 })
 export class CurrentactivityComponent implements OnInit {
+  // items = [];
+  // pageOfItems: Array<any>;
 
   user = new registerModel();
 
@@ -50,6 +52,13 @@ export class CurrentactivityComponent implements OnInit {
   ngOnInit() {
   }
 
+    // onChangePage(pageOfItems: Array<any>) {
+    //     // update current page of items
+    //     this.pageOfItems = pageOfItems;
+    // }
+
+
+    
   // Delete
 
   onDelete(aid: number) {
