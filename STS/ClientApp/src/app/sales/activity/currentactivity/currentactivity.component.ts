@@ -287,25 +287,5 @@ export class CurrentactivityComponent implements OnInit {
     });
   }
 
-  Activityhistoryupdate(aid:number) {
-
-    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
-    this.activityhistory.Users_id = this.user.id;
-    console.log(this.activityhistory.Users_id);
-
-    this.activityService.Activityhistoryupdate(aid, this.activityhistory).subscribe((data: any) => {
-      if (data.Status.code === 0) {
-        // alert('Activity updated sucesfully');
-        this.toastr.success('Activityhistory add Successfully', 'Successful', {
-          disableTimeOut: false,
-          timeOut: 2000
-        });
-      }
-      // this.activity = new activityModel();
-       this.activityList();
-    }, (err) => {
-    });
-  }
-
 
 }
