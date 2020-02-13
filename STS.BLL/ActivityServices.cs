@@ -52,14 +52,16 @@ namespace STS.BLL.Service
                 return await activityRepository.updateActivity(Aid, model);
             }
         }
-        //Change status InProgress
-        public async Task<TranStatus> ChangeStatusInProgress(int id )
-        {
-            using (activityRepository = new ActivityRepository())
-            {
-                return await activityRepository.ChangeStatusInProgress(id);
-            }
-        }
+       
+
+        ////Change status InProgress
+        //public async Task<TranStatus> ChangeStatusInProgress(int id )
+        //{
+        //    using (activityRepository = new ActivityRepository())
+        //    {
+        //        return await activityRepository.ChangeStatusInProgress(id);
+        //    }
+        //}
 
         
 

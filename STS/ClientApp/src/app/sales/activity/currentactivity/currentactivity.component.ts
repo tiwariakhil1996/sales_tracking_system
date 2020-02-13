@@ -4,7 +4,7 @@ import { SalesService } from '../../../service/sales.service';
 import { ProductService } from '../../../service/product.service';
 import { ClientService } from '../../../service/client.service';
 import { ActivityService } from '../../../service/activity.service';
-import { activityModel } from '../../../model/activity';
+import { activityModel, ActivityhistoryModel } from '../../../model/activity';
 import { salesregisterModel } from '../../../model/sales';
 import { productModel } from '../../../model/product';
 import { clientModel } from '../../../model/client';
@@ -32,6 +32,11 @@ export class CurrentactivityComponent implements OnInit {
 
   client = new clientModel();
   clientDetails: clientModel[] = [];
+
+  activityhistory=new ActivityhistoryModel();
+  activityhistorys:ActivityhistoryModel[]=[];
+
+
 
   constructor(private clienService: ClientService,
     private activityService: ActivityService,
@@ -223,8 +228,24 @@ export class CurrentactivityComponent implements OnInit {
           timeOut: 2000
         });
       }
-
+     
       this.activityList();
+    }, (err) => {
+    });
+
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.activityhistory.Users_id = this.user.id;
+    console.log(this.activityhistory.Users_id);
+
+    this.activityService.Activityhistoryupdate(aid, this.activityhistory).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        // alert('Activity updated sucesfully');
+        this.toastr.success('Activity history add Successfully', 'Successful', {
+          disableTimeOut: false,
+          timeOut: 2000
+        });
+      }
+    
     }, (err) => {
     });
   }
@@ -283,6 +304,26 @@ export class CurrentactivityComponent implements OnInit {
       }
       // this.activity = new activityModel();
       this.activityList();
+    }, (err) => {
+    });
+  }
+
+  Activityhistoryupdate(aid:number) {
+
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.activityhistory.Users_id = this.user.id;
+    console.log(this.activityhistory.Users_id);
+
+    this.activityService.Activityhistoryupdate(aid, this.activityhistory).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        // alert('Activity updated sucesfully');
+        this.toastr.success('Activityhistory add Successfully', 'Successful', {
+          disableTimeOut: false,
+          timeOut: 2000
+        });
+      }
+      // this.activity = new activityModel();
+       this.activityList();
     }, (err) => {
     });
   }

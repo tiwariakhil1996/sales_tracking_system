@@ -1,5 +1,6 @@
+import{AgmCoreModule} from '@agm/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -63,6 +64,9 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 
 @NgModule({
+
+  schemas:  [ CUSTOM_ELEMENTS_SCHEMA ],
+  
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -74,8 +78,14 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     AppHeaderModule,
     AppSidebarModule,
     HttpClientModule,
+    //this is angular google map api key
+    AgmCoreModule.forRoot({
+        apiKey:'AIzaSyBaU6eEpioeuf9Nkzsd5N3OoJsDpVQdzEs',
+        libraries:['places']
+    }),
     ModalModule.forRoot(),
     NgbModule,
+
     NgbAlertModule,
     // HttpModule,
     ReactiveFormsModule,
@@ -109,7 +119,8 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
   //   provide: LocationStrategy,
   //   useClass: HashLocationStrategy
   // }],
+  
   providers: [AuthGuard, AuthService, SalesGuard, SalesService],
-  bootstrap: [ AppComponent ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

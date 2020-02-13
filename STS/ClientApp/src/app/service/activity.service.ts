@@ -47,6 +47,11 @@ export class ActivityService {
     return this.http.put('/api/Activity/updateToCancel/' + aid, data);
   }
 
+  Activityhistoryupdate(aid: number, data: any) {
+    return this.http.put('/api/Activity/Activity_history/' +aid, data);
+  }
+
+
   // changeStatus_ToInprogress(aid: number) {
   //   return this.http.put('/api/Activity/ChangeStatusActivity_Inprogress/' + aid, null);
   // }

@@ -36,7 +36,7 @@ export class SalesService {
   }
 
   changeStatus(id: number) {
-    return this.http.put('/api/Sales/ChangeStatusSales/' + id, null);
+    return this.http.put('/api/Sales/ChangeStatusSales/' + id,null);
   }
 
   active_SalesList(){

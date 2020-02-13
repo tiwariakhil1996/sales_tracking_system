@@ -46,6 +46,9 @@ namespace STS.Model
         public int userId { get; set; }
         public bool status { get; set; }
         public string Statusname { get; set; }
+
+      
+
     }
 
 }

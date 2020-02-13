@@ -1,7 +1,6 @@
 <div class="col-lg-12">
   <div class="card">
     <div class="card-header">
-
       Activity Details
       <!-- <button type="submit" style="float: right;" class="btn btn-sm btn-success"
          (click)="addnewActivity()"><i class="fa fa-plus">Add</i></button> -->
@@ -51,7 +50,6 @@
             <td>
               <button type="button" class="btn btn-primary" data-toggle="modal"
                 (click)="openupdatemodal(content,item)"><i class="fa fa-edit" aria-hidden="true"></i></button>
-
               <!-- <button class='btn btn-danger' type="button" (click)="onDelete(item.aid)"><i class="fa fa-trash" aria-hidden="true"></i></button> -->
             </td>
           </tr>
@@ -60,10 +58,6 @@
     </div>
   </div>
 </div>
-
-
-
-
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT</h4>
@@ -73,11 +67,8 @@
       </button>
     </div>
   </div>
-
   <div class="modal-body" style="color: black;">
     <div>
-
-
       <div class="form-group row">
         <div class="col-md-6">
           <label for="select1">Product Name</label>
@@ -90,7 +81,6 @@
             disabled>
         </div>
       </div>
-
       <div class="form-group row">
         <div class="col-sm-6">
           <label class="text-input">Appointment Date</label>
@@ -102,7 +92,6 @@
           <input type="text" class="form-control" id="contact" [(ngModel)]="activity.contact " name="contact " disabled>
         </div>
       </div>
-
       <div class="form-group row">
         <div class="col-sm-6">
           <label for="latitude">Latitude</label>
@@ -114,35 +103,23 @@
           <input type="text" class="form-control" id="longitude" [(ngModel)]="activity.longitude" name="longitude"
             disabled>
         </div>
-
       </div>
-
     </div>
-
     <button class='btn btn-success' type="button" (click)="update_Inprogress(activity.aid)"><i>Inprogress</i></button>
     <button class='btn btn-warning' type="button" (click)="update_ToFollowup(activity.aid)"><i>Followup</i></button>
     <button class='btn btn-dark' type="button" (click)="update_ToClose(activity.aid)"><i>Close</i></button>
     <button class='btn btn-danger' type="button" (click)="update_ToCancel(activity.aid)"><i>Cancel</i></button>
-
-
     <!-- <button *ngIf="activity.status" class='btn btn-success' type="button" (click)="changeStatus_ToInprogress(activity.aid)"><i >Inprogress</i></button>
     <button *ngIf="activity.status" class='btn btn-warning' type="button" (click)="changeStatus_ToFollowup(activity.aid)"><i >Followup</i></button>
     <button *ngIf="activity.status" class='btn btn-dark' type="button" (click)="changeStatus_ToClose(activity.aid)"><i >Close</i></button>
     <button *ngIf="activity.status" class='btn btn-danger' type="button" (click)="changeStatus_ToCancel(activity.aid)"><i >Cancel</i></button> -->
-
     <!-- <button type="submit" class="btn btn-warning">Followup</button>
     <button type="submit" class="btn btn-dark">Close</button>
     <button type="submit" class="btn btn-danger">Cancel</button> -->
-
-
-
-
     <!-- <button type="submit" class="btn btn-success" (click)="onEdit(activity.aid)">Update</button> -->
     <!-- <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal-body" (click)="modal.dismiss('Cross click')">Cancel</button>  -->
   </div>
 </ng-template>
-
-
 <!-- <ng-template #content let-modal>
     <div class="modal-header">
       <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT</h4>
@@ -152,11 +129,9 @@
         </button>
         </div>
     </div>
-
            <div class="modal-body" style="color: black;">
             <div>
              
-
               <div class="form-group row">
                 <div class="col-md-6">
                 <label for="select1">Product Name</label>
@@ -173,52 +148,45 @@
                       </select>
                    </div>
               </div>
-
-
-
-      <div class="form-group row">
-        <div class="col-md-6">
-          <label for="select1">Sales Name</label>
-          <select name="clientName" class="form-control" [(ngModel)]="activity.salesId">
-            <option [ngValue]="undefined" selected>Select Sales Name</option>
-            <option *ngFor="let item of salesDetails;" name="salesName" [ngValue]="item.id">{{item.salesName}}</option>
-          </select>
-        </div>
-        <div class="col-sm-6">
-          <label for="contact">Contact no.</label>
-          <input type="text" class="form-control" id="contact" [(ngModel)]="activity.contact " name="contact "
-            placeholder="Enter contact no.">
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <div class="col-sm-6">
-          <label for="latitude">Latitude</label>
-          <input type="text" class="form-control" id="latitude" [(ngModel)]="activity.latitude" name="latitude"
-            placeholder="Enter latitude">
-        </div>
-        <div class="col-sm-6">
-          <label for="longitude">Longitude</label>
-          <input type="text" class="form-control" id="longitude" [(ngModel)]="activity.longitude" name="longitude"
-            placeholder="Enter longitude">
-        </div>
-
-      </div>
-      <div class="form-group row">
-        <div class="col-sm-6">
-          <label class="text-input">Appointment Date</label>
-          <input class="form-control" id="date" type="date" name="appointmentDate"
-            [(ngModel)]="activity.appointmentDate">
-        </div>
-      </div>
-    </div>
-
-
-    <!-- <button *ngIf="activity.status" class='btn btn-success' type="button" (click)="changeStatusInProgress(activity.aid)">Accept</button> -->
-    <!-- <button type="submit" class="btn btn-success" (click)="onEdit(activity.aid)">Update</button>
-    <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal-body"
-      (click)="modal.dismiss('Cross click')">Cancel</button> -->
-
+           
+ 
+              <div class="form-group row">
+              <div class="col-md-6">
+              <label  for="select1">Sales Name</label>
+                  <select name="clientName" class="form-control" [(ngModel)]="activity.salesId" >
+                      <option [ngValue]="undefined" selected>Select Sales Name</option>
+                      <option *ngFor="let item of salesDetails;" name="salesName" [ngValue]="item.id">{{item.salesName}}</option>
+                  </select>
+               </div>
+               <div class="col-sm-6">
+                <label for="contact">Contact no.</label>
+                <input type="text" class="form-control" id="contact" [(ngModel)]="activity.contact " name="contact " placeholder="Enter contact no.">
+              </div>
+            </div>
+        
+            <div class="form-group row">
+              <div class="col-sm-6">
+                <label for="latitude">Latitude</label>
+                <input type="text" class="form-control" id="latitude" [(ngModel)]="activity.latitude" name="latitude"
+                  placeholder="Enter latitude">
+              </div>
+              <div class="col-sm-6">
+                <label for="longitude">Longitude</label>
+                <input type="text" class="form-control" id="longitude" [(ngModel)]="activity.longitude" name="longitude"
+                  placeholder="Enter longitude">
+              </div>
+      
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-6">
+                <label class="text-input">Appointment Date</label>
+                <input class="form-control" id="date" type="date" name="appointmentDate"
+                  [(ngModel)]="activity.appointmentDate">
+              </div>
+            </div>
+          </div>
+      
+             
          <button type="submit" class="btn btn-success" (click)="onEdit(activity.aid)">Update</button>
         <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal-body" (click)="modal.dismiss('Cross click')">Cancel</button> 
         </div>      

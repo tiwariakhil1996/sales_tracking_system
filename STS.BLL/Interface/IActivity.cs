@@ -23,6 +23,8 @@ namespace STS.BLL.Interface
         //Update
         Task<TranStatus> updateActivity(int Aid, ActivityListModel model);
 
+       
+
 
         //Update updateInprogress
         Task<TranStatus> updateInprogress(int Aid, ActivityListModel model);
