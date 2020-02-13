@@ -8,12 +8,8 @@
         <div class="card-body">
           <div class="form-group row">
             <div class="col-md-6">
-              <label for="select1">Product Name</label>
-              <select name="productname" class="form-control" [(ngModel)]="activity.productId">
-                <option [ngValue]="undefined" selected>Select Product Name</option>
-                <option *ngFor="let item of productDetails;" name="productname" [ngValue]="item.id">{{item.productname}}
-                </option>
-              </select>
+              <label >Title</label>
+              <input type="text" id="title" name="title" [(ngModel)]="activity.title"  class="form-control">
             </div>
             <div class="col-md-6">
               <label for="select1">Client Name</label>
@@ -24,7 +20,16 @@
               </select>
             </div>
           </div>
+
           <div class="form-group row">
+            <div class="col-md-6">
+              <label for="select1">Product Name</label>
+              <select name="productname" class="form-control" [(ngModel)]="activity.productId">
+                <option [ngValue]="undefined" selected>Select Product Name</option>
+                <option *ngFor="let item of productDetails;" name="productname" [ngValue]="item.id">{{item.productname}}
+                </option>
+              </select>
+            </div>
             <div class="col-md-6">
               <label for="select1">Sales Name</label>
               <select name="clientName" class="form-control" [(ngModel)]="activity.salesId">
@@ -33,13 +38,24 @@
                 </option>
               </select>
             </div>
+          </div>
+
+
+
+          <div class="form-group row">
             <div class="col-sm-6">
               <label for="contact">Contact no.</label>
               <input type="text" class="form-control" id="contact" [(ngModel)]="activity.contact " name="contact "
                 placeholder="Enter contact no.">
             </div>
+            <div class="col-sm-6">
+              <label class="text-input">Appointment Date</label>
+              <input class="form-control" id="date" type="date" name="appointmentDate"
+                [(ngModel)]="activity.appointmentDate">
+            </div>
           </div>
-          <div class="form-group row">
+
+          <!-- <div class="form-group row">
             <div class="col-sm-6">
               <label for="lat">Latitude</label>
               <input type="text" class="form-control" id="lat" [(ngModel)]="activity.latitude" name="lat"
@@ -50,12 +66,14 @@
               <input type="text" class="form-control" id="long" [(ngModel)]="activity.longitude" name="long"
                 placeholder="Enter longitude">
             </div>
-          </div>
+          </div> -->
+
           <div class="form-group row">
-            <div class="col-sm-6">
-              <label class="text-input">Appointment Date</label>
-              <input class="form-control" id="date" type="date" name="appointmentDate"
-                [(ngModel)]="activity.appointmentDate">
+            <div class="col-md-6">
+              <label >Description</label>
+              <!-- <input type="text" id="description" name="description" [(ngModel)]="activity.description"  class="form-control" > -->
+              <textarea type="text" id="description" name="description" [(ngModel)]="activity.description" rows="5" class="form-control" placeholder="Enter description"></textarea>
+
             </div>
           </div>
         </div>

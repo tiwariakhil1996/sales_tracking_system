@@ -105,15 +105,16 @@ namespace STS.BLL.Service
         }
 
 
-        ////Update
-        //public async Task<Tuple<TranStatus,List<ClientListModel>>> updateClient(int ID, ClientListModel model)
-        //{
-        //    using (clientRepository = new ClientRepository())
-        //    {
-        //        TranStatus tranStatus = new TranStatus();
-        //        return await clientRepository.updateClient(ID, model);
-        //    }
-        //}
+        //Activity History
+        public async Task<TranStatus> activity_history(int Aid, ActivityListModel model)
+        {
+            using (activityRepository = new ActivityRepository())
+            {
+                return await activityRepository.activity_history(Aid, model);
+            }
+        }
+
+
 
 
 

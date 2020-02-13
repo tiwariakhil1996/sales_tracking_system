@@ -41,15 +41,9 @@ namespace STS.BLL.Interface
         //Delete
         Task<TranStatus> deleteActivity(int Aid);
 
+        //Activity_History
+        Task<TranStatus> activity_history(int Aid, ActivityListModel model);
 
-        ////Change Status Activity InProgress
-        //Task<TranStatus> ChangeStatusActivity_Inprogress(int aid);
-
-        ////Change Status Activity Followup
-        //Task<TranStatus> ChangeStatusActivity_Followup(int aid);
-
-        ////Change Status Activity Close
-        //Task<TranStatus> ChangeStatusActivity_Close(int aid);
     }
 
 }

@@ -3,6 +3,8 @@
 
 export class activityModel {
     aid: number;
+    title: string;
+    description: string;
     productId: number;
     productname: string;
     clientId: number;
@@ -19,8 +21,10 @@ export class activityModel {
     modifiedby: number;
     userid: number;
 
-    status: boolean;
-    statusname:string;
+    followup_description: string;
+    user_id: number;
+    status: number;
+    statusname: string;
 }
 export class ActivityhistoryModel{
     id:number;

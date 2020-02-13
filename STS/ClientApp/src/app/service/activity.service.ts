@@ -33,6 +33,9 @@ export class ActivityService {
     return this.http.put('/api/Activity/updateInprogress/' + aid, data);
   }
 
+  activity_history(aid: number, data: any){
+    return this.http.put('/api/Activity/activity_history/' + aid, data);
+  }
 
   updateToFollowup(aid: number, data: any) {
     return this.http.put('/api/Activity/updateToFollowup/' + aid, data);

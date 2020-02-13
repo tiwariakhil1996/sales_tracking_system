@@ -241,73 +241,31 @@ namespace STS.Controllers
         }
 
 
-        ////Change Status To Inpregress
+        //Activity_History
 
-        //[HttpPut]
-        //[Route("ChangeStatusActivity_Inprogress/{aid}")]
-        //public async Task<IActionResult> ChangeStatusActivity_Inprogress(int aid)
-        //{
-        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
-        //    HttpStatusCode statusCode = HttpStatusCode.OK;
-        //    TranStatus transaction = new TranStatus();
-        //    try
-        //    {
-        //        transaction = await iactivity.ChangeStatusActivity_Inprogress(aid);
+        [HttpPut]
+        [Route("activity_history/{Aid}")]
+        public async Task<IActionResult> activity_history(int Aid, [FromBody]ActivityListModel model)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        transaction = CommonHelper.TransactionErrorHandler(ex);
-        //        statusCode = HttpStatusCode.BadRequest;
-        //    }
-        //    dctData.Add("Status", transaction);
-        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
-        //}
+                transaction = await iactivity.activity_history(Aid, model);
 
-        ////Change Status To Followup
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
 
-        //[HttpPut]
-        //[Route("ChangeStatusActivity_Followup/{aid}")]
-        //public async Task<IActionResult> ChangeStatusActivity_Followup(int aid)
-        //{
-        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
-        //    HttpStatusCode statusCode = HttpStatusCode.OK;
-        //    TranStatus transaction = new TranStatus();
-        //    try
-        //    {
-        //        transaction = await iactivity.ChangeStatusActivity_Followup(aid);
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        transaction = CommonHelper.TransactionErrorHandler(ex);
-        //        statusCode = HttpStatusCode.BadRequest;
-        //    }
-        //    dctData.Add("Status", transaction);
-        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
-        //}
 
-        ////Change Status To Close
-
-        //[HttpPut]
-        //[Route("ChangeStatusActivity_Close/{aid}")]
-        //public async Task<IActionResult> ChangeStatusActivity_Close(int aid)
-        //{
-        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
-        //    HttpStatusCode statusCode = HttpStatusCode.OK;
-        //    TranStatus transaction = new TranStatus();
-        //    try
-        //    {
-        //        transaction = await iactivity.ChangeStatusActivity_Close(aid);
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        transaction = CommonHelper.TransactionErrorHandler(ex);
-        //        statusCode = HttpStatusCode.BadRequest;
-        //    }
-        //    dctData.Add("Status", transaction);
-        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
-        //}
     }
 }

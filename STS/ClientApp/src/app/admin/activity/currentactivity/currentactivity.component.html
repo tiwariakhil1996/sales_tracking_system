@@ -12,12 +12,14 @@
           <tr class="table-success">
             <th>Sr.no</th>
             <!-- <th>ID</th> -->
+            <th>Title</th>
+            <th>Description</th>
             <th>Product</th>
             <th>Client</th>
             <th>Sales</th>
             <th>Contact</th>
-            <th>Latitude</th>
-            <th>Longitude</th>
+            <!-- <th>Latitude</th>
+            <th>Longitude</th> -->
             <th>Appointment Date</th>
             <th>Status</th>
             <th>Action</th>
@@ -36,12 +38,14 @@
           <tr *ngFor="let item of activityDetails;let i=index;">
             <td>{{i+1}}</td>
             <!-- <td>{{item.aid}}</td> -->
+            <td>{{item.title}}</td>
+            <td>{{item.description}}</td>
             <td>{{item.productname}}</td>
             <td>{{item.clientName}}</td>
             <td>{{item.salesName}}</td>
             <td>{{item.contact}}</td>
-            <td>{{item.latitude}}</td>
-            <td>{{item.longitude}}</td>
+            <!-- <td>{{item.latitude}}</td>
+            <td>{{item.longitude}}</td> -->
             <td>{{item.appointmentDate}}</td>
             <td>       
               <span class="badge badge-pill badge-success">{{item.statusname}}</span>
@@ -73,13 +77,10 @@
     <div>
       <div class="form-group row">
         <div class="col-md-6">
-          <label for="select1">Product Name</label>
-          <select name="productname" class="form-control" [(ngModel)]="activity.productId">
-            <option [ngValue]="undefined" selected>Select Product Name</option>
-            <option *ngFor="let item of productDetails;" name="productname" [ngValue]="item.id">{{item.productname}}
-            </option>
-          </select>
+          <label >Title</label>
+          <input type="text" id="title" name="title" [(ngModel)]="activity.title"  class="form-control">
         </div>
+
         <div class="col-md-6">
           <label for="select1">Client Name</label>
           <select name="clientName" class="form-control" [(ngModel)]="activity.clientId">
@@ -88,8 +89,21 @@
             </option>
           </select>
         </div>
+
+       
       </div>
+
+
       <div class="form-group row">
+        <div class="col-md-6">
+          <label for="select1">Product Name</label>
+          <select name="productname" class="form-control" [(ngModel)]="activity.productId">
+            <option [ngValue]="undefined" selected>Select Product Name</option>
+            <option *ngFor="let item of productDetails;" name="productname" [ngValue]="item.id">{{item.productname}}
+            </option>
+          </select>
+        </div>
+
         <div class="col-md-6">
           <label for="select1">Sales Name</label>
           <select name="clientName" class="form-control" [(ngModel)]="activity.salesId">
@@ -97,13 +111,25 @@
             <option *ngFor="let item of salesDetails;" name="salesName" [ngValue]="item.id">{{item.salesName}}</option>
           </select>
         </div>
+      </div>
+
+
+
+      <div class="form-group row">
         <div class="col-sm-6">
           <label for="contact">Contact no.</label>
           <input type="text" class="form-control" id="contact" [(ngModel)]="activity.contact " name="contact "
             placeholder="Enter contact no.">
         </div>
+
+        <div class="col-sm-6">
+          <label class="text-input">Appointment Date</label>
+          <input class="form-control" id="date" type="date" name="appointmentDate"
+            [(ngModel)]="activity.appointmentDate">
+        </div>
       </div>
-      <div class="form-group row">
+
+      <!-- <div class="form-group row">
         <div class="col-sm-6">
           <label for="latitude">Latitude</label>
           <input type="text" class="form-control" id="latitude" [(ngModel)]="activity.latitude" name="latitude"
@@ -114,12 +140,12 @@
           <input type="text" class="form-control" id="longitude" [(ngModel)]="activity.longitude" name="longitude"
             placeholder="Enter address">
         </div>
-      </div>
+
+      </div> -->
       <div class="form-group row">
-        <div class="col-sm-6">
-          <label class="text-input">Appointment Date</label>
-          <input class="form-control" id="date" type="date" name="appointmentDate"
-            [(ngModel)]="activity.appointmentDate">
+        <div class="col-md-6">
+          <label >Description</label>
+          <textarea type="text" id="description" name="description" [(ngModel)]="activity.description" rows="5" class="form-control" placeholder="Enter description"></textarea>
         </div>
       </div>
     </div>
@@ -128,4 +154,7 @@
       (click)="modal.dismiss('Cross click')">Cancel</button>
   </div>
   <!-- </div> -->
+  <!-- <div class="col-xs-12 col-12 d-sm-down-none">
+    <pagination [items]="activity" [(ngModel)]="activity" (change)="onChangePage($event)"></pagination>
+  </div> -->
 </ng-template>
