@@ -26,7 +26,7 @@
           </tr>
         </thead>
         <tbody>
- 
+
           <tr *ngFor="let item of activityDetails;let i=index;">
             <td>{{i+1}}</td>
             <!-- <td >{{item.aid}}</td> -->
@@ -68,13 +68,14 @@
 
       <div class="form-group row">
         <div class="col-md-6">
-          <label >Title</label>
-          <input type="text" id="title" name="title" [(ngModel)]="activity.title"  class="form-control" disabled>
+          <label>Title</label>
+          <input type="text" id="title" name="title" [(ngModel)]="activity.title" class="form-control" disabled>
 
         </div>
         <div class="col-md-6">
-          <label >Description</label>
-          <input type="text" id="description" name="description" [(ngModel)]="activity.description"  class="form-control" disabled >
+          <label>Description</label>
+          <input type="text" id="description" name="description" [(ngModel)]="activity.description" class="form-control"
+            disabled>
 
         </div>
       </div>
@@ -107,24 +108,27 @@
 
     </div>
 
-      <div *ngIf="(activity.status == 1)">
-        <button class='btn btn-success' type="button" (click)="update_Inprogress(activity.aid)"><i>Inprogress</i></button>
-        <button class='btn btn-danger' type="button" (click)="update_ToCancel(activity.aid)"><i>Cancel</i></button>
+    <div *ngIf="(activity.status == 1)">
+      <button class='btn btn-success' type="button" (click)="update_Inprogress(activity.aid)"
+        (click)="modal.dismiss('Cross click')"><i>Inprogress</i></button>
+      <button class='btn btn-danger' type="button" (click)="update_ToCancel(activity.aid)"
+        (click)="modal.dismiss('Cross click')"><i>Cancel</i></button>
     </div>
-    
+
     <div *ngIf="(activity.status == 2)">
-        <button  class='btn btn-warning'  data-toggle="modal"
-        (click)="open(content1)" type="button"><i>Followup</i></button>
+      <button class='btn btn-warning' data-toggle="modal" (click)="open(content1)" type="button"
+        (click)="modal.dismiss('Cross click')"><i>Followup</i></button>
     </div>
 
     <div *ngIf="(activity.status == 2 || activity.status == 3 )">
-      <button class='btn btn-dark' type="button" (click)="update_ToClose(activity.aid)"><i>Close</i></button>
+      <button class='btn btn-dark' type="button" (click)="update_ToClose(activity.aid)"
+        (click)="modal.dismiss('Cross click')"><i>Close</i></button>
     </div>
-  
+
   </div>
 </ng-template>
 
-
+<!-- This Followup model -->
 <ng-template #content1 let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Followup</h4>
@@ -134,25 +138,26 @@
   </div>
   <div class="modal-body">
     <!-- <form> -->
-      <div class="form-group">
-        <label for="date">Next Appointment Date</label>
-        <div class="input-group">
-          <input class="form-control" id="date" type="date" name="appointmentDate"
-          [(ngModel)]="activity.appointmentDate">
-        </div>
-
-        <div class="form-group">
-          <label class="textarea-input">Description</label>
-          <div class="input-group">
-            <textarea id="description" name="description"  [(ngModel)]="activity.followup_description" rows="5" class="form-control" placeholder="Enter description"></textarea>
-         </div>
-          </div>
+    <div class="form-group">
+      <label for="date">Next Appointment Date</label>
+      <div class="input-group">
+        <input class="form-control" id="date" type="date" name="appointmentDate" [(ngModel)]="activity.appointmentDate">
       </div>
+
+      <div class="form-group">
+        <label class="textarea-input">Description</label>
+        <div class="input-group">
+          <textarea id="description" name="description" [(ngModel)]="activity.followup_description" rows="5"
+            class="form-control" placeholder="Enter description"></textarea>
+        </div>
+      </div>
+    </div>
     <!-- </form> -->
   </div>
   <div class="modal-footer">
     <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button> -->
-    <button type="button" class="btn btn-outline-dark" (click)="update_ToFollowup(activity.aid)">Submit</button>
+    <button type="button" class="btn btn-outline-dark" (click)="update_ToFollowup(activity.aid)"
+      (click)="modal.dismiss('Cross click')">Submit</button>
 
   </div>
 </ng-template>
