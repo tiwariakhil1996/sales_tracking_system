@@ -22,27 +22,23 @@ export class MapComponent implements OnInit {
   marker = new google.maps.Marker({
     position: this.coordinates,
     map: this.map,
-    title: 'Hello World!'
+    title: 'google map'
   });
 
-
-
   constructor(
-
-
   ) { }
 
-  
+
   ngOnInit() {
     this.mapInitializer();
 
 
   }
 
-
-mapInitializer() {
+  mapInitializer() {
     this.map = new google.maps.Map(this.gmap.nativeElement, this.mapOptions);
     this.marker.setMap(this.map);
   }
+
 
 }
