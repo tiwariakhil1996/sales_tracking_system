@@ -1,4 +1,11 @@
 .btn-center tr td:last-child{
     text-align: center;
 }
+.badge-pill {
+    border-radius: 120px;
+    width: 120px;
+    padding: 5px;
+    font-size: medium;
+    font-weight: normal;
+}
   
