@@ -137,13 +137,13 @@ export class ViewproductComponent implements OnInit {
     this.product.modifiedby = this.user.id;
     console.log(this.product.modifiedby);
 
-
     this.productService.updateProduct(id, this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
         // alert('Product updated sucesfully');
         this.toastr.success('Product updated sucesfully', 'Successful', {
           disableTimeOut: false
         });
+        // this.modalService.close('Modal Closed');
       } else {
         // alert("Not Matched");
         this.toastr.warning('Please fill the remaining fields', 'Warning', {
@@ -151,6 +151,7 @@ export class ViewproductComponent implements OnInit {
           timeOut: 2000
         });
       }
+    
 
       // this.product = new productModel();
       this.productList();
@@ -176,7 +177,7 @@ export class ViewproductComponent implements OnInit {
   }
 
   validateProductname(productnameField) {
-    const reg = /^[A-Za-z0-9]+$/;
+    const reg = /^[A-Za-z0-9\s]+$/;
     return reg.test(productnameField) === false ? false : true;
   }
 

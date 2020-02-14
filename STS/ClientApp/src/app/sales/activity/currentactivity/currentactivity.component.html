@@ -18,8 +18,8 @@
             <th>Client</th>
             <!-- <th>Sales</th> -->
             <th>Contact</th>
-            <th>Latitude</th>
-            <th>Longitude</th>
+            <!-- <th>Latitude</th>
+            <th>Longitude</th> -->
             <th>Appointment Date</th>
             <th>Status</th>
             <th>Action</th>
@@ -36,8 +36,8 @@
             <td>{{item.clientName}}</td>
             <!-- <td>{{item.salesName}}</td> -->
             <td>{{item.contact}}</td>
-            <td>{{item.latitude}}</td>
-            <td>{{item.longitude}}</td>
+            <!-- <td>{{item.latitude}}</td>
+            <td>{{item.longitude}}</td> -->
             <td>{{item.appointmentDate}}</td>
             <td>
               <span class="badge badge-pill badge-success">{{item.statusname}}</span>
@@ -104,25 +104,20 @@
           <input type="text" class="form-control" id="contact" [(ngModel)]="activity.contact " name="contact " disabled>
         </div>
       </div>
-
-
     </div>
 
-    <div *ngIf="(activity.status == 1)">
-      <button class='btn btn-success' type="button" (click)="update_Inprogress(activity.aid)"
+    <div>
+      <button *ngIf="(activity.status == 1)" class='btn btn-success' type="button" (click)="update_Inprogress(activity.aid)"
         (click)="modal.dismiss('Cross click')"><i>Inprogress</i></button>
-      <button class='btn btn-danger' type="button" (click)="update_ToCancel(activity.aid)"
+    
+        <button *ngIf="(activity.status == 1)" class='btn btn-danger' type="button" (click)="update_ToCancel(activity.aid)"
         (click)="modal.dismiss('Cross click')"><i>Cancel</i></button>
-    </div>
+   
+      <button *ngIf="(activity.status == 2)" class='btn btn-warning' data-toggle="modal" (click)="open(content1)"
+        type="button"><i>Followup</i></button>
 
-    <div *ngIf="(activity.status == 2)">
-      <button class='btn btn-warning' data-toggle="modal" (click)="open(content1)" type="button"
-        (click)="modal.dismiss('Cross click')"><i>Followup</i></button>
-    </div>
-
-    <div *ngIf="(activity.status == 2 || activity.status == 3 )">
-      <button class='btn btn-dark' type="button" (click)="update_ToClose(activity.aid)"
-        (click)="modal.dismiss('Cross click')"><i>Close</i></button>
+      <button *ngIf="(activity.status == 2 || activity.status == 3 )" class='btn btn-dark' type="button"
+        (click)="update_ToClose(activity.aid)" (click)="modal.dismiss('Cross click')"><i>Close</i></button>
     </div>
 
   </div>

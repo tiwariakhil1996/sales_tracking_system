@@ -1,4 +1,12 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+// import { SelectService } from '../../service/select.service';
+// import { Country } from '../../service/country';
+// import { State } from '../../service/state';
+// import { City } from '../../service/city';
+import { Router } from '@angular/router';
+
+
+
 @Component({
   selector: 'map-root',
   templateUrl: './map.component.html',
@@ -6,39 +14,28 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 })
 export class MapComponent implements OnInit {
 
-  title = 'angular-gmap';
-  @ViewChild('mapContainer', { static: false }) gmap: ElementRef;
-  map: google.maps.Map;
-  lat = 40.73061;
-  lng = -73.935242;
-
-  coordinates = new google.maps.LatLng(this.lat, this.lng);
-
-  mapOptions: google.maps.MapOptions = {
-    center: this.coordinates,
-    zoom: 8
-  };
-
-  marker = new google.maps.Marker({
-    position: this.coordinates,
-    map: this.map,
-    title: 'google map'
-  });
+  // selectedCountry: Country = new Country(2, 'Brazil');
+  // selectedState: State = new State(8,3, 'Gujarat');
+  // countries: Country[];
+  // states: State[];
+  // cities: City[];
 
   constructor(
   ) { }
 
 
   ngOnInit() {
-    this.mapInitializer();
-
-
+    // this.countries = this.selectService.getCountries();
+    // this.onSelect(this.selectedCountry.id);
+    // this.states = this.selectService.getStates();
+    // this.onState(this.selectedState.id);
   }
 
-  mapInitializer() {
-    this.map = new google.maps.Map(this.gmap.nativeElement, this.mapOptions);
-    this.marker.setMap(this.map);
-  }
+  // onSelect(countryid) {
+  //   this.states = this.selectService.getStates().filter((item) => item.countryid == countryid);
+  // }
 
-
+  // onState(stateid) {
+  //   this.cities = this.selectService.getCities().filter((item) => item.stateid == stateid);
+  // }
 }

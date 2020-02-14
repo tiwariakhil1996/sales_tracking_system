@@ -217,13 +217,12 @@ export class CurrentactivityComponent implements OnInit {
     console.log(this.activity.user_id);
 
     this.activityService.activity_history(aid, this.activity).subscribe((data: any) => {
-      if (data.Status.code === 0) {
-      
-        this.toastr.success('Activity History', 'Successful', {
-          disableTimeOut: false,
-          timeOut: 2000
-        });
-      }
+      // if (data.Status.code === 0) {
+      //     this.toastr.success('Activity History', 'Successful', {
+      //     disableTimeOut: false,
+      //     timeOut: 2000
+      //   });
+      // }
     }, (err) => {
     });
   }
@@ -237,13 +236,12 @@ export class CurrentactivityComponent implements OnInit {
 
     this.activityService.updateToFollowup(aid, this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        // alert('Activity updated sucesfully');
         this.toastr.success('Activity is in Followup', 'Successful', {
           disableTimeOut: false,
           timeOut: 2000
         });
       }
-      // this.activity = new activityModel();
+
       this.activityList();
     }, (err) => {
     });

@@ -5,10 +5,7 @@
     "baseUrl": "./",
     "module": "esnext",
     "target": "es5",
-    "types": [
-
-      "googlemaps"
-    ],
+    "types": [],
     "paths": {
       "@angular/*": [
         "../node_modules/@angular/*"

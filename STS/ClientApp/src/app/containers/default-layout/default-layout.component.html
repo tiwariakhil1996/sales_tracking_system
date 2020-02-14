@@ -104,20 +104,18 @@
               </div>
             </div>
 
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="mobile">Mobile</label>
-                <input type="mobile" class="form-control" id="mobile" placeholder="Enter the mobile"
-                  [(ngModel)]="updateProfile.mobile" name="mobile">
-              </div>
-            </div>
-
-            <div class="card-footer">
-              <button type="submit" class="btn btn-sm btn-success" (click)="updateadminProfile()"><i
-                  class="fa fa-dot-circle-o"></i> Update</button>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="mobile">Mobile</label>
+              <input type="mobile" class="form-control" id="mobile" placeholder="Enter the mobile"  [(ngModel)]="updateProfile.mobile"  name="mobile">
             </div>
           </div>
-        </ng-template>
+        
+          <div class="card-footer">
+            <button type="submit" class="btn btn-sm btn-success" (click)="updateadminProfile()" (click)="modalRef.hide()"><i class="fa fa-dot-circle-o"></i> Update</button>
+          </div>
+        </div>
+      </ng-template>
 
         <!-- <a class="dropdown-item" href="#"><i class="fa fa-file"></i> Projects<span
             class="badge badge-primary">42</span></a> -->

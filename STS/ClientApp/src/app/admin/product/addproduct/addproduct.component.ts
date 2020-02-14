@@ -150,7 +150,7 @@ export class AddproductComponent implements OnInit {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter description';
     } else {
-      if (!this.validateProductname(this.product.description)) {
+      if (!this.validateDescription(this.product.description)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Description  should only contain alphabets & number';
       }
@@ -220,7 +220,7 @@ export class AddproductComponent implements OnInit {
   }
 
   validateProductname(productnameField) {
-    const reg = /^[A-Za-z0-9]+$/;
+    const reg = /^[A-Za-z0-9\s]+$/;
     return reg.test(productnameField) === false ? false : true;
   }
 
@@ -242,6 +242,29 @@ export class AddproductComponent implements OnInit {
     const reg = /^[0-9]+$/;
     return reg.test(priceField) === false ? false : true;
   }
+
+
+
+  productDescription() {
+    let isValid = false;
+    if (!this.validateDescription(this.product.description)) {
+      isValid = true;
+    }
+
+    if (isValid) {
+      this.toastr.warning('Please enter productname correctly', 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
+
+  }
+
+  validateDescription(productdescription) {
+    const reg = /^[A-Za-z0-9\s]+$/;
+    return reg.test(productdescription) === false ? false : true;
+  }
+
 
 
   // Image to Base64

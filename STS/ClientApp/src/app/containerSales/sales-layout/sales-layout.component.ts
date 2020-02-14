@@ -6,6 +6,8 @@ import { SalesService } from '../../service/sales.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { salesregisterModel } from '../../model/sales';
 import { ToastrService } from 'ngx-toastr';
+import { ActivityService } from '../../service/activity.service';
+import { activityModel } from '../../model/activity';
 
 
 @Component({
@@ -19,6 +21,13 @@ export class SalesLayoutComponent {
   imageSrc: string = '';
   modalRef: BsModalRef;
 
+  
+  user = new salesregisterModel();
+  
+  activity= new activityModel();
+  activityDetails: activityModel[]=[];
+  totalActivity: any;
+  
   loginDetail = new salesregisterModel();
   // salesDetails: salesregisterModel[] = [];
   salesDetails: salesregisterModel = new salesregisterModel();
@@ -29,8 +38,10 @@ export class SalesLayoutComponent {
     private salesService: SalesService,
     private modalService: NgbModal,
     private modalServices: BsModalService,
-    private toastr: ToastrService) {
+    private toastr: ToastrService,
+    private activityService: ActivityService) {
 
+      this.activityList();
   }
 
   toggleMinimize(e) {
@@ -81,6 +92,27 @@ export class SalesLayoutComponent {
       };
       reader.readAsDataURL(file);
       console.log(file);
+
+    });
+  }
+
+
+  activityList() {
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.activity.userid = this.user.id;
+    console.log(this.activity.userid);
+
+    this.activityService.each_sales_activityList(this.activity).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.each_sales_activityList) {
+          this.activityDetails = data.each_sales_activityList;
+          console.log(this.activityDetails);
+          this.totalActivity = this.activityDetails.length;
+          console.log( this.totalActivity );
+
+        }
+      }
+    }, (err) => {
 
     });
   }
