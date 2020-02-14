@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -50,7 +50,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SalesRegisterComponent } from './sales/register/register.component';
 import { SalesLayoutComponent } from './containerSales';
 import { SalesLoginComponent } from './sales/login/login.component';
-import { ModalModule, PaginationModule } from 'ngx-bootstrap';
+import { ModalModule } from 'ngx-bootstrap';
 import { NgbModal, NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from './auth.guard';
@@ -58,8 +58,8 @@ import { AuthService } from './auth.service';
 import { from } from 'rxjs';
 import { SalesService } from './sales.service';
 import { SalesGuard } from './sales.guard';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
-
+// import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   imports: [
@@ -72,7 +72,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     AppFooterModule,
     AppHeaderModule,
     AppSidebarModule,
-    PaginationModule,
+    // PaginationModule,
     HttpClientModule,
     ModalModule.forRoot(),
     NgbModule,
@@ -91,7 +91,9 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     ),
     RouterModule.forRoot(routes),
     ChartsModule,
-    TooltipModule.forRoot()
+    // AgmMarker,
+    // TooltipModule.forRoot(),
+    AgmCoreModule.forRoot({apiKey: 'AIzaSyBFP65PChjDJ1qtdD9RgkseGbNA4YclE2g'})
   ],
   declarations: [
     AppComponent,
@@ -108,6 +110,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
   //   provide: LocationStrategy,
   //   useClass: HashLocationStrategy
   // }],
+  // schemas:  [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [AuthGuard, AuthService, SalesGuard, SalesService],
   bootstrap: [ AppComponent ]
 })

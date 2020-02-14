@@ -64,7 +64,7 @@
         <input type="text" id="cname" name="cname" [(ngModel)]="category.cname" class="form-control"
           placeholder="Enter category">
         <button type="submit" style="float: right;" class="btn btn-sm btn-success"
-          (click)="updateCategory(category.cid)">Submit</button>
+          (click)="updateCategory(category.cid)" (click)="modal.dismiss('Cross click')">Submit</button>
         <button type="button" style="float: right;" class="btn btn-sm btn-danger"
           (click)="modal.dismiss('Cross click')">Cancel</button>
 

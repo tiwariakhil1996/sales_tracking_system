@@ -10,11 +10,11 @@
 
 .modal-body1{
     color: black; 
-    height: 175px; 
+    height: 141px;
     width: 496px;
 }
-
 .modal-body {
+    height: 78px;
     position: relative;
     -webkit-box-flex: 1;
     flex: 1 1 auto;
