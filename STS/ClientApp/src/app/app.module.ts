@@ -1,5 +1,6 @@
+import{AgmCoreModule} from '@agm/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -12,6 +13,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 };
 
 import { AppComponent } from './app.component';
+
 
 // Import containers
 import { DefaultLayoutComponent } from './containers';
@@ -35,7 +37,7 @@ import {
 } from '@coreui/angular';
 
 // Import routing module
-import { AppRoutingModule } from './app.routing';
+import { AppRoutingModule, routes } from './app.routing';
 
 // Import 3rd party components
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -44,14 +46,26 @@ import { ChartsModule } from 'ng2-charts';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
-//Sales Components
+
+// Sales Components
 import { SalesRegisterComponent } from './sales/register/register.component';
 import { SalesLayoutComponent } from './containerSales';
 import { SalesLoginComponent } from './sales/login/login.component';
-
+import { ModalModule, PaginationModule } from 'ngx-bootstrap';
+import { NgbModal, NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RouterModule } from '@angular/router';
+import { AuthGuard } from './auth.guard';
+import { AuthService } from './auth.service';
+import { from } from 'rxjs';
+import { SalesService } from './sales.service';
+import { SalesGuard } from './sales.guard';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 
 @NgModule({
+
+  schemas:  [ CUSTOM_ELEMENTS_SCHEMA ],
+  
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -62,20 +76,33 @@ import { SalesLoginComponent } from './sales/login/login.component';
     AppFooterModule,
     AppHeaderModule,
     AppSidebarModule,
+    PaginationModule,
     HttpClientModule,
+    //this is angular google map api key
+    AgmCoreModule.forRoot({
+        apiKey:'AIzaSyBaU6eEpioeuf9Nkzsd5N3OoJsDpVQdzEs',
+        libraries:['places']
+    }),
+    ModalModule.forRoot(),
+    NgbModule,
+
+    NgbAlertModule,
     // HttpModule,
     ReactiveFormsModule,
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
+
     ToastrModule.forRoot(
       {
-        timeOut: 1000,
+        timeOut: 2000,
         positionClass: 'toast-top-right',
         preventDuplicates: false,
       }
     ),
-    ChartsModule
+    RouterModule.forRoot(routes),
+    ChartsModule,
+    TooltipModule.forRoot()
   ],
   declarations: [
     AppComponent,
@@ -84,8 +111,6 @@ import { SalesLoginComponent } from './sales/login/login.component';
     P500Component,
     LoginComponent,
     RegisterComponent,
-
-    //SalesComponents
     SalesRegisterComponent,
     SalesLoginComponent
   ],
@@ -94,7 +119,8 @@ import { SalesLoginComponent } from './sales/login/login.component';
   //   provide: LocationStrategy,
   //   useClass: HashLocationStrategy
   // }],
-  // providers: [],
-  bootstrap: [ AppComponent ]
+  
+  providers: [AuthGuard, AuthService, SalesGuard, SalesService],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

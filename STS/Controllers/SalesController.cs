@@ -12,6 +12,9 @@ namespace STS.Controllers
     [Route("api/[controller]")]
     public class SalesController : Controller
     {
+
+        TranStatus transaction = new TranStatus();
+
         private ISales isales;
         public SalesController(ISales sales)
         {
@@ -29,7 +32,6 @@ namespace STS.Controllers
             TranStatus transaction = new TranStatus();
             try
             {
-
                 transaction = await isales.RegisterSales(model);
 
             }
@@ -43,11 +45,60 @@ namespace STS.Controllers
         }
 
 
+      
         //Login
+
+        //[HttpPost]
+        //[Route("SalesLogin")]
+        //public async Task<IActionResult> SalesLogin([FromBody] SalesLoginModel model)
+        //{
+        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
+        //    HttpStatusCode statusCode = HttpStatusCode.OK;
+        //    TranStatus transaction = new TranStatus();
+        //    try
+        //    {
+
+        //        transaction = await isales.SalesLogin(model);
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        transaction = CommonHelper.TransactionErrorHandler(ex);
+        //        statusCode = HttpStatusCode.BadRequest;
+        //    }
+        //    dctData.Add("Status", transaction);
+        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        //}
+
+
 
         [HttpPost]
         [Route("SalesLogin")]
-        public async Task<IActionResult> SalesLogin([FromBody] SalesLoginModel model)
+        public async Task<IActionResult> SalesLogin([FromBody]SalesLoginModel model)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                var result = await isales.SalesLogin(model);
+                var loginDetail = result.Item1;
+                transaction = result.Item2;
+                dctData.Add("loginDetail", loginDetail);
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+
+        //UpdateSalesProfile
+        [HttpPost]
+        [Route("updateSalesProfile")]
+        public async Task<IActionResult> updateSalesProfile([FromBody]updateSalesModel model)
         {
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
@@ -55,8 +106,64 @@ namespace STS.Controllers
             try
             {
 
-                transaction = await isales.SalesLogin(model);
+                //model.Image = CommonHelper.SaveImage(HttpContext, "Images\\SalesProfile", model.Image, true, model.ImageExtn);
+                model.Image = CommonHelper.SaveImage(HttpContext, "avatars\\Sales", model.Image, true, model.ImageExtn);
+                //transaction = await isales.updateSalesProfile(model);
 
+                var result = await isales.updateSalesProfile(model);
+                var loginDetail = result.Item1;
+                transaction = result.Item2;
+                dctData.Add("loginDetail", loginDetail);
+               
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+
+        }
+
+        //Change Status 
+
+        [HttpPut]
+        [Route("ChangeStatusSales/{id}")]
+        public async Task<IActionResult> ChangeStatusSales(int id)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+                transaction = await isales.ChangeStatusSales(id);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+        
+
+
+        //Display Active Deactive Sales List 
+
+        [HttpGet]
+        [Route("SalesList_ActiveDeactive")]
+        public async Task<IActionResult> SalesList_ActiveDeactive()
+        {
+            TranStatus transaction = new TranStatus();
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                var registerList = await isales.SalesList_ActiveDeactive();
+                dctData.Add("SalesList_ActiveDeactive", registerList);
             }
             catch (Exception ex)
             {
@@ -70,26 +177,50 @@ namespace STS.Controllers
 
         //Display
 
-        //[HttpGet]
-        //[Route("RegisterSalesList")]
-        //public async Task<IActionResult> RegisterSalesList()
-        //{
-        //    TranStatus transaction = new TranStatus();
-        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
-        //    HttpStatusCode statusCode = HttpStatusCode.OK;
-        //    try
-        //    {
-        //        var registerList = await isales.RegisterSalesList();
-        //        dctData.Add("RegisterSalesList", registerList);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        transaction = CommonHelper.TransactionErrorHandler(ex);
-        //        statusCode = HttpStatusCode.BadRequest;
-        //    }
-        //    dctData.Add("Status", transaction);
-        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
-        //}
+        [HttpGet]
+        [Route("RegisteredSalesList")]
+        public async Task<IActionResult> RegisteredSalesList()
+        {
+            TranStatus transaction = new TranStatus();
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                var registerList = await isales.RegisteredSalesList();
+                dctData.Add("RegisteredSalesList", registerList);
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
 
+
+
+        //Delete
+        [HttpDelete]
+        [Route("deleteSales/{ID}")]
+        public async Task<IActionResult> deleteSales(int ID)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+
+                transaction = await isales.deleteSales(ID);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
     }
 }

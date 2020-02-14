@@ -1,174 +1,71 @@
 <div class="animated fadeIn">
     <div class="row">
         <div class="col-md-12">
-          <div class="card">
+          <div class="card ">
             <div class="card-header">
               <strong>Add Products</strong> 
             </div>
             <div class="card-body">
-              <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+              <div class="form-group row">
+                <div class="col-sm-6">
+                  <label class="text-input">Category</label>  
+                <div class="form-inline">              
+                  <select name="cid" class="form-control" [(ngModel)]="product.cid"  (change)="onCategoryChange($event.target.value)" >
+                    <option value="0" selected>Select category</option>
+                    <option *ngFor="let item of categoryDetails;" name="cname" value={{item.cid}}>{{item.cname}}</option>
+                  </select>
+                 </div>  
+                 </div>  
+                 <div class="col-sm-6">
+                  <label class="text-input">Subcategory</label> 
+                 <div class="form-inline">              
+                  <select name="sid" class="form-control" [(ngModel)]="product.sid"  >
+                    <option value="0" selected>Select subcategory</option>
+                    <option *ngFor="let item of subcategoryDetails;" name="sname" value={{item.sid}} >{{item.sname}}</option>
+                   </select>
+                 </div>  
+               
+              </div>
            
-                <div class="form-group row">
-                  <label class="col-md-3 col-form-label" for="select1">Category</label>
-                  <div class="col-md-9">
-                    <input type="text" id="category" name="category" [(ngModel)]="product.category" class="form-control" placeholder="Enter category">
-                    <!-- <select id="select1" name="select1" class="form-control">
-                      <option value="0">Please select</option>
-                      <option value="1">Option #1</option>
-                      <option value="2">Option #2</option>
-                      <option value="3">Option #3</option>
-                    </select> -->
-                  </div>
-                </div>
-    
-                <div class="form-group row">
-                  <label class="col-md-3 col-form-label" for="select1">Sub Category</label>
-                  <div class="col-md-9">
-                    <input type="text" id="subcategory" name="subcategory" [(ngModel)]="product.subcategory" class="form-control" placeholder="Enter subcategory">
-                    <!-- <select id="select1" name="select1" class="form-control">
-                      <option value="0">Please select</option>
-                      <option value="1">Option #1</option>
-                      <option value="2">Option #2</option>
-                      <option value="3">Option #3</option>
-                    </select> -->
-                  </div>
-                </div>
-    
-                <div class="form-group row">
-                  <label class="col-md-3 col-form-label" for="text-input">Product Name</label>
-                  <div class="col-md-9">
-                    <input type="text" id="productname" name="productname" [(ngModel)]="product.productname"  class="form-control" placeholder="Enter product name">
-                    <!-- <span class="help-block">This is a help text</span> -->
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-md-3 col-form-label" for="textarea-input">Product Description</label>
-                  <div class="col-md-9">
-                    <textarea id="description" name="description"  [(ngModel)]="product.description" rows="5" class="form-control" placeholder="Content.."></textarea>
-                  </div>
-                </div>
-    
-                <div class="form-group row">
-                  <label class="col-md-3 col-form-label" for="file-multiple-input">Product Price</label>
-                  <div class="col-md-9">
-                      <input type="text" id="price" name="price"  [(ngModel)]="product.price" class="form-control" placeholder="..">
-                      </div>
-                </div>
-    
-                
-                <div class="form-group row">
-                  <label class="col-md-3 col-form-label" for="file-multiple-input">Product Image</label>
-                  <div class="col-md-9">
-                    <input class="form-control" type="file" id="image" name="image" accept="image/*" (change)="handleFileInput($event)" multiple>
-                  </div>
-                </div>
-    
-                <div class="form-group row">
-                  <label class="col-md-3 col-form-label" for="date-input">Added on</label>
-                  <div class="col-md-9">
-                    <input class="form-control" id="date" type="date" name="date" [(ngModel)]="product.date" placeholder="Select Date">
-                  </div>
-                </div>
-    
-              </form>
             </div>
+
+                 <div class="form-group row">
+                    <div class="col-sm-6">
+                      <label class="text-input">Product Name</label>
+                      <input type="text" id="productname" name="productname" [(ngModel)]="product.productname"  class="form-control" placeholder="Enter product name">
+                   
+                      <label class="text-input">Product Price</label>       
+                          <input type="text" id="price" name="price"  [(ngModel)]="product.price" class="form-control" placeholder="Enter price">                
+                    </div>
+
+                     <div class="col-sm-6">
+                      <label class="textarea-input">Product Description</label>
+                        <textarea id="description" name="description"  [(ngModel)]="product.description" rows="5" class="form-control" placeholder="Enter description"></textarea>
+                      </div>
+                    </div>
+    
+         
+    
+              <div class="form-group row">
+                <div class="col-sm-6">
+                  <label class="text-input">Product Image</label>            
+                    <input class="form-control" type="file" id="fileupload" name="image"  multiple (change)="handleFileInput($event.target.files)" [(ngModel)]="product.image" />                      
+                </div>
+    
+                <div class="col-sm-6">
+                  <label class="text-input">Added on</label>
+                    <input class="form-control" id="date" type="date" name="date" [(ngModel)]="product.date"> 
+                  </div>
+                </div>
+            </div>
+
             <div class="card-footer">
               <button type="submit" class="btn btn-sm btn-primary" (click)="submitForm()"><i class="fa fa-dot-circle-o"></i> Submit</button>
               <button type="reset" class="btn btn-sm btn-danger" (click)="resetForm()"><i class="fa fa-ban"></i> Reset</button>
+              <button type="submit" class="btn btn-sm btn-primary" (click)="viewProductForm()">View</button>
+
             </div>
           </div>
         </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-        <!-- <div class="animated fadeIn">
-          <div class="row">
-              <div class="col-md-6">
-                <div class="card">
-                  <div class="card-header">
-                    <strong>Products</strong> 
-                  </div>
-                  <div class="card-body">
-                    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-                 
-                      <div class="form-group row">
-                        <label class="col-md-3 col-form-label" for="select1">Category</label>
-                        <div class="col-md-9">
-                          <select id="select1" name="select1" class="form-control">
-                            <option value="0">Please select</option>
-                            <option value="1">Option #1</option>
-                            <option value="2">Option #2</option>
-                            <option value="3">Option #3</option>
-                          </select>
-                        </div>
-                      </div>
-          
-                      <div class="form-group row">
-                        <label class="col-md-3 col-form-label" for="select1">Sub Category</label>
-                        <div class="col-md-9">
-                          <select id="select1" name="select1" class="form-control">
-                            <option value="0">Please select</option>
-                            <option value="1">Option #1</option>
-                            <option value="2">Option #2</option>
-                            <option value="3">Option #3</option>
-                          </select>
-                        </div>
-                      </div>
-          
-                      <div class="form-group row">
-                        <label class="col-md-3 col-form-label" for="text-input">Product Name</label>
-                        <div class="col-md-9">
-                          <input type="text" id="text-input" name="text-input" class="form-control" placeholder="Text">
-                          <span class="help-block">This is a help text</span>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label class="col-md-3 col-form-label" for="textarea-input">Product Desciption</label>
-                        <div class="col-md-9">
-                          <textarea id="textarea-input" name="textarea-input" rows="5" class="form-control" placeholder="Content.."></textarea>
-                        </div>
-                      </div>
-          
-                      <div class="form-group row">
-                        <label class="col-md-3 col-form-label" for="file-multiple-input">Product Price</label>
-                        <div class="col-md-9">
-                            <input type="text" id="input3-group1" name="input3-group1" class="form-control" placeholder="..">
-                            </div>
-                      </div>
-          
-                      
-                      <div class="form-group row">
-                        <label class="col-md-3 col-form-label" for="file-multiple-input">Product Image</label>
-                        <div class="col-md-9">
-                          <input type="file" id="file-multiple-input" name="file-multiple-input" multiple>
-                        </div>
-                      </div>
-          
-                      <div class="form-group row">
-                        <label class="col-md-3 col-form-label" for="date-input">Added on</label>
-                        <div class="col-md-9">
-                          <input class="form-control" id="date-input" type="date" name="date-input" placeholder="date">
-                          <span class="help-block">Please enter a valid date</span>
-                        </div>
-                      </div>
-          
-                    </form>
-                  </div>
-                  <div class="card-footer">
-                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
-                    <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
-                  </div>
-                </div>
-              </div> -->
-
-
-
-
-            
+   
+ 

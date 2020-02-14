@@ -1,8 +1,8 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { AdminService } from '../../service/admin.service';
-import { registerModel } from '../../model/model';
+import { registerModel } from '../../model/admin';
 
 
 
@@ -12,108 +12,51 @@ import { registerModel } from '../../model/model';
 })
 export class LoginComponent implements OnInit {
 
-  // formdata;
-  // message: string;
-  // loginDetail: any = new loginModel();
-  // registerDetails: registerModel[] = [];
-  // constructor(private router: Router, private toastr: ToastrService) { }
-
   title = 'STS';
-  login = new registerModel();
+  loginDetail = new registerModel();
   adminDetails: registerModel[] = [];
 
-  constructor(private router: Router, private adminService: AdminService) {
+  constructor(private router: Router, private adminService: AdminService, private toastr: ToastrService) {
     // this.registerList();
 
+    this.logout();
 
   }
   ngOnInit() {
 
   }
+ 
 
-  // loginForm() {
-  //   let isValid = false;
-  //   this.registerDetails = JSON.parse(localStorage.getItem('Signup')) || [];
-  //   this.registerDetails.forEach(element => {
-  //     if (this.loginDetail.userName == element.userName && this.loginDetail.password == element.password) {
-  //       isValid = true;
-  //     }
-  //   });
+  submitLogin() {
+  
 
-  //   if (isValid) {
-  //     this.toastr.success('Login Successful', 'Successful', {
-  //       disableTimeOut: false
-  //     });
-  //     this.router.navigate(['/dashboard']);
-  //   } else {
-  //     this.toastr.warning('Please enter valid username and password', 'Warning', {
-  //       disableTimeOut: false
-  //     });
-  //   }
-  // }
+  this.adminService.AdminLogin(this.loginDetail).subscribe((data: any) => {
+    if (data.Status.code === 0) {
+      localStorage.setItem('adminLogin', JSON.stringify(data.loginDetail[0] || {}));
+      // alert('Admin Login Successfully');
 
-  // submitForm() {
+        this.toastr.success('Login Successful', 'Successful', {
+          disableTimeOut: false
+        });
 
-  // }
-  //   this.userService.SignupList().subscribe( data => {      
-  //       if(data.Status.code===0)    
-  //       {       
-  //         this.router.navigate(['/dashboard']);  
-  //       }    
-  //       else{    
-  //         this.errorMessage = data.Message;    
-  //       }    
-  //     },    
-  //     error => {    
-  //       this.errorMessage = error.message;    
-  //     });    
-  // };   
+      this.router.navigate(['/admin/dashboard']);
 
-
-  submitForm() {
-    this.adminService.AdminLogin(this.login).subscribe((data: any) => {
-      if (data.Status.code === 0) {
-        const obj = this.adminDetails.find(item => item.email == this.login.email && item.password == this.login.password);
-        if (!obj) {
-          // this.toastrService.success('login succesfully', 'success');
-          alert('Admin Login Successfully');
-          this.router.navigate(['/admin/dashboard']);
-        }
-        else {
-          alert('UnSuccessfully');
-          // this.toastrService.warning('please enter the valid email or passsword', 'warning');
-        }
-      }
-    }, (err) => {
-    });
+    }
+    else {
+      // alert('UnSuccessfully');
+      this.toastr.warning('Please enter valid username and password', 'Warning', {
+        disableTimeOut: false
+      });
+    }
+  }, (err) => {
+  });
+  }
+  
+  logout() {
+    localStorage.removeItem('adminLogin');
   }
   
 
-  
-
-  registerForm() {
-    this.router.navigate(['/register']);
-  }
-
-  // adminregisterForm(){
-  //   this.router.navigate(['/admin/register']);
-  // }
-
-  // salesregisterForm(){
-  //   this.router.navigate(['/sales/register']);
-  // }
-
-  // registerList(){
-  //   this.adminService.RegisterList().subscribe((data: any) => {
-  //     if (data.Status.code === 0) {
-  //       if (data.RegisterList) {
-  //         this.adminDetails = data.RegisterList;
-  //       }
-  //     }
-  //   }, (err) => {
-
-  //   });
-  // }
 
 }
 

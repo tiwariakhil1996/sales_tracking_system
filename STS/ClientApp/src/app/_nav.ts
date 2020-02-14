@@ -21,80 +21,138 @@ export const navItems: INavData[] = [
   //   icon: 'icon-note'
   // },
 
-
-  {
-    name: 'Product',
-    url:'/admin/product',
-    icon: 'icon-note',
-    children: [
-      {
-        name: 'Add Product',
-        url: '/admin/product/addproduct',
-        icon: 'icon-note',
-      },
-      {
-        name: 'View Product',
+     {
+        name: 'Product',
         url: '/admin/product/viewproduct',
         icon: 'icon-calendar',
-      }
-    ]
-  },
- 
-  {
-    name: 'Client',
-    url:'/admin/client',
-    icon: 'icon-note',
-    children: [
-      {
-        name: 'Add Client',
-        url: '/admin/client/addclient',
-        icon: 'icon-note',
       },
-      {
-        name: 'View Client',
+
+  // {
+  //   name: 'Product',
+  //   url: '/admin/product',
+  //   icon: 'icon-note',
+  //   children: [
+  //     {
+  //       name: 'Add Product',
+  //       url: '/admin/product/addproduct',
+  //       icon: 'icon-note',
+  //     },
+  //     {
+  //       name: 'View Product',
+  //       url: '/admin/product/viewproduct',
+  //       icon: 'icon-calendar',
+  //     }
+  //   ]
+  // },
+  {
+    name: 'Sales',
+    url: '/admin/salesdata',
+    icon: 'icon-map'
+  },
+
+     {
+        name: 'Client',
         url: '/admin/client/viewclient',
         icon: 'icon-calendar',
-      }
-    ]
-  },
+      },
+  // {
+  //   name: 'Client',
+  //   url: '/admin/client',
+  //   icon: 'icon-note',
+  //   children: [
+  //     {
+  //       name: 'Add Client',
+  //       url: '/admin/client/addclient',
+  //       icon: 'icon-note',
+  //     },
+  //     {
+  //       name: 'View Client',
+  //       url: '/admin/client/viewclient',
+  //       icon: 'icon-calendar',
+  //     }
+  //   ]
+  // },
 
-
+// Activity side bar routing
   {
     name: 'Activity',
-    url: '/admin/activity',
-    icon: 'icon-layers',
-    children: [
-      {
-        name: 'Add Activity',
-        url: '/admin/activity/addactivity',
-        icon: 'icon-note',
-      },
-      {
-        name: 'Past Activity',
-        url: '/admin/activity/pastactivity',
-        icon: 'icon-calendar',
-      },
-      {
-        name: 'Current Activity',
-        url: '/admin/activity/currentactivity',
-        icon: 'icon-notebook',
-      },
-    ]
+    url: '/admin/activity/currentactivity',
+    icon: 'icon-notebook',
   },
+
+  // {
+  //   name: 'Activity',
+  //   url: '/admin/activity',
+  //   icon: 'icon-layers',
+  //   children: [
+  //     {
+  //       name: 'Add Activity',
+  //       url: '/admin/activity/addactivity',
+  //       icon: 'icon-note',
+  //     },
+  //     {
+  //       name: 'Past Activity',
+  //       url: '/admin/activity/pastactivity',
+  //       icon: 'icon-calendar',
+  //     },
+  //     {
+  //       name: 'Current Activity',
+  //       url: '/admin/activity/currentactivity',
+  //       icon: 'icon-notebook',
+  //     },
+  //   ]
+  // },
   {
     name: 'Map',
     url: '/admin/map',
     icon: 'icon-map'
   },
+
+  {
+    name: 'Category',
+    url: '/admin/category-subcategory/viewcategory',
+    icon: 'icon-note',
+  },
+  {
+    name: 'Subcategory',
+    url: '/admin/category-subcategory/viewsubcategory',
+    icon: 'icon-calendar',
+  },
+
   // {
-  //   name: 'Demo',
-  //   url: '/admin/demo',
-  //   icon: 'icon-demo'
+  //   name: 'Customize',
+  //   url: '/admin/category-subcategory',
+  //   icon: 'icon-layers',
+  //   children: [
+  //     {
+  //       name: 'Add Category',
+  //       url: '/admin/category-subcategory/addcategory',
+  //       icon: 'icon-note',
+  //     },
+  //     {
+  //       name: 'View Category',
+  //       url: '/admin/category-subcategory/viewcategory',
+  //       icon: 'icon-note',
+  //     },
+  //     {
+  //       name: 'Add Subcategory',
+  //       url: '/admin/category-subcategory/addsubcategory',
+  //       icon: 'icon-calendar',
+  //     },
+  //     {
+  //       name: 'View Subcategory',
+  //       url: '/admin/category-subcategory/viewsubcategory',
+  //       icon: 'icon-calendar',
+  //     },
+  //   ]
   // },
+
+
   {
     name: 'Logout',
     url: '/admin/login',
     icon: 'icon-logout'
+
   },
 
 
@@ -325,6 +383,9 @@ export const navItems: INavData[] = [
       }
     ]
   }
+
+
+
   // {
   //   name: 'Disabled',
   //   url: '/admin/dashboard',

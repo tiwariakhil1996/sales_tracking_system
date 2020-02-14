@@ -1,6 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
+import { clientModel } from '../../model/client';
+import { productModel } from '../../model/product';
+import { salesregisterModel } from '../../model/sales';
+import { activityModel } from '../../model/activity';
+import { Router } from '@angular/router';
+import { ClientService } from '../../service/client.service';
+import { ProductService } from '../../service/product.service';
+import { SalesService } from '../../service/sales.service';
+import { ActivityService } from '../../service/activity.service';
 
 
 @Component({
@@ -10,6 +19,24 @@ export class DashboardComponent implements OnInit {
 
   radioModel: string = 'Month';
 
+  user = new salesregisterModel();
+
+  client = new clientModel();
+  clientDetails: clientModel[] = [];
+  totalClient: any = null;
+
+  product = new productModel();
+  productDetails: productModel[] = [];
+  totalProduct:any ;
+
+  sales=new salesregisterModel();
+  salesDetails: salesregisterModel[]=[];
+  totalSales:any;
+
+  activity= new activityModel();
+  activityDetails: activityModel[]=[];
+  totalActivity: any;
+  
   // lineChart1
   public lineChart1Data: Array<any> = [
     {
@@ -376,6 +403,67 @@ export class DashboardComponent implements OnInit {
 
   public random(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+
+ 
+
+  constructor(private router: Router,
+    private clientService: ClientService,
+    private productService: ProductService,
+    private salesService: SalesService,
+    private activityService: ActivityService) {
+    this.productList();
+    this.clientList();
+
+    this.activityList();
+  }
+  productList() {
+    this.productService.productList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.ProductList) {
+          this.productDetails = data.ProductList;
+          this.totalProduct = this.productDetails.length;
+          console.log( this.totalProduct );
+        }
+      }
+    }, (err) => {
+
+    });
+  }
+
+  clientList() {
+    this.clientService.clientList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.ClientList) {
+          this.clientDetails = data.ClientList;
+          // console.log( this.clientDetails.length);
+           this.totalClient = this.clientDetails.length;
+           console.log( this.totalClient );
+        }
+      }
+    }, (err) => {
+    });
+  }
+
+
+  activityList() {
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.activity.userid = this.user.id;
+    console.log(this.activity.userid);
+
+    this.activityService.each_sales_activityList(this.activity).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.each_sales_activityList) {
+          this.activityDetails = data.each_sales_activityList;
+          console.log(this.activityDetails);
+          this.totalActivity = this.activityDetails.length;
+          console.log( this.totalActivity );
+
+        }
+      }
+    }, (err) => {
+
+    });
   }
 
   ngOnInit(): void {

@@ -13,6 +13,8 @@ namespace STS.BLL.Service
 
     {
         ClientRepository clientRepository = null;
+
+        //Insert
         public Task<TranStatus> addClient(ClientModel model)
         {
             using (clientRepository = new ClientRepository())
@@ -22,6 +24,8 @@ namespace STS.BLL.Service
             }
         }
 
+
+        //Display
         public async Task<List<ClientListModel>> ClientList()
         {
             using (clientRepository = new ClientRepository())
@@ -29,5 +33,55 @@ namespace STS.BLL.Service
                 return await clientRepository.ClientList();
             }
         }
+
+
+        //Update
+        public async Task<TranStatus> updateClient(int ID, ClientListModel model)
+        {
+            using (clientRepository = new ClientRepository())
+            {
+                return await clientRepository.updateClient(ID, model);
+            }
+        }
+
+        ////Update
+        //public async Task<Tuple<TranStatus,List<ClientListModel>>> updateClient(int ID, ClientListModel model)
+        //{
+        //    using (clientRepository = new ClientRepository())
+        //    {
+        //        TranStatus tranStatus = new TranStatus();
+        //        return await clientRepository.updateClient(ID, model);
+        //    }
+        //}
+
+
+
+        //Delete
+        public async Task<TranStatus> deleteClient(int ID)
+        {
+            using (clientRepository = new ClientRepository())
+            {
+                return await clientRepository.deleteClient(ID);
+            }
+        }
+
+        //Change Status Client
+        public async Task<TranStatus> ChangeStatusClient(int id)
+        {
+            using (clientRepository = new ClientRepository())
+            {
+                return await clientRepository.ChangeStatusClient(id);
+            }
+        }
+
+        // Display  Active Deactive Client List
+        public async Task<List<ClientListModel>> ClientList_ActiveDeactive()
+        {
+            using (clientRepository = new ClientRepository())
+            {
+                return await clientRepository.ClientList_ActiveDeactive();
+            }
+        }
+
     }
 }

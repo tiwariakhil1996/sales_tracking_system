@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Http;
 using STS.BLL.Service;
 using System;
 
-
 namespace STS
 {
     public class Startup
@@ -27,32 +26,48 @@ namespace STS
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
+
+            ////this logic is convert the string to int when i am passed the category_id it is pass the as string but category_id is int then this service
+            //is convert the string to int..
+            services.AddControllers()
+                           .AddNewtonsoftJson();
 
             services.AddControllersWithViews();
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+            services.AddControllers()
+                .AddNewtonsoftJson();
 
             //Database Connectivity
-
             STSSetting.ConnectionString = Configuration.GetSection("ConnectionString:STS").Value;
             DependencyResolver(services);
+            
         }
-
+        //Add the Interface and  Service 
         private void DependencyResolver(IServiceCollection services)
         {
             //throw new NotImplementedException();
-
+            //services.AddMvc()
+            //.AddJsonOptions(option => option.JsonSerializerOptions = new DefaultContractResolver());
             //Services
+
+           
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
            
             services.AddSingleton<IAdmin, AdminServices>();
-            services.AddSingleton<IClient, ClientServices>();
+            services.AddSingleton<IClient,ClientServices>();
             services.AddSingleton<ISales, SalesServices>();
             services.AddSingleton<IProduct, ProductServices>();
+            services.AddSingleton<ICategory_Subcategory, Category_SubcategoryServices>();
+            services.AddSingleton<IActivity, ActivityServices>();
+            services.AddSingleton<ICountry_State_City, Country_State_CityServices>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -98,7 +113,6 @@ namespace STS
                     //spa.UseAngularCliServer(npmScript: "start");
                 }
             });
-            STSSetting.ImagePathUrl = env.WebRootPath;
         }
     }
 }

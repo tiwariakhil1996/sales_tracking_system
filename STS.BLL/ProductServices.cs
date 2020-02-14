@@ -31,5 +31,43 @@ namespace STS.BLL.Service
                 return await productRepository.ProductList();
             }
         }
+
+
+        //Update
+        public async Task<TranStatus> updateProduct(int ID, ProductListModel model)
+        {
+            using (productRepository = new ProductRepository())
+            {
+                return await productRepository.updateProduct(ID, model);
+            }
+        }
+
+        //Delete
+        public async Task<TranStatus> deleteProduct(int ID)
+        {
+            using (productRepository = new ProductRepository())
+            {
+                return await productRepository.deleteProduct(ID);
+            }
+        }
+
+        //Change Status Product
+        public async Task<TranStatus> ChangeStatusProduct(int id)
+        {
+            using (productRepository = new ProductRepository())
+            {
+                return await productRepository.ChangeStatusProduct(id);
+            }
+        }
+
+        // Display  Active Deactive Product List
+        public async Task<List<ProductListModel>> ProductList_ActiveDeactive()
+        {
+            using (productRepository = new ProductRepository())
+            {
+                return await productRepository.ProductList_ActiveDeactive();
+            }
+        }
+
     }
 }

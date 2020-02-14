@@ -21,8 +21,26 @@ export class SalesService {
 
   }
 
+  UpdateSalesProfile(data) {
+    return this.http.post('/api/Sales/updateSalesProfile', data)
+  }
 
-  // RegisterSalesList() {
-  //   return this.http.get('/api/Sales/RegisterSalesList');
-  // }
+
+  SalesList() {
+    return this.http.get('/api/Sales/RegisteredSalesList');
+  }
+
+  
+  deleteSales(id: number) {
+    return this.http.delete('/api/Sales/deleteSales/' + id);
+  }
+
+  changeStatus(id: number) {
+    return this.http.put('/api/Sales/ChangeStatusSales/' + id,null);
+  }
+
+  active_SalesList(){
+    return this.http.get('/api/Sales/SalesList_ActiveDeactive');
+  }
+  
 }

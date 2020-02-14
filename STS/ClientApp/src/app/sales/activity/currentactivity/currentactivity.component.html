@@ -1,1 +1,163 @@
-<p>currentactivity works!</p>
+<div class="col-lg-12">
+  <div class="card">
+    <div class="card-header">
+      Activity Details
+      <!-- <button type="submit" style="float: right;" class="btn btn-sm btn-success"
+         (click)="addnewActivity()"><i class="fa fa-plus">Add</i></button> -->
+    </div>
+    <!-- <div style="overflow-x:auto;"> -->
+    <div class="card-body table-responsive">
+      <table class="table table-bordered btn-center">
+        <thead>
+          <tr class="table-success">
+            <th>Sr.no</th>
+            <!-- <th>ID</th> -->
+            <th>Title</th>
+            <th>Description</th>
+            <th>Product</th>
+            <th>Client</th>
+            <!-- <th>Sales</th> -->
+            <th>Contact</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Appointment Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr *ngFor="let item of activityDetails;let i=index;">
+            <td>{{i+1}}</td>
+            <!-- <td >{{item.aid}}</td> -->
+            <td>{{item.title}}</td>
+            <td>{{item.description}}</td>
+            <td>{{item.productname}}</td>
+            <td>{{item.clientName}}</td>
+            <!-- <td>{{item.salesName}}</td> -->
+            <td>{{item.contact}}</td>
+            <td>{{item.latitude}}</td>
+            <td>{{item.longitude}}</td>
+            <td>{{item.appointmentDate}}</td>
+            <td>
+              <span class="badge badge-pill badge-success">{{item.statusname}}</span>
+              <!-- <button  class='btn btn-success' type="button" disabled><i>{{item.statusname}}</i></button> -->
+            </td>
+            <td>
+              <button type="button" class="btn btn-primary" data-toggle="modal"
+                (click)="openupdatemodal(content,item)"><i class="fa fa-edit" aria-hidden="true"></i></button>
+              <!-- <button class='btn btn-danger' type="button" (click)="onDelete(item.aid)"><i class="fa fa-trash" aria-hidden="true"></i></button> -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">Activity Details</h4>
+    <div>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+  <div class="modal-body" style="color: black;">
+    <div>
+
+      <div class="form-group row">
+        <div class="col-md-6">
+          <label>Title</label>
+          <input type="text" id="title" name="title" [(ngModel)]="activity.title" class="form-control" disabled>
+
+        </div>
+        <div class="col-md-6">
+          <label>Description</label>
+          <input type="text" id="description" name="description" [(ngModel)]="activity.description" class="form-control"
+            disabled>
+
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <div class="col-md-6">
+          <label for="select1">Product Name</label>
+          <input type="text" class="form-control" id="productname" [(ngModel)]="activity.productname "
+            name="productname " disabled>
+        </div>
+        <div class="col-md-6">
+          <label for="select1">Client Name</label>
+          <input type="text" class="form-control" id="clientName" [(ngModel)]="activity.clientName " name="clientName "
+            disabled>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <label class="text-input">Appointment Date</label>
+          <input class="form-control" id="date" type="date" name="appointmentDate"
+            [(ngModel)]="activity.appointmentDate" disabled>
+        </div>
+        <div class="col-sm-6">
+          <label for="contact">Contact no.</label>
+          <input type="text" class="form-control" id="contact" [(ngModel)]="activity.contact " name="contact " disabled>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div *ngIf="(activity.status == 1)">
+      <button class='btn btn-success' type="button" (click)="update_Inprogress(activity.aid)"
+        (click)="modal.dismiss('Cross click')"><i>Inprogress</i></button>
+      <button class='btn btn-danger' type="button" (click)="update_ToCancel(activity.aid)"
+        (click)="modal.dismiss('Cross click')"><i>Cancel</i></button>
+    </div>
+
+    <div *ngIf="(activity.status == 2)">
+      <button class='btn btn-warning' data-toggle="modal" (click)="open(content1)" type="button"
+        (click)="modal.dismiss('Cross click')"><i>Followup</i></button>
+    </div>
+
+    <div *ngIf="(activity.status == 2 || activity.status == 3 )">
+      <button class='btn btn-dark' type="button" (click)="update_ToClose(activity.aid)"
+        (click)="modal.dismiss('Cross click')"><i>Close</i></button>
+    </div>
+
+  </div>
+</ng-template>
+
+<!-- This Followup model -->
+<ng-template #content1 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Followup</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <!-- <form> -->
+    <div class="form-group">
+      <label for="date">Next Appointment Date</label>
+      <div class="input-group">
+        <input class="form-control" id="date" type="date" name="appointmentDate" [(ngModel)]="activity.appointmentDate">
+      </div>
+
+      <div class="form-group">
+        <label class="textarea-input">Description</label>
+        <div class="input-group">
+          <textarea id="description" name="description" [(ngModel)]="activity.followup_description" rows="5"
+            class="form-control" placeholder="Enter description"></textarea>
+        </div>
+      </div>
+    </div>
+    <!-- </form> -->
+  </div>
+  <div class="modal-footer">
+    <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button> -->
+    <button type="button" class="btn btn-outline-dark" (click)="update_ToFollowup(activity.aid)"
+      (click)="modal.dismiss('Cross click')">Submit</button>
+
+  </div>
+</ng-template>

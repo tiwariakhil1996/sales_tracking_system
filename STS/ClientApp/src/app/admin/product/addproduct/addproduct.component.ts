@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { productModel } from '../../../model/model';
 import { Router } from '@angular/router';
-import { CommonService } from '../../../service/common.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { ToastrService } from 'ngx-toastr';
+import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
+import { ProductService } from '../../../service/product.service';
+import { productModel } from '../../../model/product';
+import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
+import { registerModel } from '../../../model/admin';
+
+
 
 @Component({
   selector: 'app-addproduct',
@@ -10,67 +18,267 @@ import { CommonService } from '../../../service/common.service';
 })
 export class AddproductComponent implements OnInit {
 
+  errorMessage = '';
+  imageSrc: string = '';
+  modalRef: BsModalRef;
+  // myDate = new Date();
+  currentDate = new Date();
+
+  user = new registerModel();
+
   product = new productModel();
   productDetails: productModel[] = [];
 
-  constructor(private router: Router, private productService: CommonService) { }
+  category = new categoryDataModel();
+  categoryDetails: categoryDataModel[] = [];
 
-  ngOnInit() {
+  subcategory = new subcategoryDataModel();
+  subcategoryDetails: subcategoryDataModel[] = [];
+
+  constructor(private router: Router,
+    private toastr: ToastrService,
+    private productService: ProductService,
+    private modalServices: BsModalService,
+    private modalService: NgbModal,
+    private categoryService: CategorySubcategoryService) {
+
+    this.active_CategoryList();
+
   }
 
-  submitForm(){
+  ngOnInit() {
+
+  }
+
+
+  // categoryList() {
+  //   this.categoryService.categoryList().subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.CategoryList) {
+  //         this.categoryDetails = data.CategoryList;
+
+  //       }
+  //     }
+  //   }, (err) => {
+
+  //     console.log(this.categoryDetails);
+  //   });
+  // }
+
+  active_CategoryList() {
+    this.categoryService.active_CategoryList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.CategoryList_ActiveDeactive) {
+          this.categoryDetails = data.CategoryList_ActiveDeactive;
+
+        }
+      }
+    }, (err) => {
+
+      console.log(this.categoryDetails);
+    });
+  }
+
+  active_SubcategoryList() {
+    this.categoryService.active_SubcategoryList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.SubcategoryList_ActiveDeactive) {
+          this.categoryDetails = data.SubcategoryList_ActiveDeactive;
+
+        }
+      }
+    }, (err) => {
+
+      console.log(this.categoryDetails);
+    });
+  }
+
+
+  onCategoryChange(cid) {
+    // this.subcategoryDetails = this.subcategoryDetails.filter(item => item.cid == cid);
+    this.subcategoryList(cid);
+  }
+
+
+  subcategoryList(catid) {
+    this.categoryService.subcategoryList(catid).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.SubcategoryList) {
+          this.subcategoryDetails = data.SubcategoryList;
+        }
+      }
+    }, (err) => {
+
+      console.log(this.subcategoryDetails);
+    });
+  }
+
+  submitForm() {
+
+    let strError = '';
+
+    if (!this.product.cid) {
+      strError += strError = '- Please select category';
+    } else
+      if (!this.product.sid) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += '- Please select subcategory';
+      }
+
+
+    if (!this.product.productname) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please enter productname';
+    } else {
+      if (!this.validateProductname(this.product.productname)) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += strError = '- Product name should only contain alphabets & number';
+      }
+    }
+
+    if (!this.product.price) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += strError = '- Please enter price';
+    } else {
+      if (!this.validateprice(this.product.price)) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += strError = '- Price should be in numbers';
+      }
+    }
+
+    if (!this.product.description) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please enter description';
+    } else {
+      if (!this.validateProductname(this.product.description)) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += strError = '- Description  should only contain alphabets & number';
+      }
+    }
+
+    if (!this.product.image) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please select image';
+    }
+
+    if (!this.product.date) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please select date';
+    }
+
+    if (strError !== '') {
+      this.toastr.warning(strError, 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000,
+        enableHtml: true,
+        progressBar: true,
+        closeButton: true,
+      });
+      return false;
+    }
+
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.product.createdby = this.user.id;
+    console.log(this.product.createdby);
+
     this.productService.addProduct(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        alert('Product added sucesfully');
+        // alert('Product added sucesfully');
+        this.toastr.success('Product added succesfully', 'Successful', {
+          disableTimeOut: false
+        });
+        this.product = new productModel();
+      } else {
+        // alert("Not Matched");
+        this.toastr.warning('Please fill the remaining fields', 'Warning', {
+          disableTimeOut: false,
+          timeOut: 2000
+        });
       }
-      this.product = new productModel();
+
+
     }, (err) => {
 
 
     });
   }
 
-  //Image to Base64
 
-  // handleInputChange(e) {
-  //   var file = e.target.files[0];
-  //   var pattern = /image-*/;
-  //   var reader = new FileReader();
+  productnameValidation() {
+    let isValid = false;
+    if (!this.validateProductname(this.product.productname)) {
+      isValid = true;
+    }
 
-  //   if (!file.type.match(pattern)) {
-  //     alert('invalid format');
-  //     return;
-  //   }
+    if (isValid) {
+      this.toastr.warning('Please enter productname correctly', 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
 
-  //   reader.onload = this._handleReaderLoaded.bind(this);
-  //   reader.readAsDataURL(file)
-  // }
+  }
 
-  // _handleReaderLoaded(e) {
-  //   let reader = e.target;
-  //   this.imageSrc = reader.result;
-  //   // console.log(this.imageSrc);
-  // }
+  validateProductname(productnameField) {
+    const reg = /^[A-Za-z0-9]+$/;
+    return reg.test(productnameField) === false ? false : true;
+  }
 
+  priceValidation() {
+    let isValid = false;
+    if (!this.validateprice(this.product.price)) {
+      isValid = true;
+    }
+
+    if (isValid) {
+      this.toastr.warning('Please enter price correctly', 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
+
+  }
+  validateprice(priceField) {
+    const reg = /^[0-9]+$/;
+    return reg.test(priceField) === false ? false : true;
+  }
+
+
+  // Image to Base64
 
   handleFileInput(fileList: FileList) {
     const preview = document.getElementById('photos-preview');
     Array.from(fileList).forEach((file: File) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          var image = new Image();
-          image.src = String(reader.result);
-          image.height=100;
-          image.width=100;
-          preview.appendChild(image);
-        }
-        reader.readAsDataURL(file);
+      const reader = new FileReader();
+      reader.onload = () => {
+        const image = new Image();
+        image.src = String(reader.result);
+        const imageDetail = String(reader.result).split(';base64,');
+        this.product.image = imageDetail[1];
+        this.product.ImageExtn = '.' + imageDetail[0].replace('data:image/', '');
+        image.height = 100;
+        image.width = 100;
+        preview.appendChild(image);
+      };
+      reader.readAsDataURL(file);
+      console.log(file);
+
     });
-}
-
-  resetForm(){
-
   }
 
+  resetForm() {
+    this.product.cid = null;
+    this.product.sid = null;
+    this.product.productname = null;
+    this.product.price = null;
+    this.product.description = null;
+    this.product.image = null;
+    this.product.date = null;
+  }
+
+
+  viewProductForm() {
+    this.router.navigate(['/admin/product/viewproduct']);
+  }
 
 }

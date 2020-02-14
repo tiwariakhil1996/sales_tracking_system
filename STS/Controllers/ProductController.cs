@@ -29,7 +29,8 @@ namespace STS.Controllers
             TranStatus transaction = new TranStatus();
             try
             {
-
+                
+                model.Image = CommonHelper.SaveImage(HttpContext, "Images\\Product", model.Image, true, model.ImageExtn);
                 transaction = await iproduct.addProduct(model);
 
             }
@@ -55,6 +56,101 @@ namespace STS.Controllers
             {
                 var productList = await iproduct.ProductList();
                 dctData.Add("ProductList", productList);
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+        //Update
+
+        [HttpPut]
+        [Route("updateProduct/{ID}")]
+        public async Task<IActionResult> updateProduct(int ID , [FromBody]ProductListModel model)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+                model.Image = CommonHelper.SaveImage(HttpContext, "Images\\Product", model.Image, true, model.ImageExtn);
+                transaction = await iproduct.updateProduct(ID,model);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+
+        //Delete
+        [HttpDelete]
+        [Route("deleteProduct/{ID}")]
+        public async Task<IActionResult> deleteProduct(int ID)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+
+                transaction = await iproduct.deleteProduct(ID);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+        //Change Status 
+
+        [HttpPut]
+        [Route("ChangeStatusProduct/{id}")]
+        public async Task<IActionResult> ChangeStatusProduct(int id)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+                transaction = await iproduct.ChangeStatusProduct(id);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+
+        //Display Active Deactive Product List 
+
+        [HttpGet]
+        [Route("ProductList_ActiveDeactive")]
+        public async Task<IActionResult> ProductList_ActiveDeactive()
+        {
+            TranStatus transaction = new TranStatus();
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                var productList = await iproduct.ProductList_ActiveDeactive();
+                dctData.Add("ProductList_ActiveDeactive", productList);
             }
             catch (Exception ex)
             {

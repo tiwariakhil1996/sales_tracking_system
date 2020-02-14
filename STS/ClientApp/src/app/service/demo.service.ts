@@ -1,27 +1,30 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import { Injectable } from '@angular/core';
 @Injectable({
-  providedIn: 'root'
-})
+    providedIn: 'root'
+  })
+
 export class DemoService {
+    constructor(
+        private http:HttpClient
+    ){}
+     
+    //api demo
+    addDemo(data){
+        return this.http.post('/api/Demo/AddDemo',data);
+    }
+    demoList(){
+        return this.http.get('/api/Demo/DemoList');
+    }
+    
+    deleteDemo(id: number) {
+         return this.http.delete('/api/Demo/deleteDemo/' + id);
+     }
+    updateDemo(id: number,data:any) {
+        return this.http.put('/api/Demo/updateDemo/'+id, data);
+     }
 
-  constructor(private http: HttpClient) { }
 
-
-  // Demo
-
-   // '/api/Demo/DemoRegister'  
-   // Demo        - It's a Controller 
-   // DemoRegister - It's a Procedure
-
-
-  registerService(data) {
-    return this.http.post('/api/Demo/DemoRegister', data);
-  }
-
-  getregisterList() {
-    return this.http.get('/api/Demo/DemoLogin');
-  }
-
+   
+    
 }

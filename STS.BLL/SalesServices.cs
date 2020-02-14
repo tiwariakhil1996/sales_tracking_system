@@ -27,23 +27,80 @@ namespace STS.BLL.Service
 
         // Login
 
-        SalesRepository salesloginRepository = null;
-        public Task<TranStatus> SalesLogin(SalesLoginModel model)
-        {
-            using (salesloginRepository = new SalesRepository())
-            {
-                return salesloginRepository.SalesLogin(model);
+        //SalesRepository salesloginRepository = null;
+        //public Task<TranStatus> SalesLogin(SalesLoginModel model)
+        //{
+        //    using (salesloginRepository = new SalesRepository())
+        //    {
+        //        return salesloginRepository.SalesLogin(model);
 
+        //    }
+        //}
+
+        public Task<Tuple<List<SalesLoginModel>, TranStatus>> SalesLogin(SalesLoginModel model)
+        {
+            using (salesRepository = new SalesRepository())
+            {
+                return salesRepository.SalesLogin(model);
             }
+
         }
 
-        //Display
-        //public async Task<List<SalesListModel>> RegisterSalesList()
+
+        //UpdateSalesProfile
+        //public Task<TranStatus> updateSalesProfile(updateSalesModel model)
         //{
         //    using (salesRepository = new SalesRepository())
         //    {
-        //        return await salesRepository.RegisterSalesList();
+        //        return salesRepository.updateSalesProfile(model);
         //    }
         //}
+
+        public Task<Tuple<List<updateSalesModel>, TranStatus>> updateSalesProfile(updateSalesModel model)
+        {
+            using (salesRepository = new SalesRepository())
+            {
+                return salesRepository.updateSalesProfile(model);
+            }
+        }
+
+        //Change Status Sales
+        public async Task<TranStatus> ChangeStatusSales(int id)
+        {
+            using (salesRepository = new SalesRepository())
+            {
+                return await salesRepository.ChangeStatusSales(id);
+            }
+        }
+       
+
+
+        //Display
+        public async Task<List<SalesListModel>> RegisteredSalesList()
+        {
+            using (salesRepository = new SalesRepository())
+            {
+                return await salesRepository.RegisteredSalesList();
+            }
+        }
+
+        // Display  Active Deactive Sales List
+        public async Task<List<SalesListModel>> SalesList_ActiveDeactive()
+        {
+            using (salesRepository = new SalesRepository())
+            {
+                return await salesRepository.SalesList_ActiveDeactive();
+            }
+        }
+
+
+        //Delete
+        public async Task<TranStatus> deleteSales(int ID)
+        {
+            using (salesRepository = new SalesRepository())
+            {
+                return await salesRepository.deleteSales(ID);
+            }
+        }
     }
 }
