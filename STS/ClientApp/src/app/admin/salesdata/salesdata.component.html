@@ -41,7 +41,7 @@
 
               <ng-template #content let-modal>
                 <div class="modal-header">
-                  <h4 id="dialog-sizes-name1"  class="modal-title pull-right">Profile Deletion</h4>
+                  <h4 id="dialog-sizes-name1" class="modal-title pull-right">Profile Deletion</h4>
                   <div>
                     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
                       <span aria-hidden="true">&times;</span>
@@ -50,19 +50,21 @@
                 </div>
 
                 <div class="modal-body1">
-                  <div >
+                  <div>
                     <div class="modal-body">
-                      <p style="margin-top: -28px;"><strong>Are you sure you want to delete <span class="text-primary">{{item.salesName}}</span> profile?</strong></p>
-                      <p style=" margin-top: -18px;">All information associated to this user profile will be permanently deleted.
+                      <p style="margin-top: -28px;"><strong>Are you sure you want to delete <span
+                            class="text-primary">{{item.salesName}}</span> profile?</strong></p>
+                      <p style=" margin-top: -18px;">All information associated to this user profile will be permanently
+                        deleted.
                         <span class="text-danger">This operation can not be undone.</span>
-                        </p>
+                      </p>
                     </div>
                     <div class="modal-footer">
-                    <button class='btn btn-success' type="button" (click)="deleteSales(item.id)">Yes</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal-body"
-                      (click)="modal.dismiss('Cross click')">No</button>
-                  
-                   </div>
+                      <button class='btn btn-success' type="button" (click)="deleteSales(item.id)">Yes</button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal-body"
+                        (click)="modal.dismiss('Cross click')">No</button>
+
+                    </div>
                   </div>
                 </div>
               </ng-template>
