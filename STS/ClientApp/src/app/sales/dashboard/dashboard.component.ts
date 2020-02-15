@@ -414,7 +414,6 @@ export class DashboardComponent implements OnInit {
     private activityService: ActivityService) {
     this.productList();
     this.clientList();
-
     this.activityList();
   }
   productList() {
@@ -422,6 +421,7 @@ export class DashboardComponent implements OnInit {
       if (data.Status.code === 0) {
         if (data.ProductList) {
           this.productDetails = data.ProductList;
+          //this logic for display the total product..in a dashboard
           this.totalProduct = this.productDetails.length;
           console.log( this.totalProduct );
         }
