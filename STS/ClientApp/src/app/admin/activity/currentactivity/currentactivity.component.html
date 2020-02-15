@@ -89,9 +89,9 @@
 
         <div class="col-md-6">
           <label for="select1">Client Name</label>
-          <select name="clientName" class="form-control" [(ngModel)]="activity.clientId">
+          <select name="clientName" id="clientName" class="form-control" [(ngModel)]="activity.clientId">
             <option [ngValue]="undefined" selected>Select client Name</option>
-            <option *ngFor="let item of clientDetails;" name="clientName" [ngValue]="item.id">{{item.clientName}}
+            <option *ngFor="let item of clientDetails;" value={{item.id}}>{{item.clientName}}
             </option>
           </select>
         </div>
@@ -113,12 +113,13 @@
         <div class="col-md-6">
           <label for="clientName">Sales Name</label>
           <select name="clientName" class="form-control" [(ngModel)]="activity.salesId">
-            <!-- <option [ngValue]="undefined" selected>Select Sales Name</option> -->
-            <option *ngFor="let item of activityDetails;"  name="salesName" [ngValue]="item.salesId">{{item.salesName}}</option>
+            <option [ngValue]="undefined" selected>Select Sales Name</option>
+            <option *ngFor="let item of salesDetails;"  id="salesName" name="salesName" [ngValue]="item.id">{{item.salesName}}</option>
           </select>
         </div>
       </div>
 
+      <!-- <option *ngFor="let item of activityDetails;"  name="salesId" [ngValue]="item.salesId">{{item.salesName}}</option> -->
 
 
       <div class="form-group row">
