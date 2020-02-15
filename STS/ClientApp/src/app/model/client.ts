@@ -3,6 +3,7 @@
 
 export class clientModel {
     id: number;
+    // clientId:number;
     clientName: string;
     email: string;
     contact: string;
