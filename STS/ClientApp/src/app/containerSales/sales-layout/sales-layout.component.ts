@@ -4,11 +4,10 @@ import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { SalesService } from '../../service/sales.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { salesregisterModel, changePasswordModel } from '../../model/sales';
 import { ToastrService } from 'ngx-toastr';
 import { ActivityService } from '../../service/activity.service';
 import { activityModel } from '../../model/activity';
-import { salesregisterModel, ChangePasswordModel } from '../../model/sales';
+import { salesregisterModel, changePasswordModel } from '../../model/sales';
 
 
 @Component({
@@ -33,12 +32,11 @@ export class SalesLayoutComponent {
   // salesDetails: salesregisterModel[] = [];
   // sales = new salesregisterModel();
   salesDetails: salesregisterModel = new salesregisterModel();
-
-  changePassword = new changePasswordModel();
-
   item: any;
   updateProfile: any;
-  changePassword=new ChangePasswordModel();
+
+  changePassword=new changePasswordModel();
+
 
   constructor(private router: Router,
     private salesService: SalesService,
@@ -111,41 +109,41 @@ export class SalesLayoutComponent {
       });
       return false;
     }
-   
+
     if (this.changePassword.newpassword === this.changePassword.confirmpassword) {
 
-    this.salesService.changePassword(id, this.changePassword).subscribe((data: any) => {
-      if (data.Status.code === 0) {
-        this.toastr.success('Password changed successfully', 'Successful', {
-          disableTimeOut: false
-        });
-        // this.logout();
-        // this.router.navigate(['/sales/login']);
-       
-      } else {
-        this.toastr.warning('Old Password is incorrect', 'Warning', {
-          disableTimeOut: false,
-          timeOut: 2000
-        });
-      }
-    }, (err) => {
-   
-    });
-  } else {
-    this.toastr.error('New Password & Confirm Password didnt match', 'Error', {
-      disableTimeOut: false,
-      timeOut: 2000
-    });
-  }
+      this.salesService.changePassword(id, this.changePassword).subscribe((data: any) => {
+        if (data.Status.code === 0) {
+          this.toastr.success('Password changed successfully', 'Successful', {
+            disableTimeOut: false
+          });
+          // this.logout();
+          // this.router.navigate(['/sales/login']);
+
+        } else {
+          this.toastr.warning('Old Password is incorrect', 'Warning', {
+            disableTimeOut: false,
+            timeOut: 2000
+          });
+        }
+      }, (err) => {
+
+      });
+    } else {
+      this.toastr.error('New Password & Confirm Password didnt match', 'Error', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
 
   }
 
 
-  
-passwordValidation(passwordField) {
-  var reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-  return reg.test(passwordField) == false ? false : true;
-}
+
+  passwordValidation(passwordField) {
+    var reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+    return reg.test(passwordField) == false ? false : true;
+  }
 
 
 

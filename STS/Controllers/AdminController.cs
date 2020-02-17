@@ -99,29 +99,6 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
-        //ChangeAdminPassword
-
-        [Route("changeadminPassword/{id}")]
-        [HttpPut]
-        public async Task<IActionResult> changeadminPassword(int id, [FromBody]ChangeAdminPasswordModel model)
-        {
-            Dictionary<String, Object> dctData = new Dictionary<string, object>();
-            HttpStatusCode statusCode = HttpStatusCode.OK;
-            TranStatus transaction = new TranStatus();
-            try
-            {
-                transaction = await iadmin.changeadminPassword(id, model);
-            }
-            catch (Exception ex)
-            {
-                transaction = CommonHelper.TransactionErrorHandler(ex);
-                statusCode = HttpStatusCode.BadRequest;
-            }
-            dctData.Add("Status", transaction);
-            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
-        }
-
-
         //Change Passsword
 
         [HttpPut]

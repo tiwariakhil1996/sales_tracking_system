@@ -7,8 +7,9 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { SalesService } from '../../service/sales.service';
 import { ProductService } from '../../service/product.service';
-import { registerModel, changePasswordModel } from '../../model/admin';
+import { registerModel, ChangeAdminPasswordModel } from '../../model/admin';
 import { salesregisterModel } from '../../model/sales';
+import { productModel } from '../../model/product';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,7 +28,6 @@ export class DefaultLayoutComponent {
   salesregister = new salesregisterModel();
   salesDetails: salesregisterModel[] = [];
   
-  changePassword = new changePasswordModel();
   
   item: any;
   updateProfile: any;
@@ -388,24 +388,6 @@ export class DefaultLayoutComponent {
     localStorage.removeItem('adminLogin');
   }
 
-  ChangePassword(id) {
-    // this.updateProfile.image = this.imageSrc;
-
-    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
-    this.changePassword.id = this.user.id;
-    console.log(this.changePassword.id);
-
-
-    this.adminService.ChangePassword(id, this.changePassword).subscribe((data: any) => {
-      if (data.Status.code === 0) {
-        // alert("Profile updated successfully");
-        this.toastr.success('Change Password successfully', 'Successful', {
-          disableTimeOut: false
-        });
-        // localStorage.setItem('salesLogin', JSON.stringify(data.loginDetail[0] || {}));
-      }
-    }, (err) => {
-    });
-  }
+  
 
 }

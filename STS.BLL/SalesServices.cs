@@ -104,7 +104,7 @@ namespace STS.BLL.Service
         }
 
         //Change Passoword
-        public async Task<TranStatus> changesalesPassword(int Id, ChangepasswordModel model)
+        public async Task<TranStatus> changesalesPassword(int Id, ChangePasswordModel model)
         {
             using (salesRepository = new SalesRepository())
             {

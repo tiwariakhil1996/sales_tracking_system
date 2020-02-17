@@ -98,35 +98,6 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
 
         }
-
-
-
-
-        //Change Passsword
-
-        [HttpPut]
-        [Route("changesalesPassword/{Id}")]
-        public async Task<IActionResult> changesalesPassword(int Id, [FromBody]ChangepasswordModel model)
-        {
-            Dictionary<String, Object> dctData = new Dictionary<string, object>();
-            HttpStatusCode statusCode = HttpStatusCode.OK;
-            TranStatus transaction = new TranStatus();
-            try
-            {
-
-                transaction = await isales.changesalesPassword(Id, model);
-
-            }
-            catch (Exception ex)
-            {
-                transaction = CommonHelper.TransactionErrorHandler(ex);
-                statusCode = HttpStatusCode.BadRequest;
-            }
-            dctData.Add("Status", transaction);
-            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
-        }
-
-
         //Change Status 
 
         [HttpPut]
@@ -226,16 +197,16 @@ namespace STS.Controllers
 
         //ChangePassword
 
-        [Route("changesalesPassword/{id}")]
+        [Route("changesalesPassword/{Id}")]
         [HttpPut]
-        public async Task<IActionResult> changesalesPassword(int id, [FromBody]ChangePasswordModel model)
+        public async Task<IActionResult> changesalesPassword(int Id, [FromBody]ChangePasswordModel model)
         {
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
             TranStatus transaction = new TranStatus();
             try
             {
-                transaction = await isales.changesalesPassword(id, model);
+                transaction = await isales.changesalesPassword(Id, model);
             }
             catch (Exception ex)
             {

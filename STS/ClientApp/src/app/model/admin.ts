@@ -16,10 +16,3 @@ export class ChangeAdminPasswordModel{
     newpassword:string;
     confirmpassword:string;
 }
-
-export class changePasswordModel {
-    id: number;
-    oldpassword: string;
-    newpassword: string;
-    confirmpassword: string;
-}

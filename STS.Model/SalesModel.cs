@@ -72,7 +72,7 @@ namespace STS.Model
     }
     public partial class ChangePasswordModel 
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public string oldpassword { get; set; }
         public string newpassword { get; set; }
         public string confirmpassword { get; set; }

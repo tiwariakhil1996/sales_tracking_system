@@ -100,14 +100,14 @@ namespace STS.DAL
             }
         }
         //Change Password
-        public async Task<TranStatus> changesalesPassword(int id,ChangePasswordModel model)
+        public async Task<TranStatus> changesalesPassword(int Id, ChangePasswordModel model)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 await connection.OpenAsync();
                 TranStatus transaction = new TranStatus();
                 DynamicParameters parameter = new DynamicParameters();
-                parameter.Add("@SalesId", id);
+                parameter.Add("@SalesId", Id);
                 parameter.Add("@Oldpassword", model.oldpassword);
                 parameter.Add("@NewPassword", model.newpassword);
                 parameter.Add("@Confirmpassword", model.confirmpassword);
