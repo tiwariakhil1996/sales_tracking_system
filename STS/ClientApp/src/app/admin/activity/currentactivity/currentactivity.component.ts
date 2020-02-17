@@ -11,6 +11,7 @@ import { clientModel } from '../../../model/client';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { registerModel } from '../../../model/admin';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 @Component({
   selector: 'app-currentactivity',
   templateUrl: './currentactivity.component.html',
@@ -29,11 +30,13 @@ export class CurrentactivityComponent implements OnInit {
   productDetails: productModel[] = [];
   client = new clientModel();
   clientDetails: clientModel[] = [];
+  modalRef: BsModalRef;
   constructor(private activityService: ActivityService,
     private router: Router,
     private clientService: ClientService,
     private modalService: NgbModal,
-    private salesService: SalesService,
+    private modalServices: BsModalService,
+     private salesService: SalesService,
     private productService: ProductService,
     private toastr: ToastrService) {
     this.activityList();

@@ -74,4 +74,12 @@ namespace STS.Model
         public bool IsActive { get; set; }
        
     }
+    public partial class ChangePasswordModel 
+    {
+        public int id { get; set; }
+        public string oldpassword { get; set; }
+        public string newpassword { get; set; }
+        public string confirmpassword { get; set; }
+
+    }
 }

@@ -1,7 +1,4 @@
-
-
 // admin register
-
 export class registerModel {
     id: number;
     image: string;
@@ -12,5 +9,11 @@ export class registerModel {
     mobile: string;
     password: string;
     cpassword: string;
+}
+export class ChangeAdminPasswordModel{
+    id:number;
+    oldpassword:string;
+    newpassword:string;
+    confirmpassword:string;
 }
 

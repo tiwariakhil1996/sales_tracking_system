@@ -1,5 +1,3 @@
-
-
 // sales register 
 export class salesregisterModel {
     id: number;
@@ -14,4 +12,10 @@ export class salesregisterModel {
     cpassword: string;
 
     isActive:boolean;
+}
+export class ChangePasswordModel{
+    id:number;
+    oldpassword:string;
+    newpassword:string;
+    confirmpassword:string;
 }

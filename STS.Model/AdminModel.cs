@@ -54,4 +54,12 @@ namespace STS.Model
     //    public string Password { get; set; }
 
     //}
+    public partial class ChangeAdminPasswordModel
+    {
+        public int id { get; set; }
+        public string oldpassword { get; set; }
+        public string newpassword { get; set; }
+        public string confirmpassword { get; set; }
+
+    }
 }

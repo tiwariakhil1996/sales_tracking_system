@@ -5,10 +5,11 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class SalesService {
-  
+
+
   constructor(private http: HttpClient) { }
 
- 
+
   // Sales REGISTER
 
   SalesRegisterService(data) {
@@ -25,22 +26,27 @@ export class SalesService {
     return this.http.post('/api/Sales/updateSalesProfile', data)
   }
 
+  //this api for update the password
+  ChangePassword(id: number,data:any) {
+    return this.http.put('/api/Sales/changesalesPassword/' + id,data);
+  }
+
 
   SalesList() {
     return this.http.get('/api/Sales/RegisteredSalesList');
   }
 
-  
+
   deleteSales(id: number) {
     return this.http.delete('/api/Sales/deleteSales/' + id);
   }
 
   changeStatus(id: number) {
-    return this.http.put('/api/Sales/ChangeStatusSales/' + id,null);
+    return this.http.put('/api/Sales/ChangeStatusSales/' + id, null);
   }
 
-  active_SalesList(){
+  active_SalesList() {
     return this.http.get('/api/Sales/SalesList_ActiveDeactive');
   }
-  
+
 }

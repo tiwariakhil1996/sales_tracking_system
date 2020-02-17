@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { SalesService } from '../../service/sales.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { salesregisterModel } from '../../model/sales';
 import { ToastrService } from 'ngx-toastr';
 import { ActivityService } from '../../service/activity.service';
 import { activityModel } from '../../model/activity';
+import { salesregisterModel, ChangePasswordModel } from '../../model/sales';
 
 
 @Component({
@@ -22,7 +22,7 @@ export class SalesLayoutComponent {
   modalRef: BsModalRef;
 
   
-  user = new salesregisterModel();
+  user:salesregisterModel= new salesregisterModel();
   
   activity= new activityModel();
   activityDetails: activityModel[]=[];
@@ -33,6 +33,7 @@ export class SalesLayoutComponent {
   salesDetails: salesregisterModel = new salesregisterModel();
   item: any;
   updateProfile: any;
+  changePassword=new ChangePasswordModel();
 
   constructor(private router: Router,
     private salesService: SalesService,
@@ -56,6 +57,13 @@ export class SalesLayoutComponent {
     this.updateProfile = this.salesDetails;
   }
 
+  ChangePasswords(template1: TemplateRef<any>) {
+    this.modalRef = this.modalServices.show(template1);
+    // this.salesDetails = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    // console.log(this.salesDetails);
+    // this.changePassword = this.salesDetails;
+  }
+
 
   updatesalesProfile() {
     // this.updateProfile.image = this.imageSrc;
@@ -66,6 +74,26 @@ export class SalesLayoutComponent {
           disableTimeOut: false
         });
         localStorage.setItem('salesLogin', JSON.stringify(data.loginDetail[0] || {}));
+      }
+    }, (err) => {
+    });
+  }
+
+  ChangePassword(id) {
+    // this.updateProfile.image = this.imageSrc;
+
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.changePassword.id = this.user.id;
+    console.log(this.changePassword.id);
+  
+
+    this.salesService.ChangePassword(id,this.changePassword).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        // alert("Profile updated successfully");
+        this.toastr.success('Change Password successfully', 'Successful', {
+          disableTimeOut: false
+        });
+        // localStorage.setItem('salesLogin', JSON.stringify(data.loginDetail[0] || {}));
       }
     }, (err) => {
     });

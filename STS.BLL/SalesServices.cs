@@ -102,5 +102,13 @@ namespace STS.BLL.Service
                 return await salesRepository.deleteSales(ID);
             }
         }
+        //Change Password
+        public async Task<TranStatus> changesalesPassword(int id, ChangePasswordModel model)
+        {
+            using (salesRepository = new SalesRepository())
+            {
+                return await salesRepository.changesalesPassword(id, model);
+            }
+        }
     }
 }

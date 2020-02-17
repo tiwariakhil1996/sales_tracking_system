@@ -93,7 +93,7 @@ namespace STS.DAL
         }
 
 
-        //UpdateAdminProfiel
+        //UpdateAdminProfile
         public async Task<Tuple<List<updateProfileModel>, TranStatus>> updateAdminProfile(updateProfileModel model)
         {
             using (var connection = new SqlConnection(ConnectionString))
@@ -115,6 +115,28 @@ namespace STS.DAL
                 return new Tuple<List<updateProfileModel>, TranStatus>(result.ToList(), transaction);
             }
         }
+        //Change Admin Password
+        public async Task<TranStatus> changeadminPassword(int id, ChangeAdminPasswordModel model)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@Id", id);
+                parameter.Add("@Oldpassword", model.oldpassword);
+                parameter.Add("@NewPassword", model.newpassword);
+                parameter.Add("@Confirmpassword", model.confirmpassword);
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                await connection.QueryAsync("changeadminPassword", parameter, commandType: CommandType.StoredProcedure);
+                transaction.returnMessage = parameter.Get<string>("@Message");
+                transaction.code = parameter.Get<int>("@Code");
+                return transaction;
+
+            }
+        }
+
         //public async Task<TranStatus> updateAdminProfile(updateProfileModel model)
         //{
         //    using (var connection = new SqlConnection(ConnectionString))
@@ -149,4 +171,5 @@ namespace STS.DAL
         //}
 
     }
+
 }

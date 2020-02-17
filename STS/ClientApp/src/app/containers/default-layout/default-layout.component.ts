@@ -7,9 +7,9 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { SalesService } from '../../service/sales.service';
 import { ProductService } from '../../service/product.service';
-import { registerModel } from '../../model/admin';
-import { salesregisterModel } from '../../model/sales';
+import { registerModel,ChangeAdminPasswordModel } from '../../model/admin';
 import { productModel } from '../../model/product';
+import { salesregisterModel } from '../../model/sales';
 
 @Component({
   selector: 'app-dashboard',
@@ -33,6 +33,9 @@ export class DefaultLayoutComponent {
 
   product = new productModel();
   productDetails: productModel[] = [];
+  changePassword=new ChangeAdminPasswordModel();
+  user = new registerModel();
+
 
   constructor(private router: Router,
     private adminService: AdminService,
@@ -56,6 +59,14 @@ export class DefaultLayoutComponent {
     this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
     console.log(this.adminDetails);
     this.updateProfile = this.adminDetails;
+  
+  }
+
+  ChangePasswords(template2: TemplateRef<any>) {
+    this.modalRef = this.modalServices.show(template2);
+    // this.salesDetails = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    // console.log(this.salesDetails);
+    // this.changePassword = this.salesDetails;
   }
   
 
@@ -319,6 +330,26 @@ return reg.test(passwordField) == false ? false : true;
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('adminLogin');
+  }
+
+  ChangePassword(id) {
+    // this.updateProfile.image = this.imageSrc;
+
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.changePassword.id = this.user.id;
+    console.log(this.changePassword.id);
+  
+
+    this.adminService.ChangePassword(id,this.changePassword).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        // alert("Profile updated successfully");
+        this.toastr.success('Change Password successfully', 'Successful', {
+          disableTimeOut: false
+        });
+        // localStorage.setItem('salesLogin', JSON.stringify(data.loginDetail[0] || {}));
+      }
+    }, (err) => {
+    });
   }
 
 }
