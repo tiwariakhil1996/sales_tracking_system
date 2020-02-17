@@ -46,13 +46,14 @@ namespace STS.Model
         public string Password { get; set; }
     }
 
-    //Display
-    //public partial class AdminLoginModel
-    //{
-    //    public int ID { get; set; }
-    //    public string Username { get; set; }
-    //    public string Email { get; set; }
-    //    public string Password { get; set; }
 
-    //}
+    //Change Password
+    public partial class Changeadmin_passwordModel
+    {
+        public int Id { get; set; }
+        public string Oldpassword { get; set; }
+        public string Newpassword { get; set; }
+        public string Confirmpassword { get; set; }
+
+    }
 }

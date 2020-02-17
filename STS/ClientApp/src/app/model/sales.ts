@@ -13,5 +13,14 @@ export class salesregisterModel {
     password: string;
     cpassword: string;
 
-    isActive:boolean;
+    isActive: boolean;
+}
+
+
+export class changePasswordModel {
+    id: number;
+    oldpassword: string;
+    newpassword: string;
+    confirmpassword: string;
+    modifiedby: number;
 }

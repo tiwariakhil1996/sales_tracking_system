@@ -45,33 +45,6 @@ namespace STS.Controllers
         }
 
 
-      
-        //Login
-
-        //[HttpPost]
-        //[Route("SalesLogin")]
-        //public async Task<IActionResult> SalesLogin([FromBody] SalesLoginModel model)
-        //{
-        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
-        //    HttpStatusCode statusCode = HttpStatusCode.OK;
-        //    TranStatus transaction = new TranStatus();
-        //    try
-        //    {
-
-        //        transaction = await isales.SalesLogin(model);
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        transaction = CommonHelper.TransactionErrorHandler(ex);
-        //        statusCode = HttpStatusCode.BadRequest;
-        //    }
-        //    dctData.Add("Status", transaction);
-        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
-        //}
-
-
-
         [HttpPost]
         [Route("SalesLogin")]
         public async Task<IActionResult> SalesLogin([FromBody]SalesLoginModel model)
@@ -125,6 +98,34 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
 
         }
+
+
+
+
+        //Change Passsword
+
+        [HttpPut]
+        [Route("changesalesPassword/{Id}")]
+        public async Task<IActionResult> changesalesPassword(int Id, [FromBody]ChangepasswordModel model)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+
+                transaction = await isales.changesalesPassword(Id, model);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
 
         //Change Status 
 

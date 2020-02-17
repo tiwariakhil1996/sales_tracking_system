@@ -22,9 +22,13 @@ export class SalesService {
   }
 
   UpdateSalesProfile(data) {
-    return this.http.post('/api/Sales/updateSalesProfile', data)
+    return this.http.post('/api/Sales/updateSalesProfile', data);
   }
 
+
+  changePassword(id: number, data: any) {
+    return this.http.put('/api/Sales/changesalesPassword/' + id, data);
+  }
 
   SalesList() {
     return this.http.get('/api/Sales/RegisteredSalesList');

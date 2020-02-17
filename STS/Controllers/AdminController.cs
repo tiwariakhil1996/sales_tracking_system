@@ -45,29 +45,7 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
-        //Login
-
-        //[HttpPost]
-        //[Route("AdminLogin")]
-        //public async Task<IActionResult> AdminLogin([FromBody] AdminLoginModel model)
-        //{
-        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
-        //    HttpStatusCode statusCode = HttpStatusCode.OK;
-        //    TranStatus transaction = new TranStatus();
-        //    try
-        //    {
-
-        //        transaction = await iadmin.AdminLogin(model);
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        transaction = CommonHelper.TransactionErrorHandler(ex);
-        //        statusCode = HttpStatusCode.BadRequest;
-        //    }
-        //    dctData.Add("Status", transaction);
-        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
-        //}
+  
 
 
         [HttpPost]
@@ -122,28 +100,32 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
-        // Display
 
-        //[HttpGet]
-        //[Route("AdminLogin")]
-        //public async Task<IActionResult> AdminLogin()
-        //{
-        //    TranStatus transaction = new TranStatus();
-        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
-        //    HttpStatusCode statusCode = HttpStatusCode.OK;
-        //    try
-        //    {
-        //        var adminLogin = await iadmin.AdminLogin();
-        //        dctData.Add("AdminLogin", adminLogin);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        transaction = CommonHelper.TransactionErrorHandler(ex);
-        //        statusCode = HttpStatusCode.BadRequest;
-        //    }
-        //    dctData.Add("Status", transaction);
-        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
-        //}
+        //Change Passsword
+
+        [HttpPut]
+        [Route("changeadminPassword/{Id}")]
+        public async Task<IActionResult> changeadminPassword(int Id, [FromBody]Changeadmin_passwordModel model)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+
+                transaction = await iadmin.changeadminPassword(Id, model);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+
 
     }
 }

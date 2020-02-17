@@ -25,5 +25,9 @@ namespace STS.BLL.Interface
 
         //Display
         //Task<List<AdminLoginModel>> AdminLogin();
+
+
+        //Change Password
+        Task<TranStatus> changeadminPassword(int Id, Changeadmin_passwordModel model);
     }
 }

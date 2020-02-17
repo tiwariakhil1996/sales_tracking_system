@@ -60,6 +60,7 @@ import { SalesService } from './sales.service';
 import { SalesGuard } from './sales.guard';
 // import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { AgmCoreModule } from '@agm/core';
+import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password.component';
 
 @NgModule({
   imports: [
@@ -103,7 +104,8 @@ import { AgmCoreModule } from '@agm/core';
     LoginComponent,
     RegisterComponent,
     SalesRegisterComponent,
-    SalesLoginComponent
+    SalesLoginComponent,
+    ForgotPasswordComponent
     ],
 
   // providers: [{

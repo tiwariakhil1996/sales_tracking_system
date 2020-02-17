@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { SalesService } from '../../service/sales.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { salesregisterModel } from '../../model/sales';
+import { salesregisterModel, changePasswordModel } from '../../model/sales';
 import { ToastrService } from 'ngx-toastr';
 import { ActivityService } from '../../service/activity.service';
 import { activityModel } from '../../model/activity';
@@ -20,16 +20,20 @@ export class SalesLayoutComponent {
   imageSrc: string = '';
   modalRef: BsModalRef;
 
-  
+
   user = new salesregisterModel();
-  
-  activity= new activityModel();
-  activityDetails: activityModel[]=[];
+
+  activity = new activityModel();
+  activityDetails: activityModel[] = [];
   totalActivity: any;
-  
+
   loginDetail = new salesregisterModel();
   // salesDetails: salesregisterModel[] = [];
+  // sales = new salesregisterModel();
   salesDetails: salesregisterModel = new salesregisterModel();
+
+  changePassword = new changePasswordModel();
+
   item: any;
   updateProfile: any;
 
@@ -40,7 +44,11 @@ export class SalesLayoutComponent {
     private toastr: ToastrService,
     private activityService: ActivityService) {
 
-      this.activityList();
+    this.activityList();
+
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.changePassword.id = this.user.id;
+    console.log(this.changePassword.id);
   }
 
   toggleMinimize(e) {
@@ -55,6 +63,9 @@ export class SalesLayoutComponent {
     this.updateProfile = this.salesDetails;
   }
 
+  changePasswordModal(template1: TemplateRef<any>) {
+    this.modalRef = this.modalServices.show(template1);
+  }
 
   updatesalesProfile() {
     // this.updateProfile.image = this.imageSrc;
@@ -69,6 +80,70 @@ export class SalesLayoutComponent {
     }, (err) => {
     });
   }
+
+
+
+  changepassword(id: number) {
+
+    let strError = '';
+
+    if (!this.changePassword.newpassword) {
+      strError += '- Please enter valid password';
+    }
+    else {
+      if (!this.passwordValidation(this.changePassword.newpassword)) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += strError = '- Your password must be between 6 and 20 characters _at least one uppercase and one lowercase letter_one number digit_ one special character like $, #, @, !,%,^,&,*,(,)   ';
+      }
+    }
+
+    if (strError !== '') {
+      this.toastr.warning(strError, 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000,
+        enableHtml: true,
+        progressBar: true,
+        closeButton: true,
+      });
+      return false;
+    }
+   
+    if (this.changePassword.newpassword === this.changePassword.confirmpassword) {
+
+    this.salesService.changePassword(id, this.changePassword).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        this.toastr.success('Password changed successfully', 'Successful', {
+          disableTimeOut: false
+        });
+        // this.logout();
+        // this.router.navigate(['/sales/login']);
+       
+      } else {
+        this.toastr.warning('Old Password is incorrect', 'Warning', {
+          disableTimeOut: false,
+          timeOut: 2000
+        });
+      }
+    }, (err) => {
+   
+    });
+  } else {
+    this.toastr.error('New Password & Confirm Password didnt match', 'Error', {
+      disableTimeOut: false,
+      timeOut: 2000
+    });
+  }
+
+  }
+
+
+  
+passwordValidation(passwordField) {
+  var reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+  return reg.test(passwordField) == false ? false : true;
+}
+
+
 
   handleFileInput(fileList: FileList) {
     const preview = document.getElementById('photos-preview');
@@ -102,7 +177,7 @@ export class SalesLayoutComponent {
           this.activityDetails = data.each_sales_activityList;
           console.log(this.activityDetails);
           this.totalActivity = this.activityDetails.length;
-          console.log( this.totalActivity );
+          console.log(this.totalActivity);
 
         }
       }

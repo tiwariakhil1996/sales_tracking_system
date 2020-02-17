@@ -35,6 +35,9 @@ namespace STS.BLL.Interface
 
         //Delete
         Task<TranStatus> deleteSales(int ID);
+
+        //Change Password
+        Task<TranStatus> changesalesPassword(int Id, ChangepasswordModel model);
     }
 }
 
