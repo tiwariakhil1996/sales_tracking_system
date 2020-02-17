@@ -25,37 +25,38 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
 
   }
- 
+
 
   submitLogin() {
-  
 
-  this.adminService.AdminLogin(this.loginDetail).subscribe((data: any) => {
-    if (data.Status.code === 0) {
-      localStorage.setItem('adminLogin', JSON.stringify(data.loginDetail[0] || {}));
-      // alert('Admin Login Successfully');
+
+    this.adminService.AdminLogin(this.loginDetail).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        localStorage.setItem('adminLogin', JSON.stringify(data.loginDetail[0] || {}));
+        // alert('Admin Login Successfully');
 
         this.toastr.success('Login Successful', 'Successful', {
           disableTimeOut: false
         });
 
-      this.router.navigate(['/admin/dashboard']);
-
-    }
-    else {
-      // alert('UnSuccessfully');
-      this.toastr.warning('Please enter valid username and password', 'Warning', {
-        disableTimeOut: false
-      });
-    }
-  }, (err) => {
-  });
+        this.router.navigate(['/admin/dashboard']);
+      } else {
+        // alert('UnSuccessfully');
+        this.toastr.warning('Please enter valid username and password', 'Warning', {
+          disableTimeOut: false
+        });
+      }
+    }, (err) => {
+    });
   }
-  
+
   logout() {
     localStorage.removeItem('adminLogin');
   }
-  
+
+  forgotPassword() {
+    this.router.navigate(['/admin/forgot-password']);
+  }
 
 
 }

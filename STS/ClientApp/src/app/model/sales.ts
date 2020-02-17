@@ -11,11 +11,14 @@ export class salesregisterModel {
     password: string;
     cpassword: string;
 
-    isActive:boolean;
+    isActive: boolean;
 }
-export class ChangePasswordModel{
-    id:number;
-    oldpassword:string;
-    newpassword:string;
-    confirmpassword:string;
+
+
+export class changePasswordModel {
+    id: number;
+    oldpassword: string;
+    newpassword: string;
+    confirmpassword: string;
+    modifiedby: number;
 }

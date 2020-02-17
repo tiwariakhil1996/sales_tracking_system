@@ -19,6 +19,7 @@ import { SalesRegisterComponent } from './sales/register/register.component';
 import { SalesLoginComponent } from './sales/login/login.component';
 import { AuthGuard } from './auth.guard';
 import { SalesGuard } from './sales.guard';
+import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password.component';
 
 
 export const routes: Routes = [
@@ -65,6 +66,16 @@ export const routes: Routes = [
       title: 'Register Page'
     }
   },
+
+
+  {
+    path: 'admin/forgot-password',
+    component: ForgotPasswordComponent,
+    data: {
+      title: 'Forgot Password Page'
+    }
+  },
+
 
   {
     path: 'admin',

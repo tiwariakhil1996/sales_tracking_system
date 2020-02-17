@@ -121,8 +121,10 @@
         </div>
       </ng-template>
 
-        <!-- <a class="dropdown-item" href="#"><i class="fa fa-file"></i> Projects<span
-            class="badge badge-primary">42</span></a> -->
+      <a class="dropdown-item" data-toggle="modal" data-toggle="modal"
+      (click)="changePasswordModal(template2)"><i class="fa fa-user"></i>Change Password</a>
+
+        <a class="dropdown-item" href="#"><i class="fa fa-file"></i> Projects<span class="badge badge-primary">42</span></a>
         <div class="divider"></div>
         <a class="dropdown-item" href="/admin/register"><i class="fa fa-building"></i> Admin Register</a>
         <a class="dropdown-item" href="/sales/register"><i class="fa fa-building"></i> Sales Register</a>
@@ -133,8 +135,8 @@
 
         <!--          SALES REGISTER       -->
 
-
-        <ng-template #template1>
+<!-- 
+        <ng-template #template1 >
           <div class="modal-header">
             <div class="card-header">
               <strong>Sales Register</strong>
@@ -189,7 +191,48 @@
             </div>
 
           </div>
-        </ng-template>
+        </ng-template> -->
+
+
+
+
+        
+<!-- change password -->
+<ng-template #template2>
+  <div class="modal-header">
+    <div class="card-header">
+      <strong>Change Password</strong>
+    </div>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="oldpassword">Old Password</label>
+        <input type="password" class="form-control" id="oldpassword" placeholder="Old Password" name="oldpassword"  [(ngModel)]="changePassword.oldpassword">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="oldpassword">New Password</label>
+        <input type="password" class="form-control" id="newpassword" placeholder="New Password" name="newpassword"  [(ngModel)]="changePassword.newpassword">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="confirmpassword">Confirm Password</label>
+        <input type="password" class="form-control" id="confirmpassword" placeholder="Confirm Password" name="confirmpassword" [(ngModel)]="changePassword.confirmpassword">
+      </div>
+    </div>
+    <div class="card-footer">
+      <button type="submit" class="btn btn-sm btn-success" (click)="changepassword(changePassword.id)" ><i
+          class="fa fa-dot-circle-o"></i>Submit</button>
+    </div>
+  </div>
+</ng-template>
+
 
 
 
@@ -241,47 +284,5 @@
   <span class="ml-auto">Powered by <a href="admin/dashboard">STS</a></span>
 </app-footer>
 
-<!-- change password -->
-<ng-template #template2>
-  <div class="modal-header">
-    <div class="card-header">
-      <strong>Change Password</strong>
-    </div>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="oldpassword">Old Password</label>
-        <input [(ngModel)]="changePassword.oldpassword" type="password"class="form-control" id="oldpassword" placeholder="Old Password"
-         name="oldpassword">
-      </div>
-    </div>
 
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="oldpassword">New Password</label>
-        <input type="password" [(ngModel)]="changePassword.newpassword" class="form-control" id="newpassword" placeholder="New Password"
-         name="newpassword">
-      </div>
-    </div>
 
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="confirmpassword">Confirm Password</label>
-        <input type="password" [(ngModel)]="changePassword.confirmpassword" class="form-control" id="confirmpassword" placeholder="Confirm Password"
-         name="confirmpassword">
-      </div>
-    </div>
-
-    <div class="card-footer">
-      <button type="submit" class="btn btn-success" (click)="ChangePassword(changePassword.id)"><i
-          class="fa fa-dot-circle-o"></i>Save</button>
-          <button type="button" class="btn btn-danger" data-dismiss="modal-body"
-          (click)="modalRef.hide()">Cancel</button>
-    </div>
-  </div>
-
-</ng-template>

@@ -7,8 +7,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { SalesService } from '../../service/sales.service';
 import { ProductService } from '../../service/product.service';
-import { registerModel, ChangeAdminPasswordModel } from '../../model/admin';
-import { productModel } from '../../model/product';
+import { registerModel, changePasswordModel } from '../../model/admin';
 import { salesregisterModel } from '../../model/sales';
 
 @Component({
@@ -27,7 +26,9 @@ export class DefaultLayoutComponent {
 
   salesregister = new salesregisterModel();
   salesDetails: salesregisterModel[] = [];
-
+  
+  changePassword = new changePasswordModel();
+  
   item: any;
   updateProfile: any;
 
@@ -48,6 +49,10 @@ export class DefaultLayoutComponent {
     this.changePassword.id = this.user.id;
     console.log(this.changePassword.id);
 
+      this.register = JSON.parse(localStorage.getItem('adminLogin')) || {};
+      this.changePassword.id = this.register.id;
+      console.log(this.changePassword.id);
+
   }
 
   toggleMinimize(e) {
@@ -65,14 +70,62 @@ export class DefaultLayoutComponent {
 
   }
 
-  ChangePasswords(template2: TemplateRef<any>) {
+
+  changePasswordModal(template2: TemplateRef<any>) {
     this.modalRef = this.modalServices.show(template2);
-    // this.salesDetails = JSON.parse(localStorage.getItem('salesLogin')) || {};
-    // console.log(this.salesDetails);
-    // this.changePassword = this.salesDetails;
   }
 
+  changepassword(id: number) {
 
+    let strError = '';
+
+    if (!this.changePassword.newpassword) {
+      strError += '- Please enter valid password';
+    }
+    else {
+      if (!this.passwordValidation(this.changePassword.newpassword)) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += strError = '- Your password must be between 6 and 20 characters _at least one uppercase and one lowercase letter_one number digit_ one special character like $, #, @, !,%,^,&,*,(,)   ';
+      }
+    }
+
+    if (strError !== '') {
+      this.toastr.warning(strError, 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000,
+        enableHtml: true,
+        progressBar: true,
+        closeButton: true,
+      });
+      return false;
+    }
+
+
+
+    if (this.changePassword.newpassword === this.changePassword.confirmpassword) {
+
+    this.adminService.changePassword(id, this.changePassword).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        this.toastr.success('Password changed successfully', 'Successful', {
+          disableTimeOut: false
+        });
+      } else {
+        this.toastr.warning('Old Password is incorrect', 'Warning', {
+          disableTimeOut: false,
+          timeOut: 2000
+        });
+      }
+    }, (err) => {
+   
+    });
+  } else {
+    this.toastr.error('New Password & Confirm Password didnt match', 'Error', {
+      disableTimeOut: false,
+      timeOut: 2000
+    });
+  }
+
+  }
 
 
   updateadminProfile() {

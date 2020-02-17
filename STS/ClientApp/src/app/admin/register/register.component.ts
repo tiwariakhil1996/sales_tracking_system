@@ -97,8 +97,6 @@ export class RegisterComponent  implements OnInit{
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Your password must be between 6 and 20 characters _at least one uppercase and one lowercase letter_one number digit_ one special character like $, #, @, !,%,^,&,*,(,)   ';
       }
-     
-     
     }
 
 

@@ -186,6 +186,30 @@ namespace STS.DAL
 
             }
         }
-       
+
+
+        //Change Password
+        public async Task<TranStatus> changesalesPassword(int Id, ChangepasswordModel model)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@SalesId", Id);
+                parameter.Add("@OldPassword", model.Oldpassword);
+                parameter.Add("@NewPassword", model.Newpassword);
+                parameter.Add("@Confirmpassword", model.Confirmpassword);
+             
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                await connection.QueryAsync("changesalesPassword", parameter, commandType: CommandType.StoredProcedure);
+                transaction.returnMessage = parameter.Get<string>("@Message");
+                transaction.code = parameter.Get<int>("@Code");
+                return transaction;
+
+            }
+        }
+
     }
 }

@@ -25,9 +25,8 @@ export class AdminService {
     return this.http.post('/api/Admin/updateAdminProfile', data)
   }
 
-   //this api for update the password
-   ChangePassword(id: number,data:any) {
-    return this.http.put('/api/Admin/changeadminPassword/' + id,data);
+  changePassword(id: number, data: any) {
+    return this.http.put('/api/Admin/changeadminPassword/' + id, data);
   }
 
 

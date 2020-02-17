@@ -79,5 +79,15 @@ namespace STS.BLL.Service
         //        return await adminRepository.AdminLogin();
         //    }
         //}
+
+
+        //Change Passoword
+        public async Task<TranStatus> changeadminPassword(int Id, Changeadmin_passwordModel model)
+        {
+            using (adminRepository = new AdminRepository())
+            {
+                return await adminRepository.changeadminPassword(Id, model);
+            }
+        }
     }
 }
