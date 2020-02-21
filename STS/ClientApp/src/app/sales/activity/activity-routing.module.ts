@@ -29,14 +29,14 @@ const routes: Routes = [
         path: 'addactivity',
         component: AddactivityComponent,
         data: {
-          title: 'Add_Activity'
+          title: 'Add Activity'
         }
       },
       {
         path: 'currentactivity',
         component: CurrentactivityComponent,
         data: {
-          title: 'Current_Activity'
+          title: 'Current Activity'
         }
       },
     ]

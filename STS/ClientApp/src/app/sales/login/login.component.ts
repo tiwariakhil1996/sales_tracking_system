@@ -6,7 +6,8 @@ import { salesregisterModel } from '../../model/sales';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: 'login.component.html'
+  templateUrl: 'login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class SalesLoginComponent implements OnInit {
 

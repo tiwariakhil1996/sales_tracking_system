@@ -46,7 +46,7 @@ export class CurrentactivityComponent implements OnInit {
     this.productList();
     this.clientList();
     this.SalesList();
-
+    // this.eachactivityList();
   }
 
   ngOnInit() {
@@ -86,6 +86,23 @@ export class CurrentactivityComponent implements OnInit {
     });
   }
 
+  // eachactivityList() {
+  //   this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+  //   this.activity.userid = this.user.id;
+  //   console.log(this.activity.userid);
+
+  //   this.activityService.each_admin_activityList(this.activity).subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.each_admin_activityList) {
+  //         this.activityDetails = data.each_admin_activityList;
+  //         console.log(this.activityDetails);
+
+  //       }
+  //     }
+  //   }, (err) => {
+
+  //   });
+  // }
 
   // Edit
   openupdatemodal(content, item) {

@@ -24,6 +24,23 @@ namespace STS.BLL.Service
             }
         }
 
+        //public Task<Tuple<List<ActivityModel>, TranStatus>> addActivity(ActivityModel model)
+        //{
+        //    using (activityRepository = new ActivityRepository())
+        //    {
+        //        return activityRepository.addActivity(model);
+        //    }
+        //}
+
+
+        // Latest Added Activity
+        public async Task<List<LatestAddedActivityModel>> addActivity()
+        {
+            using (activityRepository = new ActivityRepository())
+            {
+                return await activityRepository.addActivity();
+            }
+        }
 
         //Display
         public async Task<List<ActivityListModel>> ActivityList()
@@ -31,6 +48,15 @@ namespace STS.BLL.Service
             using (activityRepository = new ActivityRepository())
             {
                 return await activityRepository.ActivityList();
+            }
+        }
+
+        //Display
+        public async Task<List<ActivityList_while_addingModel>> ActivityList_while_adding()
+        {
+            using (activityRepository = new ActivityRepository())
+            {
+                return await activityRepository.ActivityList_while_adding();
             }
         }
 
@@ -43,6 +69,25 @@ namespace STS.BLL.Service
                 return await activityRepository.each_sales_activityList(model);
             }
         }
+
+        // Display each admin List Individually
+        public async Task<List<admin_ActivityListModel>> each_admin_activityList(admin_ActivityListModel model)
+        {
+            using (activityRepository = new ActivityRepository())
+            {
+                return await activityRepository.each_admin_activityList(model);
+            }
+
+        }
+        // Count Assigned list on bell  notification 
+        public async Task<List<newNotificationActivityLisModel>> assigned_activityList(newNotificationActivityLisModel model)
+        {
+            using (activityRepository = new ActivityRepository())
+            {
+                return await activityRepository.assigned_activityList(model);
+            }
+        }
+
 
         //Update
         public async Task<TranStatus> updateActivity(int Aid, ActivityListModel model)

@@ -226,8 +226,6 @@ validateMobile(mobileField) {
 
   onCountryChange(cid) {
     this.stateList(cid);
-
-
   }
 
   onStatechange(sid) {

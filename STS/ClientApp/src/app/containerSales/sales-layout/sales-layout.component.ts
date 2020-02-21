@@ -7,7 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { salesregisterModel, changePasswordModel } from '../../model/sales';
 import { ToastrService } from 'ngx-toastr';
 import { ActivityService } from '../../service/activity.service';
-import { activityModel } from '../../model/activity';
+import { activityModel, newactivityModel } from '../../model/activity';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,11 +20,16 @@ export class SalesLayoutComponent {
   imageSrc: string = '';
   modalRef: BsModalRef;
 
+  newactivity = new newactivityModel();
+  newactivityDetails: newactivityModel[] = [];
+
+  assignedActivity : any;
 
   user = new salesregisterModel();
 
   activity = new activityModel();
   activityDetails: activityModel[] = [];
+
   totalActivity: any;
 
   loginDetail = new salesregisterModel();
@@ -45,6 +50,7 @@ export class SalesLayoutComponent {
     private activityService: ActivityService) {
 
     this.activityList();
+    this.newactivityList();
 
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.changePassword.id = this.user.id;
@@ -107,41 +113,40 @@ export class SalesLayoutComponent {
       });
       return false;
     }
-   
+
     if (this.changePassword.newpassword === this.changePassword.confirmpassword) {
 
-    this.salesService.changePassword(id, this.changePassword).subscribe((data: any) => {
-      if (data.Status.code === 0) {
-        this.toastr.success('Password changed successfully', 'Successful', {
-          disableTimeOut: false
-        });
-        // this.logout();
-        // this.router.navigate(['/sales/login']);
-       
-      } else {
-        this.toastr.warning('Old Password is incorrect', 'Warning', {
-          disableTimeOut: false,
-          timeOut: 2000
-        });
-      }
-    }, (err) => {
-   
-    });
-  } else {
-    this.toastr.error('New Password & Confirm Password didnt match', 'Error', {
-      disableTimeOut: false,
-      timeOut: 2000
-    });
-  }
+      this.salesService.changePassword(id, this.changePassword).subscribe((data: any) => {
+        if (data.Status.code === 0) {
+          this.toastr.success('Password changed successfully', 'Successful', {
+            disableTimeOut: false
+          });
+          this.changePassword = new changePasswordModel();
+
+        } else {
+          this.toastr.warning('Old Password is incorrect', 'Warning', {
+            disableTimeOut: false,
+            timeOut: 2000
+          });
+        }
+      }, (err) => {
+
+      });
+    } else {
+      this.toastr.error('New Password & Confirm Password didnt match', 'Error', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
 
   }
 
 
-  
-passwordValidation(passwordField) {
-  var reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-  return reg.test(passwordField) == false ? false : true;
-}
+
+  passwordValidation(passwordField) {
+    var reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+    return reg.test(passwordField) == false ? false : true;
+  }
 
 
 
@@ -178,13 +183,35 @@ passwordValidation(passwordField) {
           console.log(this.activityDetails);
           this.totalActivity = this.activityDetails.length;
           console.log(this.totalActivity);
-
+          
         }
       }
     }, (err) => {
 
     });
   }
+
+
+  newactivityList() {
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.activity.userid = this.user.id;
+    console.log(this.activity.userid);
+
+    this.activityService.assigned_activityList(this.activity).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.assigned_activityList) {
+          this.newactivityDetails = data.assigned_activityList;
+          console.log(this.newactivityDetails);
+          this.assignedActivity = this.newactivityDetails.length;
+          console.log(this.assignedActivity);
+          
+        }
+      }
+    }, (err) => {
+
+    });
+  }
+
 
   logout() {
     // remove user from local storage to log user out

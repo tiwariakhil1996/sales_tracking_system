@@ -20,6 +20,14 @@ namespace STS.Model
 
     }
 
+    public partial class ProductPriceModel
+    {
+        public int Id { get; set; }
+        public string Price { get; set; }
+       
+    }
+
+
     //ProductList
 
     public partial class ProductListModel

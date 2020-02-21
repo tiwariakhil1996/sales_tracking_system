@@ -103,6 +103,7 @@ export class DefaultLayoutComponent {
         this.toastr.success('Password changed successfully', 'Successful', {
           disableTimeOut: false
         });
+        this.changePassword=new changePasswordModel();
       } else {
         this.toastr.warning('Old Password is incorrect', 'Warning', {
           disableTimeOut: false,
