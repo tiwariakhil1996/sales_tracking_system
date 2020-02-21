@@ -25,6 +25,8 @@ export class activityModel {
     user_id: number;
     status: number;
     statusname: string;
+    price:string;
+
 }
 export class ActivityhistoryModel{
     id:number;

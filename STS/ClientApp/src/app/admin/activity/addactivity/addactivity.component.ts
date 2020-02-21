@@ -36,6 +36,7 @@ export class AddactivityComponent implements OnInit {
     // this.clientList();
     this.active_ClientList();
     this.SalesList();
+    this.activityList();
   }
   ngOnInit() {
   }
@@ -118,5 +119,15 @@ export class AddactivityComponent implements OnInit {
   }
   viewActivityForm() {
     this.router.navigate(['/admin/activity/currentactivity']);
+  }
+  activityList() {
+    this.activityService.activityList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.ActivityList) {
+          this.activityDetails = data.ActivityList;
+        }
+      }
+    }, (err) => {
+    });
   }
 }

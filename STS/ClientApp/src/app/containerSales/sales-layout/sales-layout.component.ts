@@ -119,6 +119,7 @@ export class SalesLayoutComponent {
           });
           // this.logout();
           // this.router.navigate(['/sales/login']);
+          this.changePassword=new changePasswordModel();
 
         } else {
           this.toastr.warning('Old Password is incorrect', 'Warning', {

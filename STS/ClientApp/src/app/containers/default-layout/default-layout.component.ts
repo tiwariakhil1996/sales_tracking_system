@@ -27,8 +27,8 @@ export class DefaultLayoutComponent {
 
   salesregister = new salesregisterModel();
   salesDetails: salesregisterModel[] = [];
-  
-  
+
+
   item: any;
   updateProfile: any;
 
@@ -49,9 +49,9 @@ export class DefaultLayoutComponent {
     this.changePassword.id = this.user.id;
     console.log(this.changePassword.id);
 
-      this.register = JSON.parse(localStorage.getItem('adminLogin')) || {};
-      this.changePassword.id = this.register.id;
-      console.log(this.changePassword.id);
+    this.register = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.changePassword.id = this.register.id;
+    console.log(this.changePassword.id);
 
   }
 
@@ -104,26 +104,30 @@ export class DefaultLayoutComponent {
 
     if (this.changePassword.newpassword === this.changePassword.confirmpassword) {
 
-    this.adminService.changePassword(id, this.changePassword).subscribe((data: any) => {
-      if (data.Status.code === 0) {
-        this.toastr.success('Password changed successfully', 'Successful', {
-          disableTimeOut: false
-        });
-      } else {
-        this.toastr.warning('Old Password is incorrect', 'Warning', {
-          disableTimeOut: false,
-          timeOut: 2000
-        });
-      }
-    }, (err) => {
-   
-    });
-  } else {
-    this.toastr.error('New Password & Confirm Password didnt match', 'Error', {
-      disableTimeOut: false,
-      timeOut: 2000
-    });
-  }
+      this.adminService.changePassword(id, this.changePassword).subscribe((data: any) => {
+        if (data.Status.code === 0) {
+          this.toastr.success('Password changed successfully', 'Successful', {
+            disableTimeOut: false
+          });
+          this.logout();
+          this.router.navigate(['/admin/login']);
+          this.changePassword=new ChangeAdminPasswordModel();
+
+        } else {
+          this.toastr.warning('Old Password is incorrect', 'Warning', {
+            disableTimeOut: false,
+            timeOut: 2000
+          });
+        }
+      }, (err) => {
+
+      });
+    } else {
+      this.toastr.error('New Password & Confirm Password didnt match', 'Error', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
 
   }
 
@@ -388,6 +392,6 @@ export class DefaultLayoutComponent {
     localStorage.removeItem('adminLogin');
   }
 
-  
+
 
 }
