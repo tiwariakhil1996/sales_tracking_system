@@ -26,14 +26,14 @@ export class DashboardComponent implements OnInit {
 
   product = new productModel();
   productDetails: productModel[] = [];
-  totalProduct:any ;
+  totalProduct: any;
 
-  sales=new salesregisterModel();
-  salesDetails: salesregisterModel[]=[];
-  totalSales:any;
+  sales = new salesregisterModel();
+  salesDetails: salesregisterModel[] = [];
+  totalSales: any;
 
-  activity= new activityModel();
-  activityDetails: activityModel[]=[];
+  activity = new activityModel();
+  activityDetails: activityModel[] = [];
   totalActivity: any;
 
   // lineChart1
@@ -420,7 +420,7 @@ export class DashboardComponent implements OnInit {
         if (data.ProductList) {
           this.productDetails = data.ProductList;
           this.totalProduct = this.productDetails.length;
-          console.log( this.totalProduct );
+          console.log(this.totalProduct);
         }
       }
     }, (err) => {
@@ -434,8 +434,8 @@ export class DashboardComponent implements OnInit {
         if (data.ClientList) {
           this.clientDetails = data.ClientList;
           // console.log( this.clientDetails.length);
-           this.totalClient = this.clientDetails.length;
-           console.log( this.totalClient );
+          this.totalClient = this.clientDetails.length;
+          console.log(this.totalClient);
         }
       }
     }, (err) => {
@@ -448,7 +448,7 @@ export class DashboardComponent implements OnInit {
         if (data.RegisteredSalesList) {
           this.salesDetails = data.RegisteredSalesList;
           this.totalSales = this.salesDetails.length;
-          console.log( this.totalSales );
+          console.log(this.totalSales);
         }
       }
     }, (err) => {
@@ -462,7 +462,7 @@ export class DashboardComponent implements OnInit {
         if (data.ActivityList) {
           this.activityDetails = data.ActivityList;
           this.totalActivity = this.activityDetails.length;
-          console.log( this.totalActivity );
+          console.log(this.totalActivity);
         }
       }
     }, (err) => {
@@ -477,12 +477,7 @@ export class DashboardComponent implements OnInit {
       this.mainChartData2.push(this.random(80, 100));
       this.mainChartData3.push(65);
     }
-    
+
   }
-
-
-    // this.totalProduct = this.productDetails.length;
-    // this.totalActivity = this.activityDetails.length;
-    // this.totalSales = this.salesDetails.length;
 
 }

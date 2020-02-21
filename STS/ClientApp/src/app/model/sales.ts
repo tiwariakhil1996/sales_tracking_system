@@ -13,8 +13,6 @@ export class salesregisterModel {
 
     isActive: boolean;
 }
-
-
 export class changePasswordModel {
     id: number;
     oldpassword: string;

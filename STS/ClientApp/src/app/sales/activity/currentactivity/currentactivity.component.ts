@@ -33,8 +33,8 @@ export class CurrentactivityComponent implements OnInit {
   client = new clientModel();
   clientDetails: clientModel[] = [];
 
-  activityhistory=new ActivityhistoryModel();
-  activityhistorys:ActivityhistoryModel[]=[];
+  activityhistory = new ActivityhistoryModel();
+  activityhistorys: ActivityhistoryModel[] = [];
 
 
 
@@ -45,10 +45,7 @@ export class CurrentactivityComponent implements OnInit {
     private productService: ProductService,
     private router: Router,
     private toastr: ToastrService) {
-    // this.activityList();
-    // this.productList();
-    // this.clientList();
-    // this.SalesList();
+
     this.activityList();
   }
 
@@ -62,7 +59,7 @@ export class CurrentactivityComponent implements OnInit {
     // if (confirm('Are you sure to delete this record ?') === true) {
     this.activityService.deleteActivity(aid).subscribe(data => {
       // this.activityService.activityList();
-       this.activityList();
+      this.activityList();
     });
     // }
     this.toastr.success('Activity is deleted Successful', 'Successful', {
@@ -125,10 +122,10 @@ export class CurrentactivityComponent implements OnInit {
   }
 
   open(content1) {
-    this.modalService.open(content1, {ariaLabelledBy: 'modal-basic-title'})
+    this.modalService.open(content1, { ariaLabelledBy: 'modal-basic-title' })
   }
 
-  
+
   // onEdit(aid: number) {
   //   this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
   //   this.activity.modifiedby = this.user.id;
@@ -206,7 +203,7 @@ export class CurrentactivityComponent implements OnInit {
           timeOut: 2000
         });
       }
-     
+
       this.activityList();
     }, (err) => {
     });

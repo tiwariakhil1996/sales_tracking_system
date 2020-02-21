@@ -14,7 +14,8 @@
           <div class="form-group row">
             <div class="col-sm-6">
               <label class="text-input">Category</label>
-              <select name="cid" class="form-control" [(ngModel)]="product.cid" (click)="onCategoryChange($event.target.value)">
+              <select name="cid" class="form-control" [(ngModel)]="product.cid"
+                (click)="onCategoryChange($event.target.value)">
                 <option value="0" selected>Select category</option>
                 <option *ngFor="let item of categoryDetails;" name="cname" value={{item.cid}}>{{item.cname}}</option>
               </select>
@@ -77,7 +78,7 @@
             Submit</button>
           <button type="reset" class="btn btn-sm btn-danger" (click)="resetForm()"><i class="fa fa-ban"></i>
             Reset</button>
-            <button type="submit" class="btn btn-sm btn-primary" (click)="viewProductForm()">View</button>
+          <button type="submit" class="btn btn-sm btn-primary" (click)="viewProductForm()">View</button>
 
         </div>
       </div>

@@ -1,6 +1,4 @@
-
 // client 
-
 export class clientModel {
     id: number;
     // clientId:number;
@@ -17,8 +15,8 @@ export class clientModel {
     cityid: number;
     cityname: string;
     postalCode: number;
-    isActive:boolean;
+    isActive: boolean;
 
-    createdby:number;
+    createdby: number;
     modifiedby: number;
 }

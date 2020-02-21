@@ -1,10 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -51,11 +49,10 @@ import { SalesRegisterComponent } from './sales/register/register.component';
 import { SalesLayoutComponent } from './containerSales';
 import { SalesLoginComponent } from './sales/login/login.component';
 import { ModalModule } from 'ngx-bootstrap';
-import { NgbModal, NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
-import { from } from 'rxjs';
 import { SalesService } from './sales.service';
 import { SalesGuard } from './sales.guard';
 // import { TooltipModule } from 'ngx-bootstrap/tooltip';
@@ -118,11 +115,6 @@ import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password
     ForgotPasswordComponent
     ],
 
-  // providers: [{
-  //   provide: LocationStrategy,
-  //   useClass: HashLocationStrategy
-  // }],
-  // schemas:  [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [AuthGuard, AuthService, SalesGuard, SalesService],
   bootstrap: [AppComponent]
 })

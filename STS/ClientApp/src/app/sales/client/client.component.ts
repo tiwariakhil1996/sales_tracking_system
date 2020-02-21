@@ -14,26 +14,4 @@ export class ClientComponent implements OnInit {
   ngOnInit() {
   }
 
-  // client = new clientModel();
-
-  // clientDetails: clientModel[] = [];
-  // constructor(private router: Router, private clientService: CommonService){
-  //   // this.Login();
-
-
-  // }
-  
-
-  // submitForm() {
-
-  //   this.clientService.addClient(this.client).subscribe((data: any) => {
-  //     if (data.Status.code === 0) {
-  //       alert('Registered sucesfully');
-  //     }
-  //   }, (err) => {
-
-
-  //   });
-  // } 
-
 }

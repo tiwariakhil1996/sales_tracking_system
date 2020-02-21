@@ -36,7 +36,7 @@ export class AddcategoryComponent implements OnInit {
           disableTimeOut: false
         });
         this.categoryList();
-      }  else {
+      } else {
         this.toastr.warning('Cannot add duplicate Category', 'Info', {
           disableTimeOut: false,
           timeOut: 2000

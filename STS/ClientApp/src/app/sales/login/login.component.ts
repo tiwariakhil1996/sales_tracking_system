@@ -10,18 +10,13 @@ import { salesregisterModel } from '../../model/sales';
 })
 export class SalesLoginComponent implements OnInit {
 
-  // formdata;
-  // message: string;
-  // loginDetail: any = new loginModel();
-  // registerDetails: registerModel[] = [];
-  // constructor(private router: Router, private toastr: ToastrService) { }
+  
 
   title = 'STS';
   loginDetail = new salesregisterModel();
   salesDetails: salesregisterModel[] = [];
 
   constructor(private router: Router, private salesService: SalesService,private toastr: ToastrService) {
-    // this.registerList();
      this.logout();
 
   }
@@ -85,18 +80,7 @@ export class SalesLoginComponent implements OnInit {
     this.router.navigate(['/register']);
   }
 
-  // registerList(){
-  //   this.salesService.SalesRegisterList().subscribe((data: any) => {
-  //     if (data.Status.code === 0) {
-  //       if (data.RegisterSalesList) {
-  //         this.salesDetails = data.RegisterSalesList;
-  //       }
-  //     }
-  //   }, (err) => {
-
-  //   });
-  // }
-
+  
 }
 
 

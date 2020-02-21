@@ -18,15 +18,15 @@ export class AddproductComponent implements OnInit {
   imageSrc: string = '';
 
   user = new salesregisterModel();
-  
+
   product = new productModel();
   productDetails: productModel[] = [];
 
   category = new categoryDataModel();
-  categoryDetails: categoryDataModel[]=[];
+  categoryDetails: categoryDataModel[] = [];
 
   subcategory = new subcategoryDataModel();
-  subcategoryDetails: subcategoryDataModel[]=[];
+  subcategoryDetails: subcategoryDataModel[] = [];
 
   constructor(private router: Router,
     private toastr: ToastrService,
@@ -35,21 +35,21 @@ export class AddproductComponent implements OnInit {
     // this.categoryList();
     this.active_CategoryList();
 
-   }
+  }
 
   ngOnInit() {
-     
+
   }
 
 
-  addCategory(){
+  addCategory() {
     this.categoryService.addCategory(this.category).subscribe((data: any) => {
       if (data.Status.code === 0) {
         // alert('Category added sucesfully');
         this.toastr.success('Category added succesfully', 'Successful', {
           disableTimeOut: false
         });
-        this. active_CategoryList();
+        this.active_CategoryList();
       }
       this.category = new categoryDataModel();
     }, (err) => {
@@ -57,20 +57,8 @@ export class AddproductComponent implements OnInit {
     });
   }
 
-    
-  // categoryList() {
-  //   this.categoryService.categoryList().subscribe((data: any) => {
-  //     if (data.Status.code === 0) {
-  //       if (data.CategoryList) {
-  //         this.categoryDetails = data.CategoryList;
-        
-  //       }
-  //     }
-  //   }, (err) => {
-      
-  //     console.log(this.categoryDetails); 
-  //   });
-  // }
+
+  
 
   active_CategoryList() {
     this.categoryService.active_CategoryList().subscribe((data: any) => {
@@ -106,7 +94,7 @@ export class AddproductComponent implements OnInit {
   }
 
 
-  addSubcategory(){
+  addSubcategory() {
     this.categoryService.addSubcategory(this.subcategory).subscribe((data: any) => {
       if (data.Status.code === 0) {
         // alert('Subcategory added sucesfully');
@@ -130,11 +118,13 @@ export class AddproductComponent implements OnInit {
         }
       }
     }, (err) => {
-      
-      console.log(this.subcategoryDetails); 
+
+      console.log(this.subcategoryDetails);
     });
   }
 
+
+  
   submitForm() {
     let strError = '';
 
@@ -142,23 +132,23 @@ export class AddproductComponent implements OnInit {
       strError += strError = '- Please select category';
     }
     else
-    if (!this.product.sid) {
-      strError += strError = '' ? '' : '<br/>';
-      strError += '- Please select subcategory';
-    }
+      if (!this.product.sid) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += '- Please select subcategory';
+      }
 
 
     if (!this.product.productname) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter productname';
     }
-    else{
+    else {
       if (!this.validateProductname(this.product.productname)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Product name should only contain alphabets & number';
       }
     }
-  
+
     if (!this.product.price) {
       strError += strError = '' ? '' : '<br/>';
       strError += strError = '- Please enter price';
@@ -174,7 +164,7 @@ export class AddproductComponent implements OnInit {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter description';
     }
-    else{
+    else {
       if (!this.validateProductname(this.product.description)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Description  should only contain alphabets & number';
@@ -202,11 +192,11 @@ export class AddproductComponent implements OnInit {
       return false;
     }
 
-  
+
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.product.createdby = this.user.id;
     console.log(this.product.createdby);
-  
+
     this.productService.addProduct(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
         // alert('Product added sucesfully');
@@ -271,10 +261,6 @@ export class AddproductComponent implements OnInit {
     var reg = /^[0-9]+$/;
     return reg.test(priceField) == false ? false : true;
   }
-
-
-
-
   // Image to Base64
 
   handleFileInput(fileList: FileList) {
@@ -298,19 +284,19 @@ export class AddproductComponent implements OnInit {
   }
 
   resetForm() {
-    this.product.cid=null;
-    this.product.sid=null;
-    this.product.productname=null;
-    this.product.price=null;
-    this.product.description=null;
-    this.product.image=null;
-    this.product.date=null;
- }
+    this.product.cid = null;
+    this.product.sid = null;
+    this.product.productname = null;
+    this.product.price = null;
+    this.product.description = null;
+    this.product.image = null;
+    this.product.date = null;
+  }
 
 
- viewProductForm() {
-  this.router.navigate(['/sales/product/viewproduct']);
-}
+  viewProductForm() {
+    this.router.navigate(['/sales/product/viewproduct']);
+  }
 
 
 }

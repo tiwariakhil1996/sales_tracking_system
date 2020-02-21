@@ -1,6 +1,3 @@
-
-
-
 // product form
 export class productModel {
     id: number;
@@ -14,9 +11,9 @@ export class productModel {
     image: string;
     ImageExtn: string;
     date: string;
-    isActive:boolean;
+    isActive: boolean;
 
-    createdby:number;
-    modifiedby:number;
+    createdby: number;
+    modifiedby: number;
 }
 

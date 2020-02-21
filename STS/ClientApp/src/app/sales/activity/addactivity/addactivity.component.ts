@@ -16,14 +16,14 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./addactivity.component.css']
 })
 export class AddactivityComponent implements OnInit {
-   
+
   user = new salesregisterModel();
 
   activity = new activityModel();
-  activityDetails: activityModel[]=[];
+  activityDetails: activityModel[] = [];
 
   sales = new salesregisterModel();
-  salesDetails: salesregisterModel[]=[];
+  salesDetails: salesregisterModel[] = [];
 
   product = new productModel();
   productDetails: productModel[] = [];
@@ -38,17 +38,17 @@ export class AddactivityComponent implements OnInit {
     private productService: ProductService,
     private toastr: ToastrService) {
 
-   // this.productList();
-   this.active_ProductList();
-   // this.clientList();
-   this.active_ClientList();
+    // this.productList();
+    this.active_ProductList();
+    // this.clientList();
+    this.active_ClientList();
     this.SalesList();
-   }
+  }
 
   ngOnInit() {
   }
 
-  
+
   productList() {
     this.productService.productList().subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -98,7 +98,7 @@ export class AddactivityComponent implements OnInit {
   //   });
   // }
 
-  SalesList(){
+  SalesList() {
     this.salesService.SalesList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.RegisteredSalesList) {
@@ -127,24 +127,23 @@ export class AddactivityComponent implements OnInit {
       this.activity = new activityModel();
     }, (err) => {
 
-       console.log(err);
+      console.log(err);
 
     });
   }
-  
+
   resetForm() {
-    this.activity.productId=null;
-    this.activity.clientId=null;
-    this.activity.salesId=null;
-    this.activity.contact=null;
-    this.activity.latitude=null;
-    this.activity.longitude=null;
-    this.activity.appointmentDate=null;
+    this.activity.productId = null;
+    this.activity.clientId = null;
+    this.activity.salesId = null;
+    this.activity.contact = null;
+    this.activity.latitude = null;
+    this.activity.longitude = null;
+    this.activity.appointmentDate = null;
   }
 
-  
-  
-  viewActivityForm(){
+
+  viewActivityForm() {
     this.router.navigate(['/sales/activity/currentactivity']);
   }
 

@@ -28,8 +28,6 @@ export class LoginComponent implements OnInit {
 
 
   submitLogin() {
-
-
     this.adminService.AdminLogin(this.loginDetail).subscribe((data: any) => {
       if (data.Status.code === 0) {
         localStorage.setItem('adminLogin', JSON.stringify(data.loginDetail[0] || {}));

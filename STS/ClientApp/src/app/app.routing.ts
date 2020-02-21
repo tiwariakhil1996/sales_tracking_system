@@ -1,4 +1,3 @@
-import { DemoallapiComponent } from './admin/demoallapi/demoallapi.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -169,12 +168,8 @@ export const routes: Routes = [
         path: 'map',
         loadChildren: () => import('./sales/map/map.module').then(m => m.MapModule)
       }
-     ] },
-
-
-
-
-
+    ]
+  },
 
   { path: '**', component: P404Component }
 ];

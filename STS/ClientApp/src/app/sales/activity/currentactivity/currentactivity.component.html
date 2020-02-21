@@ -107,12 +107,12 @@
     </div>
 
     <div>
-      <button *ngIf="(activity.status == 1)" class='btn btn-success' type="button" (click)="update_Inprogress(activity.aid)"
-        (click)="modal.dismiss('Cross click')"><i>Inprogress</i></button>
-    
-        <button *ngIf="(activity.status == 1)" class='btn btn-danger' type="button" (click)="update_ToCancel(activity.aid)"
-        (click)="modal.dismiss('Cross click')"><i>Cancel</i></button>
-   
+      <button *ngIf="(activity.status == 1)" class='btn btn-success' type="button"
+        (click)="update_Inprogress(activity.aid)" (click)="modal.dismiss('Cross click')"><i>Inprogress</i></button>
+
+      <button *ngIf="(activity.status == 1)" class='btn btn-danger' type="button"
+        (click)="update_ToCancel(activity.aid)" (click)="modal.dismiss('Cross click')"><i>Cancel</i></button>
+
       <button *ngIf="(activity.status == 2)" class='btn btn-warning' data-toggle="modal" (click)="open(content1)"
         type="button"><i>Followup</i></button>
 

@@ -10,9 +10,9 @@ export class registerModel {
     password: string;
     cpassword: string;
 }
-export class ChangeAdminPasswordModel{
-    id:number;
-    oldpassword:string;
-    newpassword:string;
-    confirmpassword:string;
+export class ChangeAdminPasswordModel {
+    id: number;
+    oldpassword: string;
+    newpassword: string;
+    confirmpassword: string;
 }

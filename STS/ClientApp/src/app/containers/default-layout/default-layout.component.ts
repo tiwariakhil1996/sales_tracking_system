@@ -34,6 +34,7 @@ export class DefaultLayoutComponent {
 
   product = new productModel();
   productDetails: productModel[] = [];
+
   changePassword = new ChangeAdminPasswordModel();
   user = new registerModel();
 
@@ -58,9 +59,6 @@ export class DefaultLayoutComponent {
   toggleMinimize(e) {
     this.sidebarMinimized = e;
   }
-
-
-
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalServices.show(template);
@@ -106,12 +104,15 @@ export class DefaultLayoutComponent {
 
       this.adminService.changePassword(id, this.changePassword).subscribe((data: any) => {
         if (data.Status.code === 0) {
+
           this.toastr.success('Password changed successfully', 'Successful', {
             disableTimeOut: false
           });
+          //this condition set for hide the modal and logout the page after the change the password
+          this.modalRef.hide();
           this.logout();
           this.router.navigate(['/admin/login']);
-          this.changePassword=new ChangeAdminPasswordModel();
+          this.changePassword = new ChangeAdminPasswordModel();
 
         } else {
           this.toastr.warning('Old Password is incorrect', 'Warning', {
@@ -188,9 +189,6 @@ export class DefaultLayoutComponent {
     }, (err) => {
     });
   }
-
-
-
 
 
   firstnameValidation() {

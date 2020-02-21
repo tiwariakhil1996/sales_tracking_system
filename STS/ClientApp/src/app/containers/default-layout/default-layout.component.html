@@ -129,72 +129,6 @@
         <a class="dropdown-item" href="/admin/register"><i class="fa fa-building"></i> Admin Register</a>
         <a class="dropdown-item" href="/sales/register"><i class="fa fa-building"></i> Sales Register</a>
 
-        <!-- <a class="dropdown-item" data-toggle="modal"  data-toggle="modal" (click)="openModal(template1)"><i class="fa fa-user"></i> Sales Register</a> -->
-
-
-
-        <!--          SALES REGISTER       -->
-
-        <!-- 
-        <ng-template #template1 >
-          <div class="modal-header">
-            <div class="card-header">
-              <strong>Sales Register</strong>
-            </div>
-            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="form-row">
-
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="icon-user"></i></span>
-                </div>
-                <input type="text" class="form-control" placeholder="Enter Username"
-                  [(ngModel)]="salesregister.salesName" name="username">
-              </div>
-
-
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">@</span>
-                </div>
-                <input type="text" class="form-control" placeholder="Enter Email" [(ngModel)]="salesregister.email"
-                  name="email">
-              </div>
-
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="icon-lock"></i></span>
-                </div>
-                <input type="password" class="form-control" placeholder="Password" [(ngModel)]="salesregister.password"
-                  name="password">
-              </div>
-
-              <div class="input-group mb-4">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="icon-lock"></i></span>
-                </div>
-                <input type="password" class="form-control" placeholder="Repeat password"
-                  [(ngModel)]="salesregister.cpassword" name="cpassword">
-              </div>
-            </div>
-
-            <div class="card-footer p-4">
-              <div class="row">
-                <div class="col-12">
-                  <button type="submit" class="btn btn-block btn-success" (click)="salesRegister()">Register</button>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </ng-template> -->
-
-
-
 
 
         <!-- change password -->
@@ -230,16 +164,20 @@
               </div>
             </div>
             <div class="card-footer">
-              <button type="submit" class="btn btn-sm btn-success" (onclick)="modalRef.hide()" (click)="changepassword(changePassword.id)"><i
-                  class="fa fa-dot-circle-o"></i>Submit</button>
+              <button type="submit" class="btn btn-sm btn-success" (onclick)="modalRef.hide()"
+                (click)="changepassword(changePassword.id)"><i class="fa fa-dot-circle-o"></i>Submit</button>
             </div>
           </div>
         </ng-template>
+
+
         <a class="dropdown-item" href="admin/login" (click)="logout()"><i class="fa fa-lock"></i> Logout</a>
       </div>
     </li>
   </ul>
 </app-header>
+
+
 
 <div class="app-body">
   <!-- Side nav navbar -->
@@ -258,23 +196,6 @@
     </div>
   </main>
 
-  <!-- Option Menu -->
-  <!-- <app-aside [fixed]="true" [display]="false" [ngClass]="'test'">
-    <tabset>
-
-      <tab>
-        <ng-template tabHeading><i class="icon-settings"></i></ng-template>
-        <div class="p-3">
-
-
-          <div class="aside-options">
-            <div class="clearfix mt-4">
-            </div>
-          </div>
-        </div>
-      </tab>
-    </tabset>
-  </app-aside> -->
 </div>
 
 <!-- Footer -->

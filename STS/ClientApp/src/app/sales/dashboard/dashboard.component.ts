@@ -27,16 +27,16 @@ export class DashboardComponent implements OnInit {
 
   product = new productModel();
   productDetails: productModel[] = [];
-  totalProduct:any ;
+  totalProduct: any;
 
-  sales=new salesregisterModel();
-  salesDetails: salesregisterModel[]=[];
-  totalSales:any;
+  sales = new salesregisterModel();
+  salesDetails: salesregisterModel[] = [];
+  totalSales: any;
 
-  activity= new activityModel();
-  activityDetails: activityModel[]=[];
+  activity = new activityModel();
+  activityDetails: activityModel[] = [];
   totalActivity: any;
-  
+
   // lineChart1
   public lineChart1Data: Array<any> = [
     {
@@ -269,7 +269,7 @@ export class DashboardComponent implements OnInit {
       mode: 'index',
       position: 'nearest',
       callbacks: {
-        labelColor: function(tooltipItem, chart) {
+        labelColor: function (tooltipItem, chart) {
           return { backgroundColor: chart.data.datasets[tooltipItem.datasetIndex].borderColor };
         }
       }
@@ -282,7 +282,7 @@ export class DashboardComponent implements OnInit {
           drawOnChartArea: false,
         },
         ticks: {
-          callback: function(value: any) {
+          callback: function (value: any) {
             return value.charAt(0);
           }
         }
@@ -405,7 +405,7 @@ export class DashboardComponent implements OnInit {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
- 
+
 
   constructor(private router: Router,
     private clientService: ClientService,
@@ -423,7 +423,7 @@ export class DashboardComponent implements OnInit {
           this.productDetails = data.ProductList;
           //this logic for display the total product..in a dashboard
           this.totalProduct = this.productDetails.length;
-          console.log( this.totalProduct );
+          // console.log( this.totalProduct );
         }
       }
     }, (err) => {
@@ -437,8 +437,8 @@ export class DashboardComponent implements OnInit {
         if (data.ClientList) {
           this.clientDetails = data.ClientList;
           // console.log( this.clientDetails.length);
-           this.totalClient = this.clientDetails.length;
-           console.log( this.totalClient );
+          this.totalClient = this.clientDetails.length;
+          //  console.log( this.totalClient );
         }
       }
     }, (err) => {
@@ -457,7 +457,7 @@ export class DashboardComponent implements OnInit {
           this.activityDetails = data.each_sales_activityList;
           console.log(this.activityDetails);
           this.totalActivity = this.activityDetails.length;
-          console.log( this.totalActivity );
+          // console.log( this.totalActivity );
 
         }
       }

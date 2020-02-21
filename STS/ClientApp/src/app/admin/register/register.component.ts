@@ -9,7 +9,7 @@ import { registerModel } from '../../model/admin';
   selector: 'app-dashboard',
   templateUrl: 'register.component.html'
 })
-export class RegisterComponent  implements OnInit{
+export class RegisterComponent implements OnInit {
 
   title = 'STS';
   imageSrc: string = '';
@@ -17,7 +17,7 @@ export class RegisterComponent  implements OnInit{
 
   register = new registerModel();
   adminDetails: registerModel[] = [];
-  constructor(private router: Router, private adminService: AdminService,private toastr: ToastrService){
+  constructor(private router: Router, private adminService: AdminService, private toastr: ToastrService) {
 
 
   }
@@ -25,10 +25,10 @@ export class RegisterComponent  implements OnInit{
   ngOnInit() {
   }
   //Redirect the both login page admin and sales...
-  LoginAdmin(){
+  LoginAdmin() {
     this.router.navigate(['admin/login']);
   }
-  LoginSales(){
+  LoginSales() {
     this.router.navigate(['sales/login']);
   }
 
@@ -47,7 +47,7 @@ export class RegisterComponent  implements OnInit{
 
   submitForm() {
     // this.register.image = this.imageSrc;
-    
+
     let strError = '';
 
     if (!this.register.username) {
@@ -91,7 +91,7 @@ export class RegisterComponent  implements OnInit{
     if (!this.register.password) {
       strError += '- Please enter valid password';
     }
-   
+
     else {
       if (!this.passwordValidation(this.register.password)) {
         strError += strError = '' ? '' : '<br/>';
@@ -111,38 +111,38 @@ export class RegisterComponent  implements OnInit{
       return false;
     }
 
-  if (this.register.password == this.register.cpassword) {
+    if (this.register.password == this.register.cpassword) {
 
-    this.adminService.AdminRegisterService(this.register).subscribe((data: any) => {
-      if (data.Status.code === 0) {
-        // alert('Admin Registered Successfully');
-        this.toastr.success('Registration Successful', 'Successful', {
-          disableTimeOut: false,
-          timeOut: 2000
-        });
-        this.register = new registerModel();
-      } 
-      else {
-        // alert("Not Matched");
-        this.toastr.info('This email id is already registered', 'Info', {
-          disableTimeOut: false,
-          timeOut: 2000
-        });
-      }
-     
-     
-    }, (err) => {
+      this.adminService.AdminRegisterService(this.register).subscribe((data: any) => {
+        if (data.Status.code === 0) {
+          // alert('Admin Registered Successfully');
+          this.toastr.success('Registration Successful', 'Successful', {
+            disableTimeOut: false,
+            timeOut: 2000
+          });
+          this.register = new registerModel();
+        }
+        else {
+          // alert("Not Matched");
+          this.toastr.info('This email id is already registered', 'Info', {
+            disableTimeOut: false,
+            timeOut: 2000
+          });
+        }
 
 
-    });
+      }, (err) => {
+
+
+      });
+    }
+    else {
+      this.toastr.error('Password & Confirm Password didnt match', 'Error', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
   }
-  else {
-    this.toastr.error('Password & Confirm Password didnt match', 'Error', {
-      disableTimeOut: false,
-      timeOut: 2000
-    });
-  }
-  } 
 
   firstnameValidation() {
     let isValid = false;
@@ -162,68 +162,68 @@ export class RegisterComponent  implements OnInit{
 
   }
 
-  
+
 
   validateName(nameField) {
     var reg = /^[A-Za-z]+$/;
     return reg.test(nameField) == false ? false : true;
   }
 
-// Email Validation
+  // Email Validation
 
-checkEmailValidation() {
-  let isValid = false;
-  if (!this.validateEmail(this.register.email)) {
-    // alert('Please enter valid email.')
-    // this.errorMessage="Please enter valid email";
-    //  return false;
-    isValid = true;
+  checkEmailValidation() {
+    let isValid = false;
+    if (!this.validateEmail(this.register.email)) {
+      // alert('Please enter valid email.')
+      // this.errorMessage="Please enter valid email";
+      //  return false;
+      isValid = true;
+    }
+    ;
+    if (isValid) {
+      this.toastr.warning('Please enter valid email id', 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
+
   }
-  ;
-  if (isValid) {
-    this.toastr.warning('Please enter valid email id', 'Warning', {
-      disableTimeOut: false,
-      timeOut: 2000
-    });
+
+  validateEmail(emailField) {
+    var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+    return reg.test(emailField) == false ? false : true;
   }
 
-}
 
-validateEmail(emailField) {
-  var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-  return reg.test(emailField) == false ? false : true;
-}
+  // Mobile no.  Validation
 
+  mobValidation() {
+    let isValid = false;
+    if (!this.validateMobile(this.register.mobile)) {
 
-// Mobile no.  Validation
-
-mobValidation() {
-  let isValid = false;
-  if (!this.validateMobile(this.register.mobile)) {
-   
-    isValid = true;
+      isValid = true;
+    }
+    ;
+    if (isValid) {
+      this.toastr.warning('Please enter valid mobile number', 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
   }
-  ;
-  if (isValid) {
-    this.toastr.warning('Please enter valid mobile number', 'Warning', {
-      disableTimeOut: false,
-      timeOut: 2000
-    });
+
+  validateMobile(mobileField) {
+    var reg = /^\d{10}$/;
+    return reg.test(mobileField) == false ? false : true;
   }
-}
-
-validateMobile(mobileField) {
-  var reg = /^\d{10}$/;
-  return reg.test(mobileField) == false ? false : true;
-}
 
 
-passwordValidation(passwordField) {
-  var reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-  return reg.test(passwordField) == false ? false : true;
-}
+  passwordValidation(passwordField) {
+    var reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+    return reg.test(passwordField) == false ? false : true;
+  }
 
-  
+
   handleFileInput(fileList: FileList) {
     const preview = document.getElementById('photos-preview');
     Array.from(fileList).forEach((file: File) => {
@@ -248,8 +248,11 @@ passwordValidation(passwordField) {
     this.router.navigate(['/sales/register']);
   }
 
-  loginForm(){
+  loginForm() {
     this.router.navigate(['/admin/login']);
+  }
+  dashboardform() {
+    this.router.navigate(['/admin/dashboard']);
   }
 
 }

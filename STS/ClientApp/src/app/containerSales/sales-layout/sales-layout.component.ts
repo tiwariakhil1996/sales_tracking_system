@@ -35,7 +35,7 @@ export class SalesLayoutComponent {
   item: any;
   updateProfile: any;
 
-  changePassword=new changePasswordModel();
+  changePassword = new changePasswordModel();
 
 
   constructor(private router: Router,
@@ -117,9 +117,10 @@ export class SalesLayoutComponent {
           this.toastr.success('Password changed successfully', 'Successful', {
             disableTimeOut: false
           });
-          // this.logout();
-          // this.router.navigate(['/sales/login']);
-          this.changePassword=new changePasswordModel();
+          this.modalRef.hide();
+          this.logout();
+          this.router.navigate(['/sales/login']);
+          this.changePassword = new changePasswordModel();
 
         } else {
           this.toastr.warning('Old Password is incorrect', 'Warning', {

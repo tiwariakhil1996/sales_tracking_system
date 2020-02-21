@@ -29,19 +29,7 @@ export class AddsubcategoryComponent implements OnInit {
   ngOnInit() {
   }
 
-  // categoryList() {
-  //   this.categoryService.categoryList().subscribe((data: any) => {
-  //     if (data.Status.code === 0) {
-  //       if (data.CategoryList) {
-  //         this.categoryDetails = data.CategoryList;
-
-  //       }
-  //     }
-  //   }, (err) => {
-
-  //     console.log(this.categoryDetails);
-  //   });
-  // }
+  
 
   active_CategoryList() {
     this.categoryService.active_CategoryList().subscribe((data: any) => {
