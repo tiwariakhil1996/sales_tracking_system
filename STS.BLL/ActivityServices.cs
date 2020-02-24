@@ -34,13 +34,13 @@ namespace STS.BLL.Service
 
 
         // Latest Added Activity
-        public async Task<List<LatestAddedActivityModel>> addActivity()
-        {
-            using (activityRepository = new ActivityRepository())
-            {
-                return await activityRepository.addActivity();
-            }
-        }
+        //public async Task<List<LatestAddedActivityModel>> addActivity()
+        //{
+        //    using (activityRepository = new ActivityRepository())
+        //    {
+        //        return await activityRepository.addActivity();
+        //    }
+        //}
 
         //Display
         public async Task<List<ActivityListModel>> ActivityList()

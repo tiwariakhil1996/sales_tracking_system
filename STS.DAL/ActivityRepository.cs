@@ -53,8 +53,7 @@ namespace STS.DAL
 
 
 
-        //    }
-        //}
+        
 
 
         //Display
@@ -209,8 +208,6 @@ namespace STS.DAL
         //}
 
 
-
-
         //Update updateInprogress
         public async Task<TranStatus> updateInprogress(int Aid, ActivityListModel model)
         {
@@ -320,7 +317,5 @@ namespace STS.DAL
 
             }
         }
-
-
     }
 }

@@ -23,12 +23,14 @@
           </div>
 
           <div class="form-group row">
+
             <div class="col-md-6">
               <label>Description</label>
               <!-- <input type="text" id="description" name="description" [(ngModel)]="activity.description"  class="form-control" > -->
               <textarea type="text" id="description" name="description" [(ngModel)]="activity.description" rows="5"
                 class="form-control" placeholder="Enter description"></textarea>
             </div>
+
             <div class="col-md-6">
               <label for="select1">Sales Name</label>
               <select name="clientName" class="form-control" [(ngModel)]="activity.salesId">
@@ -36,6 +38,7 @@
                 <option *ngFor="let item of salesDetails;" name="salesName" [ngValue]="item.id">{{item.salesName}}
                 </option>
               </select>
+
               <div class="form-group row">
                 <div class="col-sm-6">
                   <label for="contact">Contact no.</label>
@@ -49,22 +52,15 @@
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="form-group row">
-            <div class="col-sm-1 left_div">
-              <label>Sub Total</label>
-            </div>
-            <div class="col-sm-1 label_subtotal_left">
-              <label>120.00</label>
-            </div>
           </div>
 
           <div class="form-group row">
 
             <div class="col-sm-2">
               <label for="productname">Product Name</label>
-              <select id="productname" name="productname" class="form-control" [(ngModel)]="activity.productId" (change)="onProductChange($event.target.value)">
+              <select id="productname" name="productname" class="form-control" [(ngModel)]="activity.productId"
+                (change)="onProductChange($event.target.value)">
                 <option [ngValue]="undefined" selected>Select Product Name</option>
                 <option *ngFor="let item of productDetails;" value={{item.id}}>{{item.productname}} </option>
               </select>
@@ -73,35 +69,38 @@
             <div class="col-sm-1">
               <label for="price">Price</label>
               <!-- <input type="text" class="form-control" id="price"  name="price" placeholder="0.00"  *ngFor="let activity of product_priceDetails;" [(ngModel)]="activity.price" disabled> -->
-              <tr *ngFor="let activity of product_priceDetails;"> 
+              <tr *ngFor="let activity of product_priceDetails;">
                 <td>{{activity.price | currency}}</td>
-             </tr>
+              </tr>
             </div>
 
             <div class="col-sm-1">
               <label for="quantity">Qty</label>
-              <input type="text" class="form-control" id="quantity" name="quantity"  [(ngModel)]="activity.quantity">
+              <input type="text" class="form-control" id="quantity" name="quantity" [(ngModel)]="activity.quantity">
             </div>
 
             <div class="col-sm-1">
               <label for="amount">Amt</label>
-             <!-- <td> {{activity.amount}}</td>  -->
-              <input type="text" class="form-control" id="amount" name="amount"  [(ngModel)]="activity.amount">
+              <!-- <td> {{activity.amount}}</td>  -->
+              <input type="text" class="form-control" id="amount" name="amount" [(ngModel)]="activity.amount">
             </div>
 
             <div class="col-sm-1">
               <label for="discount_per">Dis. %</label>
-              <input type="text" class="form-control" id="discount_per" name="discount_per"  [(ngModel)]="activity.discount_per">
+              <input type="text" class="form-control" id="discount_per" name="discount_per"
+                [(ngModel)]="activity.discount_per">
             </div>
 
             <div class="col-sm-1">
               <label for="discount_amt">Dis. Amt</label>
-              <input type="text" class="form-control" id="discount_amt" name="discount_amt"  [(ngModel)]="activity.discount_amt">
+              <input type="text" class="form-control" id="discount_amt" name="discount_amt"
+                [(ngModel)]="activity.discount_amt">
             </div>
 
             <div class="col-sm-1 total_price ">
               <label for="total_price">Total</label>
-              <input type="text" class="form-control" id="total_price" name="total_price"  [(ngModel)]="activity.total_price" >
+              <input type="text" class="form-control" id="total_price" name="total_price"
+                [(ngModel)]="activity.total_price">
             </div>
 
           </div>
@@ -109,115 +108,72 @@
 
         <div class="form-group row">
           <div class="col-sm-1 add_product ">
-            <button type="submit" class="form-control btn btn-sm btn-success" (click)="addMoreproducts()"><i class="fa fa-plus"></i> Add</button>
+            <button type="submit" class="form-control btn btn-sm btn-success" (click)="addMoreproducts()"><i
+                class="fa fa-plus"></i> Add</button>
             <!-- <button type="submit" class="form-control btn btn-sm btn-success" (click)="toggleDisplay()"><i class="fa fa-plus"></i> Add</button> -->
-            <div class="col-sm-3 left_div">
-              <label>Discount Amt</label>
-            </div>
-            <div class="col-sm-1 label_discountamount_left">
-              <label>00.00</label>
-            </div>
-          </div>
 
           </div>
+
         </div>
-       
-          <div class="col-lg-12" [hidden]="isShow">     
-              <div class="card-body ">
-                <table class="table" >
-                  <thead class="color"> 
-                    <tr>
-                      <th>Action</th>
-                      <th>Sr.</th>
-                      <th>Image</th>
-                      <th>Product No.</th>
-                      <th>Product Name</th>
-                      <th>Price</th>
-                      <th>Qty</th>
-                      <th>Amt</th>
-                      <th>Discount</th>
-                      <th>Disc. Amt</th>
-                      <th>Total</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let item of activityList_adding;let i=index;">
-                      <td></td>
-                      <td>{{i+1}}</td>
-                      <!-- <td>{{item.image}}</td> -->
-                      <td style='text-align:center'><img style="max-width: 115px; max-height: 64px;" [src]="'assets/img/Images/Product/Thumb/'+item.image"></td>
-                      <td>{{item.productId}}</td>
-                      <td>{{item.productname}}</td>
-                      <td>{{item.price}}</td>
-                      <td>{{item.quantity}}</td>
-                      <td>{{item.amount}}</td>
-                      <td>{{item.discount_per}}</td>
-                      <td>{{item.discount_amt}}</td>
-                      <td>{{item.total_price}}</td>
-                    
-          
-                      <td>
-                        <!-- <button type="button" class="btn btn-primary" data-toggle="modal"
+      </div>
+
+
+
+      <div class="col-lg-12" [hidden]="isShow">
+        <div class="card-body ">
+          <table class="table">
+            <thead class="color">
+              <tr>
+                <th>Action</th>
+                <th>Sr.</th>
+                <th>Image</th>
+                <th>Product No.</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th>Amt</th>
+                <th>Discount</th>
+                <th>Disc. Amt</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of activityList_adding;let i=index;">
+                <td></td>
+                <td>{{i+1}}</td>
+                <!-- <td>{{item.image}}</td> -->
+                <td style='text-align:center'><img style="max-width: 115px; max-height: 64px;"
+                    [src]="'assets/img/Images/Product/Thumb/'+item.image"></td>
+                <td>{{item.productId}}</td>
+                <td>{{item.productname}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.amount}}</td>
+                <td>{{item.discount_per}}</td>
+                <td>{{item.discount_amt}}</td>
+                <td>{{item.total_price}}</td>
+
+
+                <td>
+                  <!-- <button type="button" class="btn btn-primary" data-toggle="modal"
                           (click)="openupdatemodal(content,item)"><i class="fa fa-edit" aria-hidden="true"></i></button>
           
                         <button class='btn btn-danger' type="button" (click)="onDelete(item.aid)"><i class="fa fa-trash"
                             aria-hidden="true"></i></button> -->
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-          </div>
-      
-          <div class="form-group row">
-            <div class="col-sm-1 left_div">
-              <label>Total</label>
-            </div>
-            <div class="col-sm-1 label_total_left">
-              <label>120.00</label>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-2 left_div">
-              <label for="advancepayment">Adva.Pay</label>
-            </div>
-            <div class="col-sm-2 left_advance_payment">
-               <input type="number" class="form-control" id="advancepayment" name="advancepayment " placeholder="Advance Payment">
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-md-2 left_div">
-              <label for="select1">Payment Mode</label>
-            </div>
-            <div class="col-sm-2 left_payment_mode">
-              <select name="paymentmode" class="form-control">
-                <option [ngValue]="undefined" selected>Select Pay Getway</option>
-                <option name="advancepayment">Cash</option>
-                <option name="advancepayment">Debit Card</option>
-                <option name="advancepayment">Credit Card</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-2 left_div">
-              <label for="paymentdue">Pay Due</label>
-            </div>
-            <div class="col-sm-2 left_payment_due">
-              <input type="text" class="form-control" id="paymentdue" name="paymentdue " placeholder="Payment Due">
-            </div>
-          </div>
-        </div>
-
-
-
-        <div class="card-footer">
-          <button type="submit" class="btn btn-sm btn-success" (click)="submitForm()"><i class="fa fa-dot-circle-o"></i>
-            Assign</button>
-          <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
-          <button type="submit" class="btn btn-sm btn-primary" (click)="viewActivityForm()">View</button>
-        </div>
-
-
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
+
+      <div class="card-footer">
+        <button type="submit" class="btn btn-sm btn-success" (click)="submitForm()"><i class="fa fa-dot-circle-o"></i>
+          Assign</button>
+        <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+        <button type="submit" class="btn btn-sm btn-primary" (click)="viewActivityForm()">View</button>
+      </div>
+
+
     </div>
+  </div>

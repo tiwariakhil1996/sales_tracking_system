@@ -17,7 +17,7 @@ namespace STS.BLL.Interface
 
 
         // Latest Added Activity
-        Task<List<LatestAddedActivityModel>> addActivity();
+        //Task<List<LatestAddedActivityModel>> addActivity();
 
 
         //Display
