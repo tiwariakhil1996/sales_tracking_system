@@ -1,22 +1,20 @@
-<p>map works!</p>
-
-
-<button (click)="toggle()" id="bt">
-    {{buttonName}}
-</button>
-
-<ng-container *ngIf="show">
-    <div style="margin: 0 auto;text-align: left;">
-        <div>
-            <label>Name:</label>
-            <div><input id="tbname" name="yourname" /></div>
-        </div>
-        <div>
-            <label>Email Address:</label>
-            <div><input name="email" id="email" /></div></div>
-        <div>
-            <label>Additional Information (optional):</label>
-            <div><textarea rows="5" cols="46"></textarea></div>
-        </div>
+<!-- <div class="container">
+ 
+    <h1>Angular Google Maps with Places Search Example</h1>
+   
+    <div class="form-group">
+      <label>Enter address</label>
+      <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
     </div>
-</ng-container>
+   
+    <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+      <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
+        (dragEnd)="markerDragEnd($event)"></agm-marker>
+    </agm-map>
+    
+
+
+    <h5>Address: {{address}}</h5>
+    <div>Latitude: {{latitude}}</div>
+    <div>Longitude: {{longitude}}</div>
+  </div> -->

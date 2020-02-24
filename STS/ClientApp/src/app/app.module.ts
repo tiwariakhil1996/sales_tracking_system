@@ -1,3 +1,4 @@
+import { AgmCoreModule } from '@agm/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -56,11 +57,12 @@ import { AuthService } from './auth.service';
 import { SalesService } from './sales.service';
 import { SalesGuard } from './sales.guard';
 // import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { AgmCoreModule } from '@agm/core';
 import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password.component';
 
-@NgModule({
 
+@NgModule({
+  
+  // This is google map libraries
   schemas:  [ CUSTOM_ELEMENTS_SCHEMA ],
   
   imports: [
@@ -75,11 +77,13 @@ import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password
     AppSidebarModule,
     // PaginationModule,
     HttpClientModule,
+
     //this is angular google map api key
     AgmCoreModule.forRoot({
         apiKey:'AIzaSyBaU6eEpioeuf9Nkzsd5N3OoJsDpVQdzEs',
         libraries:['places']
     }),
+
     ModalModule.forRoot(),
     NgbModule,
 
