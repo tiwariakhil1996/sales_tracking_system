@@ -137,8 +137,7 @@ export class AddactivityComponent implements OnInit {
     this.activity.clientId=null;
     this.activity.salesId=null;
     this.activity.contact=null;
-    this.activity.latitude=null;
-    this.activity.longitude=null;
+
     this.activity.appointmentDate=null;
   }
 

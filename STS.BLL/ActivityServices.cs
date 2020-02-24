@@ -34,7 +34,7 @@ namespace STS.BLL.Service
 
 
         // Latest Added Activity
-        public async Task<List<LatestAddedActivityModel>> addActivity()
+        public async Task<List<ActivityModel>> addActivity()
         {
             using (activityRepository = new ActivityRepository())
             {
@@ -42,7 +42,7 @@ namespace STS.BLL.Service
             }
         }
 
-        //Display
+        //Display Activity
         public async Task<List<ActivityListModel>> ActivityList()
         {
             using (activityRepository = new ActivityRepository())
@@ -50,6 +50,16 @@ namespace STS.BLL.Service
                 return await activityRepository.ActivityList();
             }
         }
+
+        // Display Products Added into activity
+        public async Task<List<Activity_ProductListModel>> Activity_ProductList(int aid)
+        {
+            using (activityRepository = new ActivityRepository())
+            {
+                return await activityRepository.Activity_ProductList(aid);
+            }
+        }
+
 
         //Display
         public async Task<List<ActivityList_while_addingModel>> ActivityList_while_adding()

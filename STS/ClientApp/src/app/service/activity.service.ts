@@ -16,6 +16,11 @@ export class ActivityService {
     return this.http.get('/api/Activity/ActivityList');
   }
 
+  activity_productList(aid) {
+    return this.http.get('/api/Activity/Activity_ProductList/' + aid);
+  }
+
+
   activityList_while_adding() {
     return this.http.get('/api/Activity/ActivityList_while_adding');
   }

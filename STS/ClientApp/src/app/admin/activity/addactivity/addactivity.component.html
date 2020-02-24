@@ -25,7 +25,6 @@
           <div class="form-group row">
             <div class="col-md-6">
               <label>Description</label>
-              <!-- <input type="text" id="description" name="description" [(ngModel)]="activity.description"  class="form-control" > -->
               <textarea type="text" id="description" name="description" [(ngModel)]="activity.description" rows="5"
                 class="form-control" placeholder="Enter description"></textarea>
             </div>
@@ -52,122 +51,61 @@
           </div>
 
 
-          <!-- <div class="form-group row">
-            <div class="col-sm-6">
-              <label for="lat">Latitude</label>
-              <input type="text" class="form-control" id="lat" [(ngModel)]="activity.latitude" name="lat"
-                placeholder="Enter latitude">
-            </div>
-            <div class="col-sm-6">
-              <label for="long">Longitude</label>
-              <input type="text" class="form-control" id="long" [(ngModel)]="activity.longitude" name="long"
-                placeholder="Enter longitude">
-            </div>
-          </div> -->
-
-          <div class="form-group row">
-
-            <div class="col-sm-2">
-              <label for="productname">Product Name</label>
-              <select id="productname" name="productname" class="form-control" [(ngModel)]="activity.productId" (change)="onProductChange($event.target.value)">
-                <option [ngValue]="undefined" selected>Select Product Name</option>
-                <option *ngFor="let item of productDetails;" value={{item.id}}>{{item.productname}} </option>
-              </select>
-            </div>
-
-            <div class="col-sm-1">
-              <label for="price">Price</label>
-              <!-- <input type="text" class="form-control" id="price"  name="price" placeholder="0.00"  *ngFor="let activity of product_priceDetails;" [(ngModel)]="activity.price" disabled> -->
-              <tr *ngFor="let activity of product_priceDetails;"> 
-                <td>{{activity.price | currency}}</td>
-             </tr>
-            </div>
-
-            <div class="col-sm-1">
-              <label for="quantity">Qty</label>
-              <input type="text" class="form-control" id="quantity" name="quantity"  [(ngModel)]="activity.quantity">
-            </div>
-
-            <div class="col-sm-1">
-              <label for="amount">Amt</label>
-             <!-- <td> {{activity.amount}}</td>  -->
-              <input type="text" class="form-control" id="amount" name="amount"  [(ngModel)]="activity.amount">
-            </div>
-
-            <div class="col-sm-1">
-              <label for="discount_per">Dis. %</label>
-              <input type="text" class="form-control" id="discount_per" name="discount_per"  [(ngModel)]="activity.discount_per">
-            </div>
-
-            <div class="col-sm-1">
-              <label for="discount_amt">Dis. Amt</label>
-              <input type="text" class="form-control" id="discount_amt" name="discount_amt"  [(ngModel)]="activity.discount_amt">
-            </div>
-
-            <div class="col-sm-1 total_price ">
-              <label for="total_price">Total</label>
-              <input type="text" class="form-control" id="total_price" name="total_price"  [(ngModel)]="activity.total_price" >
-            </div>
-
+        <div class="row">
+          <div class="col-sm-12">
+            <table class="table">
+              <thead class="color">
+                <tr>
+                  <th>Sr.</th>
+                  <th>Product Name</th>
+                  <th>Price</th>
+                  <th>Qty</th>
+                  <th>Amt</th>
+                  <th>Discount</th>
+                  <th>Disc. Amt</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let products of addproductlistDetails;let i=index;">
+                  <td>{{i+1}}</td>
+                  <td><select id="productname" name="productname" class="form-control" [(ngModel)]="products.productId"
+                      (change)="onProductChange($event.target.value)">
+                      <option [ngValue]="undefined" selected>Select Product Name</option>
+                      <option *ngFor="let item of productDetails;" value={{item.id}}>{{item.productname}} </option>
+                    </select></td>
+                  <td> 
+                    <input type="text" class="form-control" id="price" name="price" [(ngModel)]="products.price">
+                  </td>
+                  <td> <input type="text" class="form-control" id="quantity" name="quantity"
+                      [(ngModel)]="products.quantity">
+                  </td>
+                  <td> <input type="text" class="form-control" id="amount" name="amount" [(ngModel)]="products.amount">
+                  </td>
+                  <td> <input type="text" class="form-control" id="discount_per" name="discount_per"
+                      [(ngModel)]="products.discount_per">
+                  </td>
+                  <td> <input type="text" class="form-control" id="discount_amt" name="discount_amt"
+                      [(ngModel)]="products.discount_amt">
+                  </td>
+                  <td><input type="text" class="form-control" id="total_price" name="total_price"
+                      [(ngModel)]="products.total_price">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
+
         <div class="form-group row">
           <div class="col-sm-1 add_product ">
-            <button type="submit" class="form-control btn btn-sm btn-success" (click)="addMoreproducts()"><i class="fa fa-plus"></i> Add</button>
+            <button type="submit" class="form-control btn btn-sm btn-success" (click)="addMoreproducts()"><i
+                class="fa fa-plus"></i> Add</button>
             <!-- <button type="submit" class="form-control btn btn-sm btn-success" (click)="toggleDisplay()"><i class="fa fa-plus"></i> Add</button> -->
 
           </div>
         </div>
-       
-          <div class="col-lg-12" [hidden]="isShow">     
-              <div class="card-body ">
-                <table class="table" >
-                  <thead class="color"> 
-                    <tr>
-                      <th>Action</th>
-                      <th>Sr.</th>
-                      <th>Image</th>
-                      <th>Product No.</th>
-                      <th>Product Name</th>
-                      <th>Price</th>
-                      <th>Qty</th>
-                      <th>Amt</th>
-                      <th>Discount</th>
-                      <th>Disc. Amt</th>
-                      <th>Total</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let item of activityList_adding;let i=index;">
-                      <td></td>
-                      <td>{{i+1}}</td>
-                      <!-- <td>{{item.image}}</td> -->
-                      <td style='text-align:center'><img style="max-width: 115px; max-height: 64px;" [src]="'assets/img/Images/Product/Thumb/'+item.image"></td>
-                      <td>{{item.productId}}</td>
-                      <td>{{item.productname}}</td>
-                      <td>{{item.price}}</td>
-                      <td>{{item.quantity}}</td>
-                      <td>{{item.amount}}</td>
-                      <td>{{item.discount_per}}</td>
-                      <td>{{item.discount_amt}}</td>
-                      <td>{{item.total_price}}</td>
-                    
-          
-                      <td>
-                        <!-- <button type="button" class="btn btn-primary" data-toggle="modal"
-                          (click)="openupdatemodal(content,item)"><i class="fa fa-edit" aria-hidden="true"></i></button>
-          
-                        <button class='btn btn-danger' type="button" (click)="onDelete(item.aid)"><i class="fa fa-trash"
-                            aria-hidden="true"></i></button> -->
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-          </div>
-      
-
 
         <div class="card-footer">
           <button type="submit" class="btn btn-sm btn-success" (click)="submitForm()"><i class="fa fa-dot-circle-o"></i>
