@@ -36,6 +36,24 @@ namespace STS.DAL
             }
         }
 
+        //Get Product Price
+        public async Task<List<ProductPriceModel>> ProductPrice(int id)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@Id", id);
+
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                var result = await connection.QueryAsync<ProductPriceModel>("ProductPrice", parameter, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
+
         //View Products
         public async Task<List<ProductListModel>> ProductList()
         {
@@ -46,6 +64,9 @@ namespace STS.DAL
                 return result.ToList();
             }
         }
+
+
+     
 
         //Update
         public async Task<TranStatus> updateProduct(int ID, ProductListModel model)

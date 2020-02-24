@@ -17,3 +17,7 @@ export class productModel {
     modifiedby: number;
 }
 
+export class productpriceModel {
+    id: number;
+    price: number;
+}

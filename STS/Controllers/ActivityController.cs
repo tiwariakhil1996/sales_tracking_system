@@ -13,6 +13,8 @@ namespace STS.Controllers
     public class ActivityController : Controller
     {
         private IActivity iactivity;
+
+        TranStatus transaction = new TranStatus();
         public ActivityController(IActivity activity)
         {
             iactivity = activity;
@@ -42,7 +44,7 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
-
+    
 
         //Display
 
@@ -68,6 +70,33 @@ namespace STS.Controllers
         }
 
 
+
+        //Display
+
+        [HttpGet]
+        [Route("ActivityList_while_adding")]
+        public async Task<IActionResult> ActivityList_while_adding()
+        {
+            TranStatus transaction = new TranStatus();
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                var activityList = await iactivity.ActivityList_while_adding();
+                dctData.Add("ActivityList_while_adding", activityList);
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+
+
+
         // Display each sales List Individually
         [HttpPost]
         [Route("each_sales_activityList")]
@@ -80,6 +109,50 @@ namespace STS.Controllers
             {
                 var activityList = await iactivity.each_sales_activityList(model);
                 dctData.Add("each_sales_activityList", activityList);
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+        // Display each admin List Individually
+        [HttpPost]
+        [Route("each_admin_activityList")]
+        public async Task<IActionResult> each_admin_activityList([FromBody]admin_ActivityListModel model)
+        {
+            TranStatus transaction = new TranStatus();
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                var activityList = await iactivity.each_admin_activityList(model);
+                dctData.Add("each_admin_activityList", activityList);
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+        // Count Assigned list on bell  notification 
+        [HttpPost]
+        [Route("assigned_activityList")]
+        public async Task<IActionResult> assigned_activityList([FromBody]newNotificationActivityLisModel model)
+        {
+            TranStatus transaction = new TranStatus();
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                var activityList = await iactivity.assigned_activityList(model);
+                dctData.Add("assigned_activityList", activityList);
             }
             catch (Exception ex)
             {

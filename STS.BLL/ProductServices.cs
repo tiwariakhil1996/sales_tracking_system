@@ -33,6 +33,16 @@ namespace STS.BLL.Service
         }
 
 
+        //Get Product Price
+        public async Task<List<ProductPriceModel>> ProductPrice(int id)
+        {
+            using (productRepository = new ProductRepository())
+            {
+                return await productRepository.ProductPrice(id);
+            }
+        }
+
+
         //Update
         public async Task<TranStatus> updateProduct(int ID, ProductListModel model)
         {
@@ -68,6 +78,7 @@ namespace STS.BLL.Service
                 return await productRepository.ProductList_ActiveDeactive();
             }
         }
+
 
     }
 }

@@ -16,6 +16,9 @@ export class ActivityService {
     return this.http.get('/api/Activity/ActivityList');
   }
 
+  activityList_while_adding() {
+    return this.http.get('/api/Activity/ActivityList_while_adding');
+  }
   deleteActivity(aid: number) {
     return this.http.delete('/api/Activity/deleteActivity/' + aid);
   }
@@ -28,6 +31,13 @@ export class ActivityService {
     return this.http.post('/api/Activity/each_sales_activityList', data);
   }
 
+  each_admin_activityList(data) {
+    return this.http.post('/api/Activity/each_admin_activityList', data);
+  }
+
+  assigned_activityList(data) {
+    return this.http.post('/api/Activity/assigned_activityList', data);
+  }
 
   updateInprogress(aid: number, data: any) {
     return this.http.put('/api/Activity/updateInprogress/' + aid, data);
@@ -50,22 +60,9 @@ export class ActivityService {
     return this.http.put('/api/Activity/updateToCancel/' + aid, data);
   }
 
+  latest_added_Activity(){
+    return this.http.get('/api/Activity/addActivity');
+  }
 
-
-  // changeStatus_ToInprogress(aid: number) {
-  //   return this.http.put('/api/Activity/ChangeStatusActivity_Inprogress/' + aid, null);
-  // }
-
-  // changeStatus_ToFollowup(aid: number) {
-  //   return this.http.put('/api/Activity/ChangeStatusActivity_Followup/' + aid, null);
-  // }
-
-  // changeStatus_ToClose(aid: number) {
-  //   return this.http.put('/api/Activity/ChangeStatusActivity_Close/' + aid, null);
-  // }
-  
-  // changeStatus_ToCancel(aid: number) {
-  //   return this.http.put('/api/Activity/ChangeStatusActivity_Cancel/' + aid, null);
-  // }
 
 }

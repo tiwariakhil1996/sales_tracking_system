@@ -16,6 +16,8 @@ namespace STS.BLL.Interface
         //View Products
         Task<List<ProductListModel>> ProductList();
 
+        // Get Product Price
+        Task<List<ProductPriceModel>> ProductPrice(int id);
 
         //Update Product
         Task<TranStatus> updateProduct(int ID, ProductListModel model);

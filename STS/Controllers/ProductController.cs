@@ -43,6 +43,32 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
+
+        // Get Product Price
+
+        [HttpGet]
+        [Route("ProductPrice/{id}")]
+        public async Task<IActionResult> ProductPrice(int id)
+        {
+            TranStatus transaction = new TranStatus();
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                var productPrice = await iproduct.ProductPrice(id);
+                dctData.Add("ProductPrice", productPrice);
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+
+
         //View Products
 
         [HttpGet]
@@ -160,6 +186,7 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
+
 
     }
 }

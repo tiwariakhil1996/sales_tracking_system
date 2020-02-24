@@ -32,5 +32,10 @@ export class ProductService {
     return this.http.get('/api/Product/ProductList_ActiveDeactive');
   }
 
+  price(id){
+    return this.http.get('/api/Product/ProductPrice/' + id);
+  }
+  
+ 
   
 }

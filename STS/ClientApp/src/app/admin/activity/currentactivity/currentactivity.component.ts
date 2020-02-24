@@ -43,7 +43,7 @@ export class CurrentactivityComponent implements OnInit {
     this.productList();
     this.clientList();
     this.SalesList();
-
+    // this.eachactivityList();
   }
   ngOnInit() {
   }
@@ -78,6 +78,8 @@ export class CurrentactivityComponent implements OnInit {
     }, (err) => {
     });
   }
+
+
   // Edit
   openupdatemodal(content, item) {
     this.activity = JSON.parse(JSON.stringify(item));

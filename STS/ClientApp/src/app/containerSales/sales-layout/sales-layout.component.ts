@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { SalesService } from '../../service/sales.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { salesregisterModel, changePasswordModel } from '../../model/sales';
 import { ToastrService } from 'ngx-toastr';
 import { ActivityService } from '../../service/activity.service';
-import { activityModel } from '../../model/activity';
-import { salesregisterModel, changePasswordModel } from '../../model/sales';
+import { activityModel, newactivityModel } from '../../model/activity';
 
 
 @Component({
@@ -21,11 +21,16 @@ export class SalesLayoutComponent {
   imageSrc: string = '';
   modalRef: BsModalRef;
 
+  newactivity = new newactivityModel();
+  newactivityDetails: newactivityModel[] = [];
+
+  assignedActivity : any;
 
   user = new salesregisterModel();
 
   activity = new activityModel();
   activityDetails: activityModel[] = [];
+
   totalActivity: any;
 
   loginDetail = new salesregisterModel();
@@ -46,6 +51,7 @@ export class SalesLayoutComponent {
     private activityService: ActivityService) {
 
     this.activityList();
+    this.newactivityList();
 
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.changePassword.id = this.user.id;
@@ -182,13 +188,35 @@ export class SalesLayoutComponent {
           console.log(this.activityDetails);
           this.totalActivity = this.activityDetails.length;
           console.log(this.totalActivity);
-
+          
         }
       }
     }, (err) => {
 
     });
   }
+
+
+  newactivityList() {
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.activity.userid = this.user.id;
+    console.log(this.activity.userid);
+
+    this.activityService.assigned_activityList(this.activity).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.assigned_activityList) {
+          this.newactivityDetails = data.assigned_activityList;
+          console.log(this.newactivityDetails);
+          this.assignedActivity = this.newactivityDetails.length;
+          console.log(this.assignedActivity);
+          
+        }
+      }
+    }, (err) => {
+
+    });
+  }
+
 
   logout() {
     // remove user from local storage to log user out

@@ -12,6 +12,8 @@ namespace STS.DAL
 {
     public class ActivityRepository : BaseRepository
     {
+
+
         //Insert
         public async Task<TranStatus> addActivity(ActivityModel model)
         {
@@ -23,14 +25,20 @@ namespace STS.DAL
                 parameter.Add("@Title", model.Title);
                 parameter.Add("@Description", model.Description);
                 parameter.Add("@ProductID", model.ProductID);
+                parameter.Add("@Price", model.Price);
+                parameter.Add("@Quantity", model.Quantity);
+                parameter.Add("@Amount", model.Amount);
+                parameter.Add("@Discount_per", model.Discount_per);
+                parameter.Add("@Discount_amt", model.Discount_amt);
+                parameter.Add("@Total_price", model.Total_price);
                 parameter.Add("@SalesID", model.SalesID);
                 parameter.Add("@ClientID", model.ClientID);
                 parameter.Add("@Contact", model.Contact);
-                //parameter.Add("@Latitude", model.Latitude);
-                //parameter.Add("@Longitude", model.Longitude);
+
                 parameter.Add("@AppointmentDate", model.AppointmentDate);
                 parameter.Add("@Createdby", model.Createdby);
-               
+
+                parameter.Add("@Result", dbType: DbType.Int32, direction: ParameterDirection.Output);
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
@@ -42,7 +50,13 @@ namespace STS.DAL
 
             }
         }
-    
+
+
+
+        //    }
+        //}
+
+
         //Display
         public async Task<List<ActivityListModel>> ActivityList()
         {
@@ -50,6 +64,19 @@ namespace STS.DAL
             {
                 connection.Open();
                 var result = await connection.QueryAsync<ActivityListModel>("ActivityList", commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
+
+
+        //Display ActivityList_while_adding
+        public async Task<List<ActivityList_while_addingModel>> ActivityList_while_adding()
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<ActivityList_while_addingModel>("ActivityList_while_adding", commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
             }
@@ -72,6 +99,41 @@ namespace STS.DAL
 
             }
         }
+
+
+        // Display each admin List Individually
+        public async Task<List<admin_ActivityListModel>> each_admin_activityList(admin_ActivityListModel model)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@AdminID", model.userId);
+
+                var result = await connection.QueryAsync<admin_ActivityListModel>("each_admin_activityList", parameter, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+
+
+        }
+        // Count Assigned list on bell  notification 
+        public async Task<List<newNotificationActivityLisModel>> assigned_activityList(newNotificationActivityLisModel model)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@SalesID", model.userId);
+
+                var result = await connection.QueryAsync<newNotificationActivityLisModel>("assigned_activityList", parameter, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
+
 
 
         //Delete
@@ -238,6 +300,7 @@ namespace STS.DAL
         }
 
         //Activity_History
+
         //Update
         public async Task<TranStatus> activity_history(int Aid, ActivityListModel model)
         {

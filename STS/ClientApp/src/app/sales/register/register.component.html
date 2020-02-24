@@ -1,10 +1,10 @@
-<div class="app-body">
+<div class="app-body bg">
   <main class="main d-flex align-items-center">
     <div class="container">
       <div class="row">
         <div class="col-md-6 mx-auto">
           <div class="card mx-4">
-            <div class="card-body p-4">
+            <div class="card-body p-4 reg-form">
                 <h1>Sales Register</h1>
 
                
@@ -37,7 +37,7 @@
                   <input type="password" class="form-control" placeholder="Repeat password"  [(ngModel)]="register.cpassword"  name="cpassword" >
                 </div>
             </div>
-            <div class="card-footer p-4">
+            <div class="card-footer p-4 reg-footer">
               <div class="row">
                 <div class="col-12">
                   <button type="submit" class="btn btn-block btn-success" (click)="submitForm()">Register</button>

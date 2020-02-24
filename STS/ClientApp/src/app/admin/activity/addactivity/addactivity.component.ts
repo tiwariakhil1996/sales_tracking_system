@@ -5,8 +5,8 @@ import { ProductService } from '../../../service/product.service';
 import { ActivityService } from '../../../service/activity.service';
 import { ClientService } from '../../../service/client.service';
 import { salesregisterModel } from '../../../model/sales';
-import { activityModel } from '../../../model/activity';
-import { productModel } from '../../../model/product';
+import { activityModel, addactivityModel, activityList_while_addingModel, latestactivityModel } from '../../../model/activity';
+import { productModel, productpriceModel } from '../../../model/product';
 import { clientModel } from '../../../model/client';
 import { ToastrService } from 'ngx-toastr';
 import { registerModel } from '../../../model/admin';
@@ -17,14 +17,30 @@ import { registerModel } from '../../../model/admin';
 })
 export class AddactivityComponent implements OnInit {
   user = new registerModel();
-  activity = new activityModel();
-  activityDetails: activityModel[] = [];
+
+  activity = new addactivityModel();
+  activityDetails: addactivityModel[] = [];
+
+  latestactivity = new latestactivityModel();
+  latestactivityDetails: latestactivityModel[] = [];
+
+  activityList_adding: activityList_while_addingModel[] = [];
+
   sales = new salesregisterModel();
   salesDetails: salesregisterModel[] = [];
   product = new productModel();
   productDetails: productModel[] = [];
+
+  product_price = new productpriceModel();
+  product_priceDetails: productpriceModel[] = [];
+
   client = new clientModel();
   clientDetails: clientModel[] = [];
+  
+  isShow = true;
+ 
+ 
+
   constructor(private router: Router,
     private activityService: ActivityService,
     private clientService: ClientService,
@@ -36,10 +52,21 @@ export class AddactivityComponent implements OnInit {
     // this.clientList();
     this.active_ClientList();
     this.SalesList();
-    this.activityList();
+    this.activityList_while_adding();
+    // console.log(this.product_priceDetails);
+
+    this.latest_added_activity();
+    console.log(this.latestactivityDetails);
+    
+    
   }
   ngOnInit() {
   }
+
+  toggleDisplay() {
+    this.isShow = !this.isShow;
+  }
+
   productList() {
     this.productService.productList().subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -58,13 +85,34 @@ export class AddactivityComponent implements OnInit {
         }
       }
     }, (err) => {
+
     });
   }
+
+  onProductChange(id) {
+    this.price(id);
+
+  }
+
+  price(id) {
+    this.productService.price(id).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.ProductPrice) {
+          this.product_priceDetails = data.ProductPrice;
+        }
+      }
+    }, (err) => {
+
+      console.log(err);
+    });
+  }
+
   active_ClientList() {
     this.clientService.active_ClientList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.ClientList_ActiveDeactive) {
           this.clientDetails = data.ClientList_ActiveDeactive;
+          
         }
       }
     }, (err) => {
@@ -88,26 +136,74 @@ export class AddactivityComponent implements OnInit {
         }
       }
     }, (err) => {
+
+    });
+  }
+
+  addMoreproducts() {
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.activity.createdby = this.user.id;
+    // console.log(this.activity.createdby);
+
+    this.activityService.addActivity(this.activity).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        // localStorage.setItem('activityDetail', JSON.stringify(data.activityDetail[0] || {}));
+
+        this.toastr.success('Activity is added Successfully', 'Successful', {
+          disableTimeOut: false,
+          timeOut: 2000
+        });
+      }
+      // this.activity = new addactivityModel();
+    }, (err) => {
+
     });
   }
   submitForm() {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.activity.createdby = this.user.id;
     console.log(this.activity.createdby);
-    
+
     this.activityService.addActivity(this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        // alert('Activity added sucesfully');
+        // localStorage.setItem('activityDetail', JSON.stringify(data.activityDetail[0] || {}));
+
         this.toastr.success('Activity is added Successfully', 'Successful', {
           disableTimeOut: false,
           timeOut: 2000
         });
       }
-      this.activity = new activityModel();
+      // this.activity = new addactivityModel();
     }, (err) => {
       console.log(err);
     });
   }
+
+  latest_added_activity() {
+    this.activityService.latest_added_Activity().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.addActivity) {
+          this.latestactivityDetails = data.addActivity;
+          console.log(this.latestactivityDetails);
+        }
+      }
+    }, (err) => {
+
+    });
+  }
+
+  activityList_while_adding() {
+    this.activityService.activityList_while_adding().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.ActivityList_while_adding) {
+          this.activityList_adding = data.ActivityList_while_adding;
+        }
+      }
+    }, (err) => {
+
+    });
+  }
+
   resetForm() {
     this.activity.productId = null;
     this.activity.clientId = null;
