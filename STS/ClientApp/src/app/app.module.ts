@@ -1,4 +1,6 @@
+//this is Angular Google map Libraries Import this...
 import { AgmCoreModule } from '@agm/core';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
