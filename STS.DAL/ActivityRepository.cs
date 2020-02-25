@@ -277,6 +277,7 @@ namespace STS.DAL
                 TranStatus transaction = new TranStatus();
                 DynamicParameters parameter = new DynamicParameters();
                 parameter.Add("@Activity_Id", Aid);
+                parameter.Add("@Order_Id", model.Order_Id);
                 parameter.Add("@ProductID", model.ProductID);
                 parameter.Add("@Price", model.Price);
                 parameter.Add("@Quantity", model.Quantity);

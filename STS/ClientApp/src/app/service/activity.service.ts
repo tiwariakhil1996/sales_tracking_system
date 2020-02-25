@@ -24,12 +24,21 @@ export class ActivityService {
   activityList_while_adding() {
     return this.http.get('/api/Activity/ActivityList_while_adding');
   }
+
   deleteActivity(aid: number) {
     return this.http.delete('/api/Activity/deleteActivity/' + aid);
   }
 
+  deleteProduct(productId: number) {
+    return this.http.delete('/api/Activity/deleteActivity_Product/' + productId);
+  }
+
   updateActivity(aid: number, data: any) {
     return this.http.put('/api/Activity/updateActivity/' + aid, data);
+  }
+
+  update_old_Products(aid: number, data: any) {
+    return this.http.put('/api/Activity/update_old_products/' + aid, data);
   }
 
   each_sales_activityList(data) {

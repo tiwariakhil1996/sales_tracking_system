@@ -4,7 +4,7 @@ import { SalesService } from '../../../service/sales.service';
 import { ProductService } from '../../../service/product.service';
 import { ClientService } from '../../../service/client.service';
 import { ActivityService } from '../../../service/activity.service';
-import { activityModel, ActivityhistoryModel } from '../../../model/activity';
+import { activityModel, updateactivityModel } from '../../../model/activity';
 import { salesregisterModel } from '../../../model/sales';
 import { productModel } from '../../../model/product';
 import { clientModel } from '../../../model/client';
@@ -24,6 +24,9 @@ export class CurrentactivityComponent implements OnInit {
   activity = new activityModel();
   activityDetails: activityModel[] = [];
 
+  activity_product = new updateactivityModel();
+  activity_productDetails : updateactivityModel[] = [];
+  
   sales = new salesregisterModel();
   salesDetails: salesregisterModel[] = [];
 
@@ -116,7 +119,7 @@ export class CurrentactivityComponent implements OnInit {
   openupdatemodal(content, item) {
     this.activity = JSON.parse(JSON.stringify(item));
     // data show in model use this line and store the data in user and display in ui
-    this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
+    this.modalService.open(content, { size: 'xl', backdropClass: 'light-blue-backdrop' });
     // this.viewData = JSON.parse(localStorage.getItem('Register')) || [];
 
   }
@@ -125,6 +128,22 @@ export class CurrentactivityComponent implements OnInit {
     this.modalService.open(content1, { ariaLabelledBy: 'modal-basic-title' })
   }
 
+  GetProduct_Activity(aid) {
+    this.activity_productList(aid);
+
+  }
+  
+  activity_productList(aid) {
+    this.activityService.activity_productList(aid).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.Activity_ProductList) {
+          this.activity_productDetails = data.Activity_ProductList;
+        }
+      }
+    }, (err) => {
+
+    });
+  }
 
   // onEdit(aid: number) {
   //   this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};

@@ -96,6 +96,7 @@ export class updateactivityModel {
     // contact: String;
     // address: string;
     // appointmentDate: string;
+    order_Id: number;
     productId: number;
     productname: string;
     price: number;

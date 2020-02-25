@@ -82,6 +82,16 @@ export class CurrentactivityComponent implements OnInit {
     // }
   }
 
+  onProductDelete(productId : number) {
+    this.activityService.deleteProduct(productId).subscribe(data => {
+      this.activityList();
+    });
+    this.toastr.success('Product is deleted Successful', 'Successful', {
+      disableTimeOut: false,
+      timeOut: 2000
+    });
+  }
+
   onProductChange(id) {
     this.price(id);
 
@@ -111,7 +121,7 @@ export class CurrentactivityComponent implements OnInit {
     discount_amt: null,
     total_price: null,
     });
- 
+
   }
 
   activityList() {
@@ -170,6 +180,14 @@ export class CurrentactivityComponent implements OnInit {
 
   }
 
+  open_productupdatemodal(content1, products) {
+    this.activity_product = JSON.parse(JSON.stringify(products));
+    // data show in model use this line and store the data in user and display in ui
+    this.modalService.open(content1, {size:'xl', backdropClass: 'light-blue-backdrop' });
+    // this.viewData = JSON.parse(localStorage.getItem('Register')) || [];
+
+  }
+
   onEdit(aid: number) {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.activity.modifiedby = this.user.id;
@@ -188,6 +206,31 @@ export class CurrentactivityComponent implements OnInit {
     }, (err) => {
     });
   }
+
+
+  Update_old_Products(aid: number) {
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.activity.modifiedby = this.user.id;
+    console.log(this.activity.modifiedby);
+
+    this.activityService.update_old_Products(aid, this.activity_product).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        // alert('Activity updated sucesfully');
+        this.toastr.success('Product is updated successfully', 'Successful', {
+          disableTimeOut: false,
+          timeOut: 2000
+        });
+      }
+      // this.activity = new activityModel();
+      // this.activityList();
+    }, (err) => {
+    });
+
+
+
+  }
+
+
 
   // Display
 

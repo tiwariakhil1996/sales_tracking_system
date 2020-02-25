@@ -38,9 +38,10 @@ namespace STS.Model
 
     public class Activity_ProductListModel
     {
-        public int Activity_Id { get; set; }
+        //public int Activity_Id { get; set; }
         public int Aid { get; set; }
         public string Productname { get; set; }
+        public int Order_Id { get; set; }
         public int ProductId { get; set; }
         public int Price { get; set; }
         public int Quantity { get; set; }
@@ -151,6 +152,7 @@ namespace STS.Model
     public partial class Update_products_in_ActivityModel
     {
         public int Aid { get; set; }
+        public int Order_Id { get; set; }
 
         public int ProductID { get; set; }
         public string Productname { get; set; }
@@ -163,6 +165,6 @@ namespace STS.Model
         public int Total_price { get; set; }
         public int Modifiedby { get; set; }
 
-
+  
     }
 }
