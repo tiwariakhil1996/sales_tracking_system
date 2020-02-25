@@ -11,7 +11,7 @@ import { clientModel } from '../../../model/client';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { registerModel } from '../../../model/admin';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap';
+
 @Component({
   selector: 'app-currentactivity',
   templateUrl: './currentactivity.component.html',
@@ -22,6 +22,7 @@ export class CurrentactivityComponent implements OnInit {
   // pageOfItems: Array<any>;
 
   user = new registerModel();
+
   activity = new activityModel();
   activityDetails: activityModel[] = [];
 
@@ -38,17 +39,18 @@ export class CurrentactivityComponent implements OnInit {
 
   sales = new salesregisterModel();
   salesDetails: salesregisterModel[] = [];
+
   product = new productModel();
   productDetails: productModel[] = [];
+
   client = new clientModel();
   clientDetails: clientModel[] = [];
-  modalRef: BsModalRef;
+
   constructor(private activityService: ActivityService,
     private router: Router,
     private clientService: ClientService,
     private modalService: NgbModal,
-    private modalServices: BsModalService,
-     private salesService: SalesService,
+    private salesService: SalesService,
     private productService: ProductService,
     private toastr: ToastrService) {
     this.activityList();
@@ -59,12 +61,14 @@ export class CurrentactivityComponent implements OnInit {
     // this.activity_productList();
   }
 
+  
   ngOnInit() {
     // this.addMoreproducts();
   }
 
     
   // Delete
+
   onDelete(aid: number) {
     // if (confirm('Are you sure to delete this record ?') === true) {
       this.activityService.deleteActivity(aid).subscribe(data => {
@@ -118,6 +122,7 @@ export class CurrentactivityComponent implements OnInit {
         }
       }
     }, (err) => {
+
     });
   }
 
@@ -153,18 +158,23 @@ export class CurrentactivityComponent implements OnInit {
   //     }
   //   }, (err) => {
 
+  //   });
+  // }
+
   // Edit
   openupdatemodal(content, item) {
     this.activity = JSON.parse(JSON.stringify(item));
     // data show in model use this line and store the data in user and display in ui
     this.modalService.open(content, {size:'xl', backdropClass: 'light-blue-backdrop' });
     // this.viewData = JSON.parse(localStorage.getItem('Register')) || [];
+
   }
-  
+
   onEdit(aid: number) {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.activity.modifiedby = this.user.id;
     console.log(this.activity.modifiedby);
+
     this.activityService.updateActivity(aid, this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
         // alert('Activity updated sucesfully');
@@ -178,7 +188,9 @@ export class CurrentactivityComponent implements OnInit {
     }, (err) => {
     });
   }
+
   // Display
+
   productList() {
     this.productService.productList().subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -187,8 +199,10 @@ export class CurrentactivityComponent implements OnInit {
         }
       }
     }, (err) => {
+
     });
   }
+
   clientList() {
     this.clientService.clientList().subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -197,8 +211,10 @@ export class CurrentactivityComponent implements OnInit {
         }
       }
     }, (err) => {
+
     });
   }
+
   SalesList() {
     this.salesService.SalesList().subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -207,9 +223,13 @@ export class CurrentactivityComponent implements OnInit {
         }
       }
     }, (err) => {
+
     });
   }
+
+
   addnewActivity() {
     this.router.navigate(['/admin/activity/addactivity']);
+
   }
 }

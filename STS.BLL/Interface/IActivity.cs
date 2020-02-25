@@ -42,10 +42,11 @@ namespace STS.BLL.Interface
         // Count Assigned list on bell  notification 
         Task<List<newNotificationActivityLisModel>> assigned_activityList(newNotificationActivityLisModel model);
 
-        //Update
+        //Update Activity
         Task<TranStatus> updateActivity(int Aid, ActivityListModel model);
 
-       
+        //Update Products  added in activity
+        Task<TranStatus> update_old_Products(int Aid, Update_products_in_ActivityModel model);
 
 
         //Update updateInprogress
@@ -60,8 +61,11 @@ namespace STS.BLL.Interface
         //Update updateToCancel
         Task<TranStatus> updateToCancel(int Aid, ActivityListModel model);
 
-        //Delete
+        //Delete Activity
         Task<TranStatus> deleteActivity(int Aid);
+
+        //Delete
+        Task<TranStatus> deleteActivity_Product(int productId);
 
         //Activity_History
         Task<TranStatus> activity_history(int Aid, ActivityListModel model);

@@ -29,13 +29,13 @@ export const routes: Routes = [
   //   pathMatch: 'full',
   // },
 
-  {
-    path: 'app',
-    component: AppComponent,
-    data: {
-      title: 'Map'
-    }
-  },
+  // {
+  //   path: 'app',
+  //   component: AppComponent,
+  //   data: {
+  //     title: 'Map'
+  //   }
+  // },
   
   {
     path: '',

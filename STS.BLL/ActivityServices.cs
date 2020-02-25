@@ -99,7 +99,7 @@ namespace STS.BLL.Service
         }
 
 
-        //Update
+        //Update Activity
         public async Task<TranStatus> updateActivity(int Aid, ActivityListModel model)
         {
             using (activityRepository = new ActivityRepository())
@@ -107,20 +107,17 @@ namespace STS.BLL.Service
                 return await activityRepository.updateActivity(Aid, model);
             }
         }
-       
-
-        ////Change status InProgress
-        //public async Task<TranStatus> ChangeStatusInProgress(int id )
-        //{
-        //    using (activityRepository = new ActivityRepository())
-        //    {
-        //        return await activityRepository.ChangeStatusInProgress(id);
-        //    }
-        //}
-
-        
 
 
+
+        //Update Products  added in activity
+        public async Task<TranStatus> update_old_Products(int Aid, Update_products_in_ActivityModel model)
+        {
+            using (activityRepository = new ActivityRepository())
+            {
+                return await activityRepository.update_old_Products(Aid, model);
+            }
+        }
 
         //Update updateInprogress
         public async Task<TranStatus> updateInprogress(int Aid, ActivityListModel model)
@@ -173,7 +170,7 @@ namespace STS.BLL.Service
 
 
 
-        //Delete
+        //Delete Activity
         public async Task<TranStatus> deleteActivity(int Aid)
         {
             using (activityRepository = new ActivityRepository())
@@ -182,31 +179,13 @@ namespace STS.BLL.Service
             }
         }
 
-        ////Change Status Activity Inprogress
-        //public async Task<TranStatus> ChangeStatusActivity_Inprogress(int aid)
-        //{
-        //    using (activityRepository = new ActivityRepository())
-        //    {
-        //        return await activityRepository.ChangeStatusActivity_Inprogress(aid);
-        //    }
-        //}
-
-        ////Change Status Activity Followup
-        //public async Task<TranStatus> ChangeStatusActivity_Followup(int aid)
-        //{
-        //    using (activityRepository = new ActivityRepository())
-        //    {
-        //        return await activityRepository.ChangeStatusActivity_Followup(aid);
-        //    }
-        //}
-
-        ////Change Status Activity Close
-        //public async Task<TranStatus> ChangeStatusActivity_Close(int aid)
-        //{
-        //    using (activityRepository = new ActivityRepository())
-        //    {
-        //        return await activityRepository.ChangeStatusActivity_Close(aid);
-        //    }
-        //}
+        //Delete Activity Product
+        public async Task<TranStatus> deleteActivity_Product(int productId)
+        {
+            using (activityRepository = new ActivityRepository())
+            {
+                return await activityRepository.deleteActivity_Product(productId);
+            }
+        }
     }
 }
