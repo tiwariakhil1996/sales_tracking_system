@@ -42,8 +42,8 @@
             </td>
 
             <td>
-              <button type="button" class="btn btn-primary" data-toggle="modal"
-                (click)="openupdatemodal(content,item)"  (click)="GetProduct_Activity(item.aid)"><i class="fa fa-edit" aria-hidden="true"></i></button>
+              <button type="button" class="btn btn-primary" data-toggle="modal" (click)="openupdatemodal(content,item)"
+                (click)="GetProduct_Activity(item.aid)"><i class="fa fa-edit" aria-hidden="true"></i></button>
 
               <button class='btn btn-danger' type="button" (click)="onDelete(item.aid)"><i class="fa fa-trash"
                   aria-hidden="true"></i></button>
@@ -57,6 +57,17 @@
 
 
 
+
+
+
+
+
+
+
+
+
+<!--      EDIT Activity  -->
+
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT</h4>
@@ -69,55 +80,163 @@
 
   <div class="modal-body" style="color: black;">
 
-      <div class="form-group row">
-        <div class="col-md-6">
-          <label>Title</label>
-          <input type="text" id="title" name="title" [(ngModel)]="activity.title" class="form-control">
-        </div>
-        <div class="col-md-6">
-          <label for="select1">Client Name</label>
-          <select name="clientName" class="form-control" [(ngModel)]="activity.clientId">
-            <option [ngValue]="undefined" selected>Select client Name</option>
-            <option *ngFor="let item of clientDetails;" name="clientName" [ngValue]="item.id">{{item.clientName}}
-            </option>
-          </select>
-        </div>
+    <div class="form-group row">
+      <div class="col-md-3">
+        <label>Title</label>
+        <input type="text" id="title" name="title" [(ngModel)]="activity.title" class="form-control">
+      </div>
+      <div class="col-md-2">
+        <label for="select1">Client Name</label>
+        <select name="clientName" class="form-control" [(ngModel)]="activity.clientId">
+          <option [ngValue]="undefined" selected>Select client Name</option>
+          <option *ngFor="let item of clientDetails;" name="clientName" [ngValue]="item.id">{{item.clientName}}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label for="select1">Sales Name</label>
+        <select name="clientName" class="form-control" [(ngModel)]="activity.salesId">
+          <option [ngValue]="undefined" selected>Select Sales Name</option>
+          <option *ngFor="let item of salesDetails;" name="salesName" [ngValue]="item.id">{{item.salesName}}
+          </option>
+        </select>
       </div>
 
-      <div class="form-group row">
-        <div class="col-md-6">
-          <label>Description</label>
-          <textarea type="text" id="description" name="description" [(ngModel)]="activity.description" rows="5"
-            class="form-control" placeholder="Enter description"></textarea>
-        </div>
-        <div class="col-md-6">
-          <label for="select1">Sales Name</label>
-          <select name="clientName" class="form-control" [(ngModel)]="activity.salesId">
-            <option [ngValue]="undefined" selected>Select Sales Name</option>
-            <option *ngFor="let item of salesDetails;" name="salesName" [ngValue]="item.id">{{item.salesName}}
-            </option>
-          </select>
-          <div class="form-group row">
-            <div class="col-sm-6">
-              <label for="contact">Contact no.</label>
-              <input type="text" class="form-control" id="contact" [(ngModel)]="activity.contact " name="contact "
-                placeholder="Enter contact no.">
-            </div>
-            <div class="col-sm-6">
-              <label class="text-input">Appointment Date</label>
-              <input class="form-control" id="date" type="date" name="appointmentDate"
-                [(ngModel)]="activity.appointmentDate">
-            </div>
+      <div class="col-sm-2">
+        <label for="contact">Contact no.</label>
+        <input type="text" class="form-control" id="contact" [(ngModel)]="activity.contact " name="contact "
+          placeholder="Enter contact no.">
+      </div>
+
+      <div class="col-sm-2">
+        <label class="text-input">Appointment Date</label>
+        <input class="form-control" id="date" type="date" name="appointmentDate" [(ngModel)]="activity.appointmentDate">
+      </div>
+
+    </div>
+
+    <div class="form-group row">
+      <div class="col-md-6">
+        <label>Description</label>
+        <textarea type="text" id="description" name="description" [(ngModel)]="activity.description" rows="3"
+          class="form-control" placeholder="Enter description"></textarea>
+      </div>
+      <div class="col-md-6">
+
+        <!-- <div class="form-group row">
+          <div class="col-sm-6">
+            <label for="contact">Contact no.</label>
+            <input type="text" class="form-control" id="contact" [(ngModel)]="activity.contact " name="contact "
+              placeholder="Enter contact no.">
           </div>
-        </div>
+          <div class="col-sm-6">
+            <label class="text-input">Appointment Date</label>
+            <input class="form-control" id="date" type="date" name="appointmentDate"
+              [(ngModel)]="activity.appointmentDate">
+          </div>
+        </div> -->
       </div>
+    </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Add additional products -->
+
+    <div class="card-body table-responsive">
+      <table class="table table-bordered btn-center">
+        <thead>
+          <tr class="table-success">
+            <th>Sr.no</th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Qty*</th>
+            <th>Amount</th>
+            <th>Disc %</th>
+            <th>Disc amt</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr *ngFor="let products of addproductlistDetails;let i=index;">
+            <td>{{i+1}}</td>
+            <td>
+              <select id="productname" name="productname" class="form-control" [(ngModel)]="products.productId"
+                (change)="onProductChange($event.target.value)">
+                <option [ngValue]="undefined" selected>Select Product Name</option>
+                <option *ngFor="let item of productDetails;" value={{item.id}}>{{item.productname}} </option>
+              </select>
+            </td>
+            <td>
+              <input type="text" class="form-control" id="price" name="price" [(ngModel)]="products.price">
+            </td>
+            <td> <input type="text" class="form-control" id="quantity" name="quantity" [(ngModel)]="products.quantity">
+            </td>
+            <td> <input type="text" class="form-control" id="amount" name="amount" [(ngModel)]="products.amount">
+            </td>
+            <td> <input type="text" class="form-control" id="discount_per" name="discount_per"
+                [(ngModel)]="products.discount_per">
+            </td>
+            <td> <input type="text" class="form-control" id="discount_amt" name="discount_amt"
+                [(ngModel)]="products.discount_amt">
+            </td>
+            <td><input type="text" class="form-control" id="total_price" name="total_price"
+                [(ngModel)]="products.total_price">
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-1 add_product ">
+        <button type="submit" class="form-control btn btn-sm btn-success" (click)="addMoreproducts()"><i
+            class="fa fa-plus"></i> Add</button>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- View Product List -->
 
     <div class="row">
       <div class="col-sm-12">
         <table class="table">
           <thead class="color">
             <tr>
+              <th style="padding-right: 50px;">Action</th>
               <th>Sr.</th>
               <th>Product Name</th>
               <th>Price</th>
@@ -129,48 +248,165 @@
             </tr>
           </thead>
           <tbody>
+
+
             <tr *ngFor="let products of activity_productDetails;let i=index;">
+              <td> <button type="button" class="btn btn-primary" data-toggle="modal"
+                  (click)="open_productupdatemodal(content1,products)">
+                  <i class="fa fa-edit" aria-hidden="true"></i></button>
+
+                <button class='btn btn-danger' type="button"  (click)="onProductDelete(products.productId)">
+                  <i class="fa fa-trash" aria-hidden="true"></i></button>
+              </td>
               <td>{{i+1}}</td>
-              <td><select id="productname" name="productname" class="form-control" [(ngModel)]="products.productId"
+              <td>
+                <!-- <select id="productname" name="productname" class="form-control" [(ngModel)]="products.productId"
                   (change)="onProductChange($event.target.value)">
                   <option [ngValue]="undefined" selected>Select Product Name</option>
                   <option *ngFor="let item of productDetails;" value={{item.id}}>{{item.productname}} </option>
-                </select></td>
-              <td> 
-                <input type="text" class="form-control" id="price" name="price" [(ngModel)]="products.price">
+                </select> -->
+                {{products.productname}}
               </td>
-              <td> <input type="text" class="form-control" id="quantity" name="quantity"
-                  [(ngModel)]="products.quantity">
+              <td>
+                <!-- <input type="text" class="form-control" id="price" name="price" [(ngModel)]="products.price"> -->
+                {{products.price}}
               </td>
-              <td> <input type="text" class="form-control" id="amount" name="amount" [(ngModel)]="products.amount">
+              <td>
+                <!-- <input type="text" class="form-control" id="quantity" name="quantity"
+                  [(ngModel)]="products.quantity"> -->
+                {{products.quantity}}
               </td>
-              <td> <input type="text" class="form-control" id="discount_per" name="discount_per"
-                  [(ngModel)]="products.discount_per">
+              <td>
+                <!-- <input type="text" class="form-control" id="amount" name="amount" [(ngModel)]="products.amount"> -->
+                {{products.amount}}
               </td>
-              <td> <input type="text" class="form-control" id="discount_amt" name="discount_amt"
-                  [(ngModel)]="products.discount_amt">
+              <td>
+                <!-- <input type="text" class="form-control" id="discount_per" name="discount_per"
+                  [(ngModel)]="products.discount_per"> -->
+                {{products.discount_per}}
               </td>
-              <td><input type="text" class="form-control" id="total_price" name="total_price"
-                  [(ngModel)]="products.total_price">
+              <td>
+                <!-- <input type="text" class="form-control" id="discount_amt" name="discount_amt"
+                  [(ngModel)]="products.discount_amt"> -->
+                {{products.discount_amt}}
+              </td>
+              <td>
+                <!-- <input type="text" class="form-control" id="total_price" name="total_price"
+                  [(ngModel)]="products.total_price"> -->
+                {{products.total_price}}
               </td>
             </tr>
+
           </tbody>
         </table>
       </div>
     </div>
+  </div>
 
-    </div>
-  <div class="form-group row">
-          <div class="col-sm-1 add_product ">
-            <button type="submit" class="form-control btn btn-sm btn-success" (click)="addMoreproducts()"><i
-                class="fa fa-plus"></i> Add</button>
-            <!-- <button type="submit" class="form-control btn btn-sm btn-success" (click)="toggleDisplay()"><i class="fa fa-plus"></i> Add</button> -->
 
-          </div>
-        </div>
-    <div class="card-footer">
+  <div class="card-footer">
     <button type="submit" class="btn btn-success" (click)="onEdit(activity.aid)">Update</button>
     <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal-body"
       (click)="modal.dismiss('Cross click')">Cancel</button>
+  </div>
+</ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Edit Products in activity -->
+
+<ng-template #content1 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Update Product</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <div class="form-group row">
+      <div class="col-md-2">
+        <label for="date">Product Name</label>
+        <div class="input-group">
+          <select id="productname" name="productname" class="form-control" [(ngModel)]="activity_product.productId"
+            (change)="onProductChange($event.target.value)">
+            <option [ngValue]="undefined" selected>Select Product Name</option>
+            <option *ngFor="let item of productDetails;" value={{item.id}}>{{item.productname}} </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <!-- <div class="form-group"> -->
+          <label>Price</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="price" name="price" [(ngModel)]="activity_product.price">
+          </div>
+        </div>
+      
+        <div class="col-md-1">
+        <!-- <div class="form-group"> -->
+          <label>Quantity</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="quantity" name="quantity" [(ngModel)]="activity_product.quantity">
+          </div>
+        </div>
+
+        <div class="col-md-2">
+        <!-- <div class="form-group"> -->
+          <label>Amount</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="amount" name="amount" [(ngModel)]="activity_product.amount">
+          </div>
+        </div>
+
+        <div class="col-md-1">
+        <!-- <div class="form-group"> -->
+          <label>Disc %</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="discount_per" name="discount_per" [(ngModel)]="activity_product.discount_per">
+          </div>
+        </div>
+
+        <div class="col-md-2">
+        <!-- <div class="form-group"> -->
+          <label>Disc amt</label>
+          <div>
+            <input type="text" class="form-control" id="discount_amt" name="discount_amt" [(ngModel)]="activity_product.discount_amt">
+          </div>
+        </div>
+
+        <div class="col-md-2">
+        <!-- <div class="form-group"> -->
+          <label>Total</label>
+          <div>
+            <input type="text" class="form-control" id="total_price" name="total_price" [(ngModel)]="activity_product.total_price">
+          </div>
+        </div>
+
+      </div>
     </div>
+    <!-- </form> -->
+
+  <div class="modal-footer">
+    <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button> -->
+    <!-- <button type="button" class="btn btn-outline-dark" (click)="update_ToFollowup(activity.aid)">Submit</button> -->
+    <button type="button" class="btn btn-outline-dark" (click)="Update_old_Products(activity.aid)" >Submit</button>
+
+  </div>
 </ng-template>

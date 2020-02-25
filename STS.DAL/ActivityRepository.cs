@@ -120,7 +120,7 @@ namespace STS.DAL
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
-                var result = await connection.QueryAsync<Activity_ProductListModel>("Activity_ProductList", commandType: CommandType.StoredProcedure);
+                var result = await connection.QueryAsync<Activity_ProductListModel>("Activity_ProductList", parameter, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
             }
@@ -193,7 +193,7 @@ namespace STS.DAL
 
 
 
-        //Delete
+        //Delete Activity
         public async Task<TranStatus> deleteActivity(int Aid)
         {
             using (var connection = new SqlConnection(ConnectionString))
@@ -216,7 +216,29 @@ namespace STS.DAL
 
 
 
-        //Update
+        //Delete Activity Product
+        public async Task<TranStatus> deleteActivity_Product(int productId)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@ProductId", productId);
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                //await connection.QueryMultipleAsync(nameof(deleteClient), parameter, commandType: CommandType.StoredProcedure);
+                await connection.QueryAsync("deleteActivity_Product", parameter, commandType: CommandType.StoredProcedure);
+                transaction.returnMessage = parameter.Get<string>("@Message");
+                transaction.code = parameter.Get<int>("@Code");
+                return transaction;
+
+            }
+        }
+
+
+        //Update  Activity
         public async Task<TranStatus> updateActivity(int Aid, ActivityListModel model)
         {
             using (var connection = new SqlConnection(ConnectionString))
@@ -238,6 +260,36 @@ namespace STS.DAL
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
                 await connection.QueryAsync("updateActivity", parameter, commandType: CommandType.StoredProcedure);
+                transaction.returnMessage = parameter.Get<string>("@Message");
+                transaction.code = parameter.Get<int>("@Code");
+                return transaction;
+
+            }
+        }
+
+
+        //Update Products  added in activity
+        public async Task<TranStatus> update_old_Products(int Aid, Update_products_in_ActivityModel model)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@Activity_Id", Aid);
+                parameter.Add("@Order_Id", model.Order_Id);
+                parameter.Add("@ProductID", model.ProductID);
+                parameter.Add("@Price", model.Price);
+                parameter.Add("@Quantity", model.Quantity);
+                parameter.Add("@Amount", model.Amount);
+                parameter.Add("@Discount_per", model.Discount_per);
+                parameter.Add("@Discount_amt", model.Discount_amt);
+                parameter.Add("@Total_price", model.Total_price);
+                parameter.Add("@Modifiedby", model.Modifiedby);
+
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                await connection.QueryAsync("update_old_Products", parameter, commandType: CommandType.StoredProcedure);
                 transaction.returnMessage = parameter.Get<string>("@Message");
                 transaction.code = parameter.Get<int>("@Code");
                 return transaction;

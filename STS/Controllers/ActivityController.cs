@@ -213,7 +213,7 @@ namespace STS.Controllers
         }
 
 
-        //Update
+        //Update Activity
 
         [HttpPut]
         [Route("updateActivity/{Aid}")]
@@ -237,7 +237,29 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
+        //Update Product added in activity
 
+        [HttpPut]
+        [Route("update_old_Products/{Aid}")]
+        public async Task<IActionResult> update_old_Products(int Aid, [FromBody]Update_products_in_ActivityModel model)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+
+                transaction = await iactivity.update_old_Products(Aid, model);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
 
 
         //Update updateInprogress
@@ -338,7 +360,7 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
-        //Delete
+        //Delete Activity
         [HttpDelete]
         [Route("deleteActivity/{Aid}")]
         public async Task<IActionResult> deleteActivity(int AID)
@@ -360,6 +382,30 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
+
+        //Delete Activity Product
+        [HttpDelete]
+        [Route("deleteActivity_Product/{productId}")]
+        public async Task<IActionResult> deleteActivity_Product(int productId)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+
+                transaction = await iactivity.deleteActivity_Product(productId);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
 
 
         //Activity_History
