@@ -38,11 +38,18 @@ export const navItems: INavData[] = [
   },
 
  
+  // {
+  //   name: 'Map',
+  //   url: '/admin/map',
+  //   icon: 'icon-map'
+  // },
+
   {
     name: 'Map',
-    url: '/admin/map',
+    url: '/app',
     icon: 'icon-map'
   },
+
 
   {
     name: 'Category',

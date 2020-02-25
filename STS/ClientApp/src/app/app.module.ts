@@ -82,8 +82,8 @@ import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password
 
     //this is angular google map api key
     AgmCoreModule.forRoot({
-        apiKey:'AIzaSyBaU6eEpioeuf9Nkzsd5N3OoJsDpVQdzEs',
-        libraries:['places']
+      apiKey: 'AIzaSyBaU6eEpioeuf9Nkzsd5N3OoJsDpVQdzEs',
+      libraries: ['places']
     }),
 
     ModalModule.forRoot(),
@@ -107,7 +107,6 @@ import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password
     ChartsModule,
     // AgmMarker,
     // TooltipModule.forRoot(),
-    AgmCoreModule.forRoot({apiKey: 'AIzaSyBFP65PChjDJ1qtdD9RgkseGbNA4YclE2g'})
   ],
   declarations: [
     AppComponent,
@@ -125,3 +124,4 @@ import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

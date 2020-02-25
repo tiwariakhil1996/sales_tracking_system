@@ -19,6 +19,7 @@ import { SalesLoginComponent } from './sales/login/login.component';
 import { AuthGuard } from './auth.guard';
 import { SalesGuard } from './sales.guard';
 import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password.component';
+import { AppComponent } from './app.component';
 
 
 export const routes: Routes = [
@@ -27,6 +28,15 @@ export const routes: Routes = [
   //   redirectTo: '/sales/login',
   //   pathMatch: 'full',
   // },
+
+  {
+    path: 'app',
+    component: AppComponent,
+    data: {
+      title: 'Map'
+    }
+  },
+  
   {
     path: '',
     redirectTo: '/admin/login',
@@ -46,8 +56,6 @@ export const routes: Routes = [
       title: 'Page 500'
     }
   },
-
-
 
   // --------------------------------------- ADMIN ROUTING -----------------------
   {
@@ -179,3 +187,7 @@ export const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+
+
+
