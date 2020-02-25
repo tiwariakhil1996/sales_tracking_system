@@ -17,3 +17,50 @@
     <div>Latitude: {{latitude}}</div>
     <div>Longitude: {{longitude}}</div>
   </div> -->
+   
+
+  <!-- <div class="form-group row">
+
+    <div class="col-sm-2">
+      <label for="productname">Product Name</label>
+      <select id="productname" name="productname" class="form-control" [(ngModel)]="activity.productId" (change)="onProductChange($event.target.value)">
+        <option [ngValue]="undefined" selected>Select Product Name</option>
+        <option *ngFor="let item of productDetails;" value={{item.id}}>{{item.productname}} </option>
+      </select>
+    </div>
+
+    <div class="col-sm-1">
+      <label for="price">Price</label> -->
+      <!-- <input type="text" class="form-control" id="price"  name="price" placeholder="0.00"  *ngFor="let activity of product_priceDetails;" [(ngModel)]="activity.price" disabled> -->
+      <!-- <tr *ngFor="let activity of product_priceDetails;"> 
+        <td>{{activity.price | currency}}</td>
+     </tr>
+    </div>
+
+    <div class="col-sm-1">
+      <label for="quantity">Qty</label>
+      <input type="text" class="form-control" id="quantity" name="quantity"  [(ngModel)]="activity.quantity">
+    </div>
+
+    <div class="col-sm-1">
+      <label for="amount">Amt</label> -->
+     <!-- <td> {{activity.amount}}</td>  -->
+      <!-- <input type="text" class="form-control" id="amount" name="amount"  [(ngModel)]="activity.amount">
+    </div>
+
+    <div class="col-sm-1">
+      <label for="discount_per">Dis. %</label>
+      <input type="text" class="form-control" id="discount_per" name="discount_per"  [(ngModel)]="activity.discount_per">
+    </div>
+
+    <div class="col-sm-1">
+      <label for="discount_amt">Dis. Amt</label>
+      <input type="text" class="form-control" id="discount_amt" name="discount_amt"  [(ngModel)]="activity.discount_amt">
+    </div>
+
+    <div class="col-sm-1 total_price ">
+      <label for="total_price">Total</label>
+      <input type="text" class="form-control" id="total_price" name="total_price"  [(ngModel)]="activity.total_price" >
+    </div>
+
+  </div> -->

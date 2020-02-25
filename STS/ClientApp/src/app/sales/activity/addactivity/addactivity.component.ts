@@ -133,13 +133,12 @@ export class AddactivityComponent implements OnInit {
   }
 
   resetForm() {
-    this.activity.productId = null;
-    this.activity.clientId = null;
-    this.activity.salesId = null;
-    this.activity.contact = null;
-    this.activity.latitude = null;
-    this.activity.longitude = null;
-    this.activity.appointmentDate = null;
+    this.activity.productId=null;
+    this.activity.clientId=null;
+    this.activity.salesId=null;
+    this.activity.contact=null;
+
+    this.activity.appointmentDate=null;
   }
 
 

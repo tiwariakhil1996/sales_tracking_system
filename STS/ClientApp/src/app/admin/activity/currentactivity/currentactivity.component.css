@@ -14,3 +14,32 @@
     text-align: center;
 }
 
+.add_product{
+    left: 1050px;
+    width: 54px;
+ }
+ .update-modal{
+    /* margin: -270px;
+    margin-block-start: auto; */
+    margin-left: 0px;
+    right: 50px;
+    width: 1000px;
+}
+
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%; 
+    color: modal-content-color;
+    pointer-events: auto;
+    background-color: modal-content-bg;
+    background-clip: padding-box;
+    border: modal-content-border-width solid modal-content-border-color;
+    border-radius: modal-content-border-radius;
+    box-shadow: modal-content-box-shadow-xs;
+    outline: 0;
+  } 
+  /* .model-ct{
+      max-width: 90%;
+  } */

@@ -17,11 +17,15 @@ namespace STS.BLL.Interface
 
 
         // Latest Added Activity
-        //Task<List<LatestAddedActivityModel>> addActivity();
+        Task<List<ActivityModel>> addActivity();
 
 
-        //Display
+        //Display Activity
         Task<List<ActivityListModel>> ActivityList();
+
+        // Display Products Added into activity
+        Task<List<Activity_ProductListModel>> Activity_ProductList(int aid);
+
 
 
         //Display ActivityList_while_adding

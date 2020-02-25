@@ -5,7 +5,7 @@ import { ProductService } from '../../../service/product.service';
 import { ActivityService } from '../../../service/activity.service';
 import { ClientService } from '../../../service/client.service';
 import { salesregisterModel } from '../../../model/sales';
-import { activityModel, addactivityModel, activityList_while_addingModel, latestactivityModel } from '../../../model/activity';
+import { activityModel, addactivityModel, activityList_while_addingModel, latestactivityModel, addproductListingModel } from '../../../model/activity';
 import { productModel, productpriceModel } from '../../../model/product';
 import { clientModel } from '../../../model/client';
 import { ToastrService } from 'ngx-toastr';
@@ -20,6 +20,9 @@ export class AddactivityComponent implements OnInit {
 
   activity = new addactivityModel();
   activityDetails: addactivityModel[] = [];
+
+  addproductlist = new addproductListingModel;
+  addproductlistDetails: addproductListingModel[] = [];
 
   latestactivity = new latestactivityModel();
   latestactivityDetails: latestactivityModel[] = [];
@@ -36,10 +39,10 @@ export class AddactivityComponent implements OnInit {
 
   client = new clientModel();
   clientDetails: clientModel[] = [];
-  
+
   isShow = true;
- 
- 
+
+
 
   constructor(private router: Router,
     private activityService: ActivityService,
@@ -52,15 +55,17 @@ export class AddactivityComponent implements OnInit {
     // this.clientList();
     this.active_ClientList();
     this.SalesList();
-    this.activityList_while_adding();
+    // this.activityList_while_adding();
     // console.log(this.product_priceDetails);
 
-    this.latest_added_activity();
-    console.log(this.latestactivityDetails);
-    
-    
+    // console.log(this.latestactivityDetails);
+
+
+
+
   }
   ngOnInit() {
+    this.addMoreproducts();
   }
 
   toggleDisplay() {
@@ -112,7 +117,7 @@ export class AddactivityComponent implements OnInit {
       if (data.Status.code === 0) {
         if (data.ClientList_ActiveDeactive) {
           this.clientDetails = data.ClientList_ActiveDeactive;
-          
+
         }
       }
     }, (err) => {
@@ -141,33 +146,26 @@ export class AddactivityComponent implements OnInit {
   }
 
   addMoreproducts() {
-    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
-    this.activity.createdby = this.user.id;
-    // console.log(this.activity.createdby);
-
-    this.activityService.addActivity(this.activity).subscribe((data: any) => {
-      if (data.Status.code === 0) {
-        // localStorage.setItem('activityDetail', JSON.stringify(data.activityDetail[0] || {}));
-
-        this.toastr.success('Activity is added Successfully', 'Successful', {
-          disableTimeOut: false,
-          timeOut: 2000
-        });
-      }
-      // this.activity = new addactivityModel();
-    }, (err) => {
-
+    this.addproductlistDetails.push({
+    productId: null,
+    productname: null,
+    price: null,
+    quantity: null,
+    amount: null,
+    discount_per: null,
+    discount_amt: null,
+    total_price: null,
     });
+ 
   }
   submitForm() {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.activity.createdby = this.user.id;
-    console.log(this.activity.createdby);
+    this.activity.productList = this.addproductlistDetails;
+
 
     this.activityService.addActivity(this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        // localStorage.setItem('activityDetail', JSON.stringify(data.activityDetail[0] || {}));
-
         this.toastr.success('Activity is added Successfully', 'Successful', {
           disableTimeOut: false,
           timeOut: 2000
@@ -204,13 +202,10 @@ export class AddactivityComponent implements OnInit {
     });
   }
 
-  resetForm() {
-    this.activity.productId = null;
+  resetForm() { 
     this.activity.clientId = null;
     this.activity.salesId = null;
     this.activity.contact = null;
-    this.activity.latitude = null;
-    this.activity.longitude = null;
     this.activity.appointmentDate = null;
   }
   viewActivityForm() {
