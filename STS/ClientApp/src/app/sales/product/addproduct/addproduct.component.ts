@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
 import { ProductService } from '../../../service/product.service';
-import { productModel } from '../../../model/product';
+
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
 import { salesregisterModel } from '../../../model/sales';
+import { productModel, ImageListModel } from '../../../model/product';
 
 @Component({
   selector: 'app-addproduct',
@@ -27,6 +28,12 @@ export class AddproductComponent implements OnInit {
 
   subcategory = new subcategoryDataModel();
   subcategoryDetails: subcategoryDataModel[] = [];
+
+  // imageModel: ImageModel[] = [];
+  image=new ImageListModel();
+  imageList: ImageListModel[] = [];
+
+
 
   constructor(private router: Router,
     private toastr: ToastrService,
@@ -171,7 +178,7 @@ export class AddproductComponent implements OnInit {
       }
     }
 
-    if (!this.product.image) {
+    if (!this.image.Image) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please select image';
     }
@@ -271,8 +278,8 @@ export class AddproductComponent implements OnInit {
         const image = new Image();
         image.src = String(reader.result);
         const imageDetail = String(reader.result).split(';base64,');
-        this.product.image = imageDetail[1];
-        this.product.ImageExtn = '.' + imageDetail[0].replace('data:image/', '');
+        this.image.Image = imageDetail[1];
+        this.image.ImageExtn = '.' + imageDetail[0].replace('data:image/', '');
         image.height = 100;
         image.width = 100;
         preview.appendChild(image);
@@ -289,7 +296,7 @@ export class AddproductComponent implements OnInit {
     this.product.productname = null;
     this.product.price = null;
     this.product.description = null;
-    this.product.image = null;
+    this.image.Image = null;
     this.product.date = null;
   }
 

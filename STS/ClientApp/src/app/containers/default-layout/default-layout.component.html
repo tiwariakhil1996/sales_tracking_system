@@ -1,6 +1,4 @@
-<app-header
-  [navbarBrandRouterLink]="['/admin/dashboard']"
-  [fixed]="true"
+<app-header [navbarBrandRouterLink]="['/admin/dashboard']" [fixed]="true"
   [navbarBrandFull]="{src: 'assets/img/brand/sts.png', width: 150, height: 53, alt: 'Sales Tracking System'}"
   [navbarBrandMinimized]="{src: 'assets/img/logo/Logo.png', width: 30, height: 30, alt: 'Sales Tracking System'}"
   [sidebarToggler]="'lg'" [asideMenuToggler]="'lg'">
@@ -73,7 +71,8 @@
               <div class="form-group col-md-6">
                 <label for="image">Profile Pic</label><br>
                 <!-- <img  *ngIf="imageSrc" [src]="imageSrc" style="width: 80px; height: 80px;" > -->
-                <input class="form-control" type="file" id="fileupload" name="image" multiple
+                <!-- <img  [src]="'assets/img/Images/AdminProfile/Thumb/'+item.image" style="width:100px;height:100px;"> -->
+               <input class="form-control" type="file" id="fileupload" name="image" multiple
                   (change)="handleFileInput($event.target.files)" [(ngModel)]="updateProfile.image" />
               </div>
 

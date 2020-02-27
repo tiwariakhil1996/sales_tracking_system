@@ -5,9 +5,10 @@ import { BsModalRef } from 'ngx-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
 import { ProductService } from '../../../service/product.service';
-import { productModel } from '../../../model/product';
+
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
 import { salesregisterModel } from '../../../model/sales';
+import { ImageListModel, productModel } from '../../../model/product';
 
 @Component({
   selector: 'app-viewproduct',
@@ -30,6 +31,11 @@ export class ViewproductComponent implements OnInit {
 
   subcategory = new subcategoryDataModel();
   subcategoryDetails: subcategoryDataModel[]=[];
+
+  // imageModel: ImageModel[] = [];
+  image=new ImageListModel();
+  imageList: ImageListModel[] = [];
+
 
   constructor(private router: Router,
     private toastr: ToastrService,
@@ -132,7 +138,7 @@ onEdit(id:number) {
     }
   }
 
-  if (!this.product.image) {
+  if (!this.image.Image) {
     strError += strError = '' ? '' : '<br/>';
     strError += '- Please select image';
   }
@@ -264,8 +270,8 @@ handleFileInput(fileList: FileList) {
       const image = new Image();
       image.src = String(reader.result);
       const imageDetail = String(reader.result).split(';base64,');
-      this.product.image = imageDetail[1];
-      this.product.ImageExtn = '.' + imageDetail[0].replace('data:image/', '');
+      this.image.Image = imageDetail[1];
+      this.image.ImageExtn = '.' + imageDetail[0].replace('data:image/', '');
       image.height = 100;
       image.width = 100;
       preview.appendChild(image);
@@ -275,6 +281,7 @@ handleFileInput(fileList: FileList) {
 
   });
 }
+
 
 // Delete
 

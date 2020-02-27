@@ -1,16 +1,14 @@
-
-
 .bg {
-    background-image: url("/assets/img/Images/1.jpg");
-    /* background-color: darkslategrey; */
-    background-size: 1536px 721px;
-    }
+  background-image: url("/assets/img/Images/1.jpg");
+  /* background-color: darkslategrey; */
+  background-size: 1536px 721px;
+}
 
-    .login-form {
-        /* background-color: lightblue; */
-        background-color: #ddc482;
-    }
-    
-    /* .reg-footer {
+.login-form {
+  /* background-color: lightblue; */
+  background-color: #ddc482;
+}
+
+/* .reg-footer {
         background-color: #495057;
     } */

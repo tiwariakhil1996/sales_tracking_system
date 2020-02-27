@@ -46,7 +46,7 @@ namespace STS.DAL
 
             }
         }
-
+        
         // Latest added Activity
         public async Task<List<ActivityModel>> addActivity()
         {

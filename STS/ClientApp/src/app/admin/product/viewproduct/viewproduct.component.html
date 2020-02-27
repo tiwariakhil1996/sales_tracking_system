@@ -26,15 +26,7 @@
           </tr>
         </thead>
         <tbody>
-          <!-- <tr>
-            <td>Pompeius Ren�</td>
-            <td>2012/01/01</td>
-            <td>Member</td>
-            <td>
-              <span class="badge badge-success">Active</span>
-            </td>
-          </tr>
-          -->
+
           <tr *ngFor="let item of productDetails;let i=index;">
             <td>{{i+1}}</td>
             <!-- <td >{{item.id}}</td> -->
@@ -43,8 +35,8 @@
             <td>{{item.productname}}</td>
             <td >{{item.description}}</td>
             <td >{{item.price}}</td>
-             <!-- <img style="width: 80px; height: 80px;" src={{item.image}}> -->
-            <td style='text-align:center'><img style="max-width: 115px; max-height: 64px;" [src]="'assets/img/Images/Product/Thumb/'+item.image"></td>
+            <img style="width: 80px; height: 80px;" src={{item.imageList}}>
+            <!-- <td style='text-align:center'><img style="max-width: 115px; max-height: 64px;" [src]="'assets/img/Images/Product/Thumb/'+item.Image"></td> -->
             
             <td >{{item.date}}</td>
            
@@ -106,7 +98,7 @@
           <label for="image">Image</label>
           <!-- <input class="form-control" type="file" id="image"  [(ngModel)]="product.image" name="image"    accept="image/*" (change)="handleInputChange($event)" multiple> -->
           <input class="form-control" type="file" id="fileupload" name="image" multiple
-            (change)="handleFileInput($event.target.files)" [(ngModel)]="product.image" />
+            (change)="handleFileInput($event.target.files)" [(ngModel)]="image.Image" />
 
           <!--   <img style="width: 80px; height: 80px;" src={{product.image}} >   -->
         </div>

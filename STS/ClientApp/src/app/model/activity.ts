@@ -1,5 +1,4 @@
 // activity
-
 export class addactivityModel {
     aid: number;
     title: string;
