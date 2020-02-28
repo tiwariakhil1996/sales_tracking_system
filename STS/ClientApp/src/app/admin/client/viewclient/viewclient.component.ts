@@ -5,7 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CountryStateCityService } from '../../../service/country-state-city.service';
 import { ClientService } from '../../../service/client.service';
-import { clientModel } from '../../../model/client';
+import { clientModel, clientListModel } from '../../../model/client';
 import { countryModel, stateModel, cityModel } from '../../../model/country-state-city';
 import { registerModel } from '../../../model/admin';
 
@@ -18,8 +18,8 @@ export class ViewclientComponent implements OnInit {
 
   user = new registerModel();
 
-  client = new clientModel();
-  clientDetails: clientModel[] = [];
+  client = new clientListModel();
+  clientDetails: clientListModel[] = [];
 
   country = new countryModel();
   countryDetails: countryModel[] = [];
@@ -47,12 +47,30 @@ export class ViewclientComponent implements OnInit {
 
   // Display
 
+  // clientList() {
+  //   this.clientService.clientList().subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.ClientList) {
+  //         this.clientDetails = data.ClientList;
+  //         // console.log( this.clientDetails);
+  //       }
+  //     }
+  //   }, (err) => {
+
+  //   });
+  // }
+
   clientList() {
-    this.clientService.clientList().subscribe((data: any) => {
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.client.userid = this.user.id;
+    console.log(this.client.userid);
+
+    this.clientService.each_admin_ClientList(this.client).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        if (data.ClientList) {
-          this.clientDetails = data.ClientList;
-          // console.log( this.clientDetails);
+        if (data.each_admin_ClientList) {
+          this.clientDetails = data.each_admin_ClientList;
+          console.log(this.clientDetails);
+
         }
       }
     }, (err) => {
@@ -80,7 +98,7 @@ export class ViewclientComponent implements OnInit {
           disableTimeOut: false
         });
       }
-      this.client = new clientModel();
+      this.client = new clientListModel();
       this.clientList();
     }, (err) => {
     });

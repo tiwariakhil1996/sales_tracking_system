@@ -83,6 +83,15 @@ namespace STS.BLL.Service
             }
         }
 
+        public async Task<List<SalesListModel>> RegisteredSalesList(SalesListModel model)
+        {
+            using (salesRepository = new SalesRepository())
+            {
+                return await salesRepository.RegisteredSalesList(model);
+            }
+
+        }
+
         // Display  Active Deactive Sales List
         public async Task<List<SalesListModel>> SalesList_ActiveDeactive()
         {

@@ -19,7 +19,7 @@
             <th>ProductName</th>
             <th>Description</th>
             <th>Price</th>
-            <th>Image</th>
+            <!-- <th>Image</th> -->
             <th>Date</th>
             <th>Action</th>
             <!-- <th>IsActive</th> -->
@@ -44,7 +44,7 @@
          <td>{{item.description}}</td>
          <td>{{item.price}}</td>
          <!-- <img style="width: 80px; height: 80px;" src={{item.image}} > -->
-         <td style='text-align:center'><img style="max-width: 50px; max-height: 50px;" [src]="'assets/img/Images/Product/'+item.image"></td>
+         <!-- <td style='text-align:center'><img style="max-width: 50px; max-height: 50px;" [src]="'assets/img/Images/Product/'+item.image"></td> -->
          <td>{{item.date}}</td>
             <td>
               <button type="button" class="btn btn-primary" data-toggle="modal" (click)="openupdatemodal(content,item)" ><i class="fa fa-edit" aria-hidden="true"></i></button>

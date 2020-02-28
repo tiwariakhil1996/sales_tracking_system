@@ -30,6 +30,10 @@ namespace STS.BLL.Interface
         //Display
         Task<List<SalesListModel>> RegisteredSalesList();
 
+
+        // Display by createdby which admin
+        Task<List<SalesListModel>> RegisteredSalesList(SalesListModel model);
+
         //Display Active Deactive Sales
         Task<List<SalesListModel>> SalesList_ActiveDeactive();
 

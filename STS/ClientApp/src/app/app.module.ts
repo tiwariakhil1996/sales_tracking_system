@@ -94,7 +94,11 @@ import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password
     ChartsModule,
     // AgmMarker,
     // TooltipModule.forRoot(),
-    AgmCoreModule.forRoot({apiKey: 'AIzaSyBFP65PChjDJ1qtdD9RgkseGbNA4YclE2g'})
+    // AgmCoreModule.forRoot({apiKey: 'AIzaSyBFP65PChjDJ1qtdD9RgkseGbNA4YclE2g'})
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAgmJb337SljuWJnzPXRyMjiTSL1DWcBq8'
+      // libraries: ['places']
+    }),
   ],
   declarations: [
     AppComponent,

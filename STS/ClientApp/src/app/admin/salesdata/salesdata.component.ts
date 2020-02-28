@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BsModalRef } from 'ngx-bootstrap';
 import { salesregisterModel } from '../../model/sales';
+import { registerModel } from '../../model/admin';
 
 @Component({
   selector: 'app-salesdata',
@@ -13,6 +14,8 @@ import { salesregisterModel } from '../../model/sales';
 export class SalesdataComponent implements OnInit {
 
   modalRef: BsModalRef;
+
+  user = new registerModel();
 
   sales = new salesregisterModel();
   salesDetails: salesregisterModel[] = [];
@@ -33,18 +36,35 @@ export class SalesdataComponent implements OnInit {
   }
 
 
+  // SalesList() {
+  //   this.salesService.SalesList().subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.RegisteredSalesList) {
+  //         this.salesDetails = data.RegisteredSalesList;
+  //       }
+  //     }
+  //   }, (err) => {
+
+  //   });
+  // }
+
   SalesList() {
-    this.salesService.SalesList().subscribe((data: any) => {
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.sales.userid = this.user.id;
+    console.log(this.sales.userid);
+
+    this.salesService.RegisteredSalesList(this.sales).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.RegisteredSalesList) {
           this.salesDetails = data.RegisteredSalesList;
+          console.log(this.salesDetails);
+
         }
       }
     }, (err) => {
 
     });
   }
-
 
   deleteSales(id: number) {
     this.salesService.deleteSales(id).subscribe(data => {

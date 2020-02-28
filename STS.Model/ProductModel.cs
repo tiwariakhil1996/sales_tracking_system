@@ -12,12 +12,28 @@ namespace STS.Model
         public string Productname { get; set; }
         public string Description { get; set; }
         public int Price       { get; set; }
-        public string Image       { get; set; }
-        public string ImageExtn { get; set; }
+        //public string Image       { get; set; }
+        //public string ImageExtn { get; set; }
         public string Date        { get; set; }
         public int Createdby { get; set; }
 
 
+        public List<ImageList> ImageList { get; set; }
+        public List<ImageModel> ImageListData { get; set; }
+
+
+    }
+
+    //Add multiple image
+    public partial class ImageList
+    {
+        public string Image { get; set; }
+        public string ImageExtn { get; set; }
+        public string ImageData { get; set; }
+    }
+    public partial class ImageModel
+    {
+        public string Image { get; set; }
     }
 
     public partial class ProductPriceModel
@@ -45,6 +61,8 @@ namespace STS.Model
         public string Date { get; set; }
         public bool IsActive { get; set; }
         public int Modifiedby { get; set; }
+
+        public int userId { get; set; }
 
     }
 }

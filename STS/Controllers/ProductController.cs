@@ -27,13 +27,24 @@ namespace STS.Controllers
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
             TranStatus transaction = new TranStatus();
+            //try
+            //{
+
+            //    model.Image = CommonHelper.SaveImage(HttpContext, "Images\\Product", model.Image, true, model.ImageExtn);
+            //    transaction = await iproduct.addProduct(model);
+
+            //}
+
             try
             {
-                
-                model.Image = CommonHelper.SaveImage(HttpContext, "Images\\Product", model.Image, true, model.ImageExtn);
+                //This for loop for adding the multiple Image
+                for (var i = 0; i < model.ImageList.Count; i++)
+                {
+                    model.ImageListData[i].Image = CommonHelper.SaveImage(HttpContext, "Images\\Product", model.ImageList[i].ImageData, true, model.ImageList[i].ImageExtn);
+                }
                 transaction = await iproduct.addProduct(model);
-
             }
+
             catch (Exception ex)
             {
                 transaction = CommonHelper.TransactionErrorHandler(ex);
@@ -82,6 +93,51 @@ namespace STS.Controllers
             {
                 var productList = await iproduct.ProductList();
                 dctData.Add("ProductList", productList);
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+
+        // Display each admin List Individually
+        [HttpPost]
+        [Route("each_admin_ProductList")]
+        public async Task<IActionResult> each_admin_ProductList([FromBody]ProductListModel model)
+        {
+            TranStatus transaction = new TranStatus();
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                var productList = await iproduct.each_admin_ProductList(model);
+                dctData.Add("each_admin_ProductList", productList);
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+        // Display each sales List Individually
+        [HttpPost]
+        [Route("each_sales_ProductList")]
+        public async Task<IActionResult> each_sales_ProductList([FromBody]ProductListModel model)
+        {
+            TranStatus transaction = new TranStatus();
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                var productList = await iproduct.each_sales_ProductList(model);
+                dctData.Add("each_sales_ProductList", productList);
             }
             catch (Exception ex)
             {

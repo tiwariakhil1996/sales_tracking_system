@@ -48,52 +48,18 @@ namespace STS.DAL
         }
 
         // Latest added Activity
-        public async Task<List<ActivityModel>> addActivity()
-        {
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-                var result = await connection.QueryAsync<ActivityModel>("addActivity", commandType: CommandType.StoredProcedure);
-                return result.ToList();
-
-            }
-        }
-
-        //public async Task<Tuple<List<ActivityModel>, TranStatus>> addActivity(ActivityModel model)
+        //public async Task<List<ActivityModel>> addActivity()
         //{
         //    using (var connection = new SqlConnection(ConnectionString))
         //    {
-        //        await connection.OpenAsync();
-        //        TranStatus transaction = new TranStatus();
-        //        DynamicParameters parameter = new DynamicParameters();
-        //        parameter.Add("@Title", model.Title);
-        //        parameter.Add("@Description", model.Description);
-        //        parameter.Add("@ProductID", model.ProductID);
-        //        parameter.Add("@Price", model.Price);
-        //        parameter.Add("@Quantity", model.Quantity);
-        //        parameter.Add("@Amount", model.Amount);
-        //        parameter.Add("@Discount_per", model.Discount_per);
-        //        parameter.Add("@Discount_amt", model.Discount_amt);
-        //        parameter.Add("@Total_price", model.Total_price);
-        //        parameter.Add("@SalesID", model.SalesID);
-        //        parameter.Add("@ClientID", model.ClientID);
-        //        parameter.Add("@Contact", model.Contact);
-
-        //        parameter.Add("@AppointmentDate", model.AppointmentDate);
-        //        parameter.Add("@Createdby", model.Createdby);
-
-        //        parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
-        //        parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
-
-        //        var result = await connection.QueryAsync<ActivityModel>("addActivity", parameter, commandType: CommandType.StoredProcedure);
-
-        //        transaction.returnMessage = parameter.Get<string>("@Message");
-        //        transaction.code = parameter.Get<int>("@Code");
-        //        return new Tuple<List<ActivityModel>, TranStatus>(result.ToList(), transaction);
+        //        connection.Open();
+        //        var result = await connection.QueryAsync<ActivityModel>("addActivity", commandType: CommandType.StoredProcedure);
+        //        return result.ToList();
 
         //    }
         //}
 
+      
 
         //Display Activity
         public async Task<List<ActivityListModel>> ActivityList()
@@ -239,24 +205,27 @@ namespace STS.DAL
 
 
         //Update  Activity
-        public async Task<TranStatus> updateActivity(int Aid, ActivityListModel model)
+        public async Task<TranStatus> updateActivity(int Aid, Update_ActivityModel model)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 await connection.OpenAsync();
                 TranStatus transaction = new TranStatus();
                 DynamicParameters parameter = new DynamicParameters();
-                parameter.Add("@Aid", Aid);
+                parameter.Add("@Activity_Id", Aid);
+           
                 parameter.Add("@Title", model.Title);
                 parameter.Add("@Description", model.Description);
-                parameter.Add("@ProductID", model.ProductID);
                 parameter.Add("@SalesID", model.SalesID);
                 parameter.Add("@ClientID", model.ClientID);
                 parameter.Add("@Contact", model.Contact);
-                //parameter.Add("@Latitude", model.Latitude);
-                //parameter.Add("@Longitude", model.Longitude);
                 parameter.Add("@AppointmentDate", model.AppointmentDate);
                 parameter.Add("@Modifiedby", model.Modifiedby);
+
+                //Data Table Type -- to insert multiple products 
+                DataTable dataTable = model.ProductList.ToDataTable();
+                parameter.Add("@ProductDetails", dataTable.AsTableValuedParameter("dbo.ProductList"));
+
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
                 await connection.QueryAsync("updateActivity", parameter, commandType: CommandType.StoredProcedure);
@@ -266,6 +235,9 @@ namespace STS.DAL
 
             }
         }
+
+
+
 
 
         //Update Products  added in activity
@@ -279,7 +251,7 @@ namespace STS.DAL
                 parameter.Add("@Activity_Id", Aid);
                 parameter.Add("@Order_Id", model.Order_Id);
                 parameter.Add("@ProductID", model.ProductID);
-                parameter.Add("@Price", model.Price);
+                //parameter.Add("@Price", model.Price);
                 parameter.Add("@Quantity", model.Quantity);
                 parameter.Add("@Amount", model.Amount);
                 parameter.Add("@Discount_per", model.Discount_per);
@@ -408,6 +380,73 @@ namespace STS.DAL
             }
         }
 
+        // Search Title
+        //public async Task<List<ActivityListModel>> searchTitle(string Title)
+        //{
+        //    using (var connection = new SqlConnection(ConnectionString))
+        //    {
+        //        connection.Open();
+        //        TranStatus transaction = new TranStatus();
+        //        DynamicParameters parameter = new DynamicParameters();
+        //        parameter.Add("@Search", Title);
 
+        //        parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+        //        parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+        //        var result = await connection.QueryAsync<ActivityListModel>("searchTitle", parameter, commandType: CommandType.StoredProcedure);
+        //        return result.ToList();
+
+        //    }
+        //}
+
+        public async Task<List<ActivityListModel>> searchTitle(int aid)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@Search", aid);
+
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                var result = await connection.QueryAsync<ActivityListModel>("searchTitle", parameter, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
+
+
+
+        //public async Task<List<ActivityListModel>> searchTitle()
+        //{
+        //    using (var connection = new SqlConnection(ConnectionString))
+        //    {
+        //        connection.Open();
+        //        var result = await connection.QueryAsync<ActivityListModel>("searchTitle", commandType: CommandType.StoredProcedure);
+        //        return result.ToList();
+
+        //    }
+        //}
+
+        //public async Task<TranStatus> searchTitle(ActivityListModel model)
+        //{
+        //    using (var connection = new SqlConnection(ConnectionString))
+        //    {
+        //        await connection.OpenAsync();
+        //        TranStatus transaction = new TranStatus();
+        //        DynamicParameters parameter = new DynamicParameters();
+        //        parameter.Add("@Search", model.Title);
+
+        //        parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+        //        parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+        //        await connection.QueryAsync("searchTitle", parameter, commandType: CommandType.StoredProcedure);
+        //        transaction.returnMessage = parameter.Get<string>("@Message");
+        //        transaction.code = parameter.Get<int>("@Code");
+        //        return transaction;
+
+        //    }
+        //}
     }
 }

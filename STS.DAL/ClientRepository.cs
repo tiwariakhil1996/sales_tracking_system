@@ -56,6 +56,37 @@ namespace STS.DAL
             }
         }
 
+
+        public async Task<List<ClientListModel>> each_admin_ClientList(ClientListModel model)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@AdminID", model.userId);
+                var result = await connection.QueryAsync<ClientListModel>("each_admin_ClientList", parameter, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
+
+
+
+        public async Task<List<ClientListModel>> each_sales_ClientList(ClientListModel model)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@SalesID", model.userId);
+                var result = await connection.QueryAsync<ClientListModel>("each_sales_ClientList", parameter, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
+
         //Update
         public async Task<TranStatus> updateClient(int ID, ClientListModel model)
         {

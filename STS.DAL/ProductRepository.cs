@@ -27,11 +27,15 @@ namespace STS.DAL
                 parameter.Add("@Productname", model.Productname);
                 parameter.Add("@Description", model.Description);
                 parameter.Add("@Price", model.Price);
-                parameter.Add("@Image", model.Image);
+                //parameter.Add("@Image", model.Image);
                 parameter.Add("@Date", model.Date);
                 parameter.Add("@Createdby", model.Createdby);
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                //Data Table Type -- to insert multiple image
+                DataTable dataTable = CommonHelper.ToDataTable(model.ImageListData);
+                parameter.Add("@ImageListing", dataTable.AsTableValuedParameter("dbo.ImageList"));
 
                 await connection.QueryAsync("addProduct", parameter, commandType: CommandType.StoredProcedure);
 
@@ -72,8 +76,36 @@ namespace STS.DAL
             }
         }
 
+        // Display each admin List Individually
+        public async Task<List<ProductListModel>> each_admin_ProductList(ProductListModel model)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@AdminID", model.userId);
+                var result = await connection.QueryAsync<ProductListModel>("each_admin_ProductList", parameter, commandType: CommandType.StoredProcedure);
+                return result.ToList();
 
-     
+            }
+        }
+
+        // Display each sales List Individually
+        public async Task<List<ProductListModel>> each_sales_ProductList(ProductListModel model)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@SalesID", model.userId);
+
+                var result = await connection.QueryAsync<ProductListModel>("each_sales_ProductList", parameter, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
 
         //Update
         public async Task<TranStatus> updateProduct(int ID, ProductListModel model)

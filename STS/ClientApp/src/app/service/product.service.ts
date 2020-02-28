@@ -16,6 +16,14 @@ export class ProductService {
     return this.http.get('/api/Product/ProductList');
   }
 
+  each_admin_ProductList(data) {
+    return this.http.post('/api/Product/each_admin_ProductList', data);
+  }
+
+  each_sales_ProductList(data) {
+    return this.http.post('/api/Product/each_sales_ProductList', data);
+  }
+
   deleteProduct(id: number) {
     return this.http.delete('/api/Product/deleteProduct/' + id);
   }

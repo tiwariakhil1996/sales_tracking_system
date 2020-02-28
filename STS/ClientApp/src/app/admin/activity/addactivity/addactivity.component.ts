@@ -45,7 +45,8 @@ export class AddactivityComponent implements OnInit {
 
   isShow = true;
 
-
+  private sum = 0;
+  private value;
 
   constructor(private router: Router,
     private activityService: ActivityService,
@@ -64,18 +65,43 @@ export class AddactivityComponent implements OnInit {
 
     // console.log(this.latestactivityDetails);
 
-
+    // this.add(this.addproductlistDetails); 
 
 
   }
 
   ngOnInit() {
     this.addMoreproducts();
+    this.static_price();
   }
 
-  toggleDisplay() {
-    this.isShow = !this.isShow;
-  }
+  // toggleDisplay() {
+  //   this.isShow = !this.isShow;
+  // }
+
+ 
+
+  // values = '';
+
+  // onKey(event: any) { 
+  //   this.values += event.target.value + ;
+  // }
+
+//   total(bills) {
+//     var total = 0;
+//     bills.forEach(element => {
+// total = total + (this.productService.price * this.products.quantity);
+//     });
+//     return total;
+// }
+
+
+  // add(addproductlistDetails) {
+  //   this.value = addproductlistDetails
+  //   for (let j = 0; j < addproductlistDetails.length; j++) {
+  //     this.sum += this.value[j].amount
+  //   }
+  // }
 
   productList() {
     this.productService.productList().subscribe((data: any) => {
@@ -103,7 +129,6 @@ export class AddactivityComponent implements OnInit {
 
   onProductChange(id) {
     this.price(id);
-
   }
 
   price(id) {
@@ -157,18 +182,27 @@ export class AddactivityComponent implements OnInit {
     });
   }
 
+
+
   addMoreproducts() {
     this.addproductlistDetails.push({
-    productId: null,
-    productname: null,
-    price: null,
-    quantity: null,
-    amount: null,
-    discount_per: null,
-    discount_amt: null,
-    total_price: null,
+      productId: null,
+      productname: null,
+      price: null,
+      quantity: null,
+      amount: null,
+      discount_per: null,
+      discount_amt: null,
+      total_price: null,
     });
- 
+
+  }
+
+  static_price() {
+    this.product_priceDetails.push({
+      id: null,
+      price: "0.00",
+    });
   }
 
 
@@ -193,18 +227,18 @@ export class AddactivityComponent implements OnInit {
     });
   }
 
-  latest_added_activity() {
-    this.activityService.latest_added_Activity().subscribe((data: any) => {
-      if (data.Status.code === 0) {
-        if (data.addActivity) {
-          this.latestactivityDetails = data.addActivity;
-          console.log(this.latestactivityDetails);
-        }
-      }
-    }, (err) => {
+  // latest_added_activity() {
+  //   this.activityService.latest_added_Activity().subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.addActivity) {
+  //         this.latestactivityDetails = data.addActivity;
+  //         console.log(this.latestactivityDetails);
+  //       }
+  //     }
+  //   }, (err) => {
 
-    });
-  }
+  //   });
+  // }
 
   activityList_while_adding() {
     this.activityService.activityList_while_adding().subscribe((data: any) => {
@@ -218,7 +252,7 @@ export class AddactivityComponent implements OnInit {
     });
   }
 
-  resetForm() { 
+  resetForm() {
     this.activity.clientId = null;
     this.activity.salesId = null;
     this.activity.contact = null;

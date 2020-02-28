@@ -155,7 +155,7 @@ export const routes: Routes = [
   {
     path: 'sales',
     component: SalesLayoutComponent,
-    canActivate: [SalesGuard],
+   
     data: {
       title: 'Home'
     },

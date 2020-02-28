@@ -5,7 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
 import { ProductService } from '../../../service/product.service';
-import { productModel } from '../../../model/product';
+import { productModel, productListModel } from '../../../model/product';
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
 import { registerModel } from '../../../model/admin';
 
@@ -21,8 +21,8 @@ export class ViewproductComponent implements OnInit {
 
   user = new registerModel();
 
-  product = new productModel();
-  productDetails: productModel[] = [];
+  product = new productListModel();
+  productDetails: productListModel[] = [];
 
 
   category = new categoryDataModel();
@@ -48,11 +48,29 @@ export class ViewproductComponent implements OnInit {
 
   // Display
 
+  // productList() {
+  //   this.productService.productList().subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.ProductList) {
+  //         this.productDetails = data.ProductList;
+  //       }
+  //     }
+  //   }, (err) => {
+
+  //   });
+  // }
+
   productList() {
-    this.productService.productList().subscribe((data: any) => {
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.product.userid = this.user.id;
+    console.log(this.product.userid);
+
+    this.productService.each_admin_ProductList(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        if (data.ProductList) {
-          this.productDetails = data.ProductList;
+        if (data.each_admin_ProductList) {
+          this.productDetails = data.each_admin_ProductList;
+          console.log(this.productDetails);
+
         }
       }
     }, (err) => {
@@ -68,6 +86,14 @@ export class ViewproductComponent implements OnInit {
     // this.viewData = JSON.parse(localStorage.getItem('Register')) || [];
 
   }
+
+
+  open_image_modal(images, item) {
+    this.product = JSON.parse(JSON.stringify(item));
+    this.modalService.open(images, { backdropClass: 'light-blue-backdrop' });
+  }
+
+
 
   onEdit(id: number) {
 
@@ -298,4 +324,9 @@ export class ViewproductComponent implements OnInit {
   addnewProduct() {
     this.router.navigate(['/admin/product/addproduct']);
   }
+
+  view_product_Images() {
+    this.router.navigate(['/admin/product/product-images']);
+  }
 }
+

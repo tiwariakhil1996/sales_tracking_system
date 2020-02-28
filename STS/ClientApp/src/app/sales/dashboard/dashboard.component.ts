@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
-import { clientModel } from '../../model/client';
-import { productModel } from '../../model/product';
+import { clientModel, clientListModel } from '../../model/client';
+import { productModel, productListModel } from '../../model/product';
 import { salesregisterModel } from '../../model/sales';
 import { activityModel } from '../../model/activity';
 import { Router } from '@angular/router';
@@ -21,12 +21,12 @@ export class DashboardComponent implements OnInit {
 
   user = new salesregisterModel();
 
-  client = new clientModel();
-  clientDetails: clientModel[] = [];
+  client = new clientListModel();
+  clientDetails: clientListModel[] = [];
   totalClient: any = null;
 
-  product = new productModel();
-  productDetails: productModel[] = [];
+  product = new productListModel();
+  productDetails: productListModel[] = [];
   totalProduct:any ;
 
   sales=new salesregisterModel();
@@ -417,34 +417,71 @@ export class DashboardComponent implements OnInit {
 
     this.activityList();
   }
+  // productList() {
+  //   this.productService.productList().subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.ProductList) {
+  //         this.productDetails = data.ProductList;
+  //         this.totalProduct = this.productDetails.length;
+  //         console.log( this.totalProduct );
+  //       }
+  //     }
+  //   }, (err) => {
+
+  //   });
+  // }
+
   productList() {
-    this.productService.productList().subscribe((data: any) => {
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.product.userid = this.user.id;
+    console.log(this.product.userid);
+
+    this.productService.each_sales_ProductList(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        if (data.ProductList) {
-          this.productDetails = data.ProductList;
+        if (data.each_sales_ProductList) {
+          this.productDetails = data.each_sales_ProductList;
           this.totalProduct = this.productDetails.length;
-          console.log( this.totalProduct );
+          console.log(this.productDetails);
+
         }
       }
     }, (err) => {
 
     });
   }
+
+  // clientList() {
+  //   this.clientService.clientList().subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.ClientList) {
+  //         this.clientDetails = data.ClientList;
+  //         // console.log( this.clientDetails.length);
+  //          this.totalClient = this.clientDetails.length;
+  //          console.log( this.totalClient );
+  //       }
+  //     }
+  //   }, (err) => {
+  //   });
+  // }
 
   clientList() {
-    this.clientService.clientList().subscribe((data: any) => {
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.client.userid = this.user.id;
+    console.log(this.client.userid);
+
+    this.clientService.each_sales_ClientList(this.client).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        if (data.ClientList) {
-          this.clientDetails = data.ClientList;
-          // console.log( this.clientDetails.length);
-           this.totalClient = this.clientDetails.length;
-           console.log( this.totalClient );
+        if (data.each_sales_ClientList) {
+          this.clientDetails = data.each_sales_ClientList;
+          this.totalClient = this.clientDetails.length;
+          console.log(this.clientDetails);
+
         }
       }
     }, (err) => {
+
     });
   }
-
 
   activityList() {
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};

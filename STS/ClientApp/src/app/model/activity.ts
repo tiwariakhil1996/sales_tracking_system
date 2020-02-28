@@ -10,9 +10,9 @@ export class addactivityModel {
     salesId: number;
     salesName: string;
     contact: String;
-    address: string;
-    latitude: string;
-    longitude: string;
+    // address: string;
+    // latitude: string;
+    // longitude: string;
     appointmentDate: string;
     createdby: number;
     modifiedby: number;
@@ -34,6 +34,8 @@ export class addproductListingModel {
     discount_amt: string;
     total_price: string;
 }
+
+
 export class activityList_while_addingModel {
     image: string;
     ImageExtn: string;
@@ -67,7 +69,7 @@ export class activityModel {
     discount_per: string;
     discount_amt: string;
     total_price: string;
-    
+
     createdby: number;
     modifiedby: number;
     userid: number;
@@ -78,8 +80,9 @@ export class activityModel {
     statusname: string;
 }
 
+
 export class updateactivityModel {
-    // aid: number;
+    aid: number;
     // title: string;
     // description: string;
     // clientId: number;
@@ -98,12 +101,12 @@ export class updateactivityModel {
     discount_per: string;
     discount_amt: string;
     total_price: string;
-    
+
     createdby: number;
     modifiedby: number;
-    userid: number;
+    // userid: number;
 
-    user_id: number;
+    // user_id: number;
 
 }
 
@@ -114,5 +117,17 @@ export class newactivityModel {
 
 export class latestactivityModel {
     aid: number;
+}
 
+
+export class searchModel {
+    aid: number;
+    title: string;
+    description: string;
+    clientId: number;
+    clientName: string;
+    salesId: number;
+    salesName: string;
+    contact: String;
+    appointmentDate: string;
 }

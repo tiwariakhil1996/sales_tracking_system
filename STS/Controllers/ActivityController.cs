@@ -45,30 +45,6 @@ namespace STS.Controllers
         }
 
 
-
-        // Latest Added Activity
-
-        [HttpGet]
-        [Route("addActivity")]
-        public async Task<IActionResult> addActivity()
-        {
-            TranStatus transaction = new TranStatus();
-            Dictionary<String, Object> dctData = new Dictionary<string, object>();
-            HttpStatusCode statusCode = HttpStatusCode.OK;
-            try
-            {
-                var activityList = await iactivity.addActivity();
-                dctData.Add("addActivity", activityList);
-            }
-            catch (Exception ex)
-            {
-                transaction = CommonHelper.TransactionErrorHandler(ex);
-                statusCode = HttpStatusCode.BadRequest;
-            }
-            dctData.Add("Status", transaction);
-            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
-        }
-
         //Display Actitivity
 
         [HttpGet]
@@ -92,7 +68,7 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
- 
+
 
         // Display Products Added into activity
 
@@ -217,7 +193,7 @@ namespace STS.Controllers
 
         [HttpPut]
         [Route("updateActivity/{Aid}")]
-        public async Task<IActionResult> updateActivity(int Aid, [FromBody]ActivityListModel model)
+        public async Task<IActionResult> updateActivity(int Aid, [FromBody]Update_ActivityModel model)
         {
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
@@ -236,6 +212,7 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
+
 
         //Update Product added in activity
 
@@ -431,6 +408,54 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
+
+
+        //Search Title
+        [HttpGet]
+        [Route("searchTitle/{aid}")]
+        public async Task<IActionResult> searchTitle(int aid)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+
+                var activityList = await iactivity.searchTitle(aid);
+                dctData.Add("searchTitle", activityList);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+
+
+        //[HttpGet]
+        //[Route("searchTitle")]
+        //public async Task<IActionResult> searchTitle([FromBody]ActivityListModel model)
+        //{
+        //    TranStatus transaction = new TranStatus();
+        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
+        //    HttpStatusCode statusCode = HttpStatusCode.OK;
+        //    try
+        //    {
+        //        var activityList = await iactivity.searchTitle(model);
+        //        dctData.Add("searchTitle", activityList);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        transaction = CommonHelper.TransactionErrorHandler(ex);
+        //        statusCode = HttpStatusCode.BadRequest;
+        //    }
+        //    dctData.Add("Status", transaction);
+        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        //}
 
 
     }

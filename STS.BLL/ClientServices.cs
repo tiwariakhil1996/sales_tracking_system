@@ -34,6 +34,23 @@ namespace STS.BLL.Service
             }
         }
 
+        public async Task<List<ClientListModel>> each_admin_ClientList(ClientListModel model)
+        {
+            using (clientRepository = new ClientRepository())
+            {
+                return await clientRepository.each_admin_ClientList(model);
+            }
+
+        }
+
+        public async Task<List<ClientListModel>> each_sales_ClientList(ClientListModel model)
+        {
+            using (clientRepository = new ClientRepository())
+            {
+                return await clientRepository.each_sales_ClientList(model);
+            }
+
+        }
 
         //Update
         public async Task<TranStatus> updateClient(int ID, ClientListModel model)
