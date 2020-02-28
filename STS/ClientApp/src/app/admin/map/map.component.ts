@@ -32,8 +32,8 @@ import { Router } from '@angular/router';
 
 import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { MapsAPILoader, AgmMap } from '@agm/core';
-import { MouseEvent } from "@agm/core";
-import { google } from "google-maps";
+import { MouseEvent } from '@agm/core';
+import { google } from 'google-maps';
 import { AdminService } from '../../service/admin.service';
 
 @Component({
@@ -54,7 +54,7 @@ export class MapComponent implements OnInit {
   location: Coordinates;
   lat: any;
   lng: any;
-  
+
   centerlat: any;
   centerlng: any;
   geocoder: any;
@@ -65,13 +65,13 @@ export class MapComponent implements OnInit {
 
   RoleJason = {
     ROle: [0, 1],
-    Component: "MapComponent"
-  }
+    Component: 'MapComponent'
+  };
 
   constructor(
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
-    private router:Router
+    private router: Router
 
   ) {
        this.geocoder = new google.maps.Geocoder;
@@ -79,7 +79,7 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
 
-    this.checkRole(this.RoleJason)
+    this.checkRole(this.RoleJason);
 
     setTimeout(() => {
       navigator.geolocation.getCurrentPosition(position => {
@@ -94,7 +94,7 @@ export class MapComponent implements OnInit {
       });
     }, 2000);
 
-   
+
     // //load Places Autocomplete
     // this.mapsAPILoader.load().then(() => {
     //   this.setCurrentLocation();
@@ -120,11 +120,11 @@ export class MapComponent implements OnInit {
     //   });
     // });
   }
-  
+
 
   checkRole(RoleJason) {
-    var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
-    if (this.RoleJason.Component == RoleJason.Component) {
+    const result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+    if (this.RoleJason.Component === RoleJason.Component) {
       console.log(result);
       if (!this.RoleJason.ROle.includes(result.userType)) {
         this.router.navigate(['admin/login']);
@@ -176,7 +176,7 @@ export class MapComponent implements OnInit {
   //   this.adminService.AdminLogin(this.lat,this.lng).subscribe((data: any) => {
   //     if (data.Status.code === 0) {
 
-  //     } 
+  //     }
   //   }, (err) => {
 
 

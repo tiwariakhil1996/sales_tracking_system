@@ -19,40 +19,40 @@ export class AddclientComponent implements OnInit {
 
   client = new clientModel();
   clientDetails: clientModel[] = [];
-  
+
   country = new countryModel();
   countryDetails: countryModel[] = [];
 
   state = new stateModel();
   stateDetails: stateModel[] = [];
 
-  
+
   city = new cityModel();
   cityDetails: cityModel[] = [];
 
   RoleJason = {
     ROle: [0, 1],
-    Component: "AddClientComponent"
-  }
+    Component: 'AddClientComponent'
+  };
 
   constructor(private router: Router,
     private toastr: ToastrService,
     private clientService: ClientService,
-    private country_state_cityService: CountryStateCityService){
+    private country_state_cityService: CountryStateCityService) {
 
     this.countryList();
-  
-  }
-  
-  ngOnInit() {
-    this.checkRole(this.RoleJason)
-   
+
   }
 
-  
+  ngOnInit() {
+    this.checkRole(this.RoleJason);
+
+  }
+
+
   checkRole(RoleJason) {
-    var result = JSON.parse(localStorage.getItem('salesLogin')) || [];
-    if (this.RoleJason.Component == RoleJason.Component) {
+    const result = JSON.parse(localStorage.getItem('salesLogin')) || [];
+    if (this.RoleJason.Component === RoleJason.Component) {
       console.log(result);
       if (!this.RoleJason.ROle.includes(result.userType)) {
         this.router.navigate(['sales/login']);
@@ -61,13 +61,12 @@ export class AddclientComponent implements OnInit {
   }
 
   submitForm() {
-    
+
     let strError = '';
 
     if (!this.client.clientName) {
       strError += strError = '- Please enter clientname';
-    }
-    else
+    } else
     if (!this.validateName(this.client.clientName)) {
       strError += strError = '' ? '' : '<br/>';
       strError += strError = '- Client name should only contain alphabets';
@@ -76,8 +75,7 @@ export class AddclientComponent implements OnInit {
     if (!this.client.email) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter valid email id';
-    }
-    else {
+    } else {
       if (!this.validateEmail(this.client.email)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Email should contain @ and . ';
@@ -87,14 +85,13 @@ export class AddclientComponent implements OnInit {
     if (!this.client.contact) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter valid mobile no.';
-    }
-    else {
+    } else {
       if (!this.validateMobile(this.client.contact)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Mobile no should be of 10 digits';
       }
     }
-  
+
     if (!this.client.gender) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please select gender';
@@ -113,12 +110,11 @@ export class AddclientComponent implements OnInit {
     if (!this.client.cid) {
       strError += strError = '' ? '' : '<br/>';
       strError += strError = '- Please select country';
-    }
-    else
+    } else
     if (!this.client.sid) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please select state';
-    }else
+    } else
     if (!this.client.cityid) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please select city';
@@ -139,11 +135,11 @@ export class AddclientComponent implements OnInit {
       });
       return false;
     }
-  
+
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.client.createdby = this.user.id;
     console.log(this.client.createdby);
-  
+
     this.clientService.addClient(this.client).subscribe((data: any) => {
       if (data.Status.code === 0) {
         // alert('Registered sucesfully');
@@ -151,8 +147,7 @@ export class AddclientComponent implements OnInit {
           disableTimeOut: false
         });
         this.client = new clientModel();
-      }
-      else {
+      } else {
         // alert("Not Matched");
         this.toastr.info('This email id is already registered', 'Info', {
           disableTimeOut: false,
@@ -161,19 +156,19 @@ export class AddclientComponent implements OnInit {
       }
       this.client = new clientModel();
     }, (err) => {
- 
+
 
     });
-  } 
+  }
 
- 
-  
+
+
   firstnameValidation() {
     let isValid = false;
     if (!this.validateName(this.client.clientName)) {
       isValid = true;
     }
-    ;
+
 
     if (isValid) {
       this.toastr.warning('Please enter clientname correctly', 'Warning', {
@@ -184,11 +179,11 @@ export class AddclientComponent implements OnInit {
 
   }
 
-  
+
 
   validateName(nameField) {
-    var reg = /^[A-Za-z]+$/;
-    return reg.test(nameField) == false ? false : true;
+    const reg = /^[A-Za-z]+$/;
+    return reg.test(nameField) === false ? false : true;
   }
 
 // Email Validation
@@ -201,7 +196,7 @@ checkEmailValidation() {
     //  return false;
     isValid = true;
   }
-  ;
+
   if (isValid) {
     this.toastr.warning('Please enter valid email id', 'Warning', {
       disableTimeOut: false,
@@ -212,8 +207,8 @@ checkEmailValidation() {
 }
 
 validateEmail(emailField) {
-  var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-  return reg.test(emailField) == false ? false : true;
+  const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+  return reg.test(emailField) === false ? false : true;
 }
 
 // Mobile no.  Validation
@@ -221,10 +216,10 @@ validateEmail(emailField) {
 mobValidation() {
   let isValid = false;
   if (!this.validateMobile(this.client.contact)) {
-   
+
     isValid = true;
   }
-  ;
+
   if (isValid) {
     this.toastr.warning('Please enter valid mobile number', 'Warning', {
       disableTimeOut: false,
@@ -234,32 +229,32 @@ mobValidation() {
 }
 
 validateMobile(mobileField) {
-  var reg = /^\d{10}$/;
-  return reg.test(mobileField) == false ? false : true;
+  const reg = /^\d{10}$/;
+  return reg.test(mobileField) === false ? false : true;
 }
-  
+
   countryList() {
     this.country_state_cityService.countryList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.CountryList) {
           this.countryDetails = data.CountryList;
-        
+
         }
       }
     }, (err) => {
-      
-      console.log(err); 
+
+      console.log(err);
     });
   }
 
 
   onCountryChange(cid) {
     this.stateList(cid);
-    
-    
+
+
   }
 
-  onStatechange(sid){
+  onStatechange(sid) {
     this.cityList(sid);
   }
 
@@ -271,8 +266,8 @@ validateMobile(mobileField) {
         }
       }
     }, (err) => {
-      
-      console.log(err); 
+
+      console.log(err);
     });
   }
 
@@ -284,8 +279,8 @@ validateMobile(mobileField) {
         }
       }
     }, (err) => {
-      
-      console.log(err); 
+
+      console.log(err);
     });
   }
 

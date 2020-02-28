@@ -22,8 +22,8 @@ export class ViewcategoryComponent implements OnInit {
 
   RoleJason = {
     ROle: [0, 1],
-    Component: "ViewcategoryComponent"
-  }
+    Component: 'ViewcategoryComponent'
+  };
 
   constructor(
     private router: Router,
@@ -35,13 +35,13 @@ export class ViewcategoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.checkRole(this.RoleJason)
+    this.checkRole(this.RoleJason);
   }
 
   checkRole(RoleJason) {
-    var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
-    if (this.RoleJason.Component == RoleJason.Component) {
-      console.log(result);
+    const result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+    if (this.RoleJason.Component === RoleJason.Component) {
+      // console.log(result);
       if (!this.RoleJason.ROle.includes(result.userType)) {
         this.router.navigate(['admin/login']);
       }
@@ -53,12 +53,12 @@ export class ViewcategoryComponent implements OnInit {
       if (data.Status.code === 0) {
         if (data.CategoryList) {
           this.categoryDetails = data.CategoryList;
-          console.log(this.categoryDetails);
+          // console.log(this.categoryDetails);
         }
       }
     }, (err) => {
 
-      console.log(this.categoryDetails);
+      // console.log(err);
     });
   }
 
@@ -74,7 +74,7 @@ export class ViewcategoryComponent implements OnInit {
   updateCategory(cid: number) {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.category.modifiedby = this.user.id;
-    console.log(this.category.modifiedby);
+    // console.log(this.category.modifiedby);
 
 
     this.categoryService.updateCategory(cid, this.category).subscribe((data: any) => {
@@ -105,7 +105,7 @@ export class ViewcategoryComponent implements OnInit {
   }
 
   changeStatus(id: number) {
-    console.log(id);
+    // console.log(id);
     this.categoryService.changeStatus(id).subscribe(data => {
       this.categoryList();
     });

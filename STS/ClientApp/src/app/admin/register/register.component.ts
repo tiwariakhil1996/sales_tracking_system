@@ -10,7 +10,7 @@ import { registerModel } from '../../model/admin';
   templateUrl: 'register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent  implements OnInit{
+export class RegisterComponent  implements OnInit {
 
   title = 'STS';
   imageSrc: string = '';
@@ -20,21 +20,21 @@ export class RegisterComponent  implements OnInit{
 
   RoleJason = {
     ROle: [0, 1],
-    Component: "RegisterComponent"
-  }
+    Component: 'RegisterComponent'
+  };
 
-  constructor(private router: Router, private adminService: AdminService,private toastr: ToastrService){
+  constructor(private router: Router, private adminService: AdminService, private toastr: ToastrService) {
 
 
   }
 
   ngOnInit() {
-    this.checkRole(this.RoleJason)
+    this.checkRole(this.RoleJason);
   }
 
   checkRole(RoleJason) {
-    var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
-    if (this.RoleJason.Component == RoleJason.Component) {
+    const result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+    if (this.RoleJason.Component === RoleJason.Component) {
       console.log(result);
       if (!this.RoleJason.ROle.includes(result.userType)) {
         this.router.navigate(['admin/login']);
@@ -57,13 +57,12 @@ export class RegisterComponent  implements OnInit{
 
   submitForm() {
     // this.register.image = this.imageSrc;
-    
+
     let strError = '';
 
     if (!this.register.username) {
       strError += '- Please enter username';
-    }
-    else {
+    } else {
       if (!this.validateName(this.register.username)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- First name should be in alphabets';
@@ -79,8 +78,7 @@ export class RegisterComponent  implements OnInit{
     if (!this.register.email) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter valid email id';
-    }
-    else {
+    } else {
       if (!this.validateEmail(this.register.email)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Email should contain @ and . ';
@@ -90,8 +88,7 @@ export class RegisterComponent  implements OnInit{
     if (!this.register.mobile) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter valid mobile no.';
-    }
-    else {
+    } else {
       if (!this.validateMobile(this.register.mobile)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Mobile no should be of 10 digits';
@@ -100,9 +97,7 @@ export class RegisterComponent  implements OnInit{
 
     if (!this.register.password) {
       strError += '- Please enter valid password';
-    }
-   
-    else {
+    } else {
       if (!this.passwordValidation(this.register.password)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Your password must be between 6 and 20 characters _at least one uppercase and one lowercase letter_one number digit_ one special character like $, #, @, !,%,^,&,*,(,)   ';
@@ -121,7 +116,7 @@ export class RegisterComponent  implements OnInit{
       return false;
     }
 
-  if (this.register.password == this.register.cpassword) {
+  if (this.register.password === this.register.cpassword) {
 
     this.adminService.AdminRegisterService(this.register).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -131,28 +126,26 @@ export class RegisterComponent  implements OnInit{
           timeOut: 2000
         });
         this.register = new registerModel();
-      } 
-      else {
+      } else {
         // alert("Not Matched");
         this.toastr.info('This email id is already registered', 'Info', {
           disableTimeOut: false,
           timeOut: 2000
         });
       }
-     
-     
+
+
     }, (err) => {
 
 
     });
-  }
-  else {
+  } else {
     this.toastr.error('Password & Confirm Password didnt match', 'Error', {
       disableTimeOut: false,
       timeOut: 2000
     });
   }
-  } 
+  }
 
   firstnameValidation() {
     let isValid = false;
@@ -161,7 +154,7 @@ export class RegisterComponent  implements OnInit{
       // this.errorMessage="Please enter valid first name";
       isValid = true;
     }
-    ;
+
 
     if (isValid) {
       this.toastr.warning('Please enter username correctly', 'Warning', {
@@ -172,11 +165,11 @@ export class RegisterComponent  implements OnInit{
 
   }
 
-  
+
 
   validateName(nameField) {
-    var reg = /^[A-Za-z]+$/;
-    return reg.test(nameField) == false ? false : true;
+    const reg = /^[A-Za-z]+$/;
+    return reg.test(nameField) === false ? false : true;
   }
 
 // Email Validation
@@ -189,7 +182,7 @@ checkEmailValidation() {
     //  return false;
     isValid = true;
   }
-  ;
+
   if (isValid) {
     this.toastr.warning('Please enter valid email id', 'Warning', {
       disableTimeOut: false,
@@ -200,8 +193,8 @@ checkEmailValidation() {
 }
 
 validateEmail(emailField) {
-  var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-  return reg.test(emailField) == false ? false : true;
+  const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+  return reg.test(emailField) === false ? false : true;
 }
 
 
@@ -210,10 +203,10 @@ validateEmail(emailField) {
 mobValidation() {
   let isValid = false;
   if (!this.validateMobile(this.register.mobile)) {
-   
+
     isValid = true;
   }
-  ;
+
   if (isValid) {
     this.toastr.warning('Please enter valid mobile number', 'Warning', {
       disableTimeOut: false,
@@ -223,17 +216,17 @@ mobValidation() {
 }
 
 validateMobile(mobileField) {
-  var reg = /^\d{10}$/;
-  return reg.test(mobileField) == false ? false : true;
+  const reg = /^\d{10}$/;
+  return reg.test(mobileField) === false ? false : true;
 }
 
 
 passwordValidation(passwordField) {
-  var reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-  return reg.test(passwordField) == false ? false : true;
+  const reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+  return reg.test(passwordField) === false ? false : true;
 }
 
-  
+
   handleFileInput(fileList: FileList) {
     const preview = document.getElementById('photos-preview');
     Array.from(fileList).forEach((file: File) => {
@@ -258,7 +251,7 @@ passwordValidation(passwordField) {
     this.router.navigate(['/sales/register']);
   }
 
-  loginForm(){
+  loginForm() {
     this.router.navigate(['/admin/login']);
   }
 }

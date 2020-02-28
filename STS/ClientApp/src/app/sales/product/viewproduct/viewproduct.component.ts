@@ -20,21 +20,21 @@ export class ViewproductComponent implements OnInit {
   modalRef: BsModalRef;
 
   user = new salesregisterModel();
-  
+
   product = new productListModel();
   productDetails: productListModel[] = [];
 
-  
+
   category = new categoryDataModel();
-  categoryDetails: categoryDataModel[]=[];
+  categoryDetails: categoryDataModel[] = [];
 
   subcategory = new subcategoryDataModel();
-  subcategoryDetails: subcategoryDataModel[]=[];
+  subcategoryDetails: subcategoryDataModel[] = [];
 
   RoleJason = {
     ROle: [0, 1],
-    Component: "ViewproductComponent"
-  }
+    Component: 'ViewproductComponent'
+  };
 
   constructor(private router: Router,
     private toastr: ToastrService,
@@ -49,13 +49,13 @@ export class ViewproductComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.checkRole(this.RoleJason)
+    this.checkRole(this.RoleJason);
   }
 
-  
+
   checkRole(RoleJason) {
-    var result = JSON.parse(localStorage.getItem('salesLogin')) || [];
-    if (this.RoleJason.Component == RoleJason.Component) {
+    const result = JSON.parse(localStorage.getItem('salesLogin')) || [];
+    if (this.RoleJason.Component === RoleJason.Component) {
       console.log(result);
       if (!this.RoleJason.ROle.includes(result.userType)) {
         this.router.navigate(['sales/login']);
@@ -63,7 +63,7 @@ export class ViewproductComponent implements OnInit {
     }
   }
 
-  //Display
+  // Display
 
   // productList(){
   //   this.productService.productList().subscribe((data: any) => {
@@ -76,7 +76,7 @@ export class ViewproductComponent implements OnInit {
 
   //   });
   // }
-  
+
   productList() {
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.product.userid = this.user.id;
@@ -110,8 +110,8 @@ export class ViewproductComponent implements OnInit {
     });
   }
 
-  
-//Edit
+
+// Edit
 openupdatemodal(content, item) {
   this.product = JSON.parse(JSON.stringify(item));
   // this.product = item;
@@ -121,14 +121,13 @@ openupdatemodal(content, item) {
 
 }
 
-onEdit(id:number) {
-   
+onEdit(id: number) {
+
   let strError = '';
 
   if (!this.product.cid) {
     strError += strError = '- Please select category';
-  }
-  else
+  } else
   if (!this.product.sid) {
     strError += strError = '' ? '' : '<br/>';
     strError += '- Please select subcategory';
@@ -138,8 +137,7 @@ onEdit(id:number) {
   if (!this.product.productname) {
     strError += strError = '' ? '' : '<br/>';
     strError += '- Please enter productname';
-  }
-  else{
+  } else {
     if (!this.validateProductname(this.product.productname)) {
       strError += strError = '' ? '' : '<br/>';
       strError += strError = '- Product name should only contain alphabets & number';
@@ -149,8 +147,7 @@ onEdit(id:number) {
   if (!this.product.price) {
     strError += strError = '' ? '' : '<br/>';
     strError += strError = '- Please enter price';
-  }
-  else {
+  } else {
     if (!this.validateprice(this.product.price)) {
       strError += strError = '' ? '' : '<br/>';
       strError += strError = '- Price should be in numbers';
@@ -160,8 +157,7 @@ onEdit(id:number) {
   if (!this.product.description) {
     strError += strError = '' ? '' : '<br/>';
     strError += '- Please enter description';
-  }
-  else{
+  } else {
     if (!this.validateProductname(this.product.description)) {
       strError += strError = '' ? '' : '<br/>';
       strError += strError = '- Description  should only contain alphabets & number';
@@ -199,8 +195,7 @@ onEdit(id:number) {
       this.toastr.success('Product updated sucesfully', 'Successful', {
         disableTimeOut: false
       });
-    }  
-    else {
+    } else {
       // alert("Not Matched");
       this.toastr.warning('Please fill the remaining fields', 'Warning', {
         disableTimeOut: false,
@@ -208,7 +203,7 @@ onEdit(id:number) {
       });
     }
     // this.product = new productModel();
-    
+
     this.productList();
   }, (err) => {
   });
@@ -216,13 +211,13 @@ onEdit(id:number) {
 
 
 
-  
+
 productnameValidation() {
   let isValid = false;
   if (!this.validateProductname(this.product.productname)) {
     isValid = true;
   }
-  ;
+
 
   if (isValid) {
     this.toastr.warning('Please enter productname correctly', 'Warning', {
@@ -234,8 +229,8 @@ productnameValidation() {
 }
 
 validateProductname(productnameField) {
-  var reg = /^[A-Za-z0-9]+$/;
-  return reg.test(productnameField) == false ? false : true;
+  const reg = /^[A-Za-z0-9]+$/;
+  return reg.test(productnameField) === false ? false : true;
 }
 
 priceValidation() {
@@ -243,7 +238,7 @@ priceValidation() {
   if (!this.validateprice(this.product.price)) {
     isValid = true;
   }
-  ;
+
 
   if (isValid) {
     this.toastr.warning('Please enter price correctly', 'Warning', {
@@ -254,8 +249,8 @@ priceValidation() {
 
 }
 validateprice(priceField) {
-  var reg = /^[0-9]+$/;
-  return reg.test(priceField) == false ? false : true;
+  const reg = /^[0-9]+$/;
+  return reg.test(priceField) === false ? false : true;
 }
 
 
@@ -264,12 +259,12 @@ categoryList() {
     if (data.Status.code === 0) {
       if (data.CategoryList) {
         this.categoryDetails = data.CategoryList;
-      
+
       }
     }
   }, (err) => {
-    
-    console.log(this.categoryDetails); 
+
+    console.log(this.categoryDetails);
   });
 }
 
@@ -287,8 +282,8 @@ subcategoryList(catid) {
       }
     }
   }, (err) => {
-    
-    console.log(this.subcategoryDetails); 
+
+    console.log(this.subcategoryDetails);
   });
 }
 

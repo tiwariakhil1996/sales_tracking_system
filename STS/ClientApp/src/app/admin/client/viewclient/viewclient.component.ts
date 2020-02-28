@@ -32,8 +32,8 @@ export class ViewclientComponent implements OnInit {
 
   RoleJason = {
     ROle: [0, 1],
-    Component: "ViewClientComponent"
-  }
+    Component: 'ViewClientComponent'
+  };
 
   constructor(private router: Router,
     private toastr: ToastrService,
@@ -46,13 +46,13 @@ export class ViewclientComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.checkRole(this.RoleJason)
+    this.checkRole(this.RoleJason);
   }
 
   checkRole(RoleJason) {
-    var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
-    if (this.RoleJason.Component == RoleJason.Component) {
-      console.log(result);
+    const result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+    if (this.RoleJason.Component === RoleJason.Component) {
+      // console.log(result);
       if (!this.RoleJason.ROle.includes(result.userType)) {
         this.router.navigate(['admin/login']);
       }
@@ -79,13 +79,13 @@ export class ViewclientComponent implements OnInit {
   clientList() {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.client.userid = this.user.id;
-    console.log(this.client.userid);
+    // console.log(this.client.userid);
 
     this.clientService.each_admin_ClientList(this.client).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.each_admin_ClientList) {
           this.clientDetails = data.each_admin_ClientList;
-          console.log(this.clientDetails);
+          // console.log(this.clientDetails);
 
         }
       }
@@ -105,7 +105,7 @@ export class ViewclientComponent implements OnInit {
   onEdit(id: number) {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.client.modifiedby = this.user.id;
-    console.log(this.client.modifiedby);
+    // console.log(this.client.modifiedby);
 
     this.clientService.updateClient(id, this.client).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -183,7 +183,7 @@ export class ViewclientComponent implements OnInit {
   }
 
   changeStatus(id: number) {
-    console.log(id);
+    // console.log(id);
     this.clientService.changeStatus(id).subscribe(data => {
       this.clientList();
     });

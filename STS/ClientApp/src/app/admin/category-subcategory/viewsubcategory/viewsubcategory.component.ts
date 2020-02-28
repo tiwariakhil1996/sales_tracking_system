@@ -15,7 +15,7 @@ import { registerModel } from '../../../model/admin';
 export class ViewsubcategoryComponent implements OnInit {
 
   modalRef: BsModalRef;
-  
+
   user  = new registerModel();
 
   category = new categoryDataModel();
@@ -26,49 +26,49 @@ export class ViewsubcategoryComponent implements OnInit {
 
   RoleJason = {
     ROle: [0, 1],
-    Component: "ViewsubcategoryComponent"
-  }
+    Component: 'ViewsubcategoryComponent'
+  };
 
   constructor(private router: Router,
     private categoryService: CategorySubcategoryService,
     private modalServices: BsModalService,
     private modalService: NgbModal,
     private toastr: ToastrService) {
-  
+
     this.viewsubcategoryList();
     this.categoryList();
   }
 
 
   ngOnInit() {
-    this.checkRole(this.RoleJason)
+    this.checkRole(this.RoleJason);
   }
 
   checkRole(RoleJason) {
-    var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
-    if (this.RoleJason.Component == RoleJason.Component) {
+    const result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+    if (this.RoleJason.Component === RoleJason.Component) {
       console.log(result);
       if (!this.RoleJason.ROle.includes(result.userType)) {
         this.router.navigate(['admin/login']);
       }
     }
   }
-  
+
   categoryList() {
     this.categoryService.categoryList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.CategoryList) {
           this.categoryDetails = data.CategoryList;
-          console.log(this.categoryDetails);
+          // console.log(this.categoryDetails);
         }
       }
     }, (err) => {
 
-      console.log(this.categoryDetails);
+      console.log(err);
     });
   }
 
-  
+
 
 
   viewsubcategoryList() {
@@ -80,7 +80,7 @@ export class ViewsubcategoryComponent implements OnInit {
       }
     }, (err) => {
 
-      console.log(this.subcategoryDetails);
+      // console.log(this.subcategoryDetails);
     });
   }
 
@@ -97,7 +97,7 @@ export class ViewsubcategoryComponent implements OnInit {
   updateSubcategory(sid: number) {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.subcategory.modifiedby = this.user.id;
-    console.log(this.subcategory.modifiedby);
+    // console.log(this.subcategory.modifiedby);
 
     this.categoryService.updateSubcategory(sid, this.subcategory).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -126,7 +126,7 @@ export class ViewsubcategoryComponent implements OnInit {
   }
 
   changeStatus(id: number) {
-    console.log(id);
+    // console.log(id);
     this.categoryService.changesubcategoryStatus(id).subscribe(data => {
       this.viewsubcategoryList();
     });

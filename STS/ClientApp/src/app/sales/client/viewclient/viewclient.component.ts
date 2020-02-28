@@ -32,9 +32,9 @@ export class ViewclientComponent implements OnInit {
 
   RoleJason = {
     ROle: [0, 1],
-    Component: "ViewClientComponent"
-  }
-  
+    Component: 'ViewClientComponent'
+  };
+
   constructor(private router: Router,
     private clientService: ClientService,
     private modalService: NgbModal,
@@ -46,13 +46,13 @@ export class ViewclientComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.checkRole(this.RoleJason)
+    this.checkRole(this.RoleJason);
   }
 
-  
+
   checkRole(RoleJason) {
-    var result = JSON.parse(localStorage.getItem('salesLogin')) || [];
-    if (this.RoleJason.Component == RoleJason.Component) {
+    const result = JSON.parse(localStorage.getItem('salesLogin')) || [];
+    if (this.RoleJason.Component === RoleJason.Component) {
       console.log(result);
       if (!this.RoleJason.ROle.includes(result.userType)) {
         this.router.navigate(['sales/login']);
@@ -60,7 +60,7 @@ export class ViewclientComponent implements OnInit {
     }
   }
 
-  //Display
+  // Display
 
   // clientList(){
   //   this.clientService.clientList().subscribe((data: any) => {
@@ -120,7 +120,7 @@ export class ViewclientComponent implements OnInit {
   }
 
 
-  //Delete
+  // Delete
   onDelete(id: number) {
     // if (confirm('Are you sure to delete this record ?') === true) {
     this.clientService.deleteClient(id).subscribe(data => {

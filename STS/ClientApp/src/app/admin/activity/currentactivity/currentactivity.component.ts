@@ -28,7 +28,7 @@ export class CurrentactivityComponent implements OnInit {
   activity = new activityModel();
   activityDetails: activityModel[] = [];
 
-  search =new searchModel();
+  search = new searchModel();
   searchDetails: searchModel[] = [];
   // update_activityproduct = new editactivityModel();
   // update_activityproductDetails: editactivityModel[] = [];
@@ -56,8 +56,8 @@ export class CurrentactivityComponent implements OnInit {
 
   RoleJason = {
     ROle: [0, 1],
-    Component:"CurrentactivityComponent"
-  }
+    Component: 'CurrentactivityComponent'
+  };
 
   constructor(private activityService: ActivityService,
     private router: Router,
@@ -71,7 +71,7 @@ export class CurrentactivityComponent implements OnInit {
     this.clientList();
     this.SalesList();
 
-   
+
     this.eachactivityList();
     // this.activity_productList();
   }
@@ -80,24 +80,24 @@ export class CurrentactivityComponent implements OnInit {
   ngOnInit() {
     this.addMoreproducts();
     this.static_price();
-    this.checkRole(this.RoleJason)
+    this.checkRole(this.RoleJason);
   }
 
   checkRole(RoleJason) {
-    var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
-    if (this.RoleJason.Component == RoleJason.Component) {
-      console.log(result);
+    const result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+    if (this.RoleJason.Component === RoleJason.Component) {
+      // console.log(result);
       if (!this.RoleJason.ROle.includes(result.userType)) {
         this.router.navigate(['admin/login']);
       }
     }
   }
-  
+
   onSearch(aid: any) {
-      this.activityService.searchTitle(aid).subscribe(data => {
-        // this.activityList();
-     
-      });
+    this.activityService.searchTitle(aid).subscribe(data => {
+      // this.activityList();
+
+    });
   }
 
   // Search() {
@@ -173,7 +173,7 @@ export class CurrentactivityComponent implements OnInit {
   static_price() {
     this.product_priceDetails.push({
       id: null,
-      price: "0.00",
+      price: '0.00',
     });
   }
 
@@ -209,13 +209,13 @@ export class CurrentactivityComponent implements OnInit {
   eachactivityList() {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.activity.userid = this.user.id;
-    console.log(this.activity.userid);
+    // console.log(this.activity.userid);
 
     this.activityService.each_admin_activityList(this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.each_admin_activityList) {
           this.activityDetails = data.each_admin_activityList;
-          console.log(this.activityDetails);
+          // console.log(this.activityDetails);
 
         }
       }
@@ -269,7 +269,7 @@ export class CurrentactivityComponent implements OnInit {
   Update_old_Products(aid: number) {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.activity_product.modifiedby = this.user.id;
-    console.log(this.activity_product.modifiedby);
+    // console.log(this.activity_product.modifiedby);
 
     this.activityService.update_old_Products(aid, this.activity_product).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -315,19 +315,36 @@ export class CurrentactivityComponent implements OnInit {
     });
   }
 
+  // SalesList() {
+  //   this.salesService.SalesList().subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.RegisteredSalesList) {
+  //         this.salesDetails = data.RegisteredSalesList;
+  //       }
+  //     }
+  //   }, (err) => {
+
+  //   });
+  // }
+
   SalesList() {
-    this.salesService.SalesList().subscribe((data: any) => {
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.sales.userid = this.user.id;
+    // console.log(this.sales.userid);
+
+    this.salesService.RegisteredSalesList(this.sales).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.RegisteredSalesList) {
           this.salesDetails = data.RegisteredSalesList;
+          // console.log(this.salesDetails);
+
         }
       }
     }, (err) => {
 
     });
   }
-
-
+  
   addnewActivity() {
     this.router.navigate(['/admin/activity/addactivity']);
 

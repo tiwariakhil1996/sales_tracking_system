@@ -23,8 +23,8 @@ export class SalesRegisterComponent implements OnInit {
 
   RoleJason = {
     ROle: [0, 1],
-    Component: "RegisterComponent"
-  }
+    Component: 'RegisterComponent'
+  };
 
   constructor(private router: Router, private salesService: SalesService, private toastr: ToastrService) {
     // this.Login();
@@ -33,13 +33,13 @@ export class SalesRegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.checkRole(this.RoleJason)
+    this.checkRole(this.RoleJason);
   }
 
-  
+
   checkRole(RoleJason) {
-    var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
-    if (this.RoleJason.Component == RoleJason.Component) {
+    const result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+    if (this.RoleJason.Component === RoleJason.Component) {
       console.log(result);
       if (!this.RoleJason.ROle.includes(result.userType)) {
         this.router.navigate(['admin/login']);
@@ -54,8 +54,7 @@ export class SalesRegisterComponent implements OnInit {
 
     if (!this.register.salesName) {
       strError += '- Please enter username';
-    }
-    else {
+    } else {
       if (!this.validateName(this.register.salesName)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- First name should be in alphabets';
@@ -66,8 +65,7 @@ export class SalesRegisterComponent implements OnInit {
     if (!this.register.email) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter valid email id';
-    }
-    else {
+    } else {
       if (!this.validateEmail(this.register.email)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Email should contain @ and . ';
@@ -76,8 +74,7 @@ export class SalesRegisterComponent implements OnInit {
 
     if (!this.register.password) {
       strError += '- Please enter valid password';
-    }
-    else {
+    } else {
       if (!this.passwordValidation(this.register.password)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Your password must be between 6 and 20 characters _at least one uppercase and one lowercase letter_one number digit_ one special character like $, #, @, !,%,^,&,*,(,)   ';
@@ -97,7 +94,7 @@ export class SalesRegisterComponent implements OnInit {
       return false;
     }
 
-    if (this.register.password == this.register.cpassword) {
+    if (this.register.password === this.register.cpassword) {
 
       this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
       this.register.createdby = this.user.id;
@@ -110,8 +107,7 @@ export class SalesRegisterComponent implements OnInit {
             disableTimeOut: false,
             timeOut: 2000
           });
-        }
-        else {
+        } else {
           // alert("Not Matched");
           this.toastr.info('This email id is already registered', 'Info', {
             disableTimeOut: false,
@@ -124,8 +120,7 @@ export class SalesRegisterComponent implements OnInit {
 
 
         });
-    }
-    else {
+    } else {
       this.toastr.error('Password & Confirm Password didnt match', 'Error', {
         disableTimeOut: false,
         timeOut: 2000
@@ -141,7 +136,7 @@ export class SalesRegisterComponent implements OnInit {
       // this.errorMessage="Please enter valid first name";
       isValid = true;
     }
-    ;
+
 
     if (isValid) {
       this.toastr.warning('Please enter username correctly', 'Warning', {
@@ -155,8 +150,8 @@ export class SalesRegisterComponent implements OnInit {
 
 
   validateName(nameField) {
-    var reg = /^[A-Za-z]+$/;
-    return reg.test(nameField) == false ? false : true;
+    const reg = /^[A-Za-z]+$/;
+    return reg.test(nameField) === false ? false : true;
   }
 
   // Email Validation
@@ -169,7 +164,7 @@ export class SalesRegisterComponent implements OnInit {
       //  return false;
       isValid = true;
     }
-    ;
+
     if (isValid) {
       this.toastr.warning('Please enter valid email id', 'Warning', {
         disableTimeOut: false,
@@ -180,8 +175,8 @@ export class SalesRegisterComponent implements OnInit {
   }
 
   validateEmail(emailField) {
-    var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-    return reg.test(emailField) == false ? false : true;
+    const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+    return reg.test(emailField) === false ? false : true;
   }
 
 
@@ -193,7 +188,7 @@ export class SalesRegisterComponent implements OnInit {
 
       isValid = true;
     }
-    ;
+
     if (isValid) {
       this.toastr.warning('Please enter valid mobile number', 'Warning', {
         disableTimeOut: false,
@@ -203,14 +198,14 @@ export class SalesRegisterComponent implements OnInit {
   }
 
   validateMobile(mobileField) {
-    var reg = /^\d{10}$/;
-    return reg.test(mobileField) == false ? false : true;
+    const reg = /^\d{10}$/;
+    return reg.test(mobileField) === false ? false : true;
   }
 
 
   passwordValidation(passwordField) {
-    var reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-    return reg.test(passwordField) == false ? false : true;
+    const reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+    return reg.test(passwordField) === false ? false : true;
   }
 
 
