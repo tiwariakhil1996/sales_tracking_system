@@ -1,4 +1,3 @@
-import { productModel, ImageListModel, ImageModel, UpdateImageListModel } from './../../../model/product';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -6,11 +5,12 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
 import { ProductService } from '../../../service/product.service';
+import { productModel, ImageListModel, ImageModel } from '../../../model/product';
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
 import { registerModel } from '../../../model/admin';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
+// import {DomSanitizatio.nService} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-addproduct',
@@ -175,10 +175,16 @@ export class AddproductComponent implements OnInit {
       }
     }
 
+    // if (!this.product.image) {
+    //   strError += strError = '' ? '' : '<br/>';
+    //   strError += '- Please select image';
+    // }
+
+    
     if (!this.product.imageList) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please select image';
-      }
+    }
 
     if (!this.product.date) {
       strError += strError = '' ? '' : '<br/>';
@@ -203,8 +209,6 @@ export class AddproductComponent implements OnInit {
     this.product.imageList = this.imageList;
     this.product.imageListData = this.imageModel;
 
-   
-    
     this.productService.addProduct(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
         // alert('Product added sucesfully');
@@ -316,7 +320,6 @@ export class AddproductComponent implements OnInit {
   handleFileInput(fileList: FileList) {
     this.imageList = [];
     this.imageModel = [];
-
     // const preview = document.getElementById('photos-preview');
     Array.from(fileList).forEach((file: File) => {
       const reader = new FileReader();
@@ -338,7 +341,6 @@ export class AddproductComponent implements OnInit {
       console.log(file);
     });
   }
-  
 
   resetForm() {
     this.product.cid = null;

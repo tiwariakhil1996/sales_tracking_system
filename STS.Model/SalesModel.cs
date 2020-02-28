@@ -30,8 +30,8 @@ namespace STS.Model
 
         public string Email { get; set; }
         public string Password { get; set; }
-        //public string Latitude { get; set; }
-        //public string Longitude { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
         public int UserType { get; set; }
 
     }

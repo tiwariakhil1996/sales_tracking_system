@@ -9,7 +9,6 @@ import { ToastrService } from 'ngx-toastr';
 import { ActivityService } from '../../service/activity.service';
 import { activityModel, newactivityModel } from '../../model/activity';
 
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './sales-layout.component.html'
@@ -37,11 +36,11 @@ export class SalesLayoutComponent implements OnInit {
   // salesDetails: salesregisterModel[] = [];
   // sales = new salesregisterModel();
   salesDetails: salesregisterModel = new salesregisterModel();
-  item: any;
-  updateProfile: any;
 
   changePassword = new changePasswordModel();
 
+  item: any;
+  updateProfile: any;
 
   RoleJason = {
     ROle: [0,1],
@@ -93,7 +92,6 @@ export class SalesLayoutComponent implements OnInit {
     this.modalRef = this.modalServices.show(template1);
   }
 
-
   updatesalesProfile() {
     // this.updateProfile.image = this.imageSrc;
     this.salesService.UpdateSalesProfile(this.updateProfile).subscribe((data: any) => {
@@ -142,9 +140,6 @@ export class SalesLayoutComponent implements OnInit {
           this.toastr.success('Password changed successfully', 'Successful', {
             disableTimeOut: false
           });
-          this.modalRef.hide();
-          this.logout();
-          this.router.navigate(['/sales/login']);
           this.changePassword = new changePasswordModel();
 
         } else {

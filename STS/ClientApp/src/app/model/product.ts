@@ -1,3 +1,6 @@
+
+
+
 // product form
 export class productModel {
     id: number;
@@ -8,37 +11,29 @@ export class productModel {
     productname: string;
     description: string;
     price: number;
-    // image: string;
-    // ImageExtn: string;
-    date: string;
-    isActive: boolean;
-
-    createdby: number;
-    modifiedby: number;
-    imageList: ImageListModel[];
-    //this model for display the image
-    imageListData: ImageModel[];
-    UpdateImageList: UpdateImageListModel[];
-}
-export class ImageListModel {
-
-    ImageId?: number = 0;
-    Image: string;
+    image: string;
     ImageExtn: string;
-    ImageData: string;
+    date: string;
+    isActive:boolean;
 
     createdby:number;
     modifiedby:number;
+    imageList: ImageListModel[];
+    //this model for display the image
+    imageListData: ImageModel[];
 }
-//This for store the data type(data table)
-export class ImageModel {
 
+export class ImageListModel {
+    Image: string;
+    ImageExtn: string;
+    ImageData: string;
+    
+}
+//This for display the image
+export class ImageModel {
     Image: string;
 }
-export class UpdateImageListModel {
-    ImageId: number;
-    ImageData: string;
-}
+
 export class productpriceModel {
     id: number;
     price: string;
@@ -54,8 +49,14 @@ export class productListModel {
     productname: string;
     description: string;
     price: number;
-    date:string;
-    userid:number;
+    image: string;
+    ImageExtn: string;
+    date: string;
+    isActive:boolean;
+    userid: number;
+    createdby:number;
     modifiedby:number;
-    
+    imageList: ImageListModel[];
+    //this model for display the image
+    imageListData: ImageModel[];
 }

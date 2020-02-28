@@ -17,15 +17,10 @@ export class AppComponent implements OnInit {
   //   Component: "DashboardComponent,ActivityComponent,ProductComponent,ClientComponent,RegisterComponent,MapComponent,SalesdataComponent,ForgotPasswordComponent,CategorySubcategoryComponent"
   // }
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit() {
-    this.router.events.subscribe((evt) => {
-      if (!(evt instanceof NavigationEnd)) {
-        return;
-      }
-      window.scrollTo(0, 0);
-    });
+
     // this.checkRole(this.RoleJason)
   }
 
@@ -42,4 +37,3 @@ export class AppComponent implements OnInit {
 
 }
 
-}

@@ -9,15 +9,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./client.component.css']
 })
 export class ClientComponent implements OnInit {
-  constructor()
-  {}
+
 
   RoleJason = {
     ROle: [0, 1],
     Component: "ClientComponent"
   }
 
-  constructor(private router:Router){
+  constructor(private router: Router) {
 
   }
 

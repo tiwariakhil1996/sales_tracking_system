@@ -169,7 +169,7 @@ onEdit(id:number) {
     }
   }
 
-  if (!this.image.Image) {
+  if (!this.product.imageList) {
     strError += strError = '' ? '' : '<br/>';
     strError += '- Please select image';
   }
@@ -301,8 +301,8 @@ handleFileInput(fileList: FileList) {
       const image = new Image();
       image.src = String(reader.result);
       const imageDetail = String(reader.result).split(';base64,');
-      this.image.Image = imageDetail[1];
-      this.image.ImageExtn = '.' + imageDetail[0].replace('data:image/', '');
+      this.product.image = imageDetail[1];
+      this.product.ImageExtn = '.' + imageDetail[0].replace('data:image/', '');
       image.height = 100;
       image.width = 100;
       preview.appendChild(image);

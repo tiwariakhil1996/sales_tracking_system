@@ -37,11 +37,10 @@ import { google } from "google-maps";
 import { AdminService } from '../../service/admin.service';
 
 @Component({
-  selector: 'map-root',
+  selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-
 export class MapComponent implements OnInit {
 
   latitude: number;
