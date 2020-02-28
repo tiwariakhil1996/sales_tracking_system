@@ -100,6 +100,10 @@ import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password
     ),
     RouterModule.forRoot(routes),
     ChartsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBaU6eEpioeuf9Nkzsd5N3OoJsDpVQdzEs'
+      // libraries: ['places']
+    }),
     // AgmMarker,
     // TooltipModule.forRoot(),
   ],
