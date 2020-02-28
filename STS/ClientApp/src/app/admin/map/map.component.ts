@@ -1,33 +1,3 @@
-
-// import { Router } from '@angular/router';
-
-// import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
-// import { MapsAPILoader, AgmMap } from '@agm/core';
-// import { MouseEvent } from "@agm/core";
-// import { google } from "google-maps";
-
-// @Component({
-//   selector: 'app-map',
-//   templateUrl: './map.component.html',
-//   styleUrls: ['./map.component.css']
-// })
-// export class MapComponent implements OnInit {
-
-//   latitude = 51.678418;
-//   longitude = 7.809007;
-//   locationChosen = false;
-
-//   constructor(private router: Router) { }
-
-//   ngOnInit() {
-//   }
-
-
-// }
-
-
-
-
 import { Router } from '@angular/router';
 
 import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
