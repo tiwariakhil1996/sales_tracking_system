@@ -5,7 +5,7 @@ import { BsModalRef } from 'ngx-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
 import { ProductService } from '../../../service/product.service';
-
+import { productModel, productListModel } from '../../../model/product';
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
 import { salesregisterModel } from '../../../model/sales';
 import { ImageListModel, productModel } from '../../../model/product';
@@ -22,8 +22,8 @@ export class ViewproductComponent implements OnInit {
 
   user = new salesregisterModel();
   
-  product = new productModel();
-  productDetails: productModel[] = [];
+  product = new productListModel();
+  productDetails: productListModel[] = [];
 
   
   category = new categoryDataModel();
@@ -54,18 +54,37 @@ export class ViewproductComponent implements OnInit {
 
   //Display
 
-  productList(){
-    this.productService.productList().subscribe((data: any) => {
+  // productList(){
+  //   this.productService.productList().subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.ProductList) {
+  //         this.productDetails = data.ProductList;
+  //       }
+  //     }
+  //   }, (err) => {
+
+  //   });
+  // }
+  
+  productList() {
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.product.userid = this.user.id;
+    console.log(this.product.userid);
+
+    this.productService.each_sales_ProductList(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        if (data.ProductList) {
-          this.productDetails = data.ProductList;
+        if (data.each_sales_ProductList) {
+          this.productDetails = data.each_sales_ProductList;
+          console.log(this.productDetails);
+
         }
       }
     }, (err) => {
 
     });
   }
-  
+
+
   active_deactive_CategoryList() {
     this.categoryService.active_CategoryList().subscribe((data: any) => {
       if (data.Status.code === 0) {

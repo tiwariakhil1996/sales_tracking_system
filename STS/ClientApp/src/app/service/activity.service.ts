@@ -29,6 +29,14 @@ export class ActivityService {
     return this.http.delete('/api/Activity/deleteActivity/' + aid);
   }
 
+  searchTitle(aid) {
+    return this.http.get('/api/Activity/searchTitle/' + aid);
+  }
+
+  // searchActivity(data) {
+  //   return this.http.get('/api/Activity/searchTitle', data);
+  // }
+
   deleteProduct(productId: number) {
     return this.http.delete('/api/Activity/deleteActivity_Product/' + productId);
   }
@@ -74,9 +82,9 @@ export class ActivityService {
     return this.http.put('/api/Activity/updateToCancel/' + aid, data);
   }
 
-  latest_added_Activity(){
-    return this.http.get('/api/Activity/addActivity');
-  }
+  // latest_added_Activity(){
+  //   return this.http.get('/api/Activity/addActivity');
+  // }
 
 
 }

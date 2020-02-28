@@ -12,6 +12,9 @@ export class salesregisterModel {
     cpassword: string;
 
     isActive: boolean;
+    createdby: number;
+
+    userid:number;
 }
 export class changePasswordModel {
     id: number;

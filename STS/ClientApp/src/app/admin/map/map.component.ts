@@ -1,7 +1,39 @@
-import { Component, OnInit, NgZone, ViewChild, ElementRef } from '@angular/core';
-import { MapsAPILoader } from '@agm/core';
-import {MouseEvent} from "@agm/core";
 
+// import { Router } from '@angular/router';
+
+// import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
+// import { MapsAPILoader, AgmMap } from '@agm/core';
+// import { MouseEvent } from "@agm/core";
+// import { google } from "google-maps";
+
+// @Component({
+//   selector: 'app-map',
+//   templateUrl: './map.component.html',
+//   styleUrls: ['./map.component.css']
+// })
+// export class MapComponent implements OnInit {
+
+//   latitude = 51.678418;
+//   longitude = 7.809007;
+//   locationChosen = false;
+
+//   constructor(private router: Router) { }
+
+//   ngOnInit() {
+//   }
+
+
+// }
+
+
+
+
+import { Router } from '@angular/router';
+
+import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { MapsAPILoader, AgmMap } from '@agm/core';
+import { MouseEvent } from "@agm/core";
+import { google } from "google-maps";
 
 @Component({
   selector: 'map-root',
@@ -11,53 +43,73 @@ import {MouseEvent} from "@agm/core";
 
 export class MapComponent implements OnInit {
 
-  title: string = 'STS project';
   latitude: number;
   longitude: number;
   zoom: number;
   address: string;
+
   private geoCoder;
+
+
+  location: Coordinates;
+  lat: any;
+  lng: any;
   
+  centerlat: any;
+  centerlng: any;
+  geocoder: any;
+  @ViewChild(AgmMap) map: any;
 
   @ViewChild('search')
   public searchElementRef: ElementRef;
-  
   constructor(
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone
-
-  ) { }
-  
-
+  ) {
+       this.geocoder = new google.maps.Geocoder;
+    }
 
   ngOnInit() {
-    //load Places Autocomplete
-    this.mapsAPILoader.load().then(() => {
-      this.setCurrentLocation();
-      this.geoCoder = new google.maps.Geocoder;
- 
-      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
-        types: ["address"]
+
+    setTimeout(() => {
+      navigator.geolocation.getCurrentPosition(position => {
+        console.log(position);
+
+        this.location = position.coords;
+        this.centerlat = this.location.latitude;
+        this.centerlng = this.location.longitude;
+        this.lat = this.location.latitude;
+        this.lng = this.location.longitude;
+        this.geocoder = new google.maps.Geocoder();
       });
-      autocomplete.addListener("place_changed", () => {
-        this.ngZone.run(() => {
-          //get the place result
-          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
- 
-          //verify result
-          if (place.geometry === undefined || place.geometry === null) {
-            return;
-          }
- 
-          //set latitude, longitude and zoom
-          this.latitude = place.geometry.location.lat();
-          this.longitude = place.geometry.location.lng();
-          this.zoom = 12;
-        });
-      });
-    });
+    }, 2000);
+
+    // //load Places Autocomplete
+    // this.mapsAPILoader.load().then(() => {
+    //   this.setCurrentLocation();
+
+    //   this.geoCoder = new google.maps.Geocoder;
+    //   let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+    //     types: ["address"]
+    //   });
+
+    //   autocomplete.addListener("place_changed", () => {
+    //     this.ngZone.run(() => {
+    //       //get the place result
+    //       let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+    //       //verify result
+    //       if (place.geometry === undefined || place.geometry === null) {
+    //         return;
+    //       }
+    //       //set latitude, longitude and zoom
+    //       this.latitude = place.geometry.location.lat();
+    //       this.longitude = place.geometry.location.lng();
+    //       this.zoom = 12;
+    //     });
+    //   });
+    // });
   }
- 
+  
   // Get Current Location Coordinates
   private setCurrentLocation() {
     if ('geolocation' in navigator) {
@@ -69,15 +121,15 @@ export class MapComponent implements OnInit {
       });
     }
   }
- 
- 
+
+
   markerDragEnd($event: MouseEvent) {
     console.log($event);
     this.latitude = $event.coords.lat;
     this.longitude = $event.coords.lng;
-    this.getAddress(this.latitude, this.longitude);
+    // this.getAddress(this.latitude, this.longitude);
   }
- 
+
   getAddress(latitude, longitude) {
     this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
       console.log(results);
@@ -91,9 +143,9 @@ export class MapComponent implements OnInit {
         }
       } else {
         window.alert('Geocoder failed due to: ' + status);
+        console.log(this.address);
+
       }
- 
     });
   }
- 
 }

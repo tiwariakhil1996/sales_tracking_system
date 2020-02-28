@@ -31,6 +31,22 @@ namespace STS.Model
 
         public string ImageData { get; set; }
 
+        public List<ImageList> ImageList { get; set; }
+        public List<ImageModel> ImageListData { get; set; }
+
+
+    }
+
+    //Add multiple image
+    public partial class ImageList
+    {
+        public string Image { get; set; }
+        public string ImageExtn { get; set; }
+        public string ImageData { get; set; }
+    }
+    public partial class ImageModel
+    {
+        public string Image { get; set; }
     }
    
 
@@ -83,6 +99,8 @@ namespace STS.Model
         public int Modifiedby { get; set; }
         public List<ImageList> ImageList { get; set; }
         public List<ImageModel> ImageListData { get; set; }
+
+        public int userId { get; set; }
 
     }
     public class GetPropertyImageListModel

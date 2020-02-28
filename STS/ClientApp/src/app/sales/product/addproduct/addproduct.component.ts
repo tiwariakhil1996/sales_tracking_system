@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
 import { ProductService } from '../../../service/product.service';
-
+import { productModel, ImageListModel, ImageModel } from '../../../model/product';
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
 import { salesregisterModel } from '../../../model/sales';
 import { productModel, ImageListModel } from '../../../model/product';
@@ -18,6 +18,9 @@ export class AddproductComponent implements OnInit {
   errorMessage = '';
   imageSrc: string = '';
 
+  imageList: ImageListModel[] = [];
+  imageModel: ImageModel[] = [];
+  
   user = new salesregisterModel();
 
   product = new productModel();
@@ -178,10 +181,16 @@ export class AddproductComponent implements OnInit {
       }
     }
 
-    if (!this.image.Image) {
+    // if (!this.product.image) {
+    //   strError += strError = '' ? '' : '<br/>';
+    //   strError += '- Please select image';
+    // }
+
+    if (!this.product.imageList) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please select image';
     }
+
 
     if (!this.product.date) {
       strError += strError = '' ? '' : '<br/>';
@@ -203,6 +212,9 @@ export class AddproductComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.product.createdby = this.user.id;
     console.log(this.product.createdby);
+  
+    this.product.imageList = this.imageList;
+    this.product.imageListData = this.imageModel;
 
     this.productService.addProduct(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -270,23 +282,48 @@ export class AddproductComponent implements OnInit {
   }
   // Image to Base64
 
+  // handleFileInput(fileList: FileList) {
+  //   const preview = document.getElementById('photos-preview');
+  //   Array.from(fileList).forEach((file: File) => {
+  //     const reader = new FileReader();
+  //     reader.onload = () => {
+  //       const image = new Image();
+  //       image.src = String(reader.result);
+  //       const imageDetail = String(reader.result).split(';base64,');
+  //       this.product.image = imageDetail[1];
+  //       this.product.ImageExtn = '.' + imageDetail[0].replace('data:image/', '');
+  //       image.height = 100;
+  //       image.width = 100;
+  //       preview.appendChild(image);
+  //     };
+  //     reader.readAsDataURL(file);
+  //     console.log(file);
+
+  //   });
+  // }
+
   handleFileInput(fileList: FileList) {
-    const preview = document.getElementById('photos-preview');
+    this.imageList = [];
+    this.imageModel = [];
+    // const preview = document.getElementById('photos-preview');
     Array.from(fileList).forEach((file: File) => {
       const reader = new FileReader();
       reader.onload = () => {
-        const image = new Image();
-        image.src = String(reader.result);
+        // const image = new Image();
+        // image.src = String(reader.result);
         const imageDetail = String(reader.result).split(';base64,');
-        this.image.Image = imageDetail[1];
-        this.image.ImageExtn = '.' + imageDetail[0].replace('data:image/', '');
-        image.height = 100;
-        image.width = 100;
-        preview.appendChild(image);
+        // this.product.imageList = imageDetail[1];
+        // this.image.ImageExtn = '.' + imageDetail[0].replace('data:image/', '');
+        // image.height = 100;
+        // image.width = 100;
+        // preview.appendChild(image);
+        // this.tempImageList.push({ ImageId: 0, ImageData: String(reader.result) });
+        this.imageList.push({ ImageExtn: '.' + imageDetail[0].replace('data:image/', ''), Image: "", ImageData: imageDetail[1] });
+        this.imageModel.push({ Image: "" })
+       
       };
       reader.readAsDataURL(file);
       console.log(file);
-
     });
   }
 

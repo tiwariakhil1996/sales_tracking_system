@@ -27,6 +27,8 @@ export class ImageListModel {
     ImageExtn: string;
     ImageData: string;
 
+    createdby:number;
+    modifiedby:number;
 }
 //This for store the data type(data table)
 export class ImageModel {
@@ -39,5 +41,17 @@ export class UpdateImageListModel {
 }
 export class productpriceModel {
     id: number;
+    price: string;
+}
+
+// product form
+export class productListModel {
+    id: number;
+    cid: string;
+    cname: string;
+    sid: string;
+    sname: string;
+    productname: string;
+    description: string;
     price: number;
 }

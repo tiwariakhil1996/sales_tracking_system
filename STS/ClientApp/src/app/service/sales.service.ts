@@ -40,7 +40,10 @@ export class SalesService {
     return this.http.get('/api/Sales/RegisteredSalesList');
   }
 
-
+  RegisteredSalesList(data) {
+    return this.http.post('/api/Sales/RegisteredSalesList', data);
+  }
+  
   deleteSales(id: number) {
     return this.http.delete('/api/Sales/deleteSales/' + id);
   }

@@ -53,16 +53,16 @@
 
         <div class="row">
           <div class="col-sm-12">
-            <table class="table">
+            <table class="table" style="border-bottom: solid;">
               <thead class="color">
                 <tr>
                   <th>Sr.</th>
                   <th>Product Name</th>
                   <th>Price</th>
-                  <th>Qty</th>
+                  <th>Qty*</th>
                   <th>Amt</th>
-                  <th>Discount</th>
-                  <th>Disc. Amt</th>
+                  <th>Dis (%)</th>
+                  <th>Dis. Amt</th>
                   <th>Total</th>
                 </tr>
               </thead>
@@ -75,18 +75,25 @@
                       <option *ngFor="let item of productDetails;" value={{item.id}}>{{item.productname}} </option>
                     </select></td>
                   <td> 
-                    <input type="text" class="form-control" id="price" name="price" [(ngModel)]="products.price">
+                    <!-- <input *ngFor="let item of product_priceDetails;"  type="text" class="form-control" id="price" name="price" [(ngModel)]="item.price" > -->           
+                    <tr *ngFor="let item of product_priceDetails;">
+                      <td>
+                        {{item.price}}
+                        </td>
+                    </tr>
+
+                    <!-- <input type="text" class="form-control" id="price" name="price" [(ngModel)]="products.price"  > -->
                   </td>
                   <td> <input type="text" class="form-control" id="quantity" name="quantity"
                       [(ngModel)]="products.quantity">
                   </td>
-                  <td> <input type="text" class="form-control" id="amount" name="amount" [(ngModel)]="products.amount">
+                  <td> <input  type="text" class="form-control" id="amount" name="amount" [(ngModel)]="products.amount" >
                   </td>
                   <td> <input type="text" class="form-control" id="discount_per" name="discount_per"
                       [(ngModel)]="products.discount_per">
                   </td>
                   <td> <input type="text" class="form-control" id="discount_amt" name="discount_amt"
-                      [(ngModel)]="products.discount_amt">
+                      [(ngModel)]="products.discount_amt" >
                   </td>
                   <td><input type="text" class="form-control" id="total_price" name="total_price"
                       [(ngModel)]="products.total_price">

@@ -35,7 +35,7 @@ namespace STS.Model
         public string Address { get; set; }
         public string Street { get; set; }
     
-        public string Cname { get; set; }
+        public string Cname { get;  set; }
       
         public string Sname { get; set; }
         public string Cityname { get; set; }
@@ -46,5 +46,7 @@ namespace STS.Model
         public int Cityid { get; set; }
         public bool IsActive { get; set; }
         public int Modifiedby { get; set; }
+        public int userId { get; set; }
+        
     }
 }

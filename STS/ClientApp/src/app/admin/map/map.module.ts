@@ -5,7 +5,9 @@ import { NgModule } from '@angular/core';
 
 import { MapComponent } from './map.component';
 import { MapRoutingModule } from './map-routing.module';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { AgmCoreModule } from '@agm/core';
 // Angular
 
 @NgModule({
@@ -14,8 +16,8 @@ import { MapRoutingModule } from './map-routing.module';
     FormsModule,
     MapRoutingModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBaU6eEpioeuf9Nkzsd5N3OoJsDpVQdzEs',
-      libraries: ['places']
+      apiKey: 'AIzaSyAgmJb337SljuWJnzPXRyMjiTSL1DWcBq8'
+      // libraries: ['places']
     }),
   ],
   declarations: [

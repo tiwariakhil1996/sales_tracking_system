@@ -11,6 +11,7 @@ namespace STS.Model
         public string Email { get; set; }
         public string Password { get; set; }
         public string Cpassword { get; set; }
+        public int Createdby { get; set; }
 
     }
    
@@ -68,14 +69,9 @@ namespace STS.Model
         public string Adharcard { get; set; }
         public string Address { get; set; }
         public bool IsActive { get; set; }
-       
-    }
-    public partial class ChangePasswordModel 
-    {
-        public int Id { get; set; }
-        public string oldpassword { get; set; }
-        public string newpassword { get; set; }
-        public string confirmpassword { get; set; }
+        public int UserId { get; set; }
 
+
+       
     }
 }

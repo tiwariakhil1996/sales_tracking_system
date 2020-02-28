@@ -24,24 +24,6 @@ namespace STS.BLL.Service
             }
         }
 
-        //public Task<Tuple<List<ActivityModel>, TranStatus>> addActivity(ActivityModel model)
-        //{
-        //    using (activityRepository = new ActivityRepository())
-        //    {
-        //        return activityRepository.addActivity(model);
-        //    }
-        //}
-
-
-        // Latest Added Activity
-        public async Task<List<ActivityModel>> addActivity()
-        {
-            using (activityRepository = new ActivityRepository())
-            {
-                return await activityRepository.addActivity();
-            }
-        }
-
         //Display Activity
         public async Task<List<ActivityListModel>> ActivityList()
         {
@@ -100,13 +82,15 @@ namespace STS.BLL.Service
 
 
         //Update Activity
-        public async Task<TranStatus> updateActivity(int Aid, ActivityListModel model)
+        public async Task<TranStatus> updateActivity(int Aid, Update_ActivityModel model)
         {
             using (activityRepository = new ActivityRepository())
             {
                 return await activityRepository.updateActivity(Aid, model);
             }
         }
+
+
 
 
 
@@ -187,5 +171,41 @@ namespace STS.BLL.Service
                 return await activityRepository.deleteActivity_Product(productId);
             }
         }
+
+
+        // Search Title
+        //public async Task<TranStatus> searchTitle(string Title)
+        //{
+        //    using (activityRepository = new ActivityRepository())
+        //    {
+        //        return await activityRepository.searchTitle(Title);
+        //    }
+        //}
+
+        public async Task<List<ActivityListModel>> searchTitle(int aid)
+        {
+            using (activityRepository = new ActivityRepository())
+            {
+                return await activityRepository.searchTitle(aid);
+            }
+        }
+
+        //public async Task<List<ActivityListModel>> searchTitle()
+        //{
+        //    using (activityRepository = new ActivityRepository())
+        //    {
+        //        return await activityRepository.searchTitle();
+        //    }
+        //}
+
+        //public async Task<TranStatus> searchTitle(ActivityListModel model)
+        //{
+        //    using (activityRepository = new ActivityRepository())
+        //    {
+        //        return await activityRepository.searchTitle(model);
+        //    }
+        //}
+
+
     }
 }

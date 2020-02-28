@@ -6,6 +6,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
 import { ProductService } from '../../../service/product.service';
+import { productModel, ImageListModel, ImageModel } from '../../../model/product';
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
 import { registerModel } from '../../../model/admin';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
@@ -23,6 +24,9 @@ export class AddproductComponent implements OnInit {
   imageSrc: string = '';
   modalRef: BsModalRef;
   // myDate = new Date();
+  imageList: ImageListModel[] = [];
+  imageModel: ImageModel[] = [];
+  
   currentDate = new Date();
 
   user = new registerModel();
@@ -165,7 +169,7 @@ export class AddproductComponent implements OnInit {
       }
     }
 
-    if (!this.product.imageList) {
+    if (!this.product.image) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please select image';
       }
@@ -283,6 +287,26 @@ export class AddproductComponent implements OnInit {
 
   // Image to Base64
 
+  // handleFileInput(fileList: FileList) {
+  //   const preview = document.getElementById('photos-preview');
+  //   Array.from(fileList).forEach((file: File) => {
+  //     const reader = new FileReader();
+  //     reader.onload = () => {
+  //       const image = new Image();
+  //       image.src = String(reader.result);
+  //       const imageDetail = String(reader.result).split(';base64,');
+  //       this.product.image = imageDetail[1];
+  //       this.product.ImageExtn = '.' + imageDetail[0].replace('data:image/', '');
+  //       image.height = 100;
+  //       image.width = 100;
+  //       preview.appendChild(image);
+  //     };
+  //     reader.readAsDataURL(file);
+  //     console.log(file);
+
+  //   });
+  // }
+
   handleFileInput(fileList: FileList) {
     this.imageList = [];
     this.imageModel = [];
@@ -306,7 +330,6 @@ export class AddproductComponent implements OnInit {
       };
       reader.readAsDataURL(file);
       console.log(file);
-
     });
   }
   

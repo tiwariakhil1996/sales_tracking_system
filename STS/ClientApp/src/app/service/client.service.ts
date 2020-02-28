@@ -19,6 +19,14 @@ export class ClientService {
     return this.http.get('/api/Client/ClientList');
   }
 
+  each_admin_ClientList(data) {
+    return this.http.post('/api/Client/each_admin_ClientList', data);
+  }
+
+  each_sales_ClientList(data) {
+    return this.http.post('/api/Client/each_sales_ClientList', data);
+  }
+
   deleteClient(id: number) {
     return this.http.delete('/api/Client/deleteClient/' + id);
   }

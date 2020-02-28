@@ -8,6 +8,7 @@ import { AddproductComponent } from './addproduct/addproduct.component';
 import { ViewproductComponent } from './viewproduct/viewproduct.component';
 import { ModalModule } from 'ngx-bootstrap';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ProductImagesComponent } from './product-images/product-images.component';
 // Angular
 
 @NgModule({
@@ -19,7 +20,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   declarations: [
     ProductComponent,
     AddproductComponent,
-    ViewproductComponent
+    ViewproductComponent,
+    ProductImagesComponent
   ]
 })
 export class ProductModule { }

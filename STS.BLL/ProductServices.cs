@@ -32,13 +32,26 @@ namespace STS.BLL.Service
             }
         }
 
-        //public async Task<Tuple<List<ProductListModel>, List<GetPropertyImageListModel>>> ProductList(callPropertyImageListModel model)
-        //{
-        //    using (productRepository = new ProductRepository())
-        //    {
-        //        return await productRepository.ProductList(model);
-        //    }
-        //}
+        // Display each admin List Individually
+        public async Task<List<ProductListModel>> each_admin_ProductList(ProductListModel model)
+        {
+            using (productRepository = new ProductRepository())
+            {
+                return await productRepository.each_admin_ProductList(model);
+            }
+
+        }
+
+        // Display each sales List Individually
+        public async Task<List<ProductListModel>> each_sales_ProductList(ProductListModel model)
+        {
+            using (productRepository = new ProductRepository())
+            {
+                return await productRepository.each_sales_ProductList(model);
+            }
+
+        }
+
 
         //Get Product Price
         public async Task<List<ProductPriceModel>> ProductPrice(int id)

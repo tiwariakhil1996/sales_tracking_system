@@ -3,13 +3,14 @@ import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { Router } from '@angular/router';
 import { ClientService } from '../../service/client.service';
-import { clientModel } from '../../model/client';
-import { productModel } from '../../model/product';
+import { clientModel, clientListModel } from '../../model/client';
+import { productModel, productListModel } from '../../model/product';
 import { salesregisterModel } from '../../model/sales';
 import { activityModel } from '../../model/activity';
 import { ProductService } from '../../service/product.service';
 import { SalesService } from '../../service/sales.service';
 import { ActivityService } from '../../service/activity.service';
+import { registerModel } from '../../model/admin';
 
 
 
@@ -20,12 +21,14 @@ export class DashboardComponent implements OnInit {
 
   radioModel: string = 'Month';
 
-  client = new clientModel();
-  clientDetails: clientModel[] = [];
+  user = new registerModel();
+
+  client = new clientListModel();
+  clientDetails: clientListModel[] = [];
   totalClient: any = null;
 
-  product = new productModel();
-  productDetails: productModel[] = [];
+  product = new productListModel();
+  productDetails: productListModel[] = [];
   totalProduct: any;
 
   sales = new salesregisterModel();
@@ -412,43 +415,100 @@ export class DashboardComponent implements OnInit {
     this.productList();
     this.clientList();
     this.SalesList();
-    this.activityList();
+    this.eachactivityList();
   }
+  // productList() {
+  //   this.productService.productList().subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.ProductList) {
+  //         this.productDetails = data.ProductList;
+  //         this.totalProduct = this.productDetails.length;
+  //         console.log( this.totalProduct );
+  //       }
+  //     }
+  //   }, (err) => {
+
+  //   });
+  // }
+
   productList() {
-    this.productService.productList().subscribe((data: any) => {
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.product.userid = this.user.id;
+    console.log(this.product.userid);
+
+    this.productService.each_admin_ProductList(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        if (data.ProductList) {
-          this.productDetails = data.ProductList;
+        if (data.each_admin_ProductList) {
+          this.productDetails = data.each_admin_ProductList;
           this.totalProduct = this.productDetails.length;
           console.log(this.totalProduct);
+
         }
       }
     }, (err) => {
 
     });
   }
+
+  // clientList() {
+  //   this.clientService.clientList().subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.ClientList) {
+  //         this.clientDetails = data.ClientList;
+  //         // console.log( this.clientDetails.length);
+  //          this.totalClient = this.clientDetails.length;
+  //          console.log( this.totalClient );
+  //       }
+  //     }
+  //   }, (err) => {
+  //   });
+  // }
 
   clientList() {
-    this.clientService.clientList().subscribe((data: any) => {
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.client.userid = this.user.id;
+    console.log(this.client.userid);
+
+    this.clientService.each_admin_ClientList(this.client).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        if (data.ClientList) {
-          this.clientDetails = data.ClientList;
-          // console.log( this.clientDetails.length);
+        if (data.each_admin_ClientList) {
+          this.clientDetails = data.each_admin_ClientList;
           this.totalClient = this.clientDetails.length;
-          console.log(this.totalClient);
+          console.log(this.clientDetails);
+
         }
       }
     }, (err) => {
+
     });
   }
 
+  // SalesList() {
+  //   this.salesService.SalesList().subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.RegisteredSalesList) {
+  //         this.salesDetails = data.RegisteredSalesList;
+  //         this.totalSales = this.salesDetails.length;
+  //         console.log(this.totalSales);
+  //       }
+  //     }
+  //   }, (err) => {
+
+  //   });
+  // }
+
   SalesList() {
-    this.salesService.SalesList().subscribe((data: any) => {
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.sales.userid = this.user.id;
+    console.log(this.sales.userid);
+
+    this.salesService.RegisteredSalesList(this.sales).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.RegisteredSalesList) {
           this.salesDetails = data.RegisteredSalesList;
           this.totalSales = this.salesDetails.length;
-          console.log(this.totalSales);
+          console.log(this.salesDetails);
+
         }
       }
     }, (err) => {
@@ -456,13 +516,17 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  activityList() {
-    this.activityService.activityList().subscribe((data: any) => {
+  eachactivityList() {
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.activity.userid = this.user.id;
+
+    this.activityService.each_admin_activityList(this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        if (data.ActivityList) {
-          this.activityDetails = data.ActivityList;
+        if (data.each_admin_activityList) {
+          this.activityDetails = data.each_admin_activityList;
           this.totalActivity = this.activityDetails.length;
           console.log(this.totalActivity);
+
         }
       }
     }, (err) => {
@@ -479,5 +543,11 @@ export class DashboardComponent implements OnInit {
     }
 
   }
+
+
+
+  // this.totalProduct = this.productDetails.length;
+  // this.totalActivity = this.activityDetails.length;
+  // this.totalSales = this.salesDetails.length;
 
 }

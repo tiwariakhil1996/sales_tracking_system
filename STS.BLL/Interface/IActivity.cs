@@ -17,7 +17,7 @@ namespace STS.BLL.Interface
 
 
         // Latest Added Activity
-        Task<List<ActivityModel>> addActivity();
+        //Task<List<ActivityModel>> addActivity();
 
 
         //Display Activity
@@ -43,7 +43,8 @@ namespace STS.BLL.Interface
         Task<List<newNotificationActivityLisModel>> assigned_activityList(newNotificationActivityLisModel model);
 
         //Update Activity
-        Task<TranStatus> updateActivity(int Aid, ActivityListModel model);
+        Task<TranStatus> updateActivity(int Aid, Update_ActivityModel model);
+
 
         //Update Products  added in activity
         Task<TranStatus> update_old_Products(int Aid, Update_products_in_ActivityModel model);
@@ -70,6 +71,12 @@ namespace STS.BLL.Interface
         //Activity_History
         Task<TranStatus> activity_history(int Aid, ActivityListModel model);
 
+        // Search Title
+        //Task<TranStatus> searchTitle(string Title);
+        Task<List<ActivityListModel>> searchTitle(int aid);
+
+        //Task<List<ActivityListModel>> searchTitle(string Title);
+        //Task<TranStatus> searchTitle(ActivityListModel model);
     }
 
 }

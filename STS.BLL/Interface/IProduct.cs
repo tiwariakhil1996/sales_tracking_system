@@ -19,6 +19,12 @@ namespace STS.BLL.Interface
 
 
 
+        // Display each admin List Individually
+        Task<List<ProductListModel>> each_admin_ProductList(ProductListModel model);
+
+        // Display each sales List Individually
+        Task<List<ProductListModel>> each_sales_ProductList(ProductListModel model);
+
         // Get Product Price
         Task<List<ProductPriceModel>> ProductPrice(int id);
 

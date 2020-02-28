@@ -170,7 +170,27 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
-
+        // Display by createdby which admin
+        [HttpPost]
+        [Route("RegisteredSalesList")]
+        public async Task<IActionResult> RegisteredSalesList([FromBody]SalesListModel model)
+        {
+            TranStatus transaction = new TranStatus();
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                var registerList = await isales.RegisteredSalesList(model);
+                dctData.Add("RegisteredSalesList", registerList);
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
 
         //Delete
         [HttpDelete]
