@@ -32,8 +32,8 @@ export class AddclientComponent implements OnInit {
 
   RoleJason = {
     ROle: [0, 1],
-    Component: "AddClientComponent"
-  }
+    Component: 'AddClientComponent'
+  };
 
   constructor(private router: Router,
     private toastr: ToastrService,
@@ -45,14 +45,14 @@ export class AddclientComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.checkRole(this.RoleJason)
-   
+    this.checkRole(this.RoleJason);
+
   }
 
-  
+
   checkRole(RoleJason) {
-    var result = JSON.parse(localStorage.getItem('salesLogin')) || [];
-    if (this.RoleJason.Component == RoleJason.Component) {
+    const result = JSON.parse(localStorage.getItem('salesLogin')) || [];
+    if (this.RoleJason.Component === RoleJason.Component) {
       console.log(result);
       if (!this.RoleJason.ROle.includes(result.userType)) {
         this.router.navigate(['sales/login']);
@@ -66,18 +66,16 @@ export class AddclientComponent implements OnInit {
 
     if (!this.client.clientName) {
       strError += strError = '- Please enter clientname';
+    } else
+    if (!this.validateName(this.client.clientName)) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += strError = '- Client name should only contain alphabets';
     }
-    else
-      if (!this.validateName(this.client.clientName)) {
-        strError += strError = '' ? '' : '<br/>';
-        strError += strError = '- Client name should only contain alphabets';
-      }
 
     if (!this.client.email) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter valid email id';
-    }
-    else {
+    } else {
       if (!this.validateEmail(this.client.email)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Email should contain @ and . ';
@@ -87,8 +85,7 @@ export class AddclientComponent implements OnInit {
     if (!this.client.contact) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter valid mobile no.';
-    }
-    else {
+    } else {
       if (!this.validateMobile(this.client.contact)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Mobile no should be of 10 digits';
@@ -113,16 +110,15 @@ export class AddclientComponent implements OnInit {
     if (!this.client.cid) {
       strError += strError = '' ? '' : '<br/>';
       strError += strError = '- Please select country';
+    } else
+    if (!this.client.sid) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please select state';
+    } else
+    if (!this.client.cityid) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please select city';
     }
-    else
-      if (!this.client.sid) {
-        strError += strError = '' ? '' : '<br/>';
-        strError += '- Please select state';
-      } else
-        if (!this.client.cityid) {
-          strError += strError = '' ? '' : '<br/>';
-          strError += '- Please select city';
-        }
 
     if (!this.client.postalCode) {
       strError += strError = '' ? '' : '<br/>';
@@ -151,8 +147,7 @@ export class AddclientComponent implements OnInit {
           disableTimeOut: false
         });
         this.client = new clientModel();
-      }
-      else {
+      } else {
         // alert("Not Matched");
         this.toastr.info('This email id is already registered', 'Info', {
           disableTimeOut: false,
@@ -172,7 +167,7 @@ export class AddclientComponent implements OnInit {
     if (!this.validateName(this.client.clientName)) {
       isValid = true;
     }
-    ;
+
 
     if (isValid) {
       this.toastr.warning('Please enter clientname correctly', 'Warning', {
@@ -186,56 +181,56 @@ export class AddclientComponent implements OnInit {
 
 
   validateName(nameField) {
-    var reg = /^[A-Za-z]+$/;
-    return reg.test(nameField) == false ? false : true;
+    const reg = /^[A-Za-z]+$/;
+    return reg.test(nameField) === false ? false : true;
   }
 
   // Email Validation
 
-  checkEmailValidation() {
-    let isValid = false;
-    if (!this.validateEmail(this.client.email)) {
-      // alert('Please enter valid email.')
-      // this.errorMessage="Please enter valid email";
-      //  return false;
-      isValid = true;
-    }
-    ;
-    if (isValid) {
-      this.toastr.warning('Please enter valid email id', 'Warning', {
-        disableTimeOut: false,
-        timeOut: 2000
-      });
-    }
+checkEmailValidation() {
+  let isValid = false;
+  if (!this.validateEmail(this.client.email)) {
+    // alert('Please enter valid email.')
+    // this.errorMessage="Please enter valid email";
+    //  return false;
+    isValid = true;
+  }
+
+  if (isValid) {
+    this.toastr.warning('Please enter valid email id', 'Warning', {
+      disableTimeOut: false,
+      timeOut: 2000
+    });
+  }
 
   }
 
-  validateEmail(emailField) {
-    var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-    return reg.test(emailField) == false ? false : true;
-  }
+validateEmail(emailField) {
+  const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+  return reg.test(emailField) === false ? false : true;
+}
 
   // Mobile no.  Validation
 
-  mobValidation() {
-    let isValid = false;
-    if (!this.validateMobile(this.client.contact)) {
+mobValidation() {
+  let isValid = false;
+  if (!this.validateMobile(this.client.contact)) {
 
-      isValid = true;
-    }
-    ;
-    if (isValid) {
-      this.toastr.warning('Please enter valid mobile number', 'Warning', {
-        disableTimeOut: false,
-        timeOut: 2000
-      });
-    }
+    isValid = true;
   }
 
-  validateMobile(mobileField) {
-    var reg = /^\d{10}$/;
-    return reg.test(mobileField) == false ? false : true;
+  if (isValid) {
+    this.toastr.warning('Please enter valid mobile number', 'Warning', {
+      disableTimeOut: false,
+      timeOut: 2000
+    });
   }
+}
+
+validateMobile(mobileField) {
+  const reg = /^\d{10}$/;
+  return reg.test(mobileField) === false ? false : true;
+}
 
   countryList() {
     this.country_state_cityService.countryList().subscribe((data: any) => {

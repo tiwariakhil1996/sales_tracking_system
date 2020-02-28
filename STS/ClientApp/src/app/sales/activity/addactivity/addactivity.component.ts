@@ -16,14 +16,14 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./addactivity.component.css']
 })
 export class AddactivityComponent implements OnInit {
-   
+
   user = new salesregisterModel();
 
   activity = new activityModel();
-  activityDetails: activityModel[]=[];
+  activityDetails: activityModel[] = [];
 
   sales = new salesregisterModel();
-  salesDetails: salesregisterModel[]=[];
+  salesDetails: salesregisterModel[] = [];
 
   product = new productModel();
   productDetails: productModel[] = [];
@@ -32,9 +32,9 @@ export class AddactivityComponent implements OnInit {
   clientDetails: clientModel[] = [];
 
   RoleJason = {
-    ROle: [0,1],
-    Component: "AddactivityComponent"
-  }
+    ROle: [0, 1],
+    Component: 'AddactivityComponent'
+  };
 
   constructor(private router: Router,
     private activityService: ActivityService,
@@ -51,12 +51,12 @@ export class AddactivityComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.checkRole(this.RoleJason)
+    this.checkRole(this.RoleJason);
   }
 
   checkRole(RoleJason) {
-    var result = JSON.parse(localStorage.getItem('salesLogin')) || [];
-    if (this.RoleJason.Component == RoleJason.Component) {
+    const result = JSON.parse(localStorage.getItem('salesLogin')) || [];
+    if (this.RoleJason.Component === RoleJason.Component) {
       console.log(result);
       if (!this.RoleJason.ROle.includes(result.userType)) {
         this.router.navigate(['sales/login']);
@@ -64,7 +64,7 @@ export class AddactivityComponent implements OnInit {
     }
   }
 
-  
+
   productList() {
     this.productService.productList().subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -114,7 +114,7 @@ export class AddactivityComponent implements OnInit {
   //   });
   // }
 
-  SalesList(){
+  SalesList() {
     this.salesService.SalesList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.RegisteredSalesList) {
@@ -147,19 +147,19 @@ export class AddactivityComponent implements OnInit {
 
     });
   }
-  
-  resetForm() {
-    this.activity.productId=null;
-    this.activity.clientId=null;
-    this.activity.salesId=null;
-    this.activity.contact=null;
 
-    this.activity.appointmentDate=null;
+  resetForm() {
+    this.activity.productId = null;
+    this.activity.clientId = null;
+    this.activity.salesId = null;
+    this.activity.contact = null;
+
+    this.activity.appointmentDate = null;
   }
 
-  
-  
-  viewActivityForm(){
+
+
+  viewActivityForm() {
     this.router.navigate(['/sales/activity/currentactivity']);
   }
 

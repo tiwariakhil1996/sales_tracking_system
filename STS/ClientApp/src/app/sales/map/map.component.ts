@@ -36,8 +36,8 @@ export class MapComponent implements OnInit {
 
   RoleJason = {
     ROle: [0, 1],
-    Component: "MapComponent"
-  }
+    Component: 'MapComponent'
+  };
 
   constructor(
     private mapsAPILoader: MapsAPILoader,

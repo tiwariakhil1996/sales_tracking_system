@@ -33,15 +33,15 @@ export class ViewproductComponent implements OnInit {
 
   RoleJason = {
     ROle: [0, 1],
-    Component: "ViewproductComponent"
-  }
+    Component: 'ViewproductComponent'
+  };
 
   constructor(private router: Router,
     private productService: ProductService,
     private toastr: ToastrService,
     private categoryService: CategorySubcategoryService,
     private modalService: NgbModal,
-    
+
   ) {
     this.productList();
     // this.categoryList();
@@ -49,13 +49,13 @@ export class ViewproductComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.checkRole(this.RoleJason)
+    this.checkRole(this.RoleJason);
   }
 
   checkRole(RoleJason) {
-    var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
-    if (this.RoleJason.Component == RoleJason.Component) {
-      console.log(result);
+    const result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+    if (this.RoleJason.Component === RoleJason.Component) {
+      // console.log(result);
       if (!this.RoleJason.ROle.includes(result.userType)) {
         this.router.navigate(['admin/login']);
       }
@@ -79,13 +79,13 @@ export class ViewproductComponent implements OnInit {
   productList() {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.product.userid = this.user.id;
-    console.log(this.product.userid);
+    // console.log(this.product.userid);
 
     this.productService.each_admin_ProductList(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.each_admin_ProductList) {
           this.productDetails = data.each_admin_ProductList;
-          console.log(this.productDetails);
+          // console.log(this.productDetails);
 
         }
       }
@@ -177,7 +177,7 @@ export class ViewproductComponent implements OnInit {
 
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.product.modifiedby = this.user.id;
-    console.log(this.product.modifiedby);
+    // console.log(this.product.modifiedby);
 
     this.productService.updateProduct(id, this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -193,7 +193,7 @@ export class ViewproductComponent implements OnInit {
           timeOut: 2000
         });
       }
-    
+
 
       // this.product = new productModel();
       this.productList();
@@ -284,7 +284,7 @@ export class ViewproductComponent implements OnInit {
       }
     }, (err) => {
 
-      console.log(this.categoryDetails);
+      // console.log(this.categoryDetails);
     });
   }
 
@@ -302,7 +302,7 @@ export class ViewproductComponent implements OnInit {
       }
     }, (err) => {
 
-      console.log(this.subcategoryDetails);
+      // console.log(this.subcategoryDetails);
     });
   }
 
@@ -324,14 +324,14 @@ export class ViewproductComponent implements OnInit {
         preview.appendChild(image);
       };
       reader.readAsDataURL(file);
-      console.log(file);
+      // console.log(file);
 
     });
   }
 
 
   changeStatus(id: number) {
-    console.log(id);
+    // console.log(id);
     this.productService.changeStatus(id).subscribe(data => {
       this.productList();
     });

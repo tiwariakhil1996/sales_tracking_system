@@ -6,8 +6,8 @@ import { salesregisterModel } from '../../model/sales';
 
 import {ViewChild, ElementRef, NgZone } from '@angular/core';
 import { MapsAPILoader, AgmMap } from '@agm/core';
-import { MouseEvent } from "@agm/core";
-import { google } from "google-maps";
+import { MouseEvent } from '@agm/core';
+import { google } from 'google-maps';
 import { AdminService } from '../../service/admin.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class SalesLoginComponent implements OnInit {
   loginDetail = new salesregisterModel();
   salesDetails: salesregisterModel[] = [];
 
-  
+
   latitude: number;
   longitude: number;
   zoom: number;
@@ -32,7 +32,7 @@ export class SalesLoginComponent implements OnInit {
   location: Coordinates;
   lat: any;
   lng: any;
-  
+
   centerlat: any;
   centerlng: any;
   geocoder: any;
@@ -41,12 +41,12 @@ export class SalesLoginComponent implements OnInit {
   @ViewChild('search')
   public searchElementRef: ElementRef;
 
-  constructor(private router: Router, 
+  constructor(private router: Router,
     private salesService: SalesService,
     private toastr: ToastrService,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone) {
-     
+
     this.geocoder = new google.maps.Geocoder;
 
      this.logout();
@@ -71,7 +71,7 @@ export class SalesLoginComponent implements OnInit {
 
 
   submitLogin() {
-   
+
     this.loginDetail.latitude = this.lat;
     this.loginDetail.longitude = this.lng;
 
@@ -84,8 +84,7 @@ export class SalesLoginComponent implements OnInit {
         });
 
         this.router.navigate(['/sales/dashboard']);
-      }
-      else {
+      } else {
         this.toastr.warning('Either your username and password didnt matched or This account is temporarily blocked', 'Warning', {
           disableTimeOut: false,
           timeOut: 2000
@@ -98,8 +97,8 @@ export class SalesLoginComponent implements OnInit {
     logout() {
       localStorage.removeItem('salesLogin');
     }
-  
-    
+
+
   registerForm() {
     this.router.navigate(['/register']);
   }

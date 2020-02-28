@@ -50,9 +50,8 @@ export class AddactivityComponent implements OnInit {
 
   RoleJason = {
     ROle: [0, 1],
-    // Component: "DashboardComponent,ActivityComponent,ProductComponent,ClientComponent,RegisterComponent,MapComponent,SalesdataComponent,ForgotPasswordComponent,CategorySubcategoryComponent"
-     Component:"AddComponent"
-  }
+    Component: 'AddComponent'
+  };
 
   constructor(private router: Router,
     private activityService: ActivityService,
@@ -69,23 +68,18 @@ export class AddactivityComponent implements OnInit {
     // this.activityList_while_adding();
     // console.log(this.product_priceDetails);
 
-    // console.log(this.latestactivityDetails);
-
-    // this.add(this.addproductlistDetails); 
-
-
   }
 
   ngOnInit() {
     this.addMoreproducts();
     this.static_price();
-    this.checkRole(this.RoleJason)
+    this.checkRole(this.RoleJason);
   }
 
   checkRole(RoleJason) {
-    var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
-    if (this.RoleJason.Component == RoleJason.Component) {
-      console.log(result);
+    const result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+    if (this.RoleJason.Component === RoleJason.Component) {
+      // console.log(result);
       if (!this.RoleJason.ROle.includes(result.userType)) {
         this.router.navigate(['admin/login']);
       }
@@ -95,21 +89,21 @@ export class AddactivityComponent implements OnInit {
   //   this.isShow = !this.isShow;
   // }
 
- 
+
 
   // values = '';
 
-  // onKey(event: any) { 
+  // onKey(event: any) {
   //   this.values += event.target.value + ;
   // }
 
-//   total(bills) {
-//     var total = 0;
-//     bills.forEach(element => {
-// total = total + (this.productService.price * this.products.quantity);
-//     });
-//     return total;
-// }
+  //   total(bills) {
+  //     var total = 0;
+  //     bills.forEach(element => {
+  // total = total + (this.productService.price * this.products.quantity);
+  //     });
+  //     return total;
+  // }
 
 
   // add(addproductlistDetails) {
@@ -186,19 +180,37 @@ export class AddactivityComponent implements OnInit {
   //   });
   // }
 
+  // SalesList() {
+  //   this.salesService.SalesList().subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.RegisteredSalesList) {
+  //         this.salesDetails = data.RegisteredSalesList;
+  //       }
+  //     }
+  //   }, (err) => {
+
+  //   });
+  // }
+
+
   SalesList() {
-    this.salesService.SalesList().subscribe((data: any) => {
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.sales.userid = this.user.id;
+    // console.log(this.sales.userid);
+
+    this.salesService.RegisteredSalesList(this.sales).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.RegisteredSalesList) {
           this.salesDetails = data.RegisteredSalesList;
+          // console.log(this.salesDetails);
+
         }
       }
     }, (err) => {
 
     });
   }
-
-
+  
 
   addMoreproducts() {
     this.addproductlistDetails.push({
@@ -217,7 +229,7 @@ export class AddactivityComponent implements OnInit {
   static_price() {
     this.product_priceDetails.push({
       id: null,
-      price: "0.00",
+      price: '0.00',
     });
   }
 

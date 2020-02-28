@@ -19,21 +19,21 @@ export class AddcategoryComponent implements OnInit {
 
   RoleJason = {
     ROle: [0, 1],
-    Component: "AddcategoryComponent"
-  }
+    Component: 'AddcategoryComponent'
+  };
 
   constructor(private router: Router,
     private toastr: ToastrService,
     private categoryService: CategorySubcategoryService) { }
 
   ngOnInit() {
-    this.checkRole(this.RoleJason)
+    this.checkRole(this.RoleJason);
   }
 
   checkRole(RoleJason) {
-    var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
-    if (this.RoleJason.Component == RoleJason.Component) {
-      console.log(result);
+    const result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+    if (this.RoleJason.Component === RoleJason.Component) {
+      // console.log(result);
       if (!this.RoleJason.ROle.includes(result.userType)) {
         this.router.navigate(['admin/login']);
       }
@@ -43,7 +43,7 @@ export class AddcategoryComponent implements OnInit {
   addCategory() {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.category.createdby = this.user.id;
-    console.log(this.category.createdby);
+    // console.log(this.category.createdby);
 
 
     this.categoryService.addCategory(this.category).subscribe((data: any) => {
@@ -69,12 +69,12 @@ export class AddcategoryComponent implements OnInit {
       if (data.Status.code === 0) {
         if (data.CategoryList) {
           this.categoryDetails = data.CategoryList;
-          console.log(this.categoryDetails);
+          // console.log(this.categoryDetails);
         }
       }
     }, (err) => {
 
-      console.log(this.categoryDetails);
+      // console.log(this.categoryDetails);
     });
   }
 

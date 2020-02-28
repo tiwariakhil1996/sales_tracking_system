@@ -19,7 +19,7 @@ export class AddproductComponent implements OnInit {
 
   imageList: ImageListModel[] = [];
   imageModel: ImageModel[] = [];
-  
+
   user = new salesregisterModel();
 
   product = new productModel();
@@ -33,8 +33,8 @@ export class AddproductComponent implements OnInit {
 
   RoleJason = {
     ROle: [0, 1],
-    Component: "AddproductComponent"
-  }
+    Component: 'AddproductComponent'
+  };
 
   constructor(private router: Router,
     private toastr: ToastrService,
@@ -46,13 +46,13 @@ export class AddproductComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.checkRole(this.RoleJason)
+    this.checkRole(this.RoleJason);
   }
 
-  
+
   checkRole(RoleJason) {
-    var result = JSON.parse(localStorage.getItem('salesLogin')) || [];
-    if (this.RoleJason.Component == RoleJason.Component) {
+    const result = JSON.parse(localStorage.getItem('salesLogin')) || [];
+    if (this.RoleJason.Component === RoleJason.Component) {
       console.log(result);
       if (!this.RoleJason.ROle.includes(result.userType)) {
         this.router.navigate(['sales/login']);
@@ -60,7 +60,7 @@ export class AddproductComponent implements OnInit {
     }
   }
 
-  addCategory(){
+  addCategory() {
     this.categoryService.addCategory(this.category).subscribe((data: any) => {
       if (data.Status.code === 0) {
         // alert('Category added sucesfully');
@@ -76,7 +76,19 @@ export class AddproductComponent implements OnInit {
   }
 
 
-  
+  // categoryList() {
+  //   this.categoryService.categoryList().subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.CategoryList) {
+  //         this.categoryDetails = data.CategoryList;
+
+  //       }
+  //     }
+  //   }, (err) => {
+
+  //     console.log(this.categoryDetails);
+  //   });
+  // }
 
   active_CategoryList() {
     this.categoryService.active_CategoryList().subscribe((data: any) => {
@@ -148,19 +160,17 @@ export class AddproductComponent implements OnInit {
 
     if (!this.product.cid) {
       strError += strError = '- Please select category';
+    } else
+    if (!this.product.sid) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please select subcategory';
     }
-    else
-      if (!this.product.sid) {
-        strError += strError = '' ? '' : '<br/>';
-        strError += '- Please select subcategory';
-      }
 
 
     if (!this.product.productname) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter productname';
-    }
-    else {
+    } else {
       if (!this.validateProductname(this.product.productname)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Product name should only contain alphabets & number';
@@ -170,8 +180,7 @@ export class AddproductComponent implements OnInit {
     if (!this.product.price) {
       strError += strError = '' ? '' : '<br/>';
       strError += strError = '- Please enter price';
-    }
-    else {
+    } else {
       if (!this.validateprice(this.product.price)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Price should be in numbers';
@@ -181,8 +190,7 @@ export class AddproductComponent implements OnInit {
     if (!this.product.description) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter description';
-    }
-    else {
+    } else {
       if (!this.validateProductname(this.product.description)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Description  should only contain alphabets & number';
@@ -220,7 +228,7 @@ export class AddproductComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.product.createdby = this.user.id;
     console.log(this.product.createdby);
-  
+
     this.product.imageList = this.imageList;
     this.product.imageListData = this.imageModel;
 
@@ -231,9 +239,7 @@ export class AddproductComponent implements OnInit {
           disableTimeOut: false
         });
         this.product = new productModel();
-      }
-      // this.product = new productModel();
-      else {
+      } else {
         // alert("Not Matched");
         this.toastr.warning('Please fill the remaining fields', 'Warning', {
           disableTimeOut: false,
@@ -253,7 +259,7 @@ export class AddproductComponent implements OnInit {
     if (!this.validateProductname(this.product.productname)) {
       isValid = true;
     }
-    ;
+
 
     if (isValid) {
       this.toastr.warning('Please enter productname correctly', 'Warning', {
@@ -265,8 +271,8 @@ export class AddproductComponent implements OnInit {
   }
 
   validateProductname(productnameField) {
-    var reg = /^[A-Za-z0-9]+$/;
-    return reg.test(productnameField) == false ? false : true;
+    const reg = /^[A-Za-z0-9]+$/;
+    return reg.test(productnameField) === false ? false : true;
   }
 
   priceValidation() {
@@ -274,7 +280,7 @@ export class AddproductComponent implements OnInit {
     if (!this.validateprice(this.product.price)) {
       isValid = true;
     }
-    ;
+
 
     if (isValid) {
       this.toastr.warning('Please enter price correctly', 'Warning', {
@@ -285,8 +291,8 @@ export class AddproductComponent implements OnInit {
 
   }
   validateprice(priceField) {
-    var reg = /^[0-9]+$/;
-    return reg.test(priceField) == false ? false : true;
+    const reg = /^[0-9]+$/;
+    return reg.test(priceField) === false ? false : true;
   }
   // Image to Base64
 
@@ -326,9 +332,9 @@ export class AddproductComponent implements OnInit {
         // image.width = 100;
         // preview.appendChild(image);
         // this.tempImageList.push({ ImageId: 0, ImageData: String(reader.result) });
-        this.imageList.push({ ImageExtn: '.' + imageDetail[0].replace('data:image/', ''), Image: "", ImageData: imageDetail[1] });
-        this.imageModel.push({ Image: "" })
-       
+        this.imageList.push({ ImageExtn: '.' + imageDetail[0].replace('data:image/', ''), Image: '', ImageData: imageDetail[1] });
+        this.imageModel.push({ Image: '' });
+
       };
       reader.readAsDataURL(file);
       console.log(file);
@@ -341,9 +347,9 @@ export class AddproductComponent implements OnInit {
     this.product.productname = null;
     this.product.price = null;
     this.product.description = null;
-    this.product.imageList = null;
+    this.product.image = null;
     this.product.date = null;
-  }
+ }
 
 
   viewProductForm() {

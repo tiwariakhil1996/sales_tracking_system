@@ -23,7 +23,7 @@ export class SalesLayoutComponent implements OnInit {
   newactivity = new newactivityModel();
   newactivityDetails: newactivityModel[] = [];
 
-  assignedActivity : any;
+  assignedActivity: any;
 
   user = new salesregisterModel();
 
@@ -43,9 +43,9 @@ export class SalesLayoutComponent implements OnInit {
   updateProfile: any;
 
   RoleJason = {
-    ROle: [0,1],
-    Component: "SalesLayoutComponent"
-  }
+    ROle: [0, 1],
+    Component: 'SalesLayoutComponent'
+  };
 
   constructor(private router: Router,
     private salesService: SalesService,
@@ -62,14 +62,14 @@ export class SalesLayoutComponent implements OnInit {
     console.log(this.changePassword.id);
   }
 
-  ngOnInit(){
-    this.checkRole(this.RoleJason)
+  ngOnInit() {
+    this.checkRole(this.RoleJason);
   }
 
 
   checkRole(RoleJason) {
-    var result = JSON.parse(localStorage.getItem('salesLogin')) || [];
-    if (this.RoleJason.Component == RoleJason.Component) {
+    const result = JSON.parse(localStorage.getItem('salesLogin')) || [];
+    if (this.RoleJason.Component === RoleJason.Component) {
       console.log(result);
       if (!this.RoleJason.ROle.includes(result.userType)) {
         this.router.navigate(['sales/login']);
@@ -114,8 +114,7 @@ export class SalesLayoutComponent implements OnInit {
 
     if (!this.changePassword.newpassword) {
       strError += '- Please enter valid password';
-    }
-    else {
+    } else {
       if (!this.passwordValidation(this.changePassword.newpassword)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Your password must be between 6 and 20 characters _at least one uppercase and one lowercase letter_one number digit_ one special character like $, #, @, !,%,^,&,*,(,)   ';
@@ -163,8 +162,8 @@ export class SalesLayoutComponent implements OnInit {
 
 
   passwordValidation(passwordField) {
-    var reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-    return reg.test(passwordField) == false ? false : true;
+    const reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+    return reg.test(passwordField) === false ? false : true;
   }
 
 
@@ -202,7 +201,7 @@ export class SalesLayoutComponent implements OnInit {
           console.log(this.activityDetails);
           this.totalActivity = this.activityDetails.length;
           console.log(this.totalActivity);
-          
+
         }
       }
     }, (err) => {
@@ -223,7 +222,7 @@ export class SalesLayoutComponent implements OnInit {
           console.log(this.newactivityDetails);
           this.assignedActivity = this.newactivityDetails.length;
           console.log(this.assignedActivity);
-          
+
         }
       }
     }, (err) => {

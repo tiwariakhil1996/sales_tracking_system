@@ -27,9 +27,9 @@ export class DefaultLayoutComponent implements OnInit {
 
   salesregister = new salesregisterModel();
   salesDetails: salesregisterModel[] = [];
-  
+
   changePassword = new changePasswordModel();
-  
+
   item: any;
   updateProfile: any;
 
@@ -37,9 +37,9 @@ export class DefaultLayoutComponent implements OnInit {
   productDetails: productModel[] = [];
 
   RoleJason = {
-    ROle: [0,1],
-    Component: "DefaultLayoutComponent"
-  }
+    ROle: [0, 1],
+    Component: 'DefaultLayoutComponent'
+  };
 
   constructor(private router: Router,
     private adminService: AdminService,
@@ -51,18 +51,18 @@ export class DefaultLayoutComponent implements OnInit {
 
       this.register = JSON.parse(localStorage.getItem('adminLogin')) || {};
       this.changePassword.id = this.register.id;
-      console.log(this.changePassword.id);
+      // console.log(this.changePassword.id);
 
   }
 
   ngOnInit() {
-    this.checkRole(this.RoleJason)
+    this.checkRole(this.RoleJason);
   }
 
   checkRole(RoleJason) {
-    var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
-    if (this.RoleJason.Component == RoleJason.Component) {
-      console.log(result);
+    const result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+    if (this.RoleJason.Component === RoleJason.Component) {
+      // console.log(result);
       if (!this.RoleJason.ROle.includes(result.userType)) {
         this.router.navigate(['admin/login']);
       }
@@ -74,12 +74,12 @@ export class DefaultLayoutComponent implements OnInit {
   }
 
 
- 
+
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalServices.show(template);
     this.adminDetails = JSON.parse(localStorage.getItem('adminLogin')) || {};
-    console.log(this.adminDetails);
+    // console.log(this.adminDetails);
     this.updateProfile = this.adminDetails;
   }
 
@@ -94,8 +94,7 @@ export class DefaultLayoutComponent implements OnInit {
 
     if (!this.changePassword.newpassword) {
       strError += '- Please enter valid password';
-    }
-    else {
+    } else {
       if (!this.passwordValidation(this.changePassword.newpassword)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Your password must be between 6 and 20 characters _at least one uppercase and one lowercase letter_one number digit_ one special character like $, #, @, !,%,^,&,*,(,)   ';
@@ -122,7 +121,7 @@ export class DefaultLayoutComponent implements OnInit {
         this.toastr.success('Password changed successfully', 'Successful', {
           disableTimeOut: false
         });
-        this.changePassword=new changePasswordModel();
+        this.changePassword = new changePasswordModel();
       } else {
         this.toastr.warning('Old Password is incorrect', 'Warning', {
           disableTimeOut: false,
@@ -130,7 +129,7 @@ export class DefaultLayoutComponent implements OnInit {
         });
       }
     }, (err) => {
-   
+
     });
   } else {
     this.toastr.error('New Password & Confirm Password didnt match', 'Error', {
@@ -183,7 +182,7 @@ export class DefaultLayoutComponent implements OnInit {
     //   return false;
     // }
 
-   
+
     this.adminService.UpdateAdminProfile(this.updateProfile).subscribe((data: any) => {
       if (data.Status.code === 0) {
         // alert("Profile updated successfully");
@@ -207,7 +206,6 @@ export class DefaultLayoutComponent implements OnInit {
       // this.errorMessage="Please enter valid first name";
       isValid = true;
     }
-    ;
 
     if (isValid) {
       this.toastr.warning('Please enter username correctly', 'Warning', {
@@ -218,11 +216,11 @@ export class DefaultLayoutComponent implements OnInit {
 
   }
 
-  
+
 
   validateName(nameField) {
-    var reg = /^[A-Za-z]+$/;
-    return reg.test(nameField) == false ? false : true;
+    const reg = /^[A-Za-z]+$/;
+    return reg.test(nameField) === false ? false : true;
   }
 
 // Email Validation
@@ -235,7 +233,7 @@ checkEmailValidation() {
     //  return false;
     isValid = true;
   }
-  ;
+
   if (isValid) {
     this.toastr.warning('Please enter valid email id', 'Warning', {
       disableTimeOut: false,
@@ -246,8 +244,8 @@ checkEmailValidation() {
 }
 
 validateEmail(emailField) {
-  var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-  return reg.test(emailField) == false ? false : true;
+  const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+  return reg.test(emailField) === false ? false : true;
 }
 
 
@@ -256,10 +254,10 @@ validateEmail(emailField) {
 mobValidation() {
   let isValid = false;
   if (!this.validateMobile(this.register.mobile)) {
-   
+
     isValid = true;
   }
-  ;
+
   if (isValid) {
     this.toastr.warning('Please enter valid mobile number', 'Warning', {
       disableTimeOut: false,
@@ -269,8 +267,8 @@ mobValidation() {
 }
 
 validateMobile(mobileField) {
-  var reg = /^\d{10}$/;
-  return reg.test(mobileField) == false ? false : true;
+  const reg = /^\d{10}$/;
+  return reg.test(mobileField) === false ? false : true;
 }
 
   handleFileInput(fileList: FileList) {
@@ -288,46 +286,43 @@ validateMobile(mobileField) {
         preview.appendChild(image);
       };
       reader.readAsDataURL(file);
-      console.log(file);
+      // console.log(file);
 
     });
   }
 
 
 
-  
+
   salesRegister() {
-   
+
     let strError = '';
 
     if (!this.salesregister.salesName) {
       strError += '- Please enter username';
-    }
-    else {
+    } else {
       if (!this.validateName(this.salesregister.salesName)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- First name should be in alphabets';
       }
     }
 
-    
+
     if (!this.salesregister.email) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter valid email id';
-    }
-    else {
+    } else {
       if (!this.validateEmail(this.salesregister.email)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Email should contain @ and . ';
       }
     }
 
-   
+
 
     if (!this.salesregister.password) {
       strError += '- Please enter valid password';
-    }
-    else {
+    } else {
       if (!this.passwordValidation(this.salesregister.password)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Your password must be between 6 and 20 characters _at least one uppercase and one lowercase letter_one number digit_ one special character like $, #, @, !,%,^,&,*,(,)   ';
@@ -346,7 +341,7 @@ validateMobile(mobileField) {
       return false;
     }
 
-    if (this.salesregister.password == this.salesregister.cpassword) {
+    if (this.salesregister.password === this.salesregister.cpassword) {
 
     this.salesService.SalesRegisterService(this.register).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -355,8 +350,7 @@ validateMobile(mobileField) {
           disableTimeOut: false,
           timeOut: 2000
         });
-      } 
-      else {
+      } else {
         // alert("Not Matched");
         this.toastr.error('Password & Confirm Password didnt match', 'Error', {
           disableTimeOut: false,
@@ -364,18 +358,18 @@ validateMobile(mobileField) {
         });
       }
       this.salesregister = new salesregisterModel();
-    } 
+    }
     , (err) => {
 
 
     });
-  } 
+  }
 }
 
 
 passwordValidation(passwordField) {
-var reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-return reg.test(passwordField) == false ? false : true;
+const reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+return reg.test(passwordField) === false ? false : true;
 }
 
 
@@ -383,7 +377,7 @@ return reg.test(passwordField) == false ? false : true;
     this.router.navigate(['/register']);
   }
 
-  loginForm(){
+  loginForm() {
     this.router.navigate(['/sales/login']);
   }
   adminregisterForm() {

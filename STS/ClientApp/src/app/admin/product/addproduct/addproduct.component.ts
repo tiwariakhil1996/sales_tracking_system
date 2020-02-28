@@ -25,7 +25,7 @@ export class AddproductComponent implements OnInit {
   // myDate = new Date();
   imageList: ImageListModel[] = [];
   imageModel: ImageModel[] = [];
-  
+
   currentDate = new Date();
 
   user = new registerModel();
@@ -41,8 +41,8 @@ export class AddproductComponent implements OnInit {
 
   RoleJason = {
     ROle: [0, 1],
-    Component: "AddproductComponent"
-  }
+    Component: 'AddproductComponent'
+  };
 
   constructor(private router: Router,
     private toastr: ToastrService,
@@ -56,19 +56,19 @@ export class AddproductComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.checkRole(this.RoleJason)
+    this.checkRole(this.RoleJason);
   }
 
   checkRole(RoleJason) {
-    var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
-    if (this.RoleJason.Component == RoleJason.Component) {
+    const result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+    if (this.RoleJason.Component === RoleJason.Component) {
       console.log(result);
       if (!this.RoleJason.ROle.includes(result.userType)) {
         this.router.navigate(['admin/login']);
       }
     }
   }
-  
+
 
   // categoryList() {
   //   this.categoryService.categoryList().subscribe((data: any) => {
@@ -180,7 +180,7 @@ export class AddproductComponent implements OnInit {
     //   strError += '- Please select image';
     // }
 
-    
+
     if (!this.product.imageList) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please select image';
@@ -333,9 +333,9 @@ export class AddproductComponent implements OnInit {
         // image.width = 100;
         // preview.appendChild(image);
         // this.tempImageList.push({ ImageId: 0, ImageData: String(reader.result) });
-        this.imageList.push({ ImageExtn: '.' + imageDetail[0].replace('data:image/', ''), Image: "", ImageData: imageDetail[1] });
-        this.imageModel.push({ Image: "" })
-       
+        this.imageList.push({ ImageExtn: '.' + imageDetail[0].replace('data:image/', ''), Image: '', ImageData: imageDetail[1] });
+        this.imageModel.push({ Image: '' });
+
       };
       reader.readAsDataURL(file);
       console.log(file);

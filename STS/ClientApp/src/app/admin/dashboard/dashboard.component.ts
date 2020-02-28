@@ -41,9 +41,8 @@ export class DashboardComponent implements OnInit {
 
   RoleJason = {
     ROle: [0, 1],
-    Component: "DashboardComponent"
-  }
-  
+    Component: 'DashboardComponent'
+  };
 
 
   constructor(private router: Router,
@@ -56,8 +55,8 @@ export class DashboardComponent implements OnInit {
     this.SalesList();
     this.eachactivityList();
   }
-  
-ngOnInit(){
+
+ngOnInit() {
   this.checkRole(this.RoleJason);
 }
   // productList() {
@@ -75,10 +74,10 @@ ngOnInit(){
   // }
 
   checkRole(RoleJason) {
-  
-    var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
-    if (this.RoleJason.Component == RoleJason.Component) {
-      console.log(result);
+
+    const result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+    if (this.RoleJason.Component === RoleJason.Component) {
+      // console.log(result);
       if (!this.RoleJason.ROle.includes(result.userType)) {
         this.router.navigate(['admin/login']);
       }
@@ -88,14 +87,14 @@ ngOnInit(){
   productList() {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.product.userid = this.user.id;
-    console.log(this.product.userid);
+    // console.log(this.product.userid);
 
     this.productService.each_admin_ProductList(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.each_admin_ProductList) {
           this.productDetails = data.each_admin_ProductList;
           this.totalProduct = this.productDetails.length;
-          console.log(this.totalProduct);
+          // console.log(this.totalProduct);
 
         }
       }
@@ -121,14 +120,14 @@ ngOnInit(){
   clientList() {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.client.userid = this.user.id;
-    console.log(this.client.userid);
+    // console.log(this.client.userid);
 
     this.clientService.each_admin_ClientList(this.client).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.each_admin_ClientList) {
           this.clientDetails = data.each_admin_ClientList;
           this.totalClient = this.clientDetails.length;
-          console.log(this.clientDetails);
+          // console.log(this.clientDetails);
 
         }
       }
@@ -154,14 +153,14 @@ ngOnInit(){
   SalesList() {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.sales.userid = this.user.id;
-    console.log(this.sales.userid);
+    // console.log(this.sales.userid);
 
     this.salesService.RegisteredSalesList(this.sales).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.RegisteredSalesList) {
           this.salesDetails = data.RegisteredSalesList;
           this.totalSales = this.salesDetails.length;
-          console.log(this.salesDetails);
+          // console.log(this.salesDetails);
 
         }
       }
@@ -179,7 +178,7 @@ ngOnInit(){
         if (data.each_admin_activityList) {
           this.activityDetails = data.each_admin_activityList;
           this.totalActivity = this.activityDetails.length;
-          console.log(this.totalActivity);
+          // console.log(this.totalActivity);
 
         }
       }

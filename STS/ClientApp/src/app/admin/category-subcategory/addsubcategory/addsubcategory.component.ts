@@ -22,8 +22,8 @@ export class AddsubcategoryComponent implements OnInit {
 
   RoleJason = {
     ROle: [0, 1],
-    Component: "Addsubcategory"
-  }
+    Component: 'Addsubcategory'
+  };
 
   constructor(private router: Router,
     private toastr: ToastrService,
@@ -32,13 +32,13 @@ export class AddsubcategoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.checkRole(this.RoleJason)
+    this.checkRole(this.RoleJason);
   }
 
   checkRole(RoleJason) {
-    var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
-    if (this.RoleJason.Component == RoleJason.Component) {
-      console.log(result);
+    const result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+    if (this.RoleJason.Component === RoleJason.Component) {
+      // console.log(result);
       if (!this.RoleJason.ROle.includes(result.userType)) {
         this.router.navigate(['admin/login']);
       }
@@ -57,14 +57,14 @@ export class AddsubcategoryComponent implements OnInit {
       }
     }, (err) => {
 
-      console.log(this.categoryDetails);
+      // console.log(this.categoryDetails);
     });
   }
 
   addSubcategory() {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.subcategory.createdby = this.user.id;
-    console.log(this.subcategory.createdby);
+    // console.log(this.subcategory.createdby);
 
 
     this.categoryService.addSubcategory(this.subcategory).subscribe((data: any) => {
@@ -91,7 +91,7 @@ export class AddsubcategoryComponent implements OnInit {
       }
     }, (err) => {
 
-      console.log(this.subcategoryDetails);
+      // console.log(this.subcategoryDetails);
     });
   }
 

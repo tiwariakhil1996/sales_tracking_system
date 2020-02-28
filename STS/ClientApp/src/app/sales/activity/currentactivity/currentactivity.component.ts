@@ -25,8 +25,8 @@ export class CurrentactivityComponent implements OnInit {
   activityDetails: activityModel[] = [];
 
   activity_product = new updateactivityModel();
-  activity_productDetails : updateactivityModel[] = [];
-  
+  activity_productDetails: updateactivityModel[] = [];
+
   sales = new salesregisterModel();
   salesDetails: salesregisterModel[] = [];
 
@@ -39,9 +39,9 @@ export class CurrentactivityComponent implements OnInit {
 
    RoleJason = {
     ROle: [0, 1],
-    Component: "CurrentactivityComponent"
-  }
-  
+    Component: 'CurrentactivityComponent'
+  };
+
   constructor(private clienService: ClientService,
     private activityService: ActivityService,
     private modalService: NgbModal,
@@ -58,13 +58,13 @@ export class CurrentactivityComponent implements OnInit {
 
 
   ngOnInit() {
-    this.checkRole(this.RoleJason)
+    this.checkRole(this.RoleJason);
   }
 
-  
+
   checkRole(RoleJason) {
-    var result = JSON.parse(localStorage.getItem('salesLogin')) || [];
-    if (this.RoleJason.Component == RoleJason.Component) {
+    const result = JSON.parse(localStorage.getItem('salesLogin')) || [];
+    if (this.RoleJason.Component === RoleJason.Component) {
       console.log(result);
       if (!this.RoleJason.ROle.includes(result.userType)) {
         this.router.navigate(['sales/login']);
@@ -130,7 +130,7 @@ export class CurrentactivityComponent implements OnInit {
     });
   }
 
-  //Edit
+  // Edit
   openupdatemodal(content, item) {
     this.activity = JSON.parse(JSON.stringify(item));
     // data show in model use this line and store the data in user and display in ui
@@ -140,14 +140,14 @@ export class CurrentactivityComponent implements OnInit {
   }
 
   open(content1) {
-    this.modalService.open(content1, { ariaLabelledBy: 'modal-basic-title' })
+    this.modalService.open(content1, { ariaLabelledBy: 'modal-basic-title' });
   }
 
   GetProduct_Activity(aid) {
     this.activity_productList(aid);
 
   }
-  
+
   activity_productList(aid) {
     this.activityService.activity_productList(aid).subscribe((data: any) => {
       if (data.Status.code === 0) {

@@ -23,25 +23,25 @@ export class SalesdataComponent implements OnInit {
 
   RoleJason = {
     ROle: [0, 1],
-    Component: "SalesdataComponent"
-  }
+    Component: 'SalesdataComponent'
+  };
 
   constructor(private salesService: SalesService,
     private modalService: NgbModal,
     private toastr: ToastrService,
-    private router:Router) {
+    private router: Router) {
     this.SalesList();
     // this.active_deactive_SalesList();
   }
 
   ngOnInit() {
-    this.checkRole(this.RoleJason)
+    this.checkRole(this.RoleJason);
   }
 
   checkRole(RoleJason) {
-    var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
-    if (this.RoleJason.Component == RoleJason.Component) {
-      console.log(result);
+    const result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+    if (this.RoleJason.Component === RoleJason.Component) {
+      // console.log(result);
       if (!this.RoleJason.ROle.includes(result.userType)) {
         this.router.navigate(['admin/login']);
       }
@@ -69,13 +69,13 @@ export class SalesdataComponent implements OnInit {
   SalesList() {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.sales.userid = this.user.id;
-    console.log(this.sales.userid);
+    // console.log(this.sales.userid);
 
     this.salesService.RegisteredSalesList(this.sales).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.RegisteredSalesList) {
           this.salesDetails = data.RegisteredSalesList;
-          console.log(this.salesDetails);
+          // console.log(this.salesDetails);
 
         }
       }
@@ -94,9 +94,9 @@ export class SalesdataComponent implements OnInit {
       timeOut: 2000
     });
   }
-  
+
   changeStatus(id: number) {
-    console.log(id);
+    // console.log(id);
     this.salesService.changeStatus(id).subscribe(data => {
       this.SalesList();
     });

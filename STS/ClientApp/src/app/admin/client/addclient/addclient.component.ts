@@ -31,8 +31,8 @@ export class AddclientComponent implements OnInit {
 
   RoleJason = {
     ROle: [0, 1],
-    Component: "AddclientComponent"
-  }
+    Component: 'AddclientComponent'
+  };
 
   constructor(private router: Router,
      private toastr: ToastrService,
@@ -43,19 +43,19 @@ export class AddclientComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.checkRole(this.RoleJason)
+    this.checkRole(this.RoleJason);
   }
 
   checkRole(RoleJason) {
-    var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
-    if (this.RoleJason.Component == RoleJason.Component) {
-      console.log(result);
+    const result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+    if (this.RoleJason.Component === RoleJason.Component) {
+      // console.log(result);
       if (!this.RoleJason.ROle.includes(result.userType)) {
         this.router.navigate(['admin/login']);
       }
     }
   }
-  
+
 
   submitForm() {
 
@@ -135,7 +135,7 @@ export class AddclientComponent implements OnInit {
 
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.client.createdby = this.user.id;
-    console.log(this.client.createdby);
+    // console.log(this.client.createdby);
 
 
     this.clientService.addClient(this.client).subscribe((data: any) => {
