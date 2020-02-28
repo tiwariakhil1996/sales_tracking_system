@@ -9,7 +9,7 @@ export class registerModel {
     mobile: string;
     password: string;
     cpassword: string;
-    userType:number;
+    userType: number;
 }
 export class ChangeAdminPasswordModel {
     id: number;

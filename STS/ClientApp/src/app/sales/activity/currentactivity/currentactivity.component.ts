@@ -36,6 +36,12 @@ export class CurrentactivityComponent implements OnInit {
   client = new clientModel();
   clientDetails: clientModel[] = [];
 
+
+   RoleJason = {
+    ROle: [0, 1],
+    Component: "CurrentactivityComponent"
+  }
+  
   constructor(private clienService: ClientService,
     private activityService: ActivityService,
     private modalService: NgbModal,
@@ -52,8 +58,19 @@ export class CurrentactivityComponent implements OnInit {
 
 
   ngOnInit() {
+    this.checkRole(this.RoleJason)
   }
 
+  
+  checkRole(RoleJason) {
+    var result = JSON.parse(localStorage.getItem('salesLogin')) || [];
+    if (this.RoleJason.Component == RoleJason.Component) {
+      console.log(result);
+      if (!this.RoleJason.ROle.includes(result.userType)) {
+        this.router.navigate(['sales/login']);
+      }
+    }
+  }
   // Delete
 
   onDelete(aid: number) {

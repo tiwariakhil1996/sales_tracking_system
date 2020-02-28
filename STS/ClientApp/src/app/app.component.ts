@@ -12,10 +12,34 @@ import { MouseEvent } from "@agm/core";
 
 export class AppComponent implements OnInit {
 
-  constructor(
-  ) { }
-  ngOnInit(){
-    
+  // RoleJason = {
+  //   ROle: [0, 1],
+  //   Component: "DashboardComponent,ActivityComponent,ProductComponent,ClientComponent,RegisterComponent,MapComponent,SalesdataComponent,ForgotPasswordComponent,CategorySubcategoryComponent"
+  // }
+
+  constructor(private router: Router) { }
+
+  ngOnInit() {
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0);
+    });
+    // this.checkRole(this.RoleJason)
   }
+
+  // checkRole(RoleJason) {
+  //   var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+  //   if (this.RoleJason.Component == RoleJason.Component) {
+  //     console.log(result);
+  //     if (!this.RoleJason.ROle.includes(result.userType)) {
+  //       this.router.navigate(['admin/login']);
+  //     }
+  //   }
+  // }
+
+
+}
 
 }

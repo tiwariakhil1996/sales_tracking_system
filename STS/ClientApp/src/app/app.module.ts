@@ -54,10 +54,9 @@ import { SalesLoginComponent } from './sales/login/login.component';
 import { ModalModule } from 'ngx-bootstrap';
 import {NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
-import { AuthGuard } from './auth.guard';
-import { AuthService } from './auth.service';
-import { SalesService } from './sales.service';
-import { SalesGuard } from './sales.guard';
+
+import { from } from 'rxjs';
+
 // import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password.component';
 
@@ -116,8 +115,13 @@ import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password
     ForgotPasswordComponent
     ],
 
-  providers: [AuthGuard, AuthService, SalesGuard, SalesService],
-  bootstrap: [AppComponent]
+  // providers: [{
+  //   provide: LocationStrategy,
+  //   useClass: HashLocationStrategy
+  // }],
+  // schemas:  [ CUSTOM_ELEMENTS_SCHEMA ],
+  providers: [],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
 

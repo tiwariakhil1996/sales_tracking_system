@@ -32,10 +32,10 @@ export class ViewproductComponent implements OnInit {
   subcategory = new subcategoryDataModel();
   subcategoryDetails: subcategoryDataModel[]=[];
 
-  // imageModel: ImageModel[] = [];
-  image=new ImageListModel();
-  imageList: ImageListModel[] = [];
-
+  RoleJason = {
+    ROle: [0, 1],
+    Component: "ViewproductComponent"
+  }
 
   constructor(private router: Router,
     private toastr: ToastrService,
@@ -50,6 +50,18 @@ export class ViewproductComponent implements OnInit {
 
   }
   ngOnInit() {
+    this.checkRole(this.RoleJason)
+  }
+
+  
+  checkRole(RoleJason) {
+    var result = JSON.parse(localStorage.getItem('salesLogin')) || [];
+    if (this.RoleJason.Component == RoleJason.Component) {
+      console.log(result);
+      if (!this.RoleJason.ROle.includes(result.userType)) {
+        this.router.navigate(['sales/login']);
+      }
+    }
   }
 
   //Display

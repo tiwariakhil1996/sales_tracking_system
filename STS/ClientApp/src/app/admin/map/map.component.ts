@@ -34,6 +34,7 @@ import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core'
 import { MapsAPILoader, AgmMap } from '@agm/core';
 import { MouseEvent } from "@agm/core";
 import { google } from "google-maps";
+import { AdminService } from '../../service/admin.service';
 
 @Component({
   selector: 'map-root',
@@ -62,14 +63,24 @@ export class MapComponent implements OnInit {
 
   @ViewChild('search')
   public searchElementRef: ElementRef;
+
+  RoleJason = {
+    ROle: [0, 1],
+    Component: "MapComponent"
+  }
+
   constructor(
     private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private router:Router
+
   ) {
        this.geocoder = new google.maps.Geocoder;
     }
 
   ngOnInit() {
+
+    this.checkRole(this.RoleJason)
 
     setTimeout(() => {
       navigator.geolocation.getCurrentPosition(position => {
@@ -84,6 +95,7 @@ export class MapComponent implements OnInit {
       });
     }, 2000);
 
+   
     // //load Places Autocomplete
     // this.mapsAPILoader.load().then(() => {
     //   this.setCurrentLocation();
@@ -110,6 +122,18 @@ export class MapComponent implements OnInit {
     // });
   }
   
+
+  checkRole(RoleJason) {
+    var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+    if (this.RoleJason.Component == RoleJason.Component) {
+      console.log(result);
+      if (!this.RoleJason.ROle.includes(result.userType)) {
+        this.router.navigate(['admin/login']);
+      }
+    }
+  }
+
+
   // Get Current Location Coordinates
   private setCurrentLocation() {
     if ('geolocation' in navigator) {
@@ -148,4 +172,16 @@ export class MapComponent implements OnInit {
       }
     });
   }
+
+  // submit_location() {
+  //   this.adminService.AdminLogin(this.lat,this.lng).subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+
+  //     } 
+  //   }, (err) => {
+
+
+  //   });
+  // }
+
 }

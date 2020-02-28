@@ -48,6 +48,12 @@ export class AddactivityComponent implements OnInit {
   private sum = 0;
   private value;
 
+  RoleJason = {
+    ROle: [0, 1],
+    // Component: "DashboardComponent,ActivityComponent,ProductComponent,ClientComponent,RegisterComponent,MapComponent,SalesdataComponent,ForgotPasswordComponent,CategorySubcategoryComponent"
+     Component:"AddComponent"
+  }
+
   constructor(private router: Router,
     private activityService: ActivityService,
     private clientService: ClientService,
@@ -73,8 +79,18 @@ export class AddactivityComponent implements OnInit {
   ngOnInit() {
     this.addMoreproducts();
     this.static_price();
+    this.checkRole(this.RoleJason)
   }
 
+  checkRole(RoleJason) {
+    var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+    if (this.RoleJason.Component == RoleJason.Component) {
+      console.log(result);
+      if (!this.RoleJason.ROle.includes(result.userType)) {
+        this.router.navigate(['admin/login']);
+      }
+    }
+  }
   // toggleDisplay() {
   //   this.isShow = !this.isShow;
   // }

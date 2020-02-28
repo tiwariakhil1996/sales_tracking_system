@@ -14,7 +14,12 @@ export class salesregisterModel {
     isActive: boolean;
     createdby: number;
 
-    userid:number;
+    userid: number;
+
+    latitude: string;
+    longitude: string;
+
+    userType: number;
 }
 export class changePasswordModel {
     id: number;

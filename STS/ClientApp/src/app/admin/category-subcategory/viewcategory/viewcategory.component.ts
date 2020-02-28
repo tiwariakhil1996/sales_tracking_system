@@ -20,6 +20,11 @@ export class ViewcategoryComponent implements OnInit {
   category = new categoryDataModel();
   categoryDetails: categoryDataModel[] = [];
 
+  RoleJason = {
+    ROle: [0, 1],
+    Component: "ViewcategoryComponent"
+  }
+
   constructor(
     private router: Router,
     private categoryService: CategorySubcategoryService,
@@ -30,6 +35,17 @@ export class ViewcategoryComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.checkRole(this.RoleJason)
+  }
+
+  checkRole(RoleJason) {
+    var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+    if (this.RoleJason.Component == RoleJason.Component) {
+      console.log(result);
+      if (!this.RoleJason.ROle.includes(result.userType)) {
+        this.router.navigate(['admin/login']);
+      }
+    }
   }
 
   categoryList() {
