@@ -15,9 +15,6 @@ namespace STS.BLL.Interface
 
         //View Products
         Task<List<ProductListModel>> ProductList();
-        //Task<Tuple<List<ProductListModel>, List<GetPropertyImageListModel>>> ProductList(callPropertyImageListModel model);
-
-
 
         // Display each admin List Individually
         Task<List<ProductListModel>> each_admin_ProductList(ProductListModel model);

@@ -61,8 +61,8 @@ namespace STS.Model
         public int Order_Id { get; set; }
         public int ProductId { get; set; }
         public string Productname { get; set; }
-     
-      
+
+
         public int Price { get; set; }
         public int Quantity { get; set; }
         public int Amount { get; set; }
@@ -181,6 +181,6 @@ namespace STS.Model
         public int Total_price { get; set; }
         public int Modifiedby { get; set; }
 
-  
+
     }
 }

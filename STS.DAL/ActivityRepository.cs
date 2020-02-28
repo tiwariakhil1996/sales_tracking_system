@@ -46,7 +46,7 @@ namespace STS.DAL
 
             }
         }
-        
+
         // Latest added Activity
         //public async Task<List<ActivityModel>> addActivity()
         //{
@@ -59,7 +59,7 @@ namespace STS.DAL
         //    }
         //}
 
-      
+
 
         //Display Activity
         public async Task<List<ActivityListModel>> ActivityList()
@@ -213,7 +213,7 @@ namespace STS.DAL
                 TranStatus transaction = new TranStatus();
                 DynamicParameters parameter = new DynamicParameters();
                 parameter.Add("@Activity_Id", Aid);
-           
+
                 parameter.Add("@Title", model.Title);
                 parameter.Add("@Description", model.Description);
                 parameter.Add("@SalesID", model.SalesID);

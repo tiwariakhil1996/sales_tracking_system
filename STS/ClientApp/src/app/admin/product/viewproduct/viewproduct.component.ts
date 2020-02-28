@@ -8,7 +8,7 @@ import { ProductService } from '../../../service/product.service';
 import { productModel, productListModel } from '../../../model/product';
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
 import { registerModel } from '../../../model/admin';
-import { productModel, ImageListModel, UpdateImageListModel } from '../../../model/product';
+import { ImageListModel, UpdateImageListModel } from '../../../model/product';
 
 @Component({
   selector: 'app-viewproduct',

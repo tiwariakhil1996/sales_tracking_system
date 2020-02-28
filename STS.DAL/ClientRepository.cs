@@ -117,7 +117,7 @@ namespace STS.DAL
             }
         }
 
-    
+
 
         //Delete
         public async Task<TranStatus> deleteClient(int ID)

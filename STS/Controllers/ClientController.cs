@@ -64,7 +64,6 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
-        
 
         [HttpPost]
         [Route("each_admin_ClientList")]
@@ -132,13 +131,13 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
-       
+
 
         //Delete
         [HttpDelete]
         [Route("deleteClient/{ID}")]
         public async Task<IActionResult> deleteClient(int ID)
-        {   
+        {
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
             TranStatus transaction = new TranStatus();

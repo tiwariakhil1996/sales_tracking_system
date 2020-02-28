@@ -7,14 +7,17 @@ using System.Linq;
 using Dapper;
 using STS.Common;
 using STS.Model;
+
 namespace STS.DAL
 {
     public class ProductRepository : BaseRepository
     {
+
         //Add Products
         public async Task<TranStatus> addProduct(ProductModel model)
         {
             using (var connection = new SqlConnection(ConnectionString))
+
             {
                 await connection.OpenAsync();
                 TranStatus transaction = new TranStatus();
@@ -27,16 +30,6 @@ namespace STS.DAL
                 //parameter.Add("@Image", model.Image);
                 parameter.Add("@Date", model.Date);
                 parameter.Add("@Createdby", model.Createdby);
-
-                //Data Table Type -- to insert multiple image
-                DataTable dataTable = CommonHelper.ToDataTable(model.ImageListData);
-                parameter.Add("@ImageListing", dataTable.AsTableValuedParameter("dbo.ImageList"));
-                //parameter.Add("@Result", dbType: DbType.Int32, direction: ParameterDirection.Output);
-
-                //DataTable dataTable = CommonHelper.ToDataTable(model.ImageListData);
-                //parameter.Add("@ImageListing", dataTable.AsTableValuedParameter("dbo.ImageListing"));
-
-
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
@@ -45,9 +38,11 @@ namespace STS.DAL
                 parameter.Add("@ImageListing", dataTable.AsTableValuedParameter("dbo.ImageList"));
 
                 await connection.QueryAsync("addProduct", parameter, commandType: CommandType.StoredProcedure);
+
                 transaction.returnMessage = parameter.Get<string>("@Message");
                 transaction.code = parameter.Get<int>("@Code");
                 return transaction;
+
             }
         }
 
@@ -69,7 +64,7 @@ namespace STS.DAL
             }
         }
 
-        ////View Products
+        //View Products
         public async Task<List<ProductListModel>> ProductList()
         {
             using (var connection = new SqlConnection(ConnectionString))
@@ -77,6 +72,7 @@ namespace STS.DAL
                 connection.Open();
                 var result = await connection.QueryAsync<ProductListModel>("ProductList", commandType: CommandType.StoredProcedure);
                 return result.ToList();
+
             }
         }
 
@@ -119,13 +115,13 @@ namespace STS.DAL
                 await connection.OpenAsync();
                 TranStatus transaction = new TranStatus();
                 DynamicParameters parameter = new DynamicParameters();
-                parameter.Add("@ID",ID);
+                parameter.Add("@ID", ID);
                 parameter.Add("@Cid", model.Cid);
                 parameter.Add("@Sid", model.Sid);
                 parameter.Add("@Productname", model.Productname);
                 parameter.Add("@Description", model.Description);
                 parameter.Add("@Price", model.Price);
-                //parameter.Add("@Image", model.Image);
+                parameter.Add("@Image", model.Image);
                 parameter.Add("@Date", model.Date);
                 parameter.Add("@Modifiedby", model.Modifiedby);
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);

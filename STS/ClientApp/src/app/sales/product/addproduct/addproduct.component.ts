@@ -6,7 +6,6 @@ import { ProductService } from '../../../service/product.service';
 import { productModel, ImageListModel, ImageModel } from '../../../model/product';
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
 import { salesregisterModel } from '../../../model/sales';
-import { productModel, ImageListModel } from '../../../model/product';
 
 @Component({
   selector: 'app-addproduct',
@@ -33,8 +32,7 @@ export class AddproductComponent implements OnInit {
   subcategoryDetails: subcategoryDataModel[] = [];
 
   // imageModel: ImageModel[] = [];
-  image=new ImageListModel();
-  imageList: ImageListModel[] = [];
+  
 
 
 
@@ -333,7 +331,7 @@ export class AddproductComponent implements OnInit {
     this.product.productname = null;
     this.product.price = null;
     this.product.description = null;
-    this.image.Image = null;
+    this.product.imageList = null;
     this.product.date = null;
   }
 

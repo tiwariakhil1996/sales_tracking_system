@@ -44,6 +44,7 @@ namespace STS.Controllers
                 }
                 transaction = await iproduct.addProduct(model);
             }
+
             catch (Exception ex)
             {
                 transaction = CommonHelper.TransactionErrorHandler(ex);
@@ -92,15 +93,6 @@ namespace STS.Controllers
             {
                 var productList = await iproduct.ProductList();
                 dctData.Add("ProductList", productList);
-
-                //List<ProductListModel> ProductList = new List<ProductListModel>();
-                //List<GetPropertyImageListModel> ImageList = new List<GetPropertyImageListModel>();
-                //var result = await iproduct.ProductList(model);
-                //ProductList = result.Item1;
-                //ImageList = result.Item2;
-
-                //dctData.Add("ProductList", ProductList);
-                //dctData.Add("ImageList", ImageList);
             }
             catch (Exception ex)
             {
@@ -160,15 +152,15 @@ namespace STS.Controllers
 
         [HttpPut]
         [Route("updateProduct/{ID}")]
-        public async Task<IActionResult> updateProduct(int ID , [FromBody]ProductListModel model)
+        public async Task<IActionResult> updateProduct(int ID, [FromBody]ProductListModel model)
         {
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
             TranStatus transaction = new TranStatus();
             try
             {
-                //model.Image = CommonHelper.SaveImage(HttpContext, "Images\\Product", model.Image, true, model.ImageExtn);
-                transaction = await iproduct.updateProduct(ID,model);
+                model.Image = CommonHelper.SaveImage(HttpContext, "Images\\Product", model.Image, true, model.ImageExtn);
+                transaction = await iproduct.updateProduct(ID, model);
 
             }
             catch (Exception ex)

@@ -10,7 +10,7 @@ import { registerModel } from '../../model/admin';
   selector: 'app-salesdata',
   templateUrl: './salesdata.component.html',
   styleUrls: ['./salesdata.component.css']
-})
+})  
 export class SalesdataComponent implements OnInit {
 
   modalRef: BsModalRef;

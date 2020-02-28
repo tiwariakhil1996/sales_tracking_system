@@ -15,8 +15,8 @@ namespace STS.Controllers
     {
         private IAdmin iadmin;
 
-       TranStatus transaction = new TranStatus();
-            public AdminController(IAdmin admin)
+        TranStatus transaction = new TranStatus();
+        public AdminController(IAdmin admin)
         {
             iadmin = admin;
         }
@@ -45,7 +45,7 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
-  
+
 
 
         [HttpPost]
@@ -99,6 +99,8 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
+
+
         //Change Passsword
 
         [HttpPut]

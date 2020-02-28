@@ -6,7 +6,6 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
 import { ProductService } from '../../../service/product.service';
-import { productModel, ImageListModel, ImageModel } from '../../../model/product';
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
 import { registerModel } from '../../../model/admin';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
@@ -44,8 +43,7 @@ export class AddproductComponent implements OnInit {
   // image=new ImageListModel();
   // imageList: ImageListModel[] = [];
   tempImageList: UpdateImageListModel[] = [];
-  imageList: ImageListModel[] = [];
-  imageModel: ImageModel[] = [];
+ 
  
  
   constructor(private router: Router,
@@ -169,7 +167,7 @@ export class AddproductComponent implements OnInit {
       }
     }
 
-    if (!this.product.image) {
+    if (!this.product.imageList) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please select image';
       }

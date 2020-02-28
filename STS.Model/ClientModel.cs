@@ -5,7 +5,7 @@ using System.Text;
 
 namespace STS.Model
 {
-     //addClient
+    //addClient
     public partial class ClientModel
     {
         public string ClientName { get; set; }
@@ -25,7 +25,7 @@ namespace STS.Model
     }
 
     //Client List
-    public partial class ClientListModel 
+    public partial class ClientListModel
     {
         public int ID { get; set; }
         public string ClientName { get; set; }
@@ -34,9 +34,9 @@ namespace STS.Model
         public string Gender { get; set; }
         public string Address { get; set; }
         public string Street { get; set; }
-    
-        public string Cname { get;  set; }
-      
+
+        public string Cname { get; set; }
+
         public string Sname { get; set; }
         public string Cityname { get; set; }
         public string PostalCode { get; set; }
@@ -47,6 +47,6 @@ namespace STS.Model
         public bool IsActive { get; set; }
         public int Modifiedby { get; set; }
         public int userId { get; set; }
-        
+
     }
 }

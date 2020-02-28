@@ -54,4 +54,8 @@ export class productListModel {
     productname: string;
     description: string;
     price: number;
+    date:string;
+    userid:number;
+    modifiedby:number;
+    
 }

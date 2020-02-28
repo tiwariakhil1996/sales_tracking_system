@@ -12,10 +12,10 @@ namespace STS.DAL
 {
     public class AdminRepository : BaseRepository
     {
-       
+
         TranStatus transaction = new TranStatus();
 
-        //Register Admin    
+        //Register
         public async Task<TranStatus> AdminRegister(AdminRegisterModel model)
         {
             using (var connection = new SqlConnection(ConnectionString))
@@ -24,7 +24,7 @@ namespace STS.DAL
                 await connection.OpenAsync();
                 TranStatus transaction = new TranStatus();
                 DynamicParameters parameter = new DynamicParameters();
-             
+
                 parameter.Add("@Username", model.Username);
                 parameter.Add("@Gender", model.Gender);
                 parameter.Add("@Email", model.Email);
@@ -89,12 +89,12 @@ namespace STS.DAL
                 var result = await connection.QueryAsync<AdminLoginModel>("AdminLogin", parameter, commandType: CommandType.StoredProcedure);
                 transaction.returnMessage = parameter.Get<string>("@Message");
                 transaction.code = parameter.Get<int>("@Code");
-                return new Tuple<List<AdminLoginModel>, TranStatus>(result.ToList(), transaction); 
+                return new Tuple<List<AdminLoginModel>, TranStatus>(result.ToList(), transaction);
             }
         }
 
 
-        //UpdateAdminProfile
+        //UpdateAdminProfiel
         public async Task<Tuple<List<updateProfileModel>, TranStatus>> updateAdminProfile(updateProfileModel model)
         {
             using (var connection = new SqlConnection(ConnectionString))
@@ -106,7 +106,7 @@ namespace STS.DAL
                 parameter.Add("@Username", model.Username);
                 parameter.Add("@Gender", model.Gender);
                 parameter.Add("@Mobile", model.Mobile);
-             
+
 
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
@@ -116,7 +116,6 @@ namespace STS.DAL
                 return new Tuple<List<updateProfileModel>, TranStatus>(result.ToList(), transaction);
             }
         }
-        
         //public async Task<TranStatus> updateAdminProfile(updateProfileModel model)
         //{
         //    using (var connection = new SqlConnection(ConnectionString))
@@ -151,5 +150,4 @@ namespace STS.DAL
         //}
 
     }
-
 }

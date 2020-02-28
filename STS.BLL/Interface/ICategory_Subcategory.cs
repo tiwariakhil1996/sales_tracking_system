@@ -40,7 +40,7 @@ namespace STS.BLL.Interface
         // Add Subcategory
         Task<TranStatus> addSubcategory(SubcategoryModel model);
 
-        //Display Subcategory drop down
+        //Display Subcategory
         Task<List<SubcategoryListModel>> SubcategoryList(int cid);
 
         //View Subcategory
@@ -48,10 +48,13 @@ namespace STS.BLL.Interface
 
         //Update Subcategory
         Task<TranStatus> updateSubcategory(int Sid, SubcategoryListModel model);
-        //Active Deactive Subcategory
-        Task<TranStatus> ChangeStatusSubcategory(int id);
+
+
         //Delete Subcategory
         Task<TranStatus> deleteSubcategory(int Sid);
+
+        //Active Deactive Subategory
+        Task<TranStatus> ChangeStatusSubcategory(int id);
 
         //Display Active Deactive Subcategory
         Task<List<SubcategoryListModel>> SubcategoryList_ActiveDeactive();

@@ -261,28 +261,6 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
-        //Active Deactive Subcategory
-
-        [HttpPut]
-        [Route("ChangeStatusSubcategory/{id}")]
-        public async Task<IActionResult> ChangeStatusSubcategory(int id)
-        {
-            Dictionary<String, Object> dctData = new Dictionary<string, object>();
-            HttpStatusCode statusCode = HttpStatusCode.OK;
-            TranStatus transaction = new TranStatus();
-            try
-            {
-                transaction = await icategory.ChangeStatusSubcategory(id);
-
-            }
-            catch (Exception ex)
-            {
-                transaction = CommonHelper.TransactionErrorHandler(ex);
-                statusCode = HttpStatusCode.BadRequest;
-            }
-            dctData.Add("Status", transaction);
-            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
-        }
 
 
         //Delete Subcategory
@@ -308,6 +286,31 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
+
+
+        //Active Deactive Subcategory
+
+        [HttpPut]
+        [Route("ChangeStatusSubcategory/{id}")]
+        public async Task<IActionResult> ChangeStatusSubcategory(int id)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+                transaction = await icategory.ChangeStatusSubcategory(id);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
 
         // Display Active Deactive Subategory List 
 

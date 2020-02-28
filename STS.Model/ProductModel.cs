@@ -4,32 +4,19 @@ using System.Text;
 
 namespace STS.Model
 {
-     //addProduct
+    //addProduct
     public partial class ProductModel
     {
-        public int Cid    { get; set; }
+        public int Cid { get; set; }
         public int Sid { get; set; }
         public string Productname { get; set; }
         public string Description { get; set; }
-        public int Price       { get; set; }
+        public int Price { get; set; }
         //public string Image       { get; set; }
         //public string ImageExtn { get; set; }
-        public string Date        { get; set; }
+        public string Date { get; set; }
         public int Createdby { get; set; }
 
-        public  List<ImageList> ImageList{ get; set; }
-        public List<ImageModel> ImageListData { get; set; }
-        public List<DeleteImageModel> DeleteImageListData { get; set; }
-
-    }
-    //Add multiple image
-    public partial class ImageList
-    {
-        public int ImageId { get; set; }
-        public string Image { get; set; }
-        public string ImageExtn { get; set; }
-
-        public string ImageData { get; set; }
 
         public List<ImageList> ImageList { get; set; }
         public List<ImageModel> ImageListData { get; set; }
@@ -48,35 +35,12 @@ namespace STS.Model
     {
         public string Image { get; set; }
     }
-   
-
-    //This table for used input the image path in Data Type(Data table) Temporary table
-    public partial class ImageModel
-    {
-     
-        public string Image { get; set; }
-       
-
-    }
-    public class DeleteImageModel
-    {
-        public int ImageId { get; set; }
-        public string Image { get; set; }
-    }
-
-    public class UpdateImageList
-    {
-        public int ImageId { get; set; }
-        public string ImageExtn { get; set; }
-        public string Image { get; set; }
-        public string ImageData { get; set; }
-    }
 
     public partial class ProductPriceModel
     {
         public int Id { get; set; }
         public string Price { get; set; }
-       
+
     }
 
 
@@ -92,27 +56,13 @@ namespace STS.Model
         public string Productname { get; set; }
         public string Description { get; set; }
         public int Price { get; set; }
-        //public string Image { get; set; }
-        //public string ImageExtn { get; set; }
+        public string Image { get; set; }
+        public string ImageExtn { get; set; }
         public string Date { get; set; }
         public bool IsActive { get; set; }
         public int Modifiedby { get; set; }
-        public List<ImageList> ImageList { get; set; }
-        public List<ImageModel> ImageListData { get; set; }
 
         public int userId { get; set; }
 
-    }
-    public class GetPropertyImageListModel
-    {
-        public int Product_ID { get; set; }
-        public int ImageId { get; set; }
-        public string Image { get; set; }
-
-    }
-    public class callPropertyImageListModel
-    {
-        public int Product_ID { get; set; }
-        
     }
 }

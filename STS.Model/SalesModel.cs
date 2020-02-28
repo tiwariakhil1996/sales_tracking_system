@@ -14,7 +14,7 @@ namespace STS.Model
         public int Createdby { get; set; }
 
     }
-   
+
 
     //Login
     public partial class SalesLoginModel
@@ -34,7 +34,7 @@ namespace STS.Model
     //Change Password
     public partial class ChangepasswordModel
     {
-       //public int Id { get; set; }
+        //public int Id { get; set; }
 
         public string Oldpassword { get; set; }
         public string Newpassword { get; set; }
@@ -57,7 +57,6 @@ namespace STS.Model
     }
 
     //Display
-
     public partial class SalesListModel
     {
         public int ID { get; set; }
@@ -72,6 +71,6 @@ namespace STS.Model
         public int UserId { get; set; }
 
 
-       
+
     }
 }

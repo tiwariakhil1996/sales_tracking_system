@@ -13,7 +13,7 @@ namespace STS.BLL.Service
 
     {
         // Register
-         
+
         AdminRepository adminRepository = null;
         public Task<TranStatus> AdminRegister(AdminRegisterModel model)
         {
@@ -62,14 +62,6 @@ namespace STS.BLL.Service
                 return adminRepository.updateAdminProfile(model);
             }
         }
-        //Change Admin Password
-        public async Task<TranStatus> changeadminPassword(int id, Changeadmin_passwordModel model)
-        {
-            using (adminRepository = new AdminRepository())
-            {
-                return await adminRepository.changeadminPassword(id, model);
-            }
-        }
 
         // Display
         //public async Task<List<AdminLoginModel>> AdminLogin()
@@ -81,6 +73,13 @@ namespace STS.BLL.Service
         //}
 
 
-        
+        //Change Passoword
+        public async Task<TranStatus> changeadminPassword(int Id, Changeadmin_passwordModel model)
+        {
+            using (adminRepository = new AdminRepository())
+            {
+                return await adminRepository.changeadminPassword(Id, model);
+            }
+        }
     }
 }

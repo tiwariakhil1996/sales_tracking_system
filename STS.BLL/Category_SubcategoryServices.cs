@@ -19,7 +19,7 @@ namespace STS.BLL.Service
 
 
         //Add Category
-      
+
         public Task<TranStatus> addCategory(CategoryModel model)
         {
             using (categoryRepository = new Category_SubcategoryRepository())
@@ -114,14 +114,6 @@ namespace STS.BLL.Service
                 return await categoryRepository.updateSubcategory(Sid, model);
             }
         }
-        //Change Status SubCategory
-        public async Task<TranStatus> ChangeStatusSubcategory(int id)
-        {
-            using (categoryRepository = new Category_SubcategoryRepository())
-            {
-                return await categoryRepository.ChangeStatusSubcategory(id);
-            }
-        }
 
         //Delete Subcategory
         public async Task<TranStatus> deleteSubcategory(int Sid)
@@ -132,7 +124,15 @@ namespace STS.BLL.Service
             }
         }
 
-        
+        //Change Status Subcategory
+        public async Task<TranStatus> ChangeStatusSubcategory(int id)
+        {
+            using (categoryRepository = new Category_SubcategoryRepository())
+            {
+                return await categoryRepository.ChangeStatusSubcategory(id);
+            }
+        }
+
         // Display  Active Deactive Subategory List
         public async Task<List<SubcategoryListModel>> SubcategoryList_ActiveDeactive()
         {

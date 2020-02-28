@@ -24,7 +24,7 @@ namespace STS.DAL
                 DynamicParameters parameter = new DynamicParameters();
                 parameter.Add("@Cname", model.Cname);
                 parameter.Add("@Createdby", model.Createdby);
-             
+
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
@@ -60,7 +60,7 @@ namespace STS.DAL
                 parameter.Add("@Cid", Cid);
                 parameter.Add("@Cname", model.Cname);
                 parameter.Add("@Modifiedby", model.Modifiedby);
-              
+
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
                 await connection.QueryAsync("updateCategory", parameter, commandType: CommandType.StoredProcedure);
@@ -90,7 +90,6 @@ namespace STS.DAL
 
             }
         }
-       
 
 
         // Display Active Deactive Category
@@ -151,6 +150,8 @@ namespace STS.DAL
             }
         }
 
+
+
         // Display Subcategory
         public async Task<List<SubcategoryListModel>> SubcategoryList(int catid)
         {
@@ -160,14 +161,14 @@ namespace STS.DAL
                 TranStatus transaction = new TranStatus();
                 DynamicParameters parameter = new DynamicParameters();
                 parameter.Add("@Cid", catid);
-                var result = await connection.QueryAsync<SubcategoryListModel>("SubcategoryList",parameter, commandType: CommandType.StoredProcedure);
+                var result = await connection.QueryAsync<SubcategoryListModel>("SubcategoryList", parameter, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
             }
         }
 
-        //Display Subcategory
-        public async Task<List<SubcategoryListModel>>   ViewSubcategoryList()
+        //View Subcategory
+        public async Task<List<SubcategoryListModel>> ViewSubcategoryList()
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
@@ -223,7 +224,9 @@ namespace STS.DAL
 
             }
         }
-        //Change Status subcategory
+
+
+        //Change Status Subcategory
         public async Task<TranStatus> ChangeStatusSubcategory(int id)
         {
             using (var connection = new SqlConnection(ConnectionString))
@@ -242,7 +245,8 @@ namespace STS.DAL
 
             }
         }
-      
+
+
         // Display Active Deactive Subcategory
         public async Task<List<SubcategoryListModel>> SubcategoryList_ActiveDeactive()
         {

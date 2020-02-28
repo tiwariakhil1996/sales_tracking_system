@@ -26,7 +26,6 @@ namespace STS.BLL.Interface
 
         //Change Status Sales
         Task<TranStatus> ChangeStatusSales(int id);
-        
 
         //Display
         Task<List<SalesListModel>> RegisteredSalesList();
@@ -42,7 +41,7 @@ namespace STS.BLL.Interface
         Task<TranStatus> deleteSales(int ID);
 
         //Change Password
-        Task<TranStatus> changesalesPassword(int Id, ChangePasswordModel model);
+        Task<TranStatus> changesalesPassword(int Id, ChangepasswordModel model);
     }
 }
 
