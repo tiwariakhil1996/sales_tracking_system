@@ -87,6 +87,15 @@ namespace STS.Controllers
             {
                 var productList = await iproduct.ProductList();
                 dctData.Add("ProductList", productList);
+
+                //List<ProductListModel> ProductList = new List<ProductListModel>();
+                //List<GetPropertyImageListModel> ImageList = new List<GetPropertyImageListModel>();
+                //var result = await iproduct.ProductList(model);
+                //ProductList = result.Item1;
+                //ImageList = result.Item2;
+
+                //dctData.Add("ProductList", ProductList);
+                //dctData.Add("ImageList", ImageList);
             }
             catch (Exception ex)
             {
@@ -108,7 +117,7 @@ namespace STS.Controllers
             TranStatus transaction = new TranStatus();
             try
             {
-                model.Image = CommonHelper.SaveImage(HttpContext, "Images\\Product", model.Image, true, model.ImageExtn);
+                //model.Image = CommonHelper.SaveImage(HttpContext, "Images\\Product", model.Image, true, model.ImageExtn);
                 transaction = await iproduct.updateProduct(ID,model);
 
             }

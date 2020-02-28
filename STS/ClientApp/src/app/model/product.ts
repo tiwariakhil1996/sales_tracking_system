@@ -18,18 +18,25 @@ export class productModel {
     imageList: ImageListModel[];
     //this model for display the image
     imageListData: ImageModel[];
+    UpdateImageList: UpdateImageListModel[];
 }
 export class ImageListModel {
+
+    ImageId?: number = 0;
     Image: string;
     ImageExtn: string;
     ImageData: string;
-    
+
 }
-//This for display the image
+//This for store the data type(data table)
 export class ImageModel {
+
     Image: string;
 }
-
+export class UpdateImageListModel {
+    ImageId: number;
+    ImageData: string;
+}
 export class productpriceModel {
     id: number;
     price: number;

@@ -32,6 +32,13 @@ namespace STS.BLL.Service
             }
         }
 
+        //public async Task<Tuple<List<ProductListModel>, List<GetPropertyImageListModel>>> ProductList(callPropertyImageListModel model)
+        //{
+        //    using (productRepository = new ProductRepository())
+        //    {
+        //        return await productRepository.ProductList(model);
+        //    }
+        //}
 
         //Get Product Price
         public async Task<List<ProductPriceModel>> ProductPrice(int id)

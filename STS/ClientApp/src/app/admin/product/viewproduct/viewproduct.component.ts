@@ -7,7 +7,7 @@ import { CategorySubcategoryService } from '../../../service/category-subcategor
 import { ProductService } from '../../../service/product.service';
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
 import { registerModel } from '../../../model/admin';
-import { productModel, ImageListModel } from '../../../model/product';
+import { productModel, ImageListModel, UpdateImageListModel } from '../../../model/product';
 
 @Component({
   selector: 'app-viewproduct',
@@ -34,6 +34,9 @@ export class ViewproductComponent implements OnInit {
   
   image=new ImageListModel();
   imageList: ImageListModel[] = [];
+
+  tempImageList: UpdateImageListModel[] = [];
+  updateImageList: UpdateImageListModel[] = [];
 
 
   constructor(private router: Router,

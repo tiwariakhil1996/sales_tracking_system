@@ -64,7 +64,7 @@ namespace STS.DAL
             }
         }
 
-        //View Products
+        ////View Products
         public async Task<List<ProductListModel>> ProductList()
         {
             using (var connection = new SqlConnection(ConnectionString))
@@ -75,8 +75,25 @@ namespace STS.DAL
             }
         }
 
+        //public async Task<Tuple<List<ProductListModel>, List<GetPropertyImageListModel>>> ProductList(callPropertyImageListModel model)
+        //{
+        //    using (var connection = new SqlConnection(ConnectionString))
+        //    {
+        //        connection.Open();
+        //        DynamicParameters parameter = new DynamicParameters();
+        //        //parameter.Add("@UserId", model.UserId);
+        //        parameter.Add("@Product_Id", model.Product_ID);
+        //        var result = await connection.QueryMultipleAsync("ProductList", parameter, commandType: CommandType.StoredProcedure);
+        //        IEnumerable<ProductListModel> ProductListModel = await result.ReadAsync<ProductListModel>();
+        //        IEnumerable<GetPropertyImageListModel> ImageList = await result.ReadAsync<GetPropertyImageListModel>();
+        //        return new Tuple<List<ProductListModel>, List<GetPropertyImageListModel>>(ProductListModel.ToList(), ImageList.ToList());
+        //    }
+        //}
 
-     
+
+
+
+
 
         //Update
         public async Task<TranStatus> updateProduct(int ID, ProductListModel model)
@@ -92,7 +109,7 @@ namespace STS.DAL
                 parameter.Add("@Productname", model.Productname);
                 parameter.Add("@Description", model.Description);
                 parameter.Add("@Price", model.Price);
-                parameter.Add("@Image", model.Image);
+                //parameter.Add("@Image", model.Image);
                 parameter.Add("@Date", model.Date);
                 parameter.Add("@Modifiedby", model.Modifiedby);
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);

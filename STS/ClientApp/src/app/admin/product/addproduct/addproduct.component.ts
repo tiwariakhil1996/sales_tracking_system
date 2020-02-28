@@ -1,4 +1,4 @@
-import { productModel, ImageListModel, ImageModel } from './../../../model/product';
+import { productModel, ImageListModel, ImageModel, UpdateImageListModel } from './../../../model/product';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -39,6 +39,7 @@ export class AddproductComponent implements OnInit {
  
   // image=new ImageListModel();
   // imageList: ImageListModel[] = [];
+  tempImageList: UpdateImageListModel[] = [];
   imageList: ImageListModel[] = [];
   imageModel: ImageModel[] = [];
  

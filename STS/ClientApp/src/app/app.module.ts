@@ -80,11 +80,7 @@ import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password
     // PaginationModule,
     HttpClientModule,
 
-    //this is angular google map api key
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBaU6eEpioeuf9Nkzsd5N3OoJsDpVQdzEs',
-      libraries: ['places']
-    }),
+    
 
     ModalModule.forRoot(),
     NgbModule,

@@ -15,6 +15,9 @@ namespace STS.BLL.Interface
 
         //View Products
         Task<List<ProductListModel>> ProductList();
+        //Task<Tuple<List<ProductListModel>, List<GetPropertyImageListModel>>> ProductList(callPropertyImageListModel model);
+
+
 
         // Get Product Price
         Task<List<ProductPriceModel>> ProductPrice(int id);

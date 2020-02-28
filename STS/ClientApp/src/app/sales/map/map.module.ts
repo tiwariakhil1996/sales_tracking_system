@@ -1,3 +1,4 @@
+import { AgmCoreModule } from '@agm/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -12,7 +13,11 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     CommonModule,
     FormsModule,
-    MapRoutingModule
+    MapRoutingModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBaU6eEpioeuf9Nkzsd5N3OoJsDpVQdzEs',
+      libraries: ['places']
+    }),
   ],
   declarations: [
     MapComponent
