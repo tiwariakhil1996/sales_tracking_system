@@ -17,11 +17,27 @@ export class AddcategoryComponent implements OnInit {
   category = new categoryDataModel();
   categoryDetails: categoryDataModel[] = [];
 
+  RoleJason = {
+    ROle: [0, 1],
+    Component: "AddcategoryComponent"
+  }
+
   constructor(private router: Router,
     private toastr: ToastrService,
     private categoryService: CategorySubcategoryService) { }
 
   ngOnInit() {
+    this.checkRole(this.RoleJason)
+  }
+
+  checkRole(RoleJason) {
+    var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+    if (this.RoleJason.Component == RoleJason.Component) {
+      console.log(result);
+      if (!this.RoleJason.ROle.includes(result.userType)) {
+        this.router.navigate(['admin/login']);
+      }
+    }
   }
 
   addCategory() {
@@ -36,7 +52,7 @@ export class AddcategoryComponent implements OnInit {
           disableTimeOut: false
         });
         this.categoryList();
-      }  else {
+      } else {
         this.toastr.warning('Cannot add duplicate Category', 'Info', {
           disableTimeOut: false,
           timeOut: 2000

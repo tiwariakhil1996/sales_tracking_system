@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BsModalRef } from 'ngx-bootstrap';
 import { salesregisterModel } from '../../model/sales';
 import { registerModel } from '../../model/admin';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-salesdata',
@@ -20,14 +21,31 @@ export class SalesdataComponent implements OnInit {
   sales = new salesregisterModel();
   salesDetails: salesregisterModel[] = [];
 
+  RoleJason = {
+    ROle: [0, 1],
+    Component: "SalesdataComponent"
+  }
+
   constructor(private salesService: SalesService,
     private modalService: NgbModal,
-    private toastr: ToastrService) {
+    private toastr: ToastrService,
+    private router:Router) {
     this.SalesList();
     // this.active_deactive_SalesList();
   }
 
   ngOnInit() {
+    this.checkRole(this.RoleJason)
+  }
+
+  checkRole(RoleJason) {
+    var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+    if (this.RoleJason.Component == RoleJason.Component) {
+      console.log(result);
+      if (!this.RoleJason.ROle.includes(result.userType)) {
+        this.router.navigate(['admin/login']);
+      }
+    }
   }
 
   openmodal(content) {

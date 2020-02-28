@@ -20,6 +20,11 @@ export class AddsubcategoryComponent implements OnInit {
   subcategory = new subcategoryDataModel();
   subcategoryDetails: subcategoryDataModel[] = [];
 
+  RoleJason = {
+    ROle: [0, 1],
+    Component: "Addsubcategory"
+  }
+
   constructor(private router: Router,
     private toastr: ToastrService,
     private categoryService: CategorySubcategoryService, ) {
@@ -27,6 +32,17 @@ export class AddsubcategoryComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.checkRole(this.RoleJason)
+  }
+
+  checkRole(RoleJason) {
+    var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+    if (this.RoleJason.Component == RoleJason.Component) {
+      console.log(result);
+      if (!this.RoleJason.ROle.includes(result.userType)) {
+        this.router.navigate(['admin/login']);
+      }
+    }
   }
 
   // categoryList() {

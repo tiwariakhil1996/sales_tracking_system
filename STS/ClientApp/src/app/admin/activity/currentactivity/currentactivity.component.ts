@@ -21,6 +21,8 @@ export class CurrentactivityComponent implements OnInit {
   // items = [];
   // pageOfItems: Array<any>;
 
+
+
   user = new registerModel();
 
   activity = new activityModel();
@@ -52,6 +54,11 @@ export class CurrentactivityComponent implements OnInit {
   client = new clientModel();
   clientDetails: clientModel[] = [];
 
+  RoleJason = {
+    ROle: [0, 1],
+    Component:"CurrentactivityComponent"
+  }
+
   constructor(private activityService: ActivityService,
     private router: Router,
     private clientService: ClientService,
@@ -73,8 +80,19 @@ export class CurrentactivityComponent implements OnInit {
   ngOnInit() {
     this.addMoreproducts();
     this.static_price();
+    this.checkRole(this.RoleJason)
   }
 
+  checkRole(RoleJason) {
+    var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+    if (this.RoleJason.Component == RoleJason.Component) {
+      console.log(result);
+      if (!this.RoleJason.ROle.includes(result.userType)) {
+        this.router.navigate(['admin/login']);
+      }
+    }
+  }
+  
   onSearch(aid: any) {
       this.activityService.searchTitle(aid).subscribe(data => {
         // this.activityList();

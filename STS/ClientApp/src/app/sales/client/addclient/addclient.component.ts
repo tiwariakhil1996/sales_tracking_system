@@ -30,6 +30,10 @@ export class AddclientComponent implements OnInit {
   city = new cityModel();
   cityDetails: cityModel[] = [];
 
+  RoleJason = {
+    ROle: [0, 1],
+    Component: "AddClientComponent"
+  }
 
   constructor(private router: Router,
     private toastr: ToastrService,
@@ -41,8 +45,19 @@ export class AddclientComponent implements OnInit {
   }
   
   ngOnInit() {
-
+    this.checkRole(this.RoleJason)
    
+  }
+
+  
+  checkRole(RoleJason) {
+    var result = JSON.parse(localStorage.getItem('salesLogin')) || [];
+    if (this.RoleJason.Component == RoleJason.Component) {
+      console.log(result);
+      if (!this.RoleJason.ROle.includes(result.userType)) {
+        this.router.navigate(['sales/login']);
+      }
+    }
   }
 
   submitForm() {

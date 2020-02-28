@@ -1,4 +1,4 @@
-import { Component, TemplateRef } from '@angular/core';
+import { Component, TemplateRef, OnInit } from '@angular/core';
 import { navItems } from '../../_nav';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -15,7 +15,7 @@ import { productModel } from '../../model/product';
   selector: 'app-dashboard',
   templateUrl: './default-layout.component.html'
 })
-export class DefaultLayoutComponent {
+export class DefaultLayoutComponent implements OnInit {
   public sidebarMinimized = false;
   public navItems = navItems;
 
@@ -36,6 +36,11 @@ export class DefaultLayoutComponent {
   product = new productModel();
   productDetails: productModel[] = [];
 
+  RoleJason = {
+    ROle: [0,1],
+    Component: "DefaultLayoutComponent"
+  }
+
   constructor(private router: Router,
     private adminService: AdminService,
     private modalService: NgbModal,
@@ -48,6 +53,20 @@ export class DefaultLayoutComponent {
       this.changePassword.id = this.register.id;
       console.log(this.changePassword.id);
 
+  }
+
+  ngOnInit() {
+    this.checkRole(this.RoleJason)
+  }
+
+  checkRole(RoleJason) {
+    var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+    if (this.RoleJason.Component == RoleJason.Component) {
+      console.log(result);
+      if (!this.RoleJason.ROle.includes(result.userType)) {
+        this.router.navigate(['admin/login']);
+      }
+    }
   }
 
   toggleMinimize(e) {

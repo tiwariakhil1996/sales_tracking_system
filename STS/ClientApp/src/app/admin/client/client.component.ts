@@ -10,10 +10,27 @@ import { Router } from '@angular/router';
 })
 export class ClientComponent implements OnInit {
 
-
-  ngOnInit() {
+  RoleJason = {
+    ROle: [0, 1],
+    Component: "ClientComponent"
   }
 
+  constructor(private router:Router){
 
+  }
+
+  ngOnInit() {
+    this.checkRole(this.RoleJason)
+  }
+
+  checkRole(RoleJason) {
+    var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+    if (this.RoleJason.Component == RoleJason.Component) {
+      console.log(result);
+      if (!this.RoleJason.ROle.includes(result.userType)) {
+        this.router.navigate(['admin/login']);
+      }
+    }
+  }
 
 }

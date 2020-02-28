@@ -12,7 +12,7 @@ export class registerModel {
     mobile: number;
     password: string;
     cpassword: string;
-    userType:number;
+    userType: number;
 }
 
 export class changePasswordModel {

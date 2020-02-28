@@ -13,7 +13,7 @@ import { activityModel, newactivityModel } from '../../model/activity';
   selector: 'app-dashboard',
   templateUrl: './sales-layout.component.html'
 })
-export class SalesLayoutComponent {
+export class SalesLayoutComponent implements OnInit {
   public sidebarMinimized = false;
   public SalesnavItems = SalesnavItems;
 
@@ -42,6 +42,11 @@ export class SalesLayoutComponent {
   item: any;
   updateProfile: any;
 
+  RoleJason = {
+    ROle: [0,1],
+    Component: "SalesLayoutComponent"
+  }
+
   constructor(private router: Router,
     private salesService: SalesService,
     private modalService: NgbModal,
@@ -57,6 +62,20 @@ export class SalesLayoutComponent {
     console.log(this.changePassword.id);
   }
 
+  ngOnInit(){
+    this.checkRole(this.RoleJason)
+  }
+
+
+  checkRole(RoleJason) {
+    var result = JSON.parse(localStorage.getItem('salesLogin')) || [];
+    if (this.RoleJason.Component == RoleJason.Component) {
+      console.log(result);
+      if (!this.RoleJason.ROle.includes(result.userType)) {
+        this.router.navigate(['sales/login']);
+      }
+    }
+  }
   toggleMinimize(e) {
     this.sidebarMinimized = e;
   }

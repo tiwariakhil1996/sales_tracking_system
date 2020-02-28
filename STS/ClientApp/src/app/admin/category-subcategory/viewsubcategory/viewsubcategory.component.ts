@@ -24,6 +24,11 @@ export class ViewsubcategoryComponent implements OnInit {
   subcategory = new subcategoryDataModel();
   subcategoryDetails: subcategoryDataModel[] = [];
 
+  RoleJason = {
+    ROle: [0, 1],
+    Component: "ViewsubcategoryComponent"
+  }
+
   constructor(private router: Router,
     private categoryService: CategorySubcategoryService,
     private modalServices: BsModalService,
@@ -36,8 +41,19 @@ export class ViewsubcategoryComponent implements OnInit {
 
 
   ngOnInit() {
+    this.checkRole(this.RoleJason)
   }
 
+  checkRole(RoleJason) {
+    var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+    if (this.RoleJason.Component == RoleJason.Component) {
+      console.log(result);
+      if (!this.RoleJason.ROle.includes(result.userType)) {
+        this.router.navigate(['admin/login']);
+      }
+    }
+  }
+  
   categoryList() {
     this.categoryService.categoryList().subscribe((data: any) => {
       if (data.Status.code === 0) {

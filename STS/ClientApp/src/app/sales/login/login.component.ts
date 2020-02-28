@@ -4,55 +4,77 @@ import { ToastrService } from 'ngx-toastr';
 import { SalesService } from '../../service/sales.service';
 import { salesregisterModel } from '../../model/sales';
 
+import {ViewChild, ElementRef, NgZone } from '@angular/core';
+import { MapsAPILoader, AgmMap } from '@agm/core';
+import { MouseEvent } from "@agm/core";
+import { google } from "google-maps";
+import { AdminService } from '../../service/admin.service';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: 'login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class SalesLoginComponent implements OnInit {
-
-  // formdata;
-  // message: string;
-  // loginDetail: any = new loginModel();
-  // registerDetails: registerModel[] = [];
-  // constructor(private router: Router, private toastr: ToastrService) { }
-
   title = 'STS';
   loginDetail = new salesregisterModel();
   salesDetails: salesregisterModel[] = [];
 
-  constructor(private router: Router, private salesService: SalesService,private toastr: ToastrService) {
-    // this.registerList();
+  
+  latitude: number;
+  longitude: number;
+  zoom: number;
+  address: string;
+
+  private geoCoder;
+
+
+  location: Coordinates;
+  lat: any;
+  lng: any;
+  
+  centerlat: any;
+  centerlng: any;
+  geocoder: any;
+  @ViewChild(AgmMap) map: any;
+
+  @ViewChild('search')
+  public searchElementRef: ElementRef;
+
+  constructor(private router: Router, 
+    private salesService: SalesService,
+    private toastr: ToastrService,
+    private mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone) {
+     
+    this.geocoder = new google.maps.Geocoder;
+
      this.logout();
 
   }
   ngOnInit() {
 
+    setTimeout(() => {
+      navigator.geolocation.getCurrentPosition(position => {
+        console.log(position);
+
+        this.location = position.coords;
+        this.centerlat = this.location.latitude;
+        this.centerlng = this.location.longitude;
+        this.lat = this.location.latitude;
+        this.lng = this.location.longitude;
+        this.geocoder = new google.maps.Geocoder();
+      });
+    }, 2000);
+
   }
 
 
-
-  // submitForm() {
-  //   this.salesService.SalesLoginService(this.login).subscribe((data: any) => {
-  //     if (data.Status.code === 0) {
-  //       const obj = this.salesDetails.find(item => item.email == this.login.email && item.password == this.login.password);
-  //       if (!obj) {
-  //         // this.toastrService.success('login succesfully', 'success');
-          
-  //         alert('Sales Login Successfully');
-  //         this.router.navigate(['/sales/dashboard']);
-  //       }
-  //       else {
-  //         alert('UnSuccessfully');
-  //         // this.toastrService.warning('please enter the valid email or passsword', 'warning');
-  //       }
-  //     }
-  //   }, (err) => {
-  //   });
-  // }
-
-
   submitLogin() {
+   
+    this.loginDetail.latitude = this.lat;
+    this.loginDetail.longitude = this.lng;
+
     this.salesService.SalesLoginService(this.loginDetail).subscribe((data: any) => {
       if (data.Status.code === 0) {
         localStorage.setItem('salesLogin', JSON.stringify(data.loginDetail[0] || {}));
@@ -64,10 +86,6 @@ export class SalesLoginComponent implements OnInit {
         this.router.navigate(['/sales/dashboard']);
       }
       else {
-        // this.toastr.warning('Please enter valid username and password', 'Warning', {
-        //   disableTimeOut: false,
-        //   timeOut: 2000
-        // });
         this.toastr.warning('Either your username and password didnt matched or This account is temporarily blocked', 'Warning', {
           disableTimeOut: false,
           timeOut: 2000
@@ -85,18 +103,6 @@ export class SalesLoginComponent implements OnInit {
   registerForm() {
     this.router.navigate(['/sales/register']);
   }
-
-  // registerList(){
-  //   this.salesService.SalesRegisterList().subscribe((data: any) => {
-  //     if (data.Status.code === 0) {
-  //       if (data.RegisterSalesList) {
-  //         this.salesDetails = data.RegisterSalesList;
-  //       }
-  //     }
-  //   }, (err) => {
-
-  //   });
-  // }
 
 }
 

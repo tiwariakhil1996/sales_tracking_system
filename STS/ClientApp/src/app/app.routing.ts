@@ -17,8 +17,7 @@ import { SalesLayoutComponent } from './containerSales';
 
 import { SalesRegisterComponent } from './sales/register/register.component';
 import { SalesLoginComponent } from './sales/login/login.component';
-import { AuthGuard } from './auth.guard';
-import { SalesGuard } from './sales.guard';
+
 import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password.component';
 
 
@@ -75,7 +74,7 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: DefaultLayoutComponent,
-    canActivate: [AuthGuard],
+  
     data: {
       title: 'Home'
     },

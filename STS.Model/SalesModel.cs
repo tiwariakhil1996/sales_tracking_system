@@ -22,12 +22,17 @@ namespace STS.Model
         public int ID { get; set; }
         public string Image { get; set; }
         public string SalesName { get; set; }
-        public string Email { get; set; }
+
         public string Gender { get; set; }
         public string Mobile { get; set; }
         public string Adharcard { get; set; }
         public string Address { get; set; }
+
+        public string Email { get; set; }
         public string Password { get; set; }
+        //public string Latitude { get; set; }
+        //public string Longitude { get; set; }
+        public int UserType { get; set; }
 
     }
 

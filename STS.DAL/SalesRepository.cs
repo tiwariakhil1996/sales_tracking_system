@@ -53,15 +53,17 @@ namespace STS.DAL
             {
                 await connection.OpenAsync();
                 DynamicParameters parameter = new DynamicParameters();
-                parameter.Add("@ID", model.ID);
-                parameter.Add("@Image", model.Image);
-                parameter.Add("@SalesName", model.SalesName);
+                //parameter.Add("@ID", model.ID);
+                //parameter.Add("@Image", model.Image);
+                //parameter.Add("@SalesName", model.SalesName);
+                //parameter.Add("@Gender", model.Gender);
+                //parameter.Add("@Mobile", model.Mobile);
+                //parameter.Add("@Adharcard", model.Adharcard);
+                //parameter.Add("@Address", model.Address);
                 parameter.Add("@Email", model.Email);
-                parameter.Add("@Gender", model.Gender);
-                parameter.Add("@Mobile", model.Mobile);
-                parameter.Add("@Adharcard", model.Adharcard);
-                parameter.Add("@Address", model.Address);
                 parameter.Add("@Password", model.Password);
+                parameter.Add("@Latitude", model.Latitude);
+                parameter.Add("@Longitude", model.Longitude);
 
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);

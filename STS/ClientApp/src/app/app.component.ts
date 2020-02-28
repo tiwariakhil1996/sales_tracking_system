@@ -8,6 +8,12 @@ import { ToastrService } from 'ngx-toastr';
   template: '<router-outlet></router-outlet>'
 })
 export class AppComponent implements OnInit {
+
+  // RoleJason = {
+  //   ROle: [0, 1],
+  //   Component: "DashboardComponent,ActivityComponent,ProductComponent,ClientComponent,RegisterComponent,MapComponent,SalesdataComponent,ForgotPasswordComponent,CategorySubcategoryComponent"
+  // }
+
   constructor(private router: Router) { }
 
   ngOnInit() {
@@ -17,7 +23,19 @@ export class AppComponent implements OnInit {
       }
       window.scrollTo(0, 0);
     });
+    // this.checkRole(this.RoleJason)
   }
+
+  // checkRole(RoleJason) {
+  //   var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+  //   if (this.RoleJason.Component == RoleJason.Component) {
+  //     console.log(result);
+  //     if (!this.RoleJason.ROle.includes(result.userType)) {
+  //       this.router.navigate(['admin/login']);
+  //     }
+  //   }
+  // }
+
 
 }
 
