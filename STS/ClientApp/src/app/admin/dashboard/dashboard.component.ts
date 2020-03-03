@@ -39,10 +39,10 @@ export class DashboardComponent implements OnInit {
   activityDetails: activityModel[] = [];
   totalActivity: any;
 
-  // RoleJason = {
-  //   ROle: [0, 1],
-  //   Component: 'DashboardComponent'
-  // };
+  RoleJason = {
+    ROle: [0, 1],
+    Component: 'DashboardComponent'
+  };
 
 
   constructor(private router: Router,
@@ -57,7 +57,7 @@ export class DashboardComponent implements OnInit {
   }
 
 ngOnInit() {
-  // this.checkRole(this.RoleJason);
+  this.checkRole(this.RoleJason);
 }
   // productList() {
   //   this.productService.productList().subscribe((data: any) => {
@@ -73,16 +73,16 @@ ngOnInit() {
   //   });
   // }
 
-  // checkRole(RoleJason) {
+  checkRole(RoleJason) {
 
-  //   const result = JSON.parse(localStorage.getItem('adminLogin')) || [];
-  //   if (this.RoleJason.Component === RoleJason.Component) {
-  //     // console.log(result);
-  //     if (!this.RoleJason.ROle.includes(result.userType)) {
-  //       this.router.navigate(['admin/login']);
-  //     }
-  //   }
-  // }
+    const result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+    if (this.RoleJason.Component === RoleJason.Component) {
+      // console.log(result);
+      if (!this.RoleJason.ROle.includes(result.userType)) {
+        this.router.navigate(['admin/login']);
+      }
+    }
+  }
 
   productList() {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
