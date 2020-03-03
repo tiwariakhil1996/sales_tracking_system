@@ -94,7 +94,7 @@ namespace STS
 
             app.UseHttpsRedirection();
 
-            //ToString access Documents Folder 
+            //This is used used for accessing the Documents folder for image display without the compile
 
             app.UseStaticFiles(new StaticFileOptions
             {

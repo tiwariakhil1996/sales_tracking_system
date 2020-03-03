@@ -37,10 +37,10 @@ export class DashboardComponent implements OnInit {
   activityDetails: activityModel[] = [];
   totalActivity: any;
 
-  // RoleJason = {
-  //   ROle: [0, 1],
-  //   Component: 'DashboardComponent'
-  // };
+  RoleJason = {
+    ROle: [0, 1],
+    Component: 'DashboardComponent'
+  };
 
   constructor(private router: Router,
     private clientService: ClientService,
@@ -54,7 +54,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.checkRole(this.RoleJason);
+    this.checkRole(this.RoleJason);
 
   }
 

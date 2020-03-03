@@ -11,7 +11,6 @@ import { clientModel } from '../../../model/client';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { registerModel } from '../../../model/admin';
-import { BsModalRef } from 'ngx-bootstrap';
 
 // For Map
 
@@ -27,7 +26,7 @@ import { google } from 'google-maps';
 })
 export class CurrentactivityComponent implements OnInit {
 
-  modalRef: BsModalRef;
+
   user = new registerModel();
 
   activity = new activityModel();

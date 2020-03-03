@@ -1,76 +1,76 @@
 .color{
-    background-color: lightskyblue;
+  background-color: lightskyblue;
 }
 
 .badge-pill {
-    padding: 5px;
-    border-radius: 17px;
-    width: 120px;
-    font-size: medium;
-    font-weight: normal;
+  padding: 5px;
+  border-radius: 17px;
+  width: 120px;
+  font-size: medium;
+  font-weight: normal;
 }
 
 .btn-center tr td:last-child{
-    text-align: center;
-}
-
-.status-center {
   text-align: center;
 }
 
+.status-center {
+text-align: center;
+}
+
 .add_product{
-    left: 1020px;
-    width: 54px;
- }
- .update-modal{
-    /* margin: -270px;
-    margin-block-start: auto; */
-    margin-left: 0px;
-    right: 50px;
-    width: 1000px;
+  left: 1020px;
+  width: 54px;
+}
+.update-modal{
+  /* margin: -270px;
+  margin-block-start: auto; */
+  margin-left: 0px;
+  right: 50px;
+  width: 1000px;
 }
 
 .map{
-    font-size: xx-large;
-    padding-left: 15px;
+  font-size: xx-large;
+  padding-left: 15px;
 }
 
 
 
 
 .modal-content {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 100%; 
-    color: modal-content-color;
-    pointer-events: auto;
-    background-color: modal-content-bg;
-    background-clip: padding-box;
-    border: modal-content-border-width solid modal-content-border-color;
-    border-radius: modal-content-border-radius;
-    box-shadow: modal-content-box-shadow-xs;
-    outline: 0;
-  } 
-  /* .model-ct{
-      max-width: 90%;
-  } */
-  
-  agm-map {
-    height: 450px;
-  }
-  
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%; 
+  color: modal-content-color;
+  pointer-events: auto;
+  background-color: modal-content-bg;
+  background-clip: padding-box;
+  border: modal-content-border-width solid modal-content-border-color;
+  border-radius: modal-content-border-radius;
+  box-shadow: modal-content-box-shadow-xs;
+  outline: 0;
+} 
+/* .model-ct{
+    max-width: 90%;
+} */
 
-  .named {
-    font: -webkit-mini-control;
-    border-width: medium;
-    margin-top: ‒10;
-    margin-top: 15px;
-    width: 84.8px;
-    margin-left: 450px;
-    background-color: yellow;
-  }
+agm-map {
+  height: 450px;
+}
 
-  .marker_tag {
-    color: crimson;
-  }
+
+.named {
+  font: -webkit-mini-control;
+  border-width: medium;
+  margin-top: ‒10;
+  margin-top: 15px;
+  width: 84.8px;
+  margin-left: 450px;
+  background-color: yellow;
+}
+
+.marker_tag {
+  color: crimson;
+}

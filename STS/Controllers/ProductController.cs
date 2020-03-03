@@ -169,17 +169,6 @@ namespace STS.Controllers
 
                 transaction = await iproduct.DeleteImage(id);
 
-        [HttpGet]
-        [Route("Product_Images_List/{id}")]
-        public async Task<IActionResult> Product_Images_List(int id)
-        {
-            TranStatus transaction = new TranStatus();
-            Dictionary<String, Object> dctData = new Dictionary<string, object>();
-            HttpStatusCode statusCode = HttpStatusCode.OK;
-            try
-            {
-                var productList = await iproduct.Product_Images_List(id);
-                dctData.Add("Product_Images_List", productList);
             }
             catch (Exception ex)
             {
@@ -189,6 +178,7 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
+
 
         // Display each sales List Individually
         [HttpPost]
@@ -308,28 +298,7 @@ namespace STS.Controllers
         }
 
 
-        //Delete Multiple Image
-        [HttpDelete]
-        [Route("DeleteImage/{id}")]
-        public async Task<IActionResult> DeleteImage(int id)
-        {
-            Dictionary<String, Object> dctData = new Dictionary<string, object>();
-            HttpStatusCode statusCode = HttpStatusCode.OK;
-            TranStatus transaction = new TranStatus();
-            try
-            {
-
-                transaction = await iproduct.DeleteImage(id);
-
-            }
-            catch (Exception ex)
-            {
-                transaction = CommonHelper.TransactionErrorHandler(ex);
-                statusCode = HttpStatusCode.BadRequest;
-            }
-            dctData.Add("Status", transaction);
-            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
-        }
+       
 
 
 

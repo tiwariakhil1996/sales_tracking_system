@@ -376,18 +376,6 @@ export class ViewproductComponent implements OnInit {
     });
   }
 
-  DeleteImage(id: number) {
-    // if (confirm('Are you sure to delete this record ?') === true) {
-    this.productService.DeleteImage(id).subscribe(data => {
-      this.product_Images_List(id)
-    });
-    // }
-    this.toastr.success('Image deleted Successful', 'Successful', {
-      disableTimeOut: false,
-      timeOut: 2000
-    });
-  }
-
 
 }
 

@@ -39,17 +39,6 @@ export class UpdateImageListModel {
 export class ImageModel {
     Image: string;
 }
-export class UpdateImageListModel {
-    ImageId: number;
-    ImageData: string;
-}
-
-export class Product_Images_ListModel {
-    id: number;
-    image: string;
-
-}
-
 export class productpriceModel {
     id: number;
     price: string;

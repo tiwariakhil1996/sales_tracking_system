@@ -1,4 +1,6 @@
+
 // activity
+
 export class addactivityModel {
     aid: number;
     title: string;
@@ -79,14 +81,6 @@ export class activityModel {
     user_id: number;
     status: number;
     statusname: string;
-   
-}
-export class ActivityhistoryModel {
-    id: number;
-    Aid: number;
-    Users_id: number;
-    Old_status: number;
-    New_status: number;
 }
 
 export class LocationModel {
