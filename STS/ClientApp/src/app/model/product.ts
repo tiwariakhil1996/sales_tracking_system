@@ -28,17 +28,16 @@ export class ImageListModel {
     ImageData: string;
 
 }
-
-export class UpdateImageListModel {
-    ImageId: number;
-    ImageData: string;
-}
-
 // This for display the image
 
 export class ImageModel {
     Image: string;
 }
+export class UpdateImageListModel {
+    ImageId: number;
+    ImageData: string;
+}
+
 export class productpriceModel {
     id: number;
     price: string;

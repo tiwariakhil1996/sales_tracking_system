@@ -1,21 +1,21 @@
 agm-map {
-    height: 450px;
+  height: 450px;
 }
 
 #map {
-    height: 100%;
-  }
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
+  height: 100%;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 
-  
-  .agm-map-container-inner {
-    width: inherit;
-    height: inherit;
-  }
-  .agm-map-content {
-    display:none;
-  }
+
+.agm-map-container-inner {
+  width: inherit;
+  height: inherit;
+}
+.agm-map-content {
+  display:none;
+}

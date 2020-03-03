@@ -34,6 +34,7 @@ export class ProductService {
     return this.http.post('/api/Product/each_sales_ProductList', data);
   }
 
+
   deleteProduct(id: number) {
     return this.http.delete('/api/Product/deleteProduct/' + id);
   }

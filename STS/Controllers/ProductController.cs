@@ -211,11 +211,21 @@ namespace STS.Controllers
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
             TranStatus transaction = new TranStatus();
+            //try
+            //{
+            //    model.Image = CommonHelper.SaveImage(HttpContext, "Images\\Product", model.Image, true, model.ImageExtn);
+            //    transaction = await iproduct.updateProduct(ID, model);
+
+            //}
+
             try
             {
-                model.Image = CommonHelper.SaveImage(HttpContext, "Images\\Product", model.Image, true, model.ImageExtn);
-                transaction = await iproduct.updateProduct(ID, model);
-
+                //This for loop for adding the multiple Image
+                for (var i = 0; i < model.ImageList.Count; i++)
+                {
+                    model.ImageListData[i].Image = CommonHelper.SaveImage(HttpContext, "Images\\Product", model.ImageList[i].ImageData, true, model.ImageList[i].ImageExtn);
+                }
+                transaction = await iproduct.updateProduct(ID,model);
             }
             catch (Exception ex)
             {

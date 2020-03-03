@@ -16,7 +16,7 @@ import { TrackActivityComponent } from './track-activity.component';
     CommonModule,
     FormsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAgmJb337SljuWJnzPXRyMjiTSL1DWcBq8'
+      apiKey: 'AIzaSyBaU6eEpioeuf9Nkzsd5N3OoJsDpVQdzEs'
       // libraries: ['places']
     }),
   ],
