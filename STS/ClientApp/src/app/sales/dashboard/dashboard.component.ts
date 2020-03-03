@@ -37,10 +37,10 @@ export class DashboardComponent implements OnInit {
   activityDetails: activityModel[] = [];
   totalActivity: any;
 
-  RoleJason = {
-    ROle: [0, 1],
-    Component: 'DashboardComponent'
-  };
+  // RoleJason = {
+  //   ROle: [0, 1],
+  //   Component: 'DashboardComponent'
+  // };
 
   constructor(private router: Router,
     private clientService: ClientService,
@@ -54,21 +54,21 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.checkRole(this.RoleJason);
+    // this.checkRole(this.RoleJason);
 
   }
 
 
 
-  checkRole(RoleJason) {
-    const result = JSON.parse(localStorage.getItem('salesLogin')) || [];
-    if (this.RoleJason.Component === RoleJason.Component) {
-      console.log(result);
-      if (!this.RoleJason.ROle.includes(result.userType)) {
-        this.router.navigate(['sales/login']);
-      }
-    }
-  }
+  // checkRole(RoleJason) {
+  //   const result = JSON.parse(localStorage.getItem('salesLogin')) || [];
+  //   if (this.RoleJason.Component === RoleJason.Component) {
+  //     console.log(result);
+  //     if (!this.RoleJason.ROle.includes(result.userType)) {
+  //       this.router.navigate(['sales/login']);
+  //     }
+  //   }
+  // }
   // productList() {
   //   this.productService.productList().subscribe((data: any) => {
   //     if (data.Status.code === 0) {

@@ -2,9 +2,9 @@
   <div class="card">
     <div class="card-header">
       <!-- <i class="fa fa-align-justify"></i> -->
-      Product Details
-      <button type="submit" style="float: right;" class="btn btn-sm btn-success" (click)="addnewProduct()"><i
-          class="fa fa-plus">Add</i></button>
+       Product Details
+       <button type="submit" style="float: right;" class="btn btn-sm btn-success"
+      (click)="addnewProduct()"><i class="fa fa-plus">Add</i></button>
     </div>
     <div style="overflow-x:auto;">
     <div class="card-body">
@@ -55,16 +55,15 @@
               <button *ngIf="!item.isActive" class='btn btn-danger' type="button" (click)="changeStatus(item.id)"><i
                   class="fa fa-times"></i></button>
             </td> -->
-            </tr>
+          </tr>
 
-          </tbody>
-        </table>
-
-      </div>
+        </tbody>
+      </table>
+   
     </div>
   </div>
+  </div>
 </div>
-
 
 
 
@@ -76,66 +75,64 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="modal-body" style="color: black;">
-    <div>
-      <div class="form-group" hidden>
-        <label for="id">ID</label>
-        <input type="text" class="form-control" [(ngModel)]="product.id" name="id" disabled>
-      </div>
-      <div class="form-group row">
-        <div class="col-sm-6">
-          <label for="category">Category</label>
-          <!-- <input type="text" class="form-control"  [(ngModel)]="product.cname" name="category"> -->
-          <select name="cid" class="form-control" [(ngModel)]="product.cid"
-            (click)="onCategoryChange($event.target.value)">
-            <option value="0" selected>Select category</option>
-            <option *ngFor="let item of categoryDetails;" name="cname" value={{item.cid}}>{{item.cname}}</option>
-          </select>
-        </div>
+         <div class="modal-body" style="color: black;">
+          <div>
+            <div class="form-group" hidden> 
+             <label for="id">ID</label>
+               <input type="text" class="form-control"  [(ngModel)]="product.id" name="id" disabled>
+           </div>
+           <div class="form-group row">
+            <div class="col-sm-6">
+             <label for="category">Category</label>
+               <!-- <input type="text" class="form-control"  [(ngModel)]="product.cname" name="category"> -->
+               <select name="cid" class="form-control" [(ngModel)]="product.cid"  (click)="onCategoryChange($event.target.value)" >
+                <option value="0" selected>Select category</option>
+                <option *ngFor="let item of categoryDetails;" name="cname" value={{item.cid}}>{{item.cname}}</option>
+              </select>
+           </div>
+           
+           <div class="col-sm-6">
+             <label for="subcategory">Subcategory</label>
+               <!-- <input type="text" class="form-control"  [(ngModel)]="product.sname" name="subcategory" > -->
+               <select name="cid" class="form-control" [(ngModel)]="product.sid"  >
+                <option value="0" selected>Select subcategory</option>
+                <option *ngFor="let item of subcategoryDetails;" name="sname" value={{item.sid}} >{{item.sname}}</option>
+            </select>
+           </div>
+          </div>
 
-        <div class="col-sm-6">
-          <label for="subcategory">Subcategory</label>
-          <!-- <input type="text" class="form-control"  [(ngModel)]="product.sname" name="subcategory" > -->
-          <select name="cid" class="form-control" [(ngModel)]="product.sid">
-            <option value="0" selected>Select subcategory</option>
-            <option *ngFor="let item of subcategoryDetails;" name="sname" value={{item.sid}}>{{item.sname}}</option>
-          </select>
-        </div>
-      </div>
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <label for="productname">ProductName</label>
+                <input type="text" class="form-control" [(ngModel)]="product.productname" name="productname">
+           </div>
+           <div class="col-sm-6">
+            <label for="image">Image</label>
+            <input class="form-control" type="file" id="fileupload" name="image"  multiple (change)="handleFileInput($event.target.files)" [(ngModel)]="product.image" />          
+            <!--   <img style="width: 80px; height: 80px;" src={{product.image}} >   -->  
+           </div>
+          </div>
+            <div class="form-group">
+               <label for="description">Description</label>
+               <input type="text" class="form-control"  [(ngModel)]="product.description" name="description">
+            </div>
 
-      <div class="form-group row">
-        <div class="col-sm-6">
-          <label for="productname">ProductName</label>
-          <input type="text" class="form-control" [(ngModel)]="product.productname" name="productname">
-        </div>
-        <div class="col-sm-6">
-          <label for="image">Image</label>
-          <input class="form-control" type="file" id="fileupload" name="image" multiple
-            (change)="handleFileInput($event.target.files)" [(ngModel)]="product.image" />
-          <!--   <img style="width: 80px; height: 80px;" src={{product.image}} >   -->
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="description">Description</label>
-        <input type="text" class="form-control" [(ngModel)]="product.description" name="description">
-      </div>
+            
 
+             <div class="form-group row">
+              <div class="col-sm-6">
+               <label for="price">Price</label>
+               <input type="text" class="form-control"  [(ngModel)]="product.price" name="price" >
+             </div>
 
+             <div class="col-sm-6">
+               <label for="date">Date</label>
+                <input type="text" class="form-control" [(ngModel)]="product.date" name="date" >
+            </div>
+          </div>
 
-      <div class="form-group row">
-        <div class="col-sm-6">
-          <label for="price">Price</label>
-          <input type="text" class="form-control" [(ngModel)]="product.price" name="price">
-        </div>
-
-        <div class="col-sm-6">
-          <label for="date">Date</label>
-          <input type="text" class="form-control" [(ngModel)]="product.date" name="date">
-        </div>
-      </div>
-
-      <button type="submit" class="btn btn-success" (click)="onEdit(product.id)">Update</button>
-      <!--    <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal-body">Close</button>  -->
-    </div>
-  </div>
+       <button type="submit" class="btn btn-success" (click)="onEdit(product.id)" >Update</button>
+   <!--    <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal-body">Close</button>  -->
+      </div>      
+     </div>
 </ng-template>

@@ -122,6 +122,7 @@ export class DefaultLayoutComponent implements OnInit {
           disableTimeOut: false
         });
         this.changePassword = new changePasswordModel();
+        this.modalRef.hide();
       } else {
         this.toastr.warning('Old Password is incorrect', 'Warning', {
           disableTimeOut: false,

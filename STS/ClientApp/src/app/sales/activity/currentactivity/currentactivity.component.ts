@@ -11,6 +11,7 @@ import { clientModel } from '../../../model/client';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { BsModalRef } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-currentactivity',
@@ -20,6 +21,7 @@ import { ToastrService } from 'ngx-toastr';
 export class CurrentactivityComponent implements OnInit {
 
   user = new salesregisterModel();
+  modalRef: BsModalRef;
 
   activity = new activityModel();
   activityDetails: activityModel[] = [];
@@ -266,6 +268,7 @@ export class CurrentactivityComponent implements OnInit {
           disableTimeOut: false,
           timeOut: 2000
         });
+        // this.modalRef.hide();
       }
 
       this.activityList();

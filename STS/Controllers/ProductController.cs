@@ -93,6 +93,14 @@ namespace STS.Controllers
             {
                 var productList = await iproduct.ProductList();
                 dctData.Add("ProductList", productList);
+                //List<ProductListModel> ProductList = new List<ProductListModel>();
+                //List<GetProductImageListModel> ImageList = new List<GetProductImageListModel>();
+                //var result = await iproduct.ProductList(model);
+                //ProductList = result.Item1;
+                //ImageList = result.Item2;
+
+                //dctData.Add("ProductList", ProductList);
+                //dctData.Add("ImageList", ImageList);
             }
             catch (Exception ex)
             {
@@ -125,6 +133,52 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
+
+
+        //Multiple Image Display
+        [HttpGet]
+        [Route("Product_Images_List/{id}")]
+        public async Task<IActionResult> Product_Images_List(int id)
+        {
+            TranStatus transaction = new TranStatus();
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                var productList = await iproduct.Product_Images_List(id);
+                dctData.Add("Product_Images_List", productList);
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+        //Delete Multiple Image
+        [HttpDelete]
+        [Route("DeleteImage/{id}")]
+        public async Task<IActionResult> DeleteImage(int id)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+
+                transaction = await iproduct.DeleteImage(id);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
 
         // Display each sales List Individually
         [HttpPost]

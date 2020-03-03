@@ -13,6 +13,7 @@ export class ProductComponent implements OnInit {
   product = new productModel();
   productDetails: productModel[] = [];
 
+  // public imageUrl = "https://localhost:44317/Document/Images/Product/";
   RoleJason = {
     ROle: [0, 1],
     Component: "ProductComponent"

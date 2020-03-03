@@ -59,7 +59,7 @@ namespace STS.Common
 
                     //Path where want to save image 
 
-                    string imageDirectory = "ClientApp/src/assets/img/" + PathToSaveImage + "/";
+                    string imageDirectory = "Document/" + PathToSaveImage + "/";
 
                     if (!Directory.Exists(imageDirectory))
                     {

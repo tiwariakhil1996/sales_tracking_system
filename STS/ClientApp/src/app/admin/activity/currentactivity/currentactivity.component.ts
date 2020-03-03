@@ -11,6 +11,7 @@ import { clientModel } from '../../../model/client';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { registerModel } from '../../../model/admin';
+import { BsModalRef } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-currentactivity',
@@ -22,7 +23,7 @@ export class CurrentactivityComponent implements OnInit {
   // pageOfItems: Array<any>;
 
 
-
+  modalRef: BsModalRef;
   user = new registerModel();
 
   activity = new activityModel();

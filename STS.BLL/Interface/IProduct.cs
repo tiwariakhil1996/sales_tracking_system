@@ -15,9 +15,17 @@ namespace STS.BLL.Interface
 
         //View Products
         Task<List<ProductListModel>> ProductList();
+        //Task<Tuple<List<ProductListModel>, List<GetProductImageListModel>>> ProductList(callProductImageListMode model);
+
+
 
         // Display each admin List Individually
         Task<List<ProductListModel>> each_admin_ProductList(ProductListModel model);
+        //Multiple Image Display
+        Task<List<Product_Image_ListModel>> Product_Images_List(int id);
+        //Delete Multiple Image
+        Task<TranStatus>DeleteImage(int id);
+
 
         // Display each sales List Individually
         Task<List<ProductListModel>> each_sales_ProductList(ProductListModel model);

@@ -21,6 +21,9 @@ namespace STS.Model
         public List<ImageList> ImageList { get; set; }
         public List<ImageModel> ImageListData { get; set; }
 
+        public List<DeleteImageModel> DeleteImageListData { get; set; }
+
+
 
     }
 
@@ -34,6 +37,35 @@ namespace STS.Model
     public partial class ImageModel
     {
         public string Image { get; set; }
+    }
+
+    public partial class Product_Image_ListModel
+    {
+        public int Id { get; set; }
+        public string Image { get; set; }
+    }
+    public class DeleteImageModel
+    {
+        public int ImageId { get; set; }
+        public string Image { get; set; }
+    }
+    public class UpdateImageList
+    {
+        public int ImageId { get; set; }
+        public string ImageExtn { get; set; }
+        public string Image { get; set; }
+        public string ImageData { get; set; }
+    }
+    public class GetProductImageListModel
+    {
+        public int ImageId { get; set; }
+        public string Image { get; set; }
+       
+    }
+    public class callProductImageListMode
+    {
+        public int Product_ID { get; set; }
+        
     }
 
     public partial class ProductPriceModel
@@ -60,9 +92,11 @@ namespace STS.Model
         public string ImageExtn { get; set; }
         public string Date { get; set; }
         public bool IsActive { get; set; }
-        public int Modifiedby { get; set; }
-
+        public int Modifiedby { get; set; } 
         public int userId { get; set; }
+        public List<ImageList> ImageList { get; set; }
+        public List<ImageModel> ImageListData { get; set; }
+
 
     }
 }

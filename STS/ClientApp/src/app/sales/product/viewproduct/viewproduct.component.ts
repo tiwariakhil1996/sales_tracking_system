@@ -5,10 +5,9 @@ import { BsModalRef } from 'ngx-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
 import { ProductService } from '../../../service/product.service';
-import { productListModel } from '../../../model/product';
+import { productModel, productListModel } from '../../../model/product';
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
 import { salesregisterModel } from '../../../model/sales';
-import { ImageListModel, productModel } from '../../../model/product';
 
 @Component({
   selector: 'app-viewproduct',
@@ -165,7 +164,7 @@ onEdit(id: number) {
     }
   }
 
-  if (!this.product.imageList) {
+  if (!this.product.image) {
     strError += strError = '' ? '' : '<br/>';
     strError += '- Please select image';
   }
@@ -307,7 +306,6 @@ handleFileInput(fileList: FileList) {
 
   });
 }
-
 
 // Delete
 

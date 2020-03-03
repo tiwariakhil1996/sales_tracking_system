@@ -16,8 +16,17 @@ export class ProductService {
     return this.http.get('/api/Product/ProductList');
   }
 
+  // productList(getProductData: GetPropertyListModel) {
+  //   console.log(getProductData);
+  //   return this.http.post('/api/Product/ProductList', getProductData);
+  // }
+
   each_admin_ProductList(data) {
     return this.http.post('/api/Product/each_admin_ProductList', data);
+  }
+
+  product_Images_List(id) {
+    return this.http.get('/api/Product/Product_Images_List/' + id);
   }
 
   each_sales_ProductList(data) {
@@ -27,6 +36,10 @@ export class ProductService {
   deleteProduct(id: number) {
     return this.http.delete('/api/Product/deleteProduct/' + id);
   }
+  DeleteImage(id: number) {
+    return this.http.delete('/api/Product/DeleteImage/' + id);
+  }
+
 
   updateProduct(id: number, data: any) {
     return this.http.put('/api/Product/updateProduct/' + id, data);

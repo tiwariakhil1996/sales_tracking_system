@@ -5,7 +5,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
 import { ProductService } from '../../../service/product.service';
-import { productModel, ImageListModel, ImageModel } from '../../../model/product';
+import { productModel, ImageListModel, ImageModel, UpdateImageListModel } from '../../../model/product';
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
 import { registerModel } from '../../../model/admin';
 
@@ -25,6 +25,9 @@ export class AddproductComponent implements OnInit {
   // myDate = new Date();
   imageList: ImageListModel[] = [];
   imageModel: ImageModel[] = [];
+
+  tempImageList: UpdateImageListModel[] = [];
+  updateImageList: UpdateImageListModel[] = [];
 
   currentDate = new Date();
 
@@ -332,7 +335,7 @@ export class AddproductComponent implements OnInit {
         // image.height = 100;
         // image.width = 100;
         // preview.appendChild(image);
-        // this.tempImageList.push({ ImageId: 0, ImageData: String(reader.result) });
+        this.tempImageList.push({ ImageId: 0, ImageData: String(reader.result) });
         this.imageList.push({ ImageExtn: '.' + imageDetail[0].replace('data:image/', ''), Image: '', ImageData: imageDetail[1] });
         this.imageModel.push({ Image: '' });
 
@@ -348,7 +351,7 @@ export class AddproductComponent implements OnInit {
     this.product.productname = null;
     this.product.price = null;
     this.product.description = null;
-    this.product.imageList = null;
+    this.product.image = null;
     this.product.date = null;
   }
 

@@ -31,6 +31,14 @@ namespace STS.BLL.Service
                 return await productRepository.ProductList();
             }
         }
+        ////View Products
+        //public async Task<Tuple<List<ProductListModel>, List<GetProductImageListModel>>> ProductList(callProductImageListMode model)
+        //{
+        //    using (productRepository = new ProductRepository())
+        //    {
+        //        return await productRepository.ProductList(model);
+        //    }
+        //}
 
         // Display each admin List Individually
         public async Task<List<ProductListModel>> each_admin_ProductList(ProductListModel model)
@@ -41,6 +49,24 @@ namespace STS.BLL.Service
             }
 
         }
+
+        //Multiple Image Display
+        public async Task<List<Product_Image_ListModel>> Product_Images_List(int id)
+        {
+            using (productRepository = new ProductRepository())
+            {
+                return await productRepository.Product_Images_List(id);
+            }
+        }
+        //Delete Multiple Image
+        public async Task<TranStatus> DeleteImage(int id)
+        {
+            using (productRepository = new ProductRepository())
+            {
+                return await productRepository.DeleteImage(id);
+            }
+        }
+
 
         // Display each sales List Individually
         public async Task<List<ProductListModel>> each_sales_ProductList(ProductListModel model)
