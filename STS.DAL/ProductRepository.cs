@@ -91,6 +91,22 @@ namespace STS.DAL
             }
         }
 
+
+        public async Task<List<Product_Image_ListModel>> Product_Images_List(int id)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@Product_Id", id);
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                var result = await connection.QueryAsync<Product_Image_ListModel>("Product_Images_List", parameter, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+            }
+        }
+
         // Display each sales List Individually
         public async Task<List<ProductListModel>> each_sales_ProductList(ProductListModel model)
         {
@@ -184,6 +200,27 @@ namespace STS.DAL
                 connection.Open();
                 var result = await connection.QueryAsync<ProductListModel>("ProductList_ActiveDeactive", commandType: CommandType.StoredProcedure);
                 return result.ToList();
+
+            }
+        }
+
+        //Delete Multiple Image 
+        public async Task<TranStatus> DeleteImage(int id)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@Image_ID", id);
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                //await connection.QueryMultipleAsync(nameof(deleteClient), parameter, commandType: CommandType.StoredProcedure);
+                await connection.QueryAsync("DeleteImage", parameter, commandType: CommandType.StoredProcedure);
+                transaction.returnMessage = parameter.Get<string>("@Message");
+                transaction.code = parameter.Get<int>("@Code");
+                return transaction;
 
             }
         }

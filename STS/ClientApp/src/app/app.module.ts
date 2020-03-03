@@ -67,6 +67,7 @@ import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password
     AppRoutingModule,
     AppAsideModule,
     FormsModule,
+    // AngularFontAwesomeModule,
     AppBreadcrumbModule.forRoot(),
     AppFooterModule,
     AppHeaderModule,

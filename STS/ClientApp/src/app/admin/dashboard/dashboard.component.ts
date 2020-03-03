@@ -15,7 +15,9 @@ import { registerModel } from '../../model/admin';
 
 
 @Component({
+  // styleUrls: ['./dashboard.component.css'],
   templateUrl: 'dashboard.component.html'
+ 
 })
 export class DashboardComponent implements OnInit {
 

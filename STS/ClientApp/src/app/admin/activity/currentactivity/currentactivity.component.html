@@ -5,13 +5,13 @@
       <button type="submit" style="float: right;" class="btn btn-sm btn-success" (click)="addnewActivity()"><i
           class="fa fa-plus">Add</i></button>
     </div>
-<!-- <div>
+    <!-- <div>
   <input style="float: right; inline-size: max-content;" type="text" id="title" name="title" [(ngModel)]="update_activity.title" class="form-control" placeholder="Search">
 </div> -->
 
     <!-- <div style="overflow-x:auto;"> -->
     <div class="card-body table-responsive">
-<!-- 
+      <!-- 
       <div class="form-inline md-form mr-auto mb-4">
         <input  style="float: right;" class="form-control mr-sm-2" id="title" name="title" (keyup)="onSearch(activity.aid)" type="text" placeholder="Search" aria-label="Search">
      
@@ -32,12 +32,13 @@
             <th>Contact</th>
             <th>Appointment Date</th>
             <th>Status</th>
+            <th>Track</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let item of activityDetails;let i=index;">
-            <td>{{i+1}}</td>
+            <td style="text-align: center">{{i+1}}</td>
             <!-- <td>{{item.aid}}</td> -->
             <td>{{item.title}}</td>
             <td>{{item.description}}</td>
@@ -46,10 +47,14 @@
             <td>{{item.salesName}}</td>
             <td>{{item.contact}}</td>
             <td>{{item.appointmentDate}}</td>
-            <td>
+            <td class="status-center">
               <span class="badge badge-pill badge-success">{{item.statusname}}</span>
             </td>
+            <td>
+              <i class="fa fa-map-marker map"  (click)="Get_Lat_Long_of_Activity(item.aid)" (click)="open_map_modal(map)"></i>
+              <!-- <i class="fa fa-map-marker map" (click)="track_activity()" (click)="Get_Lat_Long_of_Activity(item.aid)" (click)="open_map_modal(map)"></i> -->
 
+            </td>
             <td>
               <button type="button" class="btn btn-primary" data-toggle="modal" (click)="openupdatemodal(content,item)"
                 (click)="GetProduct_Activity(item.aid)"><i class="fa fa-edit" aria-hidden="true"></i></button>
@@ -147,7 +152,7 @@
 
     <div class="card-body table-responsive">
       <!-- <table class="table table-bordered btn-center"> -->
-        <table class="table">
+      <table class="table">
         <thead>
           <!-- <tr class="table-success"> -->
           <tr>
@@ -174,26 +179,26 @@
             </td>
             <td>
               <!-- <input *ngFor="let item of product_priceDetails;"  type="text" class="form-control" id="price" name="price" [(ngModel)]="item.price"  > -->
-              <tr *ngFor="let item of product_priceDetails;">
-                <td>
-                  {{item.price}}
-                  </td>
-              </tr>
-              <!-- <input type="text" class="form-control" id="price" name="price" [(ngModel)]="products.price"> -->
+          <tr *ngFor="let item of product_priceDetails;">
+            <td>
+              {{item.price}}
             </td>
-            <td> <input type="text" class="form-control" id="quantity" name="quantity" [(ngModel)]="products.quantity">
-            </td>
-            <td> <input type="text" class="form-control" id="amount" name="amount" [(ngModel)]="products.amount">
-            </td>
-            <td> <input type="text" class="form-control" id="discount_per" name="discount_per"
-                [(ngModel)]="products.discount_per">
-            </td>
-            <td> <input type="text" class="form-control" id="discount_amt" name="discount_amt"
-                [(ngModel)]="products.discount_amt">
-            </td>
-            <td><input type="text" class="form-control" id="total_price" name="total_price"
-                [(ngModel)]="products.total_price">
-            </td>
+          </tr>
+          <!-- <input type="text" class="form-control" id="price" name="price" [(ngModel)]="products.price"> -->
+          </td>
+          <td> <input type="text" class="form-control" id="quantity" name="quantity" [(ngModel)]="products.quantity">
+          </td>
+          <td> <input type="text" class="form-control" id="amount" name="amount" [(ngModel)]="products.amount">
+          </td>
+          <td> <input type="text" class="form-control" id="discount_per" name="discount_per"
+              [(ngModel)]="products.discount_per">
+          </td>
+          <td> <input type="text" class="form-control" id="discount_amt" name="discount_amt"
+              [(ngModel)]="products.discount_amt">
+          </td>
+          <td><input type="text" class="form-control" id="total_price" name="total_price"
+              [(ngModel)]="products.total_price">
+          </td>
           </tr>
 
         </tbody>
@@ -254,7 +259,7 @@
                   (click)="open_productupdatemodal(content1,products)">
                   <i class="fa fa-edit" aria-hidden="true"></i></button>
 
-                  <button class='btn btn-danger' type="button" (click)="onProductDelete(products.productId,products.aid)">
+                <button class='btn btn-danger' type="button" (click)="onProductDelete(products.productId,products.aid)">
                   <i class="fa fa-trash" aria-hidden="true"></i></button>
               </td>
               <td>{{i+1}}</td>
@@ -305,11 +310,11 @@
         </table>
       </div>
     </div> -->
-    
+
   </div>
 
 
-  
+
   <div class="card-footer">
 
     <button type="submit" class="btn btn-success" (click)="onEdit(update_activity.aid)">Update</button>
@@ -367,7 +372,7 @@
           <tr *ngFor="let item of product_priceDetails;">
             <td>
               {{item.price}}
-              </td>
+            </td>
           </tr>
         </div>
       </div>
@@ -422,7 +427,98 @@
   <div class="modal-footer">
     <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button> -->
     <!-- <button type="button" class="btn btn-outline-dark" (click)="update_ToFollowup(activity.aid)">Submit</button> -->
-    <button type="button" class="btn btn-outline-dark" (click)="Update_old_Products(activity_product.aid)">Submit</button>
+    <button type="button" class="btn btn-outline-dark"
+      (click)="Update_old_Products(activity_product.aid)">Submit</button>
 
+  </div>
+</ng-template>
+
+
+<!-- <ng-template #map let-modal>
+  <div class="modal-header">
+  </div>
+  <div class="modal-body" style="color: black;">
+    <div>
+      <div>
+      <div class="agm-map">
+        <agm-map #map [zoom]="16" [latitude]="centerlat" [longitude]="centerlng">
+          <agm-marker [opacity]=0.8 [latitude]="lat" [longitude]="lng" [markerDraggable]="false"></agm-marker>
+        </agm-map>
+      </div>
+        
+        <h5>Address: {{address}}</h5>
+        <div>Latitude: {{lat}}</div>
+        <div>Longitude: {{lng}}</div>
+
+    </div>
+  </div>
+  </div>
+</ng-template> -->
+
+
+<ng-template #map let-modal>
+  <!-- <div class="modal-header">
+  </div> -->
+  <div class="modal-body" style="color: black;">
+    <div>
+      <div>
+      <div class="agm-map" *ngFor="let addr of Activity_LocationDetails;">
+        <agm-map #map [zoom]="16" [latitude]="centerlat" [longitude]="centerlng">
+          <!-- Admin Location -->
+          <agm-marker [label]="_admin" [opacity]=0.8 [latitude]="lat" [longitude]="lng" [markerDraggable]="false"></agm-marker>
+          
+          <!-- Sales Location -->
+          <agm-marker [label]="_sales" [opacity]=0.8 [latitude]="addr.latitude" [longitude]="addr.longitude" [markerDraggable]="false"></agm-marker>
+
+          <!-- Client Location -->
+          <agm-marker [label]="_client" [opacity]=0.8 [latitude]="addr.lat" [longitude]="addr.lng" [markerDraggable]="false"></agm-marker>
+
+        </agm-map>
+
+        <div class="form-group row">
+          <div class="col-md-3">
+            <h5> Sales</h5>
+            <div>Latitude: {{addr.latitude}}</div>
+            <div>Longitude: {{addr.longitude}}</div>
+          </div>
+          <div class="col-md-3">
+            <h5> Client</h5>
+            <div>Latitude: {{addr.lat}}</div>
+            <div>Longitude: {{addr.lng}}</div>
+          </div>
+
+          <!-- <div class="col-md-3">
+            <div>Admin</div>
+            <div>Sales</div>
+            <div>Client</div>
+          </div> -->
+
+         <div>
+          
+          <table class="table-bordered named">
+            <tbody>
+              <tr>
+                <td class="marker_tag">A</td>
+                <td>Admin</td>
+              </tr>
+              <tr>
+                <td  class="marker_tag">S</td>
+                <td>Sales</td>
+              </tr>
+              <tr>
+                <td  class="marker_tag">C</td>
+                <td>Client</td>
+              </tr>
+            </tbody>
+          </table>
+        
+         </div>
+
+        </div>
+        
+      </div>
+        
+    </div>
+  </div>
   </div>
 </ng-template>

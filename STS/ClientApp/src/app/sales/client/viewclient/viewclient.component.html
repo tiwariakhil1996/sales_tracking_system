@@ -32,7 +32,7 @@
           </thead>
           <tbody>
               <tr *ngFor="let client of clientDetails;let i = index;">
-                <td>{{i+1}}</td>
+                <td style="text-align: center">{{i+1}}</td>
               <!-- <td>{{client.id}}</td> -->
               <td>{{client.clientName}}</td>
               <td>{{client.email}}</td>
@@ -46,7 +46,7 @@
               <td>{{client.postalCode}}</td>
             
       
-              <td>
+              <td style="text-align: center">
                 <button type="button" class="btn btn-info" data-toggle="modal" (click)="openupdatemodal(content,client)" ><i class="fa fa-edit" aria-hidden="true"></i></button>
                  
                   <button type="button" class='btn btn-danger' (click)="onDelete(client.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>

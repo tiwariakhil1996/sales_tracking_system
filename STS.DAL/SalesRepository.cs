@@ -208,5 +208,26 @@ namespace STS.DAL
             }
         }
 
+
+        public async Task<TranStatus> Refresh_Sales_Location(Refresh_Sales_Location_Model model)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@Sales_ID", model.UserId);
+                parameter.Add("@Latitude", model.Latitude);
+                parameter.Add("@Longitude", model.Longitude);
+
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                await connection.QueryAsync("Refresh_Sales_Location", parameter, commandType: CommandType.StoredProcedure);
+                transaction.returnMessage = parameter.Get<string>("@Message");
+                transaction.code = parameter.Get<int>("@Code");
+                return transaction;
+
+            }
+        }
     }
 }

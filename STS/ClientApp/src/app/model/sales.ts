@@ -24,6 +24,12 @@ export class salesregisterModel {
     userType: number;
 }
 
+export class LocationModel {
+    userid: number;
+    // Sales Location
+    latitude: string;
+    longitude: string;
+}
 
 export class changePasswordModel {
     id: number;

@@ -13,7 +13,8 @@ import { productModel } from '../../model/product';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './default-layout.component.html'
+  templateUrl: './default-layout.component.html',
+  styleUrls: ['./default-layout.component.css']
 })
 export class DefaultLayoutComponent implements OnInit {
   public sidebarMinimized = false;

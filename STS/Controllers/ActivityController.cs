@@ -164,6 +164,28 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
+        // Display Sales lat lng ..whom admin has added
+
+        [HttpPost]
+        [Route("each_admins_sales_Location")]
+        public async Task<IActionResult> each_admins_sales_Location([FromBody]Sales_Location_Model model)
+        {
+            TranStatus transaction = new TranStatus();
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                var activityList = await iactivity.each_admins_sales_Location(model);
+                dctData.Add("each_admins_sales_Location", activityList);
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
 
 
         // Count Assigned list on bell  notification 
@@ -456,6 +478,29 @@ namespace STS.Controllers
         //    dctData.Add("Status", transaction);
         //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         //}
+
+
+        // Activity Lat Long
+        [HttpGet]
+        [Route("Activity_Location/{aid}")]
+        public async Task<IActionResult> Activity_Location(int aid)
+        {
+            TranStatus transaction = new TranStatus();
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                var activityList = await iactivity.Activity_Location(aid);
+                dctData.Add("Activity_Location", activityList);
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
 
 
     }

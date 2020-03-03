@@ -95,6 +95,8 @@ namespace STS.Model
 
         public string AppointmentDate { get; set; }
         public int Modifiedby { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
 
         public int userId { get; set; }
         public int status { get; set; }
@@ -102,6 +104,19 @@ namespace STS.Model
         public string followup_description { get; set; }
     }
 
+    public partial class Activity_Status_Model
+    {
+        public int Aid { get; set; }
+        public int User_id { get; set; }
+
+        public int Latitude { get; set; }
+        public int Longitude { get; set; }
+
+        public int userId { get; set; }
+        public int status { get; set; }
+        public string Statusname { get; set; }
+        public string followup_description { get; set; }
+    }
 
     public partial class ActivityList_while_addingModel
     {
@@ -182,5 +197,23 @@ namespace STS.Model
         public int Modifiedby { get; set; }
 
   
+    }
+
+    public partial class Activity_Location_Model
+    {
+        public int Aid { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
+        public string Lat { get; set; }
+        public string Lng { get; set; }
+
+    }
+
+    public partial class Sales_Location_Model
+    {
+        public int UserId { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
+
     }
 }

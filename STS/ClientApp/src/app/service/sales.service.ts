@@ -49,4 +49,9 @@ export class SalesService {
   active_SalesList(){
     return this.http.get('/api/Sales/SalesList_ActiveDeactive');
   }
+
+  Refresh_Sales_Location(data) {
+    return this.http.post('/api/Sales/Refresh_Sales_Location', data);
+
+  }
 }

@@ -5,7 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
 import { ProductService } from '../../../service/product.service';
-import { productModel, productListModel } from '../../../model/product';
+import { productModel, productListModel, Product_Images_ListModel } from '../../../model/product';
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
 import { registerModel } from '../../../model/admin';
 
@@ -24,12 +24,16 @@ export class ViewproductComponent implements OnInit {
   product = new productListModel();
   productDetails: productListModel[] = [];
 
+  product_image=new Product_Images_ListModel();
+  product_imageDetails: Product_Images_ListModel[] = [];
 
   category = new categoryDataModel();
   categoryDetails: categoryDataModel[] = [];
 
   subcategory = new subcategoryDataModel();
   subcategoryDetails: subcategoryDataModel[] = [];
+
+  // public imageUrl = "http://localhost:44317/Documents/Images/Product/";
 
   RoleJason = {
     ROle: [0, 1],
@@ -341,8 +345,34 @@ export class ViewproductComponent implements OnInit {
     this.router.navigate(['/admin/product/addproduct']);
   }
 
-  view_product_Images() {
-    this.router.navigate(['/admin/product/product-images']);
+  view_product_Images(id) {
+    // this.router.navigate(['/admin/product/product-images']);
+    this.product_Images_List(id)
   }
+  product_Images_List(id) {
+    this.productService.product_Images_List(id).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.Product_Images_List) {
+          this.product_imageDetails = data.Product_Images_List;
+          console.log(this.product_imageDetails);
+        }
+      }
+    }, (err) => {
+    });
+  }
+
+  DeleteImage(id: number) {
+    // if (confirm('Are you sure to delete this record ?') === true) {
+    this.productService.DeleteImage(id).subscribe(data => {
+      this.product_Images_List(id)
+    });
+    // }
+    this.toastr.success('Image deleted Successful', 'Successful', {
+      disableTimeOut: false,
+      timeOut: 2000
+    });
+  }
+
+
 }
 

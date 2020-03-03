@@ -141,6 +141,26 @@ namespace STS.DAL
 
 
         }
+
+        // Display Sales lat lng ..whom admin has added
+        public async Task<List<Sales_Location_Model>> each_admins_sales_Location(Sales_Location_Model model)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@Admin_ID", model.UserId);
+
+                var result = await connection.QueryAsync<Sales_Location_Model>("each_admins_sales_Location", parameter, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+
+
+        }
+
+
         // Count Assigned list on bell  notification 
         public async Task<List<newNotificationActivityLisModel>> assigned_activityList(newNotificationActivityLisModel model)
         {
@@ -280,7 +300,9 @@ namespace STS.DAL
                 DynamicParameters parameter = new DynamicParameters();
                 parameter.Add("@Aid", Aid);
                 parameter.Add("@Status", model.status);
-              
+                parameter.Add("@Latitude", model.Latitude);
+                parameter.Add("@Longitude", model.Longitude);
+                
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
                 await connection.QueryAsync("updateInprogress", parameter, commandType: CommandType.StoredProcedure);
@@ -304,6 +326,8 @@ namespace STS.DAL
                 parameter.Add("@AppointmentDate", model.AppointmentDate);
                 parameter.Add("@@Description_on_Followup", model.followup_description);
                 parameter.Add("@Status", model.status);
+                parameter.Add("@Latitude", model.Latitude);
+                parameter.Add("@Longitude", model.Longitude);
 
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
@@ -326,6 +350,8 @@ namespace STS.DAL
                 DynamicParameters parameter = new DynamicParameters();
                 parameter.Add("@Aid", Aid);
                 parameter.Add("@Status", model.status);
+                parameter.Add("@Latitude", model.Latitude);
+                parameter.Add("@Longitude", model.Longitude);
 
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
@@ -347,6 +373,8 @@ namespace STS.DAL
                 DynamicParameters parameter = new DynamicParameters();
                 parameter.Add("@Aid", Aid);
                 parameter.Add("@Status", model.status);
+                parameter.Add("@Latitude", model.Latitude);
+                parameter.Add("@Longitude", model.Longitude);
 
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
@@ -376,6 +404,25 @@ namespace STS.DAL
                 transaction.returnMessage = parameter.Get<string>("@Message");
                 transaction.code = parameter.Get<int>("@Code");
                 return transaction;
+
+            }
+        }
+
+        // Activity Lat Long
+        public async Task<List<Activity_Location_Model>> Activity_Location(int aid)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@Activity_Id", aid);
+
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                var result = await connection.QueryAsync<Activity_Location_Model>("Activity_Location", parameter, commandType: CommandType.StoredProcedure);
+                return result.ToList();
 
             }
         }
@@ -416,6 +463,7 @@ namespace STS.DAL
 
             }
         }
+
 
 
 

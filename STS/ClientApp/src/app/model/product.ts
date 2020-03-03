@@ -14,10 +14,10 @@ export class productModel {
     image: string;
     ImageExtn: string;
     date: string;
-    isActive:boolean;
+    isActive: boolean;
 
-    createdby:number;
-    modifiedby:number;
+    createdby: number;
+    modifiedby: number;
     imageList: ImageListModel[];
     //this model for display the image
     imageListData: ImageModel[];
@@ -27,11 +27,24 @@ export class ImageListModel {
     Image: string;
     ImageExtn: string;
     ImageData: string;
-    
+
 }
-//This for display the image
+
+export class UpdateImageListModel {
+    ImageId: number;
+    ImageData: string;
+}
+
+// This for display the image
+
 export class ImageModel {
     Image: string;
+}
+
+export class Product_Images_ListModel {
+    id: number;
+    image: string;
+
 }
 
 export class productpriceModel {
@@ -52,10 +65,10 @@ export class productListModel {
     image: string;
     ImageExtn: string;
     date: string;
-    isActive:boolean;
+    isActive: boolean;
     userid: number;
-    createdby:number;
-    modifiedby:number;
+    createdby: number;
+    modifiedby: number;
     imageList: ImageListModel[];
     //this model for display the image
     imageListData: ImageModel[];
