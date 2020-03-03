@@ -33,12 +33,12 @@
          
               
               <!-- <td >{{item.date}}</td> -->
-              <td >
+              <td style="text-align: center">
                 <button type="button" class="btn btn-primary" data-toggle="modal" (click)="openupdatemodal(content,item)" ><i class="fa fa-edit" aria-hidden="true"></i></button>
               
                 <button class='btn btn-danger' type="button" (click)="deleteSubcategory(item.sid)"><i class="fa fa-trash" aria-hidden="true"></i></button>
               </td>
-              <td>
+              <td style="text-align: center">
                 <button *ngIf="item.isActive" class='btn btn-success' type="button" (click)="changeStatus(item.sid)"><i
                     class="fa fa-check-circle"></i></button>
                 <button *ngIf="!item.isActive" class='btn btn-danger' type="button" (click)="changeStatus(item.sid)"><i

@@ -68,6 +68,15 @@ namespace STS.BLL.Service
         }
 
 
+        public async Task<List<Product_Image_ListModel>> Product_Images_List(int id)
+        {
+            using (productRepository = new ProductRepository())
+            {
+                return await productRepository.Product_Images_List(id);
+            }
+        }
+
+
         // Display each sales List Individually
         public async Task<List<ProductListModel>> each_sales_ProductList(ProductListModel model)
         {
@@ -125,6 +134,14 @@ namespace STS.BLL.Service
             }
         }
 
+        //Delete Multiple Image
+        public async Task<TranStatus> DeleteImage(int id)
+        {
+            using (productRepository = new ProductRepository())
+            {
+                return await productRepository.DeleteImage(id);
+            }
+        }
 
     }
 }

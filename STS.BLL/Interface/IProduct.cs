@@ -27,6 +27,8 @@ namespace STS.BLL.Interface
         Task<TranStatus>DeleteImage(int id);
 
 
+        Task<List<Product_Image_ListModel>> Product_Images_List(int id);
+
         // Display each sales List Individually
         Task<List<ProductListModel>> each_sales_ProductList(ProductListModel model);
 
@@ -46,6 +48,9 @@ namespace STS.BLL.Interface
 
         //Display Active Deactive Category
         Task<List<ProductListModel>> ProductList_ActiveDeactive();
+
+        //Delete Multiple Image
+        Task<TranStatus> DeleteImage(int id);
 
     }
 }

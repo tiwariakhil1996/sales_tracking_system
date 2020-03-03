@@ -49,6 +49,9 @@ export class ViewcategoryComponent implements OnInit {
   }
 
   categoryList() {
+    // this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    // this.sales.userid = this.user.id;
+
     this.categoryService.categoryList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.CategoryList) {

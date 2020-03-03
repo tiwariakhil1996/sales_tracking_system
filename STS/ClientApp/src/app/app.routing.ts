@@ -86,7 +86,7 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: DefaultLayoutComponent,
-  
+
     data: {
       title: 'Home'
     },
@@ -150,7 +150,6 @@ export const routes: Routes = [
   {
     path: 'sales',
     component: SalesLayoutComponent,
-   
     data: {
       title: 'Home'
     },

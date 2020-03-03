@@ -14,6 +14,10 @@
     text-align: center;
 }
 
+.status-center {
+  text-align: center;
+}
+
 .add_product{
     left: 1020px;
     width: 54px;
@@ -26,25 +30,13 @@
     width: 1000px;
 }
 
-
-/* .blue-gradient {
-    background: linear-gradient(40deg, #45cafc, #303f9f) !important;
-    background-image: linear-gradient(40deg, rgb(69, 202, 252), rgb(48, 63, 159)) !important;
-    background-position-x: initial !important;
-    background-position-y: initial !important;
-    background-size: initial !important;
-    background-repeat-x: initial !important;
-    background-repeat-y: initial !important;
-    background-attachment: initial !important;
-    background-origin: initial !important;
-    background-clip: initial !important;
-    background-color: initial !important;
+.map{
+    font-size: xx-large;
+    padding-left: 15px;
 }
 
-.btn.blue-gradient {
-    color: #fff;
-    transition: .5s ease;
-} */
+
+
 
 .modal-content {
     position: relative;
@@ -63,3 +55,22 @@
   /* .model-ct{
       max-width: 90%;
   } */
+  
+  agm-map {
+    height: 450px;
+  }
+  
+
+  .named {
+    font: -webkit-mini-control;
+    border-width: medium;
+    margin-top: ‒10;
+    margin-top: 15px;
+    width: 84.8px;
+    margin-left: 450px;
+    background-color: yellow;
+  }
+
+  .marker_tag {
+    color: crimson;
+  }

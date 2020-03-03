@@ -11,7 +11,8 @@ import { activityModel, newactivityModel } from '../../model/activity';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './sales-layout.component.html'
+  templateUrl: './sales-layout.component.html',
+  styleUrls: ['./sales-layout.component.css']
 })
 export class SalesLayoutComponent implements OnInit {
   public sidebarMinimized = false;
@@ -59,7 +60,7 @@ export class SalesLayoutComponent implements OnInit {
 
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.changePassword.id = this.user.id;
-    console.log(this.changePassword.id);
+    // console.log(this.changePassword.id);
   }
 
   ngOnInit() {
@@ -70,7 +71,7 @@ export class SalesLayoutComponent implements OnInit {
   checkRole(RoleJason) {
     const result = JSON.parse(localStorage.getItem('salesLogin')) || [];
     if (this.RoleJason.Component === RoleJason.Component) {
-      console.log(result);
+      // console.log(result);
       if (!this.RoleJason.ROle.includes(result.userType)) {
         this.router.navigate(['sales/login']);
       }
@@ -84,7 +85,7 @@ export class SalesLayoutComponent implements OnInit {
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalServices.show(template);
     this.salesDetails = JSON.parse(localStorage.getItem('salesLogin')) || {};
-    console.log(this.salesDetails);
+    // console.log(this.salesDetails);
     this.updateProfile = this.salesDetails;
   }
 
@@ -183,7 +184,7 @@ export class SalesLayoutComponent implements OnInit {
         preview.appendChild(image);
       };
       reader.readAsDataURL(file);
-      console.log(file);
+      // console.log(file);
 
     });
   }
@@ -192,15 +193,15 @@ export class SalesLayoutComponent implements OnInit {
   activityList() {
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.activity.userid = this.user.id;
-    console.log(this.activity.userid);
+    // console.log(this.activity.userid);
 
     this.activityService.each_sales_activityList(this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.each_sales_activityList) {
           this.activityDetails = data.each_sales_activityList;
-          console.log(this.activityDetails);
+          // console.log(this.activityDetails);
           this.totalActivity = this.activityDetails.length;
-          console.log(this.totalActivity);
+          // console.log(this.totalActivity);
 
         }
       }
@@ -213,15 +214,15 @@ export class SalesLayoutComponent implements OnInit {
   newactivityList() {
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.activity.userid = this.user.id;
-    console.log(this.activity.userid);
+    // console.log(this.activity.userid);
 
     this.activityService.assigned_activityList(this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.assigned_activityList) {
           this.newactivityDetails = data.assigned_activityList;
-          console.log(this.newactivityDetails);
+          // console.log(this.newactivityDetails);
           this.assignedActivity = this.newactivityDetails.length;
-          console.log(this.assignedActivity);
+          // console.log(this.assignedActivity);
 
         }
       }

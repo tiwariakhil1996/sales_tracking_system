@@ -26,8 +26,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of productDetails;let i=index;">
-            <td>{{i+1}}</td>
+          <tr *ngFor="let item of productDetails;let i=index;" >
+            <td style="text-align: center">{{i+1}}</td>
             <!-- <td >{{item.id}}</td> -->
             <td>{{item.cname}}</td>
             <td>{{item.sname}}</td>
@@ -41,17 +41,18 @@
             </td> -->
 
             <td style='text-align:center'>
+              <button type="submit" class="btn btn-sm btn-success" (click)="view_product_Images()"> View Images</button>
+            </td> -->
+            <td style='text-align:center'>
               <button type="submit" class="btn btn-sm btn-success" (click)="open_image_modal(images,item)"
                 (click)="view_product_Images(item.id)"> View Images</button>
             </td>
 
-            <td>{{item.date}}</td>
-
-            <td>
-              <button type="button" class="btn btn-primary" data-toggle="modal"
-                (click)="openupdatemodal(content,item)"><i class="fa fa-edit" aria-hidden="true"></i></button>
-              <button class='btn btn-danger' type="button" (click)="onDelete(item.id)"><i class="fa fa-trash"
-                  aria-hidden="true"></i></button>
+            <td >{{item.date}}</td>
+           
+            <td style="text-align: center">
+              <button type="button" class="btn btn-primary" data-toggle="modal" (click)="openupdatemodal(content,item)" ><i class="fa fa-edit" aria-hidden="true"></i></button>       
+              <button class='btn btn-danger' type="button" (click)="onDelete(item.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
             </td>
             <td>
               <button *ngIf="item.isActive" class='btn btn-success' type="button" (click)="changeStatus(item.id)"><i
@@ -147,26 +148,25 @@
 </ng-template>
 
 
+<!-- Product Image -->
 
-
-
-<ng-template #images let-modal>
-
-
-  <div class="modal-header">
-  </div>
-  <div class="modal-body" style="color: black;">
-    <div>
-      <div *ngFor="let item of product_imageDetails;let i=index;" class="float-left">
-        <div class="row">
-          <div _ngcontent-xyz-c2 class="col-1">
-            <img style="max-width: 300px; max-height: 300px" [src]="'Document/Images/Product/'+item.image">
-          </div>
-        </div>
-        <button class='btn btn-danger' type="button" (click)="DeleteImage(item.id)"><i class="fa fa-trash"
-          aria-hidden="true"></i></button>
-      </div>
-    </div>
-
-  </div>
-</ng-template>
+     <ng-template #images let-modal>
+            <div class="modal-header">
+            </div>
+            <div class="modal-body" style="color: black;">
+              <div>
+                <div *ngFor="let items of product_imageDetails;let i=index;">
+                  <!-- <img style="max-width: 115px; max-height: 64px;" [src]="'assets/img/Images/Product/Thumb/'+items.image"> -->
+                  <!-- <img style="max-width: 115px; max-height: 64px;" [src]="'http://localhost:44317/Documents/Images/Product/Thumb/'+items.image"> -->
+                  <div class="row">
+                    <div class="col-1">
+                      <img style="width: 150px;height: 150px" [src]="'http://localhost:55627/Documents/Images/Product/Thumb/'+items.image">
+                    </div>
+                  </div>
+                  <button class='btn btn-danger' type="button" (click)="DeleteImage(items.id)"><i class="fa fa-trash"
+                    aria-hidden="true"></i></button>
+                </div>
+              </div>
+            </div>
+          
+     </ng-template>

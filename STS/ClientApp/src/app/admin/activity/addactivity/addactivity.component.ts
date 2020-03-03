@@ -5,7 +5,7 @@ import { ProductService } from '../../../service/product.service';
 import { ActivityService } from '../../../service/activity.service';
 import { ClientService } from '../../../service/client.service';
 import { salesregisterModel } from '../../../model/sales';
-import { activityModel, addactivityModel, activityList_while_addingModel, latestactivityModel, addproductListingModel } from '../../../model/activity';
+import { activityModel, addactivityModel,latestactivityModel, addproductListingModel } from '../../../model/activity';
 import { productModel, productpriceModel } from '../../../model/product';
 import { clientModel } from '../../../model/client';
 import { ToastrService } from 'ngx-toastr';
@@ -29,7 +29,7 @@ export class AddactivityComponent implements OnInit {
   latestactivity = new latestactivityModel();
   latestactivityDetails: latestactivityModel[] = [];
 
-  activityList_adding: activityList_while_addingModel[] = [];
+  // activityList_adding: activityList_while_addingModel[] = [];
 
   sales = new salesregisterModel();
   salesDetails: salesregisterModel[] = [];
@@ -42,6 +42,10 @@ export class AddactivityComponent implements OnInit {
 
   client = new clientModel();
   clientDetails: clientModel[] = [];
+
+  // _price: string;
+  // quantity: number;
+  amount: number;
 
   isShow = true;
 
@@ -74,6 +78,19 @@ export class AddactivityComponent implements OnInit {
     this.addMoreproducts();
     this.static_price();
     this.checkRole(this.RoleJason);
+
+  }
+
+  TotalAmount(_price: string, quantity: number) {
+    this.amount = parseInt(_price) * quantity;
+  }
+
+  // TotalAmount() {
+  //   this.amount = parseInt(this.product_price.price) + (this.addproductlist.quantity);
+  // }
+
+  Total() {
+    this.amount = parseInt(this.product_price.price) + (this.addproductlist.quantity);
   }
 
   checkRole(RoleJason) {
@@ -93,9 +110,7 @@ export class AddactivityComponent implements OnInit {
 
   // values = '';
 
-  // onKey(event: any) {
-  //   this.values += event.target.value + ;
-  // }
+
 
   //   total(bills) {
   //     var total = 0;
@@ -106,12 +121,6 @@ export class AddactivityComponent implements OnInit {
   // }
 
 
-  // add(addproductlistDetails) {
-  //   this.value = addproductlistDetails
-  //   for (let j = 0; j < addproductlistDetails.length; j++) {
-  //     this.sum += this.value[j].amount
-  //   }
-  // }
 
   productList() {
     this.productService.productList().subscribe((data: any) => {
@@ -210,7 +219,7 @@ export class AddactivityComponent implements OnInit {
 
     });
   }
-  
+
 
   addMoreproducts() {
     this.addproductlistDetails.push({
@@ -268,17 +277,17 @@ export class AddactivityComponent implements OnInit {
   //   });
   // }
 
-  activityList_while_adding() {
-    this.activityService.activityList_while_adding().subscribe((data: any) => {
-      if (data.Status.code === 0) {
-        if (data.ActivityList_while_adding) {
-          this.activityList_adding = data.ActivityList_while_adding;
-        }
-      }
-    }, (err) => {
+  // activityList_while_adding() {
+  //   this.activityService.activityList_while_adding().subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.ActivityList_while_adding) {
+  //         this.activityList_adding = data.ActivityList_while_adding;
+  //       }
+  //     }
+  //   }, (err) => {
 
-    });
-  }
+  //   });
+  // }
 
   resetForm() {
     this.activity.clientId = null;

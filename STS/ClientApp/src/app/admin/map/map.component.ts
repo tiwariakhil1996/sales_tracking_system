@@ -1,3 +1,4 @@
+
 import { Router } from '@angular/router';
 
 import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
@@ -5,6 +6,9 @@ import { MapsAPILoader, AgmMap } from '@agm/core';
 import { MouseEvent } from '@agm/core';
 import { google } from 'google-maps';
 import { AdminService } from '../../service/admin.service';
+import { registerModel } from '../../model/admin';
+import { ActivityService } from '../../service/activity.service';
+import { sales_Location_Model } from '../../model/activity';
 
 @Component({
   selector: 'app-map',
@@ -12,6 +16,13 @@ import { AdminService } from '../../service/admin.service';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
+
+  user = new registerModel();
+
+  Sales_Location = new sales_Location_Model();
+  Sales_LocationDetails: sales_Location_Model[] = [];
+  
+  _admin = 'A';
 
   latitude: number;
   longitude: number;
@@ -41,23 +52,29 @@ export class MapComponent implements OnInit {
   constructor(
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
-    private router: Router
+    private router: Router,
+    private activityService: ActivityService
 
   ) {
        this.geocoder = new google.maps.Geocoder;
+    
     }
 
   ngOnInit() {
+    this.sales_Location();
 
     this.checkRole(this.RoleJason);
 
     setTimeout(() => {
       navigator.geolocation.getCurrentPosition(position => {
-        console.log(position);
+        // console.log(position);
 
         this.location = position.coords;
+        // When map opens there marker will be 1st in center
         this.centerlat = this.location.latitude;
         this.centerlng = this.location.longitude;
+
+        //This is the current lat long
         this.lat = this.location.latitude;
         this.lng = this.location.longitude;
         this.geocoder = new google.maps.Geocoder();
@@ -95,7 +112,7 @@ export class MapComponent implements OnInit {
   checkRole(RoleJason) {
     const result = JSON.parse(localStorage.getItem('adminLogin')) || [];
     if (this.RoleJason.Component === RoleJason.Component) {
-      console.log(result);
+      // console.log(result);
       if (!this.RoleJason.ROle.includes(result.userType)) {
         this.router.navigate(['admin/login']);
       }
@@ -117,7 +134,7 @@ export class MapComponent implements OnInit {
 
 
   markerDragEnd($event: MouseEvent) {
-    console.log($event);
+    // console.log($event);
     this.latitude = $event.coords.lat;
     this.longitude = $event.coords.lng;
     // this.getAddress(this.latitude, this.longitude);
@@ -125,8 +142,8 @@ export class MapComponent implements OnInit {
 
   getAddress(latitude, longitude) {
     this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
-      console.log(results);
-      console.log(status);
+      // console.log(results);
+      // console.log(status);
       if (status === 'OK') {
         if (results[0]) {
           this.zoom = 12;
@@ -136,21 +153,28 @@ export class MapComponent implements OnInit {
         }
       } else {
         window.alert('Geocoder failed due to: ' + status);
-        console.log(this.address);
+        // console.log(this.address);
 
       }
     });
   }
 
-  // submit_location() {
-  //   this.adminService.AdminLogin(this.lat,this.lng).subscribe((data: any) => {
-  //     if (data.Status.code === 0) {
+  sales_Location() {
+    
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.Sales_Location.userId = this.user.id;
 
-  //     }
-  //   }, (err) => {
+    this.activityService.each_admins_sales_Location(this.Sales_Location).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.each_admins_sales_Location) {
+          this.Sales_LocationDetails = data.each_admins_sales_Location;
+           console.log(this.Sales_LocationDetails);
+        }
+      }
+    }, (err) => {
 
+    });
+  }
 
-  //   });
-  // }
 
 }

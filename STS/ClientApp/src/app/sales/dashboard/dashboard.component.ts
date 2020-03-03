@@ -60,15 +60,15 @@ export class DashboardComponent implements OnInit {
 
 
 
-  // checkRole(RoleJason) {
-  //   const result = JSON.parse(localStorage.getItem('salesLogin')) || [];
-  //   if (this.RoleJason.Component === RoleJason.Component) {
-  //     console.log(result);
-  //     if (!this.RoleJason.ROle.includes(result.userType)) {
-  //       this.router.navigate(['sales/login']);
-  //     }
-  //   }
-  // }
+  checkRole(RoleJason) {
+    const result = JSON.parse(localStorage.getItem('salesLogin')) || [];
+    if (this.RoleJason.Component === RoleJason.Component) {
+      // console.log(result);
+      if (!this.RoleJason.ROle.includes(result.userType)) {
+        this.router.navigate(['sales/login']);
+      }
+    }
+  }
   // productList() {
   //   this.productService.productList().subscribe((data: any) => {
   //     if (data.Status.code === 0) {
@@ -86,14 +86,14 @@ export class DashboardComponent implements OnInit {
   productList() {
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.product.userid = this.user.id;
-    console.log(this.product.userid);
+    // console.log(this.product.userid);
 
     this.productService.each_sales_ProductList(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.each_sales_ProductList) {
           this.productDetails = data.each_sales_ProductList;
           this.totalProduct = this.productDetails.length;
-          console.log(this.productDetails);
+          // console.log(this.productDetails);
 
         }
       }
@@ -119,14 +119,14 @@ export class DashboardComponent implements OnInit {
   clientList() {
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.client.userid = this.user.id;
-    console.log(this.client.userid);
+    // console.log(this.client.userid);
 
     this.clientService.each_sales_ClientList(this.client).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.each_sales_ClientList) {
           this.clientDetails = data.each_sales_ClientList;
           this.totalClient = this.clientDetails.length;
-          console.log(this.clientDetails);
+          // console.log(this.clientDetails);
 
         }
       }
@@ -138,13 +138,13 @@ export class DashboardComponent implements OnInit {
   activityList() {
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.activity.userid = this.user.id;
-    console.log(this.activity.userid);
+    // console.log(this.activity.userid);
 
     this.activityService.each_sales_activityList(this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.each_sales_activityList) {
           this.activityDetails = data.each_sales_activityList;
-          console.log(this.activityDetails);
+          // console.log(this.activityDetails);
           this.totalActivity = this.activityDetails.length;
           // console.log( this.totalActivity );
 

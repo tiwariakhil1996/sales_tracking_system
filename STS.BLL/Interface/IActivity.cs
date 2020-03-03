@@ -39,6 +39,9 @@ namespace STS.BLL.Interface
         // Display each admin List Individually
         Task<List<admin_ActivityListModel>> each_admin_activityList(admin_ActivityListModel model);
 
+        // Display Sales lat lng ..whom admin has added
+        Task<List<Sales_Location_Model>> each_admins_sales_Location(Sales_Location_Model model);
+
         // Count Assigned list on bell  notification 
         Task<List<newNotificationActivityLisModel>> assigned_activityList(newNotificationActivityLisModel model);
 
@@ -77,6 +80,11 @@ namespace STS.BLL.Interface
 
         //Task<List<ActivityListModel>> searchTitle(string Title);
         //Task<TranStatus> searchTitle(ActivityListModel model);
+
+
+        // Activity Lat Long
+
+        Task<List<Activity_Location_Model>> Activity_Location(int aid);
     }
 
 }

@@ -78,4 +78,12 @@ namespace STS.Model
 
 
     }
+
+    public partial class Refresh_Sales_Location_Model
+    {
+        public int UserId { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
+
+    }
 }

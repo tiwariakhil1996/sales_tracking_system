@@ -20,10 +20,13 @@ export class ActivityService {
     return this.http.get('/api/Activity/Activity_ProductList/' + aid);
   }
 
-
-  activityList_while_adding() {
-    return this.http.get('/api/Activity/ActivityList_while_adding');
+  activity_Location(aid) {
+    return this.http.get('/api/Activity/Activity_Location/' + aid);
   }
+
+  // activityList_while_adding() {
+  //   return this.http.get('/api/Activity/ActivityList_while_adding');
+  // }
 
   deleteActivity(aid: number) {
     return this.http.delete('/api/Activity/deleteActivity/' + aid);
@@ -55,6 +58,10 @@ export class ActivityService {
 
   each_admin_activityList(data) {
     return this.http.post('/api/Activity/each_admin_activityList', data);
+  }
+
+  each_admins_sales_Location(data) {
+    return this.http.post('/api/Activity/each_admins_sales_Location', data);
   }
 
   assigned_activityList(data) {

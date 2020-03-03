@@ -42,6 +42,13 @@ namespace STS.BLL.Interface
 
         //Change Password
         Task<TranStatus> changesalesPassword(int Id, ChangepasswordModel model);
+
+
+        //Task<List<Refresh_Sales_Location_Model>> Refresh_Sales_Location(Refresh_Sales_Location_Model model);
+
+        //Task<TranStatus> Refresh_Sales_Location(Refresh_Sales_Location_Model model);
+
+        Task<TranStatus> Refresh_Sales_Location(Refresh_Sales_Location_Model model);
     }
 }
 

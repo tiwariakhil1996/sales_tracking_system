@@ -8,7 +8,6 @@ export const SalesnavItems: INavData[] = [
 
   },
 
-
   {
     name: 'Product',
     url: '/sales/product/viewproduct',
@@ -20,22 +19,18 @@ export const SalesnavItems: INavData[] = [
     url: '/sales/client/viewclient',
     icon: 'icon-calendar',
   },
-
-  
-
   
   {
     name: 'Activity',
     url: '/sales/activity/currentactivity',
     icon: 'icon-notebook',
   },
-
   
-  {
-    name: 'Map',
-    url: '/sales/map',
-    icon: 'icon-map'
-  },
+  // {
+  //   name: 'Map',
+  //   url: '/sales/map',
+  //   icon: 'icon-map'
+  // },
 
   {
     name: 'Logout',

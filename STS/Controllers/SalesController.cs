@@ -242,5 +242,51 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
+
+
+        //[HttpPost]
+        //[Route("Refresh_Sales_Location")]
+        //public async Task<IActionResult> Refresh_Sales_Location(Refresh_Sales_Location_Model model)
+        //{
+        //    TranStatus transaction = new TranStatus();
+        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
+        //    HttpStatusCode statusCode = HttpStatusCode.OK;
+        //    try
+        //    {
+        //        var registerList = await isales.Refresh_Sales_Location(model);
+        //        dctData.Add("Refresh_Sales_Location", registerList);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        transaction = CommonHelper.TransactionErrorHandler(ex);
+        //        statusCode = HttpStatusCode.BadRequest;
+        //    }
+        //    dctData.Add("Status", transaction);
+        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        //}
+
+
+
+        [HttpPost]
+        [Route("Refresh_Sales_Location")]
+        public async Task<IActionResult> Refresh_Sales_Location([FromBody]Refresh_Sales_Location_Model model)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+
+                transaction = await isales.Refresh_Sales_Location(model);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
     }
 }

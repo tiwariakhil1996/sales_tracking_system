@@ -76,18 +76,27 @@
                     </select></td>
                   <td> 
                     <!-- <input *ngFor="let item of product_priceDetails;"  type="text" class="form-control" id="price" name="price" [(ngModel)]="item.price" > -->           
-                    <tr *ngFor="let item of product_priceDetails;">
+                    <tr *ngFor="let item of product_priceDetails;" >
                       <td>
                         {{item.price}}
                         </td>
-                    </tr>
+                      </tr>                    
 
-                    <!-- <input type="text" class="form-control" id="price" name="price" [(ngModel)]="products.price"  > -->
+                    <!-- <input type="text" class="form-control" id="price" name="price" [(ngModel)]="products.price" #_price> -->
+                   
                   </td>
-                  <td> <input type="text" class="form-control" id="quantity" name="quantity"
-                      [(ngModel)]="products.quantity">
+                  <td>
+                     <input type="text" class="form-control" id="quantity" name="quantity" #quantity
+                      [(ngModel)]="products.quantity"> 
+
+                      <!-- <input type="text" class="form-control" id="quantity" name="quantity" #quantity
+                      [(ngModel)]="products.quantity" (keyup)="TotalAmount(_price.value,quantity.value)">  -->
                   </td>
-                  <td> <input  type="text" class="form-control" id="amount" name="amount" [(ngModel)]="products.amount" >
+                  <td>
+                     <input  type="text" class="form-control" id="amount" name="amount" [(ngModel)]="products.amount" >
+                    <!-- {{amount}}  -->
+ 
+
                   </td>
                   <td> <input type="text" class="form-control" id="discount_per" name="discount_per"
                       [(ngModel)]="products.discount_per">

@@ -71,6 +71,18 @@ namespace STS.BLL.Service
             }
 
         }
+
+        // Display Sales lat lng ..whom admin has added
+        public async Task<List<Sales_Location_Model>> each_admins_sales_Location(Sales_Location_Model model)
+        {
+            using (activityRepository = new ActivityRepository())
+            {
+                return await activityRepository.each_admins_sales_Location(model);
+            }
+
+        }
+
+
         // Count Assigned list on bell  notification 
         public async Task<List<newNotificationActivityLisModel>> assigned_activityList(newNotificationActivityLisModel model)
         {
@@ -206,6 +218,13 @@ namespace STS.BLL.Service
         //    }
         //}
 
-
+        // Activity Lat Long
+        public async Task<List<Activity_Location_Model>> Activity_Location(int aid)
+        {
+            using (activityRepository = new ActivityRepository())
+            {
+                return await activityRepository.Activity_Location(aid);
+            }
+        }
     }
 }

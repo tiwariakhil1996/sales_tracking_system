@@ -11,6 +11,9 @@ using STS.BLL.Interface;
 using Microsoft.AspNetCore.Http;
 using STS.BLL.Service;
 using System;
+using Newtonsoft.Json.Serialization;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace STS
 {
@@ -44,6 +47,11 @@ namespace STS
                 .AddNewtonsoftJson();
 
             //Database Connectivity
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/dist";
+            });
+
             STSSetting.ConnectionString = Configuration.GetSection("ConnectionString:STS").Value;
             DependencyResolver(services);
             
@@ -59,9 +67,9 @@ namespace STS
            
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-           
+
             services.AddSingleton<IAdmin, AdminServices>();
-            services.AddSingleton<IClient,ClientServices>();
+            services.AddSingleton<IClient, ClientServices>();
             services.AddSingleton<ISales, SalesServices>();
             services.AddSingleton<IProduct, ProductServices>();
             services.AddSingleton<ICategory_Subcategory, Category_SubcategoryServices>();
@@ -85,7 +93,16 @@ namespace STS
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+
+            //ToString access Documents Folder 
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                        Path.Combine(Directory.GetCurrentDirectory(), "Documents")),
+                        RequestPath = "/Documents"
+            });
+
             if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();

@@ -28,6 +28,10 @@ export class ProductService {
   product_Images_List(id) {
     return this.http.get('/api/Product/Product_Images_List/' + id);
   }
+  
+  DeleteImage(id: number) {
+    return this.http.delete('/api/Product/DeleteImage/' + id);
+  }
 
   each_sales_ProductList(data) {
     return this.http.post('/api/Product/each_sales_ProductList', data);

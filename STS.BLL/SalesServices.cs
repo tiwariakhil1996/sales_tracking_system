@@ -119,5 +119,25 @@ namespace STS.BLL.Service
                 return await salesRepository.changesalesPassword(Id, model);
             }
         }
+
+
+        //public async Task<TranStatus> Refresh_Sales_Location(Refresh_Sales_Location_Model model)
+        //{
+        //    using (salesRepository = new SalesRepository())
+        //    {
+        //        return await salesRepository.Refresh_Sales_Location(model);
+        //    }
+        //}
+
+
+        public Task<TranStatus> Refresh_Sales_Location(Refresh_Sales_Location_Model model)
+        {
+            using (salesRepository = new SalesRepository())
+            {
+                return salesRepository.Refresh_Sales_Location(model);
+
+            }
+        }
+
     }
 }

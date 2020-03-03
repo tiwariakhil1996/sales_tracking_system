@@ -26,7 +26,7 @@
             <td>{{item.cid}}</td>
             <td>{{item.cname}}</td>
             <!-- <td >{{item.date}}</td> -->
-            <td>
+            <td style="text-align: center">
               <button type="button" class="btn btn-primary" data-toggle="modal"
                 (click)="openupdatemodal(content,item)"><i class="fa fa-edit" aria-hidden="true"></i></button>
 
@@ -34,7 +34,7 @@
                   aria-hidden="true"></i></button>
 
             </td>
-            <td>
+            <td style="text-align: center">
               <button *ngIf="item.isActive" class='btn btn-success' type="button" (click)="changeStatus(item.cid)"><i
                   class="fa fa-check-circle"></i></button>
               <button *ngIf="!item.isActive" class='btn btn-danger' type="button" (click)="changeStatus(item.cid)"><i

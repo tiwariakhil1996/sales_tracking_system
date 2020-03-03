@@ -29,7 +29,7 @@
         <tbody>
 
           <tr *ngFor="let item of activityDetails;let i=index;">
-            <td>{{i+1}}</td>
+            <td style="text-align: center">{{i+1}}</td>
             <!-- <td >{{item.aid}}</td> -->
             <td>{{item.title}}</td>
             <td>{{item.description}}</td>
@@ -40,7 +40,7 @@
             <!-- <td>{{item.latitude}}</td>
             <td>{{item.longitude}}</td> -->
             <td>{{item.appointmentDate}}</td>
-            <td>
+            <td  style="text-align: center">
               <span class="badge badge-pill badge-success">{{item.statusname}}</span>
               <!-- <button  class='btn btn-success' type="button" disabled><i>{{item.statusname}}</i></button> -->
             </td>
@@ -184,16 +184,16 @@
 
     <div>
       <button *ngIf="(activity.status == 1)" class='btn btn-success' type="button"
-        (click)="update_Inprogress(activity.aid)" (click)="modal.dismiss('Cross click')"><i>Inprogress</i></button>
+        (click)="update_Inprogress(activity.aid)" ><i>Inprogress</i></button>
 
       <button *ngIf="(activity.status == 1)" class='btn btn-danger' type="button"
-        (click)="update_ToCancel(activity.aid)" (click)="modal.dismiss('Cross click')"><i>Cancel</i></button>
+        (click)="update_ToCancel(activity.aid)"><i>Cancel</i></button>
 
       <button *ngIf="(activity.status == 2)" class='btn btn-warning' data-toggle="modal" (click)="open(content1)"
         type="button"><i>Followup</i></button>
 
       <button *ngIf="(activity.status == 2 || activity.status == 3 )" class='btn btn-dark' type="button"
-        (click)="update_ToClose(activity.aid)" (click)="modal.dismiss('Cross click')"><i>Close</i></button>
+        (click)="update_ToClose(activity.aid)"><i>Close</i></button>
     </div>
 
   </div>

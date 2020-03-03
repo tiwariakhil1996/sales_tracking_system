@@ -27,6 +27,7 @@ namespace STS.Common
             return transaction;
         }
 
+        //To Store multiple products using Data Table
         public static DataTable ToDataTable<T>(this IList<T> items)
         {
             DataTable dataTable = new DataTable(typeof(T).Name);
@@ -59,7 +60,9 @@ namespace STS.Common
 
                     //Path where want to save image 
 
-                    string imageDirectory = "Document/" + PathToSaveImage + "/";
+                    //string imageDirectory = "ClientApp/src/assets/img/" + PathToSaveImage + "/";
+
+                    string imageDirectory = "Documents/" + PathToSaveImage + "/";
 
                     if (!Directory.Exists(imageDirectory))
                     {

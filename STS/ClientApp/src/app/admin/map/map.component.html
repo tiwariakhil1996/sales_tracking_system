@@ -16,12 +16,26 @@
     <div>Latitude: {{latitude}}</div>
     <div>Longitude: {{longitude}}</div>
   </div> -->
-  <div class="agm-map">
-    <agm-map #map [zoom]="16" [latitude]="centerlat" [longitude]="centerlng">
-      <agm-marker [opacity]=0.8 [latitude]="lat" [longitude]="lng" [markerDraggable]="false" (dragEnd)="markerDragEnd($event)"></agm-marker>
-    </agm-map>
-  </div>
-    
-    <h5>Address: {{address}}</h5>
-    <div>Latitude: {{lat}}</div>
-    <div>Longitude: {{lng}}</div>
+
+
+<div class="agm-map">
+  <agm-map #map [zoom]="16" [latitude]="centerlat" [longitude]="centerlng" >
+     <!-- Admin Location -->
+    <agm-marker [label]="_admin" [opacity]=0.8 [latitude]="lat" [longitude]="lng" [markerDraggable]="false"></agm-marker>
+ <!-- All Sales Location -->
+    <agm-marker *ngFor="let addr of Sales_LocationDetails;" [opacity]=0.8 [latitude]="addr.latitude"
+      [longitude]="addr.longitude" [markerDraggable]="false" (dragEnd)="markerDragEnd($event)" ></agm-marker>
+
+    <!-- <agm-circle [latitude]="lat + 0.3" [longitude]="lng" [radius]="5000" [fillColor]="'red'" [circleDraggable]="true"
+      [editable]="true">
+    </agm-circle> -->
+
+  </agm-map>
+
+  <h5>Admin:</h5>
+  <div>Latitude: {{centerlat}}</div>
+  <div>Longitude: {{centerlng}}</div>
+
+</div>
+
+<!--[iconUrl]="'Documents/Images/Product/Thumb/'+addr.latitude">-->

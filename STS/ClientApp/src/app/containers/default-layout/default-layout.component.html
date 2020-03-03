@@ -1,20 +1,20 @@
-<app-header
+<app-header 
   [navbarBrandRouterLink]="['/admin/dashboard']"
   [fixed]="true"
-  [navbarBrandFull]="{src: 'assets/img/brand/sts.png', width: 150, height: 53, alt: 'Sales Tracking System'}"
-  [navbarBrandMinimized]="{src: 'assets/img/logo/Logo.png', width: 30, height: 30, alt: 'Sales Tracking System'}"
+  [navbarBrandFull]="{src: 'assets/img/brand/purple.png',width: 200, height: 53, alt: 'Sales Tracking System'}"
+  [navbarBrandMinimized]="{src: 'assets/img/logo/NewLogo.jpg', width: 30, height: 30}"
   [sidebarToggler]="'lg'"
   [asideMenuToggler]="'lg'">
   <ul class="nav navbar-nav d-md-down-none">
     <li class="nav-item px-3">
       <a class="nav-link" href="/admin/dashboard">Dashboard</a>
     </li>
-    <li class="nav-item px-3">
+    <!-- <li class="nav-item px-3">
       <a class="nav-link" href="#">Users</a>
     </li>
     <li class="nav-item px-3">
       <a class="nav-link" href="#">Settings</a>
-    </li>
+    </li> -->
   </ul>
   <ul class="nav navbar-nav ml-auto">
     <li class="nav-item d-md-down-none">
@@ -63,7 +63,7 @@
             <div class="form-group col-md-6">
               <label for="image">Profile Pic</label><br>
               <!-- <img  *ngIf="imageSrc" [src]="imageSrc" style="width: 80px; height: 80px;" > -->
-              <input class="form-control" type="file" id="fileupload" name="image"  multiple (change)="handleFileInput($event.target.files)" [(ngModel)]="updateProfile.image" />          
+              <input type="file" id="fileupload" name="image"  multiple (change)="handleFileInput($event.target.files)" [(ngModel)]="updateProfile.image" />          
             </div>
 
             <div class="form-group col-md-6">
@@ -238,7 +238,7 @@
     <app-sidebar-minimizer></app-sidebar-minimizer>
   </app-sidebar>
   <!-- Main content -->
-  <main class="main">
+  <main class="main bg">
     <cui-breadcrumb>
  
     </cui-breadcrumb>
@@ -269,7 +269,7 @@
 <!-- Footer -->
 <app-footer>
   <span><a href="admin/dashboard">Sale Tracking System</a> &copy; 2020 </span>
-  <span class="ml-auto">Powered by <a href="admin/dashboard">VDS</a></span>
+  <span class="ml-auto">Powered by <a href="admin/dashboard">AV</a></span>
 </app-footer>
 
 

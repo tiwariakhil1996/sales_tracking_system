@@ -1,0 +1,10 @@
+/* img {
+    vertical-align: middle;
+    border-style: none;
+  } */
+
+  .bg {
+    background-image: url("/assets/img/Images/2.jpg");
+    /* background-color: darkslategrey; */
+    background-size: 1374px 634px
+    }

@@ -1,17 +1,56 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { registerModel } from './model/admin';
+import { LocationModel } from './model/sales';
+import { SalesService } from './service/sales.service';
+
+
+import { ViewChild, ElementRef, NgZone } from '@angular/core';
+import { MapsAPILoader, AgmMap } from '@agm/core';
+import { MouseEvent } from '@agm/core';
+import { google } from 'google-maps';
+
 @Component({
   // tslint:disable-next-line
   selector: 'body',
   template: '<router-outlet></router-outlet>'
 })
 export class AppComponent implements OnInit {
-  // RoleJason = {
-  //   ROle: [0, 1],
-  //   Component: "DashboardComponent,ActivityComponent,ProductComponent,ClientComponent,RegisterComponent,MapComponent,SalesdataComponent,ForgotPasswordComponent,CategorySubcategoryComponent"
-  // }
-  constructor(private router: Router) { }
+
+  user = new registerModel();
+
+  saleslocation = new LocationModel();
+  saleslocationDetails: LocationModel[] = [];
+
+  latitude: number;
+  longitude: number;
+  zoom: number;
+  address: string;
+
+  private geoCoder;
+
+
+  location: Coordinates;
+  lat: any;
+  lng: any;
+
+  centerlat: any;
+  centerlng: any;
+  geocoder: any;
+  @ViewChild(AgmMap) map: any;
+
+  @ViewChild('search')
+  public searchElementRef: ElementRef;
+
+  constructor(private router: Router,
+    private salesService: SalesService,
+    private mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone
+  ) {
+    this.geocoder = new google.maps.Geocoder;
+  }
+
   ngOnInit() {
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
@@ -19,17 +58,49 @@ export class AppComponent implements OnInit {
       }
       window.scrollTo(0, 0);
     });
-    // this.checkRole(this.RoleJason)
+
+    setTimeout(() => {
+      navigator.geolocation.getCurrentPosition(position => {
+        // console.log(position);
+
+        this.location = position.coords;
+        this.centerlat = this.location.latitude;
+        this.centerlng = this.location.longitude;
+
+        this.lat = this.location.latitude;
+        this.lng = this.location.longitude;
+
+        this.geocoder = new google.maps.Geocoder();
+      });
+    }, 2000);
+
+     // this.Refresh_Sales_Location();
   }
-  // checkRole(RoleJason) {
-  //   var result = JSON.parse(localStorage.getItem('adminLogin')) || [];
-  //   if (this.RoleJason.Component == RoleJason.Component) {
-  //     console.log(result);
-  //     if (!this.RoleJason.ROle.includes(result.userType)) {
-  //       this.router.navigate(['admin/login']);
-  //     }
-  //   }
-  // }
+
+
+  Refresh_Sales_Location() {
+  
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.saleslocation.userid = this.user.id;
+    console.log(this.saleslocation.userid);
+
+    this.saleslocation.latitude = this.lat;
+    this.saleslocation.longitude = this.lng;
+    console.log(this.saleslocation.latitude);
+    console.log(this.saleslocation.longitude);
+
+    this.salesService.Refresh_Sales_Location(this.saleslocation).subscribe((data: any) => {
+      // if (data.Status.code === 0) {
+      //   // if (data.Refresh_Sales_Location) {
+      //   //   this.sales_locationDetails = data.Refresh_Sales_Location;
+
+      //   // }
+      // }
+    }, (err) => {
+
+    });
+  }
+
 }
 // import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 // import { MapsAPILoader, AgmMap } from '@agm/core';
@@ -39,7 +110,7 @@ export class AppComponent implements OnInit {
 // @Component({
 //   // tslint:disable-next-line
 //   selector: 'body',
- 
+
 //   //template: '<router-outlet></router-outlet>',
 //   templateUrl: './app.component.html',
 //   styleUrls: ['./app.component.css']
@@ -49,9 +120,10 @@ export class AppComponent implements OnInit {
 //   longitude: number;
 //   zoom: number;
 //   address: string;
-  
+
 //   private geoCoder;
-  
+
+
 //   location: Coordinates;
 //   lat: any;
 //   lng: any;
@@ -64,14 +136,14 @@ export class AppComponent implements OnInit {
 //   constructor(
 //     private mapsAPILoader: MapsAPILoader,
 //     private ngZone: NgZone
-//   ) { 
+//   ) {
 //     this.geocoder = new google.maps.Geocoder;
 //   }
 //   ngOnInit() {
 //     setTimeout(() => {
 //       navigator.geolocation.getCurrentPosition(position => {
 //         console.log(position);
-        
+
 //         this.location = position.coords;
 //           this.centerlat = this.location.latitude;
 //           this.centerlng = this.location.longitude;
@@ -83,12 +155,12 @@ export class AppComponent implements OnInit {
 //     // //load Places Autocomplete
 //     // this.mapsAPILoader.load().then(() => {
 //     //   this.setCurrentLocation();
-      
+
 //     //   this.geoCoder = new google.maps.Geocoder;
 //     //   let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
 //     //     types: ["address"]
 //     //   });
-      
+
 //     //   autocomplete.addListener("place_changed", () => {
 //     //     this.ngZone.run(() => {
 //     //       //get the place result
@@ -136,7 +208,7 @@ export class AppComponent implements OnInit {
 //       } else {
 //         window.alert('Geocoder failed due to: ' + status);
 //         console.log(this.address);
-        
+
 //       }
 //     });
 //   }

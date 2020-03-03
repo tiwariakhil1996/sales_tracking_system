@@ -17,7 +17,9 @@ export class ActivityComponent implements OnInit {
     Component: 'ActivityComponent'
     };
 
-  constructor(private router: Router) { }
+  constructor( private router: Router) { 
+
+    }
 
   ngOnInit() {
     this.checkRole(this.RoleJason);
@@ -27,11 +29,12 @@ export class ActivityComponent implements OnInit {
   checkRole(RoleJason) {
     const result = JSON.parse(localStorage.getItem('adminLogin')) || [];
     if (this.RoleJason.Component === RoleJason.Component) {
-      console.log(result);
+      // console.log(result);
       if (!this.RoleJason.ROle.includes(result.userType)) {
         this.router.navigate(['admin/login']);
       }
     }
   }
+
 
 }

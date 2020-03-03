@@ -27,25 +27,25 @@ export class addproductListingModel {
     productname: string;
     price: number;
     quantity: number;
-    amount: string;
-    discount_per: string;
-    discount_amt: string;
-    total_price: string;
+    amount: number;
+    discount_per: number;
+    discount_amt: number;
+    total_price: number;
 }
 
 
-export class activityList_while_addingModel {
-    image: string;
-    ImageExtn: string;
-    productId: number;
-    productname: string;
-    price: number;
-    quantity: number;
-    amount: string;
-    discount_per: string;
-    discount_amt: string;
-    total_price: string;
-}
+// export class activityList_while_addingModel {
+//     image: string;
+//     ImageExtn: string;
+//     productId: number;
+//     productname: string;
+//     price: number;
+//     quantity: number;
+//     amount: string;
+//     discount_per: string;
+//     discount_amt: string;
+//     total_price: string;
+// }
 
 
 export class activityModel {
@@ -70,6 +70,9 @@ export class activityModel {
 
     createdby: number;
     modifiedby: number;
+
+    latitude: any;
+    longitude: any;
     userid: number;
 
     followup_description: string;
@@ -86,6 +89,23 @@ export class ActivityhistoryModel {
     New_status: number;
 }
 
+export class LocationModel {
+
+    // Sales Location
+    latitude: any;
+    longitude: any;
+
+    // Client Location
+    lat: any;
+    lng: any;
+}
+
+export class sales_Location_Model {
+    // Sales Location
+    userId: number;
+    latitude: any;
+    longitude: any;
+}
 
 export class updateactivityModel {
     aid: number;

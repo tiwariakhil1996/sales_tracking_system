@@ -13,6 +13,9 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BsModalRef } from 'ngx-bootstrap';
 
+import { ViewChild, ElementRef, NgZone } from '@angular/core';
+import { MapsAPILoader, AgmMap } from '@agm/core';
+
 @Component({
   selector: 'app-currentactivity',
   templateUrl: './currentactivity.component.html',
@@ -39,7 +42,27 @@ export class CurrentactivityComponent implements OnInit {
   clientDetails: clientModel[] = [];
 
 
-   RoleJason = {
+  latitude: number;
+  longitude: number;
+  zoom: number;
+  address: string;
+
+  private geoCoder;
+
+
+  location: Coordinates;
+  lat: any;
+  lng: any;
+
+  centerlat: any;
+  centerlng: any;
+  geocoder: any;
+  @ViewChild(AgmMap) map: any;
+
+  @ViewChild('search')
+  public searchElementRef: ElementRef;
+
+  RoleJason = {
     ROle: [0, 1],
     Component: 'CurrentactivityComponent'
   };
@@ -51,6 +74,8 @@ export class CurrentactivityComponent implements OnInit {
     private productService: ProductService,
     private router: Router,
     private toastr: ToastrService) {
+
+    this.geocoder = new google.maps.Geocoder;
     // this.activityList();
     // this.productList();
     // this.clientList();
@@ -60,6 +85,20 @@ export class CurrentactivityComponent implements OnInit {
 
 
   ngOnInit() {
+    setTimeout(() => {
+      navigator.geolocation.getCurrentPosition(position => {
+        console.log(position);
+
+        this.location = position.coords;
+        this.centerlat = this.location.latitude;
+        this.centerlng = this.location.longitude;
+        this.lat = this.location.latitude;
+        this.lng = this.location.longitude;
+        this.geocoder = new google.maps.Geocoder();
+      });
+    }, 2000);
+
+
     this.checkRole(this.RoleJason);
   }
 
@@ -227,9 +266,12 @@ export class CurrentactivityComponent implements OnInit {
 
 
   update_Inprogress(aid: number) {
-    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
-    this.activity.modifiedby = this.user.id;
-    console.log(this.activity.modifiedby);
+    // this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    // this.activity.modifiedby = this.user.id;
+    // console.log(this.activity.modifiedby);
+
+    this.activity.latitude = this.lat;
+    this.activity.longitude = this.lng;
 
     this.activityService.updateInprogress(aid, this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -238,6 +280,7 @@ export class CurrentactivityComponent implements OnInit {
           disableTimeOut: false,
           timeOut: 2000
         });
+
       }
 
       this.activityList();
@@ -258,9 +301,13 @@ export class CurrentactivityComponent implements OnInit {
 
   update_ToFollowup(aid: number) {
 
-    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
-    this.activity.modifiedby = this.user.id;
-    console.log(this.activity.modifiedby);
+    // this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    // this.activity.modifiedby = this.user.id;
+    // console.log(this.activity.modifiedby);
+
+
+    this.activity.latitude = this.lat;
+    this.activity.longitude = this.lng;
 
     this.activityService.updateToFollowup(aid, this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -277,9 +324,12 @@ export class CurrentactivityComponent implements OnInit {
   }
 
   update_ToClose(aid: number) {
-    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
-    this.activity.modifiedby = this.user.id;
-    console.log(this.activity.modifiedby);
+    // this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    // this.activity.modifiedby = this.user.id;
+    // console.log(this.activity.modifiedby);
+
+    this.activity.latitude = this.lat;
+    this.activity.longitude = this.lng;
 
     this.activityService.updateToClose(aid, this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -296,9 +346,12 @@ export class CurrentactivityComponent implements OnInit {
   }
 
   update_ToCancel(aid: number) {
-    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
-    this.activity.modifiedby = this.user.id;
-    console.log(this.activity.modifiedby);
+    // this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    // this.activity.modifiedby = this.user.id;
+    // console.log(this.activity.modifiedby);
+
+    this.activity.latitude = this.lat;
+    this.activity.longitude = this.lng;
 
     this.activityService.updateToCancel(aid, this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {

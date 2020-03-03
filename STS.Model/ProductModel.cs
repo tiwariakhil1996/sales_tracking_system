@@ -56,16 +56,11 @@ namespace STS.Model
         public string Image { get; set; }
         public string ImageData { get; set; }
     }
-    public class GetProductImageListModel
+
+    public partial class Product_Image_ListModel
     {
-        public int ImageId { get; set; }
+        public int Id { get; set; }
         public string Image { get; set; }
-       
-    }
-    public class callProductImageListMode
-    {
-        public int Product_ID { get; set; }
-        
     }
 
     public partial class ProductPriceModel
