@@ -7,7 +7,6 @@
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
     "module": "esnext",
     "target": "es5",
     "typeRoots": [

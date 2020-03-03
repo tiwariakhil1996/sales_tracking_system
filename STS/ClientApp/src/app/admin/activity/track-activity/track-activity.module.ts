@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 
 
 // import { MapRoutingModule } from './map-routing.module';
@@ -24,4 +24,12 @@ import { TrackActivityComponent } from './track-activity.component';
     TrackActivityComponent
   ]
 })
-export class TrackActivityModule { }
+export class TrackActivityModule  implements OnInit{
+  constructor(){
+    
+  }
+  ngOnInit(){
+
+  }
+
+ }
