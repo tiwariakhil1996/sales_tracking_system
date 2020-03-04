@@ -71,7 +71,6 @@ export class SalesLoginComponent implements OnInit {
 
 
   submitLogin() {
-
     this.loginDetail.latitude = this.lat;
     this.loginDetail.longitude = this.lng;
 

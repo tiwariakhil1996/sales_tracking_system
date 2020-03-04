@@ -51,15 +51,6 @@
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 0.3rem;
     outline: 0;
-
-    /* 
-    width: 459px;
-    height: 197px;
-    margin-bottom: 0px;
-    margin-top: 56px;
-    margin-right: 653.6;
-    margin-left: 516px;
-    margin-right: 516px; */
   
 }
    
@@ -71,3 +62,19 @@
     margin: 0.5rem;
     pointer-events: none;
 }
+
+
+.sales-img {
+    text-align: center;
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 22px;
+    height: 76px;
+    border-left-width: 1px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+/* element.style {
+    width: 22px;
+} */

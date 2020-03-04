@@ -70,5 +70,8 @@ namespace STS.Model
 
         public int userId { get; set; }
 
+        public List<ImageList> ImageList { get; set; }
+        public List<ImageModel> ImageListData { get; set; }
+
     }
 }

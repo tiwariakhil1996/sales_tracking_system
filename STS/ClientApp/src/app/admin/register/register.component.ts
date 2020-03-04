@@ -168,7 +168,7 @@ export class RegisterComponent  implements OnInit {
 
 
   validateName(nameField) {
-    const reg = /^[A-Za-z]+$/;
+    const reg = /^[A-Za-z\s]+$/;
     return reg.test(nameField) === false ? false : true;
   }
 

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from '../../service/admin.service';
 import { registerModel } from '../../model/admin';
+import { EmailService } from '../../service/email.service';
 
 
 @Component({
@@ -23,12 +24,13 @@ export class ForgotPasswordComponent implements OnInit {
 
   constructor(private router: Router,
     private adminService: AdminService,
-    private toastr: ToastrService) {
+    private toastr: ToastrService,
+    private _emailService: EmailService) {
 
   }
 
   ngOnInit() {
-    this.checkRole(this.RoleJason);
+    // this.checkRole(this.RoleJason);
   }
 
   checkRole(RoleJason) {
@@ -45,4 +47,18 @@ export class ForgotPasswordComponent implements OnInit {
   submitLogin() {
 
   }
+
+
+  // onSubmit(name, email, message) {
+  //   this._emailService.sendEmail({
+  //     from: 'Mailgun Sandbox <postmaster@sandboxXXXXXXXXXXXXXXXXXXXXX.mailgun.org>',
+  //     to: email,
+  //     name: name,
+  //     text: message,
+  //   })
+  //   .subscribe(
+  //     () => {},
+  //     err => console.log(err)
+  //   );
+  // } 
 }

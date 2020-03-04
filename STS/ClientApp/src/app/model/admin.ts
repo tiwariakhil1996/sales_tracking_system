@@ -15,6 +15,13 @@ export class registerModel {
     userType: number;
 }
 
+export class avatarModel {
+    image: string;
+
+    ImageId: number;
+    ImageData: string;
+}
+
 export class changePasswordModel {
     id: number;
     oldpassword: string;

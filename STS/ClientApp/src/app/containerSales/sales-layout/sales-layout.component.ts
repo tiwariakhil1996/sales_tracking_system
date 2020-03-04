@@ -4,10 +4,11 @@ import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { SalesService } from '../../service/sales.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { salesregisterModel, changePasswordModel } from '../../model/sales';
+import { salesregisterModel, changePasswordModel, sales_avatarModel } from '../../model/sales';
 import { ToastrService } from 'ngx-toastr';
 import { ActivityService } from '../../service/activity.service';
 import { activityModel, newactivityModel } from '../../model/activity';
+import { avatarModel, registerModel } from '../../model/admin';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,20 +29,24 @@ export class SalesLayoutComponent implements OnInit {
 
   user = new salesregisterModel();
 
+  profile_pic = new registerModel();
+  
+  salesavatar = new sales_avatarModel();
+  
   activity = new activityModel();
   activityDetails: activityModel[] = [];
 
   totalActivity: any;
 
   loginDetail = new salesregisterModel();
-  // salesDetails: salesregisterModel[] = [];
-  // sales = new salesregisterModel();
+
   salesDetails: salesregisterModel = new salesregisterModel();
 
   changePassword = new changePasswordModel();
 
   item: any;
   updateProfile: any;
+
 
   RoleJason = {
     ROle: [0, 1],
@@ -61,10 +66,13 @@ export class SalesLayoutComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.changePassword.id = this.user.id;
     // console.log(this.changePassword.id);
+    this.profile_pic.image = this.user.image;
   }
 
   ngOnInit() {
     this.checkRole(this.RoleJason);
+
+    this.getuserProfile();
   }
 
 
@@ -87,6 +95,8 @@ export class SalesLayoutComponent implements OnInit {
     this.salesDetails = JSON.parse(localStorage.getItem('salesLogin')) || {};
     // console.log(this.salesDetails);
     this.updateProfile = this.salesDetails;
+    console.log(this.updateProfile);
+    
   }
 
   changePasswordModal(template1: TemplateRef<any>) {
@@ -231,6 +241,11 @@ export class SalesLayoutComponent implements OnInit {
     });
   }
 
+  getuserProfile() {
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.salesavatar.image = this.user.image;
+
+  }
 
   logout() {
     // remove user from local storage to log user out

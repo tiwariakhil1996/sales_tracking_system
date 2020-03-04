@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
 import { ProductService } from '../../../service/product.service';
-import { productModel, ImageListModel, ImageModel } from '../../../model/product';
+import { productModel, ImageListModel, ImageModel, UpdateImageListModel } from '../../../model/product';
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
 import { salesregisterModel } from '../../../model/sales';
 
@@ -22,6 +22,9 @@ export class AddproductComponent implements OnInit {
 
   user = new salesregisterModel();
 
+  tempImageList: UpdateImageListModel[] = [];
+  updateImageList: UpdateImageListModel[] = [];
+  
   product = new productModel();
   productDetails: productModel[] = [];
 
@@ -333,7 +336,7 @@ export class AddproductComponent implements OnInit {
         // image.height = 100;
         // image.width = 100;
         // preview.appendChild(image);
-        // this.tempImageList.push({ ImageId: 0, ImageData: String(reader.result) });
+        this.tempImageList.push({ ImageId: 0, ImageData: String(reader.result) });
         this.imageList.push({ ImageExtn: '.' + imageDetail[0].replace('data:image/', ''), Image: '', ImageData: imageDetail[1] });
         this.imageModel.push({ Image: '' });
 

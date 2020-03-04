@@ -131,15 +131,18 @@ namespace STS.DAL
                 await connection.OpenAsync();
                 TranStatus transaction = new TranStatus();
                 DynamicParameters parameter = new DynamicParameters();
-                parameter.Add("@ID",ID);
+                parameter.Add("@Product_ID",ID);
                 parameter.Add("@Cid", model.Cid);
                 parameter.Add("@Sid", model.Sid);
                 parameter.Add("@Productname", model.Productname);
                 parameter.Add("@Description", model.Description);
                 parameter.Add("@Price", model.Price);
-                parameter.Add("@Image", model.Image);
+                //parameter.Add("@Image", model.Image);
                 parameter.Add("@Date", model.Date);
                 parameter.Add("@Modifiedby", model.Modifiedby);
+                // Data Table Type --to insert multiple image
+                DataTable dataTable = CommonHelper.ToDataTable(model.ImageListData);
+                parameter.Add("@ImageListing", dataTable.AsTableValuedParameter("dbo.ImageList"));
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
                 await connection.QueryAsync("updateProduct", parameter, commandType: CommandType.StoredProcedure);

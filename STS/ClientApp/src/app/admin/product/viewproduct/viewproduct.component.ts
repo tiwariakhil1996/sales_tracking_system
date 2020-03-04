@@ -5,7 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
 import { ProductService } from '../../../service/product.service';
-import { productModel, productListModel, Product_Images_ListModel } from '../../../model/product';
+import { productModel, productListModel, Product_Images_ListModel, ImageListModel, ImageModel, UpdateImageListModel } from '../../../model/product';
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
 import { registerModel } from '../../../model/admin';
 
@@ -21,6 +21,12 @@ export class ViewproductComponent implements OnInit {
 
   user = new registerModel();
 
+  imageList: ImageListModel[] = [];
+  
+  imageModel: ImageModel[] = [];
+  tempImageList: UpdateImageListModel[] = [];
+  updateImageList: UpdateImageListModel[] = [];
+  
   product = new productListModel();
   productDetails: productListModel[] = [];
 
@@ -110,7 +116,7 @@ export class ViewproductComponent implements OnInit {
 
   open_image_modal(images, item) {
     this.product = JSON.parse(JSON.stringify(item));
-    this.modalService.open(images, { backdropClass: 'light-blue-backdrop' });
+    this.modalService.open(images, {size: 'xl', backdropClass: 'light-blue-backdrop' });
   }
 
 
@@ -158,7 +164,7 @@ export class ViewproductComponent implements OnInit {
       }
     }
 
-    if (!this.product.image) {
+    if (!this.product.imageList) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please select image';
     }
@@ -182,6 +188,9 @@ export class ViewproductComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.product.modifiedby = this.user.id;
     // console.log(this.product.modifiedby);
+
+    this.product.imageList = this.imageList;
+    this.product.imageListData = this.imageModel;
 
     this.productService.updateProduct(id, this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -313,26 +322,50 @@ export class ViewproductComponent implements OnInit {
 
   // Image to Base64
 
+  // handleFileInput(fileList: FileList) {
+  //   const preview = document.getElementById('photos-preview');
+  //   Array.from(fileList).forEach((file: File) => {
+  //     const reader = new FileReader();
+  //     reader.onload = () => {
+  //       const image = new Image();
+  //       image.src = String(reader.result);
+  //       const imageDetail = String(reader.result).split(';base64,');
+  //       this.product.image = imageDetail[1];
+  //       this.product.ImageExtn = '.' + imageDetail[0].replace('data:image/', '');
+  //       image.height = 100;
+  //       image.width = 100;
+  //       preview.appendChild(image);
+  //     };
+  //     reader.readAsDataURL(file);
+  //     // console.log(file);
+
+  //   });
+  // }
+
   handleFileInput(fileList: FileList) {
-    const preview = document.getElementById('photos-preview');
+    this.imageList = [];
+    this.imageModel = [];
+    // const preview = document.getElementById('photos-preview');
     Array.from(fileList).forEach((file: File) => {
       const reader = new FileReader();
       reader.onload = () => {
-        const image = new Image();
-        image.src = String(reader.result);
+        // const image = new Image();
+        // image.src = String(reader.result);
         const imageDetail = String(reader.result).split(';base64,');
-        this.product.image = imageDetail[1];
-        this.product.ImageExtn = '.' + imageDetail[0].replace('data:image/', '');
-        image.height = 100;
-        image.width = 100;
-        preview.appendChild(image);
+        // this.product.imageList = imageDetail[1];
+        // this.image.ImageExtn = '.' + imageDetail[0].replace('data:image/', '');
+        // image.height = 100;
+        // image.width = 100;
+        // preview.appendChild(image);
+        this.tempImageList.push({ ImageId: 0, ImageData: String(reader.result) });
+        this.imageList.push({ ImageExtn: '.' + imageDetail[0].replace('data:image/', ''), Image: '', ImageData: imageDetail[1] });
+        this.imageModel.push({ Image: '' });
+
       };
       reader.readAsDataURL(file);
-      // console.log(file);
-
+      console.log(file);
     });
   }
-
 
   changeStatus(id: number) {
     // console.log(id);
@@ -364,7 +397,7 @@ export class ViewproductComponent implements OnInit {
   DeleteImage(id: number) {
     // if (confirm('Are you sure to delete this record ?') === true) {
     this.productService.DeleteImage(id).subscribe(data => {
-      this.product_Images_List(id)
+      // this.product_Images_List(id)
     });
     // }
     this.toastr.success('Image deleted Successful', 'Successful', {

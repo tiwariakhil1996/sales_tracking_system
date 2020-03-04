@@ -82,7 +82,7 @@ namespace STS.Controllers
             try
             {
                 //model.Image = CommonHelper.SaveImage(HttpContext, "Images\\AdminProfile", model.Image, true, model.ImageExtn);
-                model.Image = CommonHelper.SaveImage(HttpContext, "avatars\\Admin", model.Image, true, model.ImageExtn);
+                model.Image = CommonHelper.SaveImage(HttpContext, "Avatars\\Admin", model.Image, true, model.ImageExtn);
 
                 //transaction = await iadmin.updateAdminProfile(model);
 

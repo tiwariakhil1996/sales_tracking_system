@@ -59,6 +59,8 @@ namespace STS.Model
         public string Adharcard { get; set; }
         public string Address { get; set; }
         public string Password { get; set; }
+
+        public int UserType { get; set; }
     }
 
     //Display
