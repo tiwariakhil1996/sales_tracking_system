@@ -300,5 +300,6 @@ export class AddactivityComponent implements OnInit {
   viewActivityForm() {
     this.router.navigate(['/admin/activity/currentactivity']);
   }
+ 
 
 }

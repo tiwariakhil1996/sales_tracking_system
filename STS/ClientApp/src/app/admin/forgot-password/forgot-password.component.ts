@@ -23,7 +23,8 @@ export class ForgotPasswordComponent implements OnInit {
 
   constructor(private router: Router,
     private adminService: AdminService,
-    private toastr: ToastrService) {
+    private toastr: ToastrService,
+  ) {
 
   }
 
@@ -42,7 +43,17 @@ export class ForgotPasswordComponent implements OnInit {
   // }
 
 
-  submitLogin() {
+  sendmail() {
+      this.toastr.success('An email has been send to you with instructions to reset your password.', 'Successfully', {
+      disableTimeOut: false,
+      timeOut: 2000
+    });
+    // this.router.navigate(['/admin/login']);
 
   }
+
+  backtologinpage() {
+    this.router.navigate(['/admin/login']);
+  }
+
 }

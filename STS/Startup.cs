@@ -14,6 +14,8 @@ using System;
 using Newtonsoft.Json.Serialization;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using System.Net.Mail;
+using System.Net;
 
 namespace STS
 {
@@ -29,6 +31,24 @@ namespace STS
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //mail
+            services.AddScoped<SmtpClient>((serviceProvider) =>
+            {
+                var config = serviceProvider.GetRequiredService<IConfiguration>();
+                return new SmtpClient()
+                {
+                    Host = config.GetValue<String>("Email:Smtp:Host"),
+                    Port = config.GetValue<int>("Email:Smtp:Port"),
+                    Credentials = new NetworkCredential(
+                            config.GetValue<String>("Email:Smtp:Username"),
+                            config.GetValue<String>("Email:Smtp:Password")
+                        )
+                };
+            });
+
+            services.AddMvc();
+
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
 
             ////this logic is convert the string to int when i am passed the category_id it is pass the as string but category_id is int then this service
@@ -46,12 +66,9 @@ namespace STS
             services.AddControllers()
                 .AddNewtonsoftJson();
 
-            //Database Connectivity
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
-            });
+ 
 
+            //Database Connectivity
             STSSetting.ConnectionString = Configuration.GetSection("ConnectionString:STS").Value;
             DependencyResolver(services);
             

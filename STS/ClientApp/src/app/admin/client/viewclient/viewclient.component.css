@@ -1,10 +1,9 @@
-.btn-center tr td:last-child{
-    text-align: center;
+.btn-center tr td:last-child {
+  text-align: center;
 }
 
 
 
-.color{
-    background-color: lightskyblue;
+.color {
+  background-color: lightskyblue;
 }
-

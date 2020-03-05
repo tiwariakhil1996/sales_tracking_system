@@ -466,4 +466,8 @@ export class CurrentactivityComponent implements OnInit {
     this.router.navigate(['/admin/activity/addactivity']);
 
   }
+  getRowSum(price,quantity) {
+    const sum = price * quantity;
+    return isNaN(sum) ? '' : sum;
+}
 }

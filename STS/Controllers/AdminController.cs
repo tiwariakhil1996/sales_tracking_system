@@ -6,6 +6,7 @@ using STS.BLL.Interface;
 using STS.Common;
 using STS.Model;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Mail;
 
 
 namespace STS.Controllers
@@ -13,6 +14,28 @@ namespace STS.Controllers
     [Route("api/[controller]")]
     public class AdminController : Controller
     {
+
+        //public string emailsend(EmailClass ec)
+        //{
+        //    string To = ec.To;
+        //    string body = ec.Body;
+        //    string subject = ec.Subject;
+        //    MailMessage mm = new MailMessage();
+        //    mm.From = new MailAddress("tiwariakhil052@gmail.com");
+        //    mm.Subject = subject;
+        //    mm.Body = body;
+        //    mm.To.Add(To);
+        //    mm.IsBodyHtml = false;
+
+        //    SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+        //    smtp.Port = 587;
+        //    smtp.UseDefaultCredentials = true;
+        //    smtp.EnableSsl = true;
+        //    smtp.Credentials = new System.Net.NetworkCredential("tiwariakhil052@gmail.com","password");
+        //    smtp.Send(mm);
+        //    return "The mail has been send to "+ec.To.ToString();
+        //}
+
         private IAdmin iadmin;
 
         TranStatus transaction = new TranStatus();

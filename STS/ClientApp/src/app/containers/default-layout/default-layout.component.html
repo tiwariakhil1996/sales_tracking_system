@@ -63,7 +63,7 @@
             <div class="form-group col-md-6">
               <label for="image">Profile Pic</label><br>
               <!-- <img  *ngIf="imageSrc" [src]="imageSrc" style="width: 80px; height: 80px;" > -->
-              <input type="file" id="fileupload" name="image"  multiple (change)="handleFileInput($event.target.files)" [(ngModel)]="updateProfile.image" />          
+              <input type="file" class="form-control" selected id="fileupload" name="image"  multiple (change)="handleFileInput($event.target.files)" [(ngModel)]="updateProfile.image" />          
             </div>
 
             <div class="form-group col-md-6">

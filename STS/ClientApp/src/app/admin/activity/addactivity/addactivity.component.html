@@ -80,8 +80,9 @@
                       <td>
                         {{item.price}}
                         </td>
+                      
                       </tr>                    
-
+                      
                     <!-- <input type="text" class="form-control" id="price" name="price" [(ngModel)]="products.price" #_price> -->
                    
                   </td>
@@ -93,7 +94,7 @@
                       [(ngModel)]="products.quantity" (keyup)="TotalAmount(_price.value,quantity.value)">  -->
                   </td>
                   <td>
-                     <input  type="text" class="form-control" id="amount" name="amount" [(ngModel)]="products.amount" >
+                     <input  type="text" class="form-control" id="amount" name="amount" [(ngModel)]="products.amount"> 
                     <!-- {{amount}}  -->
  
 

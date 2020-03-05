@@ -12,3 +12,29 @@
 /* .reg-footer {
         background-color: #495057;
     } */
+
+.forget-password {
+  margin-left: 15px;
+}
+
+p {
+  margin-top: -11px;
+  margin-bottom: 1rem;
+  margin: 0 0 10px;
+
+}
+
+.card-body {
+  -webkit-box-flex: 1;
+  flex: 1 1 auto;
+  padding: 1.25rem;
+  padding-bottom: 4px;
+}
+
+.copyright {
+  text-align: center;
+  margin: 0 auto;
+  padding: 10px;
+  color: #999;
+  font-size: 13px;
+}

@@ -57,9 +57,11 @@ namespace STS.Model
         public string Confirmpassword { get; set; }
 
     }
-    public class ForgotPasswordViewModel
+    public class EmailClass
     {
-        public string Email { get; set; }
-        
+        public string To { get; set; }
+        public string Body { get; set; }
+        public string Subject { get; set; }
     }
 }
+    
