@@ -22,6 +22,10 @@ export class salesregisterModel {
     userType: number;
 }
 
+export class sales_avatarModel {
+    image: string;
+}
+
 export class LocationModel {
     userid: number;
     // Sales Location

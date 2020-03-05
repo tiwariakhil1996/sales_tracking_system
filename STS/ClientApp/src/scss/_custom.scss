@@ -1,4 +1,97 @@
-// Here you can add other styles
-.app-header .navbar-toggler-icon{
-    display: none;
+// // Here you can add other styles
+
+
+
+.no-padding{
+    padding: 0!important;
+}
+.app-header .navbar-brand{
+    display: block;
+}
+
+.breadcrumb {
+    margin-bottom: 15px;
+}
+
+.header-fixed .app-header {
+    background-color: gold;
+}
+
+.app-header .navbar-brand .navbar-brand-minimized {
+    height: 54px;
+    width: 50px;
+}
+
+.navbar-toggler.d-none.d-md-block {
+    display: none !important;
+}
+
+// To view sidebar menu
+
+// .navbar-toggler.d-none.d-lg-block {
+//     display: none !important;
+// }
+
+.app-header .navbar-toggler {
+    // margin-left: 41px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    z-index: 11;
+}
+
+img {
+    height: -webkit-fill-available;
+}
+
+
+.app-footer {
+    background-color: darkgrey;
+}
+
+// .app-header .navbar-toggler:hover .navbar-toggler-icon {
+//     background-image: none;
+// }
+
+// .app-header .navbar-toggler-icon {
+//     background-image: none;
+// }
+
+
+a {
+    color: #000000;
+}
+
+
+
+.app-header .navbar-brand {
+    position: sticky;
+    left: 0;
+}
+
+
+// .app-header .nav-item .nav-link {
+//     float: right;
+//     position: absolute;
+//     top: -27px;
+//     right: -50px;
+//     z-index: 111111111;
+//     display: block;
+//     height: 54px;
+//     padding-top: 10px;
+// }
+
+.app-header .navbar-nav {
+    position: absolute;
+    right: 0px;
+
+}
+
+.app-header .nav-item {
+    z-index: 11111;
+}
+
+.card-header:first-child {
+    background-color: transparent;
 }

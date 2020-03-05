@@ -1,173 +1,211 @@
-<div class="col-lg-12">
-  <div class="card">
-    <div class="card-header color font">
-     
-       Product Details
-       <button type="submit" style="float: right;" class="btn btn-sm btn-success"
-      (click)="addnewProduct()"><i class="fa fa-plus">Add</i></button>
+<div class="row" style="padding: 0;">
 
-    </div>
-    <!-- <div style="overflow-x:auto;"> -->
-    <div class="card-body table-responsive">
-      <table class="table table-bordered btn-center">
-        <thead>
-          <tr class="table-success">
-            <th>Sr.no</th>
-            <!-- <th>ID</th> -->
-            <th>Category</th>
-            <th>Subcategory</th>
-            <th>ProductName</th>
-            <th >Description</th>
-            <th>Price</th>
-            <th>Image</th>
-            <th>Date</th>
-            <th>Action</th>
-            <th>IsActive</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of productDetails;let i=index;" >
-            <td style="text-align: center">{{i+1}}</td>
-            <!-- <td >{{item.id}}</td> -->
-            <td >{{item.cname}}</td>
-            <td >{{item.sname}}</td>
-            <td>{{item.productname}}</td>
-            <td >{{item.description}}</td>
-            <td >{{item.price}}</td>
-             <!-- <img style="width: 80px; height: 80px;" src={{item.image}}> -->
-             
-            <!-- <td style='text-align:center'>
-              <img  style="max-width: 115px; max-height: 64px;" [src]="'assets/img/Images/Product/Thumb/'+item.image">
-            </td>
-            
-            <td style='text-align:center'>
-              <button type="submit" class="btn btn-sm btn-success" (click)="view_product_Images()"> View Images</button>
-            </td> -->
-            <td style='text-align:center'>
-              <button type="submit" class="btn btn-sm btn-success" (click)="open_image_modal(images,item)"
-                (click)="view_product_Images(item.id)"> View Images</button>
-            </td>
-
-            <td >{{item.date}}</td>
-           
-            <td style="text-align: center">
-              <button type="button" class="btn btn-primary" data-toggle="modal" (click)="openupdatemodal(content,item)" ><i class="fa fa-edit" aria-hidden="true"></i></button>       
-              <button class='btn btn-danger' type="button" (click)="onDelete(item.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
-            </td>
-            <td>
-              <button *ngIf="item.isActive" class='btn btn-success' type="button" (click)="changeStatus(item.id)"><i
-                  class="fa fa-check-circle" ></i></button>
-              <button *ngIf="!item.isActive" class='btn btn-danger' type="button" (click)="changeStatus(item.id)"><i
-                  class="fa fa-times"></i></button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="col-lg-12 view-form" style="padding: 0;">
+    <div class="card">
+      <div class="card-header color font">
+  
+        Product Details
+        <button type="submit" style="float: right; width: 74px;" class="btn btn-sm btn-success" (click)="addnewProduct()"><i
+            class="fa fa-plus"> Add</i></button>
+  
+      </div>
+      <!-- <div style="overflow-x:auto;"> -->
+      <div class="card-body table-responsive">
+        <table class="table table-bordered btn-center">
+          <thead>
+            <tr class="table-success">
+              <th>Sr.no</th>
+              <!-- <th>ID</th> -->
+              <th>Category</th>
+              <th>Subcategory</th>
+              <th>ProductName</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Image</th>
+              <th>Date</th>
+              <th>Action</th>
+              <th>IsActive</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of productDetails;let i=index;">
+              <td style="text-align: center">{{i+1}}</td>
+              <!-- <td >{{item.id}}</td> -->
+              <td>{{item.cname}}</td>
+              <td>{{item.sname}}</td>
+              <td>{{item.productname}}</td>
+              <td>{{item.description}}</td>
+              <td>{{item.price}}</td>
+              <!-- <img style="width: 80px; height: 80px;" src={{item.image}}> -->
+  
+              <!-- <td style='text-align:center'>
+                <img  style="max-width: 115px; max-height: 64px;" [src]="'assets/img/Images/Product/Thumb/'+item.image">
+              </td>
+              
+              <td style='text-align:center'>
+                <button type="submit" class="btn btn-sm btn-success" (click)="view_product_Images()"> View Images</button>
+              </td> -->
+              <td style='text-align:center' class="font-size">
+                  <i class="fa fa-picture-o" aria-hidden="true"  (click)="open_image_modal(images,item)" (click)="view_product_Images(item.id)"></i>
+              </td>
+  
+              <td>{{item.date}}</td>
+  
+              <td style="text-align: center">
+                <button type="button" class="btn btn-primary" data-toggle="modal"
+                  (click)="openupdatemodal(content,item)"><i class="fa fa-edit" aria-hidden="true"></i></button>
+                <button class='btn btn-danger' type="button" (click)="onDelete(item.id)"><i class="fa fa-trash"
+                    aria-hidden="true"></i></button>
+              </td>
+              <td>
+                <button *ngIf="item.isActive" class='btn btn-success' type="button" (click)="changeStatus(item.id)"><i
+                    class="fa fa-check-circle"></i></button>
+                <button *ngIf="!item.isActive" class='btn btn-danger' type="button" (click)="changeStatus(item.id)"><i
+                    class="fa fa-times"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
- 
-<!-- Update Product with Multiple image -->
-  <ng-template #content let-modal>
-                <div class="modal-header">
-                  <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT</h4>
-                  <div>
-                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT</h4>
+    <div>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+
+
+  <div class="modal-body" style="color: black;">
+    <div>
+      <div class="form-group" hidden>
+        <label for="id">ID</label>
+        <input type="text" class="form-control" [(ngModel)]="product.id" name="id" disabled>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <label for="category">Category</label>
+          <select name="cid" class="form-control" [(ngModel)]="product.cid"
+            (click)="onCategoryChange($event.target.value)">
+            <option value="0" selected>Select category</option>
+            <option *ngFor="let item of categoryDetails;" name="cname" value={{item.cid}}>{{item.cname}}</option>
+          </select>
+        </div>
+        <div class="col-sm-6">
+          <label for="subcategory">Subcategory</label>
+          <select name="sid" class="form-control" [(ngModel)]="product.sid">
+            <option value="0" selected>Select subcategory</option>
+            <option *ngFor="let item of subcategoryDetails;" name="sname" value={{item.sid}}>{{item.sname}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <!-- <div class="col-sm-6">
+          <label for="image">Image</label>
+          <div>
+            <input type="file" id="fileupload" name="image" multiple (change)="handleFileInput($event.target.files)"
+              [(ngModel)]="product.image" />
+          </div>
+
+        </div> -->
+
+        <div class=" col-sm-6">
+          <div id='photos-preview'>
+            <label for="Product">Select Product Image</label><br>
+            <input type="file" id="fileupload" multiple (change)="handleFileInput($event.target.files)"
+              [(ngModel)]="product.imageList" /><br><br>
+
+            <div *ngFor="let image of tempImageList;let i=index;" class="float-left">
+              <div class="row">
+                <div _ngcontent-xyz-c2 class="col-1">
+                  <img [src]="image.ImageData" height="100px" width="100px">
                 </div>
-            
-                  
-                       <div class="modal-body" style="color: black;">
-                        <div>
-                          <div class="form-group" hidden>
-                           <label for="id">ID</label>
-                             <input type="text" class="form-control"  [(ngModel)]="product.id" name="id" disabled>
-                         </div>
-                         <div class="form-group row">
-                          <div class="col-sm-6">
-                           <label for="category">Category</label>
-                             <select name="cid" class="form-control" [(ngModel)]="product.cid"  (click)="onCategoryChange($event.target.value)" >
-                              <option value="0" selected>Select category</option>
-                              <option *ngFor="let item of categoryDetails;" name="cname" value={{item.cid}}>{{item.cname}}</option>
-                            </select>
-                            </div>
-                          <div class="col-sm-6">
-                           <label for="subcategory">Subcategory</label>
-                             <select name="sid" class="form-control" [(ngModel)]="product.sid" >
-                              <option value="0" selected>Select subcategory</option>
-                              <option *ngFor="let item of subcategoryDetails;" name="sname" value={{item.sid}} >{{item.sname}}</option>
-                          </select>
-                            </div>
-                         </div>
+              </div>
+            </div>
 
-                         <div class="form-group row">
-                          <div class=" col-sm-6">
-                            <div id='photos-preview'>
-                              <label for="Product">Select Product Image</label><br>
-                              <input type="file" id="fileupload" multiple (change)="handleFileInput($event.target.files)"
-                                [(ngModel)]="product.imageList" /><br><br>
-                              <div *ngFor="let image of tempImageList;let i=index;" class="float-left">
-                                <div class="row">
-                                  <div _ngcontent-xyz-c2 class="col-1">
-                                    <img [src]="image.ImageData" height="100px" width="100px">
-                                  </div>
-                                </div>
-                                <!-- <input class="btn btn-primary clsbtn" (click)="deleteImage(image,i)" type="button" value="X" /> -->
-                              </div>
-                            </div>
-                          </div>
-                         <div class="col-sm-6">
-                            <label for="productname">ProductName</label>
-                              <input type="text" class="form-control" [(ngModel)]="product.productname" name="productname">
-                         </div>
-                         </div>
-                          <div class="form-group">
-                             <label for="description">Description</label>
-                             <input type="text" class="form-control"  [(ngModel)]="product.description" name="description">
-                          </div>
+          </div>
+        </div>
 
-                         
+        <div class="col-sm-6">
+          <label for="productname">ProductName</label>
+          <input type="text" class="form-control" [(ngModel)]="product.productname" name="productname">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" [(ngModel)]="product.description" name="description">
+      </div>
 
-                          <div class="form-group row">
-                            <div class="col-sm-6">
-                             <label for="price">Price</label>
-                             <input type="text" class="form-control"  [(ngModel)]="product.price" name="price" >
-                           </div>
-          
-                           <div class="col-sm-6">
-                             <label for="date">Date</label>
-                              <input type="text" class="form-control" [(ngModel)]="product.date" name="date" >
-                          </div>
-                        </div>
-                     <button type="submit" class="btn btn-success" (click)="onEdit(product.id)">Update</button>
-                    <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal-body" (click)="modal.dismiss('Cross click')">Cancel</button> 
-                    </div>      
-                   </div>
-             
-           </ng-template>
+
+
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <label for="price">Price</label>
+          <input type="text" class="form-control" [(ngModel)]="product.price" name="price">
+        </div>
+
+        <div class="col-sm-6">
+          <label for="date">Date</label>
+          <input type="text" class="form-control" [(ngModel)]="product.date" name="date">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success" (click)="onEdit(product.id)">Update</button>
+      <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal-body"
+        (click)="modal.dismiss('Cross click')">Cancel</button>
+    </div>
+  </div>
+
+</ng-template>
 
 
 <!-- Product Image -->
 
-     <ng-template #images let-modal>
-            <div class="modal-header">
-            </div>
-            <div class="modal-body" style="color: black;">
-              <div>
-                <div *ngFor="let items of product_imageDetails;let i=index;">
-                  <!-- <img style="max-width: 115px; max-height: 64px;" [src]="'assets/img/Images/Product/Thumb/'+items.image"> -->
-                  <!-- <img style="max-width: 115px; max-height: 64px;" [src]="'http://localhost:44317/Documents/Images/Product/Thumb/'+items.image"> -->
-                  <div class="row">
-                    <div class="col-1">
-                      <img style="width: 150px;height: 150px" [src]="'http://localhost:55627/Documents/Images/Product/Thumb/'+items.image">
-                    </div>
-                  </div>
-                  <button class='btn btn-danger' type="button" (click)="DeleteImage(items.id)"><i class="fa fa-trash"
-                    aria-hidden="true"></i></button>
-                </div>
-              </div>
-            </div>
-          
-     </ng-template>
+<ng-template #images let-modal>
+
+  <!-- <div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div> -->
+  <div>
+  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+  <div class="modal-body" style="color: black;">
+    <div>
+
+      <div class="form-group row">
+        <div class="set-in-line" *ngFor="let items of product_imageDetails;let i=index;">
+          <button class='close setdelete' type="button" (click)="DeleteImage(items.id)">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <img style="width: 150px;height: 150px"
+            [src]="'http://localhost:55627/Documents/Images/Product/Thumb/'+items.image">
+        </div>
+
+        <!-- <div class="row">
+          <div class="col-1">
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            <img style="width: 150px;height: 150px"
+              [src]="'http://localhost:55627/Documents/Images/Product/Thumb/'+items.image">
+          </div>
+        </div> -->
+        <!-- <button class='btn btn-danger' type="button" (click)="DeleteImage(items.id)"><i class="fa fa-trash"
+                    aria-hidden="true"></i></button> -->
+      </div>
+
+    </div>
+  </div>
+
+</ng-template>

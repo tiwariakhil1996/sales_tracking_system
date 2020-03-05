@@ -80,7 +80,7 @@ namespace STS.Controllers
             {
 
                 //model.Image = CommonHelper.SaveImage(HttpContext, "Images\\SalesProfile", model.Image, true, model.ImageExtn);
-                model.Image = CommonHelper.SaveImage(HttpContext, "avatars\\Sales", model.Image, true, model.ImageExtn);
+                model.Image = CommonHelper.SaveImage(HttpContext, "Avatars\\Sales", model.Image, true, model.ImageExtn);
                 //transaction = await isales.updateSalesProfile(model);
 
                 var result = await isales.updateSalesProfile(model);

@@ -63,14 +63,15 @@
                     <label for="Product">Select Product Image</label><br>
                     <input type="file" id="fileupload" multiple (change)="handleFileInput($event.target.files)"
                       [(ngModel)]="product.imageList" /><br><br>
+
                     <div *ngFor="let image of tempImageList;let i=index;" class="float-left">
                       <div class="row">
                         <div _ngcontent-xyz-c2 class="col-1">
                           <img [src]="image.ImageData" height="100px" width="100px">
                         </div>
                       </div>
-                      <!-- <input class="btn btn-primary clsbtn" (click)="deleteImage(image,i)" type="button" value="X" /> -->
                     </div>
+
                   </div>
                 </div>
 

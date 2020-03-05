@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from '../../service/admin.service';
 import { registerModel } from '../../model/admin';
+import { EmailService } from '../../service/email.service';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class ForgotPasswordComponent implements OnInit {
   constructor(private router: Router,
     private adminService: AdminService,
     private toastr: ToastrService,
-  ) {
+    private _emailService: EmailService) {
 
   }
 

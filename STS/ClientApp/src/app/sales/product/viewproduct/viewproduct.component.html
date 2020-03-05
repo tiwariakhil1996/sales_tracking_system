@@ -18,7 +18,7 @@
             <th>ProductName</th>
             <th>Description</th>
             <th>Price</th>
-            <!-- <th>Image</th> -->
+            <th>Image</th>
             <th>Date</th>
             <th>Action</th>
             <!-- <th>IsActive</th> -->
@@ -42,8 +42,9 @@
          <td>{{item.productname}}</td>
          <td>{{item.description}}</td>
          <td>{{item.price}}</td>
-         <!-- <img style="width: 80px; height: 80px;" src={{item.image}} > -->
-         <!-- <td style='text-align:center'><img style="max-width: 50px; max-height: 50px;" [src]="'assets/img/Images/Product/'+item.image"></td> -->
+         <td  style='text-align:center' class="font-size">
+            <i class="fa fa-picture-o" aria-hidden="true"  (click)="open_image_modal(images,item)" (click)="view_product_Images(item.id)"></i>
+        </td>
          <td>{{item.date}}</td>
             <td>
               <button type="button" class="btn btn-primary" data-toggle="modal" (click)="openupdatemodal(content,item)" ><i class="fa fa-edit" aria-hidden="true"></i></button>
@@ -106,11 +107,21 @@
               <label for="productname">ProductName</label>
                 <input type="text" class="form-control" [(ngModel)]="product.productname" name="productname">
            </div>
-           <div class="col-sm-6">
-            <label for="image">Image</label>
-            <input class="form-control" type="file" id="fileupload" name="image"  multiple (change)="handleFileInput($event.target.files)" [(ngModel)]="product.image" />          
-            <!--   <img style="width: 80px; height: 80px;" src={{product.image}} >   -->  
-           </div>
+           <div class=" col-sm-6">
+            <div id='photos-preview'>
+              <label for="Product">Select Product Image</label><br>
+              <input type="file" id="fileupload" multiple (change)="handleFileInput($event.target.files)"
+                [(ngModel)]="product.imageList" /><br><br>
+              <div *ngFor="let image of tempImageList;let i=index;" class="float-left">
+                <div class="row">
+                  <div _ngcontent-xyz-c2 class="col-1">
+                    <img [src]="image.ImageData" height="100px" width="100px">
+                  </div>
+                </div>
+                <!-- <input class="btn btn-primary clsbtn" (click)="deleteImage(image,i)" type="button" value="X" /> -->
+              </div>
+            </div>
+          </div>
           </div>
             <div class="form-group">
                <label for="description">Description</label>
@@ -135,4 +146,34 @@
    <!--    <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal-body">Close</button>  -->
       </div>      
      </div>
+</ng-template>
+
+
+
+<!-- Product Image -->
+
+<ng-template #images let-modal>
+
+  <div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body" style="color: black;">
+    <div>
+
+      <div class="form-group row">
+        <div class="set-in-line" *ngFor="let items of product_imageDetails;let i=index;">
+          <button class='close setdelete' type="button" (click)="DeleteImage(items.id)">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <img style="width: 150px;height: 150px"
+            [src]="'http://localhost:55627/Documents/Images/Product/Thumb/'+items.image">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </ng-template>

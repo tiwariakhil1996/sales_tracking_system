@@ -5,7 +5,7 @@ import { BsModalRef } from 'ngx-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
 import { ProductService } from '../../../service/product.service';
-import { productModel, productListModel } from '../../../model/product';
+import { productModel, productListModel, ImageListModel, ImageModel, Product_Images_ListModel, UpdateImageListModel } from '../../../model/product';
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
 import { salesregisterModel } from '../../../model/sales';
 
@@ -21,6 +21,16 @@ export class ViewproductComponent implements OnInit {
 
   user = new salesregisterModel();
 
+  imageList: ImageListModel[] = [];
+  
+  imageModel: ImageModel[] = [];
+  
+  tempImageList: UpdateImageListModel[] = [];
+  updateImageList: UpdateImageListModel[] = [];
+  
+  product_image=new Product_Images_ListModel();
+  product_imageDetails: Product_Images_ListModel[] = [];
+  
   product = new productListModel();
   productDetails: productListModel[] = [];
 
@@ -121,6 +131,12 @@ openupdatemodal(content, item) {
 
 }
 
+
+open_image_modal(images, item) {
+  this.product = JSON.parse(JSON.stringify(item));
+  this.modalService.open(images, {size: 'xl', backdropClass: 'light-blue-backdrop' });
+}
+
 onEdit(id: number) {
 
   let strError = '';
@@ -164,7 +180,7 @@ onEdit(id: number) {
     }
   }
 
-  if (!this.product.image) {
+  if (!this.product.imageList) {
     strError += strError = '' ? '' : '<br/>';
     strError += '- Please select image';
   }
@@ -188,6 +204,9 @@ onEdit(id: number) {
   this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
   this.product.modifiedby = this.user.id;
   console.log(this.product.modifiedby);
+
+  this.product.imageList = this.imageList;
+  this.product.imageListData = this.imageModel;
 
   this.productService.updateProduct(id, this.product).subscribe((data: any) => {
     if (data.Status.code === 0) {
@@ -287,23 +306,48 @@ subcategoryList(catid) {
   });
 }
 
+// handleFileInput(fileList: FileList) {
+//   const preview = document.getElementById('photos-preview');
+//   Array.from(fileList).forEach((file: File) => {
+//     const reader = new FileReader();
+//     reader.onload = () => {
+//       const image = new Image();
+//       image.src = String(reader.result);
+//       const imageDetail = String(reader.result).split(';base64,');
+//       this.product.image = imageDetail[1];
+//       this.product.ImageExtn = '.' + imageDetail[0].replace('data:image/', '');
+//       image.height = 100;
+//       image.width = 100;
+//       preview.appendChild(image);
+//     };
+//     reader.readAsDataURL(file);
+//     console.log(file);
+
+//   });
+// }
+
 handleFileInput(fileList: FileList) {
-  const preview = document.getElementById('photos-preview');
+  this.imageList = [];
+  this.imageModel = [];
+  // const preview = document.getElementById('photos-preview');
   Array.from(fileList).forEach((file: File) => {
     const reader = new FileReader();
     reader.onload = () => {
-      const image = new Image();
-      image.src = String(reader.result);
+      // const image = new Image();
+      // image.src = String(reader.result);
       const imageDetail = String(reader.result).split(';base64,');
-      this.product.image = imageDetail[1];
-      this.product.ImageExtn = '.' + imageDetail[0].replace('data:image/', '');
-      image.height = 100;
-      image.width = 100;
-      preview.appendChild(image);
+      // this.product.imageList = imageDetail[1];
+      // this.image.ImageExtn = '.' + imageDetail[0].replace('data:image/', '');
+      // image.height = 100;
+      // image.width = 100;
+      // preview.appendChild(image);
+      this.tempImageList.push({ ImageId: 0, ImageData: String(reader.result) });
+      this.imageList.push({ ImageExtn: '.' + imageDetail[0].replace('data:image/', ''), Image: '', ImageData: imageDetail[1] });
+      this.imageModel.push({ Image: '' });
+
     };
     reader.readAsDataURL(file);
     console.log(file);
-
   });
 }
 
@@ -332,5 +376,35 @@ changeStatus(id: number) {
 addnewProduct() {
   this.router.navigate(['/sales/product/addproduct']);
 }
+
+view_product_Images(id) {
+  // this.router.navigate(['/admin/product/product-images']);
+  this.product_Images_List(id)
+}
+product_Images_List(id) {
+  this.productService.product_Images_List(id).subscribe((data: any) => {
+    if (data.Status.code === 0) {
+      if (data.Product_Images_List) {
+        this.product_imageDetails = data.Product_Images_List;
+        console.log(this.product_imageDetails);
+      }
+    }
+  }, (err) => {
+  });
+}
+
+
+DeleteImage(id: number) {
+  // if (confirm('Are you sure to delete this record ?') === true) {
+  this.productService.DeleteImage(id).subscribe(data => {
+    this.product_Images_List(id)
+  });
+  // }
+  this.toastr.success('Image deleted Successful', 'Successful', {
+    disableTimeOut: false,
+    timeOut: 2000
+  });
+}
+
 
 }

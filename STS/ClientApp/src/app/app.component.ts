@@ -59,43 +59,83 @@ export class AppComponent implements OnInit {
       window.scrollTo(0, 0);
     });
 
-    setTimeout(() => {
+ //  this.lat_lng();
+    // setTimeout(() => {
+    //   navigator.geolocation.getCurrentPosition(position => {
+    //     // console.log(position);
+
+    //     this.location = position.coords;
+    //     this.centerlat = this.location.latitude;
+    //     this.centerlng = this.location.longitude;
+
+    //     this.lat = this.location.latitude;
+    //     this.lng = this.location.longitude;
+
+    //     this.geocoder = new google.maps.Geocoder();
+    //   });
+    // }, 2000);
+
+      this.lat_lng();
+  }
+
+  // lat_lng() {
+  //  setInterval(function(){
+  //   navigator.geolocation.getCurrentPosition(position => {
+  //     // console.log(position);
+  
+  //     this.location = position.coords;
+  //     this.centerlat = this.location.latitude;
+  //     this.centerlng = this.location.longitude;
+  
+  //     this.lat = this.location.latitude;
+  //     this.lng = this.location.longitude;
+  
+  //     console.log(this.lat);
+  //     console.log(this.lng);
+      
+      
+  //     this.geocoder = new google.maps.Geocoder();
+  //     this.Refresh_Sales_Location();
+  //   });
+
+  // }, 1000);
+  // }
+
+  
+  lat_lng() {
       navigator.geolocation.getCurrentPosition(position => {
         // console.log(position);
-
+    
         this.location = position.coords;
         this.centerlat = this.location.latitude;
         this.centerlng = this.location.longitude;
-
+    
         this.lat = this.location.latitude;
         this.lng = this.location.longitude;
+    
+        console.log(this.lat);
+        console.log(this.lng);
 
         this.geocoder = new google.maps.Geocoder();
+        this.Refresh_Sales_Location();
       });
-    }, 2000);
-
-     // this.Refresh_Sales_Location();
-  }
-
+    }
 
   Refresh_Sales_Location() {
   
+    // this.lat_lng();
+
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.saleslocation.userid = this.user.id;
-    console.log(this.saleslocation.userid);
+    
 
     this.saleslocation.latitude = this.lat;
     this.saleslocation.longitude = this.lng;
-    console.log(this.saleslocation.latitude);
-    console.log(this.saleslocation.longitude);
+
+    console.log(this.saleslocation);
 
     this.salesService.Refresh_Sales_Location(this.saleslocation).subscribe((data: any) => {
-      // if (data.Status.code === 0) {
-      //   // if (data.Refresh_Sales_Location) {
-      //   //   this.sales_locationDetails = data.Refresh_Sales_Location;
 
-      //   // }
-      // }
     }, (err) => {
 
     });

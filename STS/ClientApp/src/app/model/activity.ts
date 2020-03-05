@@ -99,6 +99,8 @@ export class sales_Location_Model {
     userId: number;
     latitude: any;
     longitude: any;
+    image: string;
+
 }
 
 export class updateactivityModel {

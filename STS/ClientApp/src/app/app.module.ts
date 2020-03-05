@@ -59,6 +59,7 @@ import { from } from 'rxjs';
 
 // import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password.component';
+import { EmailService } from './service/email.service';
 
 
 @NgModule({
@@ -125,7 +126,7 @@ import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password
   //   useClass: HashLocationStrategy
   // }],
   // schemas:  [ CUSTOM_ELEMENTS_SCHEMA ],
-  providers: [],
+  providers: [EmailService],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

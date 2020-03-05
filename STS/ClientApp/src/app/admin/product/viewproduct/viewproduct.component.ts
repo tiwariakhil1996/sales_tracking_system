@@ -118,7 +118,7 @@ export class ViewproductComponent implements OnInit {
 
   open_image_modal(images, item) {
     this.product = JSON.parse(JSON.stringify(item));
-    this.modalService.open(images, { backdropClass: 'light-blue-backdrop' });
+    this.modalService.open(images, {size: 'xl', backdropClass: 'light-blue-backdrop' });
   }
 
 
@@ -401,7 +401,7 @@ export class ViewproductComponent implements OnInit {
   DeleteImage(id: number) {
     // if (confirm('Are you sure to delete this record ?') === true) {
     this.productService.DeleteImage(id).subscribe(data => {
-      this.product_Images_List(id)
+      // this.product_Images_List(id)
     });
     // }
     this.toastr.success('Image deleted Successful', 'Successful', {

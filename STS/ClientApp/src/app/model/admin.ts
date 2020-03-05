@@ -11,7 +11,15 @@ export class registerModel {
     cpassword: string;
     userType: number;
 }
-export class ChangeAdminPasswordModel {
+
+export class avatarModel {
+    image: string;
+
+    ImageId: number;
+    ImageData: string;
+}
+
+export class changePasswordModel {
     id: number;
     oldpassword: string;
     newpassword: string;

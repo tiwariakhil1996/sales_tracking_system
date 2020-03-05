@@ -2,3 +2,29 @@
     text-align: center;
 }
   
+.modal-content {
+    width: 1000px;
+      right: 250px;
+      height: 490px;
+  }
+  
+  .setdelete {
+    position: absolute;
+    z-index: 1;
+    background-color: white;
+    color: red;
+  }
+  
+  .set-in-line {
+    float: left;
+    margin: 5px;
+  }
+
+  .font-size {
+    font-size: 43px;
+      text-align: center;
+      padding-left: 0px;
+      padding-right: 0px;
+      padding-top: 0px;
+      padding-bottom: 0px;
+  }

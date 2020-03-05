@@ -41,25 +41,40 @@
 }
 
 .modal-content {
-  position: relative;
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  flex-direction: column;
-  width: 100%;
-  pointer-events: auto;
-  background-color: #f8f9fa;
-  background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 0.3rem;
-  outline: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: none;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.3rem;
+    outline: 0;
+  
 }
 
 
 .modal-dialog {
-  position: relative;
-  width: auto;
-  margin: 0.5rem;
-  pointer-events: none;
+    position: relative;
+    width: auto;
+    margin: 0.5rem;
+    pointer-events: none;
 }
+
+
+.sales-img {
+    text-align: center;
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 22px;
+    height: 76px;
+    border-left-width: 1px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+/* element.style {
+    width: 22px;
+} */
