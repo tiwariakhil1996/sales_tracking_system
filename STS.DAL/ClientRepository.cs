@@ -57,36 +57,94 @@ namespace STS.DAL
         }
 
 
-        public async Task<List<ClientListModel>> each_admin_ClientList(ClientListModel model)
+        //public async Task<List<ClientListModel>> each_admin_ClientList(ClientListModel model)
+        //{
+        //    using (var connection = new SqlConnection(ConnectionString))
+        //    {
+        //        connection.Open();
+        //        TranStatus transaction = new TranStatus();
+        //        DynamicParameters parameter = new DynamicParameters();
+        //        parameter.Add("@AdminID", model.userId);
+        //        var result = await connection.QueryAsync<ClientListModel>("each_admin_ClientList", parameter, commandType: CommandType.StoredProcedure);
+        //        return result.ToList();
+
+        //    }
+        //}
+
+
+
+        public List<ClientListModel> each_admin_ClientList(ClientListModel model, out int RowCount)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                TranStatus transaction = new TranStatus();
+               
                 DynamicParameters parameter = new DynamicParameters();
                 parameter.Add("@AdminID", model.userId);
-                var result = await connection.QueryAsync<ClientListModel>("each_admin_ClientList", parameter, commandType: CommandType.StoredProcedure);
+                parameter.Add("@pageIndex", model.pageIndex);
+                parameter.Add("@pageSize", model.pageSize);
+
+                parameter.Add("@RowCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                var result = connection.Query<ClientListModel>("each_admin_ClientList", parameter, commandType: CommandType.StoredProcedure);
+                RowCount = parameter.Get<int>("@RowCount");
                 return result.ToList();
 
             }
         }
 
 
+        //public async Task<List<ClientListModel>> each_sales_ClientList(ClientListModel model)
+        //    {
+        //        using (var connection = new SqlConnection(ConnectionString))
+        //        {
+        //            connection.Open();
+        //            TranStatus transaction = new TranStatus();
+        //            DynamicParameters parameter = new DynamicParameters();
+        //            parameter.Add("@SalesID", model.userId);
+        //            var result = await connection.QueryAsync<ClientListModel>("each_sales_ClientList", parameter, commandType: CommandType.StoredProcedure);
+        //            return result.ToList();
 
-        public async Task<List<ClientListModel>> each_sales_ClientList(ClientListModel model)
+        //        }
+        //    }
+
+        public List<ClientListModel> each_sales_ClientList(ClientListModel model, out int RowCount)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                TranStatus transaction = new TranStatus();
+
                 DynamicParameters parameter = new DynamicParameters();
                 parameter.Add("@SalesID", model.userId);
-                var result = await connection.QueryAsync<ClientListModel>("each_sales_ClientList", parameter, commandType: CommandType.StoredProcedure);
+                parameter.Add("@pageIndex", model.pageIndex);
+                parameter.Add("@pageSize", model.pageSize);
+
+                parameter.Add("@RowCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                var result = connection.Query<ClientListModel>("each_sales_ClientList", parameter, commandType: CommandType.StoredProcedure);
+                RowCount = parameter.Get<int>("@RowCount");
+                return result.ToList();
+
+            }
+        } 
+        
+        
+        public List<ClientListModel> each_user_ClientList(ClientListModel model, out int RowCount)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@UserID", model.userId);
+                parameter.Add("@pageIndex", model.pageIndex);
+                parameter.Add("@pageSize", model.pageSize);
+
+                parameter.Add("@RowCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                var result = connection.Query<ClientListModel>("each_user_ClientList", parameter, commandType: CommandType.StoredProcedure);
+                RowCount = parameter.Get<int>("@RowCount");
                 return result.ToList();
 
             }
         }
-
         //Update
         public async Task<TranStatus> updateClient(int ID, ClientListModel model)
         {

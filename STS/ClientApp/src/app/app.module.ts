@@ -50,7 +50,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SalesRegisterComponent } from './sales/register/register.component';
 import { SalesLayoutComponent } from './containerSales';
 import { SalesLoginComponent } from './sales/login/login.component';
-import { ModalModule } from 'ngx-bootstrap';
+import { ModalModule, TooltipModule } from 'ngx-bootstrap';
 import { NgbModal, NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 
@@ -59,7 +59,8 @@ import { from } from 'rxjs';
 // import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { AgmCoreModule } from '@agm/core';
 import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password.component';
-import { EmailService } from './service/email.service';
+import { ResetPasswordComponent } from './admin/reset-password/reset-password.component';
+import { ResetPasswordFormComponent } from './admin/reset-password-form/reset-password-form.component';
 
 @NgModule({
   imports: [
@@ -93,7 +94,7 @@ import { EmailService } from './service/email.service';
     RouterModule.forRoot(routes),
     ChartsModule,
     // AgmMarker,
-    // TooltipModule.forRoot(),
+     TooltipModule.forRoot(),
     // AgmCoreModule.forRoot({apiKey: 'AIzaSyBFP65PChjDJ1qtdD9RgkseGbNA4YclE2g'})
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAgmJb337SljuWJnzPXRyMjiTSL1DWcBq8'
@@ -109,7 +110,9 @@ import { EmailService } from './service/email.service';
     RegisterComponent,
     SalesRegisterComponent,
     SalesLoginComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
+    ResetPasswordFormComponent
     ],
 
   // providers: [{
@@ -117,7 +120,7 @@ import { EmailService } from './service/email.service';
   //   useClass: HashLocationStrategy
   // }],
   // schemas:  [ CUSTOM_ELEMENTS_SCHEMA ],
-  providers: [EmailService],
+  providers: [],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

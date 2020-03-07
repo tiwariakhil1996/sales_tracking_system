@@ -5,11 +5,48 @@ using System.Drawing;
 using System.IO;
 using System.Data;
 using System.Reflection;
+using System.Net.Mail;
+using System.Net;
+using System.Linq;
+using System.Threading;
 
 namespace STS.Common
 {
     public static class CommonHelper
     {
+       
+
+         //This funtion is used to send mail for forgot password.
+        public static void ResetPassword(string EmailTo, string Subject, string EmailMessage, bool needCC, Dictionary<string, byte[]> attachment = null)
+        {
+            string liveOrProd = STSSetting.PrimaryDomain;
+            MailMessage message = new MailMessage();
+            message.To.Add(EmailTo);
+            message.Subject = Subject;
+            message.From = new System.Net.Mail.MailAddress(STSSetting.UsernameEmail);
+            message.Body = EmailMessage;
+            message.IsBodyHtml = true;
+            if (attachment != null)
+            {
+                message.Attachments.Add(new Attachment(new MemoryStream(attachment.FirstOrDefault().Value), attachment.FirstOrDefault().Key + ".pdf"));
+            }
+            string password = (STSSetting.UsernamePassword);
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = STSSetting.PrimaryDomain;
+            smtp.Port = Convert.ToInt16(STSSetting.PrimaryPort);
+            smtp.EnableSsl = true;
+            smtp.Credentials = new NetworkCredential(STSSetting.UsernameEmail, password);
+            try
+            {
+                Thread thrdEmail = new Thread(new ThreadStart(() => smtp.Send(message)));
+                thrdEmail.IsBackground = true;
+                thrdEmail.Start();
+            }
+            catch (System.Exception ex)
+            {
+                ex.ToString();
+            }
+        }
         public static TranStatus TransactionErrorHandler(Exception ex)
         {
 
@@ -26,6 +63,9 @@ namespace STS.Common
             }
             return transaction;
         }
+
+     
+
 
         //To Store multiple products using Data Table
         public static DataTable ToDataTable<T>(this IList<T> items)

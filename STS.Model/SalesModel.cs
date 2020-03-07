@@ -14,7 +14,7 @@ namespace STS.Model
         public int Createdby { get; set; }
 
     }
-   
+
 
     //Login
     public partial class SalesLoginModel
@@ -39,7 +39,7 @@ namespace STS.Model
     //Change Password
     public partial class ChangepasswordModel
     {
-       //public int Id { get; set; }
+        //public int Id { get; set; }
 
         public string Oldpassword { get; set; }
         public string Newpassword { get; set; }
@@ -78,7 +78,9 @@ namespace STS.Model
         public int UserId { get; set; }
 
 
-       
+        public int pageIndex { get; set; }
+        public int pageSize { get; set; }
+        public int RowCount { get; set; }
     }
 
     public partial class Refresh_Sales_Location_Model
@@ -88,4 +90,12 @@ namespace STS.Model
         public string Longitude { get; set; }
 
     }
+
+    public partial class SalesList_DropdownModel
+    {
+        public int ID { get; set; }
+        public int UserId { get; set; }
+        public string SalesName { get; set; }
+    }
+
 }

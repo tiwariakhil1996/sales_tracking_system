@@ -5,7 +5,7 @@ import { ProductService } from '../../../service/product.service';
 import { ActivityService } from '../../../service/activity.service';
 import { ClientService } from '../../../service/client.service';
 import { salesregisterModel } from '../../../model/sales';
-import { activityModel, addactivityModel,latestactivityModel, addproductListingModel } from '../../../model/activity';
+import { activityModel, addactivityModel, latestactivityModel, addproductListingModel } from '../../../model/activity';
 import { productModel, productpriceModel } from '../../../model/product';
 import { clientModel } from '../../../model/client';
 import { ToastrService } from 'ngx-toastr';
@@ -46,6 +46,8 @@ export class AddactivityComponent implements OnInit {
   // _price: string;
   // quantity: number;
   amount: number;
+  grand_total: number;
+  dis_amount: number;
 
   isShow = true;
 
@@ -78,20 +80,45 @@ export class AddactivityComponent implements OnInit {
     this.addMoreproducts();
     this.static_price();
     this.checkRole(this.RoleJason);
+    // this.grandtotal();
+  }
+
+  TotalAmount(price: number, quantity: number,dis_per: number, i) {
+    // Amount
+    this.amount = price * quantity;
+    this.addproductlistDetails[i].amount = price * quantity;
+    console.log(this.amount);
+
+    // Dis amt
+    this.dis_amount = this.amount * dis_per / 100;
+    this.addproductlistDetails[i].discount_amt = this.amount * dis_per / 100;
+
+    // Total
+    this.grand_total = this.amount - this.dis_amount;
+    this.addproductlistDetails[i].total_price = this.amount - this.dis_amount;
+    console.log(this.grand_total);
 
   }
 
-  TotalAmount(_price: string, quantity: number) {
-    this.amount = parseInt(_price) * quantity;
-  }
+  // TotalAmount(price: number, quantity: number, i) {
+  //   // Amount
+  //   this.amount = price * quantity;
+  //   this.addproductlistDetails[i].amount = price * quantity;
+  //   console.log(this.amount);
 
-  // TotalAmount() {
-  //   this.amount = parseInt(this.product_price.price) + (this.addproductlist.quantity);
   // }
 
-  Total() {
-    this.amount = parseInt(this.product_price.price) + (this.addproductlist.quantity);
-  }
+
+  // Dis_amt(dis_per: number, i) {
+  //   // Discounted amount
+  //   this.dis_amount = this.amount * dis_per / 100;
+  //   this.addproductlistDetails[i].discount_amt = this.amount * dis_per / 100;
+
+  //   // Total
+  //   this.grand_total = this.amount - this.dis_amount;
+  //   this.addproductlistDetails[i].total_price = this.amount - this.dis_amount;
+  //   console.log(this.grand_total);
+  // }
 
   checkRole(RoleJason) {
     const result = JSON.parse(localStorage.getItem('adminLogin')) || [];
@@ -146,19 +173,19 @@ export class AddactivityComponent implements OnInit {
     });
   }
 
-  onProductChange(id) {
-    this.price(id);
+  onProductChange(id, i) {
+    this.price(id, i);
   }
-
-  price(id) {
+  price(id, i) {
     this.productService.price(id).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.ProductPrice) {
           this.product_priceDetails = data.ProductPrice;
+          //  console.log(this.product_priceDetails);
+          this.addproductlistDetails[i].price = parseInt(this.product_priceDetails[0].price);
         }
       }
     }, (err) => {
-
       console.log(err);
     });
   }
@@ -207,10 +234,10 @@ export class AddactivityComponent implements OnInit {
     this.sales.userid = this.user.id;
     // console.log(this.sales.userid);
 
-    this.salesService.RegisteredSalesList(this.sales).subscribe((data: any) => {
+    this.salesService.SalesList_dropdown(this.sales).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        if (data.RegisteredSalesList) {
-          this.salesDetails = data.RegisteredSalesList;
+        if (data.SalesList_dropdown) {
+          this.salesDetails = data.SalesList_dropdown;
           // console.log(this.salesDetails);
 
         }
@@ -224,7 +251,7 @@ export class AddactivityComponent implements OnInit {
   addMoreproducts() {
     this.addproductlistDetails.push({
       productId: null,
-      productname: null,
+      // productname: null,
       price: null,
       quantity: null,
       amount: null,
@@ -247,7 +274,6 @@ export class AddactivityComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.activity.createdby = this.user.id;
     this.activity.productList = this.addproductlistDetails;
-
 
     this.activityService.addActivity(this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {

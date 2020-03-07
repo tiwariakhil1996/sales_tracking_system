@@ -37,6 +37,8 @@ export class DashboardComponent implements OnInit {
   activityDetails: activityModel[] = [];
   totalActivity: any;
 
+  pageSize: number = 5;
+
   RoleJason = {
     ROle: [0, 1],
     Component: 'DashboardComponent'
@@ -47,13 +49,16 @@ export class DashboardComponent implements OnInit {
     private productService: ProductService,
     private salesService: SalesService,
     private activityService: ActivityService) {
-    this.productList();
-    this.clientList();
-
-    this.activityList();
+ 
   }
 
   ngOnInit() {
+    const item = { pageIndex: 0 };
+    this.productList(item);
+    this.clientList(item);
+    // this.SalesList(item);
+    this.activityList(item);
+
     this.checkRole(this.RoleJason);
 
   }
@@ -83,10 +88,13 @@ export class DashboardComponent implements OnInit {
   //   });
   // }
 
-  productList() {
+  productList(item) {
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.product.userid = this.user.id;
     // console.log(this.product.userid);
+
+    this.product.pageIndex = item.pageIndex;
+    this.product.pageSize = this.pageSize;
 
     this.productService.each_sales_ProductList(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -116,10 +124,13 @@ export class DashboardComponent implements OnInit {
   //   });
   // }
 
-  clientList() {
+  clientList(item) {
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.client.userid = this.user.id;
     // console.log(this.client.userid);
+
+    this.client.pageIndex = item.pageIndex;
+    this.client.pageSize = this.pageSize;
 
     this.clientService.each_sales_ClientList(this.client).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -135,10 +146,13 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  activityList() {
+  activityList(item) {
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.activity.userid = this.user.id;
     // console.log(this.activity.userid);
+
+    this.activity.pageIndex = item.pageIndex;
+    this.activity.pageSize = this.pageSize;
 
     this.activityService.each_sales_activityList(this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {

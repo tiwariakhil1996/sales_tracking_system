@@ -1,9 +1,10 @@
+import { SendMailModel } from './../../model/sendmail';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from '../../service/admin.service';
 import { registerModel } from '../../model/admin';
-import { EmailService } from '../../service/email.service';
+import { SendEmailService } from '../../service/sendemail.service';
 
 
 @Component({
@@ -17,48 +18,48 @@ export class ForgotPasswordComponent implements OnInit {
   loginDetail = new registerModel();
   adminDetails: registerModel[] = [];
 
-  RoleJason = {
-    ROle: [0, 1],
-    Component: 'ForgotPasswordComponent'
-  };
+  // RoleJason = {
+  //   ROle: [0, 1],
+  //   Component: 'ForgotPasswordComponent'
+  // };
 
   constructor(private router: Router,
     private adminService: AdminService,
     private toastr: ToastrService,
-    private _emailService: EmailService) {
-
+    private sendmail: SendEmailService
+  ) {
   }
 
   ngOnInit() {
     // this.checkRole(this.RoleJason);
   }
 
-  checkRole(RoleJason) {
-    const result = JSON.parse(localStorage.getItem('adminLogin')) || [];
-    if (this.RoleJason.Component === RoleJason.Component) {
-      console.log(result);
-      if (!this.RoleJason.ROle.includes(result.userType)) {
-        this.router.navigate(['admin/login']);
-      }
-    }
+  // checkRole(RoleJason) {
+  //   const result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+  //   if (this.RoleJason.Component === RoleJason.Component) {
+  //     console.log(result);
+  //     if (!this.RoleJason.ROle.includes(result.userType)) {
+  //       this.router.navigate(['admin/login']);
+  //     }
+  //   }
+  // }
+
+
+  Sendmail() {
+    
+    let getemail = new SendMailModel();
+    getemail.UsernameEmail = this.loginDetail.email;
+    this.sendmail.sendmail(getemail).subscribe((data: any) => {
+      this.toastr.success('An Email has been sent to you with instructions to reset your password.', '', {
+        disableTimeOut: false,
+        timeOut: 5000
+      });
+
+    });
   }
 
-
-  submitLogin() {
-
+  backtologinpage() {
+    this.router.navigate(['/admin/login']);
   }
 
-
-  // onSubmit(name, email, message) {
-  //   this._emailService.sendEmail({
-  //     from: 'Mailgun Sandbox <postmaster@sandboxXXXXXXXXXXXXXXXXXXXXX.mailgun.org>',
-  //     to: email,
-  //     name: name,
-  //     text: message,
-  //   })
-  //   .subscribe(
-  //     () => {},
-  //     err => console.log(err)
-  //   );
-  // } 
 }

@@ -10,9 +10,6 @@ export class addactivityModel {
     salesId: number;
     salesName: string;
     contact: String;
-    // address: string;
-    // latitude: string;
-    // longitude: string;
     appointmentDate: string;
     createdby: number;
     modifiedby: number;
@@ -26,7 +23,7 @@ export class addactivityModel {
 
 export class addproductListingModel {
     productId: number;
-    productname: string;
+    // productname: string;
     price: number;
     quantity: number;
     amount: number;
@@ -81,6 +78,10 @@ export class activityModel {
     user_id: number;
     status: number;
     statusname: string;
+
+    pageIndex: number;
+    pageSize: number;
+    search: string;
 }
 
 export class LocationModel {
@@ -152,4 +153,10 @@ export class searchModel {
     salesName: string;
     contact: String;
     appointmentDate: string;
+}
+
+export class paginationModel {
+
+    pageSize: number;
+    pageIndex: number;
 }

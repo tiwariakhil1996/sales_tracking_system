@@ -7,16 +7,19 @@ import { ActivityRoutingModule } from './activity-routing.module';
 import { ActivityComponent } from './activity.component';
 import { AddactivityComponent } from './addactivity/addactivity.component';
 import { CurrentactivityComponent } from './currentactivity/currentactivity.component';
-import { TrackActivityComponent } from './track-activity/track-activity.component';
+
 // Angular
 
 import { AgmCoreModule } from '@agm/core';
+import { TabsModule, TooltipModule } from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    TabsModule.forRoot(),
     ActivityRoutingModule,
+    TooltipModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAgmJb337SljuWJnzPXRyMjiTSL1DWcBq8'
       // libraries: ['places']
@@ -25,8 +28,7 @@ import { AgmCoreModule } from '@agm/core';
   declarations: [
     ActivityComponent,
     AddactivityComponent,
-    CurrentactivityComponent,
-    TrackActivityComponent
+    CurrentactivityComponent
   ]
 })
 export class ActivityModule { }

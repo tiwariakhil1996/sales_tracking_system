@@ -3,7 +3,7 @@ import { SalesService } from '../../service/sales.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BsModalRef } from 'ngx-bootstrap';
-import { salesregisterModel } from '../../model/sales';
+import { salesregisterModel, paginationModel } from '../../model/sales';
 import { registerModel } from '../../model/admin';
 import { Router } from '@angular/router';
 
@@ -21,6 +21,20 @@ export class SalesdataComponent implements OnInit {
   sales = new salesregisterModel();
   salesDetails: salesregisterModel[] = [];
 
+  // RowCount: number;
+  // pageSize: number = 6;
+  // totalPageList: paginationModel[] = [];
+
+  // Pagination
+  RowCount: number;
+  pageSize: number = 5;
+  totalPageList: paginationModel[] = [];
+  totalPageSize:number;
+  pagesize:any;
+  currentPageIndex: number = 0;
+  pageOfItems: Array<any>;
+
+  // Authentication
   RoleJason = {
     ROle: [0, 1],
     Component: 'SalesdataComponent'
@@ -30,12 +44,15 @@ export class SalesdataComponent implements OnInit {
     private modalService: NgbModal,
     private toastr: ToastrService,
     private router: Router) {
-    this.SalesList();
+    // this.SalesList();
     // this.active_deactive_SalesList();
   }
 
   ngOnInit() {
     this.checkRole(this.RoleJason);
+
+    const item = { pageIndex: 0 };
+    this.SalesList(item);
   }
 
   checkRole(RoleJason) {
@@ -66,16 +83,47 @@ export class SalesdataComponent implements OnInit {
   //   });
   // }
 
-  SalesList() {
+  // SalesList() {
+  //   this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+  //   this.sales.userid = this.user.id;
+  //   // console.log(this.sales.userid);
+
+  //   this.salesService.RegisteredSalesList(this.sales).subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.RegisteredSalesList) {
+  //         this.salesDetails = data.RegisteredSalesList;
+  //         // console.log(this.salesDetails);
+
+  //       }
+  //     }
+  //   }, (err) => {
+
+  //   });
+  // }
+
+
+  SalesList(item) {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.sales.userid = this.user.id;
     // console.log(this.sales.userid);
+    this.sales.pageIndex = item.pageIndex;
+    this.sales.pageSize = this.pageSize;
 
     this.salesService.RegisteredSalesList(this.sales).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.RegisteredSalesList) {
           this.salesDetails = data.RegisteredSalesList;
-          // console.log(this.salesDetails);
+
+        }
+        if (data.RowCount) {
+          this.RowCount = data.RowCount
+        }
+        this.totalPageSize = Math.ceil(this.RowCount / this.pageSize);
+        // console.log(totalPageSize);
+        
+        this.totalPageList = [];
+        for (var i = 0; i < this.totalPageSize; i++) {
+          this.totalPageList.push({ pageSize: i + 1, pageIndex: i })
 
         }
       }
@@ -83,11 +131,13 @@ export class SalesdataComponent implements OnInit {
 
     });
   }
-
+  
   deleteSales(id: number) {
     this.salesService.deleteSales(id).subscribe(data => {
       // this.salesService.SalesList();
-      this.SalesList();
+      // this.SalesList();
+      const item = { pageIndex: 0 };
+      this.SalesList(item);
     });
     this.toastr.success('Sales Account deleted Successful', 'Successful', {
       disableTimeOut: false,
@@ -98,7 +148,9 @@ export class SalesdataComponent implements OnInit {
   changeStatus(id: number) {
     // console.log(id);
     this.salesService.changeStatus(id).subscribe(data => {
-      this.SalesList();
+      // this.SalesList();
+      const item = { pageIndex: 0 };
+      this.SalesList(item);
     });
   }
 

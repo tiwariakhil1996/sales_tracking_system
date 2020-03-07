@@ -18,6 +18,10 @@ export class CategorySubcategoryService {
     return this.http.get('/api/Category_Subcategory/CategoryList');
   }
 
+  // categoryList(data) {
+  //   return this.http.get('/api/Category_Subcategory/CategoryList',data);
+  // }
+
   deleteCategory(cid: number) {
     return this.http.delete('/api/Category_Subcategory/deleteCategory/' + cid);
   }

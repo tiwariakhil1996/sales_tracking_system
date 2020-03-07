@@ -149,16 +149,36 @@ namespace STS.DAL
         }
 
 
-        public async Task<List<SalesListModel>> RegisteredSalesList(SalesListModel model)
+        //public async Task<List<SalesListModel>> RegisteredSalesList(SalesListModel model)
+        //{
+        //    using (var connection = new SqlConnection(ConnectionString))
+        //    {
+        //        connection.Open();
+        //        TranStatus transaction = new TranStatus();
+        //        DynamicParameters parameter = new DynamicParameters();
+        //        parameter.Add("@AdminID", model.UserId);
+        //        var result = await connection.QueryAsync<SalesListModel>("RegisteredSalesList", parameter, commandType: CommandType.StoredProcedure);
+        //        return result.ToList();
+
+        //    }
+        //}
+
+        public List<SalesListModel>RegisteredSalesList(SalesListModel model, out int RowCount)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                TranStatus transaction = new TranStatus();
+             
                 DynamicParameters parameter = new DynamicParameters();
                 parameter.Add("@AdminID", model.UserId);
-                var result = await connection.QueryAsync<SalesListModel>("RegisteredSalesList", parameter, commandType: CommandType.StoredProcedure);
+                parameter.Add("@pageIndex", model.pageIndex);
+                parameter.Add("@pageSize", model.pageSize);
+
+                parameter.Add("@RowCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                var result = connection.Query<SalesListModel>("RegisteredSalesList", parameter, commandType: CommandType.StoredProcedure);
+                RowCount = parameter.Get<int>("@RowCount");
                 return result.ToList();
+         
 
             }
         }
@@ -226,6 +246,21 @@ namespace STS.DAL
                 transaction.returnMessage = parameter.Get<string>("@Message");
                 transaction.code = parameter.Get<int>("@Code");
                 return transaction;
+
+            }
+        }
+
+        // Sales list in dropdown
+        public async Task<List<SalesList_DropdownModel>> SalesList_dropdown(SalesList_DropdownModel model)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@AdminID", model.UserId);
+                var result = await connection.QueryAsync<SalesList_DropdownModel>("SalesList_dropdown", parameter, commandType: CommandType.StoredProcedure);
+                return result.ToList();
 
             }
         }

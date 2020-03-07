@@ -16,9 +16,15 @@ namespace STS.BLL.Interface
         //Display
         Task<List<ClientListModel>> ClientList();
 
-        Task<List<ClientListModel>> each_admin_ClientList(ClientListModel model);
+        //Task<List<ClientListModel>> each_admin_ClientList(ClientListModel model);
 
-        Task<List<ClientListModel>> each_sales_ClientList(ClientListModel model);
+        List<ClientListModel> each_admin_ClientList(ClientListModel model, out int RowCount);
+
+        //Task<List<ClientListModel>> each_sales_ClientList(ClientListModel model);
+        List<ClientListModel> each_sales_ClientList(ClientListModel model, out int RowCount);
+
+        List<ClientListModel> each_user_ClientList(ClientListModel model, out int RowCount);
+
 
         //Update
         Task<TranStatus> updateClient(int ID, ClientListModel model);

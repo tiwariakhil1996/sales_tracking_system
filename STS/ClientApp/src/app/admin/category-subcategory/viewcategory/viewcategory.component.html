@@ -44,7 +44,19 @@
           </tr>
         </tbody>
       </table>
+
+      <div class="message" *ngIf="categoryDetails.length <= 0">
+        <p>No Record</p>
+      </div>
+
+
     </div>
+    <!-- <ul class="pagination" style="margin-left: 600px;">
+      <li class="page-item active" *ngFor="let item of categoryList " (click)="clientList(item)">
+          <a class="page-link" routerLink="/admin/client/viewclient">
+            <span class="sr-only"></span>{{item.pageSize}}</a>
+      </li>
+    </ul> -->
   </div>
 </div>
 </div>

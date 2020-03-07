@@ -5,7 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CountryStateCityService } from '../../../service/country-state-city.service';
 import { ClientService } from '../../../service/client.service';
-import { clientModel, clientListModel } from '../../../model/client';
+import { clientModel, clientListModel, paginationModel } from '../../../model/client';
 import { countryModel, stateModel, cityModel } from '../../../model/country-state-city';
 import { registerModel } from '../../../model/admin';
 
@@ -30,6 +30,16 @@ export class ViewclientComponent implements OnInit {
   city = new cityModel();
   cityDetails: cityModel[] = [];
 
+  // Pagination
+  RowCount: number;
+  pageSize: number = 5;
+  totalPageList: paginationModel[] = [];
+  totalPageSize:number;
+  pagesize:any;
+  currentPageIndex: number = 0;
+  pageOfItems: Array<any>;
+  
+  // Authentication
   RoleJason = {
     ROle: [0, 1],
     Component: 'ViewClientComponent'
@@ -40,13 +50,17 @@ export class ViewclientComponent implements OnInit {
     private clientService: ClientService,
     private modalService: NgbModal,
     private country_state_cityService: CountryStateCityService) {
-    this.clientList();
+    // this.clientList();
 
     this.countryList();
-
+  
+    
   }
   ngOnInit() {
     this.checkRole(this.RoleJason);
+
+    const item = { pageIndex: 0 };
+    this.clientList(item);
   }
 
   checkRole(RoleJason) {
@@ -76,22 +90,59 @@ export class ViewclientComponent implements OnInit {
   //   });
   // }
 
-  clientList() {
+  // clientList() {
+  //   this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+  //   this.client.userid = this.user.id;
+  //   // console.log(this.client.userid);
+
+  //   this.clientService.each_admin_ClientList(this.client).subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.each_admin_ClientList) {
+  //         this.clientDetails = data.each_admin_ClientList;
+  //         // console.log(this.clientDetails);
+
+  //       }
+  //     }
+  //   }, (err) => {
+
+  //   });
+  // }
+
+  // onChangePage(pageOfItems: Array<any>) {
+  //   // update current page of items
+  //   this.pageOfItems = pageOfItems;
+  // }
+
+  clientList(item) {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.client.userid = this.user.id;
-    // console.log(this.client.userid);
+ 
+    this.client.pageIndex = item.pageIndex;
+    this.client.pageSize = this.pageSize;
 
     this.clientService.each_admin_ClientList(this.client).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.each_admin_ClientList) {
           this.clientDetails = data.each_admin_ClientList;
-          // console.log(this.clientDetails);
 
         }
+        if (data.RowCount) {
+          this.RowCount = data.RowCount
+        }
+        this.totalPageSize = Math.ceil(this.RowCount / this.pageSize);
+        // console.log(totalPageSize);
+        
+        this.totalPageList = [];
+        for (var i = 0; i < this.totalPageSize; i++) {
+          this.totalPageList.push({ pageSize: i + 1, pageIndex: i })
+
+        }
+        this.currentPageIndex=item.pageIndex;
       }
     }, (err) => {
 
     });
+
   }
 
   // Edit
@@ -115,15 +166,18 @@ export class ViewclientComponent implements OnInit {
         });
       }
       this.client = new clientListModel();
-      this.clientList();
+      // this.clientList();
+      const item = { pageIndex: 0 };
+      this.clientList(item);
     }, (err) => {
     });
   }
 
   onDelete(id: number) {
-    // if (confirm('Are you sure to delete this record ?') === true) {
     this.clientService.deleteClient(id).subscribe(data => {
-      this.clientList();
+      // this.clientList();
+      const item = { pageIndex: 0 };
+      this.clientList(item);
     });
     // }
     this.toastr.success('Client is deleted Successful', 'Successful', {
@@ -185,7 +239,9 @@ export class ViewclientComponent implements OnInit {
   changeStatus(id: number) {
     // console.log(id);
     this.clientService.changeStatus(id).subscribe(data => {
-      this.clientList();
+      // this.clientList();
+      const item = { pageIndex: 0 };
+      this.clientList(item);
     });
   }
 

@@ -4,7 +4,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
-import { categoryDataModel } from '../../../model/category-subcategory';
+import { categoryDataModel, paginationModel } from '../../../model/category-subcategory';
 import { registerModel } from '../../../model/admin';
 
 @Component({
@@ -14,6 +14,10 @@ import { registerModel } from '../../../model/admin';
 })
 export class ViewcategoryComponent implements OnInit {
 
+  RowCount: number;
+  pageSize: number = 5;
+  totalPageList: paginationModel[] = [];
+  
   user = new registerModel();
 
   modalRef: BsModalRef;
@@ -31,11 +35,15 @@ export class ViewcategoryComponent implements OnInit {
     private modalServices: BsModalService,
     private modalService: NgbModal,
     private toastr: ToastrService) {
-    this.categoryList();
+    // this.categoryList();
   }
 
   ngOnInit() {
     this.checkRole(this.RoleJason);
+
+    this.categoryList();
+    // const item = { pageIndex: 0 };
+    // this.categoryList(item);
   }
 
   checkRole(RoleJason) {
@@ -65,6 +73,38 @@ export class ViewcategoryComponent implements OnInit {
     });
   }
 
+  
+  // categoryList(item) {
+  //   // this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+  //   // this.sales.userid = this.user.id;
+
+  //   // this.sales.pageIndex = item.pageIndex;
+  //   // this.sales.pageSize = this.pageSize;
+
+  //   this.categoryService.categoryList().subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.CategoryList) {
+  //         this.categoryDetails = data.CategoryList;
+  //         // console.log(this.categoryDetails);
+  //       }
+  //       if (data.RowCount) {
+  //         this.RowCount = data.RowCount
+  //       }
+  //       var totalPageSize = Math.ceil(this.RowCount / this.pageSize);
+  //       console.log(totalPageSize);
+        
+  //       this.totalPageList = [];
+  //       for (var i = 0; i < totalPageSize; i++) {
+  //         this.totalPageList.push({ pageSize: i + 1, pageIndex: i })
+
+  //       }
+  //     }
+  //   }, (err) => {
+
+  //     // console.log(err);
+  //   });
+  // }
+
   openupdatemodal(content, item) {
     this.category = JSON.parse(JSON.stringify(item));
     // data show in model use this line and store the data in user and display in ui
@@ -88,7 +128,9 @@ export class ViewcategoryComponent implements OnInit {
         });
       }
       this.category = new categoryDataModel();
-      this.categoryList();
+       this.categoryList();
+    //   const item = { pageIndex: 0 };
+    // this.categoryList(item);
     }, (err) => {
     });
   }
@@ -98,7 +140,9 @@ export class ViewcategoryComponent implements OnInit {
   deleteCategory(cid: number) {
     // if (confirm('Are you sure to delete this record ?') === true) {
     this.categoryService.deleteCategory(cid).subscribe(data => {
-      this.categoryList();
+     this.categoryList();
+    //   const item = { pageIndex: 0 };
+    // this.categoryList(item);
     });
     // }
     this.toastr.success('Category deleted Successful', 'Successful', {
@@ -111,6 +155,8 @@ export class ViewcategoryComponent implements OnInit {
     // console.log(id);
     this.categoryService.changeStatus(id).subscribe(data => {
       this.categoryList();
+    //   const item = { pageIndex: 0 };
+    // this.categoryList(item);
     });
   }
 

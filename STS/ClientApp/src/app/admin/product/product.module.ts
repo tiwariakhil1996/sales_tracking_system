@@ -6,7 +6,7 @@ import { ProductComponent } from './product.component';
 import { ProductRoutingModule } from './product-routing.module';
 import { AddproductComponent } from './addproduct/addproduct.component';
 import { ViewproductComponent } from './viewproduct/viewproduct.component';
-import { ModalModule } from 'ngx-bootstrap';
+import { ModalModule, TooltipModule } from 'ngx-bootstrap';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductImagesComponent } from './product-images/product-images.component';
 // Angular
@@ -15,7 +15,8 @@ import { ProductImagesComponent } from './product-images/product-images.componen
   imports: [
     CommonModule,
     FormsModule,
-    ProductRoutingModule
+    ProductRoutingModule,
+    TooltipModule.forRoot()
   ],
   declarations: [
     ProductComponent,

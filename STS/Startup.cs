@@ -46,6 +46,12 @@ namespace STS
             });
 
             STSSetting.ConnectionString = Configuration.GetSection("ConnectionString:STS").Value;
+            //Send email for forgot password
+            STSSetting.PrimaryDomain = Configuration.GetSection("EmailSettings:PrimaryDomain").Value;
+            STSSetting.PrimaryPort = Configuration.GetSection("EmailSettings:PrimaryPort").Value;
+            STSSetting.UsernameEmail = Configuration.GetSection("EmailSettings:UsernameEmail").Value;
+            STSSetting.UsernamePassword = Configuration.GetSection("EmailSettings:UsernamePassword").Value;
+
             DependencyResolver(services);
         }
 
@@ -63,6 +69,9 @@ namespace STS
             services.AddSingleton<ICategory_Subcategory, Category_SubcategoryServices>();
             services.AddSingleton<IActivity, ActivityServices>();
             services.AddSingleton<ICountry_State_City, Country_State_CityServices>();
+            services.AddSingleton<IMail, MailServices>();
+            //services.AddSingleton<IResetPassword, ResetPasswordServices>();
+
 
         }
 

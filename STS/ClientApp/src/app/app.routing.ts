@@ -19,6 +19,8 @@ import { SalesRegisterComponent } from './sales/register/register.component';
 import { SalesLoginComponent } from './sales/login/login.component';
 
 import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './admin/reset-password/reset-password.component';
+import { ResetPasswordFormComponent } from './admin/reset-password-form/reset-password-form.component';
 
 
 export const routes: Routes = [
@@ -62,6 +64,8 @@ export const routes: Routes = [
   },
 
 
+
+
   {
     path: 'admin/forgot-password',
     component: ForgotPasswordComponent,
@@ -69,7 +73,20 @@ export const routes: Routes = [
       title: 'Forgot Password Page'
     }
   },
-
+  {
+    path: 'admin/reset-password',
+    component: ResetPasswordComponent,
+    data: {
+      title: 'Forgot Password Page'
+    }
+  },
+  {
+    path: 'admin/reset-password-form',
+    component: ResetPasswordFormComponent,
+    data: {
+      title: 'Forgot Password Form'
+    }
+  },
 
   {
     path: 'admin',
@@ -107,26 +124,26 @@ export const routes: Routes = [
         path: 'category-subcategory',
         loadChildren: () => import('./admin/category-subcategory/category-subcategory.module').then(m => m.CategorySubcategoryModule)
       },
-      {
-        path: 'base',
-        loadChildren: () => import('./admin/base/base.module').then(m => m.BaseModule)
-      },
-      {
-        path: 'icons',
-        loadChildren: () => import('./admin/icons/icons.module').then(m => m.IconsModule)
-      },
-      {
-        path: 'notifications',
-        loadChildren: () => import('./admin/notifications/notifications.module').then(m => m.NotificationsModule)
-      },
-      {
-        path: 'theme',
-        loadChildren: () => import('./admin/theme/theme.module').then(m => m.ThemeModule)
-      },
-      {
-        path: 'widgets',
-        loadChildren: () => import('./admin/widgets/widgets.module').then(m => m.WidgetsModule)
-      }
+      // {
+      //   path: 'base',
+      //   loadChildren: () => import('./admin/base/base.module').then(m => m.BaseModule)
+      // },
+      // {
+      //   path: 'icons',
+      //   loadChildren: () => import('./admin/icons/icons.module').then(m => m.IconsModule)
+      // },
+      // {
+      //   path: 'notifications',
+      //   loadChildren: () => import('./admin/notifications/notifications.module').then(m => m.NotificationsModule)
+      // },
+      // {
+      //   path: 'theme',
+      //   loadChildren: () => import('./admin/theme/theme.module').then(m => m.ThemeModule)
+      // },
+      // {
+      //   path: 'widgets',
+      //   loadChildren: () => import('./admin/widgets/widgets.module').then(m => m.WidgetsModule)
+      // }
     ]
   },
 
@@ -173,10 +190,6 @@ export const routes: Routes = [
       {
         path: 'activity',
         loadChildren: () => import('./sales/activity/activity.module').then(m => m.ActivityModule)
-      },
-      {
-        path: 'map',
-        loadChildren: () => import('./sales/map/map.module').then(m => m.MapModule)
       }
      ] },
 

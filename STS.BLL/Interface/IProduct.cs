@@ -17,12 +17,20 @@ namespace STS.BLL.Interface
         Task<List<ProductListModel>> ProductList();
 
         // Display each admin List Individually
-        Task<List<ProductListModel>> each_admin_ProductList(ProductListModel model);
+        //Task<List<ProductListModel>> each_admin_ProductList(ProductListModel model);
+
+        List<ProductListModel> each_admin_ProductList(ProductListModel model, out int RowCount);
+
 
         Task<List<Product_Image_ListModel>> Product_Images_List(int id);
 
         // Display each sales List Individually
-        Task<List<ProductListModel>> each_sales_ProductList(ProductListModel model);
+        //Task<List<ProductListModel>> each_sales_ProductList(ProductListModel model);
+
+        List<ProductListModel> each_sales_ProductList(ProductListModel model, out int RowCount);
+
+        List<ProductListModel> each_user_ProductList(ProductListModel model, out int RowCount);
+
 
         // Get Product Price
         Task<List<ProductPriceModel>> ProductPrice(int id);

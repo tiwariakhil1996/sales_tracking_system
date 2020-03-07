@@ -54,24 +54,54 @@ namespace STS.BLL.Service
 
 
         // Display each sales List Individually
-        public async Task<List<ActivityListModel>> each_sales_activityList(ActivityListModel model)
+        //public async Task<List<ActivityListModel>> each_sales_activityList(ActivityListModel model)
+        //{
+        //    using (activityRepository = new ActivityRepository())
+        //    {
+        //        return await activityRepository.each_sales_activityList(model);
+        //    }
+        //}
+
+        public List<ActivityListModel> each_sales_activityList(ActivityListModel model, out int RowCount)
         {
             using (activityRepository = new ActivityRepository())
             {
-                return await activityRepository.each_sales_activityList(model);
+                return activityRepository.each_sales_activityList(model, out RowCount);
             }
+
+
+        } 
+        
+        public List<admin_ActivityListModel> each_user_activityList(admin_ActivityListModel model, out int RowCount)
+        {
+            using (activityRepository = new ActivityRepository())
+            {
+                return activityRepository.each_user_activityList(model, out RowCount);
+            }
+
+
         }
 
         // Display each admin List Individually
-        public async Task<List<admin_ActivityListModel>> each_admin_activityList(admin_ActivityListModel model)
+        //public async Task<List<admin_ActivityListModel>> each_admin_activityList(admin_ActivityListModel model)
+        //{
+        //    using (activityRepository = new ActivityRepository())
+        //    {
+        //        return await activityRepository.each_admin_activityList(model);
+        //    }
+
+        //}
+
+
+        public List<admin_ActivityListModel> each_admin_activityList(admin_ActivityListModel model, out int RowCount)
         {
             using (activityRepository = new ActivityRepository())
             {
-                return await activityRepository.each_admin_activityList(model);
+                return activityRepository.each_admin_activityList(model, out RowCount);
             }
 
-        }
 
+        }
         // Display Sales lat lng ..whom admin has added
         public async Task<List<Sales_Location_Model>> each_admins_sales_Location(Sales_Location_Model model)
         {

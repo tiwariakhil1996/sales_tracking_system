@@ -28,7 +28,7 @@ namespace STS.Model
     {
 
         public int ProductId { get; set; }
-        //public int Price { get; set; }
+        public int Price { get; set; }
         public int Quantity { get; set; }
         public int Amount { get; set; }
         public int Discount_per { get; set; }
@@ -102,6 +102,10 @@ namespace STS.Model
         public int status { get; set; }
         public string Statusname { get; set; }
         public string followup_description { get; set; }
+
+        public int pageIndex { get; set; }
+        public int pageSize { get; set; }
+        public int RowCount { get; set; }
     }
 
     public partial class Activity_Status_Model
@@ -178,6 +182,11 @@ namespace STS.Model
         public int status { get; set; }
         public string Statusname { get; set; }
         public string followup_description { get; set; }
+
+        public int pageIndex { get; set; }
+        public int pageSize { get; set; }
+        public int RowCount { get; set; }
+        public string Search { get; set; }
     }
 
     public partial class Update_products_in_ActivityModel

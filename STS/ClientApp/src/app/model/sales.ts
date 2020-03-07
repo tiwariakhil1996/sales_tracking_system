@@ -22,6 +22,9 @@ export class salesregisterModel {
     longitude: string;
 
     userType: number;
+
+    pageSize: number;
+    pageIndex: number;
 }
 
 export class sales_avatarModel {
@@ -41,4 +44,10 @@ export class changePasswordModel {
     newpassword: string;
     confirmpassword: string;
     modifiedby: number;
+}
+
+export class paginationModel {
+
+    pageSize: number;
+    pageIndex: number;
 }

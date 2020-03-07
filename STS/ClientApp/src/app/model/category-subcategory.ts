@@ -17,3 +17,8 @@ export class subcategoryDataModel {
     modifiedby:number;
 }
 
+export class paginationModel {
+
+    pageSize: number;
+    pageIndex: number;
+}

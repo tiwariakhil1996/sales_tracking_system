@@ -60,7 +60,7 @@ export class SalesLayoutComponent implements OnInit {
     private toastr: ToastrService,
     private activityService: ActivityService) {
 
-    this.activityList();
+    // this.activityList();
     this.newactivityList();
 
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
@@ -200,25 +200,25 @@ export class SalesLayoutComponent implements OnInit {
   }
 
 
-  activityList() {
-    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
-    this.activity.userid = this.user.id;
-    // console.log(this.activity.userid);
+  // activityList() {
+  //   this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+  //   this.activity.userid = this.user.id;
+  //   // console.log(this.activity.userid);
 
-    this.activityService.each_sales_activityList(this.activity).subscribe((data: any) => {
-      if (data.Status.code === 0) {
-        if (data.each_sales_activityList) {
-          this.activityDetails = data.each_sales_activityList;
-          // console.log(this.activityDetails);
-          this.totalActivity = this.activityDetails.length;
-          // console.log(this.totalActivity);
+  //   this.activityService.each_sales_activityList(this.activity).subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.each_sales_activityList) {
+  //         this.activityDetails = data.each_sales_activityList;
+  //         // console.log(this.activityDetails);
+  //         this.totalActivity = this.activityDetails.length;
+  //         // console.log(this.totalActivity);
 
-        }
-      }
-    }, (err) => {
+  //       }
+  //     }
+  //   }, (err) => {
 
-    });
-  }
+  //   });
+  // }
 
 
   newactivityList() {
