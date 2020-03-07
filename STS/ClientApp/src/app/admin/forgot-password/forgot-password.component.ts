@@ -1,9 +1,10 @@
+import { SendMailModel } from './../../model/sendmail';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from '../../service/admin.service';
 import { registerModel } from '../../model/admin';
-import { EmailService } from '../../service/email.service';
+import { SendEmailService } from '../../service/sendemail.service';
 
 
 @Component({
@@ -25,8 +26,8 @@ export class ForgotPasswordComponent implements OnInit {
   constructor(private router: Router,
     private adminService: AdminService,
     private toastr: ToastrService,
-    private _emailService: EmailService) {
-
+    private sendmail: SendEmailService
+  ) {
   }
 
   ngOnInit() {
@@ -44,13 +45,17 @@ export class ForgotPasswordComponent implements OnInit {
   // }
 
 
-  sendmail() {
-      this.toastr.success('An email has been send to you with instructions to reset your password.', 'Successfully', {
-      disableTimeOut: false,
-      timeOut: 2000
-    });
-    // this.router.navigate(['/admin/login']);
+  Sendmail() {
+    
+    let getemail = new SendMailModel();
+    getemail.UsernameEmail = this.loginDetail.email;
+    this.sendmail.sendmail(getemail).subscribe((data: any) => {
+      this.toastr.success('An Email has been sent to you with instructions to reset your password.', '', {
+        disableTimeOut: false,
+        timeOut: 5000
+      });
 
+    });
   }
 
   backtologinpage() {

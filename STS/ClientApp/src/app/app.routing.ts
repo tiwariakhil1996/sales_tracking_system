@@ -19,6 +19,8 @@ import { SalesLoginComponent } from './sales/login/login.component';
 
 import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password.component';
 import { AppComponent } from './app.component';
+import { ResetPasswordComponent } from './admin/reset-password/reset-password.component';
+import { ResetPasswordFormComponent } from './admin/reset-password-form/reset-password-form.component';
 
 
 export const routes: Routes = [
@@ -79,6 +81,21 @@ export const routes: Routes = [
     component: ForgotPasswordComponent,
     data: {
       title: 'Forgot Password Page'
+    }
+  },
+
+  {
+    path: 'admin/reset-password',
+    component: ResetPasswordComponent,
+    data: {
+      title: 'Forgot Password Page'
+    }
+  },
+  {
+    path: 'admin/reset-password-form',
+    component: ResetPasswordFormComponent,
+    data: {
+      title: 'Forgot Password Form'
     }
   },
 

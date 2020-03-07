@@ -31,23 +31,27 @@ namespace STS
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //mail
-            services.AddScoped<SmtpClient>((serviceProvider) =>
-            {
-                var config = serviceProvider.GetRequiredService<IConfiguration>();
-                return new SmtpClient()
-                {
-                    Host = config.GetValue<String>("Email:Smtp:Host"),
-                    Port = config.GetValue<int>("Email:Smtp:Port"),
-                    Credentials = new NetworkCredential(
-                            config.GetValue<String>("Email:Smtp:Username"),
-                            config.GetValue<String>("Email:Smtp:Password")
-                        )
-                };
-            });
 
-            services.AddMvc();
+            //services.Configure<SmtpConfig>(Configuration.GetSection("Smtp"));
+            //services.AddMvc();
 
+
+            ////mail
+            //services.AddScoped<SmtpClient>((serviceProvider) =>
+            //{
+            //    var config = serviceProvider.GetRequiredService<IConfiguration>();
+            //    return new SmtpClient()
+            //    {
+            //        Host = config.GetValue<String>("Email:Smtp:Host"),
+            //        Port = config.GetValue<int>("Email:Smtp:Port"),
+            //        Credentials = new NetworkCredential(
+            //                config.GetValue<String>("Email:Smtp:Username"),
+            //                config.GetValue<String>("Email:Smtp:Password")
+            //            )
+            //    };
+            //});
+
+            //services.AddMvc();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
 
@@ -70,8 +74,16 @@ namespace STS
 
             //Database Connectivity
             STSSetting.ConnectionString = Configuration.GetSection("ConnectionString:STS").Value;
+            //Send email for forgot password
+            STSSetting.PrimaryDomain = Configuration.GetSection("EmailSettings:PrimaryDomain").Value;
+            STSSetting.PrimaryPort = Configuration.GetSection("EmailSettings:PrimaryPort").Value;
+            STSSetting.UsernameEmail = Configuration.GetSection("EmailSettings:UsernameEmail").Value;
+            STSSetting.UsernamePassword = Configuration.GetSection("EmailSettings:UsernamePassword").Value;
+
             DependencyResolver(services);
-            
+
+
+
         }
         //Add the Interface and  Service 
         private void DependencyResolver(IServiceCollection services)
@@ -92,6 +104,8 @@ namespace STS
             services.AddSingleton<ICategory_Subcategory, Category_SubcategoryServices>();
             services.AddSingleton<IActivity, ActivityServices>();
             services.AddSingleton<ICountry_State_City, Country_State_CityServices>();
+            services.AddSingleton<IMail, MailServices>();
+            services.AddSingleton<IResetPassword, ResetPasswordServices>();
 
         }
 

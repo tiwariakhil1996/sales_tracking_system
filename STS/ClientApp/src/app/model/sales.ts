@@ -1,3 +1,5 @@
+
+
 // sales register 
 export class salesregisterModel {
     id: number;

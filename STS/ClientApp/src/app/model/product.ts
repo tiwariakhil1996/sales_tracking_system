@@ -39,7 +39,7 @@ export class UpdateImageListModel {
 }
 
 export class productpriceModel {
-    id: number;
+     id: number;
     price: string;
 }
 

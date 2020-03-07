@@ -59,11 +59,14 @@ namespace STS.Model
         public string Confirmpassword { get; set; }
 
     }
-    public class EmailClass
-    {
-        public string To { get; set; }
-        public string Body { get; set; }
-        public string Subject { get; set; }
-    }
+
+    //public class EmailSettingsModel
+    //{
+    //    public string EmailTo { get; set; }
+    //    public int Subject { get; set; }
+    //    public string EmailMessage { get; set; }
+     
+    //    public string UsernamePassword { get; set; }
+    //}
 }
     

@@ -30,9 +30,9 @@ export class SalesLayoutComponent implements OnInit {
   user = new salesregisterModel();
 
   profile_pic = new registerModel();
-  
+
   salesavatar = new sales_avatarModel();
-  
+
   activity = new activityModel();
   activityDetails: activityModel[] = [];
 
@@ -96,7 +96,7 @@ export class SalesLayoutComponent implements OnInit {
     // console.log(this.salesDetails);
     this.updateProfile = this.salesDetails;
     console.log(this.updateProfile);
-    
+
   }
 
   changePasswordModal(template1: TemplateRef<any>) {
@@ -152,6 +152,8 @@ export class SalesLayoutComponent implements OnInit {
           });
           this.changePassword = new changePasswordModel();
           this.modalRef.hide();
+          localStorage.removeItem('adminLogin');
+          this.router.navigate(['sales/login']);
         } else {
           this.toastr.warning('Old Password is incorrect', 'Warning', {
             disableTimeOut: false,

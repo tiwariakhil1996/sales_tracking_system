@@ -1,3 +1,5 @@
+import { ResetPasswordFormComponent } from './admin/reset-password-form/reset-password-form.component';
+import { ResetPasswordComponent } from './admin/reset-password/reset-password.component';
 //this is Angular Google map Libraries Import this...
 import { AgmCoreModule } from '@agm/core';
 
@@ -59,7 +61,6 @@ import { from } from 'rxjs';
 
 // import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password.component';
-import { EmailService } from './service/email.service';
 
 
 @NgModule({
@@ -118,7 +119,9 @@ import { EmailService } from './service/email.service';
     RegisterComponent,
     SalesRegisterComponent,
     SalesLoginComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
+    ResetPasswordFormComponent
     ],
 
   // providers: [{
@@ -126,7 +129,6 @@ import { EmailService } from './service/email.service';
   //   useClass: HashLocationStrategy
   // }],
   // schemas:  [ CUSTOM_ELEMENTS_SCHEMA ],
-  providers: [EmailService],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

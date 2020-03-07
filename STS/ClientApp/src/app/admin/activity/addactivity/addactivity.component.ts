@@ -46,6 +46,10 @@ export class AddactivityComponent implements OnInit {
   // _price: string;
   // quantity: number;
   amount: number;
+  grand_total: number;
+  dis_amount: number;
+
+
 
   isShow = true;
 
@@ -79,19 +83,24 @@ export class AddactivityComponent implements OnInit {
     this.static_price();
     this.checkRole(this.RoleJason);
 
+    // this.grandtotal();
   }
 
-  TotalAmount(_price: string, quantity: number) {
-    this.amount = parseInt(_price) * quantity;
+  TotalAmount(price: number, quantity: number) {
+    this.amount = price * quantity;
+    // console.log( this.amount );
+  }
+  Dis_amt(dis_per: number) {
+    this.dis_amount = this.amount * dis_per / 100 ;
+    this.grand_total = this.amount - this.dis_amount;
+    // console.log(this.grand_total);
   }
 
-  // TotalAmount() {
-  //   this.amount = parseInt(this.product_price.price) + (this.addproductlist.quantity);
+
+
+  // Total(price: number,dis_per: number) {
+  //   this.total = dis_per ;
   // }
-
-  Total() {
-    this.amount = parseInt(this.product_price.price) + (this.addproductlist.quantity);
-  }
 
   checkRole(RoleJason) {
     const result = JSON.parse(localStorage.getItem('adminLogin')) || [];
@@ -146,15 +155,17 @@ export class AddactivityComponent implements OnInit {
     });
   }
 
-  onProductChange(id) {
-    this.price(id);
+  onProductChange(id,i) {
+    this.price(id,i);
   }
 
-  price(id) {
+  price(id,i) {
     this.productService.price(id).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.ProductPrice) {
           this.product_priceDetails = data.ProductPrice;
+         console.log(this.product_priceDetails);
+         this.addproductlistDetails[i].price = parseInt(this.product_priceDetails[0].price);
         }
       }
     }, (err) => {
@@ -237,7 +248,7 @@ export class AddactivityComponent implements OnInit {
 
   static_price() {
     this.product_priceDetails.push({
-      id: null,
+       id: null,
       price: '0.00',
     });
   }

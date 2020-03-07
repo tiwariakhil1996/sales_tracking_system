@@ -87,9 +87,5 @@ namespace STS.Model
         public List<ImageList> ImageList { get; set; }
         public List<ImageModel> ImageListData { get; set; }
 
-
-        public List<ImageList> ImageList { get; set; }
-        public List<ImageModel> ImageListData { get; set; }
-
     }
 }

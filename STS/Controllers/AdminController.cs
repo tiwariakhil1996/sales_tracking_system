@@ -31,9 +31,9 @@ namespace STS.Controllers
         //    smtp.Port = 587;
         //    smtp.UseDefaultCredentials = true;
         //    smtp.EnableSsl = true;
-        //    smtp.Credentials = new System.Net.NetworkCredential("tiwariakhil052@gmail.com","password");
+        //    smtp.Credentials = new System.Net.NetworkCredential("tiwariakhil052@gmail.com", "password");
         //    smtp.Send(mm);
-        //    return "The mail has been send to "+ec.To.ToString();
+        //    return "The mail has been send to " + ec.To.ToString();
         //}
 
         private IAdmin iadmin;
