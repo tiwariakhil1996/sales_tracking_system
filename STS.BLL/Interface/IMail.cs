@@ -11,6 +11,6 @@ namespace STS.BLL.Interface
     public interface IMail
     {
         //Send Mail
-        Task<TranStatus> ResetPassword(SendMailModel model);     
+        Task<TranStatus> SendMail(SendMailModel model);     
     }
 }

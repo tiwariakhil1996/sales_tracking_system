@@ -5,7 +5,8 @@ using System.Text;
 namespace STS.Model
 {
     // Send Mail Model
-    public partial class SendMailModel {
+    public partial class SendMailModel
+    {
         public string PrimaryDomain { get; set; }
         public string PrimaryPort { get; set; }
         public string UsernameEmail { get; set; }
@@ -13,4 +14,3 @@ namespace STS.Model
  
     }
 }
-    

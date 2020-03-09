@@ -16,7 +16,7 @@ namespace STS.DAL
         TranStatus transaction = new TranStatus();
 
         //Send Mail
-        public async Task<TranStatus> ResetPassword(SendMailModel model)
+        public async Task<TranStatus> SendMail(SendMailModel model)
         {
             using (var connection = new SqlConnection(ConnectionString))
 
@@ -24,13 +24,14 @@ namespace STS.DAL
                 await connection.OpenAsync();
                 TranStatus transaction = new TranStatus();
                 DynamicParameters parameter = new DynamicParameters();
-                //parameter.Add("@UserId", model.UsernameEmail);
+                parameter.Add("@UserName", model.UsernameEmail);
+
 
 
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
-                await connection.QueryAsync("ResetPassword", parameter, commandType: CommandType.StoredProcedure);
+                await connection.QueryAsync("SendMail", parameter, commandType: CommandType.StoredProcedure);
 
                 transaction.returnMessage = parameter.Get<string>("@Message");
                 transaction.code = parameter.Get<int>("@Code");

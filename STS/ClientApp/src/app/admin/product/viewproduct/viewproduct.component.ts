@@ -5,7 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
 import { ProductService } from '../../../service/product.service';
-import { productModel, productListModel, Product_Images_ListModel, ImageListModel, ImageModel, UpdateImageListModel,} from '../../../model/product';
+import { productListModel, Product_Images_ListModel, ImageListModel, ImageModel, UpdateImageListModel,} from '../../../model/product';
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
 import { registerModel } from '../../../model/admin';
 

@@ -5,7 +5,7 @@
       <div class="card-header color font">
   
         Product Details
-        <button type="submit" style="float: right; width: 74px;" class="btn btn-sm btn-success" (click)="addnewProduct()"><i
+        <button  title="Add Product"type="submit" style="float: right; width: 74px;" class="btn btn-sm btn-success" (click)="addnewProduct()"><i
             class="fa fa-plus"> Add</i></button>
   
       </div>
@@ -45,6 +45,7 @@
               <td style='text-align:center'>
                 <button type="submit" class="btn btn-sm btn-success" (click)="view_product_Images()"> View Images</button>
               </td> -->
+              
               <td style='text-align:center' class="font-size">
                   <i class="fa fa-picture-o" aria-hidden="true"  (click)="open_image_modal(images,item)" (click)="view_product_Images(item.id)"></i>
               </td>

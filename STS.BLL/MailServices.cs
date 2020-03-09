@@ -14,11 +14,11 @@ namespace STS.BLL.Service
     {
         // Send Mail
         MailRepository mailRepository = null;
-        public Task<TranStatus> ResetPassword(SendMailModel model)
+        public Task<TranStatus> SendMail(SendMailModel model)
         {
             using (mailRepository = new MailRepository())
             {
-                return mailRepository.ResetPassword(model);
+                return mailRepository.SendMail(model);
 
             }
         }

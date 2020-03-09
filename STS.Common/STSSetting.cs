@@ -15,6 +15,7 @@ namespace STS.Common
         public static string UsernameEmail = "";
         public static string UsernamePassword = "";
         //public static string FromEmail = "";
+        public static string ResetPasswordUrl = "";
 
 
 

@@ -80,6 +80,8 @@ namespace STS
             STSSetting.UsernameEmail = Configuration.GetSection("EmailSettings:UsernameEmail").Value;
             STSSetting.UsernamePassword = Configuration.GetSection("EmailSettings:UsernamePassword").Value;
 
+            STSSetting.ResetPasswordUrl = Configuration.GetSection("EmailSettings:ResetPasswordUrl").Value;
+
             DependencyResolver(services);
 
 
@@ -122,10 +124,12 @@ namespace STS
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            
+            STSSetting.ResetPasswordUrl = env.ContentRootPath;
 
             app.UseHttpsRedirection();
 
-            //This is used used for accessing the Documents folder for image display without the compile
+            //This is used used for accessing the Documents folder for image display without the compile of the angular project
 
             app.UseStaticFiles(new StaticFileOptions
             {

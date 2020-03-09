@@ -43,8 +43,8 @@ namespace STS.Controllers
 
 
         [HttpPost]
-        [Route("ResetPassword")]
-        public async Task<IActionResult> ResetPassword([FromBody] SendMailModel model)
+        [Route("SendMail")]
+        public async Task<IActionResult> SendMail([FromBody] SendMailModel model)
         {
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
@@ -61,11 +61,14 @@ namespace STS.Controllers
                      //"If you didn't request a reset or don't want to change your password just ignore this message and delete it. " +
                      //"If you suspect that your account may be compromised please contact us." +
                      //"Happy Sales Tracking System",
-                     EmailMessage: System.IO.File.ReadAllText(@"C:\sales_tracking_system\trainee_salestrackingsystem\STS\ClientApp\src\app\admin\reset-password-form\reset-password-form.component.html"),
-                     needCC: true
+                     //EmailMessage: System.IO.File.ReadAllText(@"C:\sales_tracking_system\trainee_salestrackingsystem\STS\ClientApp\src\app\admin\reset-password-form\reset-password-form.component.html"),                     
+                     EmailMessage: System.IO.File.ReadAllText(@"C:\sales_tracking_system\trainee_salestrackingsystem\STS\EmailTemplates\ResetPassword.html"),
 
-                   );;
-                transaction = await imail.ResetPassword(model);
+                       //var EResetPasswordLink = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host.Host + STSSetting + "/web/pages/" + "emailresetpassword?email=" + CommonHelper.Encrypt(model["UsernameEmail"].ToString()),
+                       needCC: true
+
+                   ); ;
+                transaction = await imail.SendMail(model);
 
 
 
