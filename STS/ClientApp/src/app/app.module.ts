@@ -53,8 +53,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { SalesRegisterComponent } from './sales/register/register.component';
 import { SalesLayoutComponent } from './containerSales';
 import { SalesLoginComponent } from './sales/login/login.component';
-import { ModalModule } from 'ngx-bootstrap';
-import {NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalModule, TooltipModule } from 'ngx-bootstrap';
+import { NgbModal, NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 
 import { from } from 'rxjs';
@@ -103,6 +103,9 @@ import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password
     ),
     RouterModule.forRoot(routes),
     ChartsModule,
+    // AgmMarker,
+     TooltipModule.forRoot(),
+    // AgmCoreModule.forRoot({apiKey: 'AIzaSyBFP65PChjDJ1qtdD9RgkseGbNA4YclE2g'})
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBaU6eEpioeuf9Nkzsd5N3OoJsDpVQdzEs'
       // libraries: ['places']
@@ -129,6 +132,7 @@ import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password
   //   useClass: HashLocationStrategy
   // }],
   // schemas:  [ CUSTOM_ELEMENTS_SCHEMA ],
+  providers: [],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

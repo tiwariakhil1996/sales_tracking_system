@@ -61,8 +61,8 @@ export class DefaultLayoutComponent implements OnInit {
     this.changePassword.id = this.register.id;
     // console.log(this.changePassword.id);
     this.profile_pic.image = this.register.image;
-    console.log(this.profile_pic.image);
-
+    // console.log(this.profile_pic.image);
+    
   }
 
   ngOnInit() {
@@ -207,6 +207,7 @@ export class DefaultLayoutComponent implements OnInit {
         });
 
         localStorage.setItem('adminLogin', JSON.stringify(data.loginDetail[0] || {}));
+        this.getuserProfile();
       }
     }, (err) => {
     });

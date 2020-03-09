@@ -28,6 +28,33 @@ export class ImageListModel {
     ImageData: string;
 
 }
+
+export class updateproductModel {
+    id: number;
+    cid: string;
+    cname: string;
+    sid: string;
+    sname: string;
+    productname: string;
+    description: string;
+    price: number;
+    image: string;
+    ImageExtn: string;
+    date: string;
+    isActive: boolean;
+
+    createdby: number;
+    modifiedby: number;
+    imageList: ImageListModel[];
+    //this model for display the image
+    imageListData: ImageModel[];
+}
+
+export class UpdateImageListModel {
+    ImageId: number;
+    ImageData: string;
+}
+
 // This for display the image
 
 export class ImageModel {
@@ -63,9 +90,14 @@ export class productListModel {
     imageList: ImageListModel[];
     //this model for display the image
     imageListData: ImageModel[];
+
+    pageIndex:number;
+    pageSize:number;
 }
-export class Product_Images_ListModel{
-    id:number;
-    image: string;
-   
+
+
+export class paginationModel {
+
+    pageSize: number;
+    pageIndex: number;
 }

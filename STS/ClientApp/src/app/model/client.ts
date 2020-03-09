@@ -42,4 +42,13 @@ export class clientListModel {
 
     createdby: number;
     modifiedby: number;
+
+    pageSize:number;
+    pageIndex:number
+}
+
+export class paginationModel {
+
+    pageSize: number;
+    pageIndex: number;
 }

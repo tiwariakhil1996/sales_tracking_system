@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ActivityComponent } from './activity.component';
 import { AddactivityComponent } from './addactivity/addactivity.component';
 import { CurrentactivityComponent } from './currentactivity/currentactivity.component';
-import { TrackActivityComponent } from './track-activity/track-activity.component';
+
 
 
 const routes: Routes = [
@@ -46,13 +46,7 @@ const routes: Routes = [
           title: 'View Activity'
         }
       },
-      {
-        path: 'track-activity',
-        component: TrackActivityComponent,
-        data: {
-          title: 'Track Activity'
-        }
-      },
+
     ]
 }
 ];

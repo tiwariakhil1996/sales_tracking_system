@@ -76,6 +76,8 @@ export const routes: Routes = [
   },
 
 
+
+
   {
     path: 'admin/forgot-password',
     component: ForgotPasswordComponent,
@@ -186,10 +188,6 @@ export const routes: Routes = [
       {
         path: 'activity',
         loadChildren: () => import('./sales/activity/activity.module').then(m => m.ActivityModule)
-      },
-      {
-        path: 'map',
-        loadChildren: () => import('./sales/map/map.module').then(m => m.MapModule)
       }
     ]
   },

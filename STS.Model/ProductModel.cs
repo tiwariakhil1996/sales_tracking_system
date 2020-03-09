@@ -87,5 +87,10 @@ namespace STS.Model
         public List<ImageList> ImageList { get; set; }
         public List<ImageModel> ImageListData { get; set; }
 
+
+        public int pageIndex { get; set; }
+        public int pageSize { get; set; }
+        public int RowCount { get; set; }
+
     }
 }

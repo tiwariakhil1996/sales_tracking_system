@@ -33,11 +33,18 @@ namespace STS.BLL.Interface
 
 
         // Display each sales List Individually
-        Task<List<ActivityListModel>> each_sales_activityList(ActivityListModel model);
+        //Task<List<ActivityListModel>> each_sales_activityList(ActivityListModel model);
+        List<ActivityListModel> each_sales_activityList(ActivityListModel model, out int RowCount);
+
 
 
         // Display each admin List Individually
-        Task<List<admin_ActivityListModel>> each_admin_activityList(admin_ActivityListModel model);
+        //Task<List<admin_ActivityListModel>> each_admin_activityList(admin_ActivityListModel model);
+
+        List<admin_ActivityListModel> each_admin_activityList(admin_ActivityListModel model, out int RowCount);
+
+        List<admin_ActivityListModel> each_user_activityList(admin_ActivityListModel model, out int RowCount);
+
 
         // Display Sales lat lng ..whom admin has added
         Task<List<Sales_Location_Model>> each_admins_sales_Location(Sales_Location_Model model);

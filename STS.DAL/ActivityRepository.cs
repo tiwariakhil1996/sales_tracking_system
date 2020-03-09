@@ -108,7 +108,22 @@ namespace STS.DAL
 
 
         // Display each sales List Individually
-        public async Task<List<ActivityListModel>> each_sales_activityList(ActivityListModel model)
+        //public async Task<List<ActivityListModel>> each_sales_activityList(ActivityListModel model)
+        //{
+        //    using (var connection = new SqlConnection(ConnectionString))
+        //    {
+        //        connection.Open();
+        //        TranStatus transaction = new TranStatus();
+        //        DynamicParameters parameter = new DynamicParameters();
+        //        parameter.Add("@SalesID", model.userId);
+
+        //        var result = await connection.QueryAsync<ActivityListModel>("each_sales_activityList", parameter, commandType: CommandType.StoredProcedure);
+        //        return result.ToList();
+
+        //    }
+        //}
+
+        public List<ActivityListModel> each_sales_activityList(ActivityListModel model, out int RowCount)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
@@ -116,16 +131,34 @@ namespace STS.DAL
                 TranStatus transaction = new TranStatus();
                 DynamicParameters parameter = new DynamicParameters();
                 parameter.Add("@SalesID", model.userId);
+                parameter.Add("@pageIndex", model.pageIndex);
+                parameter.Add("@pageSize", model.pageSize);
 
-                var result = await connection.QueryAsync<ActivityListModel>("each_sales_activityList", parameter, commandType: CommandType.StoredProcedure);
+                parameter.Add("@RowCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                var result = connection.Query<ActivityListModel>("each_sales_activityList", parameter, commandType: CommandType.StoredProcedure);
+                RowCount = parameter.Get<int>("@RowCount");
                 return result.ToList();
 
             }
         }
 
-
         // Display each admin List Individually
-        public async Task<List<admin_ActivityListModel>> each_admin_activityList(admin_ActivityListModel model)
+        //public async Task<List<admin_ActivityListModel>> each_admin_activityList(admin_ActivityListModel model)
+        //{
+        //    using (var connection = new SqlConnection(ConnectionString))
+        //    {
+        //        connection.Open();
+        //        TranStatus transaction = new TranStatus();
+        //        DynamicParameters parameter = new DynamicParameters();
+        //        parameter.Add("@AdminID", model.userId);
+
+        //        var result = await connection.QueryAsync<admin_ActivityListModel>("each_admin_activityList", parameter, commandType: CommandType.StoredProcedure);
+        //        return result.ToList();
+
+        //    }
+        //}
+
+        public List<admin_ActivityListModel>each_admin_activityList(admin_ActivityListModel model, out int RowCount)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
@@ -133,14 +166,37 @@ namespace STS.DAL
                 TranStatus transaction = new TranStatus();
                 DynamicParameters parameter = new DynamicParameters();
                 parameter.Add("@AdminID", model.userId);
+                parameter.Add("@pageIndex", model.pageIndex);
+                parameter.Add("@pageSize", model.pageSize);
+                //parameter.Add("@Search", model.Search);
 
-                var result = await connection.QueryAsync<admin_ActivityListModel>("each_admin_activityList", parameter, commandType: CommandType.StoredProcedure);
+                parameter.Add("@RowCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                var result = connection.Query<admin_ActivityListModel>("each_admin_activityList", parameter, commandType: CommandType.StoredProcedure);
+                RowCount = parameter.Get<int>("@RowCount");
                 return result.ToList();
 
             }
-
-
         }
+         public List<admin_ActivityListModel> each_user_activityList(admin_ActivityListModel model, out int RowCount)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@UserID", model.userId);
+                parameter.Add("@pageIndex", model.pageIndex);
+                parameter.Add("@pageSize", model.pageSize);
+
+                parameter.Add("@RowCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                var result = connection.Query<admin_ActivityListModel>("each_user_activityList", parameter, commandType: CommandType.StoredProcedure);
+                RowCount = parameter.Get<int>("@RowCount");
+                return result.ToList();
+
+            }
+        }
+
+
 
         // Display Sales lat lng ..whom admin has added
         public async Task<List<Sales_Location_Model>> each_admins_sales_Location(Sales_Location_Model model)

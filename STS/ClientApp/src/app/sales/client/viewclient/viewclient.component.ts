@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CountryStateCityService } from '../../../service/country-state-city.service';
 import { ClientService } from '../../../service/client.service';
-import { clientModel, clientListModel } from '../../../model/client';
+import { clientModel, clientListModel, paginationModel } from '../../../model/client';
 import { countryModel, stateModel, cityModel } from '../../../model/country-state-city';
 import { ToastrService } from 'ngx-toastr';
 import { salesregisterModel } from '../../../model/sales';
@@ -29,7 +29,18 @@ export class ViewclientComponent implements OnInit {
   city = new cityModel();
   cityDetails: cityModel[] = [];
 
+  // totalClients: any ;
 
+  // Pagination
+  RowCount: number;
+  pageSize: number = 5;
+  totalPageList: paginationModel[] = [];
+  totalPageSize:number;
+  pagesize:any;
+  currentPageIndex: number = 0;
+  pageOfItems: Array<any>;
+
+    // Authentication
   RoleJason = {
     ROle: [0, 1],
     Component: 'ViewClientComponent'
@@ -40,13 +51,16 @@ export class ViewclientComponent implements OnInit {
     private modalService: NgbModal,
     private country_state_cityService: CountryStateCityService,
     private toastr: ToastrService) {
-    this.clientList();
+    // this.clientList();
 
     this.countryList();
   }
 
   ngOnInit() {
     this.checkRole(this.RoleJason);
+
+    const item = { pageIndex: 0 };
+    this.clientList(item);
   }
 
 
@@ -74,24 +88,57 @@ export class ViewclientComponent implements OnInit {
   //   });
   // }
 
-  clientList() {
+  // clientList() {
+  //   this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+  //   this.client.userid = this.user.id;
+  //   console.log(this.client.userid);
+
+  //   this.clientService.each_sales_ClientList(this.client).subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.each_sales_ClientList) {
+  //         this.clientDetails = data.each_sales_ClientList;
+  //         console.log(this.clientDetails);
+
+  //       }
+  //     }
+  //   }, (err) => {
+
+  //   });
+  // }
+
+  clientList(item) {
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.client.userid = this.user.id;
-    console.log(this.client.userid);
+ 
+    this.client.pageIndex = item.pageIndex;
+    this.client.pageSize = this.pageSize;
 
     this.clientService.each_sales_ClientList(this.client).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.each_sales_ClientList) {
           this.clientDetails = data.each_sales_ClientList;
-          console.log(this.clientDetails);
+          // this.totalClients = this.clientDetails.length;
+          // console.log(this.totalClients );
+          
+        }
+        if (data.RowCount) {
+          this.RowCount = data.RowCount
+        }
+        this.totalPageSize = Math.ceil(this.RowCount / this.pageSize);
+        // console.log(totalPageSize);
+        
+        this.totalPageList = [];
+        for (var i = 0; i < this.totalPageSize; i++) {
+          this.totalPageList.push({ pageSize: i + 1, pageIndex: i })
 
         }
+        this.currentPageIndex=item.pageIndex;
       }
     }, (err) => {
 
     });
-  }
 
+  }
   // Edit
   openupdatemodal(content, item) {
     this.client = JSON.parse(JSON.stringify(item));
@@ -114,7 +161,10 @@ export class ViewclientComponent implements OnInit {
         });
       }
       this.client = new clientListModel();
-      this.clientList();
+      // this.clientList();
+      
+    const item = { pageIndex: 0 };
+    this.clientList(item);
     }, (err) => {
     });
   }
@@ -125,7 +175,10 @@ export class ViewclientComponent implements OnInit {
     // if (confirm('Are you sure to delete this record ?') === true) {
     this.clientService.deleteClient(id).subscribe(data => {
       this.clientService.clientList();
-      this.clientList();
+      // this.clientList();
+      
+    const item = { pageIndex: 0 };
+    this.clientList(item);
     });
     // }
     this.toastr.success('Client is deleted Successful', 'Successful', {
@@ -188,7 +241,9 @@ export class ViewclientComponent implements OnInit {
   changeStatus(id: number) {
     console.log(id);
     this.clientService.changeStatus(id).subscribe(data => {
-      this.clientList();
+      // this.clientList();
+      const item = { pageIndex: 0 };
+    this.clientList(item);
     });
   }
 

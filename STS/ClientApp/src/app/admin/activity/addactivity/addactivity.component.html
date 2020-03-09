@@ -50,8 +50,8 @@
             </div>
           </div>
 
-
-        <div class="row">
+          <div class="card-body table-responsive">
+        <div class="form-group row">
           <div class="col-sm-12">
             <table class="table" style="border-bottom: solid;">
               <thead class="color">
@@ -75,52 +75,40 @@
                       <option *ngFor="let item of productDetails;" value={{item.id}}>{{item.productname}} </option>
                     </select></td>
                   <td> 
-                    <!-- <input *ngFor="let item of product_priceDetails;"  type="text" class="form-control" id="price" name="price" [(ngModel)]="item.price" > -->           
-                    {{products.price}}                    
-                      
-                    <!-- <input #_price  type="text" class="form-control" id="price" name="price" [(ngModel)]="products.price" > -->
-                   
+                    {{products.price}}
                   </td>
                   <td>
                      <input type="text" class="form-control" id="quantity" name="quantity" #quantity
-                      [(ngModel)]="products.quantity" (keyup)="TotalAmount(products.price,quantity.value)"> 
-                     
-
-                      <!-- <input type="text" class="form-control" id="quantity" name="quantity" #quantity
-                      [(ngModel)]="products.quantity" (keyup)="TotalAmount(_price.value,quantity.value)">  -->
+                      [(ngModel)]="products.quantity" (keyup)="TotalAmount(products.price,quantity.value,dis_per.value,i)"> 
                   </td>
                   <td>
-                    {{amount}} 
-                     <!-- <input type="text" class="form-control" id="amount" name="amount" [(ngModel)]="products.amount">  -->
+                    {{products.amount}}
                   </td>
-                  <td> <input #dis_per type="text" class="form-control" id="discount_per" name="discount_per"
-                      [(ngModel)]="products.discount_per" (keyup)="Dis_amt(dis_per.value)">
-                  </td>
+                
+                  <td> 
+                    <input #dis_per type="text" class="form-control" id="discount_per" name="discount_per"
+                    [(ngModel)]="products.discount_per"   (keyup)="TotalAmount(products.price,quantity.value,dis_per.value,i)">
+                </td>
+                <td>
+                    {{products.discount_amt}}
+                </td>
                   <td>
-                     <!-- <input #dis_amt type="text" class="form-control" id="discount_amt" name="discount_amt"
-                      [(ngModel)]="products.discount_amt"> -->
-                      {{dis_amount}}
-                  </td>
-                  <td>
-                    <!-- <input type="text" class="form-control" id="total_price" name="total_price"
-                      [(ngModel)]="products.total_price"> -->
-                     {{grand_total}}
-                  </td>
+                      {{products.total_price}}
+                  </td>    
                 </tr>
               </tbody>
+             
             </table>
+            <div class="form-group add_product">    
+              <button type="submit" class="btn btn-sm btn-success"  style="float: right;" (click)="addMoreproducts()"><i
+                  class="fa fa-plus"></i> Add</button>
+          </div>
           </div>
         </div>
+     
+      </div>
 
-
-        <div class="form-group row">
-          <div class="col-sm-1 add_product ">
-            <button type="submit" class="form-control btn btn-sm btn-success" (click)="addMoreproducts()"><i
-                class="fa fa-plus"></i> Add</button>
-            <!-- <button type="submit" class="form-control btn btn-sm btn-success" (click)="toggleDisplay()"><i class="fa fa-plus"></i> Add</button> -->
-
-          </div>
-        </div>
+    
 
         <div class="card-footer">
           <button type="submit" class="btn btn-sm btn-success" (click)="submitForm()"><i class="fa fa-dot-circle-o"></i>

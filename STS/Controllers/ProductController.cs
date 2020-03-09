@@ -113,17 +113,45 @@ namespace STS.Controllers
 
 
         // Display each admin List Individually
+        //[HttpPost]
+        //[Route("each_admin_ProductList")]
+        //public async Task<IActionResult> each_admin_ProductList([FromBody]ProductListModel model)
+        //{
+        //    TranStatus transaction = new TranStatus();
+        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
+        //    HttpStatusCode statusCode = HttpStatusCode.OK;
+        //    try
+        //    {
+        //        var productList = await iproduct.each_admin_ProductList(model);
+        //        dctData.Add("each_admin_ProductList", productList);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        transaction = CommonHelper.TransactionErrorHandler(ex);
+        //        statusCode = HttpStatusCode.BadRequest;
+        //    }
+        //    dctData.Add("Status", transaction);
+        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        //}
+
+
         [HttpPost]
         [Route("each_admin_ProductList")]
-        public async Task<IActionResult> each_admin_ProductList([FromBody]ProductListModel model)
+        public IActionResult each_admin_ProductList([FromBody]ProductListModel model)
         {
             TranStatus transaction = new TranStatus();
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
             try
             {
-                var productList = await iproduct.each_admin_ProductList(model);
-                dctData.Add("each_admin_ProductList", productList);
+                List<ProductListModel> each_admin_ProductList = new List<ProductListModel>();
+                int rowcount = 0;
+                each_admin_ProductList = iproduct.each_admin_ProductList(model, out rowcount);
+                dctData.Add("each_admin_ProductList", each_admin_ProductList);
+                dctData.Add("RowCount", rowcount);
+
+                //var clientList = await iclient.each_admin_ClientList(model);
+                //dctData.Add("each_admin_ClientList", clientList);
             }
             catch (Exception ex)
             {
@@ -181,17 +209,73 @@ namespace STS.Controllers
 
 
         // Display each sales List Individually
+        //[HttpPost]
+        //[Route("each_sales_ProductList")]
+        //public async Task<IActionResult> each_sales_ProductList([FromBody]ProductListModel model)
+        //{
+        //    TranStatus transaction = new TranStatus();
+        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
+        //    HttpStatusCode statusCode = HttpStatusCode.OK;
+        //    try
+        //    {
+        //        var productList = await iproduct.each_sales_ProductList(model);
+        //        dctData.Add("each_sales_ProductList", productList);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        transaction = CommonHelper.TransactionErrorHandler(ex);
+        //        statusCode = HttpStatusCode.BadRequest;
+        //    }
+        //    dctData.Add("Status", transaction);
+        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+
+        //}
+
         [HttpPost]
         [Route("each_sales_ProductList")]
-        public async Task<IActionResult> each_sales_ProductList([FromBody]ProductListModel model)
+        public IActionResult each_sales_ProductList([FromBody]ProductListModel model)
         {
             TranStatus transaction = new TranStatus();
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
             try
             {
-                var productList = await iproduct.each_sales_ProductList(model);
-                dctData.Add("each_sales_ProductList", productList);
+                List<ProductListModel> each_sales_ProductList = new List<ProductListModel>();
+                int rowcount = 0;
+                each_sales_ProductList = iproduct.each_sales_ProductList(model, out rowcount);
+                dctData.Add("each_sales_ProductList", each_sales_ProductList);
+                dctData.Add("RowCount", rowcount);
+
+                //var clientList = await iclient.each_admin_ClientList(model);
+                //dctData.Add("each_admin_ClientList", clientList);
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }      
+        
+        
+        [HttpPost]
+        [Route("each_user_ProductList")]
+        public IActionResult each_user_ProductList([FromBody]ProductListModel model)
+        {
+            TranStatus transaction = new TranStatus();
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                List<ProductListModel> each_user_ProductList = new List<ProductListModel>();
+                int rowcount = 0;
+                each_user_ProductList = iproduct.each_user_ProductList(model, out rowcount);
+                dctData.Add("each_user_ProductList", each_user_ProductList);
+                dctData.Add("RowCount", rowcount);
+
+                //var clientList = await iclient.each_admin_ClientList(model);
+                //dctData.Add("each_admin_ClientList", clientList);
             }
             catch (Exception ex)
             {
@@ -201,7 +285,6 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
-
         //Update
 
         [HttpPut]
@@ -221,6 +304,8 @@ namespace STS.Controllers
             try
             {
                 //This for loop for adding the multiple Image
+
+
                 for (var i = 0; i < model.ImageList.Count; i++)
                 {
                     model.ImageListData[i].Image = CommonHelper.SaveImage(HttpContext, "Images\\Product", model.ImageList[i].ImageData, true, model.ImageList[i].ImageExtn);

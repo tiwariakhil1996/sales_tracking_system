@@ -60,6 +60,10 @@ export class ActivityService {
     return this.http.post('/api/Activity/each_admin_activityList', data);
   }
 
+  // each_user_activityList(data) {
+  //   return this.http.post('/api/Activity/each_user_activityList', data);
+  // }
+
   each_admins_sales_Location(data) {
     return this.http.post('/api/Activity/each_admins_sales_Location', data);
   }

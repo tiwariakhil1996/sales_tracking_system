@@ -58,6 +58,9 @@ export class SalesService {
 
   Refresh_Sales_Location(data) {
     return this.http.post('/api/Sales/Refresh_Sales_Location', data);
+  }
 
+  SalesList_dropdown(data) {
+    return this.http.post('/api/Sales/SalesList_dropdown', data);
   }
 }

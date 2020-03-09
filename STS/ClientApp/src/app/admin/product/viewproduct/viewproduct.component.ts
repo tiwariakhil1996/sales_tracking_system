@@ -5,9 +5,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
 import { ProductService } from '../../../service/product.service';
-import { productListModel, Product_Images_ListModel, ImageListModel, ImageModel, UpdateImageListModel,} from '../../../model/product';
+import { productModel, productListModel, Product_Images_ListModel, ImageListModel, ImageModel, UpdateImageListModel, paginationModel } from '../../../model/product';
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
 import { registerModel } from '../../../model/admin';
+
 
 @Component({
   selector: 'app-viewproduct',
@@ -22,17 +23,21 @@ export class ViewproductComponent implements OnInit {
   user = new registerModel();
 
   imageList: ImageListModel[] = [];
-  
+
   imageModel: ImageModel[] = [];
 
   tempImageList: UpdateImageListModel[] = [];
   updateImageList: UpdateImageListModel[] = [];
 
+  // RowCount: number;
+  // pageSize: number = 6;
+
+  // totalPageList: paginationModel[] = [];
+
   product = new productListModel();
   productDetails: productListModel[] = [];
 
-
-  product_image=new Product_Images_ListModel();
+  product_image = new Product_Images_ListModel();
   product_imageDetails: Product_Images_ListModel[] = [];
 
   category = new categoryDataModel();
@@ -43,6 +48,16 @@ export class ViewproductComponent implements OnInit {
 
   // public imageUrl = "http://localhost:44317/Documents/Images/Product/";
 
+    // Pagination
+  RowCount: number;
+  pageSize: number = 5;
+  totalPageList: paginationModel[] = [];
+  totalPageSize:number;
+  pagesize:any;
+  currentPageIndex: number = 0;
+  pageOfItems: Array<any>;
+
+  // Authentication
   RoleJason = {
     ROle: [0, 1],
     Component: 'ViewproductComponent'
@@ -55,9 +70,12 @@ export class ViewproductComponent implements OnInit {
     private modalService: NgbModal,
 
   ) {
-    this.productList();
+    // this.productList();
     // this.categoryList();
     this.active_deactive_CategoryList();
+
+    const item = { pageIndex: 0 };
+    this.productList(item);
   }
 
   ngOnInit() {
@@ -88,23 +106,55 @@ export class ViewproductComponent implements OnInit {
   //   });
   // }
 
-  productList() {
+  // productList() {
+  //   this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+  //   this.product.userid = this.user.id;
+  //   // console.log(this.product.userid);
+
+  //   this.productService.each_admin_ProductList(this.product).subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.each_admin_ProductList) {
+  //         this.productDetails = data.each_admin_ProductList;
+  //         // console.log(this.productDetails);
+
+  //       }
+  //     }
+  //   }, (err) => {
+
+  //   });
+  // }
+
+  productList(item) {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.product.userid = this.user.id;
-    // console.log(this.product.userid);
+
+    this.product.pageIndex = item.pageIndex;
+    this.product.pageSize = this.pageSize;
 
     this.productService.each_admin_ProductList(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.each_admin_ProductList) {
           this.productDetails = data.each_admin_ProductList;
-          // console.log(this.productDetails);
 
         }
-      }
-    }, (err) => {
+          if (data.RowCount) {
+            this.RowCount = data.RowCount;
+          }
+          this.totalPageSize = Math.ceil(this.RowCount / this.pageSize);
+          // console.log(totalPageSize);
 
-    });
+          this.totalPageList = [];
+          for (var i = 0; i < this.totalPageSize; i++) {
+            this.totalPageList.push({ pageSize: i + 1, pageIndex: i })
+
+          }
+        }
+      }, (err) => {
+
+      });
+
   }
+
 
   // Edit
   openupdatemodal(content, item) {
@@ -118,7 +168,7 @@ export class ViewproductComponent implements OnInit {
 
   open_image_modal(images, item) {
     this.product = JSON.parse(JSON.stringify(item));
-    this.modalService.open(images, {size: 'xl', backdropClass: 'light-blue-backdrop' });
+    this.modalService.open(images, { size: 'xl', backdropClass: 'light-blue-backdrop' });
   }
 
 
@@ -213,7 +263,10 @@ export class ViewproductComponent implements OnInit {
 
 
       // this.product = new productModel();
-      this.productList();
+      // this.productList();
+      const item = { pageIndex: 0 };
+      this.productList(item);
+
     }, (err) => {
     });
   }
@@ -267,7 +320,9 @@ export class ViewproductComponent implements OnInit {
     // if (confirm('Are you sure to delete this record ?') === true) {
     this.productService.deleteProduct(id).subscribe(data => {
       this.productService.productList();
-      this.productList();
+      // this.productList();
+      const item = { pageIndex: 0 };
+      this.productList(item);
     });
     // }
     this.toastr.success('Product deleted Successful', 'Successful', {
@@ -374,7 +429,9 @@ export class ViewproductComponent implements OnInit {
   changeStatus(id: number) {
     // console.log(id);
     this.productService.changeStatus(id).subscribe(data => {
-      this.productList();
+      // this.productList();
+      const item = { pageIndex: 0 };
+      this.productList(item);
     });
   }
 

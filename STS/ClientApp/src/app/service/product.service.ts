@@ -25,6 +25,10 @@ export class ProductService {
     return this.http.post('/api/Product/each_admin_ProductList', data);
   }
 
+  // each_user_ProductList(data) {
+  //   return this.http.post('/api/Product/each_user_ProductList', data);
+  // }
+
   product_Images_List(id) {
     return this.http.get('/api/Product/Product_Images_List/' + id);
   }

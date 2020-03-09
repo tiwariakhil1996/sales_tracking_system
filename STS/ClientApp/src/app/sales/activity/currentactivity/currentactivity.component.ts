@@ -4,7 +4,7 @@ import { SalesService } from '../../../service/sales.service';
 import { ProductService } from '../../../service/product.service';
 import { ClientService } from '../../../service/client.service';
 import { ActivityService } from '../../../service/activity.service';
-import { activityModel, updateactivityModel } from '../../../model/activity';
+import { activityModel, updateactivityModel, paginationModel } from '../../../model/activity';
 import { salesregisterModel } from '../../../model/sales';
 import { productModel } from '../../../model/product';
 import { clientModel } from '../../../model/client';
@@ -62,6 +62,15 @@ export class CurrentactivityComponent implements OnInit {
   @ViewChild('search')
   public searchElementRef: ElementRef;
 
+    // Pagination
+    RowCount: number;
+    pageSize: number = 5;
+    totalPageList: paginationModel[] = [];
+    totalPageSize: number;
+    pagesize: any;
+    currentPageIndex: number = 0;
+    pageOfItems: Array<any>;
+
   RoleJason = {
     ROle: [0, 1],
     Component: 'CurrentactivityComponent'
@@ -80,11 +89,14 @@ export class CurrentactivityComponent implements OnInit {
     // this.productList();
     // this.clientList();
     // this.SalesList();
-    this.activityList();
+    // this.activityList();
   }
 
 
   ngOnInit() {
+    const item = { pageIndex: 0 };
+    this.activityList(item);
+
     setTimeout(() => {
       navigator.geolocation.getCurrentPosition(position => {
         console.log(position);
@@ -153,16 +165,48 @@ export class CurrentactivityComponent implements OnInit {
   // }
 
 
-  activityList() {
+  // activityList() {
+  //   this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+  //   this.activity.userid = this.user.id;
+  //   console.log(this.activity.userid);
+
+  //   this.activityService.each_sales_activityList(this.activity).subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.each_sales_activityList) {
+  //         this.activityDetails = data.each_sales_activityList;
+  //         console.log(this.activityDetails);
+
+  //       }
+  //     }
+  //   }, (err) => {
+
+  //   });
+  // }
+
+  activityList(item) {
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.activity.userid = this.user.id;
     console.log(this.activity.userid);
+
+    this.activity.pageIndex = item.pageIndex;
+    this.activity.pageSize = this.pageSize;
 
     this.activityService.each_sales_activityList(this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.each_sales_activityList) {
           this.activityDetails = data.each_sales_activityList;
           console.log(this.activityDetails);
+
+        }
+        if (data.RowCount) {
+          this.RowCount = data.RowCount;
+        }
+        this.totalPageSize = Math.ceil(this.RowCount / this.pageSize);
+        // console.log(totalPageSize);
+
+        this.totalPageList = [];
+        for (var i = 0; i < this.totalPageSize; i++) {
+          this.totalPageList.push({ pageSize: i + 1, pageIndex: i })
 
         }
       }
@@ -283,7 +327,9 @@ export class CurrentactivityComponent implements OnInit {
 
       }
 
-      this.activityList();
+      // this.activityList();
+      const item = { pageIndex: 0 };
+      this.activityList(item);
     }, (err) => {
     });
 
@@ -318,7 +364,9 @@ export class CurrentactivityComponent implements OnInit {
         // this.modalRef.hide();
       }
 
-      this.activityList();
+      // this.activityList();
+      const item = { pageIndex: 0 };
+      this.activityList(item);
     }, (err) => {
     });
   }
@@ -340,7 +388,9 @@ export class CurrentactivityComponent implements OnInit {
         });
       }
       // this.activity = new activityModel();
-      this.activityList();
+      // this.activityList();
+      const item = { pageIndex: 0 };
+      this.activityList(item);
     }, (err) => {
     });
   }
@@ -362,7 +412,9 @@ export class CurrentactivityComponent implements OnInit {
         });
       }
       // this.activity = new activityModel();
-      this.activityList();
+      // this.activityList();
+      const item = { pageIndex: 0 };
+      this.activityList(item);
     }, (err) => {
     });
   }

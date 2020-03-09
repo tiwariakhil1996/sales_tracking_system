@@ -71,6 +71,44 @@ agm-map {
   background-color: yellow;
 }
 
-.marker_tag {
-  color: crimson;
+  .marker_tag {
+    color: crimson;
+  }
+
+  /* .calc_row {
+    float: right;
+} */
+
+
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 4px solid rgba(0, 0, 0, 0.1);
+}
+
+.modal-title {
+  line-height: 1.5;
+}
+
+
+
+.modal-header .close {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  margin-top: 0px;
+
+  margin-right: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+
+  margin-bottom: 0px;
+}
+
+
+.modal-header {
+  padding-top: 5px;
+    padding-bottom: 4px;
+    margin-top: 0px;
+    border-bottom-width: 1px;
 }

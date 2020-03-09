@@ -41,11 +41,20 @@ namespace STS.BLL.Service
         //}
 
         // Display each admin List Individually
-        public async Task<List<ProductListModel>> each_admin_ProductList(ProductListModel model)
+        //public async Task<List<ProductListModel>> each_admin_ProductList(ProductListModel model)
+        //{
+        //    using (productRepository = new ProductRepository())
+        //    {
+        //        return await productRepository.each_admin_ProductList(model);
+        //    }
+
+        //}
+
+        public List<ProductListModel> each_admin_ProductList(ProductListModel model, out int RowCount)
         {
             using (productRepository = new ProductRepository())
             {
-                return await productRepository.each_admin_ProductList(model);
+                return  productRepository.each_admin_ProductList(model, out RowCount);
             }
 
         }
@@ -71,11 +80,30 @@ namespace STS.BLL.Service
 
 
         // Display each sales List Individually
-        public async Task<List<ProductListModel>> each_sales_ProductList(ProductListModel model)
+        //public async Task<List<ProductListModel>> each_sales_ProductList(ProductListModel model)
+        //{
+        //    using (productRepository = new ProductRepository())
+        //    {
+        //        return await productRepository.each_sales_ProductList(model);
+        //    }
+
+        //}
+
+
+        public List<ProductListModel> each_sales_ProductList(ProductListModel model, out int RowCount)
         {
             using (productRepository = new ProductRepository())
             {
-                return await productRepository.each_sales_ProductList(model);
+                return productRepository.each_sales_ProductList(model, out RowCount);
+            }
+
+        } 
+        
+        public List<ProductListModel> each_user_ProductList(ProductListModel model, out int RowCount)
+        {
+            using (productRepository = new ProductRepository())
+            {
+                return productRepository.each_user_ProductList(model, out RowCount);
             }
 
         }

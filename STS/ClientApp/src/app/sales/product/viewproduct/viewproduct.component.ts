@@ -5,7 +5,7 @@ import { BsModalRef } from 'ngx-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
 import { ProductService } from '../../../service/product.service';
-import { productModel, productListModel, ImageListModel, ImageModel, Product_Images_ListModel, UpdateImageListModel } from '../../../model/product';
+import { productModel, productListModel, ImageListModel, ImageModel, Product_Images_ListModel, UpdateImageListModel, paginationModel } from '../../../model/product';
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
 import { salesregisterModel } from '../../../model/sales';
 
@@ -22,15 +22,15 @@ export class ViewproductComponent implements OnInit {
   user = new salesregisterModel();
 
   imageList: ImageListModel[] = [];
-  
+
   imageModel: ImageModel[] = [];
-  
+
   tempImageList: UpdateImageListModel[] = [];
   updateImageList: UpdateImageListModel[] = [];
-  
-  product_image=new Product_Images_ListModel();
+
+  product_image = new Product_Images_ListModel();
   product_imageDetails: Product_Images_ListModel[] = [];
-  
+
   product = new productListModel();
   productDetails: productListModel[] = [];
 
@@ -41,6 +41,16 @@ export class ViewproductComponent implements OnInit {
   subcategory = new subcategoryDataModel();
   subcategoryDetails: subcategoryDataModel[] = [];
 
+  // Pagination
+  RowCount: number;
+  pageSize: number = 5;
+  totalPageList: paginationModel[] = [];
+  totalPageSize: number;
+  pagesize: any;
+  currentPageIndex: number = 0;
+  pageOfItems: Array<any>;
+
+  // Authentication
   RoleJason = {
     ROle: [0, 1],
     Component: 'ViewproductComponent'
@@ -51,7 +61,7 @@ export class ViewproductComponent implements OnInit {
     private productService: ProductService,
     private modalService: NgbModal,
     private categoryService: CategorySubcategoryService) {
-    this.productList();
+    // this.productList();
     // this.categoryList();
     this.active_deactive_CategoryList();
 
@@ -60,6 +70,10 @@ export class ViewproductComponent implements OnInit {
   }
   ngOnInit() {
     this.checkRole(this.RoleJason);
+
+
+    const item = { pageIndex: 0 };
+    this.productList(item);
   }
 
 
@@ -87,24 +101,54 @@ export class ViewproductComponent implements OnInit {
   //   });
   // }
 
-  productList() {
+  // productList() {
+  //   this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+  //   this.product.userid = this.user.id;
+  //   console.log(this.product.userid);
+
+  //   this.productService.each_sales_ProductList(this.product).subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.each_sales_ProductList) {
+  //         this.productDetails = data.each_sales_ProductList;
+  //         console.log(this.productDetails);
+
+  //       }
+  //     }
+  //   }, (err) => {
+
+  //   });
+  // }
+
+  productList(item) {
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.product.userid = this.user.id;
-    console.log(this.product.userid);
+
+    this.product.pageIndex = item.pageIndex;
+    this.product.pageSize = this.pageSize;
 
     this.productService.each_sales_ProductList(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.each_sales_ProductList) {
           this.productDetails = data.each_sales_ProductList;
-          console.log(this.productDetails);
+
+        }
+        if (data.RowCount) {
+          this.RowCount = data.RowCount;
+        }
+        this.totalPageSize = Math.ceil(this.RowCount / this.pageSize);
+        // console.log(totalPageSize);
+
+        this.totalPageList = [];
+        for (var i = 0; i < this.totalPageSize; i++) {
+          this.totalPageList.push({ pageSize: i + 1, pageIndex: i })
 
         }
       }
     }, (err) => {
 
     });
-  }
 
+  }
 
   active_deactive_CategoryList() {
     this.categoryService.active_CategoryList().subscribe((data: any) => {
@@ -121,290 +165,294 @@ export class ViewproductComponent implements OnInit {
   }
 
 
-// Edit
-openupdatemodal(content, item) {
-  this.product = JSON.parse(JSON.stringify(item));
-  // this.product = item;
-  // data show in model use this line and store the data in user and display in ui
-  this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
-  // this.viewData = JSON.parse(localStorage.getItem('Register')) || [];
+  // Edit
+  openupdatemodal(content, item) {
+    this.product = JSON.parse(JSON.stringify(item));
+    // this.product = item;
+    // data show in model use this line and store the data in user and display in ui
+    this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
+    // this.viewData = JSON.parse(localStorage.getItem('Register')) || [];
 
-}
-
-
-open_image_modal(images, item) {
-  this.product = JSON.parse(JSON.stringify(item));
-  this.modalService.open(images, {size: 'xl', backdropClass: 'light-blue-backdrop' });
-}
-
-onEdit(id: number) {
-
-  let strError = '';
-
-  if (!this.product.cid) {
-    strError += strError = '- Please select category';
-  } else
-  if (!this.product.sid) {
-    strError += strError = '' ? '' : '<br/>';
-    strError += '- Please select subcategory';
   }
 
 
-  if (!this.product.productname) {
-    strError += strError = '' ? '' : '<br/>';
-    strError += '- Please enter productname';
-  } else {
-    if (!this.validateProductname(this.product.productname)) {
+  open_image_modal(images, item) {
+    this.product = JSON.parse(JSON.stringify(item));
+    this.modalService.open(images, { size: 'xl', backdropClass: 'light-blue-backdrop' });
+  }
+
+  onEdit(id: number) {
+
+    let strError = '';
+
+    if (!this.product.cid) {
+      strError += strError = '- Please select category';
+    } else
+      if (!this.product.sid) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += '- Please select subcategory';
+      }
+
+
+    if (!this.product.productname) {
       strError += strError = '' ? '' : '<br/>';
-      strError += strError = '- Product name should only contain alphabets & number';
-    }
-  }
-
-  if (!this.product.price) {
-    strError += strError = '' ? '' : '<br/>';
-    strError += strError = '- Please enter price';
-  } else {
-    if (!this.validateprice(this.product.price)) {
-      strError += strError = '' ? '' : '<br/>';
-      strError += strError = '- Price should be in numbers';
-    }
-  }
-
-  if (!this.product.description) {
-    strError += strError = '' ? '' : '<br/>';
-    strError += '- Please enter description';
-  } else {
-    if (!this.validateProductname(this.product.description)) {
-      strError += strError = '' ? '' : '<br/>';
-      strError += strError = '- Description  should only contain alphabets & number';
-    }
-  }
-
-  if (!this.product.imageList) {
-    strError += strError = '' ? '' : '<br/>';
-    strError += '- Please select image';
-  }
-
-  if (!this.product.date) {
-    strError += strError = '' ? '' : '<br/>';
-    strError += '- Please select date';
-  }
-
-  if (strError !== '') {
-    this.toastr.warning(strError, 'Warning', {
-      disableTimeOut: false,
-      timeOut: 2000,
-      enableHtml: true,
-      progressBar: true,
-      closeButton: true,
-    });
-    return false;
-  }
-
-  this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
-  this.product.modifiedby = this.user.id;
-  console.log(this.product.modifiedby);
-
-  this.product.imageList = this.imageList;
-  this.product.imageListData = this.imageModel;
-
-  this.productService.updateProduct(id, this.product).subscribe((data: any) => {
-    if (data.Status.code === 0) {
-      // alert('Product updated sucesfully');
-      this.toastr.success('Product updated sucesfully', 'Successful', {
-        disableTimeOut: false
-      });
+      strError += '- Please enter productname';
     } else {
-      // alert("Not Matched");
-      this.toastr.warning('Please fill the remaining fields', 'Warning', {
+      if (!this.validateProductname(this.product.productname)) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += strError = '- Product name should only contain alphabets & number';
+      }
+    }
+
+    if (!this.product.price) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += strError = '- Please enter price';
+    } else {
+      if (!this.validateprice(this.product.price)) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += strError = '- Price should be in numbers';
+      }
+    }
+
+    if (!this.product.description) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please enter description';
+    } else {
+      if (!this.validateProductname(this.product.description)) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += strError = '- Description  should only contain alphabets & number';
+      }
+    }
+
+    if (!this.product.imageList) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please select image';
+    }
+
+    if (!this.product.date) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please select date';
+    }
+
+    if (strError !== '') {
+      this.toastr.warning(strError, 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000,
+        enableHtml: true,
+        progressBar: true,
+        closeButton: true,
+      });
+      return false;
+    }
+
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.product.modifiedby = this.user.id;
+    console.log(this.product.modifiedby);
+
+    this.product.imageList = this.imageList;
+    this.product.imageListData = this.imageModel;
+
+    this.productService.updateProduct(id, this.product).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        // alert('Product updated sucesfully');
+        this.toastr.success('Product updated sucesfully', 'Successful', {
+          disableTimeOut: false
+        });
+      } else {
+        // alert("Not Matched");
+        this.toastr.warning('Please fill the remaining fields', 'Warning', {
+          disableTimeOut: false,
+          timeOut: 2000
+        });
+      }
+      // this.product = new productModel();
+
+      // this.productList();
+      const item = { pageIndex: 0 };
+      this.productList(item);
+    }, (err) => {
+    });
+  }
+
+
+
+
+  productnameValidation() {
+    let isValid = false;
+    if (!this.validateProductname(this.product.productname)) {
+      isValid = true;
+    }
+
+
+    if (isValid) {
+      this.toastr.warning('Please enter productname correctly', 'Warning', {
         disableTimeOut: false,
         timeOut: 2000
       });
     }
-    // this.product = new productModel();
 
-    this.productList();
-  }, (err) => {
-  });
-}
+  }
+
+  validateProductname(productnameField) {
+    const reg = /^[A-Za-z0-9]+$/;
+    return reg.test(productnameField) === false ? false : true;
+  }
+
+  priceValidation() {
+    let isValid = false;
+    if (!this.validateprice(this.product.price)) {
+      isValid = true;
+    }
 
 
+    if (isValid) {
+      this.toastr.warning('Please enter price correctly', 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
 
-
-productnameValidation() {
-  let isValid = false;
-  if (!this.validateProductname(this.product.productname)) {
-    isValid = true;
+  }
+  validateprice(priceField) {
+    const reg = /^[0-9]+$/;
+    return reg.test(priceField) === false ? false : true;
   }
 
 
-  if (isValid) {
-    this.toastr.warning('Please enter productname correctly', 'Warning', {
-      disableTimeOut: false,
-      timeOut: 2000
+  categoryList() {
+    this.categoryService.categoryList().subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.CategoryList) {
+          this.categoryDetails = data.CategoryList;
+
+        }
+      }
+    }, (err) => {
+
+      console.log(this.categoryDetails);
     });
   }
 
-}
 
-validateProductname(productnameField) {
-  const reg = /^[A-Za-z0-9]+$/;
-  return reg.test(productnameField) === false ? false : true;
-}
-
-priceValidation() {
-  let isValid = false;
-  if (!this.validateprice(this.product.price)) {
-    isValid = true;
+  onCategoryChange(cid) {
+    // this.subcategoryDetails = this.subcategoryDetails.filter(item => item.cid == cid);
+    this.subcategoryList(cid);
   }
 
+  subcategoryList(catid) {
+    this.categoryService.subcategoryList(catid).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.SubcategoryList) {
+          this.subcategoryDetails = data.SubcategoryList;
+        }
+      }
+    }, (err) => {
 
-  if (isValid) {
-    this.toastr.warning('Please enter price correctly', 'Warning', {
-      disableTimeOut: false,
-      timeOut: 2000
+      console.log(this.subcategoryDetails);
     });
   }
 
-}
-validateprice(priceField) {
-  const reg = /^[0-9]+$/;
-  return reg.test(priceField) === false ? false : true;
-}
+  // handleFileInput(fileList: FileList) {
+  //   const preview = document.getElementById('photos-preview');
+  //   Array.from(fileList).forEach((file: File) => {
+  //     const reader = new FileReader();
+  //     reader.onload = () => {
+  //       const image = new Image();
+  //       image.src = String(reader.result);
+  //       const imageDetail = String(reader.result).split(';base64,');
+  //       this.product.image = imageDetail[1];
+  //       this.product.ImageExtn = '.' + imageDetail[0].replace('data:image/', '');
+  //       image.height = 100;
+  //       image.width = 100;
+  //       preview.appendChild(image);
+  //     };
+  //     reader.readAsDataURL(file);
+  //     console.log(file);
 
+  //   });
+  // }
 
-categoryList() {
-  this.categoryService.categoryList().subscribe((data: any) => {
-    if (data.Status.code === 0) {
-      if (data.CategoryList) {
-        this.categoryDetails = data.CategoryList;
+  handleFileInput(fileList: FileList) {
+    this.imageList = [];
+    this.imageModel = [];
+    // const preview = document.getElementById('photos-preview');
+    Array.from(fileList).forEach((file: File) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        // const image = new Image();
+        // image.src = String(reader.result);
+        const imageDetail = String(reader.result).split(';base64,');
+        // this.product.imageList = imageDetail[1];
+        // this.image.ImageExtn = '.' + imageDetail[0].replace('data:image/', '');
+        // image.height = 100;
+        // image.width = 100;
+        // preview.appendChild(image);
+        this.tempImageList.push({ ImageId: 0, ImageData: String(reader.result) });
+        this.imageList.push({ ImageExtn: '.' + imageDetail[0].replace('data:image/', ''), Image: '', ImageData: imageDetail[1] });
+        this.imageModel.push({ Image: '' });
 
-      }
-    }
-  }, (err) => {
+      };
+      reader.readAsDataURL(file);
+      console.log(file);
+    });
+  }
 
-    console.log(this.categoryDetails);
-  });
-}
+  // Delete
 
-
-onCategoryChange(cid) {
-  // this.subcategoryDetails = this.subcategoryDetails.filter(item => item.cid == cid);
-  this.subcategoryList(cid);
-}
-
-subcategoryList(catid) {
-  this.categoryService.subcategoryList(catid).subscribe((data: any) => {
-    if (data.Status.code === 0) {
-      if (data.SubcategoryList) {
-        this.subcategoryDetails = data.SubcategoryList;
-      }
-    }
-  }, (err) => {
-
-    console.log(this.subcategoryDetails);
-  });
-}
-
-// handleFileInput(fileList: FileList) {
-//   const preview = document.getElementById('photos-preview');
-//   Array.from(fileList).forEach((file: File) => {
-//     const reader = new FileReader();
-//     reader.onload = () => {
-//       const image = new Image();
-//       image.src = String(reader.result);
-//       const imageDetail = String(reader.result).split(';base64,');
-//       this.product.image = imageDetail[1];
-//       this.product.ImageExtn = '.' + imageDetail[0].replace('data:image/', '');
-//       image.height = 100;
-//       image.width = 100;
-//       preview.appendChild(image);
-//     };
-//     reader.readAsDataURL(file);
-//     console.log(file);
-
-//   });
-// }
-
-handleFileInput(fileList: FileList) {
-  this.imageList = [];
-  this.imageModel = [];
-  // const preview = document.getElementById('photos-preview');
-  Array.from(fileList).forEach((file: File) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      // const image = new Image();
-      // image.src = String(reader.result);
-      const imageDetail = String(reader.result).split(';base64,');
-      // this.product.imageList = imageDetail[1];
-      // this.image.ImageExtn = '.' + imageDetail[0].replace('data:image/', '');
-      // image.height = 100;
-      // image.width = 100;
-      // preview.appendChild(image);
-      this.tempImageList.push({ ImageId: 0, ImageData: String(reader.result) });
-      this.imageList.push({ ImageExtn: '.' + imageDetail[0].replace('data:image/', ''), Image: '', ImageData: imageDetail[1] });
-      this.imageModel.push({ Image: '' });
-
-    };
-    reader.readAsDataURL(file);
-    console.log(file);
-  });
-}
-
-// Delete
-
-onDelete(id: number) {
-  // if (confirm('Are you sure to delete this record ?') === true) {
+  onDelete(id: number) {
+    // if (confirm('Are you sure to delete this record ?') === true) {
     this.productService.deleteProduct(id).subscribe(data => {
       // this.productService.productList();
-      this.productList();
+      // this.productList();
+      const item = { pageIndex: 0 };
+      this.productList(item);
     });
-  // }
-  this.toastr.success('Product is deleted Successful', 'Successful', {
-    disableTimeOut: false,
-    timeOut: 2000
-  });
-}
+    // }
+    this.toastr.success('Product is deleted Successful', 'Successful', {
+      disableTimeOut: false,
+      timeOut: 2000
+    });
+  }
 
-changeStatus(id: number) {
-  console.log(id);
-  this.productService.changeStatus(id).subscribe(data => {
-    this.categoryList();
-  });
-}
+  changeStatus(id: number) {
+    console.log(id);
+    this.productService.changeStatus(id).subscribe(data => {
+      this.categoryList();
+    });
+  }
 
-addnewProduct() {
-  this.router.navigate(['/sales/product/addproduct']);
-}
+  addnewProduct() {
+    this.router.navigate(['/sales/product/addproduct']);
+  }
 
-view_product_Images(id) {
-  // this.router.navigate(['/admin/product/product-images']);
-  this.product_Images_List(id)
-}
-product_Images_List(id) {
-  this.productService.product_Images_List(id).subscribe((data: any) => {
-    if (data.Status.code === 0) {
-      if (data.Product_Images_List) {
-        this.product_imageDetails = data.Product_Images_List;
-        console.log(this.product_imageDetails);
-      }
-    }
-  }, (err) => {
-  });
-}
-
-
-DeleteImage(id: number) {
-  // if (confirm('Are you sure to delete this record ?') === true) {
-  this.productService.DeleteImage(id).subscribe(data => {
+  view_product_Images(id) {
+    // this.router.navigate(['/admin/product/product-images']);
     this.product_Images_List(id)
-  });
-  // }
-  this.toastr.success('Image deleted Successful', 'Successful', {
-    disableTimeOut: false,
-    timeOut: 2000
-  });
-}
+  }
+  product_Images_List(id) {
+    this.productService.product_Images_List(id).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.Product_Images_List) {
+          this.product_imageDetails = data.Product_Images_List;
+          console.log(this.product_imageDetails);
+        }
+      }
+    }, (err) => {
+    });
+  }
+
+
+  DeleteImage(id: number) {
+    // if (confirm('Are you sure to delete this record ?') === true) {
+    this.productService.DeleteImage(id).subscribe(data => {
+      this.product_Images_List(id)
+    });
+    // }
+    this.toastr.success('Image deleted Successful', 'Successful', {
+      disableTimeOut: false,
+      timeOut: 2000
+    });
+  }
 
 
 }

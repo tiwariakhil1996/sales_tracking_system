@@ -83,14 +83,24 @@ namespace STS.BLL.Service
             }
         }
 
-        public async Task<List<SalesListModel>> RegisteredSalesList(SalesListModel model)
+        //public async Task<List<SalesListModel>> RegisteredSalesList(SalesListModel model)
+        //{
+        //    using (salesRepository = new SalesRepository())  
+        //    {
+        //        return await salesRepository.RegisteredSalesList(model);
+        //    }
+
+        //}
+
+        public List<SalesListModel> RegisteredSalesList(SalesListModel model, out int RowCount)
         {
             using (salesRepository = new SalesRepository())
             {
-                return await salesRepository.RegisteredSalesList(model);
+                return salesRepository.RegisteredSalesList(model, out RowCount);
             }
 
         }
+
 
         // Display  Active Deactive Sales List
         public async Task<List<SalesListModel>> SalesList_ActiveDeactive()
@@ -139,5 +149,15 @@ namespace STS.BLL.Service
             }
         }
 
+        // Sales List in dropdown
+
+        public async Task<List<SalesList_DropdownModel>> SalesList_dropdown(SalesList_DropdownModel model)
+        {
+            using (salesRepository = new SalesRepository())
+            {
+                return await salesRepository.SalesList_dropdown(model);
+            }
+
+        }
     }
 }

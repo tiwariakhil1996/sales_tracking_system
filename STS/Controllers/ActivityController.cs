@@ -121,17 +121,66 @@ namespace STS.Controllers
 
 
         // Display each sales List Individually
+        //[HttpPost]
+        //[Route("each_sales_activityList")]
+        //public async Task<IActionResult> each_sales_activityList([FromBody]ActivityListModel model)
+        //{
+        //    TranStatus transaction = new TranStatus();
+        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
+        //    HttpStatusCode statusCode = HttpStatusCode.OK;
+        //    try
+        //    {
+        //        var activityList = await iactivity.each_sales_activityList(model);
+        //        dctData.Add("each_sales_activityList", activityList);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        transaction = CommonHelper.TransactionErrorHandler(ex);
+        //        statusCode = HttpStatusCode.BadRequest;
+        //    }
+        //    dctData.Add("Status", transaction);
+        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        //}
+
+        // Display each admin List Individually
+        //[HttpPost]
+        //[Route("each_admin_activityList")]
+        //public async Task<IActionResult> each_admin_activityList([FromBody]admin_ActivityListModel model)
+        //{
+        //    TranStatus transaction = new TranStatus();
+        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
+        //    HttpStatusCode statusCode = HttpStatusCode.OK;
+        //    try
+        //    {
+        //        var activityList = await iactivity.each_admin_activityList(model);
+        //        dctData.Add("each_admin_activityList", activityList);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        transaction = CommonHelper.TransactionErrorHandler(ex);
+        //        statusCode = HttpStatusCode.BadRequest;
+        //    }
+        //    dctData.Add("Status", transaction);
+        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        //}
+
         [HttpPost]
-        [Route("each_sales_activityList")]
-        public async Task<IActionResult> each_sales_activityList([FromBody]ActivityListModel model)
+        [Route("each_admin_activityList")]
+        public IActionResult each_admin_activityList([FromBody]admin_ActivityListModel model)
         {
             TranStatus transaction = new TranStatus();
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
             try
             {
-                var activityList = await iactivity.each_sales_activityList(model);
-                dctData.Add("each_sales_activityList", activityList);
+                List<admin_ActivityListModel> each_admin_activityList = new List<admin_ActivityListModel>();
+                int rowcount = 0;
+                string search=null;
+                each_admin_activityList = iactivity.each_admin_activityList(model, out rowcount);
+
+                dctData.Add("each_admin_activityList", each_admin_activityList);
+                //dctData.Add("Search", search);
+                dctData.Add("RowCount", rowcount);
             }
             catch (Exception ex)
             {
@@ -142,18 +191,48 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
-        // Display each admin List Individually
         [HttpPost]
-        [Route("each_admin_activityList")]
-        public async Task<IActionResult> each_admin_activityList([FromBody]admin_ActivityListModel model)
+        [Route("each_sales_activityList")]
+        public IActionResult each_sales_activityList([FromBody]ActivityListModel model)
         {
             TranStatus transaction = new TranStatus();
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
             try
             {
-                var activityList = await iactivity.each_admin_activityList(model);
-                dctData.Add("each_admin_activityList", activityList);
+                List<ActivityListModel> each_sales_activityList = new List<ActivityListModel>();
+                int rowcount = 0;
+                each_sales_activityList = iactivity.each_sales_activityList(model, out rowcount);
+
+                dctData.Add("each_sales_activityList", each_sales_activityList);
+                dctData.Add("RowCount", rowcount);
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+
+
+        [HttpPost]
+        [Route("each_user_activityList")]
+        public IActionResult each_user_activityList([FromBody]admin_ActivityListModel model)
+        {
+            TranStatus transaction = new TranStatus();
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                List<admin_ActivityListModel> each_user_activityList = new List<admin_ActivityListModel>();
+                int rowcount = 0;
+                each_user_activityList = iactivity.each_user_activityList(model, out rowcount);
+
+                dctData.Add("each_user_activityList", each_user_activityList);
+                dctData.Add("RowCount", rowcount);
             }
             catch (Exception ex)
             {

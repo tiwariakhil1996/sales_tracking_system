@@ -3,8 +3,8 @@
     <div class="card-header">
       <!-- <i class="fa fa-align-justify"></i> -->
        Product Details
-       <button type="submit" style="float: right;" class="btn btn-sm btn-success"
-      (click)="addnewProduct()"><i class="fa fa-plus">Add</i></button>
+       <button type="submit"  tooltip=" Add new product" style="float: right;" class="btn btn-sm btn-success"
+      (click)="addnewProduct()"><i class="fa fa-plus"></i></button>
     </div>
     <div style="overflow-x:auto;">
     <div class="card-body">
@@ -61,8 +61,33 @@
         </tbody>
       </table>
    
+      <div class="message" *ngIf="productDetails.length <= 0">
+        <p>No Record</p>
+      </div>
+
     </div>
   </div>
+  <div class="card-footer">
+    <ul class="pagination" >
+
+      <li class="page-item" class="page-item first-item" [ngClass]="{disabled:currentPageIndex === 0}">
+        <a class="page-link" (click)="productList({ pageIndex: 0 })"><i class="fa fa-step-backward"></i></a>
+    </li>
+    <li class="page-item" [ngClass]="{disabled:currentPageIndex === 0}" class="page-item previous-item">
+        <a (click)="productList({pageIndex:currentPageIndex -1})" class="page-link" routerLink="/sales/product/viewproduct"> <i class="fa fa-angle-double-left"></i></a>
+    </li>
+      <li class="page-item active" *ngFor="let item of totalPageList " [ngClass]="{active:currentPageIndex === item.pageIndex}" class="page-item number-item" (click)="productList(item)">
+          <a class="page-link" routerLink="/sales/product/viewproduct">
+            <span class="sr-only"></span>{{item.pageSize}}</a>
+      </li>
+      <li class="page-item" [ngClass]="{disabled:currentPageIndex === totalPageSize-1}" class="page-item next-item">
+        <a (click)="productList({pageIndex:currentPageIndex +1})" class="page-link" routerLink="/sales/product/viewproduct"><i class="fa fa-angle-double-right"></i></a>
+    </li>
+    <li class="page-item" class="page-item last-item" [ngClass]="{disabled:currentPageIndex === totalPageSize-1}">
+        <a class="page-link" (click)="productList({pageIndex:totalPageSize-1})"><i class="fa fa-step-forward"></i></a>
+    </li>
+    </ul>
+</div>
   </div>
 </div>
 

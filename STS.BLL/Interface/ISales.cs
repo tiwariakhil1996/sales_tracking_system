@@ -28,11 +28,14 @@ namespace STS.BLL.Interface
         Task<TranStatus> ChangeStatusSales(int id);
 
         //Display
-        Task<List<SalesListModel>> RegisteredSalesList();
+       Task<List<SalesListModel>> RegisteredSalesList();
+
 
 
         // Display by createdby which admin
-        Task<List<SalesListModel>> RegisteredSalesList(SalesListModel model);
+        //Task<List<SalesListModel>> RegisteredSalesList(SalesListModel model);
+
+        List<SalesListModel> RegisteredSalesList(SalesListModel model, out int RowCount);
 
         //Display Active Deactive Sales
         Task<List<SalesListModel>> SalesList_ActiveDeactive();
@@ -49,6 +52,10 @@ namespace STS.BLL.Interface
         //Task<TranStatus> Refresh_Sales_Location(Refresh_Sales_Location_Model model);
 
         Task<TranStatus> Refresh_Sales_Location(Refresh_Sales_Location_Model model);
+
+
+        // Sales List in dropdown
+        Task<List<SalesList_DropdownModel>> SalesList_dropdown(SalesList_DropdownModel model);
     }
 }
 

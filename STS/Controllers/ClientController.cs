@@ -65,17 +65,45 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
+        //[HttpPost]
+        //[Route("each_admin_ClientList")]
+        //public async Task<IActionResult> each_admin_ClientList([FromBody]ClientListModel model)
+        //{
+        //    TranStatus transaction = new TranStatus();
+        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
+        //    HttpStatusCode statusCode = HttpStatusCode.OK;
+        //    try
+        //    {
+        //        var clientList = await iclient.each_admin_ClientList(model);
+        //        dctData.Add("each_admin_ClientList", clientList);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        transaction = CommonHelper.TransactionErrorHandler(ex);
+        //        statusCode = HttpStatusCode.BadRequest;
+        //    }
+        //    dctData.Add("Status", transaction);
+        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        //}
+
+
         [HttpPost]
         [Route("each_admin_ClientList")]
-        public async Task<IActionResult> each_admin_ClientList([FromBody]ClientListModel model)
+        public IActionResult each_admin_ClientList([FromBody]ClientListModel model)
         {
             TranStatus transaction = new TranStatus();
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
             try
             {
-                var clientList = await iclient.each_admin_ClientList(model);
-                dctData.Add("each_admin_ClientList", clientList);
+                List<ClientListModel> each_admin_ClientList = new List<ClientListModel>();
+                int rowcount = 0;
+                each_admin_ClientList = iclient.each_admin_ClientList(model, out rowcount);
+                dctData.Add("each_admin_ClientList", each_admin_ClientList);
+                dctData.Add("RowCount", rowcount);
+
+                //var clientList = await iclient.each_admin_ClientList(model);
+                //dctData.Add("each_admin_ClientList", clientList);
             }
             catch (Exception ex)
             {
@@ -85,18 +113,47 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
+
+
+
+        //[HttpPost]
+        //[Route("each_sales_ClientList")]
+        //public async Task<IActionResult> each_sales_ClientList([FromBody]ClientListModel model)
+        //{
+        //    TranStatus transaction = new TranStatus();
+        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
+        //    HttpStatusCode statusCode = HttpStatusCode.OK;
+        //    try
+        //    {
+        //        var clientList = await iclient.each_sales_ClientList(model);
+        //        dctData.Add("each_sales_ClientList", clientList);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        transaction = CommonHelper.TransactionErrorHandler(ex);
+        //        statusCode = HttpStatusCode.BadRequest;
+        //    }
+        //    dctData.Add("Status", transaction);
+        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        //}
 
         [HttpPost]
         [Route("each_sales_ClientList")]
-        public async Task<IActionResult> each_sales_ClientList([FromBody]ClientListModel model)
+        public IActionResult each_sales_ClientList([FromBody]ClientListModel model)
         {
             TranStatus transaction = new TranStatus();
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
             try
             {
-                var clientList = await iclient.each_sales_ClientList(model);
-                dctData.Add("each_sales_ClientList", clientList);
+                List<ClientListModel> each_sales_ClientList = new List<ClientListModel>();
+                int rowcount = 0;
+                each_sales_ClientList = iclient.each_sales_ClientList(model, out rowcount);
+                dctData.Add("each_sales_ClientList", each_sales_ClientList);
+                dctData.Add("RowCount", rowcount);
+
+                //var clientList = await iclient.each_admin_ClientList(model);
+                //dctData.Add("each_admin_ClientList", clientList);
             }
             catch (Exception ex)
             {
@@ -107,6 +164,32 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
+        [HttpPost]
+        [Route("each_user_ClientList")]
+        public IActionResult each_user_ClientList([FromBody]ClientListModel model)
+        {
+            TranStatus transaction = new TranStatus();
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                List<ClientListModel> each_user_ClientList = new List<ClientListModel>();
+                int rowcount = 0;
+                each_user_ClientList = iclient.each_sales_ClientList(model, out rowcount);
+                dctData.Add("each_user_ClientList", each_user_ClientList);
+                dctData.Add("RowCount", rowcount);
+
+                //var clientList = await iclient.each_admin_ClientList(model);
+                //dctData.Add("each_admin_ClientList", clientList);
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
         //Update
 
         [HttpPut]
