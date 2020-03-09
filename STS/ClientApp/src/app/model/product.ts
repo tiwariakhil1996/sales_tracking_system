@@ -1,3 +1,6 @@
+
+
+
 // product form
 export class productModel {
     id: number;
@@ -18,13 +21,11 @@ export class productModel {
     imageList: ImageListModel[];
     //this model for display the image
     imageListData: ImageModel[];
-    UpdateImageList: UpdateImageListModel[];
-
 }
+
 export class ImageListModel {
-    ImageId?: number = 0;
-    ImageExtn: string;
     Image: string;
+    ImageExtn: string;
     ImageData: string;
 
 }
@@ -60,13 +61,15 @@ export class UpdateImageListModel {
 export class ImageModel {
     Image: string;
 }
-export class UpdateImageListModel {
-    ImageId: number;
-    ImageData: string;
+
+export class Product_Images_ListModel {
+    id: number;
+    image: string;
+
 }
 
 export class productpriceModel {
-     id: number;
+    id: number;
     price: string;
 }
 

@@ -1,3 +1,4 @@
+import { Product_Images_ListModel, paginationModel } from './../../../model/product';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
@@ -5,9 +6,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
 import { ProductService } from '../../../service/product.service';
-import { productModel, productListModel, Product_Images_ListModel, ImageListModel, ImageModel, UpdateImageListModel, paginationModel } from '../../../model/product';
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
 import { registerModel } from '../../../model/admin';
+import { ImageListModel, UpdateImageListModel, ImageModel, productListModel } from '../../../model/product';
 
 
 @Component({
