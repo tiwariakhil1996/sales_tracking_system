@@ -35,6 +35,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\STS.BLL\STS.BLL.csproj" />
     <ProjectReference Include="..\STS.Common\STS.Common.csproj" />
     <ProjectReference Include="..\STS.Model\STS.Model.csproj" />

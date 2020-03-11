@@ -3,16 +3,16 @@
     border-style: none;
   } */
 
-  .bg {
-    background-image: url("/assets/img/brand/sts2.png");
-    /* background-color: darkslategrey; */
-    background-size: 1374px 634px
-    }
+.bg {
+  background-image: url("/assets/img/brand/sts2.png");
+  /* background-color: darkslategrey; */
+  background-size: 1374px 634px
+}
 
 
 .profile-pic {
   height: 90px;
-    width: 80px;
+  width: 80px;
 }
 
 .modal-header {
@@ -32,4 +32,3 @@
   padding: 1rem 1rem;
   margin: 0rem 0rem 0rem auto;
 }
-

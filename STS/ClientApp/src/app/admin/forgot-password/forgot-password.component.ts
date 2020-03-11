@@ -7,6 +7,7 @@ import { registerModel } from '../../model/admin';
 import { SendEmailService } from '../../service/sendemail.service';
 
 
+
 @Component({
   // selector: 'app-forgot-password',
   selector: 'app-dashboard',
@@ -45,21 +46,40 @@ export class ForgotPasswordComponent implements OnInit {
   // }
 
 
+  // Sendmail() {
+  //   let getemail = new SendMailModel();
+  //   getemail.UsernameEmail = this.loginDetail.email;
+  //   this.sendmail.sendmail(getemail).subscribe((data: any) => {
+  //     this.toastr.success('An Email has been sent to you with instructions to reset your password.', '', {
+  //       disableTimeOut: false,
+  //       timeOut: 5000
+  //     });
+  //   });
+  // }
+
   Sendmail() {
-    
     let getemail = new SendMailModel();
     getemail.UsernameEmail = this.loginDetail.email;
     this.sendmail.sendmail(getemail).subscribe((data: any) => {
-      this.toastr.success('An Email has been sent to you with instructions to reset your password.', '', {
-        disableTimeOut: false,
-        timeOut: 5000
-      });
+      if (data.Status.code === 0) {
+        this.toastr.success('Email has been sent to you with instructions to reset your password. succesfully', 'Successful', {
+          disableTimeOut: false,
+          timeOut: 2000
+        });
+      } else  {
+        this.toastr.error('Soory,we couldnt find an account with that email address please contact your account administrator','Error', {
+          disableTimeOut: false,
+          timeOut: 2000
+        });
+      }
+    }, (err) => {
 
     });
   }
+ 
 
-  backtologinpage() {
-    this.router.navigate(['/admin/login']);
-  }
+backtologinpage() {
+  this.router.navigate(['/admin/login']);
+}
 
 }

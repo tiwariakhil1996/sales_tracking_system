@@ -6,7 +6,11 @@ using STS.BLL.Interface;
 using STS.Common;
 using STS.Model;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Mail;
+
+
+
+
+
 
 
 namespace STS.Controllers
@@ -55,23 +59,19 @@ namespace STS.Controllers
                 CommonHelper.SendEmail(
                      model.UsernameEmail,
                      Subject: "Sales Tracking System: Forgot Password",
-                     //EmailMessage: "Hi He/she " + "we've received a request for password change for your STS account. If this was you click on the link below to reset your password:" +
-                     //" http://localhost:55627/admin/reset-password " +
+                     //EmailMessage: System.IO.File.ReadAllText(@"C:\sales_tracking_system\trainee_salestrackingsystem\STS\ClientApp\src\app\admin\reset-password-form\reset-password-form.component.html"),
+                     //EmailMessage: System.IO.File.ReadAllText(HttpContext.Current.Server.MapPath("EmailTemplates/ResetPassword.html")),
+                        EmailMessage: System.IO.File.ReadAllText(@"EmailTemplates\ResetPassword.html"),
 
-                     //"If you didn't request a reset or don't want to change your password just ignore this message and delete it. " +
-                     //"If you suspect that your account may be compromised please contact us." +
-                     //"Happy Sales Tracking System",
-                     //EmailMessage: System.IO.File.ReadAllText(@"C:\sales_tracking_system\trainee_salestrackingsystem\STS\ClientApp\src\app\admin\reset-password-form\reset-password-form.component.html"),                     
-                     EmailMessage: System.IO.File.ReadAllText(@"C:\sales_tracking_system\trainee_salestrackingsystem\STS\EmailTemplates\ResetPassword.html"),
 
-                       //var EResetPasswordLink = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host.Host + STSSetting + "/web/pages/" + "emailresetpassword?email=" + CommonHelper.Encrypt(model["UsernameEmail"].ToString()),
-                       needCC: true
+                    //var EResetPasswordlink = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host.Host + STSSetting.Subdirectory + "/admin/reset-password/" + "emailresetpassword?email=" + CommonHelper.Encrypt(model["UsernameEmail"].ToString()),
+                    needCC: true
 
                    ); ;
                 transaction = await imail.SendMail(model);
 
 
-
+                    
 
             }
             catch (Exception ex)

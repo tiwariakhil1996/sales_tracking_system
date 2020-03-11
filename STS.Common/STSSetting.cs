@@ -17,7 +17,10 @@ namespace STS.Common
         //public static string FromEmail = "";
         public static string ResetPasswordUrl = "";
 
-
+    }
+    public class Subdirectory
+    {
+        public static string ResetPasswordUrl = "";
 
     }
 }

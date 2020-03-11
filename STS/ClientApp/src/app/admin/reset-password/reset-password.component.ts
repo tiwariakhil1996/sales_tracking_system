@@ -30,6 +30,7 @@ export class ResetPasswordComponent implements OnInit {
     private resetpassword:ResetPasswordService
   
     ) {
+      
       this.loginDetail = JSON.parse(localStorage.getItem('adminLogin')) || {};
       this.Resetpassword.ResetPassword_id = this.loginDetail.id;
       // console.log(this.Resetpassword.ResetPassword_id);
@@ -75,6 +76,7 @@ export class ResetPasswordComponent implements OnInit {
       return false;
     }
 
+    // this.router.navigate(['/admin/forgot-password'], { queryParams: { id: 'ResetPassword_id' } });
 
     if (this.Resetpassword.Newpassword === this.Resetpassword.Confirmpassword) {
 

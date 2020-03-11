@@ -53,5 +53,4 @@ export class ResetPasswordFormComponent implements OnInit {
   resetpassword() {
     this.router.navigate(['admin/reset-password']);
   }
-
 }
