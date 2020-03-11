@@ -15,17 +15,18 @@ namespace STS.DAL
 
         TranStatus transaction = new TranStatus();
         //Reset Password Admin
-        public async Task<TranStatus> ResetPasswordAdmin(int ResetPassword_id, ResetPasswordAdminModel model)
+        public async Task<TranStatus> ResetPasswordAdmin(String Token, ResetPasswordAdminModel model)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 await connection.OpenAsync();
                 TranStatus transaction = new TranStatus();
                 DynamicParameters parameter = new DynamicParameters();
-                parameter.Add("@ResetPassword_id", ResetPassword_id);
+                parameter.Add("@Token", Token);
                 //parameter.Add("@OldPassword", model.Oldpassword);
                 parameter.Add("@NewPassword", model.Newpassword);
                 parameter.Add("@Confirmpassword", model.Confirmpassword);
+                parameter.Add("@UserId", model.UserId);
 
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);

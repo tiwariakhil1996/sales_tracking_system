@@ -24,10 +24,15 @@ namespace STS.Common
     {
         public string returnMessage { get; set; }
         public int code { get; set; }
+        public string Token { get; set; }
+        public int UserIdentity { get; set; }
+        
         public TranStatus()
         {
             returnMessage = "";
             code = 0;
+            Token = "";
+            UserIdentity=0;
         }
     }
 }

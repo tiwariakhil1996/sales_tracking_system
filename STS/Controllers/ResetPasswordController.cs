@@ -29,8 +29,8 @@ namespace STS.Controllers
         //Resert Password Passsword
 
         [HttpPut]
-        [Route("ResetPasswordAdmin/{ResetPassword_id}")]
-        public async Task<IActionResult> ResetPasswordAdmin(int ResetPassword_id, [FromBody]ResetPasswordAdminModel model)
+        [Route("ResetPasswordAdmin/{Token}")]
+        public async Task<IActionResult> ResetPasswordAdmin(string Token, [FromBody]ResetPasswordAdminModel model)
         {
             Dictionary<String, Object> dctData = new Dictionary<string, object>();
             HttpStatusCode statusCode = HttpStatusCode.OK;
@@ -38,7 +38,7 @@ namespace STS.Controllers
             try
             {
 
-                transaction = await iresetpassword.ResetPasswordAdmin(ResetPassword_id, model);
+                transaction = await iresetpassword.ResetPasswordAdmin(Token, model);
 
             }
             catch (Exception ex)

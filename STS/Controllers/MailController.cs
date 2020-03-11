@@ -24,9 +24,12 @@ namespace STS.Controllers
             
             imail = mail;
         }
-
-
         TranStatus transaction = new TranStatus();
+
+        public string Token;
+        public int UserId;
+
+
 
 
 
@@ -55,24 +58,22 @@ namespace STS.Controllers
             TranStatus transaction = new TranStatus();
             try
             {
-
-                CommonHelper.SendEmail(
-                     model.UsernameEmail,
-                     Subject: "Sales Tracking System: Forgot Password",
-                     //EmailMessage: System.IO.File.ReadAllText(@"C:\sales_tracking_system\trainee_salestrackingsystem\STS\ClientApp\src\app\admin\reset-password-form\reset-password-form.component.html"),
-                     //EmailMessage: System.IO.File.ReadAllText(HttpContext.Current.Server.MapPath("EmailTemplates/ResetPassword.html")),
-                        EmailMessage: System.IO.File.ReadAllText(@"EmailTemplates\ResetPassword.html"),
-
-
-                    //var EResetPasswordlink = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host.Host + STSSetting.Subdirectory + "/admin/reset-password/" + "emailresetpassword?email=" + CommonHelper.Encrypt(model["UsernameEmail"].ToString()),
-                    needCC: true
-
-                   ); ;
                 transaction = await imail.SendMail(model);
-
-
-                    
-
+                if (transaction.code == 0)
+                {
+                    Token = transaction.Token;
+                    UserId = transaction.UserIdentity;
+                    var html = System.IO.File.ReadAllText(@"EmailTemplates/ResetPassword.html");
+                    var link = "http://localhost:55627/admin/reset-password?Token=" + Token + "&UserId=" + UserId;
+                    html = html.Replace("{{token}}", link);
+                    CommonHelper.SendEmail(
+                        model.UsernameEmail,
+                         Subject: "Sales Tracking System-Forgot Password",
+                         EmailMessage: html,
+                           needCC: true
+                       );
+                }
+                dctData.Add("SendMail", transaction);
             }
             catch (Exception ex)
             {
@@ -84,4 +85,6 @@ namespace STS.Controllers
         }
 
     }
+
+
 }

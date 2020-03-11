@@ -76,6 +76,7 @@ export class ForgotPasswordComponent implements OnInit {
 
     });
   }
+
  
 
 backtologinpage() {

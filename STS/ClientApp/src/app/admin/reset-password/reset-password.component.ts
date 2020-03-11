@@ -1,5 +1,6 @@
+import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from '../../service/admin.service';
 import { registerModel } from '../../model/admin';
@@ -17,7 +18,11 @@ export class ResetPasswordComponent implements OnInit {
 
   loginDetail = new registerModel();
   adminDetails: registerModel[] = [];
-  Resetpassword= new ResetPasswordAdmin();
+  Resetpass = new ResetPasswordAdmin();
+  Resetpassword = new ResetPasswordAdmin();
+  Token: any;
+  UserId: any;
+
 
   // RoleJason = {
   //   ROle: [0, 1],
@@ -26,19 +31,28 @@ export class ResetPasswordComponent implements OnInit {
 
   constructor(private router: Router,
     private adminService: AdminService,
+    private route: ActivatedRoute,
     private toastr: ToastrService,
-    private resetpassword:ResetPasswordService
-  
-    ) {
-      
-      this.loginDetail = JSON.parse(localStorage.getItem('adminLogin')) || {};
-      this.Resetpassword.ResetPassword_id = this.loginDetail.id;
-      // console.log(this.Resetpassword.ResetPassword_id);
-      
+    private resetpassword: ResetPasswordService
+
+  ) {
+
+    // this.loginDetail = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    // this.Resetpassword.ResetPassword_id = this.loginDetail.id;
+    // console.log(this.Resetpassword.ResetPassword_id);
+
   }
 
   ngOnInit() {
     // this.checkRole(this.RoleJason);
+    this.route.queryParams.subscribe(params => {
+      if (params.Token) {
+        this.Token = params.Token;
+        this.UserId = params.UserId;
+        this.Resetpassword.UserId = this.UserId;
+      }
+
+    });
   }
 
   // checkRole(RoleJason) {
@@ -52,8 +66,8 @@ export class ResetPasswordComponent implements OnInit {
   // }
 
 
-  ResetPassword(ResetPassword_id:number) {
-    
+  ResetPassword() {
+
     let strError = '';
 
     if (!this.Resetpassword.Newpassword) {
@@ -80,7 +94,7 @@ export class ResetPasswordComponent implements OnInit {
 
     if (this.Resetpassword.Newpassword === this.Resetpassword.Confirmpassword) {
 
-      this.resetpassword.ResetPassword(ResetPassword_id, this.Resetpassword).subscribe((data: any) => {
+      this.resetpassword.ResetPassword(this.Token, this.Resetpassword).subscribe((data: any) => {
         if (data.Status.code === 0) {
           this.toastr.success('Reset Password successfully', 'Successful', {
             disableTimeOut: false
@@ -106,5 +120,6 @@ export class ResetPasswordComponent implements OnInit {
   backtologinpage() {
     this.router.navigate(['/admin/login']);
   }
+
 
 }

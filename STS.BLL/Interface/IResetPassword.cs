@@ -12,6 +12,6 @@ namespace STS.BLL.Interface
     {
        
         //Reset Password Admin
-        Task<TranStatus> ResetPasswordAdmin(int ResetPassword_id, ResetPasswordAdminModel model);
+        Task<TranStatus> ResetPasswordAdmin(string Token, ResetPasswordAdminModel model);
     }
 }

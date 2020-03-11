@@ -1,4 +1,3 @@
-import { ResetPasswordFormComponent } from './admin/reset-password-form/reset-password-form.component';
 import { ResetPasswordComponent } from './admin/reset-password/reset-password.component';
 //this is Angular Google map Libraries Import this...
 import { AgmCoreModule } from '@agm/core';
@@ -123,8 +122,8 @@ import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password
     SalesRegisterComponent,
     SalesLoginComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent,
-    ResetPasswordFormComponent
+    ResetPasswordComponent
+    
     ],
 
   // providers: [{
