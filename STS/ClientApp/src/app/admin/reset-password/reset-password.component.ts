@@ -105,7 +105,7 @@ export class ResetPasswordComponent implements OnInit {
 
       });
     } else {
-      this.toastr.error('New Password & Confirm Password didnt match', 'Error', {
+      this.toastr.error('Old password and new Pasword matched please enter the different password', 'Error', {
         disableTimeOut: false,
         timeOut: 2000
       });

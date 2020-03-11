@@ -19,7 +19,7 @@ import { registerModel } from '../../../model/admin';
 export class AddactivityComponent implements OnInit {
 
   user = new registerModel();
-
+  
   activity = new addactivityModel();
   activityDetails: addactivityModel[] = [];
 
@@ -42,6 +42,8 @@ export class AddactivityComponent implements OnInit {
 
   client = new clientModel();
   clientDetails: clientModel[] = [];
+
+  
 
   // _price: string;
   // quantity: number;

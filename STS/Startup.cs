@@ -80,7 +80,7 @@ namespace STS
             STSSetting.UsernameEmail = Configuration.GetSection("EmailSettings:UsernameEmail").Value;
             STSSetting.UsernamePassword = Configuration.GetSection("EmailSettings:UsernamePassword").Value;
 
-            STSSetting.ResetPasswordUrl = Configuration.GetSection("EmailSettings:ResetPasswordUrl").Value;
+            //STSSetting.ResetPasswordUrl = Configuration.GetSection("EmailSettings:ResetPasswordUrl").Value;
 
             DependencyResolver(services);
 
@@ -125,7 +125,7 @@ namespace STS
                 app.UseHsts();
             }
             
-            STSSetting.ResetPasswordUrl = env.ContentRootPath;
+            //STSSetting.ResetPasswordUrl = env.ContentRootPath;
 
             app.UseHttpsRedirection();
 
