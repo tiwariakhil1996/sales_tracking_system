@@ -23,14 +23,15 @@ namespace STS.BLL.Service
         //    }
         //}
 
-        public async Task<TranStatus> ResetPassword(ResetPasswordModel model)
+        public async Task<TranStatus> SendMail(SendMailModel model)
         {
             using (mailRepository = new MailRepository())
             {
-                return await mailRepository.ResetPassword(model);
+                return await mailRepository.SendMail(model);
 
             }
         }
+
     }
     
 }

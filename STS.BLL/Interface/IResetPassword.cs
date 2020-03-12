@@ -8,13 +8,10 @@ using System.Threading.Tasks;
 
 namespace STS.BLL.Interface
 {
-    public interface IMail
+    public interface IResetPassword
     {
-        //Send Mail
-        Task<TranStatus> SendMail(SendMailModel model);
-
-
-
-
+       
+        //Reset Password Admin
+        Task<TranStatus> ResetPasswordAdmin(string Token, ResetPasswordAdminModel model);
     }
 }

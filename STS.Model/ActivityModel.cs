@@ -61,8 +61,9 @@ namespace STS.Model
         public int Order_Id { get; set; }
         public int ProductId { get; set; }
         public string Productname { get; set; }
-     
-      
+
+        public string Title { get; set; }
+        public string Description { get; set; }
         public int Price { get; set; }
         public int Quantity { get; set; }
         public int Amount { get; set; }
@@ -106,6 +107,11 @@ namespace STS.Model
         public int pageIndex { get; set; }
         public int pageSize { get; set; }
         public int RowCount { get; set; }
+        public string Search { get; set; }
+
+        public string From_date { get; set; }
+        public string To_date { get; set; }
+
     }
 
     public partial class Activity_Status_Model
@@ -187,6 +193,9 @@ namespace STS.Model
         public int pageSize { get; set; }
         public int RowCount { get; set; }
         public string Search { get; set; }
+
+        public string From_date { get; set; }
+        public string To_date { get; set; }
     }
 
     public partial class Update_products_in_ActivityModel
@@ -225,6 +234,26 @@ namespace STS.Model
         public string Longitude { get; set; }
 
         public string Image { get; set; }
+
+    }
+
+
+    public partial class ActivityDetailsModel
+    {
+        public int Aid { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string Createdon { get; set; }
+        public string AppointmentDate { get; set; }
+        public string ClientName { get; set; }
+        public string Address { get; set; }
+        //public string City { get; set; }
+        //public string State { get; set; }
+        //public string Country { get; set; }
+        public string Email { get; set; }
+        public string Contact { get; set; }
+  
+
 
     }
 }

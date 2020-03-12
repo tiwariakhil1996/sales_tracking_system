@@ -20,14 +20,21 @@ namespace STS.Common
             User = 2
         }
     }
+
     public class TranStatus
     {
         public string returnMessage { get; set; }
         public int code { get; set; }
+        public string Token { get; set; }
+        public int UserIdentity { get; set; }
+
+        //public string Users { get; set; }
         public TranStatus()
         {
             returnMessage = "";
             code = 0;
+            Token = "";
+            UserIdentity = 0;
         }
     }
 }

@@ -52,6 +52,8 @@ namespace STS.BLL.Interface
         // Count Assigned list on bell  notification 
         Task<List<newNotificationActivityLisModel>> assigned_activityList(newNotificationActivityLisModel model);
 
+        Task<List<ActivityDetailsModel>> activity_Details(int aid);
+
         //Update Activity
         Task<TranStatus> updateActivity(int Aid, Update_ActivityModel model);
 

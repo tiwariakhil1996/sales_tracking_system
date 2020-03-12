@@ -133,7 +133,13 @@ namespace STS.BLL.Service
         }
 
 
-
+        public async Task<List<ActivityDetailsModel>> activity_Details(int aid)
+        {
+            using (activityRepository = new ActivityRepository())
+            {
+                return await activityRepository.activity_Details(aid);
+            }
+        }
 
 
         //Update Products  added in activity

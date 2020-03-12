@@ -96,6 +96,7 @@ export class productListModel {
 
     pageIndex:number;
     pageSize:number;
+    search:string;
 }
 
 

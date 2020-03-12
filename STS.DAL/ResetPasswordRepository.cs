@@ -10,41 +10,33 @@ using STS.Model;
 
 namespace STS.DAL
 {
-    public class MailRepository : BaseRepository
+    public class ResetPasswordRepository : BaseRepository
     {
 
         TranStatus transaction = new TranStatus();
-
-        //Send Mail
-        public async Task<TranStatus> SendMail(SendMailModel model)
+        //Reset Password Admin
+        public async Task<TranStatus> ResetPasswordAdmin(String Token, ResetPasswordAdminModel model)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 await connection.OpenAsync();
                 TranStatus transaction = new TranStatus();
                 DynamicParameters parameter = new DynamicParameters();
-                parameter.Add("@UserName", model.UsernameEmail);
-                parameter.Add("@Token", dbType: DbType.String, direction: ParameterDirection.Output, size: 50);
-                parameter.Add("@UserIdentity", dbType: DbType.Int32, direction: ParameterDirection.Output);
-                //parameter.Add("@Users", dbType: DbType.String, direction: ParameterDirection.Output, size: 50);
+                parameter.Add("@Token", Token);
+                //parameter.Add("@OldPassword", model.Oldpassword);
+                parameter.Add("@NewPassword", model.Newpassword);
+                parameter.Add("@Confirmpassword", model.Confirmpassword);
+                parameter.Add("@UserId", model.UserId);
+
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
-                await connection.QueryAsync("SendMail", parameter, commandType: CommandType.StoredProcedure);
+                await connection.QueryAsync("ResetPasswordAdmin", parameter, commandType: CommandType.StoredProcedure);
                 transaction.returnMessage = parameter.Get<string>("@Message");
                 transaction.code = parameter.Get<int>("@Code");
-                if (transaction.code == 0)
-                {
-                    transaction.Token = parameter.Get<string>("@Token");
-                    //transaction.Users = parameter.Get<string>("@Users");
-                    transaction.UserIdentity = parameter.Get<int>("@UserIdentity");
-                }
                 return transaction;
+
             }
         }
-
-
-
-
-
     }
+        
 }

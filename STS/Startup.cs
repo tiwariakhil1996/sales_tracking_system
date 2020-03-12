@@ -30,8 +30,8 @@ namespace STS
         public void ConfigureServices(IServiceCollection services)
         {
             // services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
             services.AddControllersWithViews();
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -39,6 +39,8 @@ namespace STS
             });
             services.AddControllers()
                 .AddNewtonsoftJson();
+
+
             //Database Connectivity
             services.AddSpaStaticFiles(configuration =>
             {
@@ -46,6 +48,9 @@ namespace STS
             });
 
             STSSetting.ConnectionString = Configuration.GetSection("ConnectionString:STS").Value;
+
+
+
             //Send email for forgot password
             STSSetting.PrimaryDomain = Configuration.GetSection("EmailSettings:PrimaryDomain").Value;
             STSSetting.PrimaryPort = Configuration.GetSection("EmailSettings:PrimaryPort").Value;
@@ -54,6 +59,11 @@ namespace STS
 
             DependencyResolver(services);
         }
+
+
+
+
+
 
         private void DependencyResolver(IServiceCollection services)
         {
@@ -70,10 +80,15 @@ namespace STS
             services.AddSingleton<IActivity, ActivityServices>();
             services.AddSingleton<ICountry_State_City, Country_State_CityServices>();
             services.AddSingleton<IMail, MailServices>();
-            //services.AddSingleton<IResetPassword, ResetPasswordServices>();
+            services.AddSingleton<IResetPassword, ResetPasswordServices>();
 
 
         }
+
+
+
+
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

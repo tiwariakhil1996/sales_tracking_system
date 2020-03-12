@@ -1,4 +1,4 @@
-import { SendMailModel } from './../../model/sendmail';
+import { SendMailModel, sendmailModel } from './../../model/sendmail';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -17,6 +17,9 @@ export class ForgotPasswordComponent implements OnInit {
 
   loginDetail = new registerModel();
   adminDetails: registerModel[] = [];
+
+  mailDetail = new sendmailModel();
+  mailDetails: sendmailModel[] = [];
 
   // RoleJason = {
   //   ROle: [0, 1],
@@ -50,12 +53,25 @@ export class ForgotPasswordComponent implements OnInit {
     let getemail = new SendMailModel();
     getemail.UsernameEmail = this.loginDetail.email;
     this.sendmail.sendmail(getemail).subscribe((data: any) => {
-      this.toastr.success('An Email has been sent to you with instructions to reset your password.', '', {
+      if (data.Status.code === 0) {
+        // if (data.sendmail) {
+        //   this.mailDetails = data.sendmail;
+        //   console.log(this.mailDetails);
+
+        // }
+      this.toastr.success('Password reset request link has been sent to your email', '', {
         disableTimeOut: false,
         timeOut: 5000
       });
 
-    });
+    } else {
+      this.toastr.warning('This email id is not registered', 'Warning', {
+        disableTimeOut: false
+      });
+    }
+  },(err) => {
+
+  } );
   }
 
   backtologinpage() {

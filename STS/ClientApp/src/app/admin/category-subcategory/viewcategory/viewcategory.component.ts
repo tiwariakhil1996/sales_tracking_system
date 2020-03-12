@@ -14,11 +14,20 @@ import { registerModel } from '../../../model/admin';
 })
 export class ViewcategoryComponent implements OnInit {
 
-  RowCount: number;
-  pageSize: number = 5;
-  totalPageList: paginationModel[] = [];
+
   
+   // Pagination
+   RowCount: number;
+   pageSize: number = 5;
+   totalPageList: paginationModel[] = [];
+   totalPageSize: number;
+   pagesize: any;
+   currentPageIndex: number = 0;
+   pageOfItems: Array<any>;
+
   user = new registerModel();
+
+  search_:any;
 
   modalRef: BsModalRef;
   category = new categoryDataModel();
@@ -39,6 +48,11 @@ export class ViewcategoryComponent implements OnInit {
   }
 
   ngOnInit() {
+
+       
+    // const item = { pageIndex: 0 };
+    // this.categoryList(item);
+
     this.checkRole(this.RoleJason);
 
     this.categoryList();
@@ -56,16 +70,36 @@ export class ViewcategoryComponent implements OnInit {
     }
   }
 
+  // onsearch() {
+  //   const item = { pageIndex: 0 };
+  //   this.categoryList(item);
+  // }
+
   categoryList() {
     // this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
-    // this.sales.userid = this.user.id;
+    // this.category.userid = this.user.id;
+
+    // this.category.pageIndex = item.pageIndex;
+    // this.category.pageSize = this.pageSize;
+    // this.category.search = this.search_;
 
     this.categoryService.categoryList().subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.CategoryList) {
           this.categoryDetails = data.CategoryList;
-          // console.log(this.categoryDetails);
+
         }
+        if (data.RowCount) {
+          this.RowCount = data.RowCount;
+        }
+        this.totalPageSize = Math.ceil(this.RowCount / this.pageSize);
+
+        this.totalPageList = [];
+        for (var i = 0; i < this.totalPageSize; i++) {
+          this.totalPageList.push({ pageSize: i + 1, pageIndex: i })
+
+        }
+      
       }
     }, (err) => {
 
@@ -128,7 +162,7 @@ export class ViewcategoryComponent implements OnInit {
         });
       }
       this.category = new categoryDataModel();
-       this.categoryList();
+      //  this.categoryList();
     //   const item = { pageIndex: 0 };
     // this.categoryList(item);
     }, (err) => {
@@ -140,7 +174,7 @@ export class ViewcategoryComponent implements OnInit {
   deleteCategory(cid: number) {
     // if (confirm('Are you sure to delete this record ?') === true) {
     this.categoryService.deleteCategory(cid).subscribe(data => {
-     this.categoryList();
+    //  this.categoryList();
     //   const item = { pageIndex: 0 };
     // this.categoryList(item);
     });
@@ -154,7 +188,7 @@ export class ViewcategoryComponent implements OnInit {
   changeStatus(id: number) {
     // console.log(id);
     this.categoryService.changeStatus(id).subscribe(data => {
-      this.categoryList();
+      // this.categoryList();
     //   const item = { pageIndex: 0 };
     // this.categoryList(item);
     });

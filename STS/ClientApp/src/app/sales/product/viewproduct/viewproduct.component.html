@@ -1,7 +1,7 @@
 
 <div class="col-lg-12">
   <div class="card">
-    <div class="card-header">
+    <div class="card-header color">
       <!-- <i class="fa fa-align-justify"></i> -->
        Product Details
        <button type="submit"  tooltip=" Add new product" style="float: right;" class="btn btn-sm btn-success"
@@ -9,6 +9,9 @@
     </div>
     <div style="overflow-x:auto;">
     <div class="card-body">
+      <div class="form-inline md-form mr-auto mb-4">
+        <input style="float: right;" (input)="onsearch()" class="form-control mr-sm-2" type="text" [(ngModel)]="search_" placeholder="Search" aria-label="Search">
+       </div>
       <table class="table table-bordered btn-center">
         <thead>
           <tr class="table-success">
@@ -63,7 +66,7 @@
       </table>
    
       <div class="message" *ngIf="productDetails.length <= 0">
-        <p>No Record</p>
+        <p>No Record Found</p>
       </div>
 
     </div>

@@ -7,6 +7,9 @@
     background-color: lightskyblue;
 }
 
+.message {
+    text-align: center;
+}
 
 .modal-body1{
     color: black; 

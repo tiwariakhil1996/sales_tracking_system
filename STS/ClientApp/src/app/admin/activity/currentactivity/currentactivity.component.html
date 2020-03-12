@@ -3,6 +3,7 @@
     <div class="card">
       <div class="card-header color">
         Activity Details
+        <!-- <input style="float: right;" (input)="onsearch()" class="form-control mr-sm-2" id="title" name="title" type="text" [(ngModel)]="search_" placeholder="Search" aria-label="Search"> -->
         <button type="submit" tooltip=" Create new activity" style="float: right; width: 35px;"
           class="btn btn-sm btn-success" (click)="addnewActivity()"><i class="fa fa-plus"></i></button>
       </div>
@@ -12,17 +13,28 @@
 
       <!-- <div style="overflow-x:auto;"> -->
       <div class="card-body table-responsive">
+        <div class="md-form">
+          <input placeholder="Selected date" type="text" id="prefill" class="form-control datepicker" data-value="[2015,6,1]">
+          <label for="prefill">Try me...</label>
+        </div>
+        <!-- SEARCH -->
+        <div class="form-inline md-form mr-auto mb-4">
+         
+          <input style="float: right;" (input)="onsearch()" class="form-control mr-sm-2" type="text"
+            [(ngModel)]="search_" placeholder="Search" aria-label="Search">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          <label class="text-input" style="padding-left: 9px; padding-right: 9px;">From</label>
+          <i class="fa fa-calendar" aria-hidden="true"> <input class="form-control" id="date" type="date"
+              name="appointmentDate" [(ngModel)]="from_date" (input)="onsearch()"></i>
 
-        <!-- <div class="form-inline md-form mr-auto mb-4"> -->
-        <!-- <input  style="float: right;" [ngModel]="activity.search" class="form-control mr-sm-2" id="search" name="search" (input)="eachactivityList(item)" type="text" placeholder="Search" aria-label="Search"> -->
+          <label class="text-input" style="padding-left: 11px;
+         padding-right: 9px;">To</label>
+          <i class="fa fa-calendar" aria-hidden="true">
+            <input class="form-control" id="date" type="date" name="appointmentDate" [(ngModel)]="to_date"
+              (input)="onsearch()"> </i>
+        </div>
 
-        <!-- <input  style="float: right;" class="form-control mr-sm-2" id="search" name="search" (keyup)="onSearch(activity.aid)" type="text" placeholder="Search" aria-label="Search"> -->
 
-        <!-- <input  style="float: right;" class="form-control mr-sm-2" id="title" name="title" type="text" [(ngModel)]="search.title" placeholder="Search" aria-label="Search">
-
-        <button  type="submit" (click)="Search()">Search</button>  -->
-
-        <!-- </div> -->
 
         <table class="table table-bordered  btn-center">
           <thead>
@@ -36,7 +48,7 @@
               <th>Appointment Date</th>
               <th>Status</th>
               <th>Track</th>
-              <th>Action</th>
+              <th style="padding-right: 50px;">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -50,6 +62,7 @@
               <td>{{item.appointmentDate}}</td>
               <td class="status-center">
                 <span class="badge badge-pill badge-success">{{item.statusname}}</span>
+                <!-- <button *ngIf="item.statusname" class='btn btn-success' type="button"></button> -->
               </td>
               <td>
                 <i class="fa fa-map-marker map" (click)="Get_Lat_Long_of_Activity(item.aid)"
@@ -68,7 +81,7 @@
         </table>
 
         <div class="message" *ngIf="activityDetails.length <= 0">
-          <p>No Record</p>
+          <p>No Record Found</p>
         </div>
 
       </div>
@@ -80,17 +93,17 @@
           </li>
           <li class="page-item" [ngClass]="{disabled:currentPageIndex === 0}" class="page-item previous-item">
             <a (click)="eachactivityList({pageIndex:currentPageIndex -1})" class="page-link"
-              routerLink="/admin/client/viewclient"> <i class="fa fa-angle-double-left"></i></a>
+              routerLink="/admin/activity/currentactivity"> <i class="fa fa-angle-double-left"></i></a>
           </li>
           <li class="page-item active" *ngFor="let item of totalPageList "
             [ngClass]="{active:currentPageIndex === item.pageIndex}" class="page-item number-item"
             (click)="eachactivityList(item)">
-            <a class="page-link" routerLink="/admin/client/viewclient">
+            <a class="page-link" routerLink="/admin/activity/currentactivity">
               <span class="sr-only"></span>{{item.pageSize}}</a>
           </li>
           <li class="page-item" [ngClass]="{disabled:currentPageIndex === totalPageSize-1}" class="page-item next-item">
             <a (click)="eachactivityList({pageIndex:currentPageIndex +1})" class="page-link"
-              routerLink="/admin/client/viewclient"><i class="fa fa-angle-double-right"></i></a>
+              routerLink="/admin/activity/currentactivity"><i class="fa fa-angle-double-right"></i></a>
           </li>
           <li class="page-item" class="page-item last-item" [ngClass]="{disabled:currentPageIndex === totalPageSize-1}">
             <a class="page-link" (click)="eachactivityList({pageIndex:totalPageSize-1})"><i
@@ -116,7 +129,7 @@
 <!--   EDIT Total Activity  & add new activities -->
 
 <ng-template #content let-modal>
-  <div class="modal-header">
+  <div class="modal-header" style="background-color: darkgrey;">
     <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">Update</h4>
     <div>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -238,13 +251,12 @@
 
               </tbody>
             </table>
-          </div>
 
-          <div class="form-group row">
             <div class="col-sm-1 add_product ">
-              <button type="submit" class="form-control btn btn-sm btn-success" (click)="addMoreproducts()"><i
-                  class="fa fa-plus"></i> Add</button>
+              <button type="submit" tooltip="Add more products" class="form-control btn btn-sm btn-success"
+                style="width: 38px; height: 30px;" (click)="addMoreproducts()"><i class="fa fa-plus"></i> </button>
             </div>
+
           </div>
 
 
@@ -260,79 +272,88 @@
 
           <!-- View Old & Newly Product List -->
 
-          <div class="row">
-            <div class="col-sm-12">
-              <table class="table">
-                <thead class="color">
-                  <tr>
-                    <th style="padding-right: 50px;">Action</th>
-                    <th>Sr.</th>
-                    <th>Product Name</th>
-                    <th>Price</th>
-                    <th>Qty</th>
-                    <th>Amt</th>
-                    <th>Dis. (%)</th>
-                    <th>Dis. Amt</th>
-                    <th>Total</th>
-                  </tr>
-                </thead>
-                <tbody>
+          <div class="card-body table-responsive">
+            <div class="form-group row">
+              <div class="col-sm-12">
+                <table class="table">
+                  <thead class="color">
+                    <tr>
+                      <th style="padding-right: 50px;">Action</th>
+                      <th>Sr.</th>
+                      <th>Product Name</th>
+                      <th>Price</th>
+                      <th>Qty</th>
+                      <th>Amt</th>
+                      <th>Dis. (%)</th>
+                      <th>Dis. Amt</th>
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
 
 
-                  <tr *ngFor="let products of activity_productDetails;let i=index;">
-                    <td> <button type="button" class="btn btn-primary" data-toggle="modal"
-                        (click)="open_productupdatemodal(content1,products)">
-                        <i class="fa fa-edit" aria-hidden="true"></i></button>
+                    <tr *ngFor="let products of activity_productDetails;let i=index;">
+                      <td> <button type="button" class="btn btn-primary" data-toggle="modal"
+                          (click)="open_productupdatemodal(content1,products)">
+                          <i class="fa fa-edit" aria-hidden="true"></i></button>
 
-                      <button class='btn btn-danger' type="button"
-                        (click)="onProductDelete(products.productId,products.aid)">
-                        <i class="fa fa-trash" aria-hidden="true"></i></button>
-                    </td>
-                    <td>{{i+1}}</td>
-                    <td>
-                      {{products.productname}}
-                    </td>
-                    <td>
-                      {{products.price}}
-                    </td>
-                    <td>
-                      {{products.quantity}}
-                    </td>
-                    <td>
-                      {{products.amount}}
-                    </td>
-                    <td>
-                      {{products.discount_per}}
-                    </td>
-                    <td>
-                      {{products.discount_amt}}
-                    </td>
-                    <td>
-                      {{products.total_price}}
-                    </td>
-                  </tr>
+                        <button class='btn btn-danger' type="button"
+                          (click)="onProductDelete(products.productId,products.aid)">
+                          <i class="fa fa-trash" aria-hidden="true"></i></button>
+                      </td>
+                      <td>{{i+1}}</td>
+                      <td>
+                        {{products.productname}}
+                      </td>
+                      <td>
+                        {{products.price}}
+                      </td>
+                      <td>
+                        {{products.quantity}}
+                      </td>
+                      <td>
+                        {{products.amount}}
+                      </td>
+                      <td>
+                        {{products.discount_per}}
+                      </td>
+                      <td>
+                        {{products.discount_amt}}
+                      </td>
+                      <td>
+                        {{products.total_price}}
+                      </td>
+                    </tr>
 
-                </tbody>
-              </table>
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
 
+          </div>
           <hr>
 
-          <div class="calc_row">
-            <div class="col-sm-3" style="left: 863px;">
-              <p>Subtotal  </p> {{total}}
-              <p>Dis. amt</p>   {{total_dis_amount}}
-              <p>Grand Total</p> {{finaltotal}}
-              
 
-         
+
+          <div class="form-group row">
+            <div class="col-sm-3" style="left: 863px;">
+              <div>
+                <label>Subtotal </label><label style="padding-left: 55px;">{{total | currency: "INR"}}</label>
+              </div>
+              <div>
+                <label>Dis. amt </label><label
+                  style="padding-left: 59px;">{{total_dis_amount | currency: "INR"}}</label>
+              </div>
+              <div>
+                <label>Grand Total </label><label style="padding-left: 39px;"> {{final_total | currency: "INR"}}</label>
+              </div>
+
             </div>
           </div>
 
           <div class="card-footer">
 
-            <button type="submit" class="btn btn-success" (click)="onEdit(update_activity.aid)">Update</button>
+            <button type="submit" class="btn btn-success" (click)="Update(update_activity.aid)">Update</button>
             <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal-body"
               (click)="modal.dismiss('Cross click')">Cancel</button>
           </div>
@@ -342,6 +363,80 @@
 
         <tab heading="Details">
 
+          <div *ngFor="let activitydetails of activityInvoiceDetails;let i=index;">
+            <div>
+              <div class="clearfix">
+                <!-- <div id="logo">
+                  <img src="logo.png">
+                </div> -->
+                <h1>INVOICE</h1>
+                <div id="company" class="clearfix">
+                  <div>Company Name</div>
+                  <div>455 Foggy Heights,<br /> AZ 85004, US</div>
+                  <div>(602) 519-0450</div>
+                  <div><a href="mailto:company@example.com">company@example.com</a></div>
+                </div>
+                <div id="project">
+                  <div><span style="font-size: 0.9em;">Bill no.</span> {{activitydetails.aid}}</div>
+
+                  <div><span>Title</span> {{activitydetails.title}}</div>
+                  <div><span>CLIENT</span> {{activitydetails.description}}</div>
+                  <div><span>ADDRESS</span>{{activitydetails.address}}</div>
+                  <div><span>EMAIL</span>{{activitydetails.email}}</div>
+                  <div><span>DATE</span>{{activitydetails.createdon}}</div>
+                  <div><span>DUE DATE</span>{{activitydetails.appointmentDate}}</div>
+                </div>
+              </div>
+              <div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th class="service">Product</th>
+                      <th>PRICE</th>
+                      <th>QTY</th>
+                      <th>Amount</th>
+                      <th>Dis.%</th>
+                      <th>TOTAL</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let products of activity_productDetails;let i=index;">
+                      <td class="service">{{products.productname}}</td>
+                      <!-- <td class="desc">Creating a recognizable design solution based on the company's existing visual identity</td> -->
+                      <td class="unit">{{products.price}}</td>
+                      <td class="qty">{{products.quantity}}</td>
+                      <td class="total">{{products.amount}}</td>
+                      <td class="qty">{{products.discount_per}}</td>
+                      <td class="total">{{products.total_price}}</td>
+                    </tr>
+                    <tr>
+
+                    </tr>
+
+                    <tr>
+                      <td colspan="5" style="text-align: right;">SUBTOTAL</td>
+                      <td class="total"> {{total | currency: "INR"}}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="5" style="text-align: right;">Total Discount %</td>
+                      <td class="total">{{total_dis_per}}%</td>
+                    </tr>
+                    <tr>
+                      <td colspan="5" style="text-align: right;" class="grand total">GRAND TOTAL</td>
+                      <td class="grand total">{{final_total | currency: "INR"}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div id="notices">
+                  <div>NOTICE:</div>
+                  <!-- <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div> -->
+                </div>
+              </div>
+              <div>
+                Invoice was created on a computer and is valid without the signature and seal.
+              </div>
+            </div>
+          </div>
 
         </tab>
 
@@ -476,13 +571,13 @@
 
           </agm-map>
 
-          <div class="form-group row">
-            <div class="col-md-3">
+          <div class="form-group">
+            <div class="col-md-3" style="float: left;">
               <h5> Sales</h5>
               <div>Latitude: {{addr.latitude}}</div>
               <div>Longitude: {{addr.longitude}}</div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3" style="float: left;">
               <h5> Client</h5>
               <div>Latitude: {{addr.lat}}</div>
               <div>Longitude: {{addr.lng}}</div>
@@ -490,7 +585,7 @@
 
             <div>
 
-              <table class="table-bordered named">
+              <table class="table-bordered named cust-tbl">
                 <tbody>
                   <tr>
                     <td class="marker_tag">A</td>
@@ -506,6 +601,7 @@
                   </tr>
                 </tbody>
               </table>
+
 
             </div>
 

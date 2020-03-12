@@ -82,6 +82,8 @@ export class activityModel {
     pageIndex: number;
     pageSize: number;
     search: string;
+    from_date: string;
+    to_date: string;
 }
 
 export class LocationModel {
@@ -159,4 +161,20 @@ export class paginationModel {
 
     pageSize: number;
     pageIndex: number;
+}
+
+
+
+
+export class activityDetailsModel {
+    aid: number;
+    title: string;
+    description: string;
+    clientName: string;
+    contact: String;
+    address: string;
+    email: string;
+    createdon: string;
+    appointmentDate: string;
+
 }

@@ -91,11 +91,11 @@ export class AddactivityComponent implements OnInit {
 
     // Dis amt
     this.dis_amount = this.amount * dis_per / 100;
-    this.addproductlistDetails[i].discount_amt = this.amount * dis_per / 100;
+    this.addproductlistDetails[i].discount_amt = Math.round(this.amount * dis_per / 100);
 
     // Total
     this.grand_total = this.amount - this.dis_amount;
-    this.addproductlistDetails[i].total_price = this.amount - this.dis_amount;
+    this.addproductlistDetails[i].total_price =  Math.round(this.amount - this.dis_amount);
     console.log(this.grand_total);
 
   }

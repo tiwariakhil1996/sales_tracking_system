@@ -46,7 +46,8 @@ export class clientListModel {
     modifiedby: number;
 
     pageSize:number;
-    pageIndex:number
+    pageIndex:number;
+    search:string;
 }
 
 export class paginationModel {

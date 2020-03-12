@@ -4,7 +4,7 @@ import { SalesService } from '../../../service/sales.service';
 import { ProductService } from '../../../service/product.service';
 import { ActivityService } from '../../../service/activity.service';
 import { ClientService } from '../../../service/client.service';
-import { activityModel, addproductListingModel, updateactivityModel, addactivityModel, searchModel, LocationModel, paginationModel } from '../../../model/activity';
+import { activityModel, addproductListingModel, updateactivityModel, addactivityModel, searchModel, LocationModel, paginationModel, activityDetailsModel } from '../../../model/activity';
 import { salesregisterModel } from '../../../model/sales';
 import { productModel, productpriceModel, updateproductModel } from '../../../model/product';
 import { clientModel } from '../../../model/client';
@@ -35,8 +35,11 @@ export class CurrentactivityComponent implements OnInit {
   activity = new activityModel();
   activityDetails: activityModel[] = [];
 
-  search = new searchModel();
-  searchDetails: searchModel[] = [];
+  activityInvoice = new activityDetailsModel();
+  activityInvoiceDetails: activityDetailsModel[] = [];
+
+  // search = new searchModel();
+  // searchDetails: searchModel[] = [];
   // update_activityproduct = new editactivityModel();
   // update_activityproductDetails: editactivityModel[] = [];
 
@@ -72,14 +75,20 @@ export class CurrentactivityComponent implements OnInit {
   //  latitude: number;
   //  longitude: number;
 
+  // Searching
+  search_ : any;
+  from_date: string;
+  to_date: string;
+
   amount: number;
   grand_total: number;
   dis_amount: number;
 
 
   total: any;
-  finaltotal: any;
+  final_total: any;
   total_dis_amount: any;
+  total_dis_per: any;
 
   zoom: number;
   address: string;
@@ -143,7 +152,7 @@ export class CurrentactivityComponent implements OnInit {
 
 
   ngOnInit() {
-    this.grandtotal();
+   
     const item = { pageIndex: 0 };
     this.eachactivityList(item);
 
@@ -175,17 +184,15 @@ export class CurrentactivityComponent implements OnInit {
 
     // Dis amt
     this.dis_amount = this.amount * dis_per / 100;
-    this.addproductlistDetails[i].discount_amt = this.amount * dis_per / 100;
+    this.addproductlistDetails[i].discount_amt = Math.round(this.amount * dis_per / 100);
 
     // Total
     this.grand_total = this.amount - this.dis_amount;
-    this.addproductlistDetails[i].total_price = this.amount - this.dis_amount;
+    this.addproductlistDetails[i].total_price = Math.round (this.amount - this.dis_amount);
     console.log(this.grand_total);
   }
 
-  Calculation() {
 
-  }
 
   selectTab(tabId: number) {
     this.staticTabs.tabs[tabId].active = true;
@@ -230,12 +237,12 @@ export class CurrentactivityComponent implements OnInit {
   //   });
   // }
 
-  onSearch(aid: any) {
-    this.activityService.searchTitle(aid).subscribe(data => {
-      // this.activityList();
+  // onSearch(aid: any) {
+  //   this.activityService.searchTitle(aid).subscribe(data => {
+  //     // this.activityList();
 
-    });
-  }
+  //   });
+  // }
 
   // Search() {
   //   this.activityService.searchActivity(this.search).subscribe((data: any) => {
@@ -332,9 +339,24 @@ export class CurrentactivityComponent implements OnInit {
   //   });
   // }
 
+  activity_Details(aid) {
+    this.activityService.activity_Details(aid).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.activity_Details) {
+          this.activityInvoiceDetails = data.activity_Details;
+          console.log(this.activityInvoiceDetails);
+          
+        }
+      }
+    }, (err) => {
+
+    });
+  }
+
   GetProduct_Activity(aid) {
     this.activity_productList(aid);
-   
+
+    this.activity_Details(aid);
   }
 
 
@@ -343,10 +365,12 @@ export class CurrentactivityComponent implements OnInit {
       if (data.Status.code === 0) {
         if (data.Activity_ProductList) {
           this.activity_productDetails = data.Activity_ProductList;
-// console.log( this.activity_productDetails);
+          //console.log( this.activity_productDetails);
 
           this.subtotal();
-          this.dis_amt(); 
+          this.dis_amt();
+          this. dis_per();
+          this.grandtotal();
         }
       }
     }, (err) => {
@@ -363,9 +387,10 @@ export class CurrentactivityComponent implements OnInit {
 
 
   grandtotal() {
-    this.finaltotal = 0;
+    this.final_total = 0;
     for (let i = 0; i < this.activity_productDetails.length; i++) {
-      this.finaltotal += this.activity_productDetails[i].total_price;
+      this.final_total += this.activity_productDetails[i].total_price;
+
     }
   }
 
@@ -374,11 +399,20 @@ export class CurrentactivityComponent implements OnInit {
     this.total_dis_amount = 0;
     for (let i = 0; i < this.activity_productDetails.length; i++) {
       this.total_dis_amount += this.activity_productDetails[i].discount_amt;
-
-      console.log(this.total_dis_amount);
     }
   }
 
+  dis_per() {
+    this.total_dis_per = 0;
+    for (let i = 0; i < this.activity_productDetails.length; i++) {
+      this.total_dis_per += this.activity_productDetails[i].discount_per;
+    }
+  }
+
+onsearch() {
+  const item = { pageIndex: 0 };
+  this.eachactivityList(item);
+}
 
   eachactivityList(item) {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
@@ -387,7 +421,9 @@ export class CurrentactivityComponent implements OnInit {
 
     this.activity.pageIndex = item.pageIndex;
     this.activity.pageSize = this.pageSize;
-
+    this.activity.search = this.search_;
+    this.activity.from_date = this.from_date;
+    this.activity.to_date = this.to_date;
 
     this.activityService.each_admin_activityList(this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -461,7 +497,7 @@ export class CurrentactivityComponent implements OnInit {
   }
 
 
-  onEdit(aid: number) {
+  Update(aid: number) {
     // sending user id  as modified by
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.update_activity.modifiedby = this.user.id;

@@ -9,12 +9,7 @@ export class ResetPasswordService{
         private http: HttpClient
     ) { }
 
-  
-    // sendmail(data) {
-    //     return this.http.post('/api/Mail/SendMail',data);
-    // }
-    ResetPassword(ResetPassword_id: number, data: any) {
-        return this.http.put('/api/ResetPassword/ResetPasswordAdmin/' + ResetPassword_id, data);
+    ResetPassword(Token: any, data: any) {
+        return this.http.put('/api/ResetPassword/ResetPasswordAdmin/' + Token, data);
       }
-
 }

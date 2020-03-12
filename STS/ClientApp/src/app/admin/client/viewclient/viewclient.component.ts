@@ -30,6 +30,8 @@ export class ViewclientComponent implements OnInit {
   city = new cityModel();
   cityDetails: cityModel[] = [];
 
+  search_ : any;
+  
   // Pagination
   RowCount: number;
   pageSize: number = 5;
@@ -113,12 +115,18 @@ export class ViewclientComponent implements OnInit {
   //   this.pageOfItems = pageOfItems;
   // }
 
+  onsearch() {
+    const item = { pageIndex: 0 };
+    this.clientList(item);
+  }
+
   clientList(item) {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.client.userid = this.user.id;
  
     this.client.pageIndex = item.pageIndex;
     this.client.pageSize = this.pageSize;
+    this.client.search = this.search_;
 
     this.clientService.each_admin_ClientList(this.client).subscribe((data: any) => {
       if (data.Status.code === 0) {

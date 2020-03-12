@@ -12,7 +12,7 @@ export class SendEmailService {
     //api calling send mail
     //Mail is Controller name and SendMail is Store Procedure name
     sendmail(data) {
-        return this.http.post('/api/Mail/ResetPassword', data);
+        return this.http.post('/api/Mail/SendMail',data);
     }
 
 }

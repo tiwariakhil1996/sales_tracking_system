@@ -47,7 +47,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
 
 // Sales Components
-import { SalesRegisterComponent } from './sales/register/register.component';
+// import { SalesRegisterComponent } from './sales/register/register.component';
 import { SalesLayoutComponent } from './containerSales';
 import { SalesLoginComponent } from './sales/login/login.component';
 import { ModalModule, TooltipModule } from 'ngx-bootstrap';
@@ -60,7 +60,7 @@ import { from } from 'rxjs';
 import { AgmCoreModule } from '@agm/core';
 import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './admin/reset-password/reset-password.component';
-import { ResetPasswordFormComponent } from './admin/reset-password-form/reset-password-form.component';
+import { SalesRegisterComponent } from './admin/sales-register/sales-register.component';
 
 @NgModule({
   imports: [
@@ -111,8 +111,7 @@ import { ResetPasswordFormComponent } from './admin/reset-password-form/reset-pa
     SalesRegisterComponent,
     SalesLoginComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent,
-    ResetPasswordFormComponent
+    ResetPasswordComponent
     ],
 
   // providers: [{

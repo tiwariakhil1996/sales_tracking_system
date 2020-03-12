@@ -54,6 +54,10 @@
   margin: 5px;
 }
 
+.message {
+  text-align: center;
+}
+
 /* .view-form {
   padding-left: 10px;
     padding-right: 10px;

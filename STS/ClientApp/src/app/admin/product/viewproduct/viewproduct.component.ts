@@ -45,6 +45,7 @@ export class ViewproductComponent implements OnInit {
   subcategory = new subcategoryDataModel();
   subcategoryDetails: subcategoryDataModel[] = [];
 
+  search_ : any;
   // public imageUrl = "http://localhost:44317/Documents/Images/Product/";
 
     // Pagination
@@ -122,6 +123,10 @@ export class ViewproductComponent implements OnInit {
 
   //   });
   // }
+  onsearch() {
+    const item = { pageIndex: 0 };
+    this.productList(item);
+  }
 
   productList(item) {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
@@ -130,11 +135,13 @@ export class ViewproductComponent implements OnInit {
     this.product.pageIndex = item.pageIndex;
     this.product.pageSize = this.pageSize;
 
+    this.product.search = this.search_;
+
     this.productService.each_admin_ProductList(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.each_admin_ProductList) {
           this.productDetails = data.each_admin_ProductList;
-
+          
         }
           if (data.RowCount) {
             this.RowCount = data.RowCount;

@@ -60,6 +60,10 @@ export class CurrentactivityComponent implements OnInit {
   @ViewChild('search')
   public searchElementRef: ElementRef;
 
+  search_ : any;
+  from_date: string;
+  to_date: string;
+
     // Pagination
     RowCount: number;
     pageSize: number = 5;
@@ -181,6 +185,12 @@ export class CurrentactivityComponent implements OnInit {
   //   });
   // }
 
+  
+onsearch() {
+  const item = { pageIndex: 0 };
+  this.activityList(item);
+}
+
   activityList(item) {
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.activity.userid = this.user.id;
@@ -188,6 +198,10 @@ export class CurrentactivityComponent implements OnInit {
 
     this.activity.pageIndex = item.pageIndex;
     this.activity.pageSize = this.pageSize;
+
+    this.activity.search = this.search_;
+    this.activity.from_date = this.from_date;
+    this.activity.to_date = this.to_date;
 
     this.activityService.each_sales_activityList(this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {

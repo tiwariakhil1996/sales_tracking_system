@@ -31,6 +31,8 @@ export class ViewclientComponent implements OnInit {
 
   // totalClients: any ;
 
+  search_ : any;
+
   // Pagination
   RowCount: number;
   pageSize: number = 5;
@@ -106,6 +108,12 @@ export class ViewclientComponent implements OnInit {
   //   });
   // }
 
+  
+  onsearch() {
+    const item = { pageIndex: 0 };
+    this.clientList(item);
+  }
+
   clientList(item) {
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.client.userid = this.user.id;
@@ -113,6 +121,8 @@ export class ViewclientComponent implements OnInit {
     this.client.pageIndex = item.pageIndex;
     this.client.pageSize = this.pageSize;
 
+    this.client.search = this.search_;
+    
     this.clientService.each_sales_ClientList(this.client).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.each_sales_ClientList) {
