@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -10,12 +8,9 @@ using STS.Common;
 using STS.BLL.Interface;
 using Microsoft.AspNetCore.Http;
 using STS.BLL.Service;
-using System;
-using Newtonsoft.Json.Serialization;
+
 using Microsoft.Extensions.FileProviders;
 using System.IO;
-using System.Net.Mail;
-using System.Net;
 
 namespace STS
 {

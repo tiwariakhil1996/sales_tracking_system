@@ -1,9 +1,7 @@
 ﻿using Microsoft.Win32.SafeHandles;
 using STS.Common;
 using System;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using System.Text;
 
 namespace STS.DAL
 {

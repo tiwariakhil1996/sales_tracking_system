@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace STS.Model
+﻿namespace STS.Model
 {
     //Register
     public partial class SalesModel

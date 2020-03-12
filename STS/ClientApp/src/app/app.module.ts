@@ -1,3 +1,4 @@
+import { SalesRegisterComponent } from './admin/sales-register/sales-register.component';
 import { ResetPasswordComponent } from './admin/reset-password/reset-password.component';
 //this is Angular Google map Libraries Import this...
 import { AgmCoreModule } from '@agm/core';
@@ -119,10 +120,10 @@ import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password
     P500Component,
     LoginComponent,
     RegisterComponent,
-    SalesRegisterComponent,
     SalesLoginComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    SalesRegisterComponent
     
     ],
 

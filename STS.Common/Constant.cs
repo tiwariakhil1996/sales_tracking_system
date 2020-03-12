@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace STS.Common
+﻿namespace STS.Common
 {
     public class Constants
     {

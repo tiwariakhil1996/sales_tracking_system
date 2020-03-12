@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Drawing;
 using System.IO;
 using System.Data;
@@ -8,7 +7,7 @@ using System.Reflection;
 using System.Net.Mail;
 using System.Net;
 using System.Threading;
-using System.Linq;
+
 
 namespace STS.Common
 {
@@ -18,21 +17,21 @@ namespace STS.Common
         public static void SendEmail(string EmailTo, string Subject, string EmailMessage, bool needCC, Dictionary<string, byte[]> attachment = null)
         {
             string liveOrProd = STSSetting.PrimaryDomain;
-           
+
             MailMessage message = new MailMessage();
             message.To.Add(EmailTo);
             message.Subject = Subject;
             message.From = new System.Net.Mail.MailAddress(STSSetting.UsernameEmail);
             message.Body = EmailMessage;
-           
+
             message.IsBodyHtml = true;
             //if (attachment != null)
             //{
             //    message.Attachments.Add(new Attachment(new MemoryStream(attachment.FirstOrDefault().Value), attachment.FirstOrDefault().Key + ".pdf"));
             //}
-            string password =(STSSetting.UsernamePassword);
+            string password = (STSSetting.UsernamePassword);
             SmtpClient smtp = new SmtpClient();
-            smtp.Host = STSSetting.PrimaryDomain;   
+            smtp.Host = STSSetting.PrimaryDomain;
             smtp.Port = Convert.ToInt16(STSSetting.PrimaryPort);
             smtp.EnableSsl = true;
             smtp.Credentials = new NetworkCredential(STSSetting.UsernameEmail, password);
@@ -47,25 +46,22 @@ namespace STS.Common
                 ex.ToString();
             }
         }
+        //public static TranStatus TransactionErrorHandler(Exception ex)
+        //{
 
-      
-
-        public static TranStatus TransactionErrorHandler(Exception ex)
-        {
-
-            TranStatus transaction = new TranStatus();
-            if (ex.Message.Contains("||"))
-            {
-                transaction.code = Convert.ToInt32(ex.Message.Split("||")[0]);
-                transaction.returnMessage = ex.Message.Split("||")[1];
-            }
-            else
-            {
-                transaction.code = Constants.Status.Error;
-                transaction.returnMessage = ex.Message;
-            }
-            return transaction;
-        }
+        //    TranStatus transaction = new TranStatus();
+        //    if (ex.Message.Contains("||"))
+        //    {
+        //        transaction.code = Convert.ToInt32(ex.Message.Split("||")[0]);
+        //        transaction.returnMessage = ex.Message.Split("||")[1];
+        //    }
+        //    else
+        //    {
+        //        transaction.code = Constants.Status.Error;
+        //        transaction.returnMessage = ex.Message;
+        //    }
+        //    return transaction;
+        //}
 
      
 
@@ -164,8 +160,9 @@ namespace STS.Common
                     return fileName;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
+                
             }
             return null;
 

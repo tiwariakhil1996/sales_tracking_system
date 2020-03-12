@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace STS.Model
+﻿namespace STS.Model
 {
     // Send Mail Model
     public partial class SendMailModel
@@ -11,14 +7,11 @@ namespace STS.Model
         public string PrimaryPort { get; set; }
         public string UsernameEmail { get; set; }
         public string UsernamePassword { get; set; }
-        public string Token { get; set; }
-        public int UserId { get; set; }
         public string username { get; set; }
 
         public int ReturnCode { get; set; }
         public string Token { get; set; }
         public int UserId { get; set; }
-
         public string Username { get; set; }
 
 

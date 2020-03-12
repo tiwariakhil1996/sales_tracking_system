@@ -100,14 +100,6 @@ export const routes: Routes = [
     }
   },
   {
-    path: 'admin/reset-password-form',
-    component: ResetPasswordFormComponent,
-    data: {
-      title: 'Forgot Password Form'
-    }
-  },
-
-  {
     path: 'admin',
     component: DefaultLayoutComponent,
 
@@ -194,10 +186,10 @@ export const routes: Routes = [
         path: 'activity',
         loadChildren: () => import('./sales/activity/activity.module').then(m => m.ActivityModule)
       },
-       {
-        path: 'icons',
-        loadChildren: () => import('./sales/icons/icons.module').then(m => m.IconsModule)
-      }
+      //  {
+      //   path: 'icons',
+      //   loadChildren: () => import('./sales/icons/icons.module').then(m => m.IconsModule)
+      // }
     ]
   },
 

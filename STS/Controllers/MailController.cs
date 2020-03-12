@@ -48,7 +48,7 @@ namespace STS.Controllers
                         model.UsernameEmail,
                          Subject: "Sales Tracking System:Forgot Password",
                          EmailMessage: html,
-                           needCC: true
+                         needCC: true
                        );
                 }
                 dctData.Add("SendMail", transaction);

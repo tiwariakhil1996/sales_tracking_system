@@ -1,17 +1,15 @@
-
-
 .bg {
-    /* background-image: url("/assets/img/Images/1.jpg"); */
-    background-image: url("/assets/img/wallpapers/5.jpg");
+  /* background-image: url("/assets/img/Images/1.jpg"); */
+  background-image: url("/assets/img/wallpapers/5.jpg");
 
-    /* background-color: darkslategrey; */
-    background-size: 1536px 721px;
-    }
-    
-    .reg-form {
-        background-color: lightblue;
-    }
-    
-    .reg-footer {
-        background-color: #495057;
-    }
+  /* background-color: darkslategrey; */
+  background-size: 1536px 721px;
+}
+
+.reg-form {
+  background-color: lightblue;
+}
+
+.reg-footer {
+  background-color: #495057;
+}

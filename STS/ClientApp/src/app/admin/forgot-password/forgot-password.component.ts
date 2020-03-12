@@ -69,28 +69,21 @@ export class ForgotPasswordComponent implements OnInit {
           disableTimeOut: false,
           timeOut: 2000
         });
-      } else  {
-        this.toastr.error('Soory,we couldnt find an account with that email address please contact your account administrator','Error', {
+      } else {
+        this.toastr.error('Soory,we couldnt find an account with that email address please contact your account administrator', 'Error', {
           disableTimeOut: false,
           timeOut: 2000
         });
       }
     }, (err) => {
 
-    } else {
-      this.toastr.warning('This email id is not registered', 'Warning', {
-        disableTimeOut: false
-      });
-    }
-  },(err) => {
-
-  } );
+    });
   }
 
- 
 
-backtologinpage() {
-  this.router.navigate(['/admin/login']);
-}
+
+  backtologinpage() {
+    this.router.navigate(['/admin/login']);
+  }
 
 }

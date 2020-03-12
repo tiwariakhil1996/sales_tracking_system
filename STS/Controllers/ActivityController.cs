@@ -195,11 +195,9 @@ namespace STS.Controllers
             {
                 List<admin_ActivityListModel> each_admin_activityList = new List<admin_ActivityListModel>();
                 int rowcount = 0;
-                string search=null;
                 each_admin_activityList = iactivity.each_admin_activityList(model, out rowcount);
 
                 dctData.Add("each_admin_activityList", each_admin_activityList);
-                //dctData.Add("Search", search);
                 dctData.Add("RowCount", rowcount);
             }
             catch (Exception ex)

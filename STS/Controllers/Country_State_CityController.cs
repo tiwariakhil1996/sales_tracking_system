@@ -4,7 +4,6 @@ using System.Net;
 using System.Threading.Tasks;
 using STS.BLL.Interface;
 using STS.Common;
-using STS.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace STS.Controllers
