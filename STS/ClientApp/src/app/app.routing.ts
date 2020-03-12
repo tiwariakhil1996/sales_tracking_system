@@ -14,12 +14,13 @@ import { RegisterComponent } from './admin/register/register.component';
 // Sales Containers
 import { SalesLayoutComponent } from './containerSales';
 
-import { SalesRegisterComponent } from './sales/register/register.component';
+// import { SalesRegisterComponent } from './sales/register/register.component';
 import { SalesLoginComponent } from './sales/login/login.component';
 
 import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password.component';
 import { AppComponent } from './app.component';
 import { ResetPasswordComponent } from './admin/reset-password/reset-password.component';
+import { SalesRegisterComponent } from './admin/sales-register/sales-register.component';
 
 
 export const routes: Routes = [
@@ -74,7 +75,13 @@ export const routes: Routes = [
     }
   },
 
-
+  {
+    path: 'admin/sales-register',
+    component: SalesRegisterComponent,
+    data: {
+      title: 'Register Page'
+    }
+  },
 
 
   {
@@ -90,6 +97,13 @@ export const routes: Routes = [
     component: ResetPasswordComponent,
     data: {
       title: 'Forgot Password Page'
+    }
+  },
+  {
+    path: 'admin/reset-password-form',
+    component: ResetPasswordFormComponent,
+    data: {
+      title: 'Forgot Password Form'
     }
   },
 
@@ -179,6 +193,10 @@ export const routes: Routes = [
       {
         path: 'activity',
         loadChildren: () => import('./sales/activity/activity.module').then(m => m.ActivityModule)
+      },
+       {
+        path: 'icons',
+        loadChildren: () => import('./sales/icons/icons.module').then(m => m.IconsModule)
       }
     ]
   },

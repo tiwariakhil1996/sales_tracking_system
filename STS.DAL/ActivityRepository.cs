@@ -92,6 +92,22 @@ namespace STS.DAL
             }
         }
 
+        public async Task<List<ActivityDetailsModel>> activity_Details(int aid)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@Activity_Id", aid);
+
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                var result = await connection.QueryAsync<ActivityDetailsModel>("activity_Details", parameter, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
 
         //Display ActivityList_while_adding
         public async Task<List<ActivityList_while_addingModel>> ActivityList_while_adding()
@@ -133,6 +149,9 @@ namespace STS.DAL
                 parameter.Add("@SalesID", model.userId);
                 parameter.Add("@pageIndex", model.pageIndex);
                 parameter.Add("@pageSize", model.pageSize);
+                parameter.Add("@Search", model.Search);
+                parameter.Add("@From_Date", model.From_date);
+                parameter.Add("@To_Date", model.To_date);
 
                 parameter.Add("@RowCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
                 var result = connection.Query<ActivityListModel>("each_sales_activityList", parameter, commandType: CommandType.StoredProcedure);
@@ -168,7 +187,9 @@ namespace STS.DAL
                 parameter.Add("@AdminID", model.userId);
                 parameter.Add("@pageIndex", model.pageIndex);
                 parameter.Add("@pageSize", model.pageSize);
-                //parameter.Add("@Search", model.Search);
+                parameter.Add("@Search", model.Search);
+                parameter.Add("@From_Date", model.From_date);
+                parameter.Add("@To_Date", model.To_date);
 
                 parameter.Add("@RowCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
                 var result = connection.Query<admin_ActivityListModel>("each_admin_activityList", parameter, commandType: CommandType.StoredProcedure);
@@ -257,6 +278,7 @@ namespace STS.DAL
         }
 
 
+      
 
         //Delete Activity Product
         public async Task<TranStatus> deleteActivity_Product(int productId)
@@ -380,7 +402,7 @@ namespace STS.DAL
                 DynamicParameters parameter = new DynamicParameters();
                 parameter.Add("@Aid", Aid);
                 parameter.Add("@AppointmentDate", model.AppointmentDate);
-                parameter.Add("@@Description_on_Followup", model.followup_description);
+                parameter.Add("@Description_on_Followup", model.followup_description);
                 parameter.Add("@Status", model.status);
                 parameter.Add("@Latitude", model.Latitude);
                 parameter.Add("@Longitude", model.Longitude);

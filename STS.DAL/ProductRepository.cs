@@ -118,6 +118,7 @@ namespace STS.DAL
                 parameter.Add("@AdminID", model.userId);
                 parameter.Add("@pageIndex", model.pageIndex);
                 parameter.Add("@pageSize", model.pageSize);
+                parameter.Add("@Search", model.Search);
 
                 parameter.Add("@RowCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
                 var result = connection.Query<ProductListModel>("each_admin_ProductList", parameter, commandType: CommandType.StoredProcedure);
@@ -194,6 +195,7 @@ namespace STS.DAL
                 parameter.Add("@SalesID", model.userId);
                 parameter.Add("@pageIndex", model.pageIndex);
                 parameter.Add("@pageSize", model.pageSize);
+                parameter.Add("@Search", model.Search);
 
                 parameter.Add("@RowCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
                 var result = connection.Query<ProductListModel>("each_sales_ProductList", parameter, commandType: CommandType.StoredProcedure);

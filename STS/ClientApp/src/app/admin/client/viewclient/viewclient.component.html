@@ -10,6 +10,13 @@
     </div>
     <div style="overflow-x:auto;">
       <div class="card-body">
+
+          <!-- SEARCH -->
+          <div class="form-inline md-form mr-auto mb-4">
+            <input style="float: right;" (input)="onsearch()" class="form-control mr-sm-2"  type="text" [(ngModel)]="search_" placeholder="Search" aria-label="Search">
+          
+          </div>
+
         <table class="table table-bordered btn-center">
           <thead>
             <tr class="table-success">
@@ -56,7 +63,7 @@
         </table>
 
         <div class="message" *ngIf="clientDetails.length <= 0">
-          <p>No Record</p>
+          <p>No Record Found</p>
         </div>
 
       </div>

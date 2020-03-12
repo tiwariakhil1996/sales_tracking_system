@@ -2,6 +2,14 @@
     text-align: center;
 }
   
+.color {
+  background-color: lightskyblue;
+}
+
+.message {
+  text-align: center;
+}
+
 .modal-content {
     width: 1000px;
       right: 250px;
@@ -15,6 +23,7 @@
     color: red;
   }
   
+
   .set-in-line {
     float: left;
     margin: 5px;

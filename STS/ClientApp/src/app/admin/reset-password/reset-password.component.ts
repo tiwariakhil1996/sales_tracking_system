@@ -23,11 +23,15 @@ export class ResetPasswordComponent implements OnInit {
   Token: any;
   UserId: any;
 
-
   // RoleJason = {
   //   ROle: [0, 1],
   //   Component: 'ForgotPasswordComponent'
   // };
+
+  RoleJason = {
+    ROle: [0, 1],
+    Component: 'ResetPasswordComponent'
+  };
 
   constructor(private router: Router,
     private adminService: AdminService,
@@ -55,12 +59,22 @@ export class ResetPasswordComponent implements OnInit {
     });
   }
 
-  // checkRole(RoleJason) {
+  // check_admin_Role(RoleJason) {
   //   const result = JSON.parse(localStorage.getItem('adminLogin')) || [];
   //   if (this.RoleJason.Component === RoleJason.Component) {
   //     console.log(result);
   //     if (!this.RoleJason.ROle.includes(result.userType)) {
   //       this.router.navigate(['admin/login']);
+  //     }
+  //   }
+  // }
+
+  // check_sales_Role(RoleJason) {
+  //   const result = JSON.parse(localStorage.getItem('salesLogin')) || [];
+  //   if (this.RoleJason.Component === RoleJason.Component) {
+  //     console.log(result);
+  //     if (!this.RoleJason.ROle.includes(result.userType)) {
+  //       this.router.navigate(['sales/login']);
   //     }
   //   }
   // }

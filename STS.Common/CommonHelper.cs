@@ -94,6 +94,8 @@ namespace STS.Common
             return dataTable;
         }
 
+
+        // To store image from base 64
         public static string SaveImage(dynamic HttpContext, string PathToSaveImage, string base64imageString, bool createThumb, string extn, int isOriginalSave = 0, bool isBanner = false)
         {
             try
@@ -170,6 +172,23 @@ namespace STS.Common
 
         }
 
-       
+
+        public static TranStatus TransactionErrorHandler(Exception ex)
+        {
+
+            TranStatus transaction = new TranStatus();
+            if (ex.Message.Contains("||"))
+            {
+                transaction.code = Convert.ToInt32(ex.Message.Split("||")[0]);
+                transaction.returnMessage = ex.Message.Split("||")[1];
+            }
+            else
+            {
+                transaction.code = Constants.Status.Error;
+                transaction.returnMessage = ex.Message;
+            }
+            return transaction;
+        }
+
     }
 }

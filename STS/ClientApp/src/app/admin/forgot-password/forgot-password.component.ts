@@ -1,4 +1,4 @@
-import { SendMailModel } from './../../model/sendmail';
+import { SendMailModel, sendmailModel } from './../../model/sendmail';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -18,6 +18,9 @@ export class ForgotPasswordComponent implements OnInit {
 
   loginDetail = new registerModel();
   adminDetails: registerModel[] = [];
+
+  mailDetail = new sendmailModel();
+  mailDetails: sendmailModel[] = [];
 
   // RoleJason = {
   //   ROle: [0, 1],
@@ -74,7 +77,14 @@ export class ForgotPasswordComponent implements OnInit {
       }
     }, (err) => {
 
-    });
+    } else {
+      this.toastr.warning('This email id is not registered', 'Warning', {
+        disableTimeOut: false
+      });
+    }
+  },(err) => {
+
+  } );
   }
 
  

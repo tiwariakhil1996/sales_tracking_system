@@ -25,6 +25,8 @@ export class SalesdataComponent implements OnInit {
   // pageSize: number = 6;
   // totalPageList: paginationModel[] = [];
 
+  search_ : any;
+
   // Pagination
   RowCount: number;
   pageSize: number = 5;
@@ -101,6 +103,10 @@ export class SalesdataComponent implements OnInit {
   //   });
   // }
 
+  onsearch() {
+    const item = { pageIndex: 0 };
+    this.SalesList(item);
+  }
 
   SalesList(item) {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
@@ -108,6 +114,8 @@ export class SalesdataComponent implements OnInit {
     // console.log(this.sales.userid);
     this.sales.pageIndex = item.pageIndex;
     this.sales.pageSize = this.pageSize;
+
+    this.sales.search = this.search_;
 
     this.salesService.RegisteredSalesList(this.sales).subscribe((data: any) => {
       if (data.Status.code === 0) {

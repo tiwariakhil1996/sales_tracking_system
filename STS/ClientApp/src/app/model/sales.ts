@@ -25,6 +25,7 @@ export class salesregisterModel {
 
     pageSize: number;
     pageIndex: number;
+    search: string;
 }
 
 export class sales_avatarModel {

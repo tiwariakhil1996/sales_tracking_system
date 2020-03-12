@@ -81,6 +81,7 @@ namespace STS.Model
         public int pageIndex { get; set; }
         public int pageSize { get; set; }
         public int RowCount { get; set; }
+        public string Search { get; set; }
     }
 
     public partial class Refresh_Sales_Location_Model

@@ -74,6 +74,9 @@ namespace STS
 
             //Database Connectivity
             STSSetting.ConnectionString = Configuration.GetSection("ConnectionString:STS").Value;
+
+
+
             //Send email for forgot password
             STSSetting.PrimaryDomain = Configuration.GetSection("EmailSettings:PrimaryDomain").Value;
             STSSetting.PrimaryPort = Configuration.GetSection("EmailSettings:PrimaryPort").Value;
@@ -110,6 +113,11 @@ namespace STS
             services.AddSingleton<IResetPassword, ResetPasswordServices>();
 
         }
+
+
+
+
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

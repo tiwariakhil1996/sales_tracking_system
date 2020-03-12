@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { SalesService } from '../../service/sales.service';
-import { salesregisterModel } from '../../model/sales';
+import { ToastrService } from 'ngx-toastr';
 import { registerModel } from '../../model/admin';
-
+import { salesregisterModel } from '../../model/sales';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: 'register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-sales-register',
+  templateUrl: './sales-register.component.html',
+  styleUrls: ['./sales-register.component.css']
 })
 export class SalesRegisterComponent implements OnInit {
 
@@ -222,4 +221,6 @@ export class SalesRegisterComponent implements OnInit {
   loginForm() {
     this.router.navigate(['/sales/login']);
   }
+
+  
 }

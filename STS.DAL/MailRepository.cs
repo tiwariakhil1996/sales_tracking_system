@@ -19,7 +19,6 @@ namespace STS.DAL
         public async Task<TranStatus> SendMail(SendMailModel model)
         {
             using (var connection = new SqlConnection(ConnectionString))
-
             {
                 await connection.OpenAsync();
                 TranStatus transaction = new TranStatus();
@@ -41,7 +40,6 @@ namespace STS.DAL
                     transaction.UserIdentity = parameter.Get<int>("@UserIdentity");
                 }
                 return transaction;
-
             }
         }
        

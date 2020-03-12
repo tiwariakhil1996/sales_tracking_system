@@ -15,3 +15,12 @@
     left: 1050px;
     width: 54px;
  }
+
+
+ .color {
+    background-color: lightskyblue;
+ }
+
+ .message {
+    text-align: center;
+}

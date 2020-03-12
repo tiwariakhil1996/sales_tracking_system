@@ -20,6 +20,7 @@ namespace STS.Common
             User = 2
         }
     }
+
     public class TranStatus
     {
         public string returnMessage { get; set; }

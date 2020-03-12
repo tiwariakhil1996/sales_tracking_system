@@ -173,6 +173,7 @@ namespace STS.DAL
                 parameter.Add("@AdminID", model.UserId);
                 parameter.Add("@pageIndex", model.pageIndex);
                 parameter.Add("@pageSize", model.pageSize);
+                parameter.Add("@Search", model.Search);
 
                 parameter.Add("@RowCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
                 var result = connection.Query<SalesListModel>("RegisteredSalesList", parameter, commandType: CommandType.StoredProcedure);
