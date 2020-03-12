@@ -91,7 +91,7 @@ export class AddactivityComponent implements OnInit {
     // Amount
     this.amount = price * quantity;
     this.addproductlistDetails[i].amount = price * quantity;
-    console.log(this.amount);
+    // console.log(this.amount);
 
     // Dis amt
     this.dis_amount = this.amount * dis_per / 100;
@@ -100,7 +100,7 @@ export class AddactivityComponent implements OnInit {
     // Total
     this.grand_total = this.amount - this.dis_amount;
     this.addproductlistDetails[i].total_price = this.amount - this.dis_amount;
-    console.log(this.grand_total);
+    // console.log(this.grand_total);
 
   }
 

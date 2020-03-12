@@ -410,7 +410,6 @@ export class DefaultLayoutComponent implements OnInit {
     // remove user from local storage to log user out
     localStorage.removeItem('adminLogin');
   }
-
   getuserProfile() {
     this.register = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.avatar.image = this.register.image;

@@ -7,12 +7,6 @@ using STS.Common;
 using STS.Model;
 using Microsoft.AspNetCore.Mvc;
 
-
-
-
-
-
-
 namespace STS.Controllers
 {
     [Route("api/[controller]")]
@@ -26,6 +20,7 @@ namespace STS.Controllers
         }
         TranStatus transaction = new TranStatus();
 
+        
         public string Token;
         public int UserId;
 
@@ -46,12 +41,12 @@ namespace STS.Controllers
                     UserId = transaction.UserIdentity;
                     var html = System.IO.File.ReadAllText(@"EmailTemplates/ResetPassword.html");
                     var link = "http://localhost:55627/admin/reset-password?Token=" + Token + "&UserId=" + UserId;
-
+                  
                     html = html.Replace("{{token}}",link);
 
                     CommonHelper.SendEmail(
                         model.UsernameEmail,
-                         Subject: "Sales Tracking System-Forgot Password",
+                         Subject: "Sales Tracking System:Forgot Password",
                          EmailMessage: html,
                            needCC: true
                        );
@@ -66,7 +61,6 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
-
     }
 
 
