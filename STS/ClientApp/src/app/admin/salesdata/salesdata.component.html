@@ -21,6 +21,7 @@
             <th>Contact</th>
             <th>Adhar No.</th>
             <th>Address</th>
+            <th style="width: 128px;">Password Reset</th>
             <th>Action</th>
             <th>IsActive</th>
           </tr>
@@ -41,6 +42,15 @@
             <td>{{item.mobile}}</td>
             <td>{{item.adharcard}}</td>
             <td>{{item.address}}</td>
+            <td style="text-align: center">
+              <!-- <button class='btn btn-black' type="button" data-toggle="modal" (click)="openmodal(content)"><i
+                class="fa fa-key" aria-hidden="true"></i>
+            </button> -->
+            <span class="fa-passwd-reset fa-stack" data-toggle="modal" (click)="password_reset_modal(item,password_reset)">
+              <i class="fa fa-undo fa-stack-2x"></i>
+              <i class="fa fa-lock fa-stack-1x"></i>
+            </span>
+            </td>
             <td style="text-align: center">
               <!-- <button class='btn btn-danger' type="button" (click)="deleteSales(item.id)"><i class="fa fa-trash" aria-hidden="true"></i></button> -->
               <button class='btn btn-danger' type="button" data-toggle="modal" (click)="openmodal(content)"><i
@@ -123,3 +133,50 @@
 </div>
 
 </div>
+
+
+
+
+
+
+
+
+
+
+
+<ng-template #password_reset let-modal>
+
+
+          <div class="col-md-14">
+            <div class="card-group">
+              <div class=" p-2">
+                <div class="card-body">
+  
+                  <h3>Forgot Password?</h3>
+                  <p class="text-muted"></p>
+                  <p>
+                    Enter your e-mail address / mobile number below to reset your password.
+                  </p>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                    </div>
+                    <input type="text" class="form-control placeholder-no-fix" placeholder="Email/Mobile No."
+                    [(ngModel)]="user.email" name="email" autocomplete="email" required>
+                  </div>
+  
+                  <div class="form-actions">
+                   
+                    <button type="button" id="id_btn_forgotpassword" class="btn btn-info pull-right" (click)="Sendmail()">
+                      Submit </button>
+                  </div>
+  
+                </div>
+              </div>
+              <!-- <div class="copyright">
+                2019 - <span id="currentYearField">2020</span> © Sales Tracking System. All Rights Reserved.
+              </div> -->
+            </div>
+          </div>
+
+</ng-template>

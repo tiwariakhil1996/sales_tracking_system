@@ -7,6 +7,7 @@ import { ClientComponent } from './client.component';
 import { ViewclientComponent } from './viewclient/viewclient.component';
 import { AddclientComponent } from './addclient/addclient.component';
 import { TooltipModule } from 'ngx-bootstrap';
+import { AgmCoreModule } from '@agm/core';
 
 // Angular
 
@@ -15,7 +16,11 @@ import { TooltipModule } from 'ngx-bootstrap';
     CommonModule,
     FormsModule,
     ClientRoutingModule,
-    TooltipModule.forRoot()
+    TooltipModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAgmJb337SljuWJnzPXRyMjiTSL1DWcBq8',
+      libraries: ['places']
+    }),
   ],
   declarations: [
     ClientComponent,

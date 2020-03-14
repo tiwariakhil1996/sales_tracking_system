@@ -15,4 +15,7 @@ export class SendEmailService {
         return this.http.post('/api/Mail/SendMail',data);
     }
 
+    send_sales_mail(data) {
+        return this.http.post('/api/Mail/SendMail_Sales',data);
+    }
 }

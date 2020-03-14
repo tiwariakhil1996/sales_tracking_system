@@ -2,6 +2,9 @@
     text-align: center;
 }
   
+.modal-header {
+    background-color: cadetblue;
+}
 
 .badge-pill {
     padding: 5px;
@@ -17,6 +20,9 @@
  }
 
 
+ .activity_detail_header{
+    background-color: cadetblue;
+ }
  .color {
     background-color: lightskyblue;
  }

@@ -4,7 +4,7 @@ import { SalesService } from '../../../service/sales.service';
 import { ProductService } from '../../../service/product.service';
 import { ActivityService } from '../../../service/activity.service';
 import { ClientService } from '../../../service/client.service';
-import { activityModel, addproductListingModel, updateactivityModel, addactivityModel, searchModel, LocationModel, paginationModel, activityDetailsModel } from '../../../model/activity';
+import { activityModel, addproductListingModel, updateactivityModel, addactivityModel, searchModel, LocationModel, paginationModel, activityDetailsModel, updateproductListingModel } from '../../../model/activity';
 import { salesregisterModel } from '../../../model/sales';
 import { productModel, productpriceModel, updateproductModel } from '../../../model/product';
 import { clientModel } from '../../../model/client';
@@ -49,8 +49,14 @@ export class CurrentactivityComponent implements OnInit {
   update_activity = new addactivityModel();
   update_activityDetails: addactivityModel[] = [];
 
+
   addproductlist = new addproductListingModel;
   addproductlistDetails: addproductListingModel[] = [];
+
+  updateproductlist = new updateproductListingModel;
+  updateproductlistDetails: updateproductListingModel[] = [];
+
+
 
   product_price = new productpriceModel();
   product_priceDetails: productpriceModel[] = [];
@@ -76,14 +82,14 @@ export class CurrentactivityComponent implements OnInit {
   //  longitude: number;
 
   // Searching
-  search_ : any;
+  search_: any;
   from_date: string;
   to_date: string;
 
   amount: number;
   grand_total: number;
   dis_amount: number;
-
+  pending_amount: number;
 
   total: any;
   final_total: any;
@@ -100,8 +106,15 @@ export class CurrentactivityComponent implements OnInit {
   _client = 'C';
 
   location: Coordinates;
-  lat: any;
-  lng: any;
+  lat: number;
+  lng: number;
+
+  // Link to get lots of icon form agm marker
+  // http://kml4earth.appspot.com/icons.html
+
+  iconAdmin= 'http://maps.google.com/mapfiles/kml/paddle/A.png';
+  iconSales= 'http://maps.google.com/mapfiles/kml/paddle/S.png';
+  iconClient= 'http://maps.google.com/mapfiles/kml/paddle/C.png';
 
   centerlat: any;
   centerlng: any;
@@ -152,14 +165,14 @@ export class CurrentactivityComponent implements OnInit {
 
 
   ngOnInit() {
-   
+
     const item = { pageIndex: 0 };
     this.eachactivityList(item);
 
     this.addMoreproducts();
     this.static_price();
 
-    setTimeout(() => {
+    // setTimeout(() => {
       navigator.geolocation.getCurrentPosition(position => {
         // console.log(position);
 
@@ -173,7 +186,7 @@ export class CurrentactivityComponent implements OnInit {
 
         this.geocoder = new google.maps.Geocoder();
       });
-    }, 2000);
+    // }, 2000);
   }
 
   TotalAmount(price: number, quantity: number, dis_per: number, i) {
@@ -188,11 +201,13 @@ export class CurrentactivityComponent implements OnInit {
 
     // Total
     this.grand_total = this.amount - this.dis_amount;
-    this.addproductlistDetails[i].total_price = Math.round (this.amount - this.dis_amount);
+    this.addproductlistDetails[i].total_price = Math.round(this.amount - this.dis_amount);
     console.log(this.grand_total);
   }
 
-
+  Total_pending_amt(adv_payment: number) {
+    this.pending_amount = this.final_total - adv_payment;
+  }
 
   selectTab(tabId: number) {
     this.staticTabs.tabs[tabId].active = true;
@@ -237,24 +252,7 @@ export class CurrentactivityComponent implements OnInit {
   //   });
   // }
 
-  // onSearch(aid: any) {
-  //   this.activityService.searchTitle(aid).subscribe(data => {
-  //     // this.activityList();
 
-  //   });
-  // }
-
-  // Search() {
-  //   this.activityService.searchActivity(this.search).subscribe((data: any) => {
-  //     if (data.Status.code === 0) {
-  //       if (data.searchActivity) {
-  //         this.searchDetails = data.searchActivity;
-  //       }
-  //     }
-  //   }, (err) => {
-
-  //   });
-  // }
 
   // Delete
 
@@ -345,7 +343,7 @@ export class CurrentactivityComponent implements OnInit {
         if (data.activity_Details) {
           this.activityInvoiceDetails = data.activity_Details;
           console.log(this.activityInvoiceDetails);
-          
+
         }
       }
     }, (err) => {
@@ -369,7 +367,7 @@ export class CurrentactivityComponent implements OnInit {
 
           this.subtotal();
           this.dis_amt();
-          this. dis_per();
+          this.dis_per();
           this.grandtotal();
         }
       }
@@ -409,10 +407,10 @@ export class CurrentactivityComponent implements OnInit {
     }
   }
 
-onsearch() {
-  const item = { pageIndex: 0 };
-  this.eachactivityList(item);
-}
+  onsearch() {
+    const item = { pageIndex: 0 };
+    this.eachactivityList(item);
+  }
 
   eachactivityList(item) {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
@@ -461,6 +459,8 @@ onsearch() {
         if (data.Activity_Location) {
           this.Activity_LocationDetails = data.Activity_Location;
           console.log(this.Activity_LocationDetails);
+          // this.Activity_Location.salesname=this.activity.salesName;
+          // this.Activity_Location.clientname=this.activity.clientName;
         }
       }
     }, (err) => {
@@ -501,9 +501,10 @@ onsearch() {
     // sending user id  as modified by
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.update_activity.modifiedby = this.user.id;
-
+    this.update_activity.pending_amount = this.pending_amount;
+    this.update_activity.grand_total = this.final_total;
     // Sending product details in array
-    this.update_activity.productList = this.addproductlistDetails;
+    // this.update_activity.productList = this.addproductlistDetails;
 
     this.activityService.updateActivity(aid, this.update_activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -519,11 +520,38 @@ onsearch() {
 
       this.activity_productList(aid);
       // this.reset_newaddproducts();
-      this.addMoreproducts();
+      // this.addMoreproducts();
     }, (err) => {
     });
   }
 
+
+  Update_n_addproducts(aid: number) {
+    // sending user id  as modified by
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.updateproductlist.modifiedby = this.user.id;
+
+    // Sending product details in array
+    this.updateproductlist.productList = this.addproductlistDetails;
+
+    this.activityService.update_n_addProducts(aid, this.updateproductlist).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        this.toastr.success('Products is updated sucesfully', 'Successful', {
+          disableTimeOut: false,
+          timeOut: 2000
+        });
+      }
+      // this.activity = new activityModel();
+      // this.eachactivityList();
+      const item = { pageIndex: 0 };
+      this.eachactivityList(item);
+
+      this.activity_productList(aid);
+      // this.reset_newaddproducts();
+      // this.addMoreproducts();
+    }, (err) => {
+    });
+  }
 
 
   Update_old_Products(aid: number) {

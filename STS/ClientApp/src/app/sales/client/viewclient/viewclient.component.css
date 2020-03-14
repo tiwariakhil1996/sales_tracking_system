@@ -5,3 +5,11 @@
 .color {
     background-color: lightskyblue;
  }
+
+ agm-map {
+    height: 450px;
+}
+
+.modal-header {
+    background-color: cadetblue;
+}

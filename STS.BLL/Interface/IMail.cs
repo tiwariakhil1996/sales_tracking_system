@@ -12,6 +12,7 @@ namespace STS.BLL.Interface
     {
         //Send Mail
         Task<TranStatus> SendMail(SendMailModel model);
+        Task<TranStatus> SendMail_Sales(SendMailModel model);
 
 
 

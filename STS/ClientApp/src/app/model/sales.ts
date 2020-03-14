@@ -18,9 +18,10 @@ export class salesregisterModel {
 
     userid: number;
 
-    latitude: string;
-    longitude: string;
-
+    // latitude: string;
+    // longitude: string;
+    latitude: number;
+    longitude: number;
     userType: number;
 
     pageSize: number;
@@ -35,8 +36,10 @@ export class sales_avatarModel {
 export class LocationModel {
     userid: number;
     // Sales Location
-    latitude: string;
-    longitude: string;
+    // latitude: string;
+    // longitude: string;
+    latitude: number;
+    longitude: number;
 }
 
 export class changePasswordModel {

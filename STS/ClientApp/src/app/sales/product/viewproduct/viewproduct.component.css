@@ -10,10 +10,20 @@
   text-align: center;
 }
 
+.modal-header {
+  background-color: cadetblue;
+}
+
 .modal-content {
     width: 1000px;
       right: 250px;
       height: 490px;
+  }
+  
+  img {
+    max-height: 100%;
+    max-width: 100%;
+  
   }
   
   .setdelete {

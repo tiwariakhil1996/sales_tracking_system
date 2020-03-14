@@ -116,38 +116,7 @@ namespace STS.DAL
                 return new Tuple<List<updateProfileModel>, TranStatus>(result.ToList(), transaction);
             }
         }
-        //public async Task<TranStatus> updateAdminProfile(updateProfileModel model)
-        //{
-        //    using (var connection = new SqlConnection(ConnectionString))
-        //    {
-        //        await connection.OpenAsync();
-        //        DynamicParameters parameter = new DynamicParameters();
-        //        parameter.Add("@ID", model.ID);
-        //        parameter.Add("@Image", model.Image);
-        //        parameter.Add("@Username", model.Username);
-        //        parameter.Add("@Gender", model.Gender);
-        //        parameter.Add("@Email", model.Email);
-        //        parameter.Add("@Mobile", model.Mobile);
-        //        parameter.Add("@Password", model.Password);
-        //        parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
-        //        parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
-        //        await connection.QueryAsync("updateAdminProfile", parameter, commandType: CommandType.StoredProcedure);
-        //        transaction.returnMessage = parameter.Get<string>("@Message");
-        //        transaction.code = parameter.Get<int>("@Code");
-        //        return transaction;
-        //    }
-        //}
-        //Display
-        //public async Task<List<AdminLoginModel>> AdminLogin()
-        //{
-        //    using (var connection = new SqlConnection(ConnectionString))
-        //    {
-        //        connection.Open();
-        //        var result = await connection.QueryAsync<AdminLoginModel>("AdminLogin", commandType: CommandType.StoredProcedure);
-        //        return result.ToList();
 
-        //    }
-        //}
 
     }
 }

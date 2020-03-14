@@ -42,6 +42,20 @@ export class ViewclientComponent implements OnInit {
   currentPageIndex: number = 0;
   pageOfItems: Array<any>;
 
+    // For map
+    location: Coordinates;
+    lat: number;
+    lng: number;
+    centerlat: number;
+    centerlng: number;
+    geocoder: any;
+  
+  
+    latitude: number;
+    longitude: number;
+    zoom: number;
+    address: string;
+
     // Authentication
   RoleJason = {
     ROle: [0, 1],
@@ -63,6 +77,24 @@ export class ViewclientComponent implements OnInit {
 
     const item = { pageIndex: 0 };
     this.clientList(item);
+
+    
+    // For google map
+    navigator.geolocation.getCurrentPosition(position => {
+      this.location = position.coords;
+      // When map opens there marker will be 1st in center
+      this.centerlat = this.location.latitude;
+      this.centerlng = this.location.longitude;
+    });
+  }
+
+
+  markerDragEnd($event: any) {
+    // console.log($event);
+    this.latitude = $event.coords.lat;
+    this.longitude = $event.coords.lng;
+    this.client.latitude = this.latitude;
+    this.client.longitude = this.longitude;
   }
 
 
@@ -153,7 +185,7 @@ export class ViewclientComponent implements OnInit {
   openupdatemodal(content, item) {
     this.client = JSON.parse(JSON.stringify(item));
     // data show in model use this line and store the data in user and display in ui
-    this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
+    this.modalService.open(content, {size:'xl', backdropClass: 'light-blue-backdrop' });
 
   }
 

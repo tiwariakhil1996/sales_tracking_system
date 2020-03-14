@@ -61,6 +61,8 @@ import { AgmCoreModule } from '@agm/core';
 import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './admin/reset-password/reset-password.component';
 import { SalesRegisterComponent } from './admin/sales-register/sales-register.component';
+import { ResetPasswordSalesComponent } from './sales/reset-password-sales/reset-password-sales.component';
+import { ForgotPasswordSalesComponent } from './sales/forgot-password-sales/forgot-password-sales.component';
 
 @NgModule({
   imports: [
@@ -111,7 +113,9 @@ import { SalesRegisterComponent } from './admin/sales-register/sales-register.co
     SalesRegisterComponent,
     SalesLoginComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    ResetPasswordSalesComponent,
+    ForgotPasswordSalesComponent
     ],
 
   // providers: [{

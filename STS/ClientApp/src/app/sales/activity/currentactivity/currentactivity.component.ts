@@ -99,7 +99,7 @@ export class CurrentactivityComponent implements OnInit {
     const item = { pageIndex: 0 };
     this.activityList(item);
 
-    setTimeout(() => {
+    // setTimeout(() => {
       navigator.geolocation.getCurrentPosition(position => {
         console.log(position);
 
@@ -110,7 +110,7 @@ export class CurrentactivityComponent implements OnInit {
         this.lng = this.location.longitude;
         this.geocoder = new google.maps.Geocoder();
       });
-    }, 2000);
+    // }, 2000);
 
 
     this.checkRole(this.RoleJason);
@@ -240,6 +240,11 @@ onsearch() {
     this.modalService.open(content1, { ariaLabelledBy: 'modal-basic-title' });
   }
 
+  open_closeactivity(closeactivity,item) {
+    this.activity_product = JSON.parse(JSON.stringify(item));
+    this.modalService.open(closeactivity, { ariaLabelledBy: 'modal-basic-title' });
+  }
+
   GetProduct_Activity(aid) {
     this.activity_productList(aid);
 
@@ -250,6 +255,8 @@ onsearch() {
       if (data.Status.code === 0) {
         if (data.Activity_ProductList) {
           this.activity_productDetails = data.Activity_ProductList;
+          // console.log(this.activity_productDetails);
+          
         }
       }
     }, (err) => {
@@ -370,6 +377,25 @@ onsearch() {
     this.activityService.updateToFollowup(aid, this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
         this.toastr.success('Activity is in Followup', 'Successful', {
+          disableTimeOut: false,
+          timeOut: 2000
+        });
+      }
+
+      // this.activityList();
+      const item = { pageIndex: 0 };
+      this.activityList(item);
+    }, (err) => {
+    });
+  }
+
+  update_InPending(aid: number) {
+    this.activity.latitude = this.lat;
+    this.activity.longitude = this.lng;
+
+    this.activityService.updateToPending(aid, this.activity).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        this.toastr.success('Activity is in Pending', 'Successful', {
           disableTimeOut: false,
           timeOut: 2000
         });

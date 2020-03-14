@@ -6,7 +6,7 @@ import { ProductComponent } from './product.component';
 import { ProductRoutingModule } from './product-routing.module';
 import { AddproductComponent } from './addproduct/addproduct.component';
 import { ViewproductComponent } from './viewproduct/viewproduct.component';
-import { TooltipModule } from 'ngx-bootstrap';
+import { TooltipModule, CarouselModule } from 'ngx-bootstrap';
 // Angular
 
 @NgModule({
@@ -14,7 +14,8 @@ import { TooltipModule } from 'ngx-bootstrap';
     CommonModule,
     FormsModule,
     ProductRoutingModule,
-    TooltipModule.forRoot()
+    TooltipModule.forRoot(),
+    CarouselModule.forRoot()
   ],
   declarations: [
     ProductComponent,

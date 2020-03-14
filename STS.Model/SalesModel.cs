@@ -30,8 +30,8 @@ namespace STS.Model
 
         public string Email { get; set; }
         public string Password { get; set; }
-        public string Latitude { get; set; }
-        public string Longitude { get; set; }
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
         public int UserType { get; set; }
 
     }
@@ -87,8 +87,8 @@ namespace STS.Model
     public partial class Refresh_Sales_Location_Model
     {
         public int UserId { get; set; }
-        public string Latitude { get; set; }
-        public string Longitude { get; set; }
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
 
     }
 

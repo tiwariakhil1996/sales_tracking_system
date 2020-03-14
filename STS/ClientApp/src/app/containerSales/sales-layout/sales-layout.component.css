@@ -9,6 +9,10 @@
           width: 80px;
       }
       
+      .app-header .nav-item {
+        color: white;
+    }
+    
     .modal-header {
         background-color: lightgray;
         padding: 0rem 0rem;

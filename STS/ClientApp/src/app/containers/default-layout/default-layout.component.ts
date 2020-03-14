@@ -29,6 +29,7 @@ export class DefaultLayoutComponent implements OnInit {
 
   profile_pic = new registerModel();
 
+  username:string;
 
   salesregister = new salesregisterModel();
   salesDetails: salesregisterModel[] = [];
@@ -62,12 +63,12 @@ export class DefaultLayoutComponent implements OnInit {
     // console.log(this.changePassword.id);
     this.profile_pic.image = this.register.image;
     // console.log(this.profile_pic.image);
-    
+    this.username=this.register.username;
   }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.checkRole(this.RoleJason);
-
+  
     this.getuserProfile();
   }
 

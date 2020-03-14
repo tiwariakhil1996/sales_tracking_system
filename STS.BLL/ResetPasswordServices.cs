@@ -21,6 +21,15 @@ namespace STS.BLL.Service
             {
                 return await resetpasswordRepository.ResetPasswordAdmin(Token, model);
             }
+        } 
+        
+        
+        public async Task<TranStatus> ResetPasswordSales(string Token, ResetPasswordAdminModel model)
+        {
+            using (resetpasswordRepository = new ResetPasswordRepository())
+            {
+                return await resetpasswordRepository.ResetPasswordSales(Token, model);
+            }
         }
     }
 }

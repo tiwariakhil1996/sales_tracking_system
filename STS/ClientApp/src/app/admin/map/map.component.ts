@@ -21,7 +21,7 @@ export class MapComponent implements OnInit {
 
   Sales_Location = new sales_Location_Model();
   Sales_LocationDetails: sales_Location_Model[] = [];
-  
+
   _admin = 'A';
 
   latitude: number;
@@ -29,16 +29,33 @@ export class MapComponent implements OnInit {
   zoom: number;
   address: string;
 
+  // openedWindow : number = 0; // alternative: array of numbers
+
   private geoCoder;
+
+  // Link to get lots of icon form agm marker
+  // http://kml4earth.appspot.com/icons.html
+
+  iconAdmin= 'http://maps.google.com/mapfiles/kml/paddle/A.png';
+  iconSales= 'http://maps.google.com/mapfiles/kml/shapes/cycling.png';
+  
 
 
   location: Coordinates;
-  lat: any;
-  lng: any;
+  // lat: any;
+  // lng: any;
+  lat: number;
+  lng: number;
 
-  centerlat: any;
-  centerlng: any;
+ 
+
+  centerlat: number;
+  centerlng: number;
+  // centerlat: any;
+  // centerlng: any;
   geocoder: any;
+
+  
   @ViewChild(AgmMap) map: any;
 
   @ViewChild('search')
@@ -56,37 +73,48 @@ export class MapComponent implements OnInit {
     private activityService: ActivityService
 
   ) {
-       this.geocoder = new google.maps.Geocoder;
+    // this.geoCoder = new google.maps.Geocoder;
+    this.geocoder = new google.maps.Geocoder;
+    // console.log(this.geocoder);
     
-    }
+  }
 
   ngOnInit() {
+    // this.setCurrentLocation();
     this.sales_Location();
 
     this.checkRole(this.RoleJason);
 
-    setTimeout(() => {
+    // setTimeout(() => {
       navigator.geolocation.getCurrentPosition(position => {
         // console.log(position);
 
         this.location = position.coords;
+        
         // When map opens there marker will be 1st in center
         this.centerlat = this.location.latitude;
         this.centerlng = this.location.longitude;
 
-        //This is the current lat long
+        // This is the current lat long
         this.lat = this.location.latitude;
         this.lng = this.location.longitude;
-        this.geocoder = new google.maps.Geocoder();
+
+        // this.geocoder = new google.maps.Geocoder();
+
+       
+
+        // console.log(this.geocoder );
+        
       });
-    }, 2000);
+    // }, 2000);
 
 
-    // //load Places Autocomplete
+    // load Places Autocomplete
     // this.mapsAPILoader.load().then(() => {
     //   this.setCurrentLocation();
 
     //   this.geoCoder = new google.maps.Geocoder;
+    //   console.log(this.geoCoder);
     //   let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
     //     types: ["address"]
     //   });
@@ -95,6 +123,8 @@ export class MapComponent implements OnInit {
     //     this.ngZone.run(() => {
     //       //get the place result
     //       let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+    //       // console.log(place);
+          
     //       //verify result
     //       if (place.geometry === undefined || place.geometry === null) {
     //         return;
@@ -106,6 +136,7 @@ export class MapComponent implements OnInit {
     //     });
     //   });
     // });
+
   }
 
 
@@ -133,17 +164,12 @@ export class MapComponent implements OnInit {
   }
 
 
-  markerDragEnd($event: MouseEvent) {
-    // console.log($event);
-    this.latitude = $event.coords.lat;
-    this.longitude = $event.coords.lng;
-    // this.getAddress(this.latitude, this.longitude);
-  }
+ 
 
   getAddress(latitude, longitude) {
-    this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
-      // console.log(results);
-      // console.log(status);
+    this.geoCoder.geocoder({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
+      console.log(results);
+      console.log(status);
       if (status === 'OK') {
         if (results[0]) {
           this.zoom = 12;
@@ -159,8 +185,26 @@ export class MapComponent implements OnInit {
     });
   }
 
+
+
+  markerDragEnd($event: MouseEvent) {
+    // console.log($event);
+    this.latitude = $event.coords.lat;
+    this.longitude = $event.coords.lng;
+  }
+
+
+// openWindow(id) {
+//     this.openedWindow = id; // alternative: push to array of numbers
+// }
+
+// isInfoWindowOpen(id) {
+//     return this.openedWindow == id; // alternative: check if id is in array
+// }
+
+
   sales_Location() {
-    
+
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.Sales_Location.userId = this.user.id;
 
@@ -168,7 +212,7 @@ export class MapComponent implements OnInit {
       if (data.Status.code === 0) {
         if (data.each_admins_sales_Location) {
           this.Sales_LocationDetails = data.each_admins_sales_Location;
-           console.log(this.Sales_LocationDetails);
+          console.log(this.Sales_LocationDetails);
         }
       }
     }, (err) => {

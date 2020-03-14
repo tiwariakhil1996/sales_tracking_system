@@ -21,6 +21,8 @@ export class clientModel {
 
     createdby: number;
     modifiedby: number;
+    latitude: number;
+    longitude:number;
 }
 
 export class clientListModel {
@@ -41,7 +43,9 @@ export class clientListModel {
     postalCode: number;
     isActive: boolean;
     userid: number;
-
+    latitude: number;
+    longitude:number;
+    
     createdby: number;
     modifiedby: number;
 

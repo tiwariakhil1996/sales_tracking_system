@@ -30,6 +30,17 @@ namespace STS.BLL.Service
                 return await mailRepository.SendMail(model);
 
             }
+        } 
+        
+        
+        
+        public async Task<TranStatus> SendMail_Sales(SendMailModel model)
+        {
+            using (mailRepository = new MailRepository())
+            {
+                return await mailRepository.SendMail_Sales(model);
+
+            }
         }
 
     }

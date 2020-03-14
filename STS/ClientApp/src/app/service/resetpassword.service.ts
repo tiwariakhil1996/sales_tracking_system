@@ -12,4 +12,8 @@ export class ResetPasswordService{
     ResetPassword(Token: any, data: any) {
         return this.http.put('/api/ResetPassword/ResetPasswordAdmin/' + Token, data);
       }
+
+      ResetPasswordSales(Token: any, data: any) {
+        return this.http.put('/api/ResetPassword/ResetPasswordSales/' + Token, data);
+      }
 }
