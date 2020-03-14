@@ -13,25 +13,27 @@
 
       <!-- <div style="overflow-x:auto;"> -->
       <div class="card-body table-responsive">
-        <div class="md-form">
+        <!-- <div class="md-form">
           <input placeholder="Selected date" type="text" id="prefill" class="form-control datepicker" data-value="[2015,6,1]">
           <label for="prefill">Try me...</label>
-        </div>
-        <!-- SEARCH -->
+        </div> -->
+
+        <!-- SEARCH By text box and used of the from and TO date wise Activity searching both side admin and sales side -->
         <div class="form-inline md-form mr-auto mb-4">
-         
+
           <input style="float: right;" (input)="onsearch()" class="form-control mr-sm-2" type="text"
             [(ngModel)]="search_" placeholder="Search" aria-label="Search">
-            <i class="fa fa-search" aria-hidden="true"></i>
+          <i class="fa fa-search" aria-hidden="true"></i>
+
           <label class="text-input" style="padding-left: 9px; padding-right: 9px;">From</label>
           <i class="fa fa-calendar" aria-hidden="true"> <input class="form-control" id="date" type="date"
               name="appointmentDate" [(ngModel)]="from_date" (input)="onsearch()"></i>
 
-          <label class="text-input" style="padding-left: 11px;
-         padding-right: 9px;">To</label>
+          <label class="text-input" style="padding-left: 11px; padding-right: 9px;">To</label>
           <i class="fa fa-calendar" aria-hidden="true">
             <input class="form-control" id="date" type="date" name="appointmentDate" [(ngModel)]="to_date"
               (input)="onsearch()"> </i>
+
         </div>
 
 
@@ -47,6 +49,7 @@
               <th>Contact</th>
               <th>Appointment Date</th>
               <th>Status</th>
+              <!-- <th>Status Info</th> -->
               <th>Track</th>
               <th style="padding-right: 50px;">Action</th>
             </tr>
@@ -60,10 +63,17 @@
               <td>{{item.salesName}}</td>
               <td>{{item.contact}}</td>
               <td>{{item.appointmentDate}}</td>
+
               <td class="status-center">
                 <span class="badge badge-pill badge-success">{{item.statusname}}</span>
+                <i class="fa fa-info-circle" *ngIf="(item.status == 3)" tooltip="{{item.description_on_Followup}}"></i>
                 <!-- <button *ngIf="item.statusname" class='btn btn-success' type="button"></button> -->
               </td>
+              <!-- <td>
+                <button *ngIf="(item.status == 3)" class='btn btn-warning' tooltip="{{item.description_on_Followup}}"
+                  data-toggle="modal" type="button"><i class="fa fa-info-circle"></i></button>
+              </td> -->
+
               <td>
                 <i class="fa fa-map-marker map" (click)="Get_Lat_Long_of_Activity(item.aid)"
                   (click)="open_map_modal(map)"></i>
@@ -333,21 +343,40 @@
           </div>
           <hr>
 
-
-
           <div class="form-group row">
             <div class="col-sm-3" style="left: 863px;">
               <div>
-                <label>Subtotal </label><label style="padding-left: 55px;">{{total | currency: "INR"}}</label>
+                <label>Subtotal </label>
+                <label style="padding-left: 55px;">{{total | currency: "INR"}}</label>
               </div>
               <div>
                 <label>Dis. amt </label><label
                   style="padding-left: 59px;">{{total_dis_amount | currency: "INR"}}</label>
               </div>
+
+              <div >
+                <label>Adva.Pay</label>
+                <input #advance_pay type="text" class="form-control" id="advance_pay" name="advance_pay"
+                  [(ngModel)]="update_activity.advance_pay" (keyup)="Total_Adv_pay(advance_pay.value)">
+              </div>
+              <div>
+                <label>Payment Mode</label>
+                <td>
+                  <select id="paymentmode" name="paymentmode" class="form-control" [(ngModel)]="update_activity.paymentmode">
+                    <option [ngValue]="undefined" selected>Select Mode</option>
+                    <option>Cash</option>
+                    <option>Debit card</option>
+                    <option>Credit Card</option>
+                  </select>
+                </td>
+              </div>
+              <div>
+                <label>Pay.Due</label>
+                <label style="padding-left: 59px;">{{pay_due | currency: "INR"}}</label>
+              </div>
               <div>
                 <label>Grand Total </label><label style="padding-left: 39px;"> {{final_total | currency: "INR"}}</label>
               </div>
-
             </div>
           </div>
 

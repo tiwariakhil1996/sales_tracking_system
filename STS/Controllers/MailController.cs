@@ -19,8 +19,8 @@ namespace STS.Controllers
             imail = mail;
         }
         TranStatus transaction = new TranStatus();
-
         
+
         public string Token;
         public int UserId;
 

@@ -4,7 +4,7 @@ import { SalesService } from '../../../service/sales.service';
 import { ProductService } from '../../../service/product.service';
 import { ClientService } from '../../../service/client.service';
 import { ActivityService } from '../../../service/activity.service';
-import { activityModel, updateactivityModel, paginationModel } from '../../../model/activity';
+import { activityModel, updateactivityModel, paginationModel, addactivityModel } from '../../../model/activity';
 import { salesregisterModel } from '../../../model/sales';
 import { productModel } from '../../../model/product';
 import { clientModel } from '../../../model/client';
@@ -25,6 +25,7 @@ export class CurrentactivityComponent implements OnInit {
 
   user = new salesregisterModel();
   modalRef: BsModalRef;
+  paydue:number;
 
   activity = new activityModel();
   activityDetails: activityModel[] = [];
@@ -40,6 +41,10 @@ export class CurrentactivityComponent implements OnInit {
 
   client = new clientModel();
   clientDetails: clientModel[] = [];
+
+  update_activity = new addactivityModel();
+  update_activityDetails: addactivityModel[] = [];
+
 
 
   latitude: number;
@@ -204,6 +209,7 @@ onsearch() {
     this.activity.search = this.search_;
     this.activity.from_date = this.from_date;
     this.activity.to_date = this.to_date;
+    
 
     this.activityService.each_sales_activityList(this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -240,6 +246,9 @@ onsearch() {
 
   open(content1) {
     this.modalService.open(content1, { ariaLabelledBy: 'modal-basic-title' });
+  }
+  PaymentPendingmodel(paymentpending) {
+    this.modalService.open(paymentpending, { ariaLabelledBy: 'modal-basic-title' });
   }
 
   GetProduct_Activity(aid) {

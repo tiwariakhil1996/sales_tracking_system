@@ -70,7 +70,7 @@ export class ForgotPasswordComponent implements OnInit {
           timeOut: 2000
         });
       } else {
-        this.toastr.error('Soory,we couldnt find an account with that email address please contact your account administrator', 'Error', {
+        this.toastr.error('Sorry,we couldnt find an account with that email address please contact your account administrator', 'Error', {
           disableTimeOut: false,
           timeOut: 2000
         });

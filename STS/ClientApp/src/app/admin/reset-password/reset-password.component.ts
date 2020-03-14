@@ -18,8 +18,10 @@ export class ResetPasswordComponent implements OnInit {
 
   loginDetail = new registerModel();
   adminDetails: registerModel[] = [];
+
   Resetpass = new ResetPasswordAdmin();
   Resetpassword = new ResetPasswordAdmin();
+
   Token: any;
   UserId: any;
 
@@ -114,12 +116,19 @@ export class ResetPasswordComponent implements OnInit {
             disableTimeOut: false
           });
           this.Resetpassword = new ResetPasswordAdmin();
+
+        }else {
+          this.toastr.error('Old password and new Pasword matched please enter the different password', 'Error', {
+            disableTimeOut: false,
+            timeOut: 2000
+          });
         }
+    
       }, (err) => {
 
       });
     } else {
-      this.toastr.error('Old password and new Pasword matched please enter the different password', 'Error', {
+      this.toastr.error('New Password and Confirm Passoword Not mached', 'Error', {
         disableTimeOut: false,
         timeOut: 2000
       });

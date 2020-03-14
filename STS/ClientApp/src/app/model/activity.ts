@@ -1,6 +1,4 @@
-
 // activity
-
 export class addactivityModel {
     aid: number;
     title: string;
@@ -18,6 +16,9 @@ export class addactivityModel {
     user_id: number;
     status: number;
     statusname: string;
+    advance_pay:number;
+    paymentmode:string;
+    paydue:number;
     productList: addproductListingModel[];
 }
 
@@ -30,6 +31,10 @@ export class addproductListingModel {
     discount_per: number;
     discount_amt: number;
     total_price: number;
+    
+   
+    
+
 }
 
 
@@ -73,8 +78,8 @@ export class activityModel {
     latitude: any;
     longitude: any;
     userid: number;
-
     followup_description: string;
+    description_on_Followup: string;
     user_id: number;
     status: number;
     statusname: string;

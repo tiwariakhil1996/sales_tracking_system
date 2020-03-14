@@ -62,7 +62,7 @@ export class DefaultLayoutComponent implements OnInit {
     // console.log(this.changePassword.id);
     this.profile_pic.image = this.register.image;
     // console.log(this.profile_pic.image);
-    
+
   }
 
   ngOnInit() {
@@ -377,8 +377,7 @@ export class DefaultLayoutComponent implements OnInit {
         }
         this.salesregister = new salesregisterModel();
       }
-        , (err) => {
-
+      ,(err) => {
 
         });
     }

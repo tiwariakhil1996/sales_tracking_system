@@ -16,6 +16,7 @@ import { TabsModule, TooltipModule } from 'ngx-bootstrap';
 @NgModule({
   imports: [
     CommonModule,
+   
     FormsModule,
     TabsModule.forRoot(),
     ActivityRoutingModule,

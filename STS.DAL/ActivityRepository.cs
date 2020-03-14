@@ -317,7 +317,13 @@ namespace STS.DAL
                 parameter.Add("@ClientID", model.ClientID);
                 parameter.Add("@Contact", model.Contact);
                 parameter.Add("@AppointmentDate", model.AppointmentDate);
+
+                parameter.Add("@advance_pay", model.Advance_pay);
+                parameter.Add("@paymentmode", model.paymentmode);
+                parameter.Add("@paydue", model.paydue);
+
                 parameter.Add("@Modifiedby", model.Modifiedby);
+
 
                 //Data Table Type -- to insert multiple products 
                 DataTable dataTable = model.ProductList.ToDataTable();
@@ -354,6 +360,8 @@ namespace STS.DAL
                 parameter.Add("@Discount_per", model.Discount_per);
                 parameter.Add("@Discount_amt", model.Discount_amt);
                 parameter.Add("@Total_price", model.Total_price);
+
+
                 parameter.Add("@Modifiedby", model.Modifiedby);
 
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);

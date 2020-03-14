@@ -45,10 +45,10 @@ export class SalesRegisterComponent implements OnInit {
       }
     }
   }
-  LoginAdmin(){
+  LoginAdmin() {
     this.router.navigate(['admin/login']);
   }
-  LoginSales(){
+  LoginSales() {
     this.router.navigate(['sales/login']);
   }
 
@@ -222,5 +222,5 @@ export class SalesRegisterComponent implements OnInit {
     this.router.navigate(['/sales/login']);
   }
 
-  
+
 }

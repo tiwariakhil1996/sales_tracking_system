@@ -1,6 +1,4 @@
 
-
-
 // product form
 export class productModel {
     id: number;

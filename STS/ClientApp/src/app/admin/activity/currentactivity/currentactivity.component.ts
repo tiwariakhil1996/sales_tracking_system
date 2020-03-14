@@ -76,7 +76,7 @@ export class CurrentactivityComponent implements OnInit {
   //  longitude: number;
 
   // Searching
-  search_ : any;
+  search_: any;
   from_date: string;
   to_date: string;
 
@@ -84,11 +84,14 @@ export class CurrentactivityComponent implements OnInit {
   grand_total: number;
   dis_amount: number;
 
+  pay_due: number;
+
 
   total: any;
   final_total: any;
   total_dis_amount: any;
   total_dis_per: any;
+
 
   zoom: number;
   address: string;
@@ -152,7 +155,7 @@ export class CurrentactivityComponent implements OnInit {
 
 
   ngOnInit() {
-   
+
     const item = { pageIndex: 0 };
     this.eachactivityList(item);
 
@@ -188,11 +191,16 @@ export class CurrentactivityComponent implements OnInit {
 
     // Total
     this.grand_total = this.amount - this.dis_amount;
-    this.addproductlistDetails[i].total_price = Math.round (this.amount - this.dis_amount);
+    this.addproductlistDetails[i].total_price = Math.round(this.amount - this.dis_amount);
     console.log(this.grand_total);
+
   }
-
-
+  Total_Adv_pay(advance_pay: number) {
+    // Payment Due
+    this.pay_due=0;
+    this.pay_due = this.final_total - advance_pay;
+    // console.log(this.pay_due);
+  }
 
   selectTab(tabId: number) {
     this.staticTabs.tabs[tabId].active = true;
@@ -307,6 +315,7 @@ export class CurrentactivityComponent implements OnInit {
   }
 
   addMoreproducts() {
+
     this.addproductlistDetails.push({
       productId: null,
       // productname: null,
@@ -316,6 +325,7 @@ export class CurrentactivityComponent implements OnInit {
       discount_per: null,
       discount_amt: null,
       total_price: null,
+     
     });
 
   }
@@ -345,7 +355,7 @@ export class CurrentactivityComponent implements OnInit {
         if (data.activity_Details) {
           this.activityInvoiceDetails = data.activity_Details;
           console.log(this.activityInvoiceDetails);
-          
+
         }
       }
     }, (err) => {
@@ -369,8 +379,9 @@ export class CurrentactivityComponent implements OnInit {
 
           this.subtotal();
           this.dis_amt();
-          this. dis_per();
+          this.dis_per();
           this.grandtotal();
+          // this.advance_payment();
         }
       }
     }, (err) => {
@@ -402,6 +413,8 @@ export class CurrentactivityComponent implements OnInit {
     }
   }
 
+
+
   dis_per() {
     this.total_dis_per = 0;
     for (let i = 0; i < this.activity_productDetails.length; i++) {
@@ -409,10 +422,10 @@ export class CurrentactivityComponent implements OnInit {
     }
   }
 
-onsearch() {
-  const item = { pageIndex: 0 };
-  this.eachactivityList(item);
-}
+  onsearch() {
+    const item = { pageIndex: 0 };
+    this.eachactivityList(item);
+  }
 
   eachactivityList(item) {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
@@ -429,7 +442,7 @@ onsearch() {
       if (data.Status.code === 0) {
         if (data.each_admin_activityList) {
           this.activityDetails = data.each_admin_activityList;
-          // console.log(this.activityDetails);
+          console.log(this.activityDetails);
 
         }
         if (data.RowCount) {
@@ -491,6 +504,8 @@ onsearch() {
     this.modalService.open(map, { size: 'xl', backdropClass: 'light-blue-backdrop' });
   }
 
+
+
   track_activity() {
     this.router.navigate(['/admin/activity/track-activity']);
 
@@ -501,10 +516,10 @@ onsearch() {
     // sending user id  as modified by
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.update_activity.modifiedby = this.user.id;
-
+   this.update_activity.paydue=this.pay_due;
     // Sending product details in array
     this.update_activity.productList = this.addproductlistDetails;
-
+    
     this.activityService.updateActivity(aid, this.update_activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
         this.toastr.success('Activity is updated sucesfully', 'Successful', {

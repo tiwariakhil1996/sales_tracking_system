@@ -8,10 +8,11 @@
     </div>
     <!-- <div style="overflow-x:auto;"> -->
     <div class="card-body table-responsive">
-       <!-- SEARCH -->
-       <div class="form-inline md-form mr-auto mb-4">
-        <input style="float: right;" (input)="onsearch()" class="form-control mr-sm-2" type="text" [(ngModel)]="search_" placeholder="Search" aria-label="Search">
-     
+      <!-- SEARCH -->
+      <div class="form-inline md-form mr-auto mb-4">
+        <input style="float: right;" (input)="onsearch()" class="form-control mr-sm-2" type="text" [(ngModel)]="search_"
+          placeholder="Search" aria-label="Search">
+
         <label class="text-input" style="padding-left: 9px; padding-right: 9px;">From</label>
         <i class="fa fa-calendar" aria-hidden="true"> <input class="form-control" id="date" type="date"
             name="appointmentDate" [(ngModel)]="from_date" (input)="onsearch()"></i>
@@ -54,13 +55,13 @@
             <!-- <td>{{item.latitude}}</td>
             <td>{{item.longitude}}</td> -->
             <td>{{item.appointmentDate}}</td>
-            <td  style="text-align: center">
+            <td style="text-align: center">
               <span class="badge badge-pill badge-success">{{item.statusname}}</span>
               <!-- <button  class='btn btn-success' type="button" disabled><i>{{item.statusname}}</i></button> -->
             </td>
             <td>
-              <button type="button" class="btn btn-primary" data-toggle="modal"
-                (click)="openupdatemodal(content,item)"  (click)="GetProduct_Activity(item.aid)"><i class="fa fa-eye" aria-hidden="true"></i></button>
+              <button type="button" class="btn btn-primary" data-toggle="modal" (click)="openupdatemodal(content,item)"
+                (click)="GetProduct_Activity(item.aid)"><i class="fa fa-eye" aria-hidden="true"></i></button>
 
               <!-- <button class='btn btn-danger' type="button" (click)="onDelete(item.aid)"><i class="fa fa-trash" aria-hidden="true"></i></button> -->
             </td>
@@ -74,26 +75,31 @@
 
     </div>
     <div class="card-footer">
-      <ul class="pagination" >
-  
+      <ul class="pagination">
+
         <li class="page-item" class="page-item first-item" [ngClass]="{disabled:currentPageIndex === 0}">
           <a class="page-link" (click)="activityList({ pageIndex: 0 })"><i class="fa fa-step-backward"></i></a>
-      </li>
-      <li class="page-item" [ngClass]="{disabled:currentPageIndex === 0}" class="page-item previous-item">
-          <a (click)="activityList({pageIndex:currentPageIndex -1})" class="page-link" routerLink="/sales/activity/currentactivity"> <i class="fa fa-angle-double-left"></i></a>
-      </li>
-        <li class="page-item active" *ngFor="let item of totalPageList " [ngClass]="{active:currentPageIndex === item.pageIndex}" class="page-item number-item" (click)="activityList(item)">
-            <a class="page-link" routerLink="/sales/activity/currentactivity">
-              <span class="sr-only"></span>{{item.pageSize}}</a>
+        </li>
+        <li class="page-item" [ngClass]="{disabled:currentPageIndex === 0}" class="page-item previous-item">
+          <a (click)="activityList({pageIndex:currentPageIndex -1})" class="page-link"
+            routerLink="/sales/activity/currentactivity"> <i class="fa fa-angle-double-left"></i></a>
+        </li>
+        <li class="page-item active" *ngFor="let item of totalPageList "
+          [ngClass]="{active:currentPageIndex === item.pageIndex}" class="page-item number-item"
+          (click)="activityList(item)">
+          <a class="page-link" routerLink="/sales/activity/currentactivity">
+            <span class="sr-only"></span>{{item.pageSize}}</a>
         </li>
         <li class="page-item" [ngClass]="{disabled:currentPageIndex === totalPageSize-1}" class="page-item next-item">
-          <a (click)="activityList({pageIndex:currentPageIndex +1})" class="page-link" routerLink="/sales/activity/currentactivity"><i class="fa fa-angle-double-right"></i></a>
-      </li>
-      <li class="page-item" class="page-item last-item" [ngClass]="{disabled:currentPageIndex === totalPageSize-1}">
-          <a class="page-link" (click)="activityList({pageIndex:totalPageSize-1})"><i class="fa fa-step-forward"></i></a>
-      </li>
+          <a (click)="activityList({pageIndex:currentPageIndex +1})" class="page-link"
+            routerLink="/sales/activity/currentactivity"><i class="fa fa-angle-double-right"></i></a>
+        </li>
+        <li class="page-item" class="page-item last-item" [ngClass]="{disabled:currentPageIndex === totalPageSize-1}">
+          <a class="page-link" (click)="activityList({pageIndex:totalPageSize-1})"><i
+              class="fa fa-step-forward"></i></a>
+        </li>
       </ul>
-  </div>
+    </div>
   </div>
 </div>
 
@@ -105,7 +111,7 @@
   <div class="modal-header">
     <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">Activity Details</h4>
     <div>
-      <button type="button" class="close" aria-label="Close"  (click)="modal.dismiss('Cross click')">
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -117,33 +123,33 @@
         <div class="col-md-6">
           <label style="font-size: medium;">Title :</label>
           <!-- <input type="text" id="title" name="title" [(ngModel)]="activity.title" class="form-control" disabled> -->
-        <label style="color: crimson;">{{activity.title}}</label>
+          <label style="color: crimson;">{{activity.title}}</label>
         </div>
-       
+
         <div class="col-md-6">
-          <label  style="font-size: medium;">Client Name :</label>
+          <label style="font-size: medium;">Client Name :</label>
           <!-- <input type="text" class="form-control" id="clientName" [(ngModel)]="activity.clientName " name="clientName "
             disabled> -->
-            <label style="color: crimson;">   {{activity.clientName}}</label>
-       
+          <label style="color: crimson;"> {{activity.clientName}}</label>
+
         </div>
       </div>
 
 
-     
+
       <div class="form-group row">
         <div class="col-sm-6">
-          <label class="text-input"  style="font-size: medium;">Appointment Date :</label>
+          <label class="text-input" style="font-size: medium;">Appointment Date :</label>
           <!-- <input class="form-control" id="date" type="date" name="appointmentDate"
             [(ngModel)]="activity.appointmentDate" disabled> -->
-            <label style="color: crimson;"> {{activity.appointmentDate}}</label>
-         
+          <label style="color: crimson;"> {{activity.appointmentDate}}</label>
+
         </div>
         <div class="col-sm-6">
-          <label  style="font-size: medium;">Contact no.: </label>
+          <label style="font-size: medium;">Contact no.: </label>
           <!-- <input type="text" class="form-control" id="contact" [(ngModel)]="activity.contact " name="contact " disabled> -->
-        
-          <label style="color: crimson;">  {{activity.contact}}</label>
+
+          <label style="color: crimson;"> {{activity.contact}}</label>
         </div>
       </div>
 
@@ -154,10 +160,10 @@
             name="productname " disabled>
         </div> -->
         <div class="col-md-6">
-          <label  style="font-size: medium;">Description :</label>
+          <label style="font-size: medium;">Description :</label>
           <!-- <input type="text" id="description" name="description" [(ngModel)]="activity.description" class="form-control"
             disabled> -->
-            <label style="color: crimson;">  {{activity.description}}</label>
+          <label style="color: crimson;"> {{activity.description}}</label>
         </div>
       </div>
 
@@ -184,36 +190,36 @@
                     <option [ngValue]="undefined" selected>Select Product Name</option>
                     <option *ngFor="let item of productDetails;" value={{item.id}}>{{item.productname}} </option>
                   </select> -->
-                  <label style="color: crimson;">  {{products.productname}}</label>
+                  <label style="color: crimson;"> {{products.productname}}</label>
                 </td>
-                  
-                <td> 
+
+                <td>
                   <!-- <input type="text" class="form-control" id="price" name="price" [(ngModel)]="products.price"> -->
-                  <label style="color: crimson;">  {{products.price}}</label>
+                  <label style="color: crimson;"> {{products.price}}</label>
                 </td>
-                <td> 
+                <td>
                   <!-- <input type="text" class="form-control" id="quantity" name="quantity"
                     [(ngModel)]="products.quantity"> -->
-                    <label style="color: crimson;">  {{products.quantity}}</label>
+                  <label style="color: crimson;"> {{products.quantity}}</label>
                 </td>
-                <td> 
+                <td>
                   <!-- <input type="text" class="form-control" id="amount" name="amount" [(ngModel)]="products.amount"> -->
-                  <label style="color: crimson;">  {{products.amount}}</label>
+                  <label style="color: crimson;"> {{products.amount}}</label>
                 </td>
                 <td>
-                   <!-- <input type="text" class="form-control" id="discount_per" name="discount_per"
+                  <!-- <input type="text" class="form-control" id="discount_per" name="discount_per"
                     [(ngModel)]="products.discount_per"> -->
-                    <label style="color: crimson;">  {{products.discount_per}}</label>
+                  <label style="color: crimson;"> {{products.discount_per}}</label>
                 </td>
                 <td>
-                   <!-- <input type="text" class="form-control" id="discount_amt" name="discount_amt"
+                  <!-- <input type="text" class="form-control" id="discount_amt" name="discount_amt"
                     [(ngModel)]="products.discount_amt"> -->
-                    <label style="color: crimson;">  {{products.discount_amt}}</label>
+                  <label style="color: crimson;"> {{products.discount_amt}}</label>
                 </td>
                 <td>
                   <!-- <input type="text" class="form-control" id="total_price" name="total_price"
                     [(ngModel)]="products.total_price"> -->
-                    <label style="color: crimson;">  {{products.total_price}}</label>
+                  <label style="color: crimson;"> {{products.total_price}}</label>
                 </td>
               </tr>
             </tbody>
@@ -224,7 +230,7 @@
 
     <div>
       <button *ngIf="(activity.status == 1)" class='btn btn-success' type="button"
-        (click)="update_Inprogress(activity.aid)" ><i>Inprogress</i></button>
+        (click)="update_Inprogress(activity.aid)"><i>Inprogress</i></button>
 
       <button *ngIf="(activity.status == 1)" class='btn btn-danger' type="button"
         (click)="update_ToCancel(activity.aid)"><i>Cancel</i></button>
@@ -232,8 +238,10 @@
       <button *ngIf="(activity.status == 2)" class='btn btn-warning' data-toggle="modal" (click)="open(content1)"
         type="button"><i>Followup</i></button>
 
-      <button *ngIf="(activity.status == 2 || activity.status == 3 )" class='btn btn-dark' type="button"
-        (click)="update_ToClose(activity.aid)"><i>Close</i></button>
+      <!-- <button *ngIf="(activity.status == 2 || activity.status == 3 )" class='btn btn-dark' type="button"
+        (click)="update_ToClose(activity.aid);PaymentPendingmodel(paymentpending)"><i >Close</i></button> -->
+        <button *ngIf="(activity.status == 2 || activity.status == 3 )" class='btn btn-dark' type="button"
+        (click)="PaymentPendingmodel(paymentpending)"><i >Close</i></button>
     </div>
 
   </div>
@@ -269,5 +277,32 @@
     <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button> -->
     <button type="button" class="btn btn-outline-dark" (click)="update_ToFollowup(activity.aid)">Submit</button>
 
+  </div>
+</ng-template>
+
+<!-- Payment pending model and show the status payment this client is pending -->
+<ng-template #paymentpending let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Payment Pending</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <div class="form-group">
+      <label class="textarea-input">Payment Pending</label>
+      <div class="input-group">
+
+        <label>{{paydue}}</label>
+        <!-- <input id="paymentpedning" name="paymentpedning"
+          class="form-control" placeholder="Payment Pending"/>{{update_activity.paydue}} -->
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark">Pending</button>
+      <button type="button" class="btn btn-outline-dark">Payment Paid</button>
+
+    </div>
   </div>
 </ng-template>

@@ -47,6 +47,10 @@ namespace STS.Model
 
         public string AppointmentDate { get; set; }
         public int Modifiedby { get; set; }
+        public int Advance_pay { get; set; }
+        public string paymentmode { get; set; }
+        public int paydue { get; set; }
+
 
         public List<ProductListingModel> ProductList { get; set; }
 
@@ -68,6 +72,7 @@ namespace STS.Model
         public int Discount_per { get; set; }
         public int Discount_amt { get; set; }
         public int Total_price { get; set; }
+        public int Advance_pay { get; set; }
     }
     public partial class ActivityListModel
     {
@@ -109,6 +114,9 @@ namespace STS.Model
 
         public string From_date { get; set; }
         public string To_date { get; set; }
+        public int Advance_pay { get; set; }
+        public string paymentmode { get; set; }
+        public int paydue { get; set; }
 
     }
 
@@ -140,6 +148,8 @@ namespace STS.Model
         public int Discount_per { get; set; }
         public int Discount_amt { get; set; }
         public int Total_price { get; set; }
+        public int advance_pay { get; set; }
+
 
     }
 
@@ -186,6 +196,7 @@ namespace STS.Model
         public int status { get; set; }
         public string Statusname { get; set; }
         public string followup_description { get; set; }
+        public string Description_on_Followup { get; set; }
 
         public int pageIndex { get; set; }
         public int pageSize { get; set; }
@@ -210,6 +221,7 @@ namespace STS.Model
         public int Discount_per { get; set; }
         public int Discount_amt { get; set; }
         public int Total_price { get; set; }
+        public int advance_pay { get; set; }
         public int Modifiedby { get; set; }
 
 
