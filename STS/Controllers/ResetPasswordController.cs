@@ -51,6 +51,27 @@ namespace STS.Controllers
         }
 
 
+        [HttpPut]
+        [Route("ResetPasswordSales/{Token}")]
+        public async Task<IActionResult> ResetPasswordSales(string Token, [FromBody]ResetPasswordAdminModel model)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+
+                transaction = await iresetpassword.ResetPasswordSales(Token, model);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
 
     }
 }

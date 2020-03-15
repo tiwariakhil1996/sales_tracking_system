@@ -45,25 +45,10 @@ namespace STS.Common
             {
                 ex.ToString();
             }
-        }
-        //public static TranStatus TransactionErrorHandler(Exception ex)
-        //{
-
-        //    TranStatus transaction = new TranStatus();
-        //    if (ex.Message.Contains("||"))
-        //    {
-        //        transaction.code = Convert.ToInt32(ex.Message.Split("||")[0]);
-        //        transaction.returnMessage = ex.Message.Split("||")[1];
-        //    }
-        //    else
-        //    {
-        //        transaction.code = Constants.Status.Error;
-        //        transaction.returnMessage = ex.Message;
-        //    }
-        //    return transaction;
-        //}
-
-     
+        } 
+        
+        
+  
 
 
         //To Store multiple products using Data Table

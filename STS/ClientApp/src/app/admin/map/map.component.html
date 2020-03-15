@@ -19,16 +19,36 @@
 
 
 <div class="agm-map">
+
+  <!-- <input  autocapitalize="off" autocorrect="off" class="form-control" placeholder="Search Nearest Location" spellcheck="off" type="text" autocomplete="off"> -->
+
   <agm-map #map [zoom]="16" [latitude]="centerlat" [longitude]="centerlng">
     <!-- Admin Location -->
-    <agm-marker [label]="_admin" [opacity]=0.8 [latitude]="lat" [longitude]="lng" [markerDraggable]="false">
+    <agm-marker [iconUrl]="iconAdmin" [opacity]=0.8 [latitude]="lat" [longitude]="lng" [markerDraggable]="false">
     </agm-marker>
-    <!-- All Sales Location -->
-    <agm-marker *ngFor="let addr of Sales_LocationDetails;" [opacity]=0.8 [latitude]="addr.latitude" 
-      [longitude]="addr.longitude" [markerDraggable]="false" (dragEnd)="markerDragEnd($event)"></agm-marker>
 
-    <!-- <agm-circle [latitude]="lat + 0.3" [longitude]="lng" [radius]="5000" [fillColor]="'red'" [circleDraggable]="true"
-      [editable]="true">
+    <!-- All Sales Location -->
+    <agm-marker *ngFor="let addr of Sales_LocationDetails;" [iconUrl]="iconSales" style="color:blue" [opacity]=0.8
+      [latitude]="addr.latitude" [longitude]="addr.longitude" [markerDraggable]="false"
+      (dragEnd)="markerDragEnd($event)">
+
+      <!-- Sales info window -->
+      <!-- <agm-info-window [isOpen]="isInfoWindowOpen(addr.salesname)" [latitude]="addr.latitude"
+        [longitude]="addr.longitude">{{addr.salesname}}
+      </agm-info-window> -->
+
+      <agm-info-window [latitude]="addr.latitude" [longitude]="addr.longitude">{{addr.salesname}}
+      </agm-info-window>
+
+    </agm-marker>
+
+    <agm-circle [latitude]="lat + 0.0" [longitude]="lng" [radius]="5000" [fillColor]="'red'" [circleDraggable]="false"
+      [editable]="false">
+    </agm-circle>
+
+
+
+    <!-- <agm-circle *ngFor="let addr of Sales_LocationDetails;" [latitude]="addr.latitude" [longitude]="addr.longitude" [radius]="5000" [fillColor]="'green'">
     </agm-circle> -->
 
   </agm-map>

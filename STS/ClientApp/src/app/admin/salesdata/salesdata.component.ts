@@ -6,6 +6,8 @@ import { BsModalRef } from 'ngx-bootstrap';
 import { salesregisterModel, paginationModel } from '../../model/sales';
 import { registerModel } from '../../model/admin';
 import { Router } from '@angular/router';
+import { SendMailModel } from '../../model/sendmail';
+import { SendEmailService } from '../../service/sendemail.service';
 
 @Component({
   selector: 'app-salesdata',
@@ -45,6 +47,7 @@ export class SalesdataComponent implements OnInit {
   constructor(private salesService: SalesService,
     private modalService: NgbModal,
     private toastr: ToastrService,
+    private sendmail: SendEmailService,
     private router: Router) {
     // this.SalesList();
     // this.active_deactive_SalesList();
@@ -72,6 +75,11 @@ export class SalesdataComponent implements OnInit {
     this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
   }
 
+  password_reset_modal(item,password_reset) {
+    this.user = JSON.parse(JSON.stringify(item));
+    // data show in model use this line and store the data in user and display in ui
+    this.modalService.open(password_reset, {size: 'sm', backdropClass: 'light-blue-backdrop' });
+  }
 
   // SalesList() {
   //   this.salesService.SalesList().subscribe((data: any) => {
@@ -103,6 +111,28 @@ export class SalesdataComponent implements OnInit {
   //   });
   // }
 
+
+  Sendmail() {
+    
+    let getemail = new SendMailModel();
+    getemail.UsernameEmail = this.user.email;
+    this.sendmail.send_sales_mail(getemail).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+      this.toastr.success('Password reset request link has been sent to your email', '', {
+        disableTimeOut: false,
+        timeOut: 5000
+      });
+
+    } else {
+      this.toastr.warning('This email id is not registered', 'Warning', {
+        disableTimeOut: false
+      });
+    }
+  },(err) => {
+
+  } );
+  }
+  
   onsearch() {
     const item = { pageIndex: 0 };
     this.SalesList(item);

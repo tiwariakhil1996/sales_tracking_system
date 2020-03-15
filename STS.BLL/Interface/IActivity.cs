@@ -27,7 +27,7 @@ namespace STS.BLL.Interface
 
 
         //Display ActivityList_while_adding
-        Task<List<ActivityList_while_addingModel>> ActivityList_while_adding();
+        //Task<List<ActivityList_while_addingModel>> ActivityList_while_adding();
 
 
         // Display each sales List Individually
@@ -54,6 +54,7 @@ namespace STS.BLL.Interface
 
         //Update Activity
         Task<TranStatus> updateActivity(int Aid, Update_ActivityModel model);
+        Task<TranStatus> update_n_addProducts(int Aid, Update_ActivityModel model);
 
 
         //Update Products  added in activity
@@ -65,6 +66,7 @@ namespace STS.BLL.Interface
 
         //Update updateToFollowup
         Task<TranStatus> updateToFollowup(int Aid, ActivityListModel model);
+        Task<TranStatus> updateToPending(int Aid, ActivityListModel model);
 
         //Update updateToClose
         Task<TranStatus> updateToClose(int Aid, ActivityListModel model);
@@ -83,7 +85,7 @@ namespace STS.BLL.Interface
 
         // Search Title
         //Task<TranStatus> searchTitle(string Title);
-        Task<List<ActivityListModel>> searchTitle(int aid);
+        //Task<List<ActivityListModel>> searchTitle(int aid);
 
         //Task<List<ActivityListModel>> searchTitle(string Title);
         //Task<TranStatus> searchTitle(ActivityListModel model);

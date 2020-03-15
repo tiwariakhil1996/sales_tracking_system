@@ -58,51 +58,54 @@
             </div>
           </div>
 
-          <div class="form-group row">
-            <div class="col-sm-3">
-              <label for="country">Country</label>
-
-
-              <select class="form-control" id="country" name="country" [(ngModel)]="client.cid"
-                (change)="onCountryChange($event.target.value)">
-                <option [ngValue]="undefined" selected>Select Country</option>
-                <option *ngFor="let country of countryDetails" value={{country.cid}}>{{country.cname}}</option>
-              </select>
+                <div class="form-group row">
+                  <div class="col-sm-3">
+                    <label for="country">Country</label>
+                    <select class="form-control" id="country" name="country" [(ngModel)]="client.cid" (change)="onCountryChange($event.target.value)">
+                      <option [ngValue]="undefined"  selected>Select Country</option>
+                      <option *ngFor="let country of countryDetails" value={{country.cid}}>{{country.cname}}</option>
+                      </select>
 
             </div>
 
-            <div class="col-sm-3">
-              <label for="state">State</label>
+                  <div class="col-sm-3">
+                    <label for="state">State</label>
+                    <select  class="form-control" id="state" name="state"  [(ngModel)]="client.sid" (change)="onStatechange($event.target.value)">
+                      <option [ngValue]="undefined"  selected>Select State</option>
+                      <option *ngFor="let state of stateDetails " value= {{state.sid}}>{{state.sname}}</option>
+                    </select>
 
-              <select class="form-control" id="state" name="state" [(ngModel)]="client.sid"
-                (change)="onStatechange($event.target.value)">
-                <option [ngValue]="undefined" selected>Select State</option>
-                <option *ngFor="let state of stateDetails " value={{state.sid}}>{{state.sname}}</option>
-              </select>
+                  </div>
+                
+                    <div class="col-sm-3">
+                      <label for="city">City</label>
+                        <select  class="form-control" id="city" name="city" [(ngModel)]="client.cityid" >
+                          <option [ngValue]="undefined"  selected>Select City</option>
+                          <option *ngFor="let city of cityDetails " value= {{city.cityid}}>{{city.cityname}}</option>
+                        </select>
+                     </div>
+        
+                  <div class="col-sm-3">
+                    <label for="postalcode">Postal Code</label>
+                    <input type="text" class="form-control" id="postalCode" [(ngModel)]="client.postalCode" name="postalCode"  placeholder="Postal Code">
+                  </div>
+                </div>
+            
+                <div class="agm-map">                
+                  <agm-map #map [zoom]="16" [latitude]="centerlat" [longitude]="centerlng">
+                    <agm-marker  [opacity]=0.8 [latitude]="centerlat" [longitude]="centerlng" (dragEnd)="markerDragEnd($event)" [markerDraggable]="true">
+                    </agm-marker>
+                    <!-- <agm-marker [opacity]=0.8 [latitude]="addr.latitude" 
+                    [longitude]="addr.longitude" [markerDraggable]="false" (dragEnd)="markerDragEnd($event)"></agm-marker> -->
+                  </agm-map>
+                  <div>Latitude: {{latitude}}</div>
+                  <div>Longitude: {{longitude}}</div>
+              </div>
 
-            </div>
 
-            <div class="col-sm-3">
-              <label for="city">City</label>
-              <select class="form-control" id="city" name="city" [(ngModel)]="client.cityid">
-                <option [ngValue]="undefined" selected>Select City</option>
-                <option *ngFor="let city of cityDetails " value={{city.cityid}}>{{city.cityname}}</option>
-              </select>
-            </div>
-
-            <div class="col-sm-3">
-              <label for="postalcode">Postal Code</label>
-              <input type="text" class="form-control" id="postalCode" [(ngModel)]="client.postalCode" name="postalCode"
-                placeholder="Postal Code">
-            </div>
-          </div>
-
-
-        </div>
-        <div class="card-footer">
-          <button type="submit" class="btn btn-sm btn-primary" (click)="submitForm()"><i class="fa fa-dot-circle-o"></i>
-            Submit</button>
-          <button type="submit" class="btn btn-sm btn-primary" (click)="viewClientForm()">View</button>
+            <div class="card-footer">
+              <button type="submit" class="btn btn-sm btn-primary" (click)="submitForm()"><i class="fa fa-dot-circle-o"></i> Submit</button>
+              <button type="submit" class="btn btn-sm btn-primary" (click)="viewClientForm()">View</button>
 
           <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
         </div>

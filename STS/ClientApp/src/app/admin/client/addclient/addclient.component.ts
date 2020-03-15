@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CountryStateCityService } from '../../../service/country-state-city.service';
@@ -6,6 +6,7 @@ import { ClientService } from '../../../service/client.service';
 import { clientModel } from '../../../model/client';
 import { countryModel, stateModel, cityModel } from '../../../model/country-state-city';
 import { registerModel } from '../../../model/admin';
+import { MapsAPILoader, AgmMap } from '@agm/core';
 
 @Component({
   selector: 'app-addclient',
@@ -29,21 +30,65 @@ export class AddclientComponent implements OnInit {
   city = new cityModel();
   cityDetails: cityModel[] = [];
 
+  // For map
+  location: Coordinates;
+  lat: number;
+  lng: number;
+  centerlat: number;
+  centerlng: number;
+  geocoder: any;
+
+  
+  latitude: number;
+  longitude: number;
+  zoom: number;
+  address: string;
+
+  @ViewChild(AgmMap) map: any;
+  @ViewChild('search')
+  public searchElementRef: ElementRef;
+  
+  // Authentication
   RoleJason = {
     ROle: [0, 1],
     Component: 'AddclientComponent'
   };
 
   constructor(private router: Router,
+    private mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone,
      private toastr: ToastrService,
      private clientService: ClientService,
      private country_state_cityService: CountryStateCityService) {
 
     this.countryList();
 
+    this.geocoder = new google.maps.Geocoder;
   }
   ngOnInit() {
     this.checkRole(this.RoleJason);
+
+     // For google map
+      navigator.geolocation.getCurrentPosition(position => {
+        this.location = position.coords;
+        
+        // When map opens there marker will be 1st in center
+        this.centerlat = this.location.latitude;
+        this.centerlng = this.location.longitude;
+
+        // This is the current lat long
+        // this.lat = this.location.latitude;
+        // this.lng = this.location.longitude;
+
+      });
+  }
+
+  markerDragEnd($event: any) {
+    // console.log($event);
+    this.latitude = $event.coords.lat;
+    this.longitude = $event.coords.lng;
+    this.client.latitude=this.latitude;
+    this.client.longitude=this.longitude;
   }
 
   checkRole(RoleJason) {

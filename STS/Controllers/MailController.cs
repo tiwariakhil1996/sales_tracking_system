@@ -64,4 +64,46 @@ namespace STS.Controllers
     }
 
 
+
+
+
+        [HttpPost]
+        [Route("SendMail_Sales")]
+        public async Task<IActionResult> SendMail_Sales([FromBody] SendMailModel model)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+                transaction = await imail.SendMail_Sales(model);
+                if (transaction.code == 0)
+                {
+                    Token = transaction.Token;
+                    UserId = transaction.UserIdentity;
+                    //Users = transaction.Users;
+                    var html = System.IO.File.ReadAllText(@"EmailTemplates/ResetPassword.html");
+                    var link = "http://localhost:55627/sales/reset-password-sales?Token=" + Token + "&UserId=" + UserId;
+                    html = html.Replace("{{token}}", link);
+                    //var user = Users;
+                    //user = user.Replace("{{users}}", link);
+                    CommonHelper.SendMail(
+                        model.UsernameEmail,
+                         Subject: "Sales Tracking System-Forgot Password",
+                         EmailMessage: html,
+                           needCC: true
+                       );
+                }
+                dctData.Add("SendMail_Sales", transaction);
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+    }
 }

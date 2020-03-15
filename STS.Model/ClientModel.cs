@@ -16,6 +16,8 @@ namespace STS.Model
         public int Cityid { get; set; }
         public string PostalCode { get; set; }
         public int Createdby { get; set; }
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
 
 
     }
@@ -37,6 +39,8 @@ namespace STS.Model
         public string Cityname { get; set; }
         public string PostalCode { get; set; }
 
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
         public int Cid { get; set; }
         public int Sid { get; set; }
         public int Cityid { get; set; }

@@ -32,6 +32,8 @@ export class SalesLayoutComponent implements OnInit {
   profile_pic = new registerModel();
 
   salesavatar = new sales_avatarModel();
+  
+  username:string;
 
   activity = new activityModel();
   activityDetails: activityModel[] = [];
@@ -67,6 +69,7 @@ export class SalesLayoutComponent implements OnInit {
     this.changePassword.id = this.user.id;
     // console.log(this.changePassword.id);
     this.profile_pic.image = this.user.image;
+    this.username=this.user.salesName;
   }
 
   ngOnInit() {

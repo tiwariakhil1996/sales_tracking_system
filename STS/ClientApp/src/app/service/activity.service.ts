@@ -36,9 +36,9 @@ export class ActivityService {
     return this.http.delete('/api/Activity/deleteActivity/' + aid);
   }
 
-  searchTitle(aid) {
-    return this.http.get('/api/Activity/searchTitle/' + aid);
-  }
+  // searchTitle(aid) {
+  //   return this.http.get('/api/Activity/searchTitle/' + aid);
+  // }
 
   // searchActivity(data) {
   //   return this.http.get('/api/Activity/searchTitle', data);
@@ -50,6 +50,10 @@ export class ActivityService {
 
   updateActivity(aid: number, data: any) {
     return this.http.put('/api/Activity/updateActivity/' + aid, data);
+  }
+
+  update_n_addProducts(aid: number, data: any) {
+    return this.http.put('/api/Activity/update_n_addProducts/' + aid, data);
   }
 
   update_old_Products(aid: number, data: any) {
@@ -86,6 +90,10 @@ export class ActivityService {
 
   updateToFollowup(aid: number, data: any) {
     return this.http.put('/api/Activity/updateToFollowup/' + aid, data);
+  }
+
+  updateToPending(aid: number, data: any) {
+    return this.http.put('/api/Activity/updateToPending/' + aid, data);
   }
 
 

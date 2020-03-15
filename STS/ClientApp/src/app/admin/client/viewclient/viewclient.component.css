@@ -12,3 +12,7 @@
 .message {
     text-align: center;
 }
+
+agm-map {
+    height: 450px;
+}

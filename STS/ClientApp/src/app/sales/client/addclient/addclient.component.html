@@ -95,22 +95,30 @@
                 </option>
               </select>
 
+                     </div>
+                  <div class="col-sm-3">
+                    <label for="postalcode">Postal Code</label>
+                    <input type="text" class="form-control" id="postalCode" [(ngModel)]="client.postalCode" name="postalCode"  placeholder="Postal Code">
+                  </div>
+                </div>
+               
+  
+                <div class="agm-map">                
+                  <agm-map #map [zoom]="16" [latitude]="centerlat" [longitude]="centerlng">
+                    <agm-marker  [opacity]=0.8 [latitude]="centerlat" [longitude]="centerlng" (dragEnd)="markerDragEnd($event)" [markerDraggable]="true">
+                    </agm-marker>
+                    <!-- <agm-marker [opacity]=0.8 [latitude]="addr.latitude" 
+                    [longitude]="addr.longitude" [markerDraggable]="false" (dragEnd)="markerDragEnd($event)"></agm-marker> -->
+                  </agm-map>
+                  <div>Latitude: {{latitude}}</div>
+                  <div>Longitude: {{longitude}}</div>
+              </div>
+               
             </div>
-            <div class="col-sm-3">
-              <label for="postalcode">Postal Code</label>
-              <input type="text" class="form-control" id="postalCode" [(ngModel)]="client.postalCode" name="postalCode"
-                placeholder="Postal Code">
+            <div class="card-footer">
+              <button type="submit" class="btn btn-sm btn-primary" (click)="submitForm()"><i class="fa fa-dot-circle-o"></i> Submit</button>
+              <button type="submit" class="btn btn-sm btn-primary" (click)="viewClientForm()">View</button>
+              <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
             </div>
           </div>
-
-
-
         </div>
-        <div class="card-footer">
-          <button type="submit" class="btn btn-sm btn-primary" (click)="submitForm()"><i class="fa fa-dot-circle-o"></i>
-            Submit</button>
-          <button type="submit" class="btn btn-sm btn-primary" (click)="viewClientForm()">View</button>
-          <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
-        </div>
-      </div>
-    </div>

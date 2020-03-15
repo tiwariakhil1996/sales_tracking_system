@@ -20,7 +20,8 @@ import { SalesLoginComponent } from './sales/login/login.component';
 import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password.component';
 import { AppComponent } from './app.component';
 import { ResetPasswordComponent } from './admin/reset-password/reset-password.component';
-import { SalesRegisterComponent } from './admin/sales-register/sales-register.component';
+import { ResetPasswordSalesComponent } from './sales/reset-password-sales/reset-password-sales.component';
+import { ForgotPasswordSalesComponent } from './sales/forgot-password-sales/forgot-password-sales.component';
 
 
 export const routes: Routes = [

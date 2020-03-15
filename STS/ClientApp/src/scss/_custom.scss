@@ -42,9 +42,9 @@
     z-index: 11;
 }
 
-img {
-    height: -webkit-fill-available;
-}
+// img {
+//     height: -webkit-fill-available;
+// }
 
 
 .app-footer {
@@ -117,3 +117,18 @@ a {
     border-radius: 50%;
 
 }
+
+
+.carousel-control-next-icon {
+    background-color: darkgray;
+  }
+  
+  
+  .carousel-control-prev-icon {
+    background-color: darkgray;
+  }
+
+
+  .modal-header {
+    background-color: cadetblue;
+  }

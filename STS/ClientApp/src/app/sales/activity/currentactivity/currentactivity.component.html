@@ -179,6 +179,8 @@
                 <th>Amt</th>
                 <th>Dis. (%)</th>
                 <th>Dis. Amt</th>
+                <th>Advance Paid</th>
+                <th>Pay due</th>
                 <th>Total</th>
               </tr>
             </thead>
@@ -217,6 +219,12 @@
                   <label style="color: crimson;"> {{products.discount_amt}}</label>
                 </td>
                 <td>
+                   <label style="color: crimson;">  {{products.advance_payment}}</label>
+               </td>
+               <td>
+                <label style="color: crimson;">  {{products.pending_amount}}</label>
+            </td>
+                <td>
                   <!-- <input type="text" class="form-control" id="total_price" name="total_price"
                     [(ngModel)]="products.total_price"> -->
                   <label style="color: crimson;"> {{products.total_price}}</label>
@@ -228,7 +236,7 @@
       </div>
     </div>
 
-    <div>
+    <div *ngFor="let item of activity_productDetails;let i=index;">
       <button *ngIf="(activity.status == 1)" class='btn btn-success' type="button"
         (click)="update_Inprogress(activity.aid)"><i>Inprogress</i></button>
 
@@ -238,10 +246,10 @@
       <button *ngIf="(activity.status == 2)" class='btn btn-warning' data-toggle="modal" (click)="open(content1)"
         type="button"><i>Followup</i></button>
 
-      <!-- <button *ngIf="(activity.status == 2 || activity.status == 3 )" class='btn btn-dark' type="button"
-        (click)="update_ToClose(activity.aid);PaymentPendingmodel(paymentpending)"><i >Close</i></button> -->
-        <button *ngIf="(activity.status == 2 || activity.status == 3 )" class='btn btn-dark' type="button"
-        (click)="PaymentPendingmodel(paymentpending)"><i >Close</i></button>
+      <!-- <button *ngIf="(activity.status == 2 || activity.status == 3 )" class='btn btn-dark' type="button" 
+        (click)="update_ToClose(activity.aid)"><i>Close</i></button> -->
+        <button *ngIf="(activity.status == 2 || activity.status == 3  || activity.status == 6)" class='btn btn-dark' type="button" (click)="open_closeactivity(closeactivity,item)"
+        ><i>Close</i></button>
     </div>
 
   </div>
@@ -280,10 +288,25 @@
   </div>
 </ng-template>
 
-<!-- Payment pending model and show the status payment this client is pending -->
-<ng-template #paymentpending let-modal>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ng-template #closeactivity let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Payment Pending</h4>
+    <h4 class="modal-title" id="modal-basic-title">Pending payment</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -291,18 +314,12 @@
   <div class="modal-body">
 
     <div class="form-group">
-      <label class="textarea-input">Payment Pending</label>
-      <div class="input-group">
-
-        <label>{{paydue}}</label>
-        <!-- <input id="paymentpedning" name="paymentpedning"
-          class="form-control" placeholder="Payment Pending"/>{{update_activity.paydue}} -->
-      </div>
+      <label>{{activity_product.pending_amount | currency: "INR"}} is due to pay.</label> 
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark">Pending</button>
-      <button type="button" class="btn btn-outline-dark">Payment Paid</button>
 
-    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="update_InPending(activity.aid)" >Pending</button>
+    <button type="button" class="btn btn-outline-dark" (click)="update_ToClose(activity.aid)">Close</button>
   </div>
 </ng-template>

@@ -42,13 +42,13 @@ namespace STS.BLL.Service
 
 
         //Display
-        public async Task<List<ActivityList_while_addingModel>> ActivityList_while_adding()
-        {
-            using (activityRepository = new ActivityRepository())
-            {
-                return await activityRepository.ActivityList_while_adding();
-            }
-        }
+        //public async Task<List<ActivityList_while_addingModel>> ActivityList_while_adding()
+        //{
+        //    using (activityRepository = new ActivityRepository())
+        //    {
+        //        return await activityRepository.ActivityList_while_adding();
+        //    }
+        //}
 
 
         // Display each sales List Individually
@@ -128,6 +128,15 @@ namespace STS.BLL.Service
             {
                 return await activityRepository.updateActivity(Aid, model);
             }
+        }  
+        
+        
+        public async Task<TranStatus> update_n_addProducts(int Aid, Update_ActivityModel model)
+        {
+            using (activityRepository = new ActivityRepository())
+            {
+                return await activityRepository.update_n_addProducts(Aid, model);
+            }
         }
 
 
@@ -165,6 +174,15 @@ namespace STS.BLL.Service
             using (activityRepository = new ActivityRepository())
             {
                 return await activityRepository.updateToFollowup(Aid, model);
+            }
+        }
+
+        //Update updateToPending
+        public async Task<TranStatus> updateToPending(int Aid, ActivityListModel model)
+        {
+            using (activityRepository = new ActivityRepository())
+            {
+                return await activityRepository.updateToPending(Aid, model);
             }
         }
 
@@ -228,13 +246,13 @@ namespace STS.BLL.Service
         //    }
         //}
 
-        public async Task<List<ActivityListModel>> searchTitle(int aid)
-        {
-            using (activityRepository = new ActivityRepository())
-            {
-                return await activityRepository.searchTitle(aid);
-            }
-        }
+        //public async Task<List<ActivityListModel>> searchTitle(int aid)
+        //{
+        //    using (activityRepository = new ActivityRepository())
+        //    {
+        //        return await activityRepository.searchTitle(aid);
+        //    }
+        //}
 
         //public async Task<List<ActivityListModel>> searchTitle()
         //{

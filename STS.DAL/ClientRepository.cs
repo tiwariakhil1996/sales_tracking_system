@@ -25,6 +25,8 @@ namespace STS.DAL
                 parameter.Add("@Gender", model.Gender);
                 parameter.Add("@Address", model.Address);
                 parameter.Add("@Street", model.Street);
+                parameter.Add("@Latitude", model.Latitude);
+                parameter.Add("@Longitude", model.Longitude);
                 parameter.Add("@Cid", model.Cid);
                 parameter.Add("@Sid", model.Sid);
                 parameter.Add("@Cityid", model.Cityid);
@@ -165,6 +167,8 @@ namespace STS.DAL
                 parameter.Add("@Sid", model.Sid);
                 parameter.Add("@Cityid", model.Cityid);
                 parameter.Add("@PostalCode", model.PostalCode);
+                parameter.Add("@Latitude", model.Latitude);
+                parameter.Add("@Longitude", model.Longitude);
                 parameter.Add("@Modifiedby", model.Modifiedby);
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);

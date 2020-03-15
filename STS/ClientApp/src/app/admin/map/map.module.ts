@@ -15,8 +15,8 @@ import { AgmCoreModule } from '@agm/core';
     FormsModule,
     MapRoutingModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBaU6eEpioeuf9Nkzsd5N3OoJsDpVQdzEs'
-      // libraries: ['places']
+      apiKey: 'AIzaSyAgmJb337SljuWJnzPXRyMjiTSL1DWcBq8',
+      libraries: ['places']
     }),
   ],
   declarations: [

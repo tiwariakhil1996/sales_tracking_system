@@ -16,40 +16,29 @@ export class addactivityModel {
     user_id: number;
     status: number;
     statusname: string;
-    advance_pay:number;
-    paymentmode:string;
-    paydue:number;
+    grand_total: number;
+    advance_payment: number;
+    payment_mode: number;
+    pending_amount: number;
     productList: addproductListingModel[];
 }
 
 export class addproductListingModel {
     productId: number;
-    // productname: string;
     price: number;
     quantity: number;
     amount: number;
     discount_per: number;
     discount_amt: number;
     total_price: number;
-    
-   
-    
 
 }
 
 
-// export class activityList_while_addingModel {
-//     image: string;
-//     ImageExtn: string;
-//     productId: number;
-//     productname: string;
-//     price: number;
-//     quantity: number;
-//     amount: string;
-//     discount_per: string;
-//     discount_amt: string;
-//     total_price: string;
-// }
+export class updateproductListingModel {
+    productList: addproductListingModel[];
+    modifiedby: number;
+}
 
 
 export class activityModel {
@@ -89,24 +78,34 @@ export class activityModel {
     search: string;
     from_date: string;
     to_date: string;
+    description_on_Followup: string;
 }
 
 export class LocationModel {
 
     // Sales Location
-    latitude: any;
-    longitude: any;
+    // latitude: any;
+    // longitude: any;
+    latitude: number;
+    longitude: number;
 
     // Client Location
-    lat: any;
-    lng: any;
+    // lat: any;
+    // lng: any;
+    lat: number;
+    lng: number;
+    salesname:string;
+    clientname: string;
 }
 
 export class sales_Location_Model {
     // Sales Location
     userId: number;
-    latitude: any;
-    longitude: any;
+    // latitude: any;
+    // longitude: any;
+    salesname: string;
+    latitude: number;
+    longitude: number;
     image: string;
 
 }
@@ -137,7 +136,9 @@ export class updateactivityModel {
     // userid: number;
 
     // user_id: number;
-
+    advance_payment: number;
+    payment_mode: number;
+    pending_amount: number;
 }
 
 export class newactivityModel {

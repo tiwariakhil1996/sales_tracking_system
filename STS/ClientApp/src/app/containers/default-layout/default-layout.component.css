@@ -9,6 +9,9 @@
   background-size: 1374px 634px
 }
 
+    .app-header .nav-item {
+      color: white;
+  }
 
 .profile-pic {
   height: 90px;

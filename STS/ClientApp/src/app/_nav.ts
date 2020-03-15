@@ -9,35 +9,30 @@ export const navItems: INavData[] = [
 
   },
 
-
   {
     name: 'Product',
     url: '/admin/product/viewproduct',
-    icon: 'icon-calendar',
+    icon: 'icon-handbag',
   },
-
 
   {
     name: 'Sales',
     url: '/admin/salesdata',
-    icon: 'icon-map'
+    icon: 'icon-user'
   },
 
   {
     name: 'Client',
     url: '/admin/client/viewclient',
-    icon: 'icon-calendar',
+    icon: 'icon-people',
   },
 
-
-  // Activity side bar routing
   {
     name: 'Activity',
     url: '/admin/activity/currentactivity',
     icon: 'icon-notebook',
   },
 
- 
   {
     name: 'Map',
     url: '/admin/map',
@@ -51,7 +46,7 @@ export const navItems: INavData[] = [
   {
     name: 'Subcategory',
     url: '/admin/category-subcategory/viewsubcategory',
-    icon: 'icon-calendar',
+    icon: 'icon-note',
   },
 
 
@@ -61,28 +56,40 @@ export const navItems: INavData[] = [
     icon: 'icon-logout'
 
   },
-   // {
-  //   name: 'Activity',
-  //   url: '/admin/activity',
-  //   icon: 'icon-layers',
-  //   children: [
-  //     {
-  //       name: 'Add Activity',
-  //       url: '/admin/activity/addactivity',
-  //       icon: 'icon-note',
-  //     },
-  //     {
-  //       name: 'Past Activity',
-  //       url: '/admin/activity/pastactivity',
-  //       icon: 'icon-calendar',
-  //     },
-  //     {
-  //       name: 'Current Activity',
-  //       url: '/admin/activity/currentactivity',
-  //       icon: 'icon-notebook',
-  //     },
-  //   ]
+
+
+
+
+
+
+
+
+
+  // {
+  //   name: 'Disabled',
+  //   url: '/admin/dashboard',
+  //   icon: 'icon-ban',
+  //   badge: {
+  //     variant: 'secondary',
+  //     text: 'NEW'
+  //   },
+  //   attributes: { disabled: true },
   // },
+  // {
+  //   name: 'Download CoreUI',
+  //   url: 'http://coreui.io/angular/',
+  //   icon: 'icon-cloud-download',
+  //   class: 'mt-auto',
+  //   variant: 'success',
+  //   attributes: { target: '_blank', rel: 'noopener' }
+  // },
+  // {
+  //   name: 'Try CoreUI PRO',
+  //   url: 'http://coreui.io/pro/angular/',
+  //   icon: 'icon-layers',
+  //   variant: 'danger',
+  //   attributes: { target: '_blank', rel: 'noopener' }
+  // }
 
 
 ];

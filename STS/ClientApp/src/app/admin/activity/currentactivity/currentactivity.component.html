@@ -3,28 +3,18 @@
     <div class="card">
       <div class="card-header color">
         Activity Details
-        <!-- <input style="float: right;" (input)="onsearch()" class="form-control mr-sm-2" id="title" name="title" type="text" [(ngModel)]="search_" placeholder="Search" aria-label="Search"> -->
         <button type="submit" tooltip=" Create new activity" style="float: right; width: 35px;"
           class="btn btn-sm btn-success" (click)="addnewActivity()"><i class="fa fa-plus"></i></button>
       </div>
-      <!-- <div>
-  <input style="float: right; inline-size: max-content;" type="text" id="title" name="title" [(ngModel)]="update_activity.title" class="form-control" placeholder="Search">
-</div> -->
-
       <!-- <div style="overflow-x:auto;"> -->
       <div class="card-body table-responsive">
-        <!-- <div class="md-form">
-          <input placeholder="Selected date" type="text" id="prefill" class="form-control datepicker" data-value="[2015,6,1]">
-          <label for="prefill">Try me...</label>
-        </div> -->
 
-        <!-- SEARCH By text box and used of the from and TO date wise Activity searching both side admin and sales side -->
+        <!-- SEARCH -->
         <div class="form-inline md-form mr-auto mb-4">
 
           <input style="float: right;" (input)="onsearch()" class="form-control mr-sm-2" type="text"
             [(ngModel)]="search_" placeholder="Search" aria-label="Search">
           <i class="fa fa-search" aria-hidden="true"></i>
-
           <label class="text-input" style="padding-left: 9px; padding-right: 9px;">From</label>
           <i class="fa fa-calendar" aria-hidden="true"> <input class="form-control" id="date" type="date"
               name="appointmentDate" [(ngModel)]="from_date" (input)="onsearch()"></i>
@@ -65,9 +55,11 @@
               <td>{{item.appointmentDate}}</td>
 
               <td class="status-center">
-                <span class="badge badge-pill badge-success">{{item.statusname}}</span>
-                <i class="fa fa-info-circle" *ngIf="(item.status == 3)" tooltip="{{item.description_on_Followup}}"></i>
+                <span class="badge badge-pill badge-success">{{item.statusname}} <i class="fa fa-info-circle"
+                    *ngIf="(item.status == 3)" tooltip="{{item.description_on_Followup}}"></i></span>
                 <!-- <button *ngIf="item.statusname" class='btn btn-success' type="button"></button> -->
+
+
               </td>
               <!-- <td>
                 <button *ngIf="(item.status == 3)" class='btn btn-warning' tooltip="{{item.description_on_Followup}}"
@@ -139,7 +131,7 @@
 <!--   EDIT Total Activity  & add new activities -->
 
 <ng-template #content let-modal>
-  <div class="modal-header" style="background-color: darkgrey;">
+  <div class="modal-header">
     <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">Update</h4>
     <div>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -264,8 +256,11 @@
             </table>
 
             <div class="col-sm-1 add_product ">
-              <button type="submit" tooltip="Add more products" class="form-control btn btn-sm btn-success"
-                style="width: 38px; height: 30px;" (click)="addMoreproducts()"><i class="fa fa-plus"></i> </button>
+              <!-- <button type="submit" tooltip="Add more products" class="form-control btn btn-sm btn-success"
+                style="width: 38px; height: 30px;" (click)="addMoreproducts()"><i class="fa fa-plus"></i> </button> -->
+              <button type="submit" tooltip="Add products" class="form-control btn btn-sm btn-success"
+                style="width: 38px; height: 30px;" (click)="Update_n_addproducts(update_activity.aid)"><i
+                  class="fa fa-plus"></i> </button>
             </div>
 
           </div>
@@ -344,8 +339,10 @@
           </div>
           <hr>
 
-          <div class="form-group row">
-            <div class="col-sm-3" style="left: 863px;">
+
+
+          <div class="form-group ">
+            <div class="col-sm-3" style="float: right;">
               <div>
                 <label>Subtotal </label>
                 <label style="padding-left: 55px;">{{total | currency: "INR"}}</label>
@@ -361,24 +358,29 @@
                   [(ngModel)]="update_activity.advance_pay" (keyup)="Total_Adv_pay(advance_pay.value)">
               </div>
               <div>
-                <label>Payment Mode</label>
-                <td>
-                  <select id="paymentmode" name="paymentmode" class="form-control" [(ngModel)]="update_activity.paymentmode">
-                    <option [ngValue]="undefined" selected>Select Mode</option>
-                    <option>Cash</option>
-                    <option>Debit card</option>
-                    <option>Credit Card</option>
-                  </select>
-                </td>
+                <label>Adv. Payment </label>
+                <input #adv_payment type="text" style="width: 104px; margin-left: 20px;" id="adv_payment"
+                  name="adv_payment" [(ngModel)]="update_activity.advance_payment"
+                  (keyup)=" Total_pending_amt(adv_payment.value)">
               </div>
               <div>
-                <label>Pay.Due</label>
-                <label style="padding-left: 59px;">{{pay_due | currency: "INR"}}</label>
+                <label>Payment Mode </label>
+                <select style="padding-left: 0px; width: 105px; margin-left: 11px;" id="productname" name="productname"
+                  [(ngModel)]="update_activity.payment_mode">
+                  <option [ngValue]="undefined" selected>Select Payment Mode</option>
+                  <option value="Cash">Cash </option>
+                  <option value="Cheque">Cheque</option>
+                </select>
+              </div>
+              <div>
+                <label>Pending amt </label><label
+                  style="padding-left: 32px;">{{pending_amount | currency: "INR"}}</label>
               </div>
               <div>
                 <label>Grand Total </label><label style="padding-left: 39px;"> {{final_total | currency: "INR"}}</label>
               </div>
             </div>
+            <div class="clearfix"></div>
           </div>
 
           <div class="card-footer">
@@ -596,19 +598,28 @@
   <div class="modal-body" style="color: black;">
     <div>
       <div>
-        <div class="agm-map" *ngFor="let addr of Activity_LocationDetails;">
+        <button type="button" class="btn btn-outline-dark shape close" aria-label="Close"
+          (click)="modal.dismiss('Cross click')"> <span aria-hidden="true">&times;</span></button>
+        <div class="agm-map" *ngFor="let addr of Activity_LocationDetails;">     
           <agm-map #map [zoom]="16" [latitude]="centerlat" [longitude]="centerlng">
             <!-- Admin Location -->
-            <agm-marker [label]="_admin" [opacity]=0.8 [latitude]="lat" [longitude]="lng" [markerDraggable]="false">
+            <agm-marker [iconUrl]="iconAdmin" [opacity]=0.8 [latitude]="lat" [longitude]="lng"
+              [markerDraggable]="false">    
             </agm-marker>
 
             <!-- Sales Location -->
-            <agm-marker [label]="_sales" [opacity]=0.8 [latitude]="addr.latitude" [longitude]="addr.longitude"
-              [markerDraggable]="false"></agm-marker>
+            <agm-marker [iconUrl]="iconSales" [opacity]=0.8 [latitude]="addr.latitude" [longitude]="addr.longitude"
+              [markerDraggable]="false">
+              <agm-info-window [latitude]="addr.latitude" [longitude]="addr.longitude">{{addr.salesname}}
+              </agm-info-window>
+            </agm-marker>
 
             <!-- Client Location -->
-            <agm-marker [label]="_client" [opacity]=0.8 [latitude]="addr.lat" [longitude]="addr.lng"
-              [markerDraggable]="false"></agm-marker>
+            <agm-marker [iconUrl]="iconClient" [opacity]=0.8 [latitude]="addr.lat" [longitude]="addr.lng"
+              [markerDraggable]="false">
+              <agm-info-window [latitude]="addr.latitude" [longitude]="addr.longitude">{{addr.clientname}}
+              </agm-info-window>
+            </agm-marker>
 
           </agm-map>
 

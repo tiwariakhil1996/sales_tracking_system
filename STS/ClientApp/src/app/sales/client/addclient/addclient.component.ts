@@ -30,6 +30,20 @@ export class AddclientComponent implements OnInit {
   city = new cityModel();
   cityDetails: cityModel[] = [];
 
+    // For map
+    location: Coordinates;
+    lat: number;
+    lng: number;
+    centerlat: number;
+    centerlng: number;
+    geocoder: any;
+  
+    
+    latitude: number;
+    longitude: number;
+    zoom: number;
+    address: string;
+
   RoleJason = {
     ROle: [0, 1],
     Component: 'AddClientComponent'
@@ -47,6 +61,23 @@ export class AddclientComponent implements OnInit {
   ngOnInit() {
     this.checkRole(this.RoleJason);
 
+     // For google map
+     navigator.geolocation.getCurrentPosition(position => {
+      this.location = position.coords;
+      
+      // When map opens there marker will be 1st in center
+      this.centerlat = this.location.latitude;
+      this.centerlng = this.location.longitude;
+
+    });
+  }
+
+  markerDragEnd($event: any) {
+    // console.log($event);
+    this.latitude = $event.coords.lat;
+    this.longitude = $event.coords.lng;
+    this.client.latitude=this.latitude;
+    this.client.longitude=this.longitude;
   }
 
 

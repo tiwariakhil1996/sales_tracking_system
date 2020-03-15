@@ -11,13 +11,13 @@ export const SalesnavItems: INavData[] = [
   {
     name: 'Product',
     url: '/sales/product/viewproduct',
-    icon: 'icon-calendar',
+    icon: 'icon-handbag',
   },
 
   {
     name: 'Client',
     url: '/sales/client/viewclient',
-    icon: 'icon-calendar',
+    icon: 'icon-people',
   },
   
   {

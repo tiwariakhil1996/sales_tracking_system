@@ -47,9 +47,10 @@ namespace STS.Model
 
         public string AppointmentDate { get; set; }
         public int Modifiedby { get; set; }
-        public int Advance_pay { get; set; }
-        public string paymentmode { get; set; }
-        public int paydue { get; set; }
+        public int Grand_total { get; set; }
+        public int Advance_payment { get; set; }
+        public string Payment_mode { get; set; }
+        public int Pending_amount { get; set; }
 
 
         public List<ProductListingModel> ProductList { get; set; }
@@ -72,7 +73,11 @@ namespace STS.Model
         public int Discount_per { get; set; }
         public int Discount_amt { get; set; }
         public int Total_price { get; set; }
-        public int Advance_pay { get; set; }
+
+        public int Grand_total { get; set; }
+        public int Advance_payment { get; set; }
+        public string Payment_mode { get; set; }
+        public int Pending_amount { get; set; }
     }
     public partial class ActivityListModel
     {
@@ -99,8 +104,10 @@ namespace STS.Model
 
         public string AppointmentDate { get; set; }
         public int Modifiedby { get; set; }
-        public string Latitude { get; set; }
-        public string Longitude { get; set; }
+        //public string Latitude { get; set; }
+        //public string Longitude { get; set; }
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
 
         public int userId { get; set; }
         public int status { get; set; }
@@ -125,8 +132,8 @@ namespace STS.Model
         public int Aid { get; set; }
         public int User_id { get; set; }
 
-        public int Latitude { get; set; }
-        public int Longitude { get; set; }
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
 
         public int userId { get; set; }
         public int status { get; set; }
@@ -186,8 +193,11 @@ namespace STS.Model
         public string Contact { get; set; }
 
 
-        public string Latitude { get; set; }
-        public string Longitude { get; set; }
+        //public string Latitude { get; set; }
+        //public string Longitude { get; set; }
+
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
 
         public string AppointmentDate { get; set; }
         public int Modifiedby { get; set; }
@@ -205,6 +215,8 @@ namespace STS.Model
 
         public string From_date { get; set; }
         public string To_date { get; set; }
+
+        public string Description_on_Followup { get; set; }
     }
 
     public partial class Update_products_in_ActivityModel
@@ -230,18 +242,32 @@ namespace STS.Model
     public partial class Activity_Location_Model
     {
         public int Aid { get; set; }
-        public string Latitude { get; set; }
-        public string Longitude { get; set; }
-        public string Lat { get; set; }
-        public string Lng { get; set; }
+        //public string Latitude { get; set; }
+        //public string Longitude { get; set; }
+
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
+
+        //public string Lat { get; set; }
+        //public string Lng { get; set; }
+        
+        public decimal Lat { get; set; }
+        public decimal Lng { get; set; }
+
+        public string Salesname { get; set; }
+        public string Clientname { get; set; }
 
     }
 
     public partial class Sales_Location_Model
     {
         public int UserId { get; set; }
-        public string Latitude { get; set; }
-        public string Longitude { get; set; }
+        //public string Latitude { get; set; }
+        //public string Longitude { get; set; }
+        public string Salesname { get; set; }
+
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
 
         public string Image { get; set; }
 

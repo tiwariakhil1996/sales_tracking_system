@@ -40,7 +40,8 @@ export class SalesLoginComponent implements OnInit {
      this.logout();
   }
   ngOnInit() {
-    setTimeout(() => {
+
+    // setTimeout(() => {
       navigator.geolocation.getCurrentPosition(position => {
         console.log(position);
         this.location = position.coords;
@@ -49,12 +50,20 @@ export class SalesLoginComponent implements OnInit {
         this.lat = this.location.latitude;
         this.lng = this.location.longitude;
         this.geocoder = new google.maps.Geocoder();
+
+       
       });
-    }, 2000);
+    // }, 2000);
+
   }
   submitLogin() {
     this.loginDetail.latitude = this.lat;
-    this.loginDetail.longitude = this.lng;
+        this.loginDetail.longitude = this.lng;
+
+    console.log(this.loginDetail.latitude);
+    console.log(this.loginDetail.longitude);
+    
+    
     this.salesService.SalesLoginService(this.loginDetail).subscribe((data: any) => {
       if (data.Status.code === 0) {
         localStorage.setItem('salesLogin', JSON.stringify(data.loginDetail[0] || {}));
@@ -78,4 +87,11 @@ export class SalesLoginComponent implements OnInit {
   registerForm() {
     this.router.navigate(['/sales/register']);
   }
+
+  
+  forgotPassword() {
+    this.router.navigate(['/sales/forgot-password-sales']);
+  }
+
+
 }

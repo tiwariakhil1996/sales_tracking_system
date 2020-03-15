@@ -116,26 +116,26 @@ namespace STS.Controllers
 
         //Display
 
-        [HttpGet]
-        [Route("ActivityList_while_adding")]
-        public async Task<IActionResult> ActivityList_while_adding()
-        {
-            TranStatus transaction = new TranStatus();
-            Dictionary<String, Object> dctData = new Dictionary<string, object>();
-            HttpStatusCode statusCode = HttpStatusCode.OK;
-            try
-            {
-                var activityList = await iactivity.ActivityList_while_adding();
-                dctData.Add("ActivityList_while_adding", activityList);
-            }
-            catch (Exception ex)
-            {
-                transaction = CommonHelper.TransactionErrorHandler(ex);
-                statusCode = HttpStatusCode.BadRequest;
-            }
-            dctData.Add("Status", transaction);
-            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
-        }
+        //[HttpGet]
+        //[Route("ActivityList_while_adding")]
+        //public async Task<IActionResult> ActivityList_while_adding()
+        //{
+        //    TranStatus transaction = new TranStatus();
+        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
+        //    HttpStatusCode statusCode = HttpStatusCode.OK;
+        //    try
+        //    {
+        //        var activityList = await iactivity.ActivityList_while_adding();
+        //        dctData.Add("ActivityList_while_adding", activityList);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        transaction = CommonHelper.TransactionErrorHandler(ex);
+        //        statusCode = HttpStatusCode.BadRequest;
+        //    }
+        //    dctData.Add("Status", transaction);
+        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        //}
 
 
 
@@ -336,6 +336,29 @@ namespace STS.Controllers
         }
 
 
+
+        [HttpPut]
+        [Route("update_n_addProducts/{Aid}")]
+        public async Task<IActionResult> update_n_addProducts(int Aid, [FromBody]Update_ActivityModel model)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+
+                transaction = await iactivity.update_n_addProducts(Aid, model);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
         //Update Product added in activity
 
         [HttpPut]
@@ -398,6 +421,29 @@ namespace STS.Controllers
             {
 
                 transaction = await iactivity.updateToFollowup(Aid, model);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+
+        [HttpPut]
+        [Route("updateToPending/{Aid}")]
+        public async Task<IActionResult> updateToPending(int Aid, [FromBody]ActivityListModel model)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+
+                transaction = await iactivity.updateToPending(Aid, model);
 
             }
             catch (Exception ex)
@@ -533,28 +579,28 @@ namespace STS.Controllers
 
 
         //Search Title
-        [HttpGet]
-        [Route("searchTitle/{aid}")]
-        public async Task<IActionResult> searchTitle(int aid)
-        {
-            Dictionary<String, Object> dctData = new Dictionary<string, object>();
-            HttpStatusCode statusCode = HttpStatusCode.OK;
-            TranStatus transaction = new TranStatus();
-            try
-            {
+        //[HttpGet]
+        //[Route("searchTitle/{aid}")]
+        //public async Task<IActionResult> searchTitle(int aid)
+        //{
+        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
+        //    HttpStatusCode statusCode = HttpStatusCode.OK;
+        //    TranStatus transaction = new TranStatus();
+        //    try
+        //    {
 
-                var activityList = await iactivity.searchTitle(aid);
-                dctData.Add("searchTitle", activityList);
+        //        var activityList = await iactivity.searchTitle(aid);
+        //        dctData.Add("searchTitle", activityList);
 
-            }
-            catch (Exception ex)
-            {
-                transaction = CommonHelper.TransactionErrorHandler(ex);
-                statusCode = HttpStatusCode.BadRequest;
-            }
-            dctData.Add("Status", transaction);
-            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        transaction = CommonHelper.TransactionErrorHandler(ex);
+        //        statusCode = HttpStatusCode.BadRequest;
+        //    }
+        //    dctData.Add("Status", transaction);
+        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        //}
 
 
 

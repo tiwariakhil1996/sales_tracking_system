@@ -176,7 +176,7 @@ export class ViewproductComponent implements OnInit {
 
   open_image_modal(images, item) {
     this.product = JSON.parse(JSON.stringify(item));
-    this.modalService.open(images, { size: 'xl', backdropClass: 'light-blue-backdrop' });
+    this.modalService.open(images, { size: 'xl', backdropClass: 'light-blue-backdrop' }) ;
   }
 
 

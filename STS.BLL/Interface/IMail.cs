@@ -7,6 +7,11 @@ namespace STS.BLL.Interface
     public interface IMail
     {
         //Send Mail
-        Task<TranStatus> SendMail(SendMailModel model);     
+        Task<TranStatus> SendMail(SendMailModel model);
+        Task<TranStatus> SendMail_Sales(SendMailModel model);
+
+
+
+
     }
 }
