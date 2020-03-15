@@ -6,7 +6,7 @@ import { registerModel } from '../../model/admin';
 import { salesregisterModel } from '../../model/sales';
 
 @Component({
-  selector: 'app-sales-register',
+  selector: 'app-dashboard',
   templateUrl: './sales-register.component.html',
   styleUrls: ['./sales-register.component.css']
 })
@@ -50,6 +50,9 @@ export class SalesRegisterComponent implements OnInit {
   }
   LoginSales() {
     this.router.navigate(['sales/login']);
+  }
+  backtodashboard(){
+    this.router.navigate(['admin/dashboard']);
   }
 
 

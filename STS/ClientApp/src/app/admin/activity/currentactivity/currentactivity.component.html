@@ -150,6 +150,7 @@
 
   <div class="modal-body" style="color: black;">
 
+
     <div>
       <tabset>
         <tab heading="Edit" id="tab1">
@@ -388,17 +389,18 @@
           </div>
         </tab>
 
-
-
+<!-- this is billing model -->
         <tab heading="Details">
 
-          <div *ngFor="let activitydetails of activityInvoiceDetails;let i=index;">
+          <div *ngFor="let activitydetails of activityInvoiceDetails;let i=index;" id="invoice" #invoice>
             <div>
               <div class="clearfix">
                 <!-- <div id="logo">
                   <img src="logo.png">
                 </div> -->
-                <h1>INVOICE</h1>
+                 <h1>INVOICE
+                 </h1>
+                 <button (click)="generatePdf('open')">Download Invoice PDF</button>
                 <div id="company" class="clearfix">
                   <div>Company Name</div>
                   <div>455 Foggy Heights,<br /> AZ 85004, US</div>

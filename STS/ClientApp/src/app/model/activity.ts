@@ -183,3 +183,15 @@ export class activityDetailsModel {
     appointmentDate: string;
 
 }
+export class Downloadpdf{
+    aid:number;
+    title: string;
+    description: string;
+    clientName: string;
+    contact: String;
+    address: string;
+    email: string;
+    createdon: string;
+    appointmentDate: string;
+
+}

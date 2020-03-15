@@ -63,6 +63,7 @@
     "ngx-bootstrap-modal": "^2.0.1",
     "ngx-perfect-scrollbar": "^8.0.0",
     "ngx-toastr": "^11.3.3",
+    "pdfmake": "^0.1.65",
     "rxjs": "^6.5.3",
     "rxjs-compat": "^6.5.4",
     "sanitizer": "^0.1.3",

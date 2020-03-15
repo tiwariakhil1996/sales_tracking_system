@@ -29,5 +29,4 @@ export class AdminService {
     return this.http.put('/api/Admin/changeadminPassword/' + id, data);
   }
 
-
 }
