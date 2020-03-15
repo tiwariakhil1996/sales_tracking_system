@@ -22,6 +22,7 @@ import { AppComponent } from './app.component';
 import { ResetPasswordComponent } from './admin/reset-password/reset-password.component';
 import { ResetPasswordSalesComponent } from './sales/reset-password-sales/reset-password-sales.component';
 import { ForgotPasswordSalesComponent } from './sales/forgot-password-sales/forgot-password-sales.component';
+import { SalesRegisterComponent } from './admin/sales-register/sales-register.component';
 
 
 export const routes: Routes = [
@@ -83,8 +84,6 @@ export const routes: Routes = [
       title: 'Register Page'
     }
   },
-
-
   {
     path: 'admin/forgot-password',
     component: ForgotPasswordComponent,
@@ -100,6 +99,22 @@ export const routes: Routes = [
       title: 'Forgot Password Page'
     }
   },
+  {
+    path: 'sales/forgot-password-sales',
+    component: ForgotPasswordSalesComponent,
+    data: {
+      title: 'Forgot Password Page'
+    }
+  },
+
+  {
+    path: 'sales/reset-password-sales',
+    component: ResetPasswordSalesComponent,
+    data: {
+      title: 'Reset Password Page'
+    }
+  },
+ 
   {
     path: 'admin',
     component: DefaultLayoutComponent,

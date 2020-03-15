@@ -7,6 +7,7 @@ using STS.Common;
 using STS.Model;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace STS.Controllers
 {
     [Route("api/[controller]")]
@@ -15,15 +16,16 @@ namespace STS.Controllers
         private IMail imail;
         public MailController(IMail mail)
         {
-            
+
             imail = mail;
         }
+
+
         TranStatus transaction = new TranStatus();
-        
 
         public string Token;
         public int UserId;
-
+        //public string Users;
 
         [HttpPost]
         [Route("SendMail")]
@@ -39,16 +41,17 @@ namespace STS.Controllers
                 {
                     Token = transaction.Token;
                     UserId = transaction.UserIdentity;
+                    //Users = transaction.Users;
                     var html = System.IO.File.ReadAllText(@"EmailTemplates/ResetPassword.html");
                     var link = "http://localhost:55627/admin/reset-password?Token=" + Token + "&UserId=" + UserId;
-                  
-                    html = html.Replace("{{token}}",link);
-
+                    html = html.Replace("{{token}}", link);
+                    //var user = Users;
+                    //user = user.Replace("{{users}}", link);
                     CommonHelper.SendEmail(
                         model.UsernameEmail,
-                         Subject: "Sales Tracking System:Forgot Password",
+                         Subject: "Sales Tracking System-Forgot Password",
                          EmailMessage: html,
-                         needCC: true
+                           needCC: true
                        );
                 }
                 dctData.Add("SendMail", transaction);
@@ -61,10 +64,6 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
-    }
-
-
-
 
 
         [HttpPost]
@@ -87,7 +86,7 @@ namespace STS.Controllers
                     html = html.Replace("{{token}}", link);
                     //var user = Users;
                     //user = user.Replace("{{users}}", link);
-                    CommonHelper.SendMail(
+                    CommonHelper.SendEmail(
                         model.UsernameEmail,
                          Subject: "Sales Tracking System-Forgot Password",
                          EmailMessage: html,

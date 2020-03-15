@@ -51,8 +51,6 @@ namespace STS.Model
         public int Advance_payment { get; set; }
         public string Payment_mode { get; set; }
         public int Pending_amount { get; set; }
-
-
         public List<ProductListingModel> ProductList { get; set; }
 
     }
@@ -216,7 +214,6 @@ namespace STS.Model
         public string From_date { get; set; }
         public string To_date { get; set; }
 
-        public string Description_on_Followup { get; set; }
     }
 
     public partial class Update_products_in_ActivityModel

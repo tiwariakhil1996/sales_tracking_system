@@ -87,11 +87,10 @@ export class SalesLoginComponent implements OnInit {
   registerForm() {
     this.router.navigate(['/sales/register']);
   }
-
-  
   forgotPassword() {
     this.router.navigate(['/sales/forgot-password-sales']);
   }
+
 
 
 }

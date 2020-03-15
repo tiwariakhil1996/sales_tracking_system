@@ -318,10 +318,6 @@ namespace STS.DAL
                 parameter.Add("@Contact", model.Contact);
                 parameter.Add("@AppointmentDate", model.AppointmentDate);
 
-                parameter.Add("@advance_pay", model.Advance_pay);
-                parameter.Add("@paymentmode", model.paymentmode);
-                parameter.Add("@paydue", model.paydue);
-
                 parameter.Add("@Modifiedby", model.Modifiedby);
                 parameter.Add("@Grand_Total", model.Grand_total);
                 parameter.Add("@Advance_payment", model.Advance_payment);

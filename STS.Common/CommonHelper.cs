@@ -34,6 +34,7 @@ namespace STS.Common
             smtp.Host = STSSetting.PrimaryDomain;
             smtp.Port = Convert.ToInt16(STSSetting.PrimaryPort);
             smtp.EnableSsl = true;
+            smtp.UseDefaultCredentials = true;
             smtp.Credentials = new NetworkCredential(STSSetting.UsernameEmail, password);
             try
             {

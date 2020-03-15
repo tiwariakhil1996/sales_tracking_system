@@ -351,12 +351,6 @@
                 <label>Dis. amt </label><label
                   style="padding-left: 59px;">{{total_dis_amount | currency: "INR"}}</label>
               </div>
-
-              <div >
-                <label>Adva.Pay</label>
-                <input #advance_pay type="text" class="form-control" id="advance_pay" name="advance_pay"
-                  [(ngModel)]="update_activity.advance_pay" (keyup)="Total_Adv_pay(advance_pay.value)">
-              </div>
               <div>
                 <label>Adv. Payment </label>
                 <input #adv_payment type="text" style="width: 104px; margin-left: 20px;" id="adv_payment"

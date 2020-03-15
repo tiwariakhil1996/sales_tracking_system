@@ -78,7 +78,6 @@ export class activityModel {
     search: string;
     from_date: string;
     to_date: string;
-    description_on_Followup: string;
 }
 
 export class LocationModel {
