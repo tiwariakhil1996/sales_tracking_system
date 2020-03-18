@@ -15,11 +15,13 @@ export class ClientComponent implements OnInit {
     Component: "ClientComponent"
   }
 
-  constructor(private router:Router) {
+  constructor(private router:Router,
+    ) {
   }
 
   ngOnInit() {
     this.checkRole(this.RoleJason)
+    
   }
 
   

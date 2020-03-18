@@ -464,9 +464,11 @@ namespace STS.DAL
                 TranStatus transaction = new TranStatus();
                 DynamicParameters parameter = new DynamicParameters();
                 parameter.Add("@Aid", Aid);
-                parameter.Add("@Status", model.status);
+                parameter.Add("@Status", model.pendingId);
                 parameter.Add("@Latitude", model.Latitude);
                 parameter.Add("@Longitude", model.Longitude);
+                parameter.Add("@Paydue", model.Paydue);
+                parameter.Add("@Paymentmode", model.Payment_mode);
 
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);

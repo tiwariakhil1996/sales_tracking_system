@@ -55,9 +55,9 @@ export class ViewcategoryComponent implements OnInit {
 
     this.checkRole(this.RoleJason);
 
-    this.categoryList();
-    // const item = { pageIndex: 0 };
-    // this.categoryList(item);
+    // this.categoryList();
+    const item = { pageIndex: 0 };
+    this.categoryList(item);
   }
 
   checkRole(RoleJason) {
@@ -70,23 +70,23 @@ export class ViewcategoryComponent implements OnInit {
     }
   }
 
-  // onsearch() {
-  //   const item = { pageIndex: 0 };
-  //   this.categoryList(item);
-  // }
+  onsearch() {
+    const item = { pageIndex: 0 };
+    this.categoryList(item);
+  }
 
-  categoryList() {
-    // this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
-    // this.category.userid = this.user.id;
+  categoryList(item) {
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.category.userid = this.user.id;
 
-    // this.category.pageIndex = item.pageIndex;
-    // this.category.pageSize = this.pageSize;
-    // this.category.search = this.search_;
+    this.category.pageIndex = item.pageIndex;
+    this.category.pageSize = this.pageSize;
+    this.category.search = this.search_;
 
-    this.categoryService.categoryList().subscribe((data: any) => {
+    this.categoryService.admin_categoryList(this.category).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        if (data.CategoryList) {
-          this.categoryDetails = data.CategoryList;
+        if (data.admin_CategoryList) {
+          this.categoryDetails = data.admin_CategoryList;
 
         }
         if (data.RowCount) {
@@ -99,7 +99,7 @@ export class ViewcategoryComponent implements OnInit {
           this.totalPageList.push({ pageSize: i + 1, pageIndex: i })
 
         }
-      
+        this.currentPageIndex = item.pageIndex;
       }
     }, (err) => {
 
@@ -149,6 +149,24 @@ export class ViewcategoryComponent implements OnInit {
 
 
   updateCategory(cid: number) {
+    let strError = '';
+
+      if (!this.category.cname) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += '- Please enter category name';
+      }
+
+      if (strError !== '') {
+        this.toastr.warning(strError, 'Warning', {
+          disableTimeOut: false,
+          timeOut: 2000,
+          enableHtml: true,
+          progressBar: true,
+          closeButton: true,
+        });
+        return false;
+      }
+      
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.category.modifiedby = this.user.id;
     // console.log(this.category.modifiedby);
@@ -160,11 +178,13 @@ export class ViewcategoryComponent implements OnInit {
         this.toastr.success('Category updated succesfully', 'Successful', {
           disableTimeOut: false
         });
+        this.modalService.dismissAll();
       }
+      
       this.category = new categoryDataModel();
-      //  this.categoryList();
-    //   const item = { pageIndex: 0 };
-    // this.categoryList(item);
+
+      const item = { pageIndex: 0 };
+    this.categoryList(item);
     }, (err) => {
     });
   }
@@ -174,9 +194,8 @@ export class ViewcategoryComponent implements OnInit {
   deleteCategory(cid: number) {
     // if (confirm('Are you sure to delete this record ?') === true) {
     this.categoryService.deleteCategory(cid).subscribe(data => {
-    //  this.categoryList();
-    //   const item = { pageIndex: 0 };
-    // this.categoryList(item);
+      const item = { pageIndex: 0 };
+      this.categoryList(item);
     });
     // }
     this.toastr.success('Category deleted Successful', 'Successful', {
@@ -189,8 +208,8 @@ export class ViewcategoryComponent implements OnInit {
     // console.log(id);
     this.categoryService.changeStatus(id).subscribe(data => {
       // this.categoryList();
-    //   const item = { pageIndex: 0 };
-    // this.categoryList(item);
+      const item = { pageIndex: 0 };
+    this.categoryList(item);
     });
   }
 

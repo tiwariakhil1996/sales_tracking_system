@@ -32,9 +32,9 @@
         dropdownToggle (click)="false">
         <!-- <img src="assets/img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com"/> -->
         <img [src]="'http://localhost:55627/Documents/Avatars/Admin/Thumb/'+avatar.image" *ngIf="avatar.image"
-          class="img-avatar" alt="admin@bootstrapmaster.com" />
-        <img [src]="'/assets/img/avatars/admin.png'" *ngIf="!avatar.image" class="img-avatar"
-          alt="admin@bootstrapmaster.com" />
+          class="img-avatar" />
+     
+        <img [src]="'/assets/img/avatars/admin.png'" *ngIf="!avatar.image" class="img-avatar"/>
       </a>
 
       <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
@@ -134,7 +134,7 @@
 
         <!-- <a class="dropdown-item" href="#"><i class="fa fa-file"></i> Projects<span class="badge badge-primary">42</span></a> -->
         <div class="divider"></div>
-        <a class="dropdown-item" href="/admin/register"><i class="fa fa-user-plus"></i> Admin Register</a>
+        <a *ngIf="user == 1 || user == 2"  class="dropdown-item" href="/admin/register"><i  class="fa fa-user-plus"></i> Admin Register</a>
         <a class="dropdown-item" href="/admin/sales-register"><i class="fa fa-user-plus"></i> Sales Register</a>
 
         <!-- <a class="dropdown-item" data-toggle="modal"  data-toggle="modal" (click)="openModal(template1)"><i class="fa fa-user"></i> Sales Register</a> -->

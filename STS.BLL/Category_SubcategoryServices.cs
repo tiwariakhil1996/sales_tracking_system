@@ -36,6 +36,34 @@ namespace STS.BLL.Service
             {
                 return await categoryRepository.CategoryList();
             }
+        }   
+        
+        //public async Task<List<CategoryListModel>> admin_CategoryList()
+        //{
+        //    using (categoryRepository = new Category_SubcategoryRepository())
+        //    {
+        //        return await categoryRepository.admin_CategoryList();
+        //    }
+        //}
+
+        public List<CategoryListModel> admin_CategoryList(CategoryListModel model, out int RowCount)
+        {
+            using (categoryRepository = new Category_SubcategoryRepository())
+            {
+                return categoryRepository.admin_CategoryList(model, out RowCount);
+            }
+
+
+        } 
+        
+        public List<SubcategoryListModel> admin_subcategoryList(SubcategoryListModel model, out int RowCount)
+        {
+            using (categoryRepository = new Category_SubcategoryRepository())
+            {
+                return categoryRepository.admin_subcategoryList(model, out RowCount);
+            }
+
+
         }
 
         //Update Category

@@ -12,6 +12,10 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { registerModel } from '../../../model/admin';
 
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 
 // For Map
 
@@ -34,6 +38,8 @@ export class CurrentactivityComponent implements OnInit {
 
   activity = new activityModel();
   activityDetails: activityModel[] = [];
+
+  productInvoice = new activityDetailsModel();
 
   activityInvoice = new activityDetailsModel();
   activityInvoiceDetails: activityDetailsModel[] = [];
@@ -91,6 +97,8 @@ export class CurrentactivityComponent implements OnInit {
   dis_amount: number;
   pending_amount: number;
 
+  ind = 0;
+
   total: any;
   final_total: any;
   total_dis_amount: any;
@@ -135,6 +143,10 @@ export class CurrentactivityComponent implements OnInit {
   pagesize: any;
   currentPageIndex: number = 0;
   pageOfItems: Array<any>;
+
+ 
+public origin: any;
+public destination: any;
 
   // Authentication
 
@@ -184,10 +196,21 @@ export class CurrentactivityComponent implements OnInit {
         this.lat = this.location.latitude;
         this.lng = this.location.longitude;
 
+        // console.log(this.lat);
+        // console.log(this.lng);
+        
+        
         this.geocoder = new google.maps.Geocoder();
       });
     // }, 2000);
+
+    // this. getDirection();
   }
+
+  // getDirection() {
+  //   this.origin = { lat: 21.217319099999997, lng: 72.8664716 };
+  //   this.destination = { lat: 21.096879, lng: 72.872747 };
+  // }
 
   TotalAmount(price: number, quantity: number, dis_per: number, i) {
     // Amount
@@ -206,6 +229,7 @@ export class CurrentactivityComponent implements OnInit {
   }
 
   Total_pending_amt(adv_payment: number) {
+    this.pending_amount = 0;
     this.pending_amount = this.final_total - adv_payment;
   }
 
@@ -364,6 +388,7 @@ export class CurrentactivityComponent implements OnInit {
         if (data.Activity_ProductList) {
           this.activity_productDetails = data.Activity_ProductList;
           //console.log( this.activity_productDetails);
+          this.activityInvoice.activityproduct = this.activity_productDetails;
 
           this.subtotal();
           this.dis_amt();
@@ -471,11 +496,14 @@ export class CurrentactivityComponent implements OnInit {
 
 
   // Edit
-  openupdatemodal(content, item) {
+  openupdatemodal(content, item,i) {
+    this.ind = i;
     this.update_activity = JSON.parse(JSON.stringify(item));
     // data show in model use this line and store the data in user and display in ui
     this.modalService.open(content, { size: 'xl', backdropClass: 'light-blue-backdrop' });
     // this.viewData = JSON.parse(localStorage.getItem('Register')) || [];
+    sessionStorage.removeItem('ActivityInvoice');
+    sessionStorage.removeItem('ActivityProductInvoice');
 
   }
 
@@ -498,7 +526,61 @@ export class CurrentactivityComponent implements OnInit {
 
 
   Update(aid: number) {
+    let strError = '';
+
+    
+    if (!this.update_activity.title) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please enter title';
+    }else
+    if (!this.validateTitle(this.activity.title)) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += strError = '-  Title should only contain alphabets, numbers and space';
+    }
+
+    // if (!this.update_activity.clientId) {
+    //   strError += strError = '' ? '' : '<br/>';
+    //   strError += '- Please select client';
+    // }
+
+    // if (!this.update_activity.salesId) {
+    //   strError += strError = '' ? '' : '<br/>';
+    //   strError += '- Please select sales';
+    // }
+
+    
+    if (!this.update_activity.appointmentDate) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please enter appointment date';
+    }
+
+    if (!this.update_activity.description) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please enter description';
+    }else
+    if (!this.validateDescription(this.activity.description)) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += strError = '-  Description should only contain alphabets, numbers space and some special characters $ % & , . " : ';
+    }
+
+
+    if (this.update_activity.advance_payment > this.final_total) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Advance payment should be less then or equal to total amount';
+    }
+
+    if (strError !== '') {
+      this.toastr.warning(strError, 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000,
+        enableHtml: true,
+        progressBar: true,
+        closeButton: true,
+      });
+      return false;
+    }
     // sending user id  as modified by
+
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.update_activity.modifiedby = this.user.id;
     this.update_activity.pending_amount = this.pending_amount;
@@ -512,6 +594,7 @@ export class CurrentactivityComponent implements OnInit {
           disableTimeOut: false,
           timeOut: 2000
         });
+        this.modalService.dismissAll()
       }
       // this.activity = new activityModel();
       // this.eachactivityList();
@@ -525,6 +608,68 @@ export class CurrentactivityComponent implements OnInit {
     });
   }
 
+  
+  TitleValidation() {
+    let isValid = false;
+    if (!this.validateTitle(this.activity.title)) {
+      isValid = true;
+    }
+
+    if (isValid) {
+      this.toastr.warning('Please enter title correctly', 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
+
+  }
+
+  validateTitle(titleField) {
+    const reg = /^[A-Za-z0-9\s]+$/;
+    return reg.test(titleField) === false ? false : true;
+  }
+
+
+  activityDescription() {
+    let isValid = false;
+    if (!this.validateDescription(this.activity.description)) {
+      isValid = true;
+    }
+
+    if (isValid) {
+      this.toastr.warning('Please enter productname correctly', 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
+
+  }
+
+  validateDescription(productdescription) {
+    // const reg = /^[A-Za-z0-9\s]+$/;
+    const reg = /^[A-Za-z0-9\s$%&,.":]+$/;
+    return reg.test(productdescription) === false ? false : true;
+  }
+
+  mobValidation() {
+    let isValid = false;
+    if (!this.validateMobile(this.activity.contact)) {
+      isValid = true;
+    }
+    ;
+    if (isValid) {
+      this.toastr.warning('Please enter valid mobile number', 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
+  }
+
+  validateMobile(mobileField) {
+    var reg = /^\d{10}$/;
+    return reg.test(mobileField) == false ? false : true;
+  }
+  
 
   Update_n_addproducts(aid: number) {
     // sending user id  as modified by
@@ -566,6 +711,7 @@ export class CurrentactivityComponent implements OnInit {
           disableTimeOut: false,
           timeOut: 2000
         });
+        this.modalService.dismissAll();
       }
       // this.activity_product = new activityModel();
       this.activity_productList(aid);
@@ -648,4 +794,187 @@ export class CurrentactivityComponent implements OnInit {
   //   this.addproductlist.discount_amt = null;
   //   this.addproductlist.total_price = null;
   // }
+
+
+
+
+
+
+
+
+
+
+
+
+  GeneratePdf(action = 'open') {
+    console.log(pdfMake);
+    const documentDefinition = this.getDocumentDefinition();
+    switch (action) {
+      case 'open': pdfMake.createPdf(documentDefinition).open(); break;
+      case 'print': pdfMake.createPdf(documentDefinition).print(); break;
+      case 'download': pdfMake.createPdf(documentDefinition).download(); break;
+
+      default: pdfMake.createPdf(documentDefinition).open(); break;
+    }
+  }
+
+  getDocumentDefinition() {
+
+    sessionStorage.setItem('ActivityInvoice', JSON.stringify(this.activityInvoiceDetails[0] || {}));
+    // sessionStorage.setItem('ActivityProductInvoice', JSON.stringify(this.activity_productDetails[0] || {}));
+    this.productInvoice = JSON.parse(sessionStorage.getItem('ActivityInvoice')) || [0];
+    
+    // this.activity_product = JSON.parse(sessionStorage.getItem('ActivityProductInvoice')) || [0];
+    
+    sessionStorage.setItem('ProductInvoice', JSON.stringify(this.activityInvoice));
+    // this.activityInvoice = JSON.parse(sessionStorage.getItem('ActivityInvoice')) ;
+    this.activityInvoice = JSON.parse(sessionStorage.getItem('ProductInvoice')) || new activityDetailsModel();
+
+    return {
+      content: [
+        {
+          text: 'INVOICE',
+          bold: true,
+          fontSize: 20,
+          alignment: 'center',
+          margin: [0, 0, 0, 20]
+        },
+        {
+          columns: [
+            [
+              {
+                text: 'Company Name:' + 'MI',
+                style: 'name',
+                alignment: 'right'
+              },
+              {
+                text: 'Address:' + 'Surat',
+                style: 'name',
+                alignment: 'right'
+              },
+              {
+                text: 'Help Desk:' + 'mi@info.co.in',
+                style: 'name',
+                alignment: 'right'
+              },
+            ],
+          ]
+        },
+
+        {
+          columns: [
+            [
+              {
+                text: 'Bill No:-' + this.productInvoice.aid,
+                style: 'name'
+              },
+              {
+                text: 'Title:-' + this.productInvoice.title
+              },
+              {
+                text: 'Client Name:-' + this.productInvoice.clientName
+              },
+              {
+                text: 'Address:-' + this.productInvoice.address
+              },
+              {
+                text: 'Email:-' + this.productInvoice.email,
+              },
+              {
+                text: 'Date:-' + this.productInvoice.createdon,
+              },
+              {
+                text: 'Due Date:- ' + this.productInvoice.appointmentDate,
+              },
+            ],
+
+          ]
+
+        },
+        {
+          text: 'Product Details',
+          style: 'header'
+        },
+    
+        this.getEducationObject(this.activityInvoice.activityproduct),
+       
+        {
+          text: 'Notice:',
+          style: 'header'
+        },
+        {
+          text: 'Invoice was created on a computer and is valid without the signature and seal.'
+        },
+        {
+          text: 'Signature',
+          style: 'sign'
+        },
+
+        {
+          columns: [
+            { qr: this.productInvoice.email + ', Contact No : ' + this.productInvoice.contact, fit: 100 },
+            {
+              text: `(${this.productInvoice.clientName})`,
+              alignment: 'right',
+            }
+          ]
+        }
+
+      ],
+
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          margin: [0, 20, 0, 10],
+          decoration: 'underline'
+        },
+        name: {
+          fontSize: 10,
+          bold: true
+        },
+        jobTitle: {
+          fontSize: 14,
+          bold: true,
+          italics: true
+        },
+        sign: {
+          margin: [0, 50, 0, 10],
+          alignment: 'right',
+          italics: true
+        },
+        tableHeader: {
+          bold: true,
+        }
+      }
+
+    };
+  }
+  getEducationObject(prodinv: updateactivityModel[]) {
+    return {
+      table: {
+        widths: ['*', '*', '*', '*'],
+        body: [
+          [
+            {
+              text: 'Product',
+              style: 'tableHeader'
+            },
+            {
+              text: 'Price',
+              style: 'tableHeader'
+            },
+            {
+              text: 'Qty',
+              style: 'tableHeader'
+            },
+          ],
+          ...prodinv.map(pi => {
+            return [pi.productname, pi.price, pi.quantity];
+          })
+        ]
+      }
+    };
+  }
+
 }

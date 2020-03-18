@@ -45,10 +45,10 @@ export class AppComponent implements OnInit {
 
   constructor(private router: Router,
     private salesService: SalesService,
-    private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone
+    // private mapsAPILoader: MapsAPILoader,
+    // private ngZone: NgZone
   ) {
-    this.geocoder = new google.maps.Geocoder;
+    // this.geocoder = new google.maps.Geocoder;
   }
 
   ngOnInit() {
@@ -102,24 +102,24 @@ export class AppComponent implements OnInit {
   // }
 
 
-  lat_lng() {
-    navigator.geolocation.getCurrentPosition(position => {
-      // console.log(position);
+  // lat_lng() {
+  //   navigator.geolocation.getCurrentPosition(position => {
+  //     // console.log(position);
 
-      this.location = position.coords;
-      this.centerlat = this.location.latitude;
-      this.centerlng = this.location.longitude;
+  //     this.location = position.coords;
+  //     this.centerlat = this.location.latitude;
+  //     this.centerlng = this.location.longitude;
 
-      this.lat = this.location.latitude;
-      this.lng = this.location.longitude;
+  //     this.lat = this.location.latitude;
+  //     this.lng = this.location.longitude;
 
-      console.log(this.lat);
-      console.log(this.lng);
+  //     console.log(this.lat);
+  //     console.log(this.lng);
 
-      this.geocoder = new google.maps.Geocoder();
-      this.Refresh_Sales_Location();
-    });
-  }
+  //     this.geocoder = new google.maps.Geocoder();
+  //     this.Refresh_Sales_Location();
+  //   });
+  // }
 
   Refresh_Sales_Location() {
 

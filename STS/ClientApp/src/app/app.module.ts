@@ -63,6 +63,7 @@ import { ResetPasswordComponent } from './admin/reset-password/reset-password.co
 import { SalesRegisterComponent } from './admin/sales-register/sales-register.component';
 import { ResetPasswordSalesComponent } from './sales/reset-password-sales/reset-password-sales.component';
 import { ForgotPasswordSalesComponent } from './sales/forgot-password-sales/forgot-password-sales.component';
+import { AgmDirectionModule } from 'agm-direction';
 
 @NgModule({
   imports: [
@@ -102,6 +103,7 @@ import { ForgotPasswordSalesComponent } from './sales/forgot-password-sales/forg
       apiKey: 'AIzaSyAgmJb337SljuWJnzPXRyMjiTSL1DWcBq8'
       // libraries: ['places']
     }),
+    AgmDirectionModule
   ],
   declarations: [
     AppComponent,

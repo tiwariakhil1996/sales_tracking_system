@@ -42,15 +42,24 @@
                     <input type="password" class="form-control" placeholder="Repeat password"  [(ngModel)]="register.cpassword"  name="cpassword" >
                   </div>
               </div>
-              <div class="card-footer p-4 reg-footer">
+              <!-- <div class="card-footer p-4 reg-footer">
                 <div class="row">
                   <div class="col-12">
                     <button type="submit" class="btn btn-block btn-success" (click)="submitForm()">Register</button>
                   </div>
                 </div>
-              </div>
+              </div> -->
   
-         
+              <div class="card-footer p-4 reg-footer">
+                <div class="row">
+                  <div class="col-6">
+                    <button type="submit" class="btn btn-block btn-success" (click)="submitForm()">Register</button>
+                  </div>
+                  <div class="col-6">
+                    <button type="button" class="btn btn-block btn-danger" (click)="back()">Back</button>
+                  </div>
+                </div>
+              </div>
               
             </div>
           </div>

@@ -53,19 +53,23 @@
               <td>{{item.contact}}</td>
               <td>{{item.appointmentDate}}</td>
               <td class="status-center">
-                <span class="badge badge-pill badge-success">{{item.statusname}} <i class="fa fa-info-circle"
-                    *ngIf="(item.status == 3)" tooltip="{{item.description_on_Followup}}"></i></span>
-                <!-- <button *ngIf="item.statusname" class='btn btn-success' type="button"></button> -->
-
-
+                <span *ngIf="(item.status == 1)" class="badge badge-pill badge-success">{{item.statusname}}</span>
+                <span *ngIf="(item.status == 2)" class="badge badge-pill badge-secondary">{{item.statusname}}</span>
+                <span *ngIf="(item.status == 3)" class="badge badge-pill badge-warning">{{item.statusname}}
+                  <i class="fa fa-info-circle" *ngIf="item.description_on_Followup" tooltip="{{item.description_on_Followup}}"></i>   
+                </span>
+                <span *ngIf="(item.status == 4)" class="badge badge-pill badge-danger">{{item.statusname}}</span>
+                <span *ngIf="(item.status == 5)" class="badge badge-pill badge-dark">Canceled</span>
+                <span *ngIf="(item.status == 6)" class="badge badge-pill badge-light">{{item.statusname}}</span>
               </td>
+
               <td>
                 <i class="fa fa-map-marker map" (click)="Get_Lat_Long_of_Activity(item.aid)"
                   (click)="open_map_modal(map)"></i>
               </td>
               <td>
                 <button type="button" class="btn btn-primary" data-toggle="modal"
-                  (click)="openupdatemodal(content,item); GetProduct_Activity(item.aid)"><i class="fa fa-edit"
+                  (click)="openupdatemodal(content,item,i); GetProduct_Activity(item.aid)"><i class="fa fa-edit"
                     aria-hidden="true"></i></button>
 
                 <button class='btn btn-danger' type="button" (click)="onDelete(item.aid)"><i class="fa fa-trash"
@@ -127,7 +131,9 @@
   <div class="modal-header">
     <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">Update</h4>
     <div>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"> -->
+      <button type="button" class="close" aria-label="Close" (click)="modalService.dismissAll()" >
+
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -358,8 +364,12 @@
                 </select>
               </div>
               <div>
-                <label>Pending amt </label><label
-                  style="padding-left: 32px;">{{pending_amount | currency: "INR"}}</label>
+                <label>Pending amt </label>
+           <label style="padding-left: 32px;">{{pending_amount | currency: "INR"}}</label>
+
+                <!-- <label style="padding-left: 32px;">{{this.activityDetails[this.ind].pendingamount | currency: "INR"}}</label> -->
+
+                <!-- <label style="padding-left: 32px;">{{pending_amount | currency: "INR"}}{{this.activityDetails[this.ind].pendingamount}}</label> -->
               </div>
               <div>
                 <label>Grand Total </label><label style="padding-left: 39px;"> {{final_total | currency: "INR"}}</label>
@@ -380,7 +390,7 @@
 
 
         <tab heading="Details">
-
+          <button (click)="GeneratePdf('open')"><i class="fa fa-download" aria-hidden="true"></i></button>
           <div *ngFor="let activitydetails of activityInvoiceDetails;let i=index;">
             <div>
               <div class="clearfix">
@@ -483,7 +493,7 @@
 <ng-template #content1 let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Update Product</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <button type="button" class="close" aria-label="Close" (click)="modalService.dismissAll()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -575,6 +585,7 @@
       <div>
         <button type="button" class="btn btn-outline-dark shape close" aria-label="Close"
           (click)="modal.dismiss('Cross click')"> <span aria-hidden="true">&times;</span></button>
+
         <div class="agm-map" *ngFor="let addr of Activity_LocationDetails;">     
           <agm-map #map [zoom]="16" [latitude]="centerlat" [longitude]="centerlng">
             <!-- Admin Location -->
@@ -585,17 +596,35 @@
             <!-- Sales Location -->
             <agm-marker [iconUrl]="iconSales" [opacity]=0.8 [latitude]="addr.latitude" [longitude]="addr.longitude"
               [markerDraggable]="false">
-              <agm-info-window [latitude]="addr.latitude" [longitude]="addr.longitude">{{addr.salesname}}
+               <!-- Sales Info window -->
+              <agm-info-window [latitude]="addr.latitude" [longitude]="addr.longitude">
+                <div>
+                  <img style="max-width: 50px; max-height: 50px;" *ngIf="addr.salesimage"
+                    [src]="'http://localhost:55627/Documents/Avatars/Sales/Thumb/'+addr.salesimage">
+                  <img style="max-width: 50px; max-height: 50px;" *ngIf="!addr.salesimage" [src]="'/assets/img/avatars/Default_Images/No_image.png'">
+                </div>
+                <div> <label style="font-weight: bold;">Name:</label><a style="margin-left: 13px;">{{addr.salesname}}</a></div>
+                <div> <label style="font-weight: bold;">Contact:</label> <a>{{addr.salescontact}}</a></div>
               </agm-info-window>
             </agm-marker>
 
             <!-- Client Location -->
             <agm-marker [iconUrl]="iconClient" [opacity]=0.8 [latitude]="addr.lat" [longitude]="addr.lng"
               [markerDraggable]="false">
-              <agm-info-window [latitude]="addr.latitude" [longitude]="addr.longitude">{{addr.clientname}}
+                <!-- Client Info window -->
+              <agm-info-window [latitude]="addr.latitude" [longitude]="addr.longitude">
+                <div>
+                  <img style="max-width: 50px; max-height: 50px;" *ngIf="!addr.clientimage" [src]="'/assets/img/avatars/Default_Images/No_image.png'">
+                </div>
+                <div> <label style="font-weight: bold;">Name:</label><a style="margin-left: 13px;">{{addr.clientname}}</a></div>
+                <div> <label style="font-weight: bold;">Contact:</label> <a>{{addr.clientcontact}}</a></div>
+                <div> <label style="font-weight: bold;">Address:</label> <a>{{addr.clientaddress}}</a></div>
               </agm-info-window>
             </agm-marker>
 
+            <!-- <agm-direction [origin]="origin" [destination]="destination">
+            </agm-direction> -->
+            
           </agm-map>
 
           <div class="form-group">

@@ -189,10 +189,10 @@ export class AddproductComponent implements OnInit {
       strError += '- Please select image';
     }
 
-    if (!this.product.date) {
-      strError += strError = '' ? '' : '<br/>';
-      strError += '- Please select date';
-    }
+    // if (!this.product.date) {
+    //   strError += strError = '' ? '' : '<br/>';
+    //   strError += '- Please select date';
+    // }
 
     if (strError !== '') {
       this.toastr.warning(strError, 'Warning', {
@@ -292,7 +292,8 @@ export class AddproductComponent implements OnInit {
   }
 
   validateDescription(productdescription) {
-    const reg = /^[A-Za-z0-9\s]+$/;
+    // const reg = /^[A-Za-z0-9\s]+$/;
+    const reg = /^[A-Za-z0-9\s!@#$%^&*(),.?":{}|<>]+$/;
     return reg.test(productdescription) === false ? false : true;
   }
 
@@ -353,6 +354,8 @@ export class AddproductComponent implements OnInit {
     this.product.description = null;
     this.product.imageList = null;
     this.product.date = null;
+
+    this.product = new productModel();
   }
 
 

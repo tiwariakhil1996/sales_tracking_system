@@ -74,6 +74,27 @@ export class AddsubcategoryComponent implements OnInit {
   }
 
   addSubcategory() {
+    let strError = '';
+
+    if (!this.subcategory.cid) {
+      strError += strError = '- Please select category';
+    } else
+      if (!this.subcategory.sname) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += '- Please select subcategory';
+      }
+
+      if (strError !== '') {
+        this.toastr.warning(strError, 'Warning', {
+          disableTimeOut: false,
+          timeOut: 2000,
+          enableHtml: true,
+          progressBar: true,
+          closeButton: true,
+        });
+        return false;
+      }
+
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.subcategory.createdby = this.user.id;
     // console.log(this.subcategory.createdby);

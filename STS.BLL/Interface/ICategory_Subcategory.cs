@@ -19,6 +19,10 @@ namespace STS.BLL.Interface
 
         //Display Category
         Task<List<CategoryListModel>> CategoryList();
+        //Task<List<CategoryListModel>> admin_CategoryList();
+
+        List<CategoryListModel> admin_CategoryList(CategoryListModel model, out int RowCount);
+        List<SubcategoryListModel> admin_subcategoryList(SubcategoryListModel model, out int RowCount);
 
 
         //Update Category

@@ -62,16 +62,19 @@ export class activityModel {
     discount_per: string;
     discount_amt: string;
     total_price: string;
-
+    pendingamount: number;
+    advancepay: number;
+    paydue: number;
+    payment_mode: string;
     createdby: number;
     modifiedby: number;
-
     latitude: any;
     longitude: any;
     userid: number;
 
     followup_description: string;
     user_id: number;
+    pendingId: number;
     status: number;
     statusname: string;
 
@@ -96,8 +99,14 @@ export class LocationModel {
     // lng: any;
     lat: number;
     lng: number;
-    salesname:string;
+    salesname: string;
+    salesimage: string;
+    salescontact: string;
     clientname: string;
+    clientimage: string;
+    clientcontact: string;
+    clientaddress: string;
+
 }
 
 export class sales_Location_Model {
@@ -109,6 +118,7 @@ export class sales_Location_Model {
     latitude: number;
     longitude: number;
     image: string;
+    mobile: string;
 
 }
 
@@ -184,5 +194,10 @@ export class activityDetailsModel {
     email: string;
     createdon: string;
     appointmentDate: string;
+    
+    activityproduct: updateactivityModel[] = [];
+    constructor() {
+        this.activityproduct.push(new updateactivityModel());   
+    }
 
 }

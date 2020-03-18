@@ -6,7 +6,8 @@ import { ClientService } from '../../../service/client.service';
 import { clientModel, clientListModel, paginationModel } from '../../../model/client';
 import { countryModel, stateModel, cityModel } from '../../../model/country-state-city';
 import { ToastrService } from 'ngx-toastr';
-import { salesregisterModel } from '../../../model/sales';
+import { salesregisterModel, LocationModel } from '../../../model/sales';
+import { SalesService } from '../../../service/sales.service';
 
 @Component({
   selector: 'app-viewclient',
@@ -16,6 +17,9 @@ import { salesregisterModel } from '../../../model/sales';
 export class ViewclientComponent implements OnInit {
 
   user = new salesregisterModel();
+
+  saleslocation = new LocationModel();
+  saleslocationDetails: LocationModel[] = [];
 
   client = new clientListModel();
   clientDetails: clientListModel[] = [];
@@ -65,6 +69,7 @@ export class ViewclientComponent implements OnInit {
   constructor(private router: Router,
     private clientService: ClientService,
     private modalService: NgbModal,
+    private salesService: SalesService,
     private country_state_cityService: CountryStateCityService,
     private toastr: ToastrService) {
     // this.clientList();
@@ -78,7 +83,8 @@ export class ViewclientComponent implements OnInit {
     const item = { pageIndex: 0 };
     this.clientList(item);
 
-    
+    this.Refresh_Location();
+
     // For google map
     navigator.geolocation.getCurrentPosition(position => {
       this.location = position.coords;
@@ -88,7 +94,37 @@ export class ViewclientComponent implements OnInit {
     });
   }
 
+  Refresh_Location() {
+    navigator.geolocation.getCurrentPosition(position => {
+      this.location = position.coords;
+      this.centerlat = this.location.latitude;
+      this.centerlng = this.location.longitude;
 
+      this.lat = this.location.latitude;
+      this.lng = this.location.longitude;
+
+      console.log(this.lat);
+      console.log(this.lng);
+
+      this.geocoder = new google.maps.Geocoder();
+      this.Refresh_Sales_Location();
+    });
+
+  }
+
+  Refresh_Sales_Location() {
+   this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+   this.saleslocation.userid = this.user.id;
+   this.saleslocation.latitude = this.lat;
+   this.saleslocation.longitude = this.lng;
+
+   this.salesService.Refresh_Sales_Location(this.saleslocation).subscribe((data: any) => {
+   }, (err) => {
+
+   });
+ }
+
+ 
   markerDragEnd($event: any) {
     // console.log($event);
     this.latitude = $event.coords.lat;
@@ -190,6 +226,83 @@ export class ViewclientComponent implements OnInit {
   }
 
   onEdit(id: number) {
+    let strError = '';
+
+    if (!this.client.clientName) {
+      strError += strError = '- Please enter clientname';
+    } else
+    if (!this.validateName(this.client.clientName)) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += strError = '- Client name should only contain alphabets';
+    }
+
+    if (!this.client.email) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please enter valid email id';
+    } else {
+      if (!this.validateEmail(this.client.email)) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += strError = '- Email should contain @ and . ';
+      }
+    }
+
+    if (!this.client.contact) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please enter valid mobile no.';
+    } else {
+      if (!this.validateMobile(this.client.contact)) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += strError = '- Mobile no should be of 10 digits';
+      }
+    }
+    if (!this.client.gender) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please select gender';
+    }
+
+    if (!this.client.address) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please enter address';
+    }else
+    if (!this.validateAddress(this.client.address)) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += strError = '-  Address should only contain alphabets, numbers, space and . ,';
+    }
+
+    if (!this.client.street) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please enter street';
+    }
+
+    if (!this.client.cid) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += strError = '- Please select country';
+    } else
+    if (!this.client.sid) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please select state';
+    } else
+    if (!this.client.cityid) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please select city';
+    }
+
+    if (!this.client.postalCode) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please enter postalcode';
+    }
+
+    if (strError !== '') {
+      this.toastr.warning(strError, 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000,
+        enableHtml: true,
+        progressBar: true,
+        closeButton: true,
+      });
+      return false;
+    }
+
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.client.modifiedby = this.user.id;
     console.log(this.client.modifiedby);
@@ -201,8 +314,15 @@ export class ViewclientComponent implements OnInit {
           disableTimeOut: false,
           timeOut: 2000
         });
+        this.modalService.dismissAll();
       }
-      this.client = new clientListModel();
+      // this.client = new clientListModel();
+      else {
+        this.toastr.info('This email id is already registered', 'Info', {
+          disableTimeOut: false,
+          timeOut: 2000
+        });
+      }
       // this.clientList();
       
     const item = { pageIndex: 0 };
@@ -211,6 +331,89 @@ export class ViewclientComponent implements OnInit {
     });
   }
 
+
+  firstnameValidation() {
+    let isValid = false;
+    if (!this.validateName(this.client.clientName)) {
+      isValid = true;
+    }
+
+    if (isValid) {
+      this.toastr.warning('Please enter clientname correctly', 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
+
+  }
+
+  
+
+  validateName(nameField) {
+    const reg = /^[A-Za-z\s]+$/;
+    return reg.test(nameField) === false ? false : true;
+  }
+
+  addressValidation() {
+    let isValid = false;
+    if (!this.validateAddress(this.client.address)) {
+      isValid = true;
+    }
+
+    if (isValid) {
+      this.toastr.warning('Please enter address correctly', 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
+
+  }
+
+  validateAddress(addressField) {
+    const reg = /^[A-Za-z0-9\s.,]+$/;
+    return reg.test(addressField) === false ? false : true;
+  }
+
+// Email Validation
+
+checkEmailValidation() {
+  let isValid = false;
+  if (!this.validateEmail(this.client.email)) {
+    isValid = true;
+  }
+  if (isValid) {
+    this.toastr.warning('Please enter valid email id', 'Warning', {
+      disableTimeOut: false,
+      timeOut: 2000
+    });
+  }
+
+}
+
+validateEmail(emailField) {
+  const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+  return reg.test(emailField) === false ? false : true;
+}
+
+// Mobile no.  Validation
+
+mobValidation() {
+  let isValid = false;
+  if (!this.validateMobile(this.client.contact)) {
+    isValid = true;
+  }
+  if (isValid) {
+    this.toastr.warning('Please enter valid mobile number', 'Warning', {
+      disableTimeOut: false,
+      timeOut: 2000
+    });
+  }
+}
+
+validateMobile(mobileField) {
+  const reg = /^\d{10}$/;
+  return reg.test(mobileField) === false ? false : true;
+}
 
   // Delete
   onDelete(id: number) {

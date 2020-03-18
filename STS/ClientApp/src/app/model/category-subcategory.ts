@@ -12,6 +12,7 @@ export class categoryDataModel {
 }
 
 export class subcategoryDataModel {
+    userid:number;
     sid: number;
     sname: string;
     cid: number;
@@ -19,6 +20,9 @@ export class subcategoryDataModel {
     isActive: boolean;
     createdby: number;
     modifiedby:number;
+    pageIndex: number;
+    pageSize: number;
+    search: string;
 }
 
 export class paginationModel {

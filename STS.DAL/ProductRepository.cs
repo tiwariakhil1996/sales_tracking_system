@@ -28,7 +28,7 @@ namespace STS.DAL
                 parameter.Add("@Description", model.Description);
                 parameter.Add("@Price", model.Price);
                 //parameter.Add("@Image", model.Image);
-                parameter.Add("@Date", model.Date);
+                //parameter.Add("@Date", model.Date);
                 parameter.Add("@Createdby", model.Createdby);
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
@@ -200,7 +200,7 @@ namespace STS.DAL
                 parameter.Add("@Description", model.Description);
                 parameter.Add("@Price", model.Price);
                 //parameter.Add("@Image", model.Image);
-                parameter.Add("@Date", model.Date);
+                //parameter.Add("@Date", model.Date);
                 parameter.Add("@Modifiedby", model.Modifiedby);
                 // Data Table Type --to insert multiple image
                 DataTable dataTable = CommonHelper.ToDataTable(model.ImageListData);

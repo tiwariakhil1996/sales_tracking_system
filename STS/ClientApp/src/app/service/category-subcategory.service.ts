@@ -18,9 +18,13 @@ export class CategorySubcategoryService {
     return this.http.get('/api/Category_Subcategory/CategoryList');
   }
 
-  // categoryList(data) {
-  //   return this.http.get('/api/Category_Subcategory/CategoryList',data);
-  // }
+  admin_categoryList(data) {
+    return this.http.post('/api/Category_Subcategory/admin_CategoryList',data);
+  }
+
+  admin_viewsubcategoryList(data) {
+    return this.http.post('/api/Category_Subcategory/admin_subcategoryList',data);
+  }
 
   deleteCategory(cid: number) {
     return this.http.delete('/api/Category_Subcategory/deleteCategory/' + cid);

@@ -32,7 +32,7 @@ namespace STS.Model
         public int Quantity { get; set; }
         public int Amount { get; set; }
         public int Discount_per { get; set; }
-        public int Discount_amt { get; set; }
+        public int Discount_amt { get; set; } 
         public int Total_price { get; set; }
     }
 
@@ -78,7 +78,7 @@ namespace STS.Model
         public int Grand_total { get; set; }
         public int Advance_payment { get; set; }
         public string Payment_mode { get; set; }
-        public int Pending_amount { get; set; }
+        //public int Pending_amount { get; set; }
     }
     public partial class ActivityListModel
     {
@@ -112,6 +112,7 @@ namespace STS.Model
 
         public int userId { get; set; }
         public int status { get; set; }
+        public int pendingId { get; set; }
         public string Statusname { get; set; }
         public string followup_description { get; set; }
 
@@ -122,6 +123,10 @@ namespace STS.Model
 
         public string From_date { get; set; }
         public string To_date { get; set; }
+        public int Pendingamount { get; set; }
+        public int Paydue { get; set; }
+        public string Payment_mode { get; set; }
+
 
     }
 
@@ -200,6 +205,8 @@ namespace STS.Model
 
         public int userId { get; set; }
         public int status { get; set; }
+        public int Pendingamount { get; set; }
+        public int Advancepay { get; set; }
         public string Statusname { get; set; }
         public string followup_description { get; set; }
 
@@ -249,7 +256,11 @@ namespace STS.Model
         public decimal Lng { get; set; }
 
         public string Salesname { get; set; }
+        public string Salescontact { get; set; }
+        public string Salesimage { get; set; }
         public string Clientname { get; set; }
+        public string Clientaddress { get; set; }
+        public string Clientcontact { get; set; }
 
     }
 
@@ -264,6 +275,9 @@ namespace STS.Model
         public decimal Longitude { get; set; }
 
         public string Image { get; set; }
+        public string Mobile { get; set; }
+
+
 
     }
 

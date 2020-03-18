@@ -5,15 +5,15 @@ import { ProductService } from '../../../service/product.service';
 import { ClientService } from '../../../service/client.service';
 import { ActivityService } from '../../../service/activity.service';
 import { activityModel, updateactivityModel, paginationModel } from '../../../model/activity';
-import { salesregisterModel } from '../../../model/sales';
+import { salesregisterModel, LocationModel } from '../../../model/sales';
 import { productModel } from '../../../model/product';
 import { clientModel } from '../../../model/client';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
-import { ViewChild, ElementRef, NgZone } from '@angular/core';
-import { MapsAPILoader, AgmMap } from '@agm/core';
+// import { ViewChild, ElementRef, NgZone } from '@angular/core';
+// import { MapsAPILoader, AgmMap } from '@agm/core';
 
 @Component({
   selector: 'app-currentactivity',
@@ -23,6 +23,9 @@ import { MapsAPILoader, AgmMap } from '@agm/core';
 export class CurrentactivityComponent implements OnInit {
 
   user = new salesregisterModel();
+
+  saleslocation = new LocationModel();
+  saleslocationDetails: LocationModel[] = [];
 
   activity = new activityModel();
   activityDetails: activityModel[] = [];
@@ -39,7 +42,9 @@ export class CurrentactivityComponent implements OnInit {
   client = new clientModel();
   clientDetails: clientModel[] = [];
 
+  due_paid: number;
 
+  ind = 0;
   latitude: number;
   longitude: number;
   zoom: number;
@@ -55,23 +60,23 @@ export class CurrentactivityComponent implements OnInit {
   centerlat: any;
   centerlng: any;
   geocoder: any;
-  @ViewChild(AgmMap) map: any;
+  // @ViewChild(AgmMap) map: any;
 
-  @ViewChild('search')
-  public searchElementRef: ElementRef;
+  // @ViewChild('search')
+  // public searchElementRef: ElementRef;
 
-  search_ : any;
+  search_: any;
   from_date: string;
   to_date: string;
 
-    // Pagination
-    RowCount: number;
-    pageSize: number = 5;
-    totalPageList: paginationModel[] = [];
-    totalPageSize: number;
-    pagesize: any;
-    currentPageIndex: number = 0;
-    pageOfItems: Array<any>;
+  // Pagination
+  RowCount: number;
+  pageSize: number = 5;
+  totalPageList: paginationModel[] = [];
+  totalPageSize: number;
+  pagesize: any;
+  currentPageIndex: number = 0;
+  pageOfItems: Array<any>;
 
   RoleJason = {
     ROle: [0, 1],
@@ -86,12 +91,15 @@ export class CurrentactivityComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService) {
 
-    this.geocoder = new google.maps.Geocoder;
+    // this.geocoder = new google.maps.Geocoder;
     // this.activityList();
     // this.productList();
     // this.clientList();
     // this.SalesList();
     // this.activityList();
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.activity.user_id = this.user.id;
+    console.log(this.activity.user_id);
   }
 
 
@@ -100,22 +108,52 @@ export class CurrentactivityComponent implements OnInit {
     this.activityList(item);
 
     // setTimeout(() => {
-      navigator.geolocation.getCurrentPosition(position => {
-        console.log(position);
+    navigator.geolocation.getCurrentPosition(position => {
+      console.log(position);
 
-        this.location = position.coords;
-        this.centerlat = this.location.latitude;
-        this.centerlng = this.location.longitude;
-        this.lat = this.location.latitude;
-        this.lng = this.location.longitude;
-        this.geocoder = new google.maps.Geocoder();
-      });
+      this.location = position.coords;
+      this.centerlat = this.location.latitude;
+      this.centerlng = this.location.longitude;
+      this.lat = this.location.latitude;
+      this.lng = this.location.longitude;
+      this.geocoder = new google.maps.Geocoder();
+    });
     // }, 2000);
 
-
     this.checkRole(this.RoleJason);
+
+    this.Refresh_Location();
   }
 
+  Refresh_Location() {
+    navigator.geolocation.getCurrentPosition(position => {
+      this.location = position.coords;
+      this.centerlat = this.location.latitude;
+      this.centerlng = this.location.longitude;
+
+      this.lat = this.location.latitude;
+      this.lng = this.location.longitude;
+
+      console.log(this.lat);
+      console.log(this.lng);
+
+      this.geocoder = new google.maps.Geocoder();
+      this.Refresh_Sales_Location();
+    });
+
+  }
+
+  Refresh_Sales_Location() {
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.saleslocation.userid = this.user.id;
+    this.saleslocation.latitude = this.lat;
+    this.saleslocation.longitude = this.lng;
+
+    this.salesService.Refresh_Sales_Location(this.saleslocation).subscribe((data: any) => {
+    }, (err) => {
+
+    });
+  }
 
   checkRole(RoleJason) {
     const result = JSON.parse(localStorage.getItem('salesLogin')) || [];
@@ -185,11 +223,11 @@ export class CurrentactivityComponent implements OnInit {
   //   });
   // }
 
-  
-onsearch() {
-  const item = { pageIndex: 0 };
-  this.activityList(item);
-}
+
+  onsearch() {
+    const item = { pageIndex: 0 };
+    this.activityList(item);
+  }
 
   activityList(item) {
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
@@ -228,7 +266,8 @@ onsearch() {
   }
 
   // Edit
-  openupdatemodal(content, item) {
+  openupdatemodal(content, item, i) {
+    this.ind = i;
     this.activity = JSON.parse(JSON.stringify(item));
     // data show in model use this line and store the data in user and display in ui
     this.modalService.open(content, { size: 'xl', backdropClass: 'light-blue-backdrop' });
@@ -240,10 +279,16 @@ onsearch() {
     this.modalService.open(content1, { ariaLabelledBy: 'modal-basic-title' });
   }
 
-  open_closeactivity(closeactivity,item) {
-    this.activity_product = JSON.parse(JSON.stringify(item));
+  open_closeactivity(closeactivity) {
+    if (this.activity.pendingamount > 0) {
+      this.activityDetails[this.ind];
     this.modalService.open(closeactivity, { ariaLabelledBy: 'modal-basic-title' });
+    } else {
+      this.update_ToClose(this.activity.aid)
+    }
+
   }
+
 
   GetProduct_Activity(aid) {
     this.activity_productList(aid);
@@ -256,7 +301,7 @@ onsearch() {
         if (data.Activity_ProductList) {
           this.activity_productDetails = data.Activity_ProductList;
           // console.log(this.activity_productDetails);
-          
+
         }
       }
     }, (err) => {
@@ -332,6 +377,9 @@ onsearch() {
     // this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     // this.activity.modifiedby = this.user.id;
     // console.log(this.activity.modifiedby);
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.activity.user_id = this.user.id;
+    console.log(this.activity.user_id);
 
     this.activity.latitude = this.lat;
     this.activity.longitude = this.lng;
@@ -343,7 +391,7 @@ onsearch() {
           disableTimeOut: false,
           timeOut: 2000
         });
-
+        this.modalService.dismissAll();
       }
 
       // this.activityList();
@@ -353,14 +401,14 @@ onsearch() {
     });
 
 
-    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
-    this.activity.user_id = this.user.id;
-    console.log(this.activity.user_id);
+    // this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    // this.activity.user_id = this.user.id;
+    // console.log(this.activity.user_id);
 
-    this.activityService.activity_history(aid, this.activity).subscribe((data: any) => {
+    // this.activityService.activity_history(aid, this.activity).subscribe((data: any) => {
 
-    }, (err) => {
-    });
+    // }, (err) => {
+    // });
   }
 
 
@@ -381,7 +429,7 @@ onsearch() {
           timeOut: 2000
         });
       }
-
+      this.modalService.dismissAll();
       // this.activityList();
       const item = { pageIndex: 0 };
       this.activityList(item);
@@ -389,10 +437,51 @@ onsearch() {
     });
   }
 
-  update_InPending(aid: number) {
+  // pay_due(pay_due: number, pendingamount: number) {
+  //   this.due_paid = pendingamount - pay_due;
+  //   console.log(this.due_paid);
+  //   this.update_InPending(this.activity.aid)
+  // }
+
+  remain_to_pay(pendingamount: number, amt_paid: number){
+    this.due_paid = pendingamount - amt_paid;
+  }
+
+  pay_due(pendingamount: number, amt_paid: number, aid: number) {
+    this.due_paid = pendingamount - amt_paid;
+  
+    let strError = '';
+
+     if (!this.activity.paydue) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please enter due amount';
+    }
+
+    if (!this.activity.payment_mode) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please select payment mode';
+    }
+
+    if (strError !== '') {
+      this.toastr.warning(strError, 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000,
+        enableHtml: true,
+        progressBar: true,
+        closeButton: true,
+      });
+      return false;
+    }
+
+    if (this.activity.paydue === this.due_paid) {
+      this.activity.pendingId = 4;
+    } else{
+      this.activity.pendingId = 6;
+    }
+
     this.activity.latitude = this.lat;
     this.activity.longitude = this.lng;
-
+    this.activity.paydue = this.due_paid;
     this.activityService.updateToPending(aid, this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
         this.toastr.success('Activity is in Pending', 'Successful', {
@@ -400,7 +489,7 @@ onsearch() {
           timeOut: 2000
         });
       }
-
+      this.modalService.dismissAll();
       // this.activityList();
       const item = { pageIndex: 0 };
       this.activityList(item);
@@ -424,6 +513,7 @@ onsearch() {
           timeOut: 2000
         });
       }
+      this.modalService.dismissAll();
       // this.activity = new activityModel();
       // this.activityList();
       const item = { pageIndex: 0 };
@@ -431,6 +521,9 @@ onsearch() {
     }, (err) => {
     });
   }
+
+
+
 
   update_ToCancel(aid: number) {
     // this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
@@ -447,6 +540,7 @@ onsearch() {
           disableTimeOut: false,
           timeOut: 2000
         });
+        this.modalService.dismissAll();
       }
       // this.activity = new activityModel();
       // this.activityList();

@@ -7,7 +7,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { SalesService } from '../../service/sales.service';
 import { ProductService } from '../../service/product.service';
-import { registerModel, changePasswordModel, avatarModel } from '../../model/admin';
+import { registerModel, changePasswordModel, avatarModel, userModel } from '../../model/admin';
 import { salesregisterModel } from '../../model/sales';
 import { productModel } from '../../model/product';
 
@@ -38,6 +38,8 @@ export class DefaultLayoutComponent implements OnInit {
   tempImageList: avatarModel[] = [];
 
   changePassword = new changePasswordModel();
+  user: number;
+
 
   item: any;
   updateProfile: any;
@@ -60,9 +62,8 @@ export class DefaultLayoutComponent implements OnInit {
 
     this.register = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.changePassword.id = this.register.id;
-    // console.log(this.changePassword.id);
+    this.user = this.register.id;
     this.profile_pic.image = this.register.image;
-    // console.log(this.profile_pic.image);
     this.username=this.register.username;
   }
 
@@ -70,6 +71,7 @@ export class DefaultLayoutComponent implements OnInit {
     this.checkRole(this.RoleJason);
   
     this.getuserProfile();
+
   }
 
   checkRole(RoleJason) {
@@ -139,6 +141,7 @@ export class DefaultLayoutComponent implements OnInit {
             disableTimeOut: false,
             timeOut: 2000
           });
+          this.modalRef.hide();
         }
       }, (err) => {
 
@@ -203,6 +206,7 @@ export class DefaultLayoutComponent implements OnInit {
           timeOut: 2000
         });
 
+        this.modalRef.hide();
         localStorage.setItem('adminLogin', JSON.stringify(data.loginDetail[0] || {}));
         this.getuserProfile();
       }
