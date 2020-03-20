@@ -68,6 +68,79 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
+        //[HttpGet]
+        //[Route("admin_CategoryList")]
+        //public async Task<IActionResult> admin_CategoryList()
+        //{
+        //    TranStatus transaction = new TranStatus();
+        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
+        //    HttpStatusCode statusCode = HttpStatusCode.OK;
+        //    try
+        //    {
+        //        var categoryList = await icategory.admin_CategoryList();
+        //        dctData.Add("admin_CategoryList", categoryList);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        transaction = CommonHelper.TransactionErrorHandler(ex);
+        //        statusCode = HttpStatusCode.BadRequest;
+        //    }
+        //    dctData.Add("Status", transaction);
+        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        //}
+
+        [HttpPost]
+        [Route("admin_CategoryList")]
+        public IActionResult admin_CategoryList([FromBody]CategoryListModel model)
+        {
+            TranStatus transaction = new TranStatus();
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                List<CategoryListModel> admin_CategoryList = new List<CategoryListModel>();
+                int rowcount = 0;
+                admin_CategoryList = icategory.admin_CategoryList(model, out rowcount);
+
+                dctData.Add("admin_CategoryList", admin_CategoryList);
+                dctData.Add("RowCount", rowcount);
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+
+
+        [HttpPost]
+        [Route("admin_subcategoryList")]
+        public IActionResult admin_subcategoryList([FromBody]SubcategoryListModel model)
+        {
+            TranStatus transaction = new TranStatus();
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                List<SubcategoryListModel> subcategoryList = new List<SubcategoryListModel>();
+                int rowcount = 0;
+                subcategoryList = icategory.admin_subcategoryList(model, out rowcount);
+
+                dctData.Add("admin_subcategoryList", subcategoryList);
+                dctData.Add("RowCount", rowcount);
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
         //Update
 
         [HttpPut]

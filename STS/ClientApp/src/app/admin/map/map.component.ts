@@ -33,13 +33,14 @@ export class MapComponent implements OnInit {
 
   private geoCoder;
 
+
   // Link to get lots of icon form agm marker
   // http://kml4earth.appspot.com/icons.html
 
-  iconAdmin= 'http://maps.google.com/mapfiles/kml/paddle/A.png';
-  iconSales= 'http://maps.google.com/mapfiles/kml/shapes/cycling.png';
-  
+  iconAdmin = 'http://maps.google.com/mapfiles/kml/paddle/A.png';
+  iconSales = 'http://maps.google.com/mapfiles/kml/shapes/cycling.png';
 
+ 
 
   location: Coordinates;
   // lat: any;
@@ -47,7 +48,7 @@ export class MapComponent implements OnInit {
   lat: number;
   lng: number;
 
- 
+
 
   centerlat: number;
   centerlng: number;
@@ -55,7 +56,7 @@ export class MapComponent implements OnInit {
   // centerlng: any;
   geocoder: any;
 
-  
+
   @ViewChild(AgmMap) map: any;
 
   @ViewChild('search')
@@ -67,17 +68,20 @@ export class MapComponent implements OnInit {
   };
 
   constructor(
+    // For Address
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
+
     private router: Router,
     private activityService: ActivityService
 
   ) {
     // this.geoCoder = new google.maps.Geocoder;
-    this.geocoder = new google.maps.Geocoder;
+    // this.geocoder = new google.maps.Geocoder;
     // console.log(this.geocoder);
-    
+
   }
+
 
   ngOnInit() {
     // this.setCurrentLocation();
@@ -86,26 +90,20 @@ export class MapComponent implements OnInit {
     this.checkRole(this.RoleJason);
 
     // setTimeout(() => {
-      navigator.geolocation.getCurrentPosition(position => {
-        // console.log(position);
+    navigator.geolocation.getCurrentPosition(position => {
+      this.location = position.coords;
 
-        this.location = position.coords;
-        
-        // When map opens there marker will be 1st in center
-        this.centerlat = this.location.latitude;
-        this.centerlng = this.location.longitude;
+      // When map opens there marker will be 1st in center
+      this.centerlat = this.location.latitude;
+      this.centerlng = this.location.longitude;
 
-        // This is the current lat long
-        this.lat = this.location.latitude;
-        this.lng = this.location.longitude;
+      // This is the current lat long
+      this.lat = this.location.latitude;
+      this.lng = this.location.longitude;
 
-        // this.geocoder = new google.maps.Geocoder();
-
-       
-
-        // console.log(this.geocoder );
-        
-      });
+      //  this.geocoder = new google.maps.Geocoder();
+      // this.getAddress(this.latitude, this.longitude);
+    });
     // }, 2000);
 
 
@@ -113,8 +111,10 @@ export class MapComponent implements OnInit {
     // this.mapsAPILoader.load().then(() => {
     //   this.setCurrentLocation();
 
-    //   this.geoCoder = new google.maps.Geocoder;
-    //   console.log(this.geoCoder);
+    //   // this.geoCoder = new google.maps.Geocoder;
+    //   // console.log(this.geoCoder);
+    //   this.geocoder = new google.maps.Geocoder;
+    //   console.log(this.geocoder);
     //   let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
     //     types: ["address"]
     //   });
@@ -123,8 +123,8 @@ export class MapComponent implements OnInit {
     //     this.ngZone.run(() => {
     //       //get the place result
     //       let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-    //       // console.log(place);
-          
+    //       console.log(place);
+
     //       //verify result
     //       if (place.geometry === undefined || place.geometry === null) {
     //         return;
@@ -137,7 +137,10 @@ export class MapComponent implements OnInit {
     //   });
     // });
 
+
+    
   }
+
 
 
   checkRole(RoleJason) {
@@ -151,39 +154,42 @@ export class MapComponent implements OnInit {
   }
 
 
+  
+
+
   // Get Current Location Coordinates
-  private setCurrentLocation() {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.latitude = position.coords.latitude;
-        this.longitude = position.coords.longitude;
-        this.zoom = 8;
-        this.getAddress(this.latitude, this.longitude);
-      });
-    }
-  }
+  // private setCurrentLocation() {
+  //   if ('geolocation' in navigator) {
+  //     navigator.geolocation.getCurrentPosition((position) => {
+  //       this.latitude = position.coords.latitude;
+  //       this.longitude = position.coords.longitude;
+  //       this.zoom = 8;
+  //       this.getAddress(this.latitude, this.longitude);
+  //     });
+  //   }
+  // }
 
 
- 
 
-  getAddress(latitude, longitude) {
-    this.geoCoder.geocoder({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
-      console.log(results);
-      console.log(status);
-      if (status === 'OK') {
-        if (results[0]) {
-          this.zoom = 12;
-          this.address = results[0].formatted_address;
-        } else {
-          window.alert('No results found');
-        }
-      } else {
-        window.alert('Geocoder failed due to: ' + status);
-        // console.log(this.address);
 
-      }
-    });
-  }
+  // getAddress(latitude, longitude) {
+  //   this.geoCoder.geocoder({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
+  //     console.log(results);
+  //     console.log(status);
+  //     if (status === 'OK') {
+  //       if (results[0]) {
+  //         this.zoom = 12;
+  //         this.address = results[0].formatted_address;
+  //       } else {
+  //         window.alert('No results found');
+  //       }
+  //     } else {
+  //       window.alert('Geocoder failed due to: ' + status);
+  //       // console.log(this.address);
+
+  //     }
+  //   });
+  // }
 
 
 
@@ -194,13 +200,13 @@ export class MapComponent implements OnInit {
   }
 
 
-// openWindow(id) {
-//     this.openedWindow = id; // alternative: push to array of numbers
-// }
+  // openWindow(id) {
+  //     this.openedWindow = id; // alternative: push to array of numbers
+  // }
 
-// isInfoWindowOpen(id) {
-//     return this.openedWindow == id; // alternative: check if id is in array
-// }
+  // isInfoWindowOpen(id) {
+  //     return this.openedWindow == id; // alternative: check if id is in array
+  // }
 
 
   sales_Location() {
@@ -212,7 +218,7 @@ export class MapComponent implements OnInit {
       if (data.Status.code === 0) {
         if (data.each_admins_sales_Location) {
           this.Sales_LocationDetails = data.each_admins_sales_Location;
-          console.log(this.Sales_LocationDetails);
+          // console.log(this.Sales_LocationDetails);
         }
       }
     }, (err) => {

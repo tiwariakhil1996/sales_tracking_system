@@ -5,7 +5,7 @@ import { ProductService } from '../../../service/product.service';
 import { ActivityService } from '../../../service/activity.service';
 import { ClientService } from '../../../service/client.service';
 import { productModel } from '../../../model/product';
-import { salesregisterModel } from '../../../model/sales';
+import { salesregisterModel, LocationModel } from '../../../model/sales';
 import { activityModel } from '../../../model/activity';
 import { clientModel } from '../../../model/client';
 import { ToastrService } from 'ngx-toastr';
@@ -19,6 +19,9 @@ export class AddactivityComponent implements OnInit {
 
   user = new salesregisterModel();
 
+  saleslocation = new LocationModel();
+  saleslocationDetails: LocationModel[] = [];
+  
   activity = new activityModel();
   activityDetails: activityModel[] = [];
 
@@ -30,6 +33,22 @@ export class AddactivityComponent implements OnInit {
 
   client = new clientModel();
   clientDetails: clientModel[] = [];
+
+  latitude: number;
+  longitude: number;
+  zoom: number;
+  address: string;
+
+  private geoCoder;
+
+
+  location: Coordinates;
+  lat: any;
+  lng: any;
+
+  centerlat: any;
+  centerlng: any;
+  geocoder: any;
 
   RoleJason = {
     ROle: [0, 1],
@@ -52,7 +71,10 @@ export class AddactivityComponent implements OnInit {
 
   ngOnInit() {
     this.checkRole(this.RoleJason);
+
+    this. Refresh_Location();
   }
+
 
   checkRole(RoleJason) {
     const result = JSON.parse(localStorage.getItem('salesLogin')) || [];
@@ -64,6 +86,35 @@ export class AddactivityComponent implements OnInit {
     }
   }
 
+ Refresh_Location() {
+     navigator.geolocation.getCurrentPosition(position => {
+       this.location = position.coords;
+       this.centerlat = this.location.latitude;
+       this.centerlng = this.location.longitude;
+ 
+       this.lat = this.location.latitude;
+       this.lng = this.location.longitude;
+ 
+       console.log(this.lat);
+       console.log(this.lng);
+ 
+       this.geocoder = new google.maps.Geocoder();
+       this.Refresh_Sales_Location();
+     });
+
+   }
+
+   Refresh_Sales_Location() {
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.saleslocation.userid = this.user.id;
+    this.saleslocation.latitude = this.lat;
+    this.saleslocation.longitude = this.lng;
+
+    this.salesService.Refresh_Sales_Location(this.saleslocation).subscribe((data: any) => {
+    }, (err) => {
+
+    });
+  }
 
   productList() {
     this.productService.productList().subscribe((data: any) => {

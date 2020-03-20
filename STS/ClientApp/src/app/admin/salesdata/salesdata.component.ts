@@ -122,7 +122,7 @@ export class SalesdataComponent implements OnInit {
         disableTimeOut: false,
         timeOut: 5000
       });
-
+      this.modalService.dismissAll();
     } else {
       this.toastr.warning('This email id is not registered', 'Warning', {
         disableTimeOut: false
@@ -177,10 +177,12 @@ export class SalesdataComponent implements OnInit {
       const item = { pageIndex: 0 };
       this.SalesList(item);
     });
+
     this.toastr.success('Sales Account deleted Successful', 'Successful', {
       disableTimeOut: false,
       timeOut: 2000
     });
+    this.modalService.dismissAll();
   }
 
   changeStatus(id: number) {

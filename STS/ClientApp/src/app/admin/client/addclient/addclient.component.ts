@@ -141,6 +141,10 @@ export class AddclientComponent implements OnInit {
     if (!this.client.address) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter address';
+    }else
+    if (!this.validateAddress(this.client.address)) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += strError = '-  Address should only contain alphabets, numbers, space and . ,';
     }
 
     if (!this.client.street) {
@@ -226,6 +230,26 @@ export class AddclientComponent implements OnInit {
     return reg.test(nameField) === false ? false : true;
   }
 
+  addressValidation() {
+    let isValid = false;
+    if (!this.validateAddress(this.client.address)) {
+      isValid = true;
+    }
+
+    if (isValid) {
+      this.toastr.warning('Please enter address correctly', 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
+
+  }
+
+  validateAddress(addressField) {
+    const reg = /^[A-Za-z0-9\s.,]+$/;
+    return reg.test(addressField) === false ? false : true;
+  }
+  
 // Email Validation
 
 checkEmailValidation() {
@@ -317,6 +341,9 @@ validateMobile(mobileField) {
     });
   }
 
+  reset() {
+    this.client = new clientModel();
+  }
 
   viewClientForm() {
     this.router.navigate(['/admin/client/viewclient']);

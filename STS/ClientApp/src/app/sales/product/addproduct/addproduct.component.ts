@@ -5,7 +5,8 @@ import { CategorySubcategoryService } from '../../../service/category-subcategor
 import { ProductService } from '../../../service/product.service';
 import { productModel, ImageListModel, ImageModel, UpdateImageListModel } from '../../../model/product';
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
-import { salesregisterModel } from '../../../model/sales';
+import { salesregisterModel, LocationModel } from '../../../model/sales';
+import { SalesService } from '../../../service/sales.service';
 
 @Component({
   selector: 'app-addproduct',
@@ -20,6 +21,9 @@ export class AddproductComponent implements OnInit {
   imageList: ImageListModel[] = [];
   imageModel: ImageModel[] = [];
 
+  saleslocation = new LocationModel();
+  saleslocationDetails: LocationModel[] = [];
+  
   user = new salesregisterModel();
 
   tempImageList: UpdateImageListModel[] = [];
@@ -34,6 +38,22 @@ export class AddproductComponent implements OnInit {
   subcategory = new subcategoryDataModel();
   subcategoryDetails: subcategoryDataModel[] = [];
 
+  latitude: number;
+  longitude: number;
+  zoom: number;
+  address: string;
+
+  private geoCoder;
+
+
+  location: Coordinates;
+  lat: any;
+  lng: any;
+
+  centerlat: any;
+  centerlng: any;
+  geocoder: any;
+
   RoleJason = {
     ROle: [0, 1],
     Component: 'AddproductComponent'
@@ -41,17 +61,47 @@ export class AddproductComponent implements OnInit {
 
   constructor(private router: Router,
     private toastr: ToastrService,
+    private salesService: SalesService,
     private productService: ProductService,
     private categoryService: CategorySubcategoryService) {
     // this.categoryList();
     this.active_CategoryList();
-
+   this.Refresh_Location();
    }
 
   ngOnInit() {
     this.checkRole(this.RoleJason);
   }
 
+  Refresh_Location() {
+    navigator.geolocation.getCurrentPosition(position => {
+      this.location = position.coords;
+      this.centerlat = this.location.latitude;
+      this.centerlng = this.location.longitude;
+
+      this.lat = this.location.latitude;
+      this.lng = this.location.longitude;
+
+      console.log(this.lat);
+      console.log(this.lng);
+
+      this.geocoder = new google.maps.Geocoder();
+      this.Refresh_Sales_Location();
+    });
+
+  }
+
+  Refresh_Sales_Location() {
+   this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+   this.saleslocation.userid = this.user.id;
+   this.saleslocation.latitude = this.lat;
+   this.saleslocation.longitude = this.lng;
+
+   this.salesService.Refresh_Sales_Location(this.saleslocation).subscribe((data: any) => {
+   }, (err) => {
+
+   });
+ }
 
   checkRole(RoleJason) {
     const result = JSON.parse(localStorage.getItem('salesLogin')) || [];
@@ -192,7 +242,7 @@ export class AddproductComponent implements OnInit {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter description';
     } else {
-      if (!this.validateProductname(this.product.description)) {
+      if (!this.validateProductdescription(this.product.description)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Description  should only contain alphabets & number';
       }
@@ -276,6 +326,28 @@ export class AddproductComponent implements OnInit {
     return reg.test(productnameField) === false ? false : true;
   }
 
+  descriptionValidation() {
+    let isValid = false;
+    if (!this.validateProductdescription(this.product.description)) {
+      isValid = true;
+    }
+
+
+    if (isValid) {
+      this.toastr.warning('Please enter product description correctly', 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
+
+  }
+
+  validateProductdescription(productdescriptionField) {
+    // const reg = /^[A-Za-z0-9\s!@#$%^&*(),.?":{}|<>]+$/;
+    const reg = /^[A-Za-z0-9\s!@#$%^&*(),.?":{}|<>]+$/;
+    return reg.test(productdescriptionField) === false ? false : true;
+  }
+
   priceValidation() {
     let isValid = false;
     if (!this.validateprice(this.product.price)) {
@@ -354,6 +426,9 @@ export class AddproductComponent implements OnInit {
     this.product.description = null;
     this.product.image = null;
     this.product.date = null;
+
+  this.product = new productModel();
+    
  }
 
 

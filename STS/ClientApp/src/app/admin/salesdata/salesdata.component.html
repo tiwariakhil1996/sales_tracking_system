@@ -78,11 +78,10 @@
                       </p>
                     </div>
                     <div class="modal-footer">
-                      <button class='btn btn-success' type="button" (click)="deleteSales(item.id)">Yes</button>
-                      <button type="button" class="btn btn-danger" data-dismiss="modal-body"
-                        (click)="modal.dismiss('Cross click')">No</button>
-
-                    </div>
+                    <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal-body"
+                      (click)="modalService.dismissAll()">No</button>
+                    <button class='btn btn-danger' type="button" (click)="deleteSales(item.id)">Yes</button>
+                   </div>
                   </div>
                 </div>
               </ng-template>

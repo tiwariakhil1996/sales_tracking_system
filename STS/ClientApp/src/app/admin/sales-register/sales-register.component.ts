@@ -225,5 +225,9 @@ export class SalesRegisterComponent implements OnInit {
     this.router.navigate(['/sales/login']);
   }
 
+  back() {
+    this.router.navigate(['/admin/dashboard'])
+  }
 
+  
 }

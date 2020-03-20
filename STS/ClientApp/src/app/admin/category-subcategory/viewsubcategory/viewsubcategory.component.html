@@ -4,20 +4,26 @@
       <div class="card-header color">
          Subategory Details
          
-         <button type="submit" style="float: right; width: 74px;" class="btn btn-sm btn-success"
-         (click)="addnewSubategory()"><i class="fa fa-plus">Add</i></button>
+         <button type="submit" tooltip=" Add new activity" style="float: right; width: 74px;" class="btn btn-sm btn-success"
+         (click)="addnewSubategory()"><i class="fa fa-plus"></i></button>
          
       </div>
       <!-- <div style="overflow-x:auto;"> -->
       <div class="card-body table-responsive">
+         <!-- SEARCH -->
+     <div class="form-inline md-form mr-auto mb-4">
+      <input style="float: right;" (input)="onsearch()" class="form-control mr-sm-2" type="text"
+        [(ngModel)]="search_" placeholder="Search" aria-label="Search">
+    </div>
+
         <table class="table table-bordered ">
           <thead>
             <tr class="table-success">
               <th>Sr.no</th>
-              <th>Subcategory ID</th>
-              <th>Category ID</th>
-              <th>Subcategory Name</th>
-              <th>Category Name</th>
+              <!-- <th>Subcategory ID</th>
+              <th>Category ID</th> -->
+              <th>Category</th>
+              <th>Subcategory</th>
               <th>Action</th>
               <th>IsActive</th>
             </tr>
@@ -26,11 +32,10 @@
            
             <tr *ngFor="let item of subcategoryDetails;let i=index;" >
               <td >{{i+1}}</td>
-              <td >{{item.sid}}</td>
-              <td >{{item.cid}}</td>
-              <td >{{item.sname}}</td>
+              <!-- <td >{{item.sid}}</td>
+              <td >{{item.cid}}</td> -->
               <td >{{item.cname}}</td>
-         
+              <td >{{item.sname}}</td>
               
               <!-- <td >{{item.date}}</td> -->
               <td style="text-align: center">
@@ -54,6 +59,32 @@
 
 
       </div>
+       <div class="card-footer">
+        <ul class="pagination">
+    
+          <li class="page-item" class="page-item first-item" [ngClass]="{disabled:currentPageIndex === 0}">
+            <a class="page-link" (click)="viewsubcategoryList({ pageIndex: 0 })"><i class="fa fa-step-backward"></i></a>
+          </li>
+          <li class="page-item" [ngClass]="{disabled:currentPageIndex === 0}" class="page-item previous-item">
+            <a (click)="viewsubcategoryList({pageIndex:currentPageIndex -1})" class="page-link"
+              routerLink="/admin/category-subcategory/viewsubcategory"> <i class="fa fa-angle-double-left"></i></a>
+          </li>
+          <li class="page-item active" *ngFor="let item of totalPageList "
+            [ngClass]="{active:currentPageIndex === item.pageIndex}" class="page-item number-item"
+            (click)="viewsubcategoryList(item)">
+            <a class="page-link" routerLink="/admin/category-subcategory/viewsubcategory">
+              <span class="sr-only"></span>{{item.pageSize}}</a>
+          </li>
+          <li class="page-item" [ngClass]="{disabled:currentPageIndex === totalPageSize-1}" class="page-item next-item">
+            <a (click)="viewsubcategoryList({pageIndex:currentPageIndex +1})" class="page-link"
+              routerLink="/admin/category-subcategory/viewsubcategory"><i class="fa fa-angle-double-right"></i></a>
+          </li>
+          <li class="page-item" class="page-item last-item" [ngClass]="{disabled:currentPageIndex === totalPageSize-1}">
+            <a class="page-link" (click)="viewsubcategoryList({pageIndex:totalPageSize-1})"><i
+                class="fa fa-step-forward"></i></a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
@@ -65,7 +96,7 @@
     <div class="modal-header col">
       <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT</h4>
       <div>
-          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <button type="button" class="close" aria-label="Close" (click)="modalService.dismissAll()">
           <span aria-hidden="true">&times;</span>
         </button>
         </div>
@@ -84,7 +115,7 @@
                 <label class="text-input">Subcategory</label>            
                 <input type="text" id="sname" name="sname" [(ngModel)]="subcategory.sname" class="form-control" placeholder="Enter Subcategory">         
 
-                  <button style="float: right;" type="submit" class="btn btn-sm btn-success" (click)="updateSubcategory(subcategory.sid)" (click)="modal.dismiss('Cross click')">Submit</button>
+                  <button style="float: right;" type="submit" class="btn btn-sm btn-success" (click)="updateSubcategory(subcategory.sid)">Submit</button>
                   <button type="button" style="float: right;" class="btn btn-sm btn-danger" (click)="modal.dismiss('Cross click')">Cancel</button> 
                 </div>      
             </div>

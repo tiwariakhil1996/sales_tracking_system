@@ -116,7 +116,7 @@
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <button type="button" class="close" aria-label="Close" (click)="modalService.dismissAll()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -205,15 +205,15 @@
 
 
 
-      <div class="agm-map">
+      <div class="agm-map" >  
         <agm-map #map [zoom]="16" [latitude]="centerlat" [longitude]="centerlng">
-          <agm-marker [opacity]=0.8 [latitude]="centerlat" [longitude]="centerlng" (dragEnd)="markerDragEnd($event)"
+          <agm-marker [opacity]=0.8 [latitude]="client.latitude" [longitude]="client.longitude" (dragEnd)="markerDragEnd($event)"
             [markerDraggable]="true">
           </agm-marker>
 
         </agm-map>
-        <div>Latitude: {{latitude}}</div>
-        <div>Longitude: {{longitude}}</div>
+        <div>Latitude: {{client.latitude}}</div>
+        <div>Longitude: {{client.longitude}}</div>
       </div>
 
       <button type="submit" class="btn btn-success" (click)="onEdit(client.id)">Update</button>

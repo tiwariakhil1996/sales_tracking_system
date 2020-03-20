@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ElementRef } from '@angular/core';
 import { SalesnavItems } from '../../_Salesnav';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ActivityService } from '../../service/activity.service';
 import { activityModel, newactivityModel } from '../../model/activity';
 import { avatarModel, registerModel } from '../../model/admin';
+import { AgmMap } from '@agm/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -49,7 +50,27 @@ export class SalesLayoutComponent implements OnInit {
   item: any;
   updateProfile: any;
 
+  
+  latitude: number;
+  longitude: number;
+  zoom: number;
+  address: string;
 
+  private geoCoder;
+
+
+  location: Coordinates;
+  lat: any;
+  lng: any;
+
+  centerlat: any;
+  centerlng: any;
+  geocoder: any;
+  @ViewChild(AgmMap) map: any;
+
+  @ViewChild('search')
+  public searchElementRef: ElementRef;
+  
   RoleJason = {
     ROle: [0, 1],
     Component: 'SalesLayoutComponent'
@@ -76,8 +97,27 @@ export class SalesLayoutComponent implements OnInit {
     this.checkRole(this.RoleJason);
 
     this.getuserProfile();
+
   }
 
+
+  Location(){
+    
+     // setTimeout(() => {
+      navigator.geolocation.getCurrentPosition(position => {
+        console.log(position);
+
+        this.location = position.coords;
+        this.centerlat = this.location.latitude;
+        this.centerlng = this.location.longitude;
+        this.lat = this.location.latitude;
+        this.lng = this.location.longitude;
+        this.geocoder = new google.maps.Geocoder();
+
+       
+      });
+    // }, 2000);
+  }
 
   checkRole(RoleJason) {
     const result = JSON.parse(localStorage.getItem('salesLogin')) || [];

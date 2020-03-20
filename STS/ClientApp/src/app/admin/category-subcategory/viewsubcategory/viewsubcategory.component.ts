@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
-import { subcategoryDataModel, categoryDataModel } from '../../../model/category-subcategory';
+import { subcategoryDataModel, categoryDataModel, paginationModel } from '../../../model/category-subcategory';
 import { ToastrService } from 'ngx-toastr';
 import { registerModel } from '../../../model/admin';
 
@@ -24,6 +24,16 @@ export class ViewsubcategoryComponent implements OnInit {
   subcategory = new subcategoryDataModel();
   subcategoryDetails: subcategoryDataModel[] = [];
 
+    // Pagination
+    RowCount: number;
+    pageSize: number = 5;
+    totalPageList: paginationModel[] = [];
+    totalPageSize: number;
+    pagesize: any;
+    currentPageIndex: number = 0;
+    pageOfItems: Array<any>;
+    search_:any;
+
   RoleJason = {
     ROle: [0, 1],
     Component: 'ViewsubcategoryComponent'
@@ -35,13 +45,17 @@ export class ViewsubcategoryComponent implements OnInit {
     private modalService: NgbModal,
     private toastr: ToastrService) {
 
-    this.viewsubcategoryList();
+      
+    // this.viewsubcategoryList();
     this.categoryList();
   }
 
 
   ngOnInit() {
     this.checkRole(this.RoleJason);
+
+    const item = { pageIndex: 0 };
+    this.viewsubcategoryList(item);
   }
 
   checkRole(RoleJason) {
@@ -71,16 +85,51 @@ export class ViewsubcategoryComponent implements OnInit {
 
 
 
-  viewsubcategoryList() {
-    this.categoryService.viewsubcategoryList().subscribe((data: any) => {
+  // viewsubcategoryList() {
+  //   this.categoryService.viewsubcategoryList().subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.ViewSubcategoryList) {
+  //         this.subcategoryDetails = data.ViewSubcategoryList;
+  //       }
+  //     }
+  //   }, (err) => {
+
+  //   });
+  // }
+
+
+  onsearch() {
+    const item = { pageIndex: 0 };
+    this.viewsubcategoryList(item);
+  }
+
+  viewsubcategoryList(item) {
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.subcategory.userid = this.user.id;
+
+    this.subcategory.pageIndex = item.pageIndex;
+    this.subcategory.pageSize = this.pageSize;
+    this.subcategory.search = this.search_;
+
+    this.categoryService.admin_viewsubcategoryList(this.subcategory).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        if (data.ViewSubcategoryList) {
-          this.subcategoryDetails = data.ViewSubcategoryList;
+        if (data.admin_subcategoryList) {
+          this.subcategoryDetails = data.admin_subcategoryList;
         }
+        if (data.RowCount) {
+          this.RowCount = data.RowCount;
+        }
+        this.totalPageSize = Math.ceil(this.RowCount / this.pageSize);
+
+        this.totalPageList = [];
+        for (var i = 0; i < this.totalPageSize; i++) {
+          this.totalPageList.push({ pageSize: i + 1, pageIndex: i })
+
+        }
+        this.currentPageIndex = item.pageIndex;
       }
     }, (err) => {
 
-      // console.log(this.subcategoryDetails);
     });
   }
 
@@ -95,6 +144,27 @@ export class ViewsubcategoryComponent implements OnInit {
 
 
   updateSubcategory(sid: number) {
+    let strError = '';
+
+    if (!this.subcategory.cid) {
+      strError += strError = '- Please select category';
+    } else
+      if (!this.subcategory.sname) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += '- Please select subcategory';
+      }
+
+      if (strError !== '') {
+        this.toastr.warning(strError, 'Warning', {
+          disableTimeOut: false,
+          timeOut: 2000,
+          enableHtml: true,
+          progressBar: true,
+          closeButton: true,
+        });
+        return false;
+      }
+      
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.subcategory.modifiedby = this.user.id;
     // console.log(this.subcategory.modifiedby);
@@ -105,9 +175,12 @@ export class ViewsubcategoryComponent implements OnInit {
         this.toastr.success('Subcategory updated succesfully', 'Successful', {
           disableTimeOut: false
         });
+        this.modalService.dismissAll();
       }
       this.subcategory = new subcategoryDataModel();
-      this.viewsubcategoryList();
+      // this.viewsubcategoryList();
+      const item = { pageIndex: 0 };
+      this.viewsubcategoryList(item);
     }, (err) => {
     });
   }
@@ -116,7 +189,9 @@ export class ViewsubcategoryComponent implements OnInit {
     // if (confirm('Are you sure to delete this record ?') === true) {
       this.categoryService.deleteSubcategory(sid).subscribe(data => {
         this.categoryService.viewsubcategoryList();
-        this.viewsubcategoryList();
+        // this.viewsubcategoryList();
+        const item = { pageIndex: 0 };
+        this.viewsubcategoryList(item);
       });
     // }
     this.toastr.success('Subcategory is deleted Successful', 'Successful', {
@@ -128,7 +203,9 @@ export class ViewsubcategoryComponent implements OnInit {
   changeStatus(id: number) {
     // console.log(id);
     this.categoryService.changesubcategoryStatus(id).subscribe(data => {
-      this.viewsubcategoryList();
+      // this.viewsubcategoryList();
+      const item = { pageIndex: 0 };
+      this.viewsubcategoryList(item);
     });
   }
 

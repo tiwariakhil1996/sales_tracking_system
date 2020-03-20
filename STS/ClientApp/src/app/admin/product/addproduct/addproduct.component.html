@@ -44,8 +44,9 @@
 
             <div class="col-sm-6">
               <label class="textarea-input">Product Description</label>
-              <textarea id="description" name="description" [(ngModel)]="product.description" rows="5"
+              <textarea #descrip id="description" name="description" maxlength="150"  [(ngModel)]="product.description" rows="5"
                 class="form-control" placeholder="Enter description"></textarea>
+                Total characters allowed  {{descrip.value.length}} / 150
             </div>
           </div>
 
@@ -66,19 +67,18 @@
 
                     <div *ngFor="let image of tempImageList;let i=index;" class="float-left">
                       <div class="row">
-                        <div _ngcontent-xyz-c2 class="col-1">
+                        <div  class="col-1">
                           <img [src]="image.ImageData" height="100px" width="100px">
                         </div>
                       </div>
                     </div>
-
                   </div>
                 </div>
 
-            <div class="col-sm-6">
+            <!-- <div class="col-sm-6">
               <label class="text-input">Added on</label>
               <input class="form-control" id="date" type="date" name="date" [(ngModel)]="product.date">
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="card-footer">

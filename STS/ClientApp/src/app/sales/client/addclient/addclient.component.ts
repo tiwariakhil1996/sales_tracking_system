@@ -6,7 +6,8 @@ import { CountryStateCityService } from '../../../service/country-state-city.ser
 import { ClientService } from '../../../service/client.service';
 import { clientModel } from '../../../model/client';
 import { countryModel, stateModel, cityModel } from '../../../model/country-state-city';
-import { salesregisterModel } from '../../../model/sales';
+import { salesregisterModel, LocationModel } from '../../../model/sales';
+import { SalesService } from '../../../service/sales.service';
 
 @Component({
   selector: 'app-addclient',
@@ -16,7 +17,8 @@ import { salesregisterModel } from '../../../model/sales';
 export class AddclientComponent implements OnInit {
 
   user = new salesregisterModel();
-
+  saleslocation = new LocationModel();
+  saleslocationDetails: LocationModel[] = [];
   client = new clientModel();
   clientDetails: clientModel[] = [];
 
@@ -52,6 +54,7 @@ export class AddclientComponent implements OnInit {
   constructor(private router: Router,
     private toastr: ToastrService,
     private clientService: ClientService,
+    private salesService: SalesService,
     private country_state_cityService: CountryStateCityService) {
 
     this.countryList();
@@ -60,6 +63,7 @@ export class AddclientComponent implements OnInit {
 
   ngOnInit() {
     this.checkRole(this.RoleJason);
+this.Refresh_Location();
 
      // For google map
      navigator.geolocation.getCurrentPosition(position => {
@@ -71,6 +75,36 @@ export class AddclientComponent implements OnInit {
 
     });
   }
+
+  Refresh_Location() {
+    navigator.geolocation.getCurrentPosition(position => {
+      this.location = position.coords;
+      this.centerlat = this.location.latitude;
+      this.centerlng = this.location.longitude;
+
+      this.lat = this.location.latitude;
+      this.lng = this.location.longitude;
+
+      console.log(this.lat);
+      console.log(this.lng);
+
+      this.geocoder = new google.maps.Geocoder();
+      this.Refresh_Sales_Location();
+    });
+
+  }
+
+  Refresh_Sales_Location() {
+   this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+   this.saleslocation.userid = this.user.id;
+   this.saleslocation.latitude = this.lat;
+   this.saleslocation.longitude = this.lng;
+
+   this.salesService.Refresh_Sales_Location(this.saleslocation).subscribe((data: any) => {
+   }, (err) => {
+
+   });
+ }
 
   markerDragEnd($event: any) {
     // console.log($event);
@@ -131,6 +165,10 @@ export class AddclientComponent implements OnInit {
     if (!this.client.address) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter address';
+    }else
+    if (!this.validateAddress(this.client.address)) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += strError = '-  Address should only contain alphabets, numbers, space and . ,';
     }
 
     if (!this.client.street) {
@@ -212,12 +250,31 @@ export class AddclientComponent implements OnInit {
 
 
   validateName(nameField) {
-    const reg = /^[A-Za-z0-9\s]+$/;
+    const reg = /^[A-Za-z\s]+$/;
     return reg.test(nameField) === false ? false : true;
   }
- 
 
-  // Email Validation
+  addressValidation() {
+    let isValid = false;
+    if (!this.validateAddress(this.client.address)) {
+      isValid = true;
+    }
+
+    if (isValid) {
+      this.toastr.warning('Please enter address correctly', 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
+
+  }
+
+  validateAddress(addressField) {
+    const reg = /^[A-Za-z0-9\s.,]+$/;
+    return reg.test(addressField) === false ? false : true;
+  }
+
+// Email Validation
 
 checkEmailValidation() {
   let isValid = false;
@@ -313,6 +370,10 @@ validateMobile(mobileField) {
 
       console.log(err);
     });
+  }
+
+  reset() {
+  this.country = new countryModel();
   }
 
   viewClientForm() {

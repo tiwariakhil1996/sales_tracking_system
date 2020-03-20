@@ -88,6 +88,8 @@ export class AddactivityComponent implements OnInit {
     // this.grandtotal();
   }
 
+
+
   TotalAmount(price: number, quantity: number,dis_per: number, i) {
     // Amount
     this.amount = price * quantity;
@@ -101,7 +103,7 @@ export class AddactivityComponent implements OnInit {
     // Total
     this.grand_total = this.amount - this.dis_amount;
     this.addproductlistDetails[i].total_price =  Math.round(this.amount - this.dis_amount);
-    console.log(this.grand_total);
+    // console.log(this.grand_total);
 
   }
 
@@ -277,6 +279,58 @@ export class AddactivityComponent implements OnInit {
 
 
   submitForm() {
+    let strError = '';
+
+    
+    if (!this.activity.title) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please enter title';
+    }else
+    if (!this.validateTitle(this.activity.title)) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += strError = '-  Title should only contain alphabets, numbers and space';
+    }
+
+    if (!this.activity.clientId) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please select client';
+    }
+
+    if (!this.activity.salesId) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please select sales';
+    }
+
+    if (!this.activity.description) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please enter description';
+    }else
+    if (!this.validateDescription(this.activity.description)) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += strError = '-  Description should only contain alphabets, numbers space and some special characters $ % & , . " : ';
+    }
+
+    if (!this.activity.appointmentDate) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please enter appointment date';
+    }
+
+    // if (!this.activity.productList) {
+    //   strError += strError = '' ? '' : '<br/>';
+    //   strError += '- Please enter product details';
+    // }
+
+    if (strError !== '') {
+      this.toastr.warning(strError, 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000,
+        enableHtml: true,
+        progressBar: true,
+        closeButton: true,
+      });
+      return false;
+    }
+
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.activity.createdby = this.user.id;
     this.activity.productList = this.addproductlistDetails;
@@ -289,6 +343,12 @@ export class AddactivityComponent implements OnInit {
         });
       }
       // this.activity = new addactivityModel();
+      // else if (data.Status.code === 2) {
+      //   this.toastr.warning('Please add atleast one product', 'Warning', {
+      //     disableTimeOut: false,
+      //     timeOut: 2000
+      //   });
+      // } 
     }, (err) => {
 
       console.log(err);
@@ -296,6 +356,66 @@ export class AddactivityComponent implements OnInit {
     });
   }
 
+  TitleValidation() {
+    let isValid = false;
+    if (!this.validateTitle(this.activity.title)) {
+      isValid = true;
+    }
+
+    if (isValid) {
+      this.toastr.warning('Please enter title correctly', 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
+
+  }
+
+  validateTitle(titleField) {
+    const reg = /^[A-Za-z0-9\s]+$/;
+    return reg.test(titleField) === false ? false : true;
+  }
+
+
+  activityDescription() {
+    let isValid = false;
+    if (!this.validateDescription(this.activity.description)) {
+      isValid = true;
+    }
+
+    if (isValid) {
+      this.toastr.warning('Please enter productname correctly', 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
+
+  }
+
+  validateDescription(productdescription) {
+    // const reg = /^[A-Za-z0-9\s]+$/;
+    const reg = /^[A-Za-z0-9\s$%&,.":]+$/;
+    return reg.test(productdescription) === false ? false : true;
+  }
+
+  mobValidation() {
+    let isValid = false;
+    if (!this.validateMobile(this.activity.contact)) {
+      isValid = true;
+    }
+    ;
+    if (isValid) {
+      this.toastr.warning('Please enter valid mobile number', 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
+  }
+
+  validateMobile(mobileField) {
+    var reg = /^\d{10}$/;
+    return reg.test(mobileField) == false ? false : true;
+  }
   // latest_added_activity() {
   //   this.activityService.latest_added_Activity().subscribe((data: any) => {
   //     if (data.Status.code === 0) {
@@ -322,10 +442,11 @@ export class AddactivityComponent implements OnInit {
   // }
 
   resetForm() {
-    this.activity.clientId = null;
-    this.activity.salesId = null;
-    this.activity.contact = null;
-    this.activity.appointmentDate = null;
+    // this.activity.clientId = null;
+    // this.activity.salesId = null;
+    // this.activity.contact = null;
+    // this.activity.appointmentDate = null;
+    this.activity = new addactivityModel();
   }
 
 

@@ -70,7 +70,7 @@ export class ViewproductComponent implements OnInit {
     private toastr: ToastrService,
     private categoryService: CategorySubcategoryService,
     private modalService: NgbModal,
-
+    private modalServices: BsModalService
   ) {
     // this.productList();
     // this.categoryList();
@@ -218,7 +218,7 @@ export class ViewproductComponent implements OnInit {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter description';
     } else {
-      if (!this.validateProductname(this.product.description)) {
+      if (!this.validateDescription(this.product.description)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Description  should only contain alphabets & number';
       }
@@ -226,13 +226,13 @@ export class ViewproductComponent implements OnInit {
 
     if (!this.product.imageList) {
       strError += strError = '' ? '' : '<br/>';
-      strError += '- Please select image';
+      strError += '- Please select image, atleast one image must be selected';
     }
 
-    if (!this.product.date) {
-      strError += strError = '' ? '' : '<br/>';
-      strError += '- Please select date';
-    }
+    // if (!this.product.date) {
+    //   strError += strError = '' ? '' : '<br/>';
+    //   strError += '- Please select date';
+    // }
 
     if (strError !== '') {
       this.toastr.warning(strError, 'Warning', {
@@ -261,6 +261,10 @@ export class ViewproductComponent implements OnInit {
           disableTimeOut: false
         });
         // this.modalService.close('Modal Closed');
+        // this.modalRef.hide();
+        this.modalService.dismissAll();
+        // this.modalService.dismissAll();
+        // this.modal.dismiss('Cross click');
       } else {
         // alert("Not Matched");
         this.toastr.warning('Please fill the remaining fields', 'Warning', {
@@ -299,6 +303,27 @@ export class ViewproductComponent implements OnInit {
   validateProductname(productnameField) {
     const reg = /^[A-Za-z0-9\s]+$/;
     return reg.test(productnameField) === false ? false : true;
+  }
+
+  productDescription() {
+    let isValid = false;
+    if (!this.validateDescription(this.product.description)) {
+      isValid = true;
+    }
+
+    if (isValid) {
+      this.toastr.warning('Please enter productname correctly', 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
+
+  }
+
+  validateDescription(productdescription) {
+    // const reg = /^[A-Za-z0-9\s]+$/;
+    const reg = /^[A-Za-z0-9\s!@#$%^&*(),.?":{}|<>]+$/;
+    return reg.test(productdescription) === false ? false : true;
   }
 
   priceValidation() {

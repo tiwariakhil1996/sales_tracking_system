@@ -49,8 +49,9 @@
 
             <div class="col-sm-6">
               <label class="textarea-input">Product Description</label>
-              <textarea id="description" name="description" [(ngModel)]="product.description" rows="5"
+              <textarea #descrip id="description" name="description"  maxlength="150" [(ngModel)]="product.description" rows="5"
                 class="form-control" placeholder="Content.."></textarea>
+                Total characters allowed  {{descrip.value.length}} / 150
             </div>
           </div>
 

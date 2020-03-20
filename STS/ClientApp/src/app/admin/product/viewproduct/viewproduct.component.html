@@ -118,7 +118,7 @@
   <div class="modal-header">
     <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT</h4>
     <div>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <button type="button" class="close" aria-label="Close" (click)="modalService.dismissAll()" >
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -167,12 +167,11 @@
 
             <div *ngFor="let image of tempImageList;let i=index;" class="float-left">
               <div class="row">
-                <div _ngcontent-xyz-c2 class="col-1">
-                  <img [src]="image.ImageData" height="100px" width="100px">
+                <div  class="col-1">
+                  <img  [src]="image.ImageData" height="100px" width="100px">
                 </div>
               </div>
             </div>
-
           </div>
         </div>
 
@@ -194,10 +193,10 @@
           <input type="text" class="form-control" [(ngModel)]="product.price" name="price">
         </div>
 
-        <div class="col-sm-6">
+        <!-- <div class="col-sm-6">
           <label for="date">Date</label>
           <input type="text" class="form-control" [(ngModel)]="product.date" name="date">
-        </div>
+        </div> -->
       </div>
       <button type="submit" class="btn btn-success" (click)="onEdit(product.id)">Update</button>
       <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal-body"
@@ -250,7 +249,7 @@
             </button>
             <!-- <img style="display: block; width: 500px; height: 400px;"
               [src]="'http://localhost:55627/Documents/Images/Product/Thumb/'+items.image"> -->
-            <img [src]="'http://localhost:55627/Documents/Images/Product/'+items.image" >
+            <img class="carousel_image" [src]="'http://localhost:55627/Documents/Images/Product/'+items.image">
           <!-- </div> -->
         </slide>
       </carousel>

@@ -7,7 +7,8 @@ import { CategorySubcategoryService } from '../../../service/category-subcategor
 import { ProductService } from '../../../service/product.service';
 import { productModel, productListModel, ImageListModel, ImageModel, Product_Images_ListModel, UpdateImageListModel, paginationModel } from '../../../model/product';
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
-import { salesregisterModel } from '../../../model/sales';
+import { salesregisterModel, LocationModel } from '../../../model/sales';
+import { SalesService } from '../../../service/sales.service';
 
 @Component({
   selector: 'app-viewproduct',
@@ -20,6 +21,9 @@ export class ViewproductComponent implements OnInit {
   modalRef: BsModalRef;
 
   user = new salesregisterModel();
+
+  saleslocation = new LocationModel();
+  saleslocationDetails: LocationModel[] = [];
 
   imageList: ImageListModel[] = [];
 
@@ -52,6 +56,22 @@ export class ViewproductComponent implements OnInit {
   currentPageIndex: number = 0;
   pageOfItems: Array<any>;
 
+  latitude: number;
+  longitude: number;
+  zoom: number;
+  address: string;
+
+  private geoCoder;
+
+
+  location: Coordinates;
+  lat: any;
+  lng: any;
+
+  centerlat: any;
+  centerlng: any;
+  geocoder: any;
+
   // Authentication
   RoleJason = {
     ROle: [0, 1],
@@ -62,6 +82,7 @@ export class ViewproductComponent implements OnInit {
     private toastr: ToastrService,
     private productService: ProductService,
     private modalService: NgbModal,
+    private salesService: SalesService,
     private categoryService: CategorySubcategoryService) {
     // this.productList();
     // this.categoryList();
@@ -76,8 +97,39 @@ export class ViewproductComponent implements OnInit {
 
     const item = { pageIndex: 0 };
     this.productList(item);
+
+    this.Refresh_Location();
   }
 
+  Refresh_Location() {
+    navigator.geolocation.getCurrentPosition(position => {
+      this.location = position.coords;
+      this.centerlat = this.location.latitude;
+      this.centerlng = this.location.longitude;
+
+      this.lat = this.location.latitude;
+      this.lng = this.location.longitude;
+
+      console.log(this.lat);
+      console.log(this.lng);
+
+      this.geocoder = new google.maps.Geocoder();
+      this.Refresh_Sales_Location();
+    });
+
+  }
+
+  Refresh_Sales_Location() {
+   this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+   this.saleslocation.userid = this.user.id;
+   this.saleslocation.latitude = this.lat;
+   this.saleslocation.longitude = this.lng;
+
+   this.salesService.Refresh_Sales_Location(this.saleslocation).subscribe((data: any) => {
+   }, (err) => {
+
+   });
+ }
 
   checkRole(RoleJason) {
     const result = JSON.parse(localStorage.getItem('salesLogin')) || [];
@@ -227,7 +279,7 @@ export class ViewproductComponent implements OnInit {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter description';
     } else {
-      if (!this.validateProductname(this.product.description)) {
+      if (!this.validateProductdescription(this.product.description)) {
         strError += strError = '' ? '' : '<br/>';
         strError += strError = '- Description  should only contain alphabets & number';
       }
@@ -235,7 +287,7 @@ export class ViewproductComponent implements OnInit {
 
     if (!this.product.imageList) {
       strError += strError = '' ? '' : '<br/>';
-      strError += '- Please select image';
+      strError += '- Please select image, atleast one image must be selected';
     }
 
     if (!this.product.date) {
@@ -273,6 +325,7 @@ export class ViewproductComponent implements OnInit {
           disableTimeOut: false,
           timeOut: 2000
         });
+        this.modalService.dismissAll();
       }
       // this.product = new productModel();
 
@@ -303,8 +356,30 @@ export class ViewproductComponent implements OnInit {
   }
 
   validateProductname(productnameField) {
-    const reg = /^[A-Za-z0-9]+$/;
+    const reg = /^[A-Za-z0-9\s]+$/;
     return reg.test(productnameField) === false ? false : true;
+  }
+
+  descriptionValidation() {
+    let isValid = false;
+    if (!this.validateProductdescription(this.product.description)) {
+      isValid = true;
+    }
+
+
+    if (isValid) {
+      this.toastr.warning('Please enter product description correctly', 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
+
+  }
+
+  validateProductdescription(productdescriptionField) {
+    // const reg = /^[A-Za-z0-9\s!@#$%^&*(),.?":{}|<>]+$/;
+    const reg = /^[A-Za-z0-9\s!@#$%^&*(),.?":{}|<>]+$/;
+    return reg.test(productdescriptionField) === false ? false : true;
   }
 
   priceValidation() {

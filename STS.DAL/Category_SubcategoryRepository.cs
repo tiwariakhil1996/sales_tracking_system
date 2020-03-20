@@ -46,6 +46,57 @@ namespace STS.DAL
                 return result.ToList();
 
             }
+        } 
+        
+        //public async Task<List<CategoryListModel>> admin_CategoryList()
+        //{
+        //    using (var connection = new SqlConnection(ConnectionString))
+        //    {
+        //        connection.Open();
+        //        var result = await connection.QueryAsync<CategoryListModel>("admin_CategoryList", commandType: CommandType.StoredProcedure);
+        //        return result.ToList();
+
+        //    }
+        //}
+
+        public List<CategoryListModel> admin_CategoryList(CategoryListModel model, out int RowCount)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@AdminID", model.userId);
+                parameter.Add("@pageIndex", model.pageIndex);
+                parameter.Add("@pageSize", model.pageSize);
+                parameter.Add("@Search", model.Search);
+
+                parameter.Add("@RowCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                var result = connection.Query<CategoryListModel>("admin_CategoryList", parameter, commandType: CommandType.StoredProcedure);
+                RowCount = parameter.Get<int>("@RowCount");
+                return result.ToList();
+
+            }
+        } 
+        
+        public List<SubcategoryListModel> admin_subcategoryList(SubcategoryListModel model, out int RowCount)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@AdminID", model.userId);
+                parameter.Add("@pageIndex", model.pageIndex);
+                parameter.Add("@pageSize", model.pageSize);
+                parameter.Add("@Search", model.Search);
+
+                parameter.Add("@RowCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                var result = connection.Query<SubcategoryListModel>("admin_subcategoryList", parameter, commandType: CommandType.StoredProcedure);
+                RowCount = parameter.Get<int>("@RowCount");
+                return result.ToList();
+
+            }
         }
 
         //Update Category

@@ -24,3 +24,8 @@ export class changePasswordModel {
     newpassword: string;
     confirmpassword: string;
 }
+
+
+export class userModel {
+    id: number;
+}
