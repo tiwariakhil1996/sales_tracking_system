@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { AdminService } from '../../service/admin.service';
-import { registerModel } from '../../model/admin';
+import { registerModel, userModel } from '../../model/admin';
 
 
 @Component({
@@ -14,6 +14,8 @@ export class RegisterComponent  implements OnInit {
 
   title = 'STS';
   imageSrc: string = '';
+
+  user = new userModel();
 
   register = new registerModel();
   adminDetails: registerModel[] = [];
@@ -117,6 +119,10 @@ export class RegisterComponent  implements OnInit {
     }
 
   if (this.register.password === this.register.cpassword) {
+
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    this.register.createdby = this.user.id;
+    console.log(this.register.createdby);
 
     this.adminService.AdminRegisterService(this.register).subscribe((data: any) => {
       if (data.Status.code === 0) {

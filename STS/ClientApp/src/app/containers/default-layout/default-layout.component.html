@@ -59,7 +59,8 @@
            
               <div class="form-group col-md-6">
                 <label for="image">Profile Pic</label><br>
-                <img [src]="'http://localhost:55627/Documents/Avatars/Admin/Thumb/'+profile_pic.image" class="profile-pic">
+                <img *ngIf="profile_pic.image" [src]="'http://localhost:55627/Documents/Avatars/Admin/Thumb/'+profile_pic.image" class="profile-pic">
+                <img  *ngIf="!profile_pic.image"  [src]="'/assets/img/avatars/Default_Images/No_image.png'" class="profile-pic">
               </div>
 
               <div class="form-group">
@@ -105,7 +106,21 @@
                 <input type="mobile" class="form-control" id="mobile" placeholder="Enter the mobile"
                   [(ngModel)]="updateProfile.mobile" name="mobile">
               </div>
+
+              <div *ngIf="user == 2" class="form-group col-md-12">
+                <label>Company Name</label>
+                <input type="text" class="form-control" id="companyname" placeholder="Enter Companyname"
+                  [(ngModel)]="updateProfile.companyname" name="companyname">
+              </div>   
+              <div *ngIf="user == 2" class="form-group col-md-12">
+                <label>Address</label>
+                <textarea type="textarea" class="form-control" id="address" placeholder="Enter Company address"
+                  [(ngModel)]="updateProfile.address" name="address">
+                </textarea>
+              </div>
+
             </div>
+            
 
             <!-- <div class="form-row">
               <div class="form-group col-md-6">
@@ -122,9 +137,6 @@
           </div>
         </ng-template>
 
-        <!-- <a class="dropdown-item" href="#"><i class="fa fa-bell-o"></i> Updates<span class="badge badge-info">42</span></a>
-        <a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i> Messages<span class="badge badge-success">42</span></a>
-        <a class="dropdown-item" href="#"><i class="fa fa-tasks"></i> Tasks<span class="badge badge-danger">42</span></a> -->
         <div class="dropdown-header text-center"><strong>Settings</strong></div>
 
 
@@ -132,71 +144,11 @@
         <a class="dropdown-item" data-toggle="modal" data-toggle="modal" (click)="changePasswordModal(template2)"><i
             class="fa fa-key"></i>Change Password</a>
 
-        <!-- <a class="dropdown-item" href="#"><i class="fa fa-file"></i> Projects<span class="badge badge-primary">42</span></a> -->
         <div class="divider"></div>
         <a *ngIf="user == 1 || user == 2"  class="dropdown-item" href="/admin/register"><i  class="fa fa-user-plus"></i> Admin Register</a>
         <a class="dropdown-item" href="/admin/sales-register"><i class="fa fa-user-plus"></i> Sales Register</a>
 
         <!-- <a class="dropdown-item" data-toggle="modal"  data-toggle="modal" (click)="openModal(template1)"><i class="fa fa-user"></i> Sales Register</a> -->
-
-
-
-        <!--          SALES REGISTER       -->
-
-        <!-- 
-        <ng-template #template1 >
-          <div class="modal-header">
-            <div class="card-header">
-              <strong>Sales Register</strong>
-            </div>
-            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="form-row">
-        
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="icon-user"></i></span>
-                </div>
-                <input type="text" class="form-control" placeholder="Enter Username" [(ngModel)]="salesregister.salesName"  name="username"  >
-              </div>
-             
-
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">@</span>
-                </div>
-                <input type="text" class="form-control" placeholder="Enter Email"  [(ngModel)]="salesregister.email"  name="email" >
-              </div>
-
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="icon-lock"></i></span>
-                </div>
-                <input type="password" class="form-control" placeholder="Password"  [(ngModel)]="salesregister.password"  name="password" >
-              </div>
-              
-              <div class="input-group mb-4">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="icon-lock"></i></span>
-                </div>
-                <input type="password" class="form-control" placeholder="Repeat password"  [(ngModel)]="salesregister.cpassword"  name="cpassword" >
-              </div>
-            </div>  
-
-            <div class="card-footer p-4">
-              <div class="row">
-                <div class="col-12">
-                  <button type="submit" class="btn btn-block btn-success" (click)="salesRegister()">Register</button>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </ng-template> -->
-
 
 
 

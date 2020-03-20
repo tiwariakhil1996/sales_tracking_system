@@ -31,6 +31,7 @@ namespace STS.DAL
                 parameter.Add("@Mobile", model.Mobile);
                 parameter.Add("@Password", model.Password);
                 parameter.Add("@Cpassword", model.Cpassword);
+                parameter.Add("@Createdby", model.Createdby);
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
@@ -106,6 +107,8 @@ namespace STS.DAL
                 parameter.Add("@Username", model.Username);
                 parameter.Add("@Gender", model.Gender);
                 parameter.Add("@Mobile", model.Mobile);
+                parameter.Add("@Companyname", model.Companyname);
+                parameter.Add("@Address", model.Address);
              
 
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);

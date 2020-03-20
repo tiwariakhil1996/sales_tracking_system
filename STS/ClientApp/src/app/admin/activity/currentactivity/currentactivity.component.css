@@ -134,6 +134,11 @@ hr {
 }
 
 
+.download-invoice {
+  float: right; 
+  background-color: blue; 
+  width: 47px;
+}
 
 
 

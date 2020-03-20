@@ -62,7 +62,7 @@ export class DefaultLayoutComponent implements OnInit {
 
     this.register = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.changePassword.id = this.register.id;
-    this.user = this.register.id;
+    this.user = this.register.createdby;
     this.profile_pic.image = this.register.image;
     this.username=this.register.username;
   }

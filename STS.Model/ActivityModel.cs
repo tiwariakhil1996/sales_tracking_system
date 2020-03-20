@@ -78,7 +78,7 @@ namespace STS.Model
         public int Grand_total { get; set; }
         public int Advance_payment { get; set; }
         public string Payment_mode { get; set; }
-        //public int Pending_amount { get; set; }
+        public int Pending_amount { get; set; }
     }
     public partial class ActivityListModel
     {
@@ -296,7 +296,9 @@ namespace STS.Model
         //public string Country { get; set; }
         public string Email { get; set; }
         public string Contact { get; set; }
-  
+
+        public int Advancepay { get; set; }
+        public int Pending_amount { get; set; }
 
 
     }

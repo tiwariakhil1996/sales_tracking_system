@@ -25,6 +25,7 @@ import { MouseEvent } from '@agm/core';
 import { google } from 'google-maps';
 import { from } from 'rxjs';
 import { TabsetComponent } from 'ngx-bootstrap';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-currentactivity',
@@ -82,8 +83,10 @@ export class CurrentactivityComponent implements OnInit {
   client = new clientModel();
   clientDetails: clientModel[] = [];
 
+  currentDate = new Date();
   // For Map
 
+  
   //  latitude: number;
   //  longitude: number;
 
@@ -120,9 +123,9 @@ export class CurrentactivityComponent implements OnInit {
   // Link to get lots of icon form agm marker
   // http://kml4earth.appspot.com/icons.html
 
-  iconAdmin= 'http://maps.google.com/mapfiles/kml/paddle/A.png';
-  iconSales= 'http://maps.google.com/mapfiles/kml/paddle/S.png';
-  iconClient= 'http://maps.google.com/mapfiles/kml/paddle/C.png';
+  iconAdmin = 'http://maps.google.com/mapfiles/kml/paddle/A.png';
+  iconSales = 'http://maps.google.com/mapfiles/kml/paddle/S.png';
+  iconClient = 'http://maps.google.com/mapfiles/kml/paddle/C.png';
 
   centerlat: any;
   centerlng: any;
@@ -144,9 +147,9 @@ export class CurrentactivityComponent implements OnInit {
   currentPageIndex: number = 0;
   pageOfItems: Array<any>;
 
- 
-public origin: any;
-public destination: any;
+
+  public origin: any;
+  public destination: any;
 
   // Authentication
 
@@ -157,6 +160,7 @@ public destination: any;
 
   constructor(private activityService: ActivityService,
     private router: Router,
+    // private datePipe: DatePipe,
     private clientService: ClientService,
     private modalService: NgbModal,
     private salesService: SalesService,
@@ -171,12 +175,14 @@ public destination: any;
     this.SalesList();
 
 
+    // this.mydate = this.datePipe.transform(this.currentDate, 'yyyy-MM-dd');
     // this.eachactivityList();
     // this.activity_productList();
   }
 
 
   ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
 
     const item = { pageIndex: 0 };
     this.eachactivityList(item);
@@ -185,23 +191,23 @@ public destination: any;
     this.static_price();
 
     // setTimeout(() => {
-      navigator.geolocation.getCurrentPosition(position => {
-        // console.log(position);
+    navigator.geolocation.getCurrentPosition(position => {
+      // console.log(position);
 
-        this.location = position.coords;
+      this.location = position.coords;
 
-        this.centerlat = this.location.latitude;
-        this.centerlng = this.location.longitude;
+      this.centerlat = this.location.latitude;
+      this.centerlng = this.location.longitude;
 
-        this.lat = this.location.latitude;
-        this.lng = this.location.longitude;
+      this.lat = this.location.latitude;
+      this.lng = this.location.longitude;
 
-        // console.log(this.lat);
-        // console.log(this.lng);
-        
-        
-        this.geocoder = new google.maps.Geocoder();
-      });
+      // console.log(this.lat);
+      // console.log(this.lng);
+
+
+      this.geocoder = new google.maps.Geocoder();
+    });
     // }, 2000);
 
     // this. getDirection();
@@ -387,7 +393,7 @@ public destination: any;
       if (data.Status.code === 0) {
         if (data.Activity_ProductList) {
           this.activity_productDetails = data.Activity_ProductList;
-          //console.log( this.activity_productDetails);
+          // console.log( this.activity_productDetails);
           this.activityInvoice.activityproduct = this.activity_productDetails;
 
           this.subtotal();
@@ -462,8 +468,8 @@ public destination: any;
         // console.log(totalPageSize);
 
         this.totalPageList = [];
-        for (var i = 0; i < this.totalPageSize; i++) {
-          this.totalPageList.push({ pageSize: i + 1, pageIndex: i })
+        for (let i = 0; i < this.totalPageSize; i++) {
+          this.totalPageList.push({ pageSize: i + 1, pageIndex: i });
 
         }
       }
@@ -496,7 +502,7 @@ public destination: any;
 
 
   // Edit
-  openupdatemodal(content, item,i) {
+  openupdatemodal(content, item, i) {
     this.ind = i;
     this.update_activity = JSON.parse(JSON.stringify(item));
     // data show in model use this line and store the data in user and display in ui
@@ -528,15 +534,15 @@ public destination: any;
   Update(aid: number) {
     let strError = '';
 
-    
+
     if (!this.update_activity.title) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter title';
-    }else
-    if (!this.validateTitle(this.activity.title)) {
-      strError += strError = '' ? '' : '<br/>';
-      strError += strError = '-  Title should only contain alphabets, numbers and space';
-    }
+    } else
+      if (!this.validateTitle(this.activity.title)) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += strError = '-  Title should only contain alphabets, numbers and space';
+      }
 
     // if (!this.update_activity.clientId) {
     //   strError += strError = '' ? '' : '<br/>';
@@ -548,7 +554,7 @@ public destination: any;
     //   strError += '- Please select sales';
     // }
 
-    
+
     if (!this.update_activity.appointmentDate) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter appointment date';
@@ -557,11 +563,11 @@ public destination: any;
     if (!this.update_activity.description) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter description';
-    }else
-    if (!this.validateDescription(this.activity.description)) {
-      strError += strError = '' ? '' : '<br/>';
-      strError += strError = '-  Description should only contain alphabets, numbers space and some special characters $ % & , . " : ';
-    }
+    } else
+      if (!this.validateDescription(this.activity.description)) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += strError = '-  Description should only contain alphabets, numbers space and some special characters $ % & , . " : ';
+      }
 
 
     if (this.update_activity.advance_payment > this.final_total) {
@@ -594,7 +600,7 @@ public destination: any;
           disableTimeOut: false,
           timeOut: 2000
         });
-        this.modalService.dismissAll()
+        this.modalService.dismissAll();
       }
       // this.activity = new activityModel();
       // this.eachactivityList();
@@ -608,7 +614,7 @@ public destination: any;
     });
   }
 
-  
+
   TitleValidation() {
     let isValid = false;
     if (!this.validateTitle(this.activity.title)) {
@@ -656,7 +662,7 @@ public destination: any;
     if (!this.validateMobile(this.activity.contact)) {
       isValid = true;
     }
-    ;
+
     if (isValid) {
       this.toastr.warning('Please enter valid mobile number', 'Warning', {
         disableTimeOut: false,
@@ -666,10 +672,10 @@ public destination: any;
   }
 
   validateMobile(mobileField) {
-    var reg = /^\d{10}$/;
-    return reg.test(mobileField) == false ? false : true;
+    const reg = /^\d{10}$/;
+    return reg.test(mobileField) === false ? false : true;
   }
-  
+
 
   Update_n_addproducts(aid: number) {
     // sending user id  as modified by
@@ -820,18 +826,26 @@ public destination: any;
 
   getDocumentDefinition() {
 
+    // Set & get Activity Details
     sessionStorage.setItem('ActivityInvoice', JSON.stringify(this.activityInvoiceDetails[0] || {}));
-    // sessionStorage.setItem('ActivityProductInvoice', JSON.stringify(this.activity_productDetails[0] || {}));
     this.productInvoice = JSON.parse(sessionStorage.getItem('ActivityInvoice')) || [0];
-    
-    // this.activity_product = JSON.parse(sessionStorage.getItem('ActivityProductInvoice')) || [0];
-    
+
+    // Set & get Product Details
     sessionStorage.setItem('ProductInvoice', JSON.stringify(this.activityInvoice));
-    // this.activityInvoice = JSON.parse(sessionStorage.getItem('ActivityInvoice')) ;
     this.activityInvoice = JSON.parse(sessionStorage.getItem('ProductInvoice')) || new activityDetailsModel();
 
     return {
+     
+        
+      // Heading
       content: [
+        {
+          text: '' + this.currentDate ,
+          // bold: true,
+          fontSize: 7,
+          alignment: 'right',
+          // margin: [0, 0, 0, 20]
+        },
         {
           text: 'INVOICE',
           bold: true,
@@ -839,21 +853,28 @@ public destination: any;
           alignment: 'center',
           margin: [0, 0, 0, 20]
         },
+
+        // Company Info
         {
           columns: [
             [
               {
-                text: 'Company Name:' + 'MI',
+                text: 'Company Name:' + this.user.companyname,
                 style: 'name',
                 alignment: 'right'
               },
               {
-                text: 'Address:' + 'Surat',
+                text: 'Address:' + this.user.address,
                 style: 'name',
                 alignment: 'right'
               },
               {
-                text: 'Help Desk:' + 'mi@info.co.in',
+                text: 'Help Desk:' + this.user.email,
+                style: 'name',
+                alignment: 'right'
+              },
+              {
+                text: 'Contact:' + this.user.mobile,
                 style: 'name',
                 alignment: 'right'
               },
@@ -861,50 +882,62 @@ public destination: any;
           ]
         },
 
+        // Bill Info
         {
           columns: [
             [
               {
-                text: 'Bill No:-' + this.productInvoice.aid,
+                text: 'Bill No                  : ' + this.productInvoice.aid,
                 style: 'name'
               },
               {
-                text: 'Title:-' + this.productInvoice.title
+                text: 'Title                 : ' +  this.productInvoice.title
               },
               {
-                text: 'Client Name:-' + this.productInvoice.clientName
+                text: 'Client Name   : '  +  this.productInvoice.clientName
               },
               {
-                text: 'Address:-' + this.productInvoice.address
+                text: 'Address          : ' +  this.productInvoice.address
               },
               {
-                text: 'Email:-' + this.productInvoice.email,
+                text: 'Email               : '  + this.productInvoice.email,
               },
               {
-                text: 'Date:-' + this.productInvoice.createdon,
+                text: 'Date                 : '  +  this.productInvoice.createdon,
               },
               {
-                text: 'Due Date:- ' + this.productInvoice.appointmentDate,
+                text: 'Delivery Date  : ' +  this.productInvoice.appointmentDate,
               },
             ],
 
           ]
 
         },
+
+        // Product Details
         {
           text: 'Product Details',
           style: 'header'
         },
-    
-        this.getEducationObject(this.activityInvoice.activityproduct),
-       
+
+        this.getProductsObject(this.activityInvoice.activityproduct),
+
         {
-          text: 'Notice:',
-          style: 'header'
+          text: 'Advance Paid : ' + this.productInvoice.advancepay,
+          // style: 'header'
+          // alignment: 'right',
         },
         {
-          text: 'Invoice was created on a computer and is valid without the signature and seal.'
+          text: 'Pay Due           : ' + this.productInvoice.pending_amount,
+          // style: 'header'
+          // alignment: 'right',
         },
+        {
+          text: 'Grand Total     : ' + this.final_total,
+          // style: 'header'
+          // alignment: 'right',
+        },
+
         {
           text: 'Signature',
           style: 'sign'
@@ -912,13 +945,25 @@ public destination: any;
 
         {
           columns: [
-            { qr: this.productInvoice.email + ', Contact No : ' + this.productInvoice.contact, fit: 100 },
+            // Details to show in QR Code
+            { qr: 'Company Name :' + this.user.companyname + ', Address :' + this.user.address + ',Contact :' + this.user.mobile + ',Bill No. :' + this.productInvoice.aid + ',Client Name :' + this.productInvoice.clientName + ',Clients Contact No : ' + this.productInvoice.contact, fit: 100 },
+         
+            // Signature / Name of a person
             {
-              text: `(${this.productInvoice.clientName})`,
+              // text: `(${this.productInvoice.clientName})`,
+              text: `(${this.user.username})`,
               alignment: 'right',
             }
           ]
-        }
+        },
+
+        {
+          text: 'Notice:',
+          style: 'header'
+        },
+        {
+          text: 'Invoice was created on a computer and is valid without the signature and seal.'
+        },
 
       ],
 
@@ -950,10 +995,12 @@ public destination: any;
 
     };
   }
-  getEducationObject(prodinv: updateactivityModel[]) {
+
+
+  getProductsObject(productDetails: updateactivityModel[]) {
     return {
       table: {
-        widths: ['*', '*', '*', '*'],
+        widths: ['*', '*', '*', '*', '*', '*', '*'],
         body: [
           [
             {
@@ -968,12 +1015,27 @@ public destination: any;
               text: 'Qty',
               style: 'tableHeader'
             },
+            {
+              text: 'Amount',
+              style: 'tableHeader'
+            },
+            {
+              text: 'Dis.%',
+              style: 'tableHeader'
+            },
+            {
+              text: 'Total',
+              style: 'tableHeader'
+            },
           ],
-          ...prodinv.map(pi => {
-            return [pi.productname, pi.price, pi.quantity];
+          ...productDetails.map(p => {
+            return [p.productname, p.price, p.quantity, p.amount, p.discount_per, p.total_price];
           })
         ]
-      }
+      },
+
+
+
     };
   }
 

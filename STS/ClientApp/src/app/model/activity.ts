@@ -194,7 +194,9 @@ export class activityDetailsModel {
     email: string;
     createdon: string;
     appointmentDate: string;
-    
+    pending_amount: number;
+    advancepay: number;
+
     activityproduct: updateactivityModel[] = [];
     constructor() {
         this.activityproduct.push(new updateactivityModel());   

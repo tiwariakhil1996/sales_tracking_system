@@ -10,10 +10,15 @@ export class registerModel {
     email: string;
     gender: string;
     mobile: number;
+    companyname: string;
+    address: string;
     password: string;
     cpassword: string;
     userType: number;
+    createdby: number;
 }
+
+
 
 export class avatarModel {
     image: string;
