@@ -12,7 +12,6 @@ import { CurrentactivityComponent } from './currentactivity/currentactivity.comp
 
 import { AgmCoreModule } from '@agm/core';
 import { TabsModule, TooltipModule } from 'ngx-bootstrap';
-import { AgmDirectionModule } from 'agm-direction';
 
 @NgModule({
   imports: [
@@ -26,7 +25,7 @@ import { AgmDirectionModule } from 'agm-direction';
       apiKey: 'AIzaSyBaU6eEpioeuf9Nkzsd5N3OoJsDpVQdzEs'
       // libraries: ['places']
     }),
-    AgmDirectionModule
+  
   ],
   declarations: [
     ActivityComponent,

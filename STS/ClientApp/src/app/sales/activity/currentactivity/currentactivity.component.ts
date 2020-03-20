@@ -5,7 +5,7 @@ import { ProductService } from '../../../service/product.service';
 import { ClientService } from '../../../service/client.service';
 import { ActivityService } from '../../../service/activity.service';
 import { activityModel, updateactivityModel, paginationModel, addactivityModel } from '../../../model/activity';
-import { salesregisterModel } from '../../../model/sales';
+import { salesregisterModel, LocationModel } from '../../../model/sales';
 import { productModel } from '../../../model/product';
 import { clientModel } from '../../../model/client';
 import { Route } from '@angular/compiler/src/core';

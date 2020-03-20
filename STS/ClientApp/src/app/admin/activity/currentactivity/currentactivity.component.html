@@ -19,11 +19,11 @@
           <i class="fa fa-calendar" aria-hidden="true"> <input class="form-control" id="date" type="date"
               name="appointmentDate" [(ngModel)]="from_date" (input)="onsearch()"></i>
 
-          <label class="text-input" style="padding-left: 11px; padding-right: 9px;">To</label>
+          <label class="text-input" style="padding-left: 11px;
+         padding-right: 9px;">To</label>
           <i class="fa fa-calendar" aria-hidden="true">
             <input class="form-control" id="date" type="date" name="appointmentDate" [(ngModel)]="to_date"
               (input)="onsearch()"> </i>
-
         </div>
 
 
@@ -39,7 +39,6 @@
               <th>Contact</th>
               <th>Appointment Date</th>
               <th>Status</th>
-              <!-- <th>Status Info</th> -->
               <th>Track</th>
               <th style="padding-right: 50px;">Action</th>
             </tr>
@@ -53,12 +52,12 @@
               <td>{{item.salesName}}</td>
               <td>{{item.contact}}</td>
               <td>{{item.appointmentDate}}</td>
-
               <td class="status-center">
                 <span *ngIf="(item.status == 1)" class="badge badge-pill badge-success">{{item.statusname}}</span>
                 <span *ngIf="(item.status == 2)" class="badge badge-pill badge-secondary">{{item.statusname}}</span>
                 <span *ngIf="(item.status == 3)" class="badge badge-pill badge-warning">{{item.statusname}}
-                  <i class="fa fa-info-circle" *ngIf="item.description_on_Followup" tooltip="{{item.description_on_Followup}}"></i>   
+                  <i class="fa fa-info-circle" *ngIf="item.description_on_Followup"
+                    tooltip="{{item.description_on_Followup}}"></i>
                 </span>
                 <span *ngIf="(item.status == 4)" class="badge badge-pill badge-danger">{{item.statusname}}</span>
                 <span *ngIf="(item.status == 5)" class="badge badge-pill badge-dark">Canceled</span>
@@ -134,7 +133,7 @@
     <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">Update</h4>
     <div>
       <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"> -->
-      <button type="button" class="close" aria-label="Close" (click)="modalService.dismissAll()" >
+      <button type="button" class="close" aria-label="Close" (click)="modalService.dismissAll()">
 
         <span aria-hidden="true">&times;</span>
       </button>
@@ -142,7 +141,6 @@
   </div>
 
   <div class="modal-body" style="color: black;">
-
 
     <div>
       <tabset>
@@ -224,7 +222,7 @@
                   <td>
                     <select id="productname" name="productname" class="form-control" [(ngModel)]="products.productId"
                       (change)="onProductChange($event.target.value,i)">
-                      <option [value]="undefined" selected>Select Product Name</option>
+                      <option [ngValue]="undefined" selected>Select Product Name</option>
                       <option *ngFor="let item of productDetails;" value={{item.id}}>{{item.productname}} </option>
                     </select>
                   </td>
@@ -345,8 +343,7 @@
           <div class="form-group ">
             <div class="col-sm-3" style="float: right;">
               <div>
-                <label>Subtotal </label>
-                <label style="padding-left: 55px;">{{total | currency: "INR"}}</label>
+                <label>Subtotal </label><label style="padding-left: 55px;">{{total | currency: "INR"}}</label>
               </div>
               <div>
                 <label>Dis. amt </label><label
@@ -369,7 +366,7 @@
               </div>
               <div>
                 <label>Pending amt </label>
-           <label style="padding-left: 32px;">{{pending_amount | currency: "INR"}}</label>
+                <label style="padding-left: 32px;">{{pending_amount | currency: "INR"}}</label>
 
                 <!-- <label style="padding-left: 32px;">{{this.activityDetails[this.ind].pendingamount | currency: "INR"}}</label> -->
 
@@ -378,6 +375,7 @@
               <div>
                 <label>Grand Total </label><label style="padding-left: 39px;"> {{final_total | currency: "INR"}}</label>
               </div>
+
             </div>
             <div class="clearfix"></div>
           </div>
@@ -390,14 +388,17 @@
           </div>
         </tab>
 
-        <!-- this is billing model -->
+
+
         <tab heading="Details">
           <button (click)="GeneratePdf('open')"><i class="fa fa-download" aria-hidden="true"></i></button>
           <div *ngFor="let activitydetails of activityInvoiceDetails;let i=index;">
             <div>
               <div class="clearfix">
+                <!-- <div id="logo">
+                  <img src="logo.png">
+                </div> -->
                 <h1>INVOICE</h1>
-              
                 <div id="company" class="clearfix">
                   <div>Company Name</div>
                   <div>455 Foggy Heights,<br /> AZ 85004, US</div>
@@ -408,7 +409,7 @@
                   <div><span style="font-size: 0.9em;">Bill no.</span> {{activitydetails.aid}}</div>
 
                   <div><span>Title</span> {{activitydetails.title}}</div>
-                  <div><span>CLIENT</span> {{activitydetails.clientName}}</div>
+                  <div><span>CLIENT</span> {{activitydetails.description}}</div>
                   <div><span>ADDRESS</span>{{activitydetails.address}}</div>
                   <div><span>EMAIL</span>{{activitydetails.email}}</div>
                   <div><span>DATE</span>{{activitydetails.createdon}}</div>
@@ -500,23 +501,13 @@
   <div class="modal-body">
 
     <div class="form-group row">
-      <!-- <div class="col-md-2">
+      <div class="col-md-2">
         <label for="date">Product Name</label>
         <div class="input-group">
           <select id="productname" name="productname" class="form-control" [(ngModel)]="activity_product.productId"
             (change)="onProductChange($event.target.value)">
             <option [ngValue]="undefined" selected>Select Product Name</option>
             <option *ngFor="let item of productDetails;" value={{item.id}}>{{item.productname}} </option>
-          </select>
-        </div>
-      </div> -->
-      <div class="col-md-2">
-        <label class="text-input">Product Name</label>
-        <div class="form-inline">
-          <select name="productname" class="form-control" name="productname" [(ngModel)]="activity_product.productId"
-            (change)="onProductChange($event.target.value)">
-            <option [ngValue]="undefined" selected>Select Product Name</option>
-            <option *ngFor="let item of productDetails;" value={{item.cid}}>{{item.productname}}</option>
           </select>
         </div>
       </div>
@@ -596,7 +587,7 @@
         <button type="button" class="btn btn-outline-dark shape close" aria-label="Close"
           (click)="modal.dismiss('Cross click')"> <span aria-hidden="true">&times;</span></button>
 
-        <div class="agm-map" *ngFor="let addr of Activity_LocationDetails;">     
+        <div class="agm-map" *ngFor="let addr of Activity_LocationDetails;">
           <agm-map #map [zoom]="16" [latitude]="centerlat" [longitude]="centerlng">
             <!-- Admin Location -->
             <agm-marker [iconUrl]="iconAdmin" [opacity]=0.8 [latitude]="lat" [longitude]="lng"
@@ -606,14 +597,16 @@
             <!-- Sales Location -->
             <agm-marker [iconUrl]="iconSales" [opacity]=0.8 [latitude]="addr.latitude" [longitude]="addr.longitude"
               [markerDraggable]="false">
-               <!-- Sales Info window -->
+              <!-- Sales Info window -->
               <agm-info-window [latitude]="addr.latitude" [longitude]="addr.longitude">
                 <div>
                   <img style="max-width: 50px; max-height: 50px;" *ngIf="addr.salesimage"
                     [src]="'http://localhost:55627/Documents/Avatars/Sales/Thumb/'+addr.salesimage">
-                  <img style="max-width: 50px; max-height: 50px;" *ngIf="!addr.salesimage" [src]="'/assets/img/avatars/Default_Images/No_image.png'">
+                  <img style="max-width: 50px; max-height: 50px;" *ngIf="!addr.salesimage"
+                    [src]="'/assets/img/avatars/Default_Images/No_image.png'">
                 </div>
-                <div> <label style="font-weight: bold;">Name:</label><a style="margin-left: 13px;">{{addr.salesname}}</a></div>
+                <div> <label style="font-weight: bold;">Name:</label><a
+                    style="margin-left: 13px;">{{addr.salesname}}</a></div>
                 <div> <label style="font-weight: bold;">Contact:</label> <a>{{addr.salescontact}}</a></div>
               </agm-info-window>
             </agm-marker>
@@ -621,12 +614,14 @@
             <!-- Client Location -->
             <agm-marker [iconUrl]="iconClient" [opacity]=0.8 [latitude]="addr.lat" [longitude]="addr.lng"
               [markerDraggable]="false">
-                <!-- Client Info window -->
+              <!-- Client Info window -->
               <agm-info-window [latitude]="addr.latitude" [longitude]="addr.longitude">
                 <div>
-                  <img style="max-width: 50px; max-height: 50px;" *ngIf="!addr.clientimage" [src]="'/assets/img/avatars/Default_Images/No_image.png'">
+                  <img style="max-width: 50px; max-height: 50px;" *ngIf="!addr.clientimage"
+                    [src]="'/assets/img/avatars/Default_Images/No_image.png'">
                 </div>
-                <div> <label style="font-weight: bold;">Name:</label><a style="margin-left: 13px;">{{addr.clientname}}</a></div>
+                <div> <label style="font-weight: bold;">Name:</label><a
+                    style="margin-left: 13px;">{{addr.clientname}}</a></div>
                 <div> <label style="font-weight: bold;">Contact:</label> <a>{{addr.clientcontact}}</a></div>
                 <div> <label style="font-weight: bold;">Address:</label> <a>{{addr.clientaddress}}</a></div>
               </agm-info-window>
@@ -634,7 +629,7 @@
 
             <!-- <agm-direction [origin]="origin" [destination]="destination">
             </agm-direction> -->
-            
+
           </agm-map>
 
           <div class="form-group">

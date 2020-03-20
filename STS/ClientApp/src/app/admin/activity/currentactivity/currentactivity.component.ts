@@ -4,9 +4,9 @@ import { SalesService } from '../../../service/sales.service';
 import { ProductService } from '../../../service/product.service';
 import { ActivityService } from '../../../service/activity.service';
 import { ClientService } from '../../../service/client.service';
-import { activityModel, addproductListingModel, updateactivityModel, addactivityModel, LocationModel, paginationModel, activityDetailsModel, updateproductListingModel } from '../../../model/activity';
+import { activityModel, addproductListingModel, updateactivityModel, addactivityModel, searchModel, LocationModel, paginationModel, activityDetailsModel, updateproductListingModel } from '../../../model/activity';
 import { salesregisterModel } from '../../../model/sales';
-import { productModel, productpriceModel } from '../../../model/product';
+import { productModel, productpriceModel, updateproductModel } from '../../../model/product';
 import { clientModel } from '../../../model/client';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -17,10 +17,13 @@ import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 
-
 // For Map
+
 import { ViewChild, ElementRef, NgZone } from '@angular/core';
 import { MapsAPILoader, AgmMap } from '@agm/core';
+import { MouseEvent } from '@agm/core';
+import { google } from 'google-maps';
+import { from } from 'rxjs';
 import { TabsetComponent } from 'ngx-bootstrap';
 
 @Component({
@@ -37,8 +40,14 @@ export class CurrentactivityComponent implements OnInit {
   activityDetails: activityModel[] = [];
 
   productInvoice = new activityDetailsModel();
+
   activityInvoice = new activityDetailsModel();
   activityInvoiceDetails: activityDetailsModel[] = [];
+
+  // search = new searchModel();
+  // searchDetails: searchModel[] = [];
+  // update_activityproduct = new editactivityModel();
+  // update_activityproductDetails: editactivityModel[] = [];
 
   Activity_Location = new LocationModel();
   Activity_LocationDetails: LocationModel[] = [];
@@ -61,6 +70,8 @@ export class CurrentactivityComponent implements OnInit {
   activity_product = new updateactivityModel();
   activity_productDetails: updateactivityModel[] = [];
 
+  // updateproduct = new updateproductModel();
+  // updateproductDetails: updateproductModel[] = [];
 
   sales = new salesregisterModel();
   salesDetails: salesregisterModel[] = [];
@@ -71,6 +82,10 @@ export class CurrentactivityComponent implements OnInit {
   client = new clientModel();
   clientDetails: clientModel[] = [];
 
+  // For Map
+
+  //  latitude: number;
+  //  longitude: number;
 
   // Searching
   search_: any;
@@ -89,7 +104,6 @@ export class CurrentactivityComponent implements OnInit {
   total_dis_amount: any;
   total_dis_per: any;
 
-  // invoice = 0;
   zoom: number;
   address: string;
 
@@ -106,9 +120,9 @@ export class CurrentactivityComponent implements OnInit {
   // Link to get lots of icon form agm marker
   // http://kml4earth.appspot.com/icons.html
 
-  iconAdmin = 'http://maps.google.com/mapfiles/kml/paddle/A.png';
-  iconSales = 'http://maps.google.com/mapfiles/kml/paddle/S.png';
-  iconClient = 'http://maps.google.com/mapfiles/kml/paddle/C.png';
+  iconAdmin= 'http://maps.google.com/mapfiles/kml/paddle/A.png';
+  iconSales= 'http://maps.google.com/mapfiles/kml/paddle/S.png';
+  iconClient= 'http://maps.google.com/mapfiles/kml/paddle/C.png';
 
   centerlat: any;
   centerlng: any;
@@ -151,11 +165,14 @@ public destination: any;
     private ngZone: NgZone,
     private toastr: ToastrService) {
     this.geocoder = new google.maps.Geocoder;
-
+    // this.activityList();
     this.productList();
     this.clientList();
     this.SalesList();
 
+
+    // this.eachactivityList();
+    // this.activity_productList();
   }
 
 
@@ -168,19 +185,23 @@ public destination: any;
     this.static_price();
 
     // setTimeout(() => {
-    navigator.geolocation.getCurrentPosition(position => {
-      // console.log(position);
+      navigator.geolocation.getCurrentPosition(position => {
+        // console.log(position);
 
-      this.location = position.coords;
+        this.location = position.coords;
 
-      this.centerlat = this.location.latitude;
-      this.centerlng = this.location.longitude;
+        this.centerlat = this.location.latitude;
+        this.centerlng = this.location.longitude;
 
-      this.lat = this.location.latitude;
-      this.lng = this.location.longitude;
+        this.lat = this.location.latitude;
+        this.lng = this.location.longitude;
 
-      this.geocoder = new google.maps.Geocoder();
-    });
+        // console.log(this.lat);
+        // console.log(this.lng);
+        
+        
+        this.geocoder = new google.maps.Geocoder();
+      });
     // }, 2000);
 
     // this. getDirection();
@@ -308,7 +329,6 @@ public destination: any;
   }
 
   addMoreproducts() {
-
     this.addproductlistDetails.push({
       productId: null,
       // productname: null,
@@ -318,7 +338,6 @@ public destination: any;
       discount_per: null,
       discount_amt: null,
       total_price: null,
-
     });
 
   }
@@ -362,7 +381,7 @@ public destination: any;
     this.activity_Details(aid);
   }
 
- // this funtion for display the sessionstorage in the multiple product(ActivityProductInvoice)
+
   activity_productList(aid) {
     this.activityService.activity_productList(aid).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -375,7 +394,6 @@ public destination: any;
           this.dis_amt();
           this.dis_per();
           this.grandtotal();
-          // this.advance_payment();
         }
       }
     }, (err) => {
@@ -407,8 +425,6 @@ public destination: any;
     }
   }
 
-
-
   dis_per() {
     this.total_dis_per = 0;
     for (let i = 0; i < this.activity_productDetails.length; i++) {
@@ -436,7 +452,7 @@ public destination: any;
       if (data.Status.code === 0) {
         if (data.each_admin_activityList) {
           this.activityDetails = data.each_admin_activityList;
-          console.log(this.activityDetails);
+          // console.log(this.activityDetails);
 
         }
         if (data.RowCount) {
@@ -480,11 +496,12 @@ public destination: any;
 
 
   // Edit
-  openupdatemodal(content, item, i) {
+  openupdatemodal(content, item,i) {
+    this.ind = i;
     this.update_activity = JSON.parse(JSON.stringify(item));
     // data show in model use this line and store the data in user and display in ui
-
     this.modalService.open(content, { size: 'xl', backdropClass: 'light-blue-backdrop' });
+    // this.viewData = JSON.parse(localStorage.getItem('Register')) || [];
     sessionStorage.removeItem('ActivityInvoice');
     sessionStorage.removeItem('ActivityProductInvoice');
 
@@ -497,11 +514,10 @@ public destination: any;
     // this.viewData = JSON.parse(localStorage.getItem('Register')) || [];
 
   }
+
   open_map_modal(map) {
     this.modalService.open(map, { size: 'xl', backdropClass: 'light-blue-backdrop' });
   }
-
-
 
   track_activity() {
     this.router.navigate(['/admin/activity/track-activity']);
@@ -763,16 +779,34 @@ public destination: any;
 
     });
   }
+
+
   addnewActivity() {
     this.router.navigate(['/admin/activity/addactivity']);
 
-  } s
-
-  reset_newaddproducts() {
-    this.addproductlist = new addproductListingModel();
   }
 
-  generatePdf(action = 'open') {
+  // reset_newaddproducts() {
+  //   this.addproductlist.price = null;
+  //   this.addproductlist.quantity = null;
+  //   this.addproductlist.amount = null;
+  //   this.addproductlist.discount_per = null;
+  //   this.addproductlist.discount_amt = null;
+  //   this.addproductlist.total_price = null;
+  // }
+
+
+
+
+
+
+
+
+
+
+
+
+  GeneratePdf(action = 'open') {
     console.log(pdfMake);
     const documentDefinition = this.getDocumentDefinition();
     switch (action) {
@@ -888,7 +922,6 @@ public destination: any;
 
       ],
 
-
       styles: {
         header: {
           fontSize: 18,
@@ -935,7 +968,6 @@ public destination: any;
               text: 'Qty',
               style: 'tableHeader'
             },
-          
           ],
           ...prodinv.map(pi => {
             return [pi.productname, pi.price, pi.quantity];
@@ -944,4 +976,5 @@ public destination: any;
       }
     };
   }
+
 }
