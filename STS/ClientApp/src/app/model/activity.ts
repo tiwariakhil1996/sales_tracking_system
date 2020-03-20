@@ -108,18 +108,28 @@ export class sales_Location_Model {
     image: string;
 
 }
+// this is Activity Invoice model
+export class activityDetailsModel {
+    aid: number;
+    title: string;
+    description: string;
+    clientName: string;
+    contact: String;
+    address: string;
+    email: string;
+    createdon: string;
+    appointmentDate: string;
+    activityproduct: updateactivityModel[] = [];
+    constructor() {
+        this.activityproduct.push(new updateactivityModel());   
+    }
+
+}
+// This is Activity Product Invoice Model
 
 export class updateactivityModel {
+   
     aid: number;
-    // title: string;
-    // description: string;
-    // clientId: number;
-    // clientName: string;
-    // salesId: number;
-    // salesName: string;
-    // contact: String;
-    // address: string;
-    // appointmentDate: string;
     order_Id: number;
     productId: number;
     productname: string;
@@ -132,9 +142,7 @@ export class updateactivityModel {
 
     createdby: number;
     modifiedby: number;
-    // userid: number;
-
-    // user_id: number;
+    
     advance_payment: number;
     payment_mode: number;
     pending_amount: number;
@@ -168,21 +176,6 @@ export class paginationModel {
     pageIndex: number;
 }
 
-
-
-
-export class activityDetailsModel {
-    aid: number;
-    title: string;
-    description: string;
-    clientName: string;
-    contact: String;
-    address: string;
-    email: string;
-    createdon: string;
-    appointmentDate: string;
-
-}
 export class Downloadpdf{
     aid:number;
     title: string;

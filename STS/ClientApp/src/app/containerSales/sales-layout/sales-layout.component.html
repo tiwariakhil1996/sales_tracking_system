@@ -12,7 +12,7 @@
   <ul class="nav navbar-nav ml-auto">
     <li class="nav-item d-md-down-none">
       <a  tooltip="Activity"  class="nav-link " href="/sales/activity/currentactivity"><i class="icon-bell"></i><span
-      class="badge badge-pill badge-danger blinking">{{assignedActivity}}</span></a>
+        *ngIf="assignedActivity > 0" class="badge badge-pill badge-danger blinking">{{assignedActivity}}</span></a>
     </li>
 
     <li class="nav-item d-md-down-none">

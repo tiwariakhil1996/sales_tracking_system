@@ -14,7 +14,6 @@ export class registerModel {
 
 export class avatarModel {
     image: string;
-
     ImageId: number;
     ImageData: string;
 }

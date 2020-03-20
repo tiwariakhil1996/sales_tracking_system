@@ -11,7 +11,7 @@
             <div class="col-sm-6">
               <label for="category">Category</label>
               <select name="cid" class="form-control" [(ngModel)]="subcategory.cid">
-                <option value="0" selected>Select category</option>
+                <option [value]="undefined" selected>Select category</option>
                 <option *ngFor="let item of categoryDetails;" name="cname" value={{item.cid}}>{{item.cname}}</option>
               </select>
             </div>

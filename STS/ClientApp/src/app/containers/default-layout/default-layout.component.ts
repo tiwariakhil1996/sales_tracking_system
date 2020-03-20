@@ -135,8 +135,8 @@ export class DefaultLayoutComponent implements OnInit {
           });
           this.changePassword = new changePasswordModel();
           this.modalRef.hide();
-          localStorage.removeItem('adminLogin');
-          this.router.navigate(['admin/login']);
+          // localStorage.removeItem('adminLogin');
+          // this.router.navigate(['admin/login']);
         } else {
           this.toastr.warning('Old Password is incorrect', 'Warning', {
             disableTimeOut: false,

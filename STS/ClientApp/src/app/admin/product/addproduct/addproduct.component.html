@@ -10,9 +10,9 @@
             <div class="col-sm-6">
               <label class="text-input">Category</label>
               <div class="form-inline">
-                <select name="cid" class="form-control" name="cid" [(ngModel)]="product.cid"
+                <select name="cid" class="form-control" [(ngModel)]="product.cid"
                   (change)="onCategoryChange($event.target.value)">
-                  <option [ngValue]="undefined" selected>Select category</option>
+                  <option [value]="undefined" selected>Select category</option>
                   <option *ngFor="let item of categoryDetails;" name="cname" value={{item.cid}}>{{item.cname}}</option>
                 </select>
               </div>
@@ -21,7 +21,7 @@
               <label class="text-input">Subcategory</label>
               <div class="form-inline">
                 <select name="sid" class="form-control" [(ngModel)]="product.sid">
-                  <option [ngValue]="undefined" selected>Select subcategory</option>
+                  <option [value]="undefined" selected>Select subcategory</option>
                   <option *ngFor="let item of subcategoryDetails;" name="sname" value={{item.sid}}>{{item.sname}}
                   </option>
                 </select>

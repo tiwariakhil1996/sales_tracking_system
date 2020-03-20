@@ -43,9 +43,6 @@ namespace STS.DAL
             }
         }
 
-
-
-
         //Login
         public async Task<Tuple<List<SalesLoginModel>, TranStatus>> SalesLogin(SalesLoginModel model)
         {

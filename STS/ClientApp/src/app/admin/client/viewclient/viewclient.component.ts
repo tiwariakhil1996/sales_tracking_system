@@ -154,7 +154,6 @@ export class ViewclientComponent implements OnInit {
   clientList(item) {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.client.userid = this.user.id;
-
     this.client.pageIndex = item.pageIndex;
     this.client.pageSize = this.pageSize;
     this.client.search = this.search_;

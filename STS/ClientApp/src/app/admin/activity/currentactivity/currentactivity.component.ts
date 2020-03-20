@@ -1,13 +1,12 @@
-import { Downloadpdf } from './../../../model/activity';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SalesService } from '../../../service/sales.service';
 import { ProductService } from '../../../service/product.service';
 import { ActivityService } from '../../../service/activity.service';
 import { ClientService } from '../../../service/client.service';
-import { activityModel, addproductListingModel, updateactivityModel, addactivityModel, searchModel, LocationModel, paginationModel, activityDetailsModel, updateproductListingModel } from '../../../model/activity';
+import { activityModel, addproductListingModel, updateactivityModel, addactivityModel, LocationModel, paginationModel, activityDetailsModel, updateproductListingModel } from '../../../model/activity';
 import { salesregisterModel } from '../../../model/sales';
-import { productModel, productpriceModel, updateproductModel } from '../../../model/product';
+import { productModel, productpriceModel } from '../../../model/product';
 import { clientModel } from '../../../model/client';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -19,14 +18,9 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 
 
-
 // For Map
-
 import { ViewChild, ElementRef, NgZone } from '@angular/core';
 import { MapsAPILoader, AgmMap } from '@agm/core';
-import { MouseEvent } from '@agm/core';
-import { google } from 'google-maps';
-import { from } from 'rxjs';
 import { TabsetComponent } from 'ngx-bootstrap';
 
 @Component({
@@ -42,18 +36,9 @@ export class CurrentactivityComponent implements OnInit {
   activity = new activityModel();
   activityDetails: activityModel[] = [];
 
+  productInvoice = new activityDetailsModel();
   activityInvoice = new activityDetailsModel();
   activityInvoiceDetails: activityDetailsModel[] = [];
-
-  // invoice=new Downloadpdf();
-  // invoices:Downloadpdf[]=[];
-
-  
-
-  // search = new searchModel();
-  // searchDetails: searchModel[] = [];
-  // update_activityproduct = new editactivityModel();
-  // update_activityproductDetails: editactivityModel[] = [];
 
   Activity_Location = new LocationModel();
   Activity_LocationDetails: LocationModel[] = [];
@@ -76,8 +61,6 @@ export class CurrentactivityComponent implements OnInit {
   activity_product = new updateactivityModel();
   activity_productDetails: updateactivityModel[] = [];
 
-  // updateproduct = new updateproductModel();
-  // updateproductDetails: updateproductModel[] = [];
 
   sales = new salesregisterModel();
   salesDetails: salesregisterModel[] = [];
@@ -88,10 +71,6 @@ export class CurrentactivityComponent implements OnInit {
   client = new clientModel();
   clientDetails: clientModel[] = [];
 
-  // For Map
-
-  //  latitude: number;
-  //  longitude: number;
 
   // Searching
   search_: any;
@@ -108,7 +87,7 @@ export class CurrentactivityComponent implements OnInit {
   total_dis_amount: any;
   total_dis_per: any;
 
-
+  // invoice = 0;
   zoom: number;
   address: string;
 
@@ -125,9 +104,9 @@ export class CurrentactivityComponent implements OnInit {
   // Link to get lots of icon form agm marker
   // http://kml4earth.appspot.com/icons.html
 
-  iconAdmin= 'http://maps.google.com/mapfiles/kml/paddle/A.png';
-  iconSales= 'http://maps.google.com/mapfiles/kml/paddle/S.png';
-  iconClient= 'http://maps.google.com/mapfiles/kml/paddle/C.png';
+  iconAdmin = 'http://maps.google.com/mapfiles/kml/paddle/A.png';
+  iconSales = 'http://maps.google.com/mapfiles/kml/paddle/S.png';
+  iconClient = 'http://maps.google.com/mapfiles/kml/paddle/C.png';
 
   centerlat: any;
   centerlng: any;
@@ -166,17 +145,11 @@ export class CurrentactivityComponent implements OnInit {
     private ngZone: NgZone,
     private toastr: ToastrService) {
     this.geocoder = new google.maps.Geocoder;
-    // this.activityList();
+
     this.productList();
     this.clientList();
     this.SalesList();
-    this.activityInvoice = JSON.parse(sessionStorage.getItem('invoice'));
 
-
-
-
-    // this.eachactivityList();
-    // this.activity_productList();
   }
 
 
@@ -189,19 +162,19 @@ export class CurrentactivityComponent implements OnInit {
     this.static_price();
 
     // setTimeout(() => {
-      navigator.geolocation.getCurrentPosition(position => {
-        // console.log(position);
+    navigator.geolocation.getCurrentPosition(position => {
+      // console.log(position);
 
-        this.location = position.coords;
+      this.location = position.coords;
 
-        this.centerlat = this.location.latitude;
-        this.centerlng = this.location.longitude;
+      this.centerlat = this.location.latitude;
+      this.centerlng = this.location.longitude;
 
-        this.lat = this.location.latitude;
-        this.lng = this.location.longitude;
+      this.lat = this.location.latitude;
+      this.lng = this.location.longitude;
 
-        this.geocoder = new google.maps.Geocoder();
-      });
+      this.geocoder = new google.maps.Geocoder();
+    });
     // }, 2000);
   }
 
@@ -331,7 +304,7 @@ export class CurrentactivityComponent implements OnInit {
       discount_per: null,
       discount_amt: null,
       total_price: null,
-     
+
     });
 
   }
@@ -375,13 +348,14 @@ export class CurrentactivityComponent implements OnInit {
     this.activity_Details(aid);
   }
 
-
+ // this funtion for display the sessionstorage in the multiple product(ActivityProductInvoice)
   activity_productList(aid) {
     this.activityService.activity_productList(aid).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.Activity_ProductList) {
           this.activity_productDetails = data.Activity_ProductList;
           //console.log( this.activity_productDetails);
+          this.activityInvoice.activityproduct = this.activity_productDetails;
 
           this.subtotal();
           this.dis_amt();
@@ -492,11 +466,13 @@ export class CurrentactivityComponent implements OnInit {
 
 
   // Edit
-  openupdatemodal(content, item) {
+  openupdatemodal(content, item, i) {
     this.update_activity = JSON.parse(JSON.stringify(item));
     // data show in model use this line and store the data in user and display in ui
+
     this.modalService.open(content, { size: 'xl', backdropClass: 'light-blue-backdrop' });
-    // this.viewData = JSON.parse(localStorage.getItem('Register')) || [];
+    sessionStorage.removeItem('ActivityInvoice');
+    sessionStorage.removeItem('ActivityProductInvoice');
 
   }
 
@@ -507,7 +483,6 @@ export class CurrentactivityComponent implements OnInit {
     // this.viewData = JSON.parse(localStorage.getItem('Register')) || [];
 
   }
-
   open_map_modal(map) {
     this.modalService.open(map, { size: 'xl', backdropClass: 'light-blue-backdrop' });
   }
@@ -656,19 +631,185 @@ export class CurrentactivityComponent implements OnInit {
 
     });
   }
-
-
   addnewActivity() {
     this.router.navigate(['/admin/activity/addactivity']);
 
+  } s
+
+  reset_newaddproducts() {
+    this.addproductlist = new addproductListingModel();
   }
-  
-  // reset_newaddproducts() {
-  //   this.addproductlist.price = null;
-  //   this.addproductlist.quantity = null;
-  //   this.addproductlist.amount = null;
-  //   this.addproductlist.discount_per = null;
-  //   this.addproductlist.discount_amt = null;
-  //   this.addproductlist.total_price = null;
-  // }
+
+  generatePdf(action = 'open') {
+    console.log(pdfMake);
+    const documentDefinition = this.getDocumentDefinition();
+    switch (action) {
+      case 'open': pdfMake.createPdf(documentDefinition).open(); break;
+      case 'print': pdfMake.createPdf(documentDefinition).print(); break;
+      case 'download': pdfMake.createPdf(documentDefinition).download(); break;
+
+      default: pdfMake.createPdf(documentDefinition).open(); break;
+    }
+  }
+
+  getDocumentDefinition() {
+
+    sessionStorage.setItem('ActivityInvoice', JSON.stringify(this.activityInvoiceDetails[0] || {}));
+    // sessionStorage.setItem('ActivityProductInvoice', JSON.stringify(this.activity_productDetails[0] || {}));
+    this.productInvoice = JSON.parse(sessionStorage.getItem('ActivityInvoice')) || [0];
+    
+    // this.activity_product = JSON.parse(sessionStorage.getItem('ActivityProductInvoice')) || [0];
+    
+    sessionStorage.setItem('ProductInvoice', JSON.stringify(this.activityInvoice));
+    // this.activityInvoice = JSON.parse(sessionStorage.getItem('ActivityInvoice')) ;
+    this.activityInvoice = JSON.parse(sessionStorage.getItem('ProductInvoice')) || new activityDetailsModel();
+
+    return {
+      content: [
+        {
+          text: 'INVOICE',
+          bold: true,
+          fontSize: 20,
+          alignment: 'center',
+          margin: [0, 0, 0, 20]
+        },
+        {
+          columns: [
+            [
+              {
+                text: 'Company Name:' + 'MI',
+                style: 'name',
+                alignment: 'right'
+              },
+              {
+                text: 'Address:' + 'Surat',
+                style: 'name',
+                alignment: 'right'
+              },
+              {
+                text: 'Help Desk:' + 'mi@info.co.in',
+                style: 'name',
+                alignment: 'right'
+              },
+            ],
+          ]
+        },
+
+        {
+          columns: [
+            [
+              {
+                text: 'Bill No:-' + this.productInvoice.aid,
+                style: 'name'
+              },
+              {
+                text: 'Title:-' + this.productInvoice.title
+              },
+              {
+                text: 'Client Name:-' + this.productInvoice.clientName
+              },
+              {
+                text: 'Address:-' + this.productInvoice.address
+              },
+              {
+                text: 'Email:-' + this.productInvoice.email,
+              },
+              {
+                text: 'Date:-' + this.productInvoice.createdon,
+              },
+              {
+                text: 'Due Date:- ' + this.productInvoice.appointmentDate,
+              },
+            ],
+
+          ]
+
+        },
+        {
+          text: 'Product Details',
+          style: 'header'
+        },
+    
+        this.getEducationObject(this.activityInvoice.activityproduct),
+       
+        {
+          text: 'Notice:',
+          style: 'header'
+        },
+        {
+          text: 'Invoice was created on a computer and is valid without the signature and seal.'
+        },
+        {
+          text: 'Signature',
+          style: 'sign'
+        },
+
+        {
+          columns: [
+            { qr: this.productInvoice.email + ', Contact No : ' + this.productInvoice.contact, fit: 100 },
+            {
+              text: `(${this.productInvoice.clientName})`,
+              alignment: 'right',
+            }
+          ]
+        }
+
+      ],
+
+
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          margin: [0, 20, 0, 10],
+          decoration: 'underline'
+        },
+        name: {
+          fontSize: 10,
+          bold: true
+        },
+        jobTitle: {
+          fontSize: 14,
+          bold: true,
+          italics: true
+        },
+        sign: {
+          margin: [0, 50, 0, 10],
+          alignment: 'right',
+          italics: true
+        },
+        tableHeader: {
+          bold: true,
+        }
+      }
+
+    };
+  }
+  getEducationObject(prodinv: updateactivityModel[]) {
+    return {
+      table: {
+        widths: ['*', '*', '*', '*'],
+        body: [
+          [
+            {
+              text: 'Product',
+              style: 'tableHeader'
+            },
+            {
+              text: 'Price',
+              style: 'tableHeader'
+            },
+            {
+              text: 'Qty',
+              style: 'tableHeader'
+            },
+          
+          ],
+          ...prodinv.map(pi => {
+            return [pi.productname, pi.price, pi.quantity];
+          })
+        ]
+      }
+    };
+  }
 }
