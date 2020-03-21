@@ -52,6 +52,8 @@ export class CurrentactivityComponent implements OnInit {
   client = new clientModel();
   clientDetails: clientModel[] = [];
 
+  currentDate = new Date();
+
   due_paid: number;
 
   ind = 0;
@@ -583,6 +585,7 @@ export class CurrentactivityComponent implements OnInit {
 
 
   GeneratePdf(action = 'open') {
+
     console.log(pdfMake);
     const documentDefinition = this.getDocumentDefinition();
     switch (action) {
@@ -596,6 +599,7 @@ export class CurrentactivityComponent implements OnInit {
 
   getDocumentDefinition() {
 
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     // get Activity Details
     // sessionStorage.setItem('ActivityInvoice', JSON.stringify(this.activityInvoiceDetails[0] || {}));
     this.productInvoice = JSON.parse(sessionStorage.getItem('ActivityInvoice')) || [0];
@@ -610,7 +614,7 @@ export class CurrentactivityComponent implements OnInit {
       // Heading
       content: [
         {
-          // text: '' + this.currentDate ,
+          text: '' + this.currentDate ,
           // bold: true,
           fontSize: 7,
           alignment: 'right',
@@ -629,12 +633,12 @@ export class CurrentactivityComponent implements OnInit {
           columns: [
             [
               {
-                // text: 'Company Name:' + this.user.companyname,
+                text: 'Company Name:' + this.user.companyname,
                 style: 'name',
                 alignment: 'right'
               },
               {
-                text: 'Address:' + this.user.address,
+                text: 'Address:' + this.user.companyaddress,
                 style: 'name',
                 alignment: 'right'
               },
@@ -702,11 +706,11 @@ export class CurrentactivityComponent implements OnInit {
           // style: 'header'
           // alignment: 'right',
         },
-        // {
-        //   // text: 'Grand Total     : ' + this.final_total,
-        //   // style: 'header'
-        //   // alignment: 'right',
-        // },
+        {
+          text: 'Grand Total     : ' + this.productInvoice.grandtotal,
+          // style: 'header'
+          // alignment: 'right',
+        },
 
         {
           text: 'Signature',
@@ -716,12 +720,12 @@ export class CurrentactivityComponent implements OnInit {
         {
           columns: [
             // Details to show in QR Code
-            // { qr: 'Company Name :' + this.user.companyname + ', Address :' + this.user.address + ',Contact :' + this.user.mobile + ',Bill No. :' + this.productInvoice.aid + ',Client Name :' + this.productInvoice.clientName + ',Clients Contact No : ' + this.productInvoice.contact, fit: 100 },
+            { qr: 'Company Name :' + this.user.companyname + ', Address :' + this.user.companyaddress + ',Contact :' + this.user.mobile + ',Bill No. :' + this.productInvoice.aid + ',Client Name :' + this.productInvoice.clientName + ',Clients Contact No : ' + this.productInvoice.contact, fit: 100 },
          
-            // Signature / Name of a person
+           // Signature / Name of a person
             {
               // text: `(${this.productInvoice.clientName})`,
-              // text: `(${this.user.username})`,
+              text: `(${this.user.salesName})`,
               alignment: 'right',
             }
           ]
@@ -770,7 +774,7 @@ export class CurrentactivityComponent implements OnInit {
   getProductsObject(productDetails: updateactivityModel[]) {
     return {
       table: {
-        widths: ['*', '*', '*', '*', '*', '*', '*'],
+        widths: ['*', '*', '*', '*', '*', '*'],
         body: [
           [
             {

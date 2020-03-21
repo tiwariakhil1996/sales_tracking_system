@@ -299,6 +299,7 @@ namespace STS.Model
 
         public int Advancepay { get; set; }
         public int Pending_amount { get; set; }
+        public int Grandtotal { get; set; }
 
 
     }

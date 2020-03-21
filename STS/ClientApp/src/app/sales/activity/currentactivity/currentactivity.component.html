@@ -157,7 +157,7 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row" style="overflow: auto;">
         <div class="col-sm-12">
           <table class="table">
             <thead class="color">
@@ -240,7 +240,7 @@
         <button *ngIf="(activity.status == 2 || activity.status == 3  || activity.status == 6 )" class='btn btn-dark'
           type="button" (click)="open_closeactivity(closeactivity,activity.aid)">
           <i>Close</i></button>
-          <button class="form-control btn btn-primary download-invoice" (click)="GeneratePdf('open')"><i
+          <button style="float: right; width: 47px;" class="form-control btn btn-primary download-invoice" (click)="GeneratePdf('open')"><i
             class="fa fa-download" aria-hidden="true"></i></button>
     </div>
 

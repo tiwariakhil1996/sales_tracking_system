@@ -195,6 +195,7 @@ export class activityDetailsModel {
     createdon: string;
     appointmentDate: string;
     pending_amount: number;
+    grandtotal: number;
     advancepay: number;
 
     activityproduct: updateactivityModel[] = [];
