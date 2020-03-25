@@ -69,7 +69,7 @@ namespace STS
 
             //Database Connectivity
             STSSetting.ConnectionString = Configuration.GetSection("ConnectionString:STS").Value;
-
+       
 
 
             //Send email for forgot password
@@ -78,10 +78,8 @@ namespace STS
             STSSetting.UsernameEmail = Configuration.GetSection("EmailSettings:UsernameEmail").Value;
             STSSetting.UsernamePassword = Configuration.GetSection("EmailSettings:UsernamePassword").Value;
 
-            //STSSetting.ResetPasswordUrl = Configuration.GetSection("EmailSettings:ResetPasswordUrl").Value;
 
             DependencyResolver(services);
-
 
 
         }
@@ -109,11 +107,6 @@ namespace STS
 
         }
 
-
-
-
-
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -133,10 +126,9 @@ namespace STS
             app.UseHttpsRedirection();
 
             //This is used used for accessing the Documents folder for image display without the compile of the angular project
-
             app.UseStaticFiles(new StaticFileOptions
             {
-                FileProvider = new PhysicalFileProvider(
+                        FileProvider = new PhysicalFileProvider(
                         Path.Combine(Directory.GetCurrentDirectory(), "Documents")),
                         RequestPath = "/Documents"
             });
@@ -150,7 +142,7 @@ namespace STS
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
+                    endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
             });
@@ -162,7 +154,7 @@ namespace STS
 
                 spa.Options.SourcePath = "ClientApp";
 
-                if (env.IsDevelopment())
+                if (env.IsDevelopment())   
                 {
                     spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                     //spa.UseAngularCliServer(npmScript: "start");

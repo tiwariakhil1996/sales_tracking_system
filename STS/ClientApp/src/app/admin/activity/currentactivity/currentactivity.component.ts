@@ -21,8 +21,6 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 import { ViewChild, ElementRef, NgZone } from '@angular/core';
 import { MapsAPILoader, AgmMap } from '@agm/core';
-import { MouseEvent } from '@agm/core';
-import { google } from 'google-maps';
 import { from } from 'rxjs';
 import { TabsetComponent } from 'ngx-bootstrap';
 
@@ -39,15 +37,11 @@ export class CurrentactivityComponent implements OnInit {
   activity = new activityModel();
   activityDetails: activityModel[] = [];
 
-  productInvoice = new activityDetailsModel();
+  InvoiceActivity = new activityDetailsModel();
 
   activityInvoice = new activityDetailsModel();
   activityInvoiceDetails: activityDetailsModel[] = [];
 
-  // search = new searchModel();
-  // searchDetails: searchModel[] = [];
-  // update_activityproduct = new editactivityModel();
-  // update_activityproductDetails: editactivityModel[] = [];
 
   Activity_Location = new LocationModel();
   Activity_LocationDetails: LocationModel[] = [];
@@ -120,9 +114,9 @@ export class CurrentactivityComponent implements OnInit {
   // Link to get lots of icon form agm marker
   // http://kml4earth.appspot.com/icons.html
 
-  iconAdmin= 'http://maps.google.com/mapfiles/kml/paddle/A.png';
-  iconSales= 'http://maps.google.com/mapfiles/kml/paddle/S.png';
-  iconClient= 'http://maps.google.com/mapfiles/kml/paddle/C.png';
+  iconAdmin = 'http://maps.google.com/mapfiles/kml/paddle/A.png';
+  iconSales = 'http://maps.google.com/mapfiles/kml/paddle/S.png';
+  iconClient = 'http://maps.google.com/mapfiles/kml/paddle/C.png';
 
   centerlat: any;
   centerlng: any;
@@ -144,9 +138,9 @@ export class CurrentactivityComponent implements OnInit {
   currentPageIndex: number = 0;
   pageOfItems: Array<any>;
 
- 
-public origin: any;
-public destination: any;
+
+  public origin: any;
+  public destination: any;
 
   // Authentication
 
@@ -185,23 +179,23 @@ public destination: any;
     this.static_price();
 
     // setTimeout(() => {
-      navigator.geolocation.getCurrentPosition(position => {
-        // console.log(position);
+    navigator.geolocation.getCurrentPosition(position => {
+      // console.log(position);
 
-        this.location = position.coords;
+      this.location = position.coords;
 
-        this.centerlat = this.location.latitude;
-        this.centerlng = this.location.longitude;
+      this.centerlat = this.location.latitude;
+      this.centerlng = this.location.longitude;
 
-        this.lat = this.location.latitude;
-        this.lng = this.location.longitude;
+      this.lat = this.location.latitude;
+      this.lng = this.location.longitude;
 
-        // console.log(this.lat);
-        // console.log(this.lng);
-        
-        
-        this.geocoder = new google.maps.Geocoder();
-      });
+      // console.log(this.lat);
+      // console.log(this.lng);
+
+
+      this.geocoder = new google.maps.Geocoder();
+    });
     // }, 2000);
 
     // this. getDirection();
@@ -496,7 +490,7 @@ public destination: any;
 
 
   // Edit
-  openupdatemodal(content, item,i) {
+  openupdatemodal(content, item, i) {
     this.ind = i;
     this.update_activity = JSON.parse(JSON.stringify(item));
     // data show in model use this line and store the data in user and display in ui
@@ -528,15 +522,15 @@ public destination: any;
   Update(aid: number) {
     let strError = '';
 
-    
+
     if (!this.update_activity.title) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter title';
-    }else
-    if (!this.validateTitle(this.activity.title)) {
-      strError += strError = '' ? '' : '<br/>';
-      strError += strError = '-  Title should only contain alphabets, numbers and space';
-    }
+    } else
+      if (!this.validateTitle(this.activity.title)) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += strError = '-  Title should only contain alphabets, numbers and space';
+      }
 
     // if (!this.update_activity.clientId) {
     //   strError += strError = '' ? '' : '<br/>';
@@ -548,7 +542,7 @@ public destination: any;
     //   strError += '- Please select sales';
     // }
 
-    
+
     if (!this.update_activity.appointmentDate) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter appointment date';
@@ -557,11 +551,11 @@ public destination: any;
     if (!this.update_activity.description) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter description';
-    }else
-    if (!this.validateDescription(this.activity.description)) {
-      strError += strError = '' ? '' : '<br/>';
-      strError += strError = '-  Description should only contain alphabets, numbers space and some special characters $ % & , . " : ';
-    }
+    } else
+      if (!this.validateDescription(this.activity.description)) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += strError = '-  Description should only contain alphabets, numbers space and some special characters $ % & , . " : ';
+      }
 
 
     if (this.update_activity.advance_payment > this.final_total) {
@@ -608,7 +602,7 @@ public destination: any;
     });
   }
 
-  
+
   TitleValidation() {
     let isValid = false;
     if (!this.validateTitle(this.activity.title)) {
@@ -669,7 +663,7 @@ public destination: any;
     var reg = /^\d{10}$/;
     return reg.test(mobileField) == false ? false : true;
   }
-  
+
 
   Update_n_addproducts(aid: number) {
     // sending user id  as modified by
@@ -778,7 +772,7 @@ public destination: any;
     }, (err) => {
 
     });
-  }
+  } ng 
 
 
   addnewActivity() {
@@ -792,22 +786,10 @@ public destination: any;
   //   this.addproductlist.amount = null;
   //   this.addproductlist.discount_per = null;
   //   this.addproductlist.discount_amt = null;
-  //   this.addproductlist.total_price = null;
+  //   this.addproductlist.total_price = null;  ng 
   // }
 
-
-
-
-
-
-
-
-
-
-
-
   GeneratePdf(action = 'open') {
-    console.log(pdfMake);
     const documentDefinition = this.getDocumentDefinition();
     switch (action) {
       case 'open': pdfMake.createPdf(documentDefinition).open(); break;
@@ -821,14 +803,10 @@ public destination: any;
   getDocumentDefinition() {
 
     sessionStorage.setItem('ActivityInvoice', JSON.stringify(this.activityInvoiceDetails[0] || {}));
-    // sessionStorage.setItem('ActivityProductInvoice', JSON.stringify(this.activity_productDetails[0] || {}));
-    this.productInvoice = JSON.parse(sessionStorage.getItem('ActivityInvoice')) || [0];
-    
-    // this.activity_product = JSON.parse(sessionStorage.getItem('ActivityProductInvoice')) || [0];
-    
-    sessionStorage.setItem('ProductInvoice', JSON.stringify(this.activityInvoice));
-    // this.activityInvoice = JSON.parse(sessionStorage.getItem('ActivityInvoice')) ;
-    this.activityInvoice = JSON.parse(sessionStorage.getItem('ProductInvoice')) || new activityDetailsModel();
+    this.InvoiceActivity = JSON.parse(sessionStorage.getItem('ActivityInvoice')) || [0];
+
+    sessionStorage.setItem('ActivityProductInvoice', JSON.stringify(this.activityInvoice));
+    this.activityInvoice = JSON.parse(sessionStorage.getItem('ActivityProductInvoice')) || new activityDetailsModel();
 
     return {
       content: [
@@ -865,26 +843,26 @@ public destination: any;
           columns: [
             [
               {
-                text: 'Bill No:-' + this.productInvoice.aid,
+                text: 'Bill No:-' + this.InvoiceActivity.aid,
                 style: 'name'
               },
               {
-                text: 'Title:-' + this.productInvoice.title
+                text: 'Title:-' + this.InvoiceActivity.title
               },
               {
-                text: 'Client Name:-' + this.productInvoice.clientName
+                text: 'Client Name:-' + this.InvoiceActivity.clientName
               },
               {
-                text: 'Address:-' + this.productInvoice.address
+                text: 'Address:-' + this.InvoiceActivity.address
               },
               {
-                text: 'Email:-' + this.productInvoice.email,
+                text: 'Email:-' + this.InvoiceActivity.email,
               },
               {
-                text: 'Date:-' + this.productInvoice.createdon,
+                text: 'Date:-' + this.InvoiceActivity.createdon,
               },
               {
-                text: 'Due Date:- ' + this.productInvoice.appointmentDate,
+                text: 'Due Date:- ' + this.InvoiceActivity.appointmentDate,
               },
             ],
 
@@ -895,9 +873,9 @@ public destination: any;
           text: 'Product Details',
           style: 'header'
         },
-    
+        // call the product used of the this.activityInvoice for display the product detail
         this.getEducationObject(this.activityInvoice.activityproduct),
-       
+
         {
           text: 'Notice:',
           style: 'header'
@@ -912,9 +890,9 @@ public destination: any;
 
         {
           columns: [
-            { qr: this.productInvoice.email + ', Contact No : ' + this.productInvoice.contact, fit: 100 },
+            { qr: this.InvoiceActivity.email + ', Contact No : ' + this.InvoiceActivity.contact, fit: 100 },
             {
-              text: `(${this.productInvoice.clientName})`,
+              text: `(${this.InvoiceActivity.clientName})`,
               alignment: 'right',
             }
           ]
@@ -929,6 +907,7 @@ public destination: any;
           margin: [0, 20, 0, 10],
           decoration: 'underline'
         },
+
         name: {
           fontSize: 10,
           bold: true
@@ -950,10 +929,10 @@ public destination: any;
 
     };
   }
-  getEducationObject(prodinv: updateactivityModel[]) {
+  getEducationObject(ActivityProductInvoice: updateactivityModel[]) {
     return {
       table: {
-        widths: ['*', '*', '*', '*'],
+        widths: ['*', '*', '*', '*', '*', '*'],
         body: [
           [
             {
@@ -968,13 +947,26 @@ public destination: any;
               text: 'Qty',
               style: 'tableHeader'
             },
+            {
+              text: 'Total',
+              style: 'tableHeader'
+            },
+            {
+              text: 'Discount %',
+              style: 'tableHeader'
+            },
+            {
+              text: 'Grand Total',
+              style: 'tableHeader'
+            },
+
           ],
-          ...prodinv.map(pi => {
-            return [pi.productname, pi.price, pi.quantity];
+          ...ActivityProductInvoice.map(ap => {
+            return [ap.productname, ap.price, ap.quantity, ap.amount, ap.discount_per, ap.total_price];
           })
         ]
       }
     };
   }
-
+ 
 }

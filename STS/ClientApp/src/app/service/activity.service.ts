@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, APP_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -11,6 +11,8 @@ export class ActivityService {
   addActivity(data) {
     return this.http.post('api/Activity/addActivity', data);
   }
+  
+
 
   activityList() {
     return this.http.get('/api/Activity/ActivityList');
@@ -51,6 +53,7 @@ export class ActivityService {
   updateActivity(aid: number, data: any) {
     return this.http.put('/api/Activity/updateActivity/' + aid, data);
   }
+  
 
   update_n_addProducts(aid: number, data: any) {
     return this.http.put('/api/Activity/update_n_addProducts/' + aid, data);
@@ -84,7 +87,7 @@ export class ActivityService {
     return this.http.put('/api/Activity/updateInprogress/' + aid, data);
   }
 
-  activity_history(aid: number, data: any){
+  activity_history(aid: number, data: any) {
     return this.http.put('/api/Activity/activity_history/' + aid, data);
   }
 

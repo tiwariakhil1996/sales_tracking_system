@@ -60,10 +60,9 @@
               <span *ngIf="(item.status == 6)" class="badge badge-pill badge-light">{{item.statusname}}</span>
             </td>
             <td>
-              <button type="button" class="btn btn-primary" data-toggle="modal"
-                (click)="openupdatemodal(content,item,i)" (click)="GetProduct_Activity(item.aid)"><i class="fa fa-eye"
-                  aria-hidden="true"></i></button>
-
+              <button type="button" class="btn btn-primary" data-toggle="modal" (click)= "openupdatemodal(content,item,i)"
+                (click)="GetProduct_Activity(item.aid)"><i class="fa fa-eye" aria-hidden="true"></i></button>
+              
               <!-- <button class='btn btn-danger' type="button" (click)="onDelete(item.aid)"><i class="fa fa-trash" aria-hidden="true"></i></button> -->
             </td>
           </tr>
@@ -75,6 +74,7 @@
       </div>
 
     </div>
+    <!-- pagination start -->
     <div class="card-footer">
       <ul class="pagination">
 
@@ -101,6 +101,7 @@
         </li>
       </ul>
     </div>
+    <!-- pagination end -->
   </div>
 </div>
 
@@ -135,8 +136,6 @@
 
         </div>
       </div>
-
-
 
       <div class="form-group row">
         <div class="col-sm-6">
@@ -237,9 +236,9 @@
       <button *ngIf="(activity.status == 2)" class='btn btn-warning' data-toggle="modal" (click)="open(content1)"
         type="button"><i>Followup</i></button>
 
-        <button *ngIf="(activity.status == 2 || activity.status == 3  || activity.status == 6 )" class='btn btn-dark'
-          type="button" (click)="open_closeactivity(closeactivity,activity.aid)">
-          <i>Close</i></button>
+      <button *ngIf="(activity.status == 2 || activity.status == 3  || activity.status == 6 )" class='btn btn-dark'
+        type="button" (click)="open_closeactivity(closeactivity,activity.aid)">
+        <i>Close</i></button>
     </div>
 
   </div>
@@ -303,24 +302,25 @@
   </div>
   <div class="modal-body">
     <div class="form-group">
-        <label class="paydue">{{this.activityDetails[this.ind].pendingamount | currency: "INR"}} is due to pay.</label>
-        <div  class="form-inline md-form mr-auto mb-4">
-          <label >Amount</label>
-          <input style="width: 121px;margin-left: 51px;" class="form-control" id="text" type="text" name="pendingamt"
-            [ngModel]="activity.paydue" #paydue (keyup)="remain_to_pay(this.activityDetails[this.ind].pendingamount,paydue.value)">
-            <label style="margin-left: 105px;">{{this.due_paid | currency: "INR"}} remain to pay.</label>
-          </div>
-        
-      </div>
+      <label class="paydue">{{this.activityDetails[this.ind].pendingamount | currency: "INR"}} is due to pay.</label>
       <div class="form-inline md-form mr-auto mb-4">
-        <label>Payment Mode </label>
-        <select class="form-control" style="padding-left: 0px; width: 118px; margin-left: 11px;" id="productname"
-          name="productname" [(ngModel)]="activity.payment_mode">
-          <option [value]="undefined" selected>Select Payment Mode</option>
-          <option value="Cash">Cash </option>
-          <option value="Cheque">Cheque</option>
-        </select>
+        <label>Amount</label>
+        <input style="width: 121px;margin-left: 51px;" class="form-control" id="text" type="text" name="pendingamt"
+          [ngModel]="activity.paydue" #paydue
+          (keyup)="remain_to_pay(this.activityDetails[this.ind].pendingamount,paydue.value)">
+        <label style="margin-left: 105px;">{{this.due_paid | currency: "INR"}} remain to pay.</label>
       </div>
+
+    </div>
+    <div class="form-inline md-form mr-auto mb-4">
+      <label>Payment Mode </label>
+      <select class="form-control" style="padding-left: 0px; width: 118px; margin-left: 11px;" id="productname"
+        name="productname" [(ngModel)]="activity.payment_mode">
+        <option [value]="undefined" selected>Select Payment Mode</option>
+        <option value="Cash">Cash </option>
+        <option value="Cheque">Cheque</option>
+      </select>
+    </div>
   </div>
 
   <div class="modal-footer">
@@ -328,5 +328,3 @@
       (click)="pay_due(this.activityDetails[this.ind].pendingamount,paydue.value,activity.aid)">Pay</button>
   </div>
 </ng-template>
-
-

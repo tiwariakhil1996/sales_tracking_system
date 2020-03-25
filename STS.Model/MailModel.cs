@@ -7,8 +7,6 @@
         public string PrimaryPort { get; set; }
         public string UsernameEmail { get; set; }
         public string UsernamePassword { get; set; }
-        public string username { get; set; }
-        public int ReturnCode { get; set; }
         public string Token { get; set; }
         public int UserId { get; set; }
     }

@@ -26,7 +26,7 @@ namespace STS.Controllers
         }
 
       
-        //Resert Password Passsword
+        //Reset Password Admin
 
         [HttpPut]
         [Route("ResetPasswordAdmin/{Token}")]
@@ -50,7 +50,7 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
-
+        //Reset Password Sales
         [HttpPut]
         [Route("ResetPasswordSales/{Token}")]
         public async Task<IActionResult> ResetPasswordSales(string Token, [FromBody]ResetPasswordAdminModel model)

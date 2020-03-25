@@ -2,8 +2,8 @@
   <main class="main d-flex align-items-center" style="background-color: rgba(0, 0, 0,0.7);width: 100%;">
 
 
-    
-      <!-- <div class="logo">
+
+    <!-- <div class="logo">
           <img src="assets/img/logo.png" alt="">
       </div>
     
@@ -32,41 +32,39 @@
 
       </div> -->
 
-    
-      
-  <div class="container">
-    <!-- <div class="logo">
-      <img src="assets/img/brand/purple.png" alt="">
-  </div> -->
+
+
+    <div class="container">
       <div class="row">
         <div class="col-md-4 mx-auto">
           <div class="card-group">
             <div class="card p-2 login-form">
-              
+
               <div class="card-body">
-                  <!-- <h1>Sales Login</h1> -->
-                  <h1>Login</h1>
-                  <p class="text-muted">Sign In to your account</p>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="icon-user"></i></span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Email" [(ngModel)]="loginDetail.email" name="email"  autocomplete="email" required>
+                <h1>Login</h1>
+                <p class="text-muted">Sign In to your account</p>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-user"></i></span>
                   </div>
-                  <div class="input-group mb-4">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="icon-lock"></i></span>
-                    </div>
-                    <input type="password" class="form-control" placeholder="Password" [(ngModel)]="loginDetail.password" name="password" autocomplete="current-password" required>
+                  <input type="text" class="form-control" placeholder="Email" [(ngModel)]="loginDetail.email"
+                    name="email" autocomplete="email" required>
+                </div>
+                <div class="input-group mb-4">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-lock"></i></span>
                   </div>
-                  <div class="row">
-                    <div class="col-6">
-                      <button type="button" class="btn btn-primary px-4"  (click)="submitLogin()">Login</button>
-                    </div>
-                    <div class="col-6 text-right">
-                      <button type="button" class="btn btn-link px-0" (click)="forgotPassword()">Forgot password?</button>
-                    </div>
+                  <input type="password" class="form-control" placeholder="Password" [(ngModel)]="loginDetail.password"
+                    name="password" autocomplete="current-password" required>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <button type="button" class="btn btn-primary px-4" (click)="submitLogin()">Login</button>
                   </div>
+                  <div class="col-6 text-right">
+                    <button type="button" class="btn btn-link px-0" (click)="forgotPassword()">Forgot password?</button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -75,4 +73,3 @@
     </div>
   </main>
 </div>
-

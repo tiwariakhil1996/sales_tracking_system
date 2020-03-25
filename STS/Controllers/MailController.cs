@@ -23,10 +23,11 @@ namespace STS.Controllers
 
         TranStatus transaction = new TranStatus();
 
+        //Passed the Token and user id in urr.this is declare the token and userid variable as public 
         public string Token;
         public int UserId;
-        //public string Users;
 
+        // Send mail Admin with token  and user id
         [HttpPost]
         [Route("SendMail")]
         public async Task<IActionResult> SendMail([FromBody] SendMailModel model)
@@ -65,7 +66,7 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
-
+        // Send mail sales with token  and user id
         [HttpPost]
         [Route("SendMail_Sales")]
         public async Task<IActionResult> SendMail_Sales([FromBody] SendMailModel model)
@@ -80,9 +81,11 @@ namespace STS.Controllers
                 {
                     Token = transaction.Token;
                     UserId = transaction.UserIdentity;
-                    //Users = transaction.Users;
-                    var html = System.IO.File.ReadAllText(@"EmailTemplates/ResetPassword.html");
+
+                    var html = System.IO.File.ReadAllText(@"EmailTemplate/ResetPassword.html");
                     var link = "http://localhost:55627/sales/reset-password-sales?Token=" + Token + "&UserId=" + UserId;
+
+
                     html = html.Replace("{{token}}", link);
                     //var user = Users;
                     //user = user.Replace("{{users}}", link);

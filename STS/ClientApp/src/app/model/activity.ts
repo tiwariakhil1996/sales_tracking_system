@@ -129,6 +129,7 @@ export class activityDetailsModel {
     email: string;
     createdon: string;
     appointmentDate: string;
+    // this is add for add the session storage in the multiple activity product
     activityproduct: updateactivityModel[] = [];
     constructor() {
         this.activityproduct.push(new updateactivityModel());   

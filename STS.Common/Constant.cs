@@ -16,7 +16,7 @@
             User = 2
         }
     }
-
+    //Add the Token and USerIdentity(UserId) for sending the value in url
     public class TranStatus
     {
         public string returnMessage { get; set; }

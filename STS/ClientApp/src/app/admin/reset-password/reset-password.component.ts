@@ -51,6 +51,8 @@ export class ResetPasswordComponent implements OnInit {
 
   ngOnInit() {
     // this.checkRole(this.RoleJason);
+    
+    // this is queryparam fetch the id and value from the url
     this.route.queryParams.subscribe(params => {
       if (params.Token) {
         this.Token = params.Token;

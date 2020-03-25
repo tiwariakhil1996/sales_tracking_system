@@ -13,7 +13,7 @@ namespace STS.Common
 {
     public static class CommonHelper
     {
-        //This funtion is used to send mail for forgot password.
+        //This funtion is used to send mail for forgot password both admin and sales.
         public static void SendEmail(string EmailTo, string Subject, string EmailMessage, bool needCC, Dictionary<string, byte[]> attachment = null)
         {
             string liveOrProd = STSSetting.PrimaryDomain;
@@ -49,9 +49,6 @@ namespace STS.Common
         } 
         
         
-  
-
-
         //To Store multiple products using Data Table
         public static DataTable ToDataTable<T>(this IList<T> items)
         {

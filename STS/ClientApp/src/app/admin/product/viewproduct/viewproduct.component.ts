@@ -481,7 +481,7 @@ export class ViewproductComponent implements OnInit {
       if (data.Status.code === 0) {
         if (data.Product_Images_List) {
           this.product_imageDetails = data.Product_Images_List;
-          console.log(this.product_imageDetails);
+          // console.log(this.product_imageDetails);
         }
       }
     }, (err) => {

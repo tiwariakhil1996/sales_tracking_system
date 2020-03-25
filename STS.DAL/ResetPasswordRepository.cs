@@ -21,10 +21,10 @@ namespace STS.DAL
                 TranStatus transaction = new TranStatus();
                 DynamicParameters parameter = new DynamicParameters();
                 parameter.Add("@Token", Token);
-                //parameter.Add("@OldPassword", model.Oldpassword);
+                parameter.Add("@UserId", model.UserId);
+
                 parameter.Add("@NewPassword", model.Newpassword);
                 parameter.Add("@Confirmpassword", model.Confirmpassword);
-                parameter.Add("@UserId", model.UserId);
 
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
@@ -46,10 +46,10 @@ namespace STS.DAL
                 TranStatus transaction = new TranStatus();
                 DynamicParameters parameter = new DynamicParameters();
                 parameter.Add("@Token", Token);
-                //parameter.Add("@OldPassword", model.Oldpassword);
+                parameter.Add("@UserId", model.UserId);
+
                 parameter.Add("@NewPassword", model.Newpassword);
                 parameter.Add("@Confirmpassword", model.Confirmpassword);
-                parameter.Add("@UserId", model.UserId);
 
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
