@@ -19,9 +19,7 @@ namespace STS.Controllers
         {
             iactivity = activity;
         }
-
         //Add Activity
-
         [HttpPost]
         [Route("addActivity")]
         public async Task<IActionResult> addActivity([FromBody]ActivityModel model)
@@ -67,11 +65,7 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
-
-
-
         // Display Products Added into activity
-
         [HttpGet]
         [Route("Activity_ProductList/{aid}")]
         public async Task<IActionResult> Activity_ProductList(int aid)
@@ -92,7 +86,6 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
-
         [HttpGet]
         [Route("activity_Details/{aid}")]
         public async Task<IActionResult> activity_Details(int aid)
@@ -113,7 +106,6 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
-
         //Display
 
         //[HttpGet]
