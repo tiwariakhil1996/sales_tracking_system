@@ -23,6 +23,7 @@ import { ViewChild, ElementRef, NgZone } from '@angular/core';
 import { MapsAPILoader, AgmMap } from '@agm/core';
 import { from } from 'rxjs';
 import { TabsetComponent } from 'ngx-bootstrap';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-currentactivity',
@@ -76,8 +77,10 @@ export class CurrentactivityComponent implements OnInit {
   client = new clientModel();
   clientDetails: clientModel[] = [];
 
+  currentDate = new Date();
   // For Map
 
+  
   //  latitude: number;
   //  longitude: number;
 
@@ -151,6 +154,7 @@ export class CurrentactivityComponent implements OnInit {
 
   constructor(private activityService: ActivityService,
     private router: Router,
+    // private datePipe: DatePipe,
     private clientService: ClientService,
     private modalService: NgbModal,
     private salesService: SalesService,
@@ -165,12 +169,14 @@ export class CurrentactivityComponent implements OnInit {
     this.SalesList();
 
 
+    // this.mydate = this.datePipe.transform(this.currentDate, 'yyyy-MM-dd');
     // this.eachactivityList();
     // this.activity_productList();
   }
 
 
   ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
 
     const item = { pageIndex: 0 };
     this.eachactivityList(item);
@@ -381,7 +387,7 @@ export class CurrentactivityComponent implements OnInit {
       if (data.Status.code === 0) {
         if (data.Activity_ProductList) {
           this.activity_productDetails = data.Activity_ProductList;
-          //console.log( this.activity_productDetails);
+          // console.log( this.activity_productDetails);
           this.activityInvoice.activityproduct = this.activity_productDetails;
 
           this.subtotal();
@@ -456,8 +462,8 @@ export class CurrentactivityComponent implements OnInit {
         // console.log(totalPageSize);
 
         this.totalPageList = [];
-        for (var i = 0; i < this.totalPageSize; i++) {
-          this.totalPageList.push({ pageSize: i + 1, pageIndex: i })
+        for (let i = 0; i < this.totalPageSize; i++) {
+          this.totalPageList.push({ pageSize: i + 1, pageIndex: i });
 
         }
       }
@@ -588,7 +594,7 @@ export class CurrentactivityComponent implements OnInit {
           disableTimeOut: false,
           timeOut: 2000
         });
-        this.modalService.dismissAll()
+        this.modalService.dismissAll();
       }
       // this.activity = new activityModel();
       // this.eachactivityList();
@@ -650,7 +656,7 @@ export class CurrentactivityComponent implements OnInit {
     if (!this.validateMobile(this.activity.contact)) {
       isValid = true;
     }
-    ;
+
     if (isValid) {
       this.toastr.warning('Please enter valid mobile number', 'Warning', {
         disableTimeOut: false,
@@ -660,8 +666,8 @@ export class CurrentactivityComponent implements OnInit {
   }
 
   validateMobile(mobileField) {
-    var reg = /^\d{10}$/;
-    return reg.test(mobileField) == false ? false : true;
+    const reg = /^\d{10}$/;
+    return reg.test(mobileField) === false ? false : true;
   }
 
 
@@ -802,14 +808,26 @@ export class CurrentactivityComponent implements OnInit {
 
   getDocumentDefinition() {
 
+    // Set & get Activity Details
     sessionStorage.setItem('ActivityInvoice', JSON.stringify(this.activityInvoiceDetails[0] || {}));
-    this.InvoiceActivity = JSON.parse(sessionStorage.getItem('ActivityInvoice')) || [0];
+    this.productInvoice = JSON.parse(sessionStorage.getItem('ActivityInvoice')) || [0];
 
-    sessionStorage.setItem('ActivityProductInvoice', JSON.stringify(this.activityInvoice));
-    this.activityInvoice = JSON.parse(sessionStorage.getItem('ActivityProductInvoice')) || new activityDetailsModel();
+    // Set & get Product Details
+    sessionStorage.setItem('ProductInvoice', JSON.stringify(this.activityInvoice));
+    this.activityInvoice = JSON.parse(sessionStorage.getItem('ProductInvoice')) || new activityDetailsModel();
 
     return {
+     
+        
+      // Heading
       content: [
+        {
+          text: '' + this.currentDate ,
+          // bold: true,
+          fontSize: 7,
+          alignment: 'right',
+          // margin: [0, 0, 0, 20]
+        },
         {
           text: 'INVOICE',
           bold: true,
@@ -817,21 +835,28 @@ export class CurrentactivityComponent implements OnInit {
           alignment: 'center',
           margin: [0, 0, 0, 20]
         },
+
+        // Company Info
         {
           columns: [
             [
               {
-                text: 'Company Name:' + 'MI',
+                text: 'Company Name:' + this.user.companyname,
                 style: 'name',
                 alignment: 'right'
               },
               {
-                text: 'Address:' + 'Surat',
+                text: 'Address:' + this.user.address,
                 style: 'name',
                 alignment: 'right'
               },
               {
-                text: 'Help Desk:' + 'mi@info.co.in',
+                text: 'Help Desk:' + this.user.email,
+                style: 'name',
+                alignment: 'right'
+              },
+              {
+                text: 'Contact:' + this.user.mobile,
                 style: 'name',
                 alignment: 'right'
               },
@@ -839,42 +864,80 @@ export class CurrentactivityComponent implements OnInit {
           ]
         },
 
+        // Bill Info
         {
           columns: [
             [
               {
-                text: 'Bill No:-' + this.InvoiceActivity.aid,
+                text: 'Bill No                  : ' + this.productInvoice.aid,
                 style: 'name'
               },
               {
-                text: 'Title:-' + this.InvoiceActivity.title
+                text: 'Title                 : ' +  this.productInvoice.title
               },
               {
-                text: 'Client Name:-' + this.InvoiceActivity.clientName
+                text: 'Client Name   : '  +  this.productInvoice.clientName
               },
               {
-                text: 'Address:-' + this.InvoiceActivity.address
+                text: 'Address          : ' +  this.productInvoice.address
               },
               {
-                text: 'Email:-' + this.InvoiceActivity.email,
+                text: 'Email               : '  + this.productInvoice.email,
               },
               {
-                text: 'Date:-' + this.InvoiceActivity.createdon,
+                text: 'Date                 : '  +  this.productInvoice.createdon,
               },
               {
-                text: 'Due Date:- ' + this.InvoiceActivity.appointmentDate,
+                text: 'Delivery Date  : ' +  this.productInvoice.appointmentDate,
               },
             ],
 
           ]
 
         },
+
+        // Product Details
         {
           text: 'Product Details',
           style: 'header'
         },
-        // call the product used of the this.activityInvoice for display the product detail
-        this.getEducationObject(this.activityInvoice.activityproduct),
+
+        this.getProductsObject(this.activityInvoice.activityproduct),
+
+        {
+          text: 'Advance Paid : ' + this.productInvoice.advancepay,
+          // style: 'header'
+          // alignment: 'right',
+        },
+        {
+          text: 'Pay Due           : ' + this.productInvoice.pending_amount,
+          // style: 'header'
+          // alignment: 'right',
+        },
+        {
+          text: 'Grand Total     : ' + this.final_total,
+          // style: 'header'
+          // alignment: 'right',
+        },
+
+        {
+          text: 'Signature',
+          style: 'sign'
+        },
+
+        {
+          columns: [
+            // Details to show in QR Code
+            { qr: 'Company Name :' + this.user.companyname + ', Address :' + this.user.address + ',Contact :' + this.user.mobile + ',Bill No. :' + this.productInvoice.aid + ',Client Name :' + this.productInvoice.clientName + ',Clients Contact No : ' + this.productInvoice.contact, fit: 100 },
+         
+            // Signature / Name of a person
+            {
+              // text: `(${this.productInvoice.clientName})`,
+              text: `(${this.user.username})`,
+              alignment: 'right',
+            }
+          ]
+        },
 
         {
           text: 'Notice:',
@@ -883,20 +946,6 @@ export class CurrentactivityComponent implements OnInit {
         {
           text: 'Invoice was created on a computer and is valid without the signature and seal.'
         },
-        {
-          text: 'Signature',
-          style: 'sign'
-        },
-
-        {
-          columns: [
-            { qr: this.InvoiceActivity.email + ', Contact No : ' + this.InvoiceActivity.contact, fit: 100 },
-            {
-              text: `(${this.InvoiceActivity.clientName})`,
-              alignment: 'right',
-            }
-          ]
-        }
 
       ],
 
@@ -929,10 +978,12 @@ export class CurrentactivityComponent implements OnInit {
 
     };
   }
-  getEducationObject(ActivityProductInvoice: updateactivityModel[]) {
+
+
+  getProductsObject(productDetails: updateactivityModel[]) {
     return {
       table: {
-        widths: ['*', '*', '*', '*', '*', '*'],
+        widths: ['*', '*', '*', '*', '*', '*', '*'],
         body: [
           [
             {
@@ -948,24 +999,26 @@ export class CurrentactivityComponent implements OnInit {
               style: 'tableHeader'
             },
             {
+              text: 'Amount',
+              style: 'tableHeader'
+            },
+            {
+              text: 'Dis.%',
+              style: 'tableHeader'
+            },
+            {
               text: 'Total',
               style: 'tableHeader'
             },
-            {
-              text: 'Discount %',
-              style: 'tableHeader'
-            },
-            {
-              text: 'Grand Total',
-              style: 'tableHeader'
-            },
-
           ],
-          ...ActivityProductInvoice.map(ap => {
-            return [ap.productname, ap.price, ap.quantity, ap.amount, ap.discount_per, ap.total_price];
+          ...productDetails.map(p => {
+            return [p.productname, p.price, p.quantity, p.amount, p.discount_per, p.total_price];
           })
         ]
-      }
+      },
+
+
+
     };
   }
  

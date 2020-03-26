@@ -22,6 +22,8 @@
         public string Gender { get; set; }
         public string Mobile { get; set; }
         public string Adharcard { get; set; }
+        public string Companyname { get; set; }
+        public string Companyaddress { get; set; }
         public string Address { get; set; }
 
         public string Email { get; set; }

@@ -9,6 +9,8 @@ export class salesregisterModel {
     gender: string;
     mobile: string;
     adharcard: string;
+    companyname: string;
+    companyaddress: string;
     address: string;
     password: string;
     cpassword: string;

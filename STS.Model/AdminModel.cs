@@ -11,7 +11,8 @@ namespace STS.Model
         public string Mobile { get; set; }
         public string Password { get; set; }
         public string Cpassword { get; set; }
-
+        public int Createdby { get; set; }
+        
 
 
     }
@@ -25,8 +26,13 @@ namespace STS.Model
         public string Gender { get; set; }
         public string Email { get; set; }
         public string Mobile { get; set; }
+
+        public string Companyname { get; set; }
+        public string Address { get; set; }
         public string Password { get; set; }
         public int UserType { get; set; }
+
+        public int Createdby { get; set; }
 
     }
 
@@ -42,6 +48,10 @@ namespace STS.Model
         public string Email { get; set; }
         public string Mobile { get; set; }
         public string Password { get; set; }
+        public string Companyname { get; set; }
+        public string Address { get; set; }
+
+        public int Createdby { get; set; }
 
         public int UserType { get; set; }
     }

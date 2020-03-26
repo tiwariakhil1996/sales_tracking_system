@@ -40,6 +40,7 @@
               <th>Appointment Date</th>
               <th>Invoice</th>
               <th>Track</th>
+              <!-- <th>Invoice</th> -->
               <th style="padding-right: 50px;">Action</th>
             </tr>
           </thead>
@@ -69,6 +70,9 @@
                 <i class="fa fa-map-marker map" (click)="Get_Lat_Long_of_Activity(item.aid)"
                   (click)="open_map_modal(map)"></i>
               </td>
+              <!-- <td>
+                <button (click)="GeneratePdf('open')"><i class="fa fa-download" aria-hidden="true"></i></button>
+              </td> -->
               <td>
                 <button type="button" class="btn btn-primary" data-toggle="modal"
                   (click)="openupdatemodal(content,item,i); GetProduct_Activity(item.aid)"><i class="fa fa-edit"
@@ -144,6 +148,9 @@
   <div class="modal-body" style="color: black;">
 
     <div>
+      <button class="form-control btn btn-primary download-invoice" (click)="GeneratePdf('open')"><i
+          class="fa fa-download" aria-hidden="true"></i></button>
+
       <tabset>
         <tab heading="Edit" id="tab1">
           <div class="form-group row">
@@ -350,6 +357,7 @@
                 <label>Dis. amt </label><label
                   style="padding-left: 59px;">{{total_dis_amount | currency: "INR"}}</label>
               </div>
+              <!-- <div *ngIf="update_activity.advance_payment == 0"></div> -->
               <div>
                 <label>Adv. Payment </label>
                 <input #adv_payment type="text" style="width: 104px; margin-left: 20px;" id="adv_payment"
@@ -391,16 +399,18 @@
 
 
         <tab heading="Details">
+          <!-- <i class="fa fa-download" aria-hidden="true" (click)="GeneratePdf('open')"></i> -->
           <div *ngFor="let activitydetails of activityInvoiceDetails;let i=index;">
             <div>
-              <div class="clearfix">
-                <button class="btn btn-primary buttonleft" (click)="GeneratePdf('open')">Download Invoice</button>
+              <!-- <div class="clearfix form-control"> -->
+              <div>
+
                 <h1>INVOICE</h1>
                 <div id="company" class="clearfix">
-                  <div>Company Name</div>
-                  <div>455 Foggy Heights,<br /> AZ 85004, US</div>
-                  <div>(602) 519-0450</div>
-                  <div><a href="mailto:company@example.com">company@example.com</a></div>
+                  <div>{{user.companyname}}</div>
+                  <div>{{user.address}}</div>
+                  <div>{{user.mobile}}</div>
+                  <div><a>{{user.email}}</a></div>
                 </div>
                 <div id="project">
                   <div><span style="font-size: 0.9em;">Bill no.</span> {{activitydetails.aid}}</div>
@@ -435,9 +445,6 @@
                       <td class="qty">{{products.discount_per}}</td>
                       <td class="total">{{products.total_price}}</td>
                     </tr>
-                    <tr>
-
-                    </tr>
 
                     <tr>
                       <td colspan="5" style="text-align: right;">SUBTOTAL</td>
@@ -446,6 +453,14 @@
                     <tr>
                       <td colspan="5" style="text-align: right;">Total Discount %</td>
                       <td class="total">{{total_dis_per}}%</td>
+                    </tr>
+                    <tr>
+                      <td colspan="5" style="text-align: right;">Advance Paid</td>
+                      <td class="total"> {{activitydetails.advancepay | currency: "INR"}}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="5" style="text-align: right;">Pay Due</td>
+                      <td class="total"> {{activitydetails.pending_amount | currency: "INR"}}</td>
                     </tr>
                     <tr>
                       <td colspan="5" style="text-align: right;" class="grand total">GRAND TOTAL</td>
@@ -468,7 +483,6 @@
 
 
       </tabset>
-
     </div>
 
   </div>

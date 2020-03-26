@@ -6,11 +6,16 @@ export class registerModel {
     username: string;
     email: string;
     gender: string;
-    mobile: string;
+    mobile: number;
+    companyname: string;
+    address: string;
     password: string;
     cpassword: string;
     userType: number;
+    createdby: number;
 }
+
+
 
 export class avatarModel {
     image: string;

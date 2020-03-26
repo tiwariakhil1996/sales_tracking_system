@@ -27,17 +27,13 @@
         <thead>
           <tr class="table-success">
             <th>Sr.no</th>
-            <!-- <th>ID</th> -->
             <th>Title</th>
             <th>Description</th>
-            <!-- <th>Product</th> -->
             <th>Client</th>
-            <!-- <th>Sales</th> -->
             <th>Contact</th>
-            <!-- <th>Latitude</th>
-            <th>Longitude</th> -->
             <th>Appointment Date</th>
             <th>Status</th>
+            <!-- <th>Invoice</th> -->
             <th>Action</th>
           </tr>
         </thead>
@@ -59,6 +55,10 @@
               <span *ngIf="(item.status == 5)" class="badge badge-pill badge-dark">Canceled</span>
               <span *ngIf="(item.status == 6)" class="badge badge-pill badge-light">{{item.statusname}}</span>
             </td>
+            <!-- <td>
+              <button class="form-control btn btn-primary download-invoice" (click)="GeneratePdf('open')"><i
+                class="fa fa-download" aria-hidden="true"></i></button>
+            </td> -->
             <td>
               <button type="button" class="btn btn-primary" data-toggle="modal" (click)= "openupdatemodal(content,item,i)"
                 (click)="GetProduct_Activity(item.aid)"><i class="fa fa-eye" aria-hidden="true"></i></button>
@@ -156,7 +156,7 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row" style="overflow: auto;">
         <div class="col-sm-12">
           <table class="table">
             <thead class="color">
@@ -236,9 +236,11 @@
       <button *ngIf="(activity.status == 2)" class='btn btn-warning' data-toggle="modal" (click)="open(content1)"
         type="button"><i>Followup</i></button>
 
-      <button *ngIf="(activity.status == 2 || activity.status == 3  || activity.status == 6 )" class='btn btn-dark'
-        type="button" (click)="open_closeactivity(closeactivity,activity.aid)">
-        <i>Close</i></button>
+        <button *ngIf="(activity.status == 2 || activity.status == 3  || activity.status == 6 )" class='btn btn-dark'
+          type="button" (click)="open_closeactivity(closeactivity,activity.aid)">
+          <i>Close</i></button>
+          <button style="float: right; width: 47px;" class="form-control btn btn-primary download-invoice" (click)="GeneratePdf('open')"><i
+            class="fa fa-download" aria-hidden="true"></i></button>
     </div>
 
   </div>

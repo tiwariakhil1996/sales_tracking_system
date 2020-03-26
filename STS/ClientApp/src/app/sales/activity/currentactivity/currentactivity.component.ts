@@ -4,7 +4,7 @@ import { SalesService } from '../../../service/sales.service';
 import { ProductService } from '../../../service/product.service';
 import { ClientService } from '../../../service/client.service';
 import { ActivityService } from '../../../service/activity.service';
-import { activityModel, updateactivityModel, paginationModel, addactivityModel } from '../../../model/activity';
+import { activityModel, updateactivityModel, paginationModel, activityDetailsModel } from '../../../model/activity';
 import { salesregisterModel, LocationModel } from '../../../model/sales';
 import { productModel } from '../../../model/product';
 import { clientModel } from '../../../model/client';
@@ -12,6 +12,10 @@ import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BsModalRef } from 'ngx-bootstrap';
+
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 // import { ViewChild, ElementRef, NgZone } from '@angular/core';
 // import { MapsAPILoader, AgmMap } from '@agm/core';
@@ -36,6 +40,12 @@ export class CurrentactivityComponent implements OnInit {
   activity_product = new updateactivityModel();
   activity_productDetails: updateactivityModel[] = [];
 
+  
+  productInvoice = new activityDetailsModel();
+
+  activityInvoice = new activityDetailsModel();
+  activityInvoiceDetails: activityDetailsModel[] = [];
+  
   sales = new salesregisterModel();
   salesDetails: salesregisterModel[] = [];
 
@@ -45,9 +55,7 @@ export class CurrentactivityComponent implements OnInit {
   client = new clientModel();
   clientDetails: clientModel[] = [];
 
-  update_activity = new addactivityModel();
-  update_activityDetails: addactivityModel[] = [];
-
+  currentDate = new Date();
 
   due_paid: number;
 
@@ -111,6 +119,7 @@ export class CurrentactivityComponent implements OnInit {
 
 
   ngOnInit() {
+    // this.activity_productList(aid)
     const item = { pageIndex: 0 };
     this.activityList(item);
 
@@ -301,9 +310,25 @@ export class CurrentactivityComponent implements OnInit {
   }
 
 
+  activity_Details(aid) {
+    this.activityService.activity_Details(aid).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.activity_Details) {
+          this.activityInvoiceDetails = data.activity_Details;
+          console.log(this.activityInvoiceDetails);
+
+         sessionStorage.setItem('ActivityInvoice', JSON.stringify(this.activityInvoiceDetails[0] || {}));
+
+        }
+      }
+    }, (err) => {
+
+    });
+  }
+
   GetProduct_Activity(aid) {
     this.activity_productList(aid);
-
+    this.activity_Details(aid);
   }
 
   activity_productList(aid) {
@@ -312,6 +337,10 @@ export class CurrentactivityComponent implements OnInit {
         if (data.Activity_ProductList) {
           this.activity_productDetails = data.Activity_ProductList;
           // console.log(this.activity_productDetails);
+          this.activityInvoice.activityproduct = this.activity_productDetails;
+
+          sessionStorage.setItem('ProductInvoice', JSON.stringify(this.activityInvoice));
+
 
         }
       }
@@ -561,5 +590,233 @@ export class CurrentactivityComponent implements OnInit {
     }, (err) => {
     });
   }
+
+
+  GeneratePdf(action = 'open') {
+
+    console.log(pdfMake);
+    const documentDefinition = this.getDocumentDefinition();
+    switch (action) {
+      case 'open': pdfMake.createPdf(documentDefinition).open(); break;
+      case 'print': pdfMake.createPdf(documentDefinition).print(); break;
+      case 'download': pdfMake.createPdf(documentDefinition).download(); break;
+
+      default: pdfMake.createPdf(documentDefinition).open(); break;
+    }
+  }
+
+  getDocumentDefinition() {
+
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    // get Activity Details
+    // sessionStorage.setItem('ActivityInvoice', JSON.stringify(this.activityInvoiceDetails[0] || {}));
+    this.productInvoice = JSON.parse(sessionStorage.getItem('ActivityInvoice')) || [0];
+
+    // get Product Details
+    // sessionStorage.setItem('ProductInvoice', JSON.stringify(this.activityInvoice));
+    this.activityInvoice = JSON.parse(sessionStorage.getItem('ProductInvoice')) || new activityDetailsModel();
+
+    return {
+     
+        
+      // Heading
+      content: [
+        {
+          text: '' + this.currentDate ,
+          // bold: true,
+          fontSize: 7,
+          alignment: 'right',
+          // margin: [0, 0, 0, 20]
+        },
+        {
+          text: 'INVOICE',
+          bold: true,
+          fontSize: 20,
+          alignment: 'center',
+          margin: [0, 0, 0, 20]
+        },
+
+        // Company Info
+        {
+          columns: [
+            [
+              {
+                text: 'Company Name:' + this.user.companyname,
+                style: 'name',
+                alignment: 'right'
+              },
+              {
+                text: 'Address:' + this.user.companyaddress,
+                style: 'name',
+                alignment: 'right'
+              },
+              {
+                text: 'Help Desk:' + this.user.email,
+                style: 'name',
+                alignment: 'right'
+              },
+              {
+                text: 'Contact:' + this.user.mobile,
+                style: 'name',
+                alignment: 'right'
+              },
+            ],
+          ]
+        },
+
+        // Bill Info
+        {
+          columns: [
+            [
+              {
+                text: 'Bill No                  : ' + this.productInvoice.aid,
+                style: 'name'
+              },
+              {
+                text: 'Title                 : ' +  this.productInvoice.title
+              },
+              {
+                text: 'Client Name   : '  +  this.productInvoice.clientName
+              },
+              {
+                text: 'Address          : ' +  this.productInvoice.address
+              },
+              {
+                text: 'Email               : '  + this.productInvoice.email,
+              },
+              {
+                text: 'Date                 : '  +  this.productInvoice.createdon,
+              },
+              {
+                text: 'Delivery Date  : ' +  this.productInvoice.appointmentDate,
+              },
+            ],
+
+          ]
+
+        },
+
+        // Product Details
+        {
+          text: 'Product Details',
+          style: 'header'
+        },
+
+        this.getProductsObject(this.activityInvoice.activityproduct),
+
+        {
+          text: 'Advance Paid : ' + this.productInvoice.advancepay,
+          // style: 'header'
+          // alignment: 'right',
+        },
+        {
+          text: 'Pay Due           : ' + this.productInvoice.pending_amount,
+          // style: 'header'
+          // alignment: 'right',
+        },
+        {
+          text: 'Grand Total     : ' + this.productInvoice.grandtotal,
+          // style: 'header'
+          // alignment: 'right',
+        },
+
+        {
+          text: 'Signature',
+          style: 'sign'
+        },
+
+        {
+          columns: [
+            // Details to show in QR Code
+            { qr: 'Company Name :' + this.user.companyname + ', Address :' + this.user.companyaddress + ',Contact :' + this.user.mobile + ',Bill No. :' + this.productInvoice.aid + ',Client Name :' + this.productInvoice.clientName + ',Clients Contact No : ' + this.productInvoice.contact, fit: 100 },
+         
+           // Signature / Name of a person
+            {
+              // text: `(${this.productInvoice.clientName})`,
+              text: `(${this.user.salesName})`,
+              alignment: 'right',
+            }
+          ]
+        },
+
+        {
+          text: 'Notice:',
+          style: 'header'
+        },
+        {
+          text: 'Invoice was created on a computer and is valid without the signature and seal.'
+        },
+
+      ],
+
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          margin: [0, 20, 0, 10],
+          decoration: 'underline'
+        },
+        name: {
+          fontSize: 10,
+          bold: true
+        },
+        jobTitle: {
+          fontSize: 14,
+          bold: true,
+          italics: true
+        },
+        sign: {
+          margin: [0, 50, 0, 10],
+          alignment: 'right',
+          italics: true
+        },
+        tableHeader: {
+          bold: true,
+        }
+      }
+
+    };
+  }
+
+
+  getProductsObject(productDetails: updateactivityModel[]) {
+    return {
+      table: {
+        widths: ['*', '*', '*', '*', '*', '*'],
+        body: [
+          [
+            {
+              text: 'Product',
+              style: 'tableHeader'
+            },
+            {
+              text: 'Price',
+              style: 'tableHeader'
+            },
+            {
+              text: 'Qty',
+              style: 'tableHeader'
+            },
+            {
+              text: 'Amount',
+              style: 'tableHeader'
+            },
+            {
+              text: 'Dis.%',
+              style: 'tableHeader'
+            },
+            {
+              text: 'Total',
+              style: 'tableHeader'
+            },
+          ],
+          ...productDetails.map(p => {
+            return [p.productname, p.price, p.quantity, p.amount, p.discount_per, p.total_price];
+          })
+        ]
+      },
+    };
+  }
+
 
 }

@@ -197,7 +197,10 @@ export class Downloadpdf{
     email: string;
     createdon: string;
     appointmentDate: string;
-    
+    pending_amount: number;
+    grandtotal: number;
+    advancepay: number;
+
     activityproduct: updateactivityModel[] = [];
     constructor() {
         this.activityproduct.push(new updateactivityModel());   

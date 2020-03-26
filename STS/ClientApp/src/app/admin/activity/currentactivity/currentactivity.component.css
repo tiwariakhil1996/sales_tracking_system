@@ -135,6 +135,38 @@ hr {
   border-bottom-width: 1px;
 }
 
+
+.download-invoice {
+  float: right; 
+  background-color: blue; 
+  width: 47px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .clearfix:after {
   content: "";
   display: table;
