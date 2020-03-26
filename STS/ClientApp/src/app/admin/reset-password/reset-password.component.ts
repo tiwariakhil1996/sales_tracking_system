@@ -51,7 +51,7 @@ export class ResetPasswordComponent implements OnInit {
 
   ngOnInit() {
     // this.checkRole(this.RoleJason);
-    
+
     // this is queryparam fetch the id and value from the url
     this.route.queryParams.subscribe(params => {
       if (params.Token) {
@@ -119,13 +119,13 @@ export class ResetPasswordComponent implements OnInit {
           });
           this.Resetpassword = new ResetPasswordAdmin();
 
-        }else {
+        } else {
           this.toastr.error('Old password and new Pasword matched please enter the different password', 'Error', {
             disableTimeOut: false,
             timeOut: 2000
           });
         }
-    
+
       }, (err) => {
 
       });

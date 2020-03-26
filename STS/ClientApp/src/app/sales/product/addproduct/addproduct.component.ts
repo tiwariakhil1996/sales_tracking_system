@@ -23,12 +23,12 @@ export class AddproductComponent implements OnInit {
 
   saleslocation = new LocationModel();
   saleslocationDetails: LocationModel[] = [];
-  
+
   user = new salesregisterModel();
 
   tempImageList: UpdateImageListModel[] = [];
   updateImageList: UpdateImageListModel[] = [];
-  
+
   product = new productModel();
   productDetails: productModel[] = [];
 
@@ -66,8 +66,8 @@ export class AddproductComponent implements OnInit {
     private categoryService: CategorySubcategoryService) {
     // this.categoryList();
     this.active_CategoryList();
-   this.Refresh_Location();
-   }
+    this.Refresh_Location();
+  }
 
   ngOnInit() {
     this.checkRole(this.RoleJason);
@@ -92,16 +92,16 @@ export class AddproductComponent implements OnInit {
   }
 
   Refresh_Sales_Location() {
-   this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
-   this.saleslocation.userid = this.user.id;
-   this.saleslocation.latitude = this.lat;
-   this.saleslocation.longitude = this.lng;
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.saleslocation.userid = this.user.id;
+    this.saleslocation.latitude = this.lat;
+    this.saleslocation.longitude = this.lng;
 
-   this.salesService.Refresh_Sales_Location(this.saleslocation).subscribe((data: any) => {
-   }, (err) => {
+    this.salesService.Refresh_Sales_Location(this.saleslocation).subscribe((data: any) => {
+    }, (err) => {
 
-   });
- }
+    });
+  }
 
   checkRole(RoleJason) {
     const result = JSON.parse(localStorage.getItem('salesLogin')) || [];
@@ -120,7 +120,7 @@ export class AddproductComponent implements OnInit {
         this.toastr.success('Category added succesfully', 'Successful', {
           disableTimeOut: false
         });
-        this. active_CategoryList();
+        this.active_CategoryList();
       }
       this.category = new categoryDataModel();
     }, (err) => {
@@ -212,10 +212,10 @@ export class AddproductComponent implements OnInit {
     if (!this.product.cid) {
       strError += strError = '- Please select category';
     } else
-    if (!this.product.sid) {
-      strError += strError = '' ? '' : '<br/>';
-      strError += '- Please select subcategory';
-    }
+      if (!this.product.sid) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += '- Please select subcategory';
+      }
 
 
     if (!this.product.productname) {
@@ -427,14 +427,14 @@ export class AddproductComponent implements OnInit {
     this.product.image = null;
     this.product.date = null;
 
-  this.product = new productModel();
-    
- }
+    this.product = new productModel();
+
+  }
 
 
- viewProductForm() {
-  this.router.navigate(['/sales/product/viewproduct']);
-}
+  viewProductForm() {
+    this.router.navigate(['/sales/product/viewproduct']);
+  }
 
 
 }

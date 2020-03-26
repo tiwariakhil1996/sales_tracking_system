@@ -1,20 +1,20 @@
 <div class="row" style="padding: 0;">
-<div class="col-lg-12">
+  <div class="col-lg-12">
     <div class="card">
       <div class="card-header color">
-         Subategory Details
-         
-         <button type="submit" tooltip=" Add new activity" style="float: right; width: 74px;" class="btn btn-sm btn-success"
-         (click)="addnewSubategory()"><i class="fa fa-plus"></i></button>
-         
+        Subategory Details
+
+        <button type="submit" tooltip=" Add new activity" style="float: right; width: 74px;"
+          class="btn btn-sm btn-success" (click)="addnewSubategory()"><i class="fa fa-plus"></i></button>
+
       </div>
       <!-- <div style="overflow-x:auto;"> -->
       <div class="card-body table-responsive">
-         <!-- SEARCH -->
-     <div class="form-inline md-form mr-auto mb-4">
-      <input style="float: right;" (input)="onsearch()" class="form-control mr-sm-2" type="text"
-        [(ngModel)]="search_" placeholder="Search" aria-label="Search">
-    </div>
+        <!-- SEARCH -->
+        <div class="form-inline md-form mr-auto mb-4">
+          <input style="float: right;" (input)="onsearch()" class="form-control mr-sm-2" type="text"
+            [(ngModel)]="search_" placeholder="Search" aria-label="Search">
+        </div>
 
         <table class="table table-bordered ">
           <thead>
@@ -29,19 +29,21 @@
             </tr>
           </thead>
           <tbody>
-           
-            <tr *ngFor="let item of subcategoryDetails;let i=index;" >
-              <td >{{i+1}}</td>
+
+            <tr *ngFor="let item of subcategoryDetails;let i=index;">
+              <td>{{i+1}}</td>
               <!-- <td >{{item.sid}}</td>
               <td >{{item.cid}}</td> -->
-              <td >{{item.cname}}</td>
-              <td >{{item.sname}}</td>
-              
+              <td>{{item.cname}}</td>
+              <td>{{item.sname}}</td>
+
               <!-- <td >{{item.date}}</td> -->
               <td style="text-align: center">
-                <button type="button" class="btn btn-primary" data-toggle="modal" (click)="openupdatemodal(content,item)" ><i class="fa fa-edit" aria-hidden="true"></i></button>
-              
-                <button class='btn btn-danger' type="button" (click)="deleteSubcategory(item.sid)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                <button type="button" class="btn btn-primary" data-toggle="modal"
+                  (click)="openupdatemodal(content,item)"><i class="fa fa-edit" aria-hidden="true"></i></button>
+
+                <button class='btn btn-danger' type="button" (click)="deleteSubcategory(item.sid)"><i
+                    class="fa fa-trash" aria-hidden="true"></i></button>
               </td>
               <td style="text-align: center">
                 <button *ngIf="item.isActive" class='btn btn-success' type="button" (click)="changeStatus(item.sid)"><i
@@ -59,9 +61,9 @@
 
 
       </div>
-       <div class="card-footer">
+      <div class="card-footer">
         <ul class="pagination">
-    
+
           <li class="page-item" class="page-item first-item" [ngClass]="{disabled:currentPageIndex === 0}">
             <a class="page-link" (click)="viewsubcategoryList({ pageIndex: 0 })"><i class="fa fa-step-backward"></i></a>
           </li>
@@ -88,35 +90,38 @@
     </div>
   </div>
 </div>
-  
 
-  
+
+
 <!-- Model to Insert Subcategory  -->
-<ng-template #content let-modal >
-    <div class="modal-header col">
-      <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT</h4>
-      <div>
-          <button type="button" class="close" aria-label="Close" (click)="modalService.dismissAll()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        </div>
-       </div>
-           <div class="modal-body" style="color: black;">
+<ng-template #content let-modal>
+  <div class="modal-header col">
+    <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT</h4>
+    <div>
+      <button type="button" class="close" aria-label="Close" (click)="modalService.dismissAll()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+  <div class="modal-body" style="color: black;">
 
-            <div class="col-sm-6">
-              <label class="text-input">Category</label>   
-            <select name="cid" class="form-control" [(ngModel)]="subcategory.cid" >
-              <option value="0" selected>Select category</option>
-              <option *ngFor="let item of categoryDetails;" name="cname" value={{item.cid}}>{{item.cname}}</option>
-            </select>
-            </div>
+    <div class="col-sm-6">
+      <label class="text-input">Category</label>
+      <select name="cid" class="form-control" [(ngModel)]="subcategory.cid">
+        <option value="0" selected>Select category</option>
+        <option *ngFor="let item of categoryDetails;" name="cname" value={{item.cid}}>{{item.cname}}</option>
+      </select>
+    </div>
 
-              <div class="col-sm-6">
-                <label class="text-input">Subcategory</label>            
-                <input type="text" id="sname" name="sname" [(ngModel)]="subcategory.sname" class="form-control" placeholder="Enter Subcategory">         
+    <div class="col-sm-6">
+      <label class="text-input">Subcategory</label>
+      <input type="text" id="sname" name="sname" [(ngModel)]="subcategory.sname" class="form-control"
+        placeholder="Enter Subcategory">
 
-                  <button style="float: right;" type="submit" class="btn btn-sm btn-success" (click)="updateSubcategory(subcategory.sid)">Submit</button>
-                  <button type="button" style="float: right;" class="btn btn-sm btn-danger" (click)="modal.dismiss('Cross click')">Cancel</button> 
-                </div>      
-            </div>
+      <button style="float: right;" type="submit" class="btn btn-sm btn-success"
+        (click)="updateSubcategory(subcategory.sid)">Submit</button>
+      <button type="button" style="float: right;" class="btn btn-sm btn-danger"
+        (click)="modal.dismiss('Cross click')">Cancel</button>
+    </div>
+  </div>
 </ng-template>

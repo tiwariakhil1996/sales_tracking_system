@@ -1,4 +1,6 @@
+
 // client 
+
 export class clientModel {
     id: number;
     // clientId:number;
@@ -20,7 +22,7 @@ export class clientModel {
     createdby: number;
     modifiedby: number;
     latitude: number;
-    longitude:number;
+    longitude: number;
 }
 
 export class clientListModel {
@@ -42,14 +44,14 @@ export class clientListModel {
     isActive: boolean;
     userid: number;
     latitude: number;
-    longitude:number;
-    
+    longitude: number;
+
     createdby: number;
     modifiedby: number;
 
-    pageSize:number;
-    pageIndex:number;
-    search:string;
+    pageSize: number;
+    pageIndex: number;
+    search: string;
 }
 
 export class paginationModel {

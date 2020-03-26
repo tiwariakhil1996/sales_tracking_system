@@ -14,7 +14,8 @@
           <div class="form-group row">
             <div class="col-sm-6">
               <label class="text-input">Category</label>
-              <select name="cid" class="form-control" [(ngModel)]="product.cid" (click)="onCategoryChange($event.target.value)">
+              <select name="cid" class="form-control" [(ngModel)]="product.cid"
+                (click)="onCategoryChange($event.target.value)">
                 <option value="0" selected>Select category</option>
                 <option *ngFor="let item of categoryDetails;" name="cname" value={{item.cid}}>{{item.cname}}</option>
               </select>
@@ -49,9 +50,9 @@
 
             <div class="col-sm-6">
               <label class="textarea-input">Product Description</label>
-              <textarea #descrip id="description" name="description"  maxlength="150" [(ngModel)]="product.description" rows="5"
-                class="form-control" placeholder="Content.."></textarea>
-                Total characters allowed  {{descrip.value.length}} / 150
+              <textarea #descrip id="description" name="description" maxlength="150" [(ngModel)]="product.description"
+                rows="5" class="form-control" placeholder="Content.."></textarea>
+              Total characters allowed {{descrip.value.length}} / 150
             </div>
           </div>
 
@@ -70,23 +71,23 @@
                   </div>
                 </div>
               </div> -->
-              
-              <div class=" col-sm-6">
-                <div id='photos-preview'>
-                  <label for="Product">Select Product Image</label><br>
-                  <input type="file" id="fileupload" multiple (change)="handleFileInput($event.target.files)"
-                    [(ngModel)]="product.imageList" /><br><br>
-                    
-                  <div *ngFor="let image of tempImageList;let i=index;" class="float-left">
-                    <div class="row">
-                      <div _ngcontent-xyz-c2 class="col-1">
-                        <img [src]="image.ImageData" height="100px" width="100px">
-                      </div>
+
+            <div class=" col-sm-6">
+              <div id='photos-preview'>
+                <label for="Product">Select Product Image</label><br>
+                <input type="file" id="fileupload" multiple (change)="handleFileInput($event.target.files)"
+                  [(ngModel)]="product.imageList" /><br><br>
+
+                <div *ngFor="let image of tempImageList;let i=index;" class="float-left">
+                  <div class="row">
+                    <div _ngcontent-xyz-c2 class="col-1">
+                      <img [src]="image.ImageData" height="100px" width="100px">
                     </div>
-                    <!-- <input class="btn btn-primary clsbtn" (click)="deleteImage(image,i)" type="button" value="X" /> -->
                   </div>
+                  <!-- <input class="btn btn-primary clsbtn" (click)="deleteImage(image,i)" type="button" value="X" /> -->
                 </div>
               </div>
+            </div>
 
             <div class="col-sm-6">
               <label class="text-input">Added on</label>
@@ -102,7 +103,7 @@
             Submit</button>
           <button type="reset" class="btn btn-sm btn-danger" (click)="resetForm()"><i class="fa fa-ban"></i>
             Reset</button>
-            <button type="submit" class="btn btn-sm btn-primary" (click)="viewProductForm()">View</button>
+          <button type="submit" class="btn btn-sm btn-primary" (click)="viewProductForm()">View</button>
 
         </div>
       </div>

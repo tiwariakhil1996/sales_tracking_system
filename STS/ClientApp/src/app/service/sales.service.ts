@@ -6,12 +6,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SalesService {
 
-
   constructor(private http: HttpClient) { }
-
-
   // Sales REGISTER
-
   SalesRegisterService(data) {
     return this.http.post('/api/Sales/RegisterSales', data);
 
@@ -26,11 +22,6 @@ export class SalesService {
     return this.http.post('/api/Sales/updateSalesProfile', data);
   }
 
-  //this api for update the password
-  ChangePassword(id: number,data:any) {
-    return this.http.put('/api/Sales/changesalesPassword/' + id,data);
-  }
-
 
   changePassword(id: number, data: any) {
     return this.http.put('/api/Sales/changesalesPassword/' + id, data);
@@ -43,7 +34,7 @@ export class SalesService {
   RegisteredSalesList(data) {
     return this.http.post('/api/Sales/RegisteredSalesList', data);
   }
-  
+
   deleteSales(id: number) {
     return this.http.delete('/api/Sales/deleteSales/' + id);
   }
@@ -63,4 +54,6 @@ export class SalesService {
   SalesList_dropdown(data) {
     return this.http.post('/api/Sales/SalesList_dropdown', data);
   }
+
+
 }

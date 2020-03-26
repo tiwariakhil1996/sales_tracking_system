@@ -205,10 +205,10 @@
 
 
 
-      <div class="agm-map" >  
+      <div class="agm-map">
         <agm-map #map [zoom]="16" [latitude]="centerlat" [longitude]="centerlng">
-          <agm-marker [opacity]=0.8 [latitude]="client.latitude" [longitude]="client.longitude" (dragEnd)="markerDragEnd($event)"
-            [markerDraggable]="true">
+          <agm-marker [opacity]=0.8 [latitude]="client.latitude" [longitude]="client.longitude"
+            (dragEnd)="markerDragEnd($event)" [markerDraggable]="true">
           </agm-marker>
 
         </agm-map>

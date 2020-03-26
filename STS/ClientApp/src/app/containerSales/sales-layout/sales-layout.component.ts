@@ -31,10 +31,10 @@ export class SalesLayoutComponent implements OnInit {
   user = new salesregisterModel();
 
   profile_pic = new registerModel();
-  
+
   salesavatar = new sales_avatarModel();
-  
-  username:string;
+
+  username: string;
 
   activity = new activityModel();
   activityDetails: activityModel[] = [];
@@ -50,7 +50,7 @@ export class SalesLayoutComponent implements OnInit {
   item: any;
   updateProfile: any;
 
-  
+
   latitude: number;
   longitude: number;
   zoom: number;
@@ -70,7 +70,7 @@ export class SalesLayoutComponent implements OnInit {
 
   @ViewChild('search')
   public searchElementRef: ElementRef;
-  
+
   RoleJason = {
     ROle: [0, 1],
     Component: 'SalesLayoutComponent'
@@ -90,7 +90,7 @@ export class SalesLayoutComponent implements OnInit {
     this.changePassword.id = this.user.id;
     // console.log(this.changePassword.id);
     this.profile_pic.image = this.user.image;
-    this.username=this.user.salesName;
+    this.username = this.user.salesName;
   }
 
   ngOnInit() {
@@ -101,21 +101,21 @@ export class SalesLayoutComponent implements OnInit {
   }
 
 
-  Location(){
-    
-     // setTimeout(() => {
-      navigator.geolocation.getCurrentPosition(position => {
-        console.log(position);
+  Location() {
 
-        this.location = position.coords;
-        this.centerlat = this.location.latitude;
-        this.centerlng = this.location.longitude;
-        this.lat = this.location.latitude;
-        this.lng = this.location.longitude;
-        this.geocoder = new google.maps.Geocoder();
+    // setTimeout(() => {
+    navigator.geolocation.getCurrentPosition(position => {
+      console.log(position);
 
-       
-      });
+      this.location = position.coords;
+      this.centerlat = this.location.latitude;
+      this.centerlng = this.location.longitude;
+      this.lat = this.location.latitude;
+      this.lng = this.location.longitude;
+      this.geocoder = new google.maps.Geocoder();
+
+
+    });
     // }, 2000);
   }
 
@@ -139,7 +139,7 @@ export class SalesLayoutComponent implements OnInit {
     // console.log(this.salesDetails);
     this.updateProfile = this.salesDetails;
     console.log(this.updateProfile);
-    
+
   }
 
   changePasswordModal(template1: TemplateRef<any>) {

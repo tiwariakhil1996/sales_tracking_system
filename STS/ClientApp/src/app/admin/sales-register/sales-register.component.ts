@@ -51,7 +51,7 @@ export class SalesRegisterComponent implements OnInit {
   LoginSales() {
     this.router.navigate(['sales/login']);
   }
-  backtodashboard(){
+  backtodashboard() {
     this.router.navigate(['admin/dashboard']);
   }
 
@@ -229,5 +229,5 @@ export class SalesRegisterComponent implements OnInit {
     this.router.navigate(['/admin/dashboard'])
   }
 
-  
+
 }

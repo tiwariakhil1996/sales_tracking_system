@@ -21,6 +21,8 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 import { ViewChild, ElementRef, NgZone } from '@angular/core';
 import { MapsAPILoader, AgmMap } from '@agm/core';
+import { MouseEvent } from '@agm/core';
+import { google } from 'google-maps';
 import { from } from 'rxjs';
 import { TabsetComponent } from 'ngx-bootstrap';
 import { DatePipe } from '@angular/common';
@@ -38,11 +40,15 @@ export class CurrentactivityComponent implements OnInit {
   activity = new activityModel();
   activityDetails: activityModel[] = [];
 
-  InvoiceActivity = new activityDetailsModel();
+  productInvoice = new activityDetailsModel();
 
   activityInvoice = new activityDetailsModel();
   activityInvoiceDetails: activityDetailsModel[] = [];
 
+  // search = new searchModel();
+  // searchDetails: searchModel[] = [];
+  // update_activityproduct = new editactivityModel();
+  // update_activityproductDetails: editactivityModel[] = [];
 
   Activity_Location = new LocationModel();
   Activity_LocationDetails: LocationModel[] = [];
@@ -778,7 +784,7 @@ export class CurrentactivityComponent implements OnInit {
     }, (err) => {
 
     });
-  } ng 
+  }
 
 
   addnewActivity() {
@@ -792,10 +798,22 @@ export class CurrentactivityComponent implements OnInit {
   //   this.addproductlist.amount = null;
   //   this.addproductlist.discount_per = null;
   //   this.addproductlist.discount_amt = null;
-  //   this.addproductlist.total_price = null;  ng 
+  //   this.addproductlist.total_price = null;
   // }
 
+
+
+
+
+
+
+
+
+
+
+
   GeneratePdf(action = 'open') {
+    console.log(pdfMake);
     const documentDefinition = this.getDocumentDefinition();
     switch (action) {
       case 'open': pdfMake.createPdf(documentDefinition).open(); break;
@@ -956,7 +974,6 @@ export class CurrentactivityComponent implements OnInit {
           margin: [0, 20, 0, 10],
           decoration: 'underline'
         },
-
         name: {
           fontSize: 10,
           bold: true
@@ -1016,10 +1033,7 @@ export class CurrentactivityComponent implements OnInit {
           })
         ]
       },
-
-
-
     };
   }
- 
+
 }

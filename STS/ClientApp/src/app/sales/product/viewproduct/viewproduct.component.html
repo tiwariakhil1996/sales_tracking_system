@@ -1,35 +1,35 @@
-
 <div class="col-lg-12">
   <div class="card">
     <div class="card-header color">
       <!-- <i class="fa fa-align-justify"></i> -->
-       Product Details
-       <button type="submit"  tooltip=" Add new product" style="float: right;" class="btn btn-sm btn-success"
-      (click)="addnewProduct()"><i class="fa fa-plus"></i></button>
+      Product Details
+      <button type="submit" tooltip=" Add new product" style="float: right;" class="btn btn-sm btn-success"
+        (click)="addnewProduct()"><i class="fa fa-plus"></i></button>
     </div>
     <div style="overflow-x:auto;">
-    <div class="card-body">
-      <div class="form-inline md-form mr-auto mb-4">
-        <input style="float: right;" (input)="onsearch()" class="form-control mr-sm-2" type="text" [(ngModel)]="search_" placeholder="Search" aria-label="Search">
-       </div>
-      <table class="table table-bordered btn-center">
-        <thead>
-          <tr class="table-success">
-            <th>Sr.no</th>
-            <!-- <th>ID</th> -->
-            <th>Category</th>
-            <th>Subcategory</th>
-            <th>ProductName</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Image</th>
-            <th>Date</th>
-            <th>Action</th>
-            <!-- <th>IsActive</th> -->
-          </tr>
-        </thead>
-        <tbody>
-          <!-- <tr>
+      <div class="card-body">
+        <div class="form-inline md-form mr-auto mb-4">
+          <input style="float: right;" (input)="onsearch()" class="form-control mr-sm-2" type="text"
+            [(ngModel)]="search_" placeholder="Search" aria-label="Search">
+        </div>
+        <table class="table table-bordered btn-center">
+          <thead>
+            <tr class="table-success">
+              <th>Sr.no</th>
+              <!-- <th>ID</th> -->
+              <th>Category</th>
+              <th>Subcategory</th>
+              <th>ProductName</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Image</th>
+              <th>Date</th>
+              <th>Action</th>
+              <!-- <th>IsActive</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <!-- <tr>
             <td>Pompeius René</td>
             <td>2012/01/01</td>
             <td>Member</td>
@@ -38,60 +38,67 @@
             </td>
           </tr>
           -->
-          <tr *ngFor="let item of productDetails; let i=index;">
-            <td style="text-align: center">{{i+1}}</td>
-         <!-- <td>{{item.id}}</td> -->
-         <td>{{item.cname}}</td>
-         <td>{{item.sname}}</td>
-         <td>{{item.productname}}</td>
-         <td>{{item.description}}</td>
-         <td>{{item.price}}</td>
-         <td  style='text-align:center' class="font-size">
-            <i class="fa fa-picture-o" aria-hidden="true"  (click)="open_image_modal(images,item)" (click)="view_product_Images(item.id)"></i>
-        </td>
-         <td>{{item.date}}</td>
-            <td>
-              <button type="button" class="btn btn-primary" data-toggle="modal" (click)="openupdatemodal(content,item)" ><i class="fa fa-edit" aria-hidden="true"></i></button>
-              <button class='btn btn-danger' type="button" (click)="onDelete(item.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
-            </td>
-            <!-- <td>
+            <tr *ngFor="let item of productDetails; let i=index;">
+              <td style="text-align: center">{{i+1}}</td>
+              <!-- <td>{{item.id}}</td> -->
+              <td>{{item.cname}}</td>
+              <td>{{item.sname}}</td>
+              <td>{{item.productname}}</td>
+              <td>{{item.description}}</td>
+              <td>{{item.price}}</td>
+              <td style='text-align:center' class="font-size">
+                <i class="fa fa-picture-o" aria-hidden="true" (click)="open_image_modal(images,item)"
+                  (click)="view_product_Images(item.id)"></i>
+              </td>
+              <td>{{item.date}}</td>
+              <td>
+                <button type="button" class="btn btn-primary" data-toggle="modal"
+                  (click)="openupdatemodal(content,item)"><i class="fa fa-edit" aria-hidden="true"></i></button>
+                <button class='btn btn-danger' type="button" (click)="onDelete(item.id)"><i class="fa fa-trash"
+                    aria-hidden="true"></i></button>
+              </td>
+              <!-- <td>
               <button *ngIf="item.isActive" class='btn btn-success' type="button" (click)="changeStatus(item.id)"><i
                   class="fa fa-check-circle"></i></button>
               <button *ngIf="!item.isActive" class='btn btn-danger' type="button" (click)="changeStatus(item.id)"><i
                   class="fa fa-times"></i></button>
             </td> -->
-          </tr>
+            </tr>
 
-        </tbody>
-      </table>
-   
-      <div class="message" *ngIf="productDetails.length <= 0">
-        <p>No Record Found</p>
+          </tbody>
+        </table>
+
+        <div class="message" *ngIf="productDetails.length <= 0">
+          <p>No Record Found</p>
+        </div>
+
       </div>
-
     </div>
-  </div>
-  <div class="card-footer">
-    <ul class="pagination" >
+    <div class="card-footer">
+      <ul class="pagination">
 
-      <li class="page-item" class="page-item first-item" [ngClass]="{disabled:currentPageIndex === 0}">
-        <a class="page-link" (click)="productList({ pageIndex: 0 })"><i class="fa fa-step-backward"></i></a>
-    </li>
-    <li class="page-item" [ngClass]="{disabled:currentPageIndex === 0}" class="page-item previous-item">
-        <a (click)="productList({pageIndex:currentPageIndex -1})" class="page-link" routerLink="/sales/product/viewproduct"> <i class="fa fa-angle-double-left"></i></a>
-    </li>
-      <li class="page-item active" *ngFor="let item of totalPageList " [ngClass]="{active:currentPageIndex === item.pageIndex}" class="page-item number-item" (click)="productList(item)">
+        <li class="page-item" class="page-item first-item" [ngClass]="{disabled:currentPageIndex === 0}">
+          <a class="page-link" (click)="productList({ pageIndex: 0 })"><i class="fa fa-step-backward"></i></a>
+        </li>
+        <li class="page-item" [ngClass]="{disabled:currentPageIndex === 0}" class="page-item previous-item">
+          <a (click)="productList({pageIndex:currentPageIndex -1})" class="page-link"
+            routerLink="/sales/product/viewproduct"> <i class="fa fa-angle-double-left"></i></a>
+        </li>
+        <li class="page-item active" *ngFor="let item of totalPageList "
+          [ngClass]="{active:currentPageIndex === item.pageIndex}" class="page-item number-item"
+          (click)="productList(item)">
           <a class="page-link" routerLink="/sales/product/viewproduct">
             <span class="sr-only"></span>{{item.pageSize}}</a>
-      </li>
-      <li class="page-item" [ngClass]="{disabled:currentPageIndex === totalPageSize-1}" class="page-item next-item">
-        <a (click)="productList({pageIndex:currentPageIndex +1})" class="page-link" routerLink="/sales/product/viewproduct"><i class="fa fa-angle-double-right"></i></a>
-    </li>
-    <li class="page-item" class="page-item last-item" [ngClass]="{disabled:currentPageIndex === totalPageSize-1}">
-        <a class="page-link" (click)="productList({pageIndex:totalPageSize-1})"><i class="fa fa-step-forward"></i></a>
-    </li>
-    </ul>
-</div>
+        </li>
+        <li class="page-item" [ngClass]="{disabled:currentPageIndex === totalPageSize-1}" class="page-item next-item">
+          <a (click)="productList({pageIndex:currentPageIndex +1})" class="page-link"
+            routerLink="/sales/product/viewproduct"><i class="fa fa-angle-double-right"></i></a>
+        </li>
+        <li class="page-item" class="page-item last-item" [ngClass]="{disabled:currentPageIndex === totalPageSize-1}">
+          <a class="page-link" (click)="productList({pageIndex:totalPageSize-1})"><i class="fa fa-step-forward"></i></a>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 
@@ -105,76 +112,77 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-         <div class="modal-body" style="color: black;">
-          <div>
-            <div class="form-group" hidden> 
-             <label for="id">ID</label>
-               <input type="text" class="form-control"  [(ngModel)]="product.id" name="id" disabled>
-           </div>
-           <div class="form-group row">
-            <div class="col-sm-6">
-             <label for="category">Category</label>
-               <!-- <input type="text" class="form-control"  [(ngModel)]="product.cname" name="category"> -->
-               <select name="cid" class="form-control" [(ngModel)]="product.cid"  (click)="onCategoryChange($event.target.value)" >
-                <option value="0" selected>Select category</option>
-                <option *ngFor="let item of categoryDetails;" name="cname" value={{item.cid}}>{{item.cname}}</option>
-              </select>
-           </div>
-           
-           <div class="col-sm-6">
-             <label for="subcategory">Subcategory</label>
-               <!-- <input type="text" class="form-control"  [(ngModel)]="product.sname" name="subcategory" > -->
-               <select name="cid" class="form-control" [(ngModel)]="product.sid"  >
-                <option value="0" selected>Select subcategory</option>
-                <option *ngFor="let item of subcategoryDetails;" name="sname" value={{item.sid}} >{{item.sname}}</option>
-            </select>
-           </div>
-          </div>
+  <div class="modal-body" style="color: black;">
+    <div>
+      <div class="form-group" hidden>
+        <label for="id">ID</label>
+        <input type="text" class="form-control" [(ngModel)]="product.id" name="id" disabled>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <label for="category">Category</label>
+          <!-- <input type="text" class="form-control"  [(ngModel)]="product.cname" name="category"> -->
+          <select name="cid" class="form-control" [(ngModel)]="product.cid"
+            (click)="onCategoryChange($event.target.value)">
+            <option value="0" selected>Select category</option>
+            <option *ngFor="let item of categoryDetails;" name="cname" value={{item.cid}}>{{item.cname}}</option>
+          </select>
+        </div>
 
-          <div class="form-group row">
-            <div class="col-sm-6">
-              <label for="productname">ProductName</label>
-                <input type="text" class="form-control" [(ngModel)]="product.productname" name="productname">
-           </div>
-           <div class=" col-sm-6">
-            <div id='photos-preview'>
-              <label for="Product">Select Product Image</label><br>
-              <input type="file" id="fileupload" multiple (change)="handleFileInput($event.target.files)"
-                [(ngModel)]="product.imageList" /><br><br>
-              <div *ngFor="let image of tempImageList;let i=index;" class="float-left">
-                <div class="row">
-                  <div _ngcontent-xyz-c2 class="col-1">
-                    <img [src]="image.ImageData" height="100px" width="100px">
-                  </div>
+        <div class="col-sm-6">
+          <label for="subcategory">Subcategory</label>
+          <!-- <input type="text" class="form-control"  [(ngModel)]="product.sname" name="subcategory" > -->
+          <select name="cid" class="form-control" [(ngModel)]="product.sid">
+            <option value="0" selected>Select subcategory</option>
+            <option *ngFor="let item of subcategoryDetails;" name="sname" value={{item.sid}}>{{item.sname}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <label for="productname">ProductName</label>
+          <input type="text" class="form-control" [(ngModel)]="product.productname" name="productname">
+        </div>
+        <div class=" col-sm-6">
+          <div id='photos-preview'>
+            <label for="Product">Select Product Image</label><br>
+            <input type="file" id="fileupload" multiple (change)="handleFileInput($event.target.files)"
+              [(ngModel)]="product.imageList" /><br><br>
+            <div *ngFor="let image of tempImageList;let i=index;" class="float-left">
+              <div class="row">
+                <div _ngcontent-xyz-c2 class="col-1">
+                  <img [src]="image.ImageData" height="100px" width="100px">
                 </div>
-                <!-- <input class="btn btn-primary clsbtn" (click)="deleteImage(image,i)" type="button" value="X" /> -->
               </div>
+              <!-- <input class="btn btn-primary clsbtn" (click)="deleteImage(image,i)" type="button" value="X" /> -->
             </div>
           </div>
-          </div>
-            <div class="form-group">
-               <label for="description">Description</label>
-               <input type="text" class="form-control"  [(ngModel)]="product.description" name="description">
-            </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" [(ngModel)]="product.description" name="description">
+      </div>
 
-            
 
-             <div class="form-group row">
-              <div class="col-sm-6">
-               <label for="price">Price</label>
-               <input type="text" class="form-control"  [(ngModel)]="product.price" name="price" >
-             </div>
 
-             <div class="col-sm-6">
-               <label for="date">Date</label>
-                <input type="text" class="form-control" [(ngModel)]="product.date" name="date" >
-            </div>
-          </div>
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <label for="price">Price</label>
+          <input type="text" class="form-control" [(ngModel)]="product.price" name="price">
+        </div>
 
-       <button type="submit" class="btn btn-success" (click)="onEdit(product.id)" >Update</button>
-   <!--    <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal-body">Close</button>  -->
-      </div>      
-     </div>
+        <div class="col-sm-6">
+          <label for="date">Date</label>
+          <input type="text" class="form-control" [(ngModel)]="product.date" name="date">
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-success" (click)="onEdit(product.id)">Update</button>
+      <!--    <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal-body">Close</button>  -->
+    </div>
+  </div>
 </ng-template>
 
 
@@ -205,12 +213,12 @@
       <carousel [pauseOnFocus]="true" style="text-align: center;">
         <slide *ngFor="let items of product_imageDetails;let i=index;">
           <!-- <div> -->
-            <button class="close setdelete" type="button" (click)="DeleteImage(items.id)">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <!-- <img style="display: block; width: 500px; height: 400px;"
+          <button class="close setdelete" type="button" (click)="DeleteImage(items.id)">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <!-- <img style="display: block; width: 500px; height: 400px;"
               [src]="'http://localhost:55627/Documents/Images/Product/Thumb/'+items.image"> -->
-            <img class="carousel_image" [src]="'http://localhost:55627/Documents/Images/Product/'+items.image">
+          <img class="carousel_image" [src]="'http://localhost:55627/Documents/Images/Product/'+items.image">
           <!-- </div> -->
         </slide>
       </carousel>

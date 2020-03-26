@@ -38,7 +38,7 @@
               <th>Sales</th>
               <th>Contact</th>
               <th>Appointment Date</th>
-              <th>Invoice</th>
+              <th>Status</th>
               <th>Track</th>
               <!-- <th>Invoice</th> -->
               <th style="padding-right: 50px;">Action</th>
@@ -64,7 +64,6 @@
                 <span *ngIf="(item.status == 5)" class="badge badge-pill badge-dark">Canceled</span>
                 <span *ngIf="(item.status == 6)" class="badge badge-pill badge-light">{{item.statusname}}</span>
               </td>
-
 
               <td>
                 <i class="fa fa-map-marker map" (click)="Get_Lat_Long_of_Activity(item.aid)"
@@ -396,6 +395,7 @@
               (click)="modal.dismiss('Cross click')">Cancel</button>
           </div>
         </tab>
+
 
 
         <tab heading="Details">

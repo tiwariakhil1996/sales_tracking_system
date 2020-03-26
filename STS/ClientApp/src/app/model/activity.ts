@@ -1,4 +1,6 @@
+
 // activity
+
 export class addactivityModel {
     aid: number;
     title: string;
@@ -69,8 +71,8 @@ export class activityModel {
     latitude: any;
     longitude: any;
     userid: number;
+
     followup_description: string;
-    description_on_Followup: string;
     user_id: number;
     pendingId: number;
     status: number;
@@ -81,6 +83,7 @@ export class activityModel {
     search: string;
     from_date: string;
     to_date: string;
+    description_on_Followup: string;
 }
 
 export class LocationModel {
@@ -118,29 +121,18 @@ export class sales_Location_Model {
     mobile: string;
 
 }
-// this is Activity Invoice model
-export class activityDetailsModel {
-    aid: number;
-    title: string;
-    description: string;
-    clientName: string;
-    contact: String;
-    address: string;
-    email: string;
-    createdon: string;
-    appointmentDate: string;
-    // this is add for add the session storage in the multiple activity product
-    activityproduct: updateactivityModel[] = [];
-    constructor() {
-        this.activityproduct.push(new updateactivityModel());   
-    }
-
-}
-// This is Activity Product Invoice Model
 
 export class updateactivityModel {
-   
     aid: number;
+    // title: string;
+    // description: string;
+    // clientId: number;
+    // clientName: string;
+    // salesId: number;
+    // salesName: string;
+    // contact: String;
+    // address: string;
+    // appointmentDate: string;
     order_Id: number;
     productId: number;
     productname: string;
@@ -153,7 +145,9 @@ export class updateactivityModel {
 
     createdby: number;
     modifiedby: number;
-    
+    // userid: number;
+
+    // user_id: number;
     advance_payment: number;
     payment_mode: number;
     pending_amount: number;
@@ -187,8 +181,11 @@ export class paginationModel {
     pageIndex: number;
 }
 
-export class Downloadpdf{
-    aid:number;
+
+
+
+export class activityDetailsModel {
+    aid: number;
     title: string;
     description: string;
     clientName: string;
@@ -203,7 +200,7 @@ export class Downloadpdf{
 
     activityproduct: updateactivityModel[] = [];
     constructor() {
-        this.activityproduct.push(new updateactivityModel());   
+        this.activityproduct.push(new updateactivityModel());
     }
 
 }

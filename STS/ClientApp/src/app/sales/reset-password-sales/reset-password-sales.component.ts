@@ -93,6 +93,6 @@ export class ResetPasswordSalesComponent implements OnInit {
   backtologinpage() {
     this.router.navigate(['/admin/login']);
   }
-  
-  
+
+
 }

@@ -1,4 +1,6 @@
 
+
+
 // product form
 export class productModel {
     id: number;
@@ -92,9 +94,9 @@ export class productListModel {
     //this model for display the image
     imageListData: ImageModel[];
 
-    pageIndex:number;
-    pageSize:number;
-    search:string;
+    pageIndex: number;
+    pageSize: number;
+    search: string;
 }
 
 

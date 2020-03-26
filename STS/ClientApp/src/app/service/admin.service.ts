@@ -8,7 +8,7 @@ export class AdminService {
 
   constructor(private http: HttpClient) { }
 
- 
+
   // REGISTER
 
 
@@ -18,7 +18,7 @@ export class AdminService {
   }
 
   AdminLogin(data) {
-    return this.http.post('/api/Admin/AdminLogin',data);
+    return this.http.post('/api/Admin/AdminLogin', data);
   }
 
   UpdateAdminProfile(data) {
@@ -28,5 +28,6 @@ export class AdminService {
   changePassword(id: number, data: any) {
     return this.http.put('/api/Admin/changeadminPassword/' + id, data);
   }
+
 
 }

@@ -19,7 +19,7 @@ export class ForgotPasswordSalesComponent implements OnInit {
 
   mailDetail = new sendmailModel();
   mailDetails: sendmailModel[] = [];
-  
+
   constructor(private router: Router,
     private adminService: AdminService,
     private toastr: ToastrService,
@@ -31,25 +31,25 @@ export class ForgotPasswordSalesComponent implements OnInit {
   }
 
   Sendmail() {
-    
+
     let getemail = new SendMailModel();
     getemail.UsernameEmail = this.loginDetail.email;
     this.sendmail.send_sales_mail(getemail).subscribe((data: any) => {
       if (data.Status.code === 0) {
 
-      this.toastr.success('Password reset request link has been sent to your email', '', {
-        disableTimeOut: false,
-        timeOut: 5000
-      });
+        this.toastr.success('Password reset request link has been sent to your email', '', {
+          disableTimeOut: false,
+          timeOut: 5000
+        });
 
-    } else {
-      this.toastr.warning('This email id is not registered', 'Warning', {
-        disableTimeOut: false
-      });
-    }
-  },(err) => {
+      } else {
+        this.toastr.warning('This email id is not registered', 'Warning', {
+          disableTimeOut: false
+        });
+      }
+    }, (err) => {
 
-  } );
+    });
   }
 
   backtologinpage() {

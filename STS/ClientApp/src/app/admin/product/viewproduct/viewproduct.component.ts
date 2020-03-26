@@ -47,15 +47,15 @@ export class ViewproductComponent implements OnInit {
   subcategory = new subcategoryDataModel();
   subcategoryDetails: subcategoryDataModel[] = [];
 
-  search_ : any;
+  search_: any;
   // public imageUrl = "http://localhost:44317/Documents/Images/Product/";
 
-    // Pagination
+  // Pagination
   RowCount: number;
   pageSize: number = 5;
   totalPageList: paginationModel[] = [];
-  totalPageSize:number;
-  pagesize:any;
+  totalPageSize: number;
+  pagesize: any;
   currentPageIndex: number = 0;
   pageOfItems: Array<any>;
 
@@ -143,23 +143,23 @@ export class ViewproductComponent implements OnInit {
       if (data.Status.code === 0) {
         if (data.each_admin_ProductList) {
           this.productDetails = data.each_admin_ProductList;
-          
+
         }
-          if (data.RowCount) {
-            this.RowCount = data.RowCount;
-          }
-          this.totalPageSize = Math.ceil(this.RowCount / this.pageSize);
-          // console.log(totalPageSize);
-
-          this.totalPageList = [];
-          for (var i = 0; i < this.totalPageSize; i++) {
-            this.totalPageList.push({ pageSize: i + 1, pageIndex: i })
-
-          }
+        if (data.RowCount) {
+          this.RowCount = data.RowCount;
         }
-      }, (err) => {
+        this.totalPageSize = Math.ceil(this.RowCount / this.pageSize);
+        // console.log(totalPageSize);
 
-      });
+        this.totalPageList = [];
+        for (var i = 0; i < this.totalPageSize; i++) {
+          this.totalPageList.push({ pageSize: i + 1, pageIndex: i })
+
+        }
+      }
+    }, (err) => {
+
+    });
 
   }
 
@@ -176,7 +176,7 @@ export class ViewproductComponent implements OnInit {
 
   open_image_modal(images, item) {
     this.product = JSON.parse(JSON.stringify(item));
-    this.modalService.open(images, { size: 'xl', backdropClass: 'light-blue-backdrop' }) ;
+    this.modalService.open(images, { size: 'xl', backdropClass: 'light-blue-backdrop' });
   }
 
 
@@ -251,9 +251,9 @@ export class ViewproductComponent implements OnInit {
 
     this.product.imageList = this.imageList;
     this.product.imageListData = this.imageModel;
-  
+
     // console.log(this.product);
-    
+
     this.productService.updateProduct(id, this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
         // alert('Product updated sucesfully');

@@ -43,7 +43,7 @@ export class ClientService {
     return this.http.put('/api/Client/ChangeStatusClient/' + id, null);
   }
 
-  active_ClientList(){
+  active_ClientList() {
     return this.http.get('/api/Client/ClientList_ActiveDeactive');
   }
 

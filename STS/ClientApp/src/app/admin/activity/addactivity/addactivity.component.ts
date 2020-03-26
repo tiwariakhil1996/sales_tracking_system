@@ -12,16 +12,14 @@ import { ToastrService } from 'ngx-toastr';
 import { registerModel } from '../../../model/admin';
 
 @Component({
-
   selector: 'app-addactivity',
   templateUrl: './addactivity.component.html',
   styleUrls: ['./addactivity.component.css']
-  
 })
 export class AddactivityComponent implements OnInit {
 
   user = new registerModel();
-  
+
   activity = new addactivityModel();
   activityDetails: addactivityModel[] = [];
 
@@ -44,7 +42,6 @@ export class AddactivityComponent implements OnInit {
 
   client = new clientModel();
   clientDetails: clientModel[] = [];
-
 
   // _price: string;
   // quantity: number;
@@ -265,14 +262,13 @@ export class AddactivityComponent implements OnInit {
       discount_per: null,
       discount_amt: null,
       total_price: null,
-     
     });
 
   }
 
   static_price() {
     this.product_priceDetails.push({
-       id: null,
+      id: null,
       price: '0.00',
     });
   }
@@ -453,6 +449,5 @@ export class AddactivityComponent implements OnInit {
   viewActivityForm() {
     this.router.navigate(['/admin/activity/currentactivity']);
   }
- 
 
 }

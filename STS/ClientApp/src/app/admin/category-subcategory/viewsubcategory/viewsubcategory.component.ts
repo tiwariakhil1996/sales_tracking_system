@@ -16,7 +16,7 @@ export class ViewsubcategoryComponent implements OnInit {
 
   modalRef: BsModalRef;
 
-  user  = new registerModel();
+  user = new registerModel();
 
   category = new categoryDataModel();
   categoryDetails: categoryDataModel[] = [];
@@ -24,15 +24,15 @@ export class ViewsubcategoryComponent implements OnInit {
   subcategory = new subcategoryDataModel();
   subcategoryDetails: subcategoryDataModel[] = [];
 
-    // Pagination
-    RowCount: number;
-    pageSize: number = 5;
-    totalPageList: paginationModel[] = [];
-    totalPageSize: number;
-    pagesize: any;
-    currentPageIndex: number = 0;
-    pageOfItems: Array<any>;
-    search_:any;
+  // Pagination
+  RowCount: number;
+  pageSize: number = 5;
+  totalPageList: paginationModel[] = [];
+  totalPageSize: number;
+  pagesize: any;
+  currentPageIndex: number = 0;
+  pageOfItems: Array<any>;
+  search_: any;
 
   RoleJason = {
     ROle: [0, 1],
@@ -45,7 +45,7 @@ export class ViewsubcategoryComponent implements OnInit {
     private modalService: NgbModal,
     private toastr: ToastrService) {
 
-      
+
     // this.viewsubcategoryList();
     this.categoryList();
   }
@@ -154,17 +154,17 @@ export class ViewsubcategoryComponent implements OnInit {
         strError += '- Please select subcategory';
       }
 
-      if (strError !== '') {
-        this.toastr.warning(strError, 'Warning', {
-          disableTimeOut: false,
-          timeOut: 2000,
-          enableHtml: true,
-          progressBar: true,
-          closeButton: true,
-        });
-        return false;
-      }
-      
+    if (strError !== '') {
+      this.toastr.warning(strError, 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000,
+        enableHtml: true,
+        progressBar: true,
+        closeButton: true,
+      });
+      return false;
+    }
+
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.subcategory.modifiedby = this.user.id;
     // console.log(this.subcategory.modifiedby);
@@ -187,12 +187,12 @@ export class ViewsubcategoryComponent implements OnInit {
 
   deleteSubcategory(sid: number) {
     // if (confirm('Are you sure to delete this record ?') === true) {
-      this.categoryService.deleteSubcategory(sid).subscribe(data => {
-        this.categoryService.viewsubcategoryList();
-        // this.viewsubcategoryList();
-        const item = { pageIndex: 0 };
-        this.viewsubcategoryList(item);
-      });
+    this.categoryService.deleteSubcategory(sid).subscribe(data => {
+      this.categoryService.viewsubcategoryList();
+      // this.viewsubcategoryList();
+      const item = { pageIndex: 0 };
+      this.viewsubcategoryList(item);
+    });
     // }
     this.toastr.success('Subcategory is deleted Successful', 'Successful', {
       disableTimeOut: false,

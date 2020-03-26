@@ -32,19 +32,19 @@ export class AddclientComponent implements OnInit {
   city = new cityModel();
   cityDetails: cityModel[] = [];
 
-    // For map
-    location: Coordinates;
-    lat: number;
-    lng: number;
-    centerlat: number;
-    centerlng: number;
-    geocoder: any;
-  
-    
-    latitude: number;
-    longitude: number;
-    zoom: number;
-    address: string;
+  // For map
+  location: Coordinates;
+  lat: number;
+  lng: number;
+  centerlat: number;
+  centerlng: number;
+  geocoder: any;
+
+
+  latitude: number;
+  longitude: number;
+  zoom: number;
+  address: string;
 
   RoleJason = {
     ROle: [0, 1],
@@ -63,12 +63,12 @@ export class AddclientComponent implements OnInit {
 
   ngOnInit() {
     this.checkRole(this.RoleJason);
-this.Refresh_Location();
+    this.Refresh_Location();
 
-     // For google map
-     navigator.geolocation.getCurrentPosition(position => {
+    // For google map
+    navigator.geolocation.getCurrentPosition(position => {
       this.location = position.coords;
-      
+
       // When map opens there marker will be 1st in center
       this.centerlat = this.location.latitude;
       this.centerlng = this.location.longitude;
@@ -95,23 +95,23 @@ this.Refresh_Location();
   }
 
   Refresh_Sales_Location() {
-   this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
-   this.saleslocation.userid = this.user.id;
-   this.saleslocation.latitude = this.lat;
-   this.saleslocation.longitude = this.lng;
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.saleslocation.userid = this.user.id;
+    this.saleslocation.latitude = this.lat;
+    this.saleslocation.longitude = this.lng;
 
-   this.salesService.Refresh_Sales_Location(this.saleslocation).subscribe((data: any) => {
-   }, (err) => {
+    this.salesService.Refresh_Sales_Location(this.saleslocation).subscribe((data: any) => {
+    }, (err) => {
 
-   });
- }
+    });
+  }
 
   markerDragEnd($event: any) {
     // console.log($event);
     this.latitude = $event.coords.lat;
     this.longitude = $event.coords.lng;
-    this.client.latitude=this.latitude;
-    this.client.longitude=this.longitude;
+    this.client.latitude = this.latitude;
+    this.client.longitude = this.longitude;
   }
 
 
@@ -132,10 +132,10 @@ this.Refresh_Location();
     if (!this.client.clientName) {
       strError += strError = '- Please enter clientname';
     } else
-    if (!this.validateName(this.client.clientName)) {
-      strError += strError = '' ? '' : '<br/>';
-      strError += strError = '- Client name should only contain alphabets';
-    }
+      if (!this.validateName(this.client.clientName)) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += strError = '- Client name should only contain alphabets';
+      }
 
     if (!this.client.email) {
       strError += strError = '' ? '' : '<br/>';
@@ -165,11 +165,11 @@ this.Refresh_Location();
     if (!this.client.address) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter address';
-    }else
-    if (!this.validateAddress(this.client.address)) {
-      strError += strError = '' ? '' : '<br/>';
-      strError += strError = '-  Address should only contain alphabets, numbers, space and . ,';
-    }
+    } else
+      if (!this.validateAddress(this.client.address)) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += strError = '-  Address should only contain alphabets, numbers, space and . ,';
+      }
 
     if (!this.client.street) {
       strError += strError = '' ? '' : '<br/>';
@@ -180,14 +180,14 @@ this.Refresh_Location();
       strError += strError = '' ? '' : '<br/>';
       strError += strError = '- Please select country';
     } else
-    if (!this.client.sid) {
-      strError += strError = '' ? '' : '<br/>';
-      strError += '- Please select state';
-    } else
-    if (!this.client.cityid) {
-      strError += strError = '' ? '' : '<br/>';
-      strError += '- Please select city';
-    }
+      if (!this.client.sid) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += '- Please select state';
+      } else
+        if (!this.client.cityid) {
+          strError += strError = '' ? '' : '<br/>';
+          strError += '- Please select city';
+        }
 
     if (!this.client.postalCode) {
       strError += strError = '' ? '' : '<br/>';
@@ -274,52 +274,52 @@ this.Refresh_Location();
     return reg.test(addressField) === false ? false : true;
   }
 
-// Email Validation
+  // Email Validation
 
-checkEmailValidation() {
-  let isValid = false;
-  if (!this.validateEmail(this.client.email)) {
-    // alert('Please enter valid email.')
-    // this.errorMessage="Please enter valid email";
-    //  return false;
-    isValid = true;
+  checkEmailValidation() {
+    let isValid = false;
+    if (!this.validateEmail(this.client.email)) {
+      // alert('Please enter valid email.')
+      // this.errorMessage="Please enter valid email";
+      //  return false;
+      isValid = true;
+    }
+
+    if (isValid) {
+      this.toastr.warning('Please enter valid email id', 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
+
   }
 
-  if (isValid) {
-    this.toastr.warning('Please enter valid email id', 'Warning', {
-      disableTimeOut: false,
-      timeOut: 2000
-    });
+  validateEmail(emailField) {
+    const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+    return reg.test(emailField) === false ? false : true;
   }
-
-  }
-
-validateEmail(emailField) {
-  const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-  return reg.test(emailField) === false ? false : true;
-}
 
   // Mobile no.  Validation
 
-mobValidation() {
-  let isValid = false;
-  if (!this.validateMobile(this.client.contact)) {
+  mobValidation() {
+    let isValid = false;
+    if (!this.validateMobile(this.client.contact)) {
 
-    isValid = true;
+      isValid = true;
+    }
+
+    if (isValid) {
+      this.toastr.warning('Please enter valid mobile number', 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
   }
 
-  if (isValid) {
-    this.toastr.warning('Please enter valid mobile number', 'Warning', {
-      disableTimeOut: false,
-      timeOut: 2000
-    });
+  validateMobile(mobileField) {
+    const reg = /^\d{10}$/;
+    return reg.test(mobileField) === false ? false : true;
   }
-}
-
-validateMobile(mobileField) {
-  const reg = /^\d{10}$/;
-  return reg.test(mobileField) === false ? false : true;
-}
 
   countryList() {
     this.country_state_cityService.countryList().subscribe((data: any) => {
@@ -373,7 +373,7 @@ validateMobile(mobileField) {
   }
 
   reset() {
-  this.country = new countryModel();
+    this.country = new countryModel();
   }
 
   viewClientForm() {

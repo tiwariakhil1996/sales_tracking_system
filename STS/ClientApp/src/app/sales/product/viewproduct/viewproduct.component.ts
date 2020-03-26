@@ -3,12 +3,12 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BsModalRef } from 'ngx-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
 import { ProductService } from '../../../service/product.service';
-import { productModel, productListModel, ImageListModel, ImageModel, Product_Images_ListModel, UpdateImageListModel, paginationModel } from '../../../model/product';
+import { productListModel, ImageListModel, ImageModel, Product_Images_ListModel, UpdateImageListModel, paginationModel } from '../../../model/product';
 import { categoryDataModel, subcategoryDataModel } from '../../../model/category-subcategory';
 import { salesregisterModel, LocationModel } from '../../../model/sales';
 import { SalesService } from '../../../service/sales.service';
+import { CategorySubcategoryService } from '../../../service/category-subcategory.service';
 
 @Component({
   selector: 'app-viewproduct',
@@ -45,7 +45,7 @@ export class ViewproductComponent implements OnInit {
   subcategory = new subcategoryDataModel();
   subcategoryDetails: subcategoryDataModel[] = [];
 
-  search_ : any;
+  search_: any;
 
   // Pagination
   RowCount: number;
@@ -120,16 +120,16 @@ export class ViewproductComponent implements OnInit {
   }
 
   Refresh_Sales_Location() {
-   this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
-   this.saleslocation.userid = this.user.id;
-   this.saleslocation.latitude = this.lat;
-   this.saleslocation.longitude = this.lng;
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.saleslocation.userid = this.user.id;
+    this.saleslocation.latitude = this.lat;
+    this.saleslocation.longitude = this.lng;
 
-   this.salesService.Refresh_Sales_Location(this.saleslocation).subscribe((data: any) => {
-   }, (err) => {
+    this.salesService.Refresh_Sales_Location(this.saleslocation).subscribe((data: any) => {
+    }, (err) => {
 
-   });
- }
+    });
+  }
 
   checkRole(RoleJason) {
     const result = JSON.parse(localStorage.getItem('salesLogin')) || [];
@@ -186,7 +186,7 @@ export class ViewproductComponent implements OnInit {
     this.product.pageSize = this.pageSize;
 
     this.product.search = this.search_;
-    
+
     this.productService.each_sales_ProductList(this.product).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.each_sales_ProductList) {

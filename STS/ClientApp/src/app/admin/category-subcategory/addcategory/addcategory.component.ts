@@ -43,22 +43,22 @@ export class AddcategoryComponent implements OnInit {
   addCategory() {
     let strError = '';
 
-      if (!this.category.cname) {
-        strError += strError = '' ? '' : '<br/>';
-        strError += '- Please enter category name';
-      }
+    if (!this.category.cname) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please enter category name';
+    }
 
-      if (strError !== '') {
-        this.toastr.warning(strError, 'Warning', {
-          disableTimeOut: false,
-          timeOut: 2000,
-          enableHtml: true,
-          progressBar: true,
-          closeButton: true,
-        });
-        return false;
-      }
-      
+    if (strError !== '') {
+      this.toastr.warning(strError, 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000,
+        enableHtml: true,
+        progressBar: true,
+        closeButton: true,
+      });
+      return false;
+    }
+
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.category.createdby = this.user.id;
     // console.log(this.category.createdby);

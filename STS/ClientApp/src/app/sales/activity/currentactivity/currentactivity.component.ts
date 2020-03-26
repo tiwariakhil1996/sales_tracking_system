@@ -11,7 +11,6 @@ import { clientModel } from '../../../model/client';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { BsModalRef } from 'ngx-bootstrap';
 
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -28,8 +27,6 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 export class CurrentactivityComponent implements OnInit {
 
   user = new salesregisterModel();
-  modalRef: BsModalRef;
-  paydue:number;
 
   saleslocation = new LocationModel();
   saleslocationDetails: LocationModel[] = [];
@@ -40,12 +37,12 @@ export class CurrentactivityComponent implements OnInit {
   activity_product = new updateactivityModel();
   activity_productDetails: updateactivityModel[] = [];
 
-  
+
   productInvoice = new activityDetailsModel();
 
   activityInvoice = new activityDetailsModel();
   activityInvoiceDetails: activityDetailsModel[] = [];
-  
+
   sales = new salesregisterModel();
   salesDetails: salesregisterModel[] = [];
 
@@ -256,7 +253,6 @@ export class CurrentactivityComponent implements OnInit {
     this.activity.search = this.search_;
     this.activity.from_date = this.from_date;
     this.activity.to_date = this.to_date;
-    
 
     this.activityService.each_sales_activityList(this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -295,14 +291,11 @@ export class CurrentactivityComponent implements OnInit {
   open(content1) {
     this.modalService.open(content1, { ariaLabelledBy: 'modal-basic-title' });
   }
-  PaymentPendingmodel(paymentpending) {
-    this.modalService.open(paymentpending, { ariaLabelledBy: 'modal-basic-title' });
-  }
 
   open_closeactivity(closeactivity) {
     if (this.activity.pendingamount > 0) {
       this.activityDetails[this.ind];
-    this.modalService.open(closeactivity, { ariaLabelledBy: 'modal-basic-title' });
+      this.modalService.open(closeactivity, { ariaLabelledBy: 'modal-basic-title' });
     } else {
       this.update_ToClose(this.activity.aid)
     }
@@ -317,7 +310,7 @@ export class CurrentactivityComponent implements OnInit {
           this.activityInvoiceDetails = data.activity_Details;
           console.log(this.activityInvoiceDetails);
 
-         sessionStorage.setItem('ActivityInvoice', JSON.stringify(this.activityInvoiceDetails[0] || {}));
+          sessionStorage.setItem('ActivityInvoice', JSON.stringify(this.activityInvoiceDetails[0] || {}));
 
         }
       }
@@ -468,7 +461,6 @@ export class CurrentactivityComponent implements OnInit {
           disableTimeOut: false,
           timeOut: 2000
         });
-        // this.modalRef.hide();
       }
       this.modalService.dismissAll();
       // this.activityList();
@@ -484,16 +476,16 @@ export class CurrentactivityComponent implements OnInit {
   //   this.update_InPending(this.activity.aid)
   // }
 
-  remain_to_pay(pendingamount: number, amt_paid: number){
+  remain_to_pay(pendingamount: number, amt_paid: number) {
     this.due_paid = pendingamount - amt_paid;
   }
 
   pay_due(pendingamount: number, amt_paid: number, aid: number) {
     this.due_paid = pendingamount - amt_paid;
-  
+
     let strError = '';
 
-     if (!this.activity.paydue) {
+    if (!this.activity.paydue) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter due amount';
     }
@@ -516,7 +508,7 @@ export class CurrentactivityComponent implements OnInit {
 
     if (this.activity.paydue === this.due_paid) {
       this.activity.pendingId = 4;
-    } else{
+    } else {
       this.activity.pendingId = 6;
     }
 
@@ -617,12 +609,12 @@ export class CurrentactivityComponent implements OnInit {
     this.activityInvoice = JSON.parse(sessionStorage.getItem('ProductInvoice')) || new activityDetailsModel();
 
     return {
-     
-        
+
+
       // Heading
       content: [
         {
-          text: '' + this.currentDate ,
+          text: '' + this.currentDate,
           // bold: true,
           fontSize: 7,
           alignment: 'right',
@@ -673,22 +665,22 @@ export class CurrentactivityComponent implements OnInit {
                 style: 'name'
               },
               {
-                text: 'Title                 : ' +  this.productInvoice.title
+                text: 'Title                 : ' + this.productInvoice.title
               },
               {
-                text: 'Client Name   : '  +  this.productInvoice.clientName
+                text: 'Client Name   : ' + this.productInvoice.clientName
               },
               {
-                text: 'Address          : ' +  this.productInvoice.address
+                text: 'Address          : ' + this.productInvoice.address
               },
               {
-                text: 'Email               : '  + this.productInvoice.email,
+                text: 'Email               : ' + this.productInvoice.email,
               },
               {
-                text: 'Date                 : '  +  this.productInvoice.createdon,
+                text: 'Date                 : ' + this.productInvoice.createdon,
               },
               {
-                text: 'Delivery Date  : ' +  this.productInvoice.appointmentDate,
+                text: 'Delivery Date  : ' + this.productInvoice.appointmentDate,
               },
             ],
 
@@ -729,8 +721,8 @@ export class CurrentactivityComponent implements OnInit {
           columns: [
             // Details to show in QR Code
             { qr: 'Company Name :' + this.user.companyname + ', Address :' + this.user.companyaddress + ',Contact :' + this.user.mobile + ',Bill No. :' + this.productInvoice.aid + ',Client Name :' + this.productInvoice.clientName + ',Clients Contact No : ' + this.productInvoice.contact, fit: 100 },
-         
-           // Signature / Name of a person
+
+            // Signature / Name of a person
             {
               // text: `(${this.productInvoice.clientName})`,
               text: `(${this.user.salesName})`,

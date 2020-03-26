@@ -49,7 +49,7 @@
               <td style='text-align:center'>
                 <button type="submit" class="btn btn-sm btn-success" (click)="view_product_Images()"> View Images</button>
               </td> -->
-              
+
               <td style='text-align:center' class="font-size">
                 <i class="fa fa-picture-o" aria-hidden="true" (click)="open_image_modal(images,item)"
                   (click)="view_product_Images(item.id)"></i>
@@ -118,7 +118,7 @@
   <div class="modal-header">
     <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT</h4>
     <div>
-      <button type="button" class="close" aria-label="Close" (click)="modalService.dismissAll()" >
+      <button type="button" class="close" aria-label="Close" (click)="modalService.dismissAll()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -167,8 +167,8 @@
 
             <div *ngFor="let image of tempImageList;let i=index;" class="float-left">
               <div class="row">
-                <div  class="col-1">
-                  <img  [src]="image.ImageData" height="100px" width="100px">
+                <div class="col-1">
+                  <img [src]="image.ImageData" height="100px" width="100px">
                 </div>
               </div>
             </div>
@@ -244,12 +244,12 @@
       <carousel [pauseOnFocus]="true" style="text-align: center;">
         <slide *ngFor="let items of product_imageDetails;let i=index;">
           <!-- <div> -->
-            <button class="close setdelete" type="button" (click)="DeleteImage(items.id)">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <!-- <img style="display: block; width: 500px; height: 400px;"
+          <button class="close setdelete" type="button" (click)="DeleteImage(items.id)">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <!-- <img style="display: block; width: 500px; height: 400px;"
               [src]="'http://localhost:55627/Documents/Images/Product/Thumb/'+items.image"> -->
-            <img class="carousel_image" [src]="'http://localhost:55627/Documents/Images/Product/'+items.image">
+          <img class="carousel_image" [src]="'http://localhost:55627/Documents/Images/Product/'+items.image">
           <!-- </div> -->
         </slide>
       </carousel>

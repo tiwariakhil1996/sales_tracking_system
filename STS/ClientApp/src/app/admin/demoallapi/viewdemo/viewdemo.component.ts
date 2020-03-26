@@ -10,13 +10,13 @@ import { DemoModel } from '../../../model/demo';
 })
 export class ViewdemoComponent implements OnInit {
 
-  Demo=new DemoModel();
-  DemoDetails:DemoModel[]=[];
-  
+  Demo = new DemoModel();
+  DemoDetails: DemoModel[] = [];
+
   constructor(
-    private demoService:DemoService,
-    private modalService:NgbModal
-  ) { 
+    private demoService: DemoService,
+    private modalService: NgbModal
+  ) {
     this.demoList();
   }
 
@@ -47,9 +47,9 @@ export class ViewdemoComponent implements OnInit {
 
     });
 
-   }
+  }
 
-  openupdatemodal(content,item){
+  openupdatemodal(content, item) {
     this.Demo = item;
     // data show in model use this line and store the data in user and display in ui
     this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
@@ -63,8 +63,8 @@ export class ViewdemoComponent implements OnInit {
       });
     }
   }
-  
-  onEdit(id:number) {
+
+  onEdit(id: number) {
     // this.client.image = this.imageSrc;
     this.demoService.updateDemo(id, this.Demo).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -75,5 +75,5 @@ export class ViewdemoComponent implements OnInit {
     }, (err) => {
     });
   }
-  
+
 }

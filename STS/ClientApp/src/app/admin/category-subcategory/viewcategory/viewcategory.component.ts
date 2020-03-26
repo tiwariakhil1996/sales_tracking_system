@@ -15,19 +15,19 @@ import { registerModel } from '../../../model/admin';
 export class ViewcategoryComponent implements OnInit {
 
 
-  
-   // Pagination
-   RowCount: number;
-   pageSize: number = 5;
-   totalPageList: paginationModel[] = [];
-   totalPageSize: number;
-   pagesize: any;
-   currentPageIndex: number = 0;
-   pageOfItems: Array<any>;
+
+  // Pagination
+  RowCount: number;
+  pageSize: number = 5;
+  totalPageList: paginationModel[] = [];
+  totalPageSize: number;
+  pagesize: any;
+  currentPageIndex: number = 0;
+  pageOfItems: Array<any>;
 
   user = new registerModel();
 
-  search_:any;
+  search_: any;
 
   modalRef: BsModalRef;
   category = new categoryDataModel();
@@ -49,7 +49,7 @@ export class ViewcategoryComponent implements OnInit {
 
   ngOnInit() {
 
-       
+
     // const item = { pageIndex: 0 };
     // this.categoryList(item);
 
@@ -107,7 +107,7 @@ export class ViewcategoryComponent implements OnInit {
     });
   }
 
-  
+
   // categoryList(item) {
   //   // this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
   //   // this.sales.userid = this.user.id;
@@ -126,7 +126,7 @@ export class ViewcategoryComponent implements OnInit {
   //       }
   //       var totalPageSize = Math.ceil(this.RowCount / this.pageSize);
   //       console.log(totalPageSize);
-        
+
   //       this.totalPageList = [];
   //       for (var i = 0; i < totalPageSize; i++) {
   //         this.totalPageList.push({ pageSize: i + 1, pageIndex: i })
@@ -151,22 +151,22 @@ export class ViewcategoryComponent implements OnInit {
   updateCategory(cid: number) {
     let strError = '';
 
-      if (!this.category.cname) {
-        strError += strError = '' ? '' : '<br/>';
-        strError += '- Please enter category name';
-      }
+    if (!this.category.cname) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please enter category name';
+    }
 
-      if (strError !== '') {
-        this.toastr.warning(strError, 'Warning', {
-          disableTimeOut: false,
-          timeOut: 2000,
-          enableHtml: true,
-          progressBar: true,
-          closeButton: true,
-        });
-        return false;
-      }
-      
+    if (strError !== '') {
+      this.toastr.warning(strError, 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000,
+        enableHtml: true,
+        progressBar: true,
+        closeButton: true,
+      });
+      return false;
+    }
+
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.category.modifiedby = this.user.id;
     // console.log(this.category.modifiedby);
@@ -180,11 +180,11 @@ export class ViewcategoryComponent implements OnInit {
         });
         this.modalService.dismissAll();
       }
-      
+
       this.category = new categoryDataModel();
 
       const item = { pageIndex: 0 };
-    this.categoryList(item);
+      this.categoryList(item);
     }, (err) => {
     });
   }
@@ -209,7 +209,7 @@ export class ViewcategoryComponent implements OnInit {
     this.categoryService.changeStatus(id).subscribe(data => {
       // this.categoryList();
       const item = { pageIndex: 0 };
-    this.categoryList(item);
+      this.categoryList(item);
     });
   }
 

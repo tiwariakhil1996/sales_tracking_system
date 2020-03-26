@@ -60,9 +60,10 @@
                 class="fa fa-download" aria-hidden="true"></i></button>
             </td> -->
             <td>
-              <button type="button" class="btn btn-primary" data-toggle="modal" (click)= "openupdatemodal(content,item,i)"
-                (click)="GetProduct_Activity(item.aid)"><i class="fa fa-eye" aria-hidden="true"></i></button>
-              
+              <button type="button" class="btn btn-primary" data-toggle="modal"
+                (click)="openupdatemodal(content,item,i)" (click)="GetProduct_Activity(item.aid)"><i class="fa fa-eye"
+                  aria-hidden="true"></i></button>
+
               <!-- <button class='btn btn-danger' type="button" (click)="onDelete(item.aid)"><i class="fa fa-trash" aria-hidden="true"></i></button> -->
             </td>
           </tr>
@@ -236,11 +237,11 @@
       <button *ngIf="(activity.status == 2)" class='btn btn-warning' data-toggle="modal" (click)="open(content1)"
         type="button"><i>Followup</i></button>
 
-        <button *ngIf="(activity.status == 2 || activity.status == 3  || activity.status == 6 )" class='btn btn-dark'
-          type="button" (click)="open_closeactivity(closeactivity,activity.aid)">
-          <i>Close</i></button>
-          <button style="float: right; width: 47px;" class="form-control btn btn-primary download-invoice" (click)="GeneratePdf('open')"><i
-            class="fa fa-download" aria-hidden="true"></i></button>
+      <button *ngIf="(activity.status == 2 || activity.status == 3  || activity.status == 6 )" class='btn btn-dark'
+        type="button" (click)="open_closeactivity(closeactivity,activity.aid)">
+        <i>Close</i></button>
+      <button style="float: right; width: 47px;" class="form-control btn btn-primary download-invoice"
+        (click)="GeneratePdf('open')"><i class="fa fa-download" aria-hidden="true"></i></button>
     </div>
 
   </div>

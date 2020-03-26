@@ -29,7 +29,7 @@ export class DefaultLayoutComponent implements OnInit {
 
   profile_pic = new registerModel();
 
-  username:string;
+  username: string;
 
   salesregister = new salesregisterModel();
   salesDetails: salesregisterModel[] = [];
@@ -64,12 +64,12 @@ export class DefaultLayoutComponent implements OnInit {
     this.changePassword.id = this.register.id;
     this.user = this.register.createdby;
     this.profile_pic.image = this.register.image;
-    this.username=this.register.username;
+    this.username = this.register.username;
   }
 
-  ngOnInit() {    
+  ngOnInit() {
     this.checkRole(this.RoleJason);
-  
+
     this.getuserProfile();
 
   }
@@ -381,7 +381,7 @@ export class DefaultLayoutComponent implements OnInit {
         }
         this.salesregister = new salesregisterModel();
       }
-      ,(err) => {
+        , (err) => {
 
         });
     }

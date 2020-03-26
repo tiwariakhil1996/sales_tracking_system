@@ -45,7 +45,7 @@ export class AddsubcategoryComponent implements OnInit {
     }
   }
 
-  
+
 
   active_CategoryList() {
     this.categoryService.active_CategoryList().subscribe((data: any) => {
@@ -72,16 +72,16 @@ export class AddsubcategoryComponent implements OnInit {
         strError += '- Please select subcategory';
       }
 
-      if (strError !== '') {
-        this.toastr.warning(strError, 'Warning', {
-          disableTimeOut: false,
-          timeOut: 2000,
-          enableHtml: true,
-          progressBar: true,
-          closeButton: true,
-        });
-        return false;
-      }
+    if (strError !== '') {
+      this.toastr.warning(strError, 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000,
+        enableHtml: true,
+        progressBar: true,
+        closeButton: true,
+      });
+      return false;
+    }
 
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.subcategory.createdby = this.user.id;

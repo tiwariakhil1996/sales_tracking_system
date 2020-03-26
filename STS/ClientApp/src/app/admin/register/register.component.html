@@ -5,18 +5,17 @@
         <div class="col-md-6 mx-auto">
           <div class="card mx-4">
             <div class="card-body p-4 reg-form">
-        
-                <h1>Admin Register</h1>
-                <p class="text-muted">Create your account</p>
 
+              <h1>Admin Register</h1>
+              <p class="text-muted">Create your account</p>
 
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fa fa-user"></i></span>
                 </div>
-                <input required maxlength="25" type="text" #name="ngModel" class="form-control" placeholder="Enter Username" [(ngModel)]="register.username"
-                  name="username">
-                  <!-- <div *ngIf="name.invalid && (name.dirty || name.touched)"
+                <input required maxlength="25" type="text" #name="ngModel" class="form-control"
+                  placeholder="Enter Username" [(ngModel)]="register.username" name="username">
+                <!-- <div *ngIf="name.invalid && (name.dirty || name.touched)"
                   class="alert alert-danger">
                   <div *ngIf="name.errors.required">
                     Name is required.

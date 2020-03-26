@@ -44,9 +44,9 @@
 
             <div class="col-sm-6">
               <label class="textarea-input">Product Description</label>
-              <textarea #descrip id="description" name="description" maxlength="150"  [(ngModel)]="product.description" rows="5"
-                class="form-control" placeholder="Enter description"></textarea>
-                Total characters allowed  {{descrip.value.length}} / 150
+              <textarea #descrip id="description" name="description" maxlength="150" [(ngModel)]="product.description"
+                rows="5" class="form-control" placeholder="Enter description"></textarea>
+              Total characters allowed {{descrip.value.length}} / 150
             </div>
           </div>
 
@@ -59,21 +59,21 @@
                   </div> 
                 </div> -->
 
-                <div class=" col-sm-6">
-                  <div id='photos-preview'>
-                    <label for="Product">Select Product Image</label><br>
-                    <input type="file" id="fileupload" multiple (change)="handleFileInput($event.target.files)"
-                      [(ngModel)]="product.imageList" /><br><br>
+            <div class=" col-sm-6">
+              <div id='photos-preview'>
+                <label for="Product">Select Product Image</label><br>
+                <input type="file" id="fileupload" multiple (change)="handleFileInput($event.target.files)"
+                  [(ngModel)]="product.imageList" /><br><br>
 
-                    <div *ngFor="let image of tempImageList;let i=index;" class="float-left">
-                      <div class="row">
-                        <div  class="col-1">
-                          <img [src]="image.ImageData" height="100px" width="100px">
-                        </div>
-                      </div>
+                <div *ngFor="let image of tempImageList;let i=index;" class="float-left">
+                  <div class="row">
+                    <div class="col-1">
+                      <img [src]="image.ImageData" height="100px" width="100px">
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
 
             <!-- <div class="col-sm-6">
               <label class="text-input">Added on</label>

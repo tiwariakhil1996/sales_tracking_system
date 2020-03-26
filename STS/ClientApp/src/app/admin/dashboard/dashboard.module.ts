@@ -18,6 +18,6 @@ import { RouterModule } from '@angular/router';
     ButtonsModule.forRoot()
     // RouterModule.forChild()
   ],
-  declarations: [ DashboardComponent ]
+  declarations: [DashboardComponent]
 })
 export class DashboardModule { }
