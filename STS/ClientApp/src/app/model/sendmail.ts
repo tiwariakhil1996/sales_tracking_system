@@ -4,8 +4,8 @@ export class SendMailModel {
     UsernamePassword: string;
     UsernameEmail: string
 }
+
 export class sendmailModel {
     UniqueId: string;
     email: string;
-
 }

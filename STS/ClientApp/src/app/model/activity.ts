@@ -1,6 +1,4 @@
-
 // activity
-
 export class addactivityModel {
     aid: number;
     title: string;
@@ -64,8 +62,10 @@ export class activityModel {
     total_price: string;
     pendingamount: number;
     advancepay: number;
+
     paydue: number;
     payment_mode: string;
+    
     createdby: number;
     modifiedby: number;
     latitude: any;
@@ -124,15 +124,6 @@ export class sales_Location_Model {
 
 export class updateactivityModel {
     aid: number;
-    // title: string;
-    // description: string;
-    // clientId: number;
-    // clientName: string;
-    // salesId: number;
-    // salesName: string;
-    // contact: String;
-    // address: string;
-    // appointmentDate: string;
     order_Id: number;
     productId: number;
     productname: string;
@@ -145,9 +136,7 @@ export class updateactivityModel {
 
     createdby: number;
     modifiedby: number;
-    // userid: number;
 
-    // user_id: number;
     advance_payment: number;
     payment_mode: number;
     pending_amount: number;
@@ -180,9 +169,6 @@ export class paginationModel {
     pageSize: number;
     pageIndex: number;
 }
-
-
-
 
 export class activityDetailsModel {
     aid: number;

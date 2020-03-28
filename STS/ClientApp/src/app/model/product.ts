@@ -1,6 +1,3 @@
-
-
-
 // product form
 export class productModel {
     id: number;
@@ -98,8 +95,6 @@ export class productListModel {
     pageSize: number;
     search: string;
 }
-
-
 export class paginationModel {
 
     pageSize: number;

@@ -10,8 +10,6 @@ export class AdminService {
 
 
   // REGISTER
-
-
   AdminRegisterService(data) {
     return this.http.post('/api/Admin/AdminRegister', data);
 
@@ -28,6 +26,5 @@ export class AdminService {
   changePassword(id: number, data: any) {
     return this.http.put('/api/Admin/changeadminPassword/' + id, data);
   }
-
 
 }

@@ -1,6 +1,4 @@
-
 // client 
-
 export class clientModel {
     id: number;
     // clientId:number;

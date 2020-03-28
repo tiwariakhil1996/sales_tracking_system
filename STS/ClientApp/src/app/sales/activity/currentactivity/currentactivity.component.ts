@@ -479,8 +479,9 @@ export class CurrentactivityComponent implements OnInit {
   remain_to_pay(pendingamount: number, amt_paid: number) {
     this.due_paid = pendingamount - amt_paid;
   }
-
+  //this logic for status payment pending
   pay_due(pendingamount: number, amt_paid: number, aid: number) {
+
     this.due_paid = pendingamount - amt_paid;
 
     let strError = '';
@@ -515,9 +516,10 @@ export class CurrentactivityComponent implements OnInit {
     this.activity.latitude = this.lat;
     this.activity.longitude = this.lng;
     this.activity.paydue = this.due_paid;
+
     this.activityService.updateToPending(aid, this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        this.toastr.success('Activity is in Pending', 'Successful', {
+        this.toastr.success('Activity is in Pending', 'Successfull', {
           disableTimeOut: false,
           timeOut: 2000
         });

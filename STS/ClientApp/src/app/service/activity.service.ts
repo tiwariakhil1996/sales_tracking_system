@@ -28,21 +28,9 @@ export class ActivityService {
     return this.http.get('/api/Activity/Activity_Location/' + aid);
   }
 
-  // activityList_while_adding() {
-  //   return this.http.get('/api/Activity/ActivityList_while_adding');
-  // }
-
   deleteActivity(aid: number) {
     return this.http.delete('/api/Activity/deleteActivity/' + aid);
   }
-
-  // searchTitle(aid) {
-  //   return this.http.get('/api/Activity/searchTitle/' + aid);
-  // }
-
-  // searchActivity(data) {
-  //   return this.http.get('/api/Activity/searchTitle', data);
-  // }
 
   deleteProduct(productId: number) {
     return this.http.delete('/api/Activity/deleteActivity_Product/' + productId);
@@ -67,11 +55,6 @@ export class ActivityService {
   each_admin_activityList(data) {
     return this.http.post('/api/Activity/each_admin_activityList', data);
   }
-
-  // each_user_activityList(data) {
-  //   return this.http.post('/api/Activity/each_user_activityList', data);
-  // }
-
   each_admins_sales_Location(data) {
     return this.http.post('/api/Activity/each_admins_sales_Location', data);
   }
@@ -104,10 +87,5 @@ export class ActivityService {
   updateToCancel(aid: number, data: any) {
     return this.http.put('/api/Activity/updateToCancel/' + aid, data);
   }
-
-  // latest_added_Activity(){
-  //   return this.http.get('/api/Activity/addActivity');
-  // }
-
 
 }
