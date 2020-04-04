@@ -82,7 +82,7 @@ namespace STS.Controllers
                     Token = transaction.Token;
                     UserId = transaction.UserIdentity;
 
-                    var html = System.IO.File.ReadAllText(@"EmailTemplate/ResetPassword.html");
+                    var html = System.IO.File.ReadAllText(@"EmailTemplates/ResetPassword.html");
                     var link = "http://localhost:55627/sales/reset-password-sales?Token=" + Token + "&UserId=" + UserId;
 
 

@@ -17,7 +17,7 @@ import { registerModel } from '../../model/admin';
 @Component({
   // styleUrls: ['./dashboard.component.css'],
   templateUrl: 'dashboard.component.html'
- 
+
 })
 export class DashboardComponent implements OnInit {
 
@@ -43,10 +43,10 @@ export class DashboardComponent implements OnInit {
 
   pageSize: number = 5;
 
-  RoleJason = {
-    ROle: [0, 1],
-    Component: 'DashboardComponent'
-  };
+  // RoleJason = {
+  //   ROle: [0, 1],
+  //   Component: 'DashboardComponent'
+  // };
 
 
   constructor(private router: Router,
@@ -54,18 +54,18 @@ export class DashboardComponent implements OnInit {
     private productService: ProductService,
     private salesService: SalesService,
     private activityService: ActivityService) {
-    
+
   }
 
-ngOnInit() {
-   const item = { pageIndex: 0 };
-  this.productList(item);
-  this.clientList(item);
-  this.SalesList(item);
-  this.eachactivityList(item);
+  ngOnInit() {
+    const item = { pageIndex: 0 };
+    this.productList(item);
+    this.clientList(item);
+    this.SalesList(item);
+    this.eachactivityList(item);
 
-  this.checkRole(this.RoleJason);
-}
+    // this.checkRole(this.RoleJason);
+  }
   // productList() {
   //   this.productService.productList().subscribe((data: any) => {
   //     if (data.Status.code === 0) {
@@ -80,16 +80,16 @@ ngOnInit() {
   //   });
   // }
 
-  checkRole(RoleJason) {
+  // checkRole(RoleJason) {
 
-    const result = JSON.parse(localStorage.getItem('adminLogin')) || [];
-    if (this.RoleJason.Component === RoleJason.Component) {
-      // console.log(result);
-      if (!this.RoleJason.ROle.includes(result.userType)) {
-        this.router.navigate(['admin/login']);
-      }
-    }
-  }
+  //   const result = JSON.parse(localStorage.getItem('adminLogin')) || [];
+  //   if (this.RoleJason.Component === RoleJason.Component) {
+  //     // console.log(result);
+  //     if (!this.RoleJason.ROle.includes(result.userType)) {
+  //       this.router.navigate(['admin/login']);
+  //     }
+  //   }
+  // }
 
   // productList() {
   //   this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
@@ -123,10 +123,10 @@ ngOnInit() {
           this.productDetails = data.each_admin_ProductList;
           this.totalProduct = this.productDetails.length;
         }
-        }
-      }, (err) => {
+      }
+    }, (err) => {
 
-      });
+    });
 
   }
 

@@ -268,8 +268,8 @@ export class CurrentactivityComponent implements OnInit {
         // console.log(totalPageSize);
 
         this.totalPageList = [];
-        for (var i = 0; i < this.totalPageSize; i++) {
-          this.totalPageList.push({ pageSize: i + 1, pageIndex: i })
+        for (let i = 0; i < this.totalPageSize; i++) {
+          this.totalPageList.push({ pageSize: i + 1, pageIndex: i });
 
         }
       }
@@ -297,7 +297,7 @@ export class CurrentactivityComponent implements OnInit {
       this.activityDetails[this.ind];
       this.modalService.open(closeactivity, { ariaLabelledBy: 'modal-basic-title' });
     } else {
-      this.update_ToClose(this.activity.aid)
+      this.update_ToClose(this.activity.aid);
     }
 
   }
@@ -476,20 +476,34 @@ export class CurrentactivityComponent implements OnInit {
   //   this.update_InPending(this.activity.aid)
   // }
 
+  // remain_to_pay(pendingamount: number, amt_paid: number) {
+  //   this.due_paid = pendingamount - amt_paid;
+  // }
+
   remain_to_pay(pendingamount: number, amt_paid: number) {
-    this.due_paid = pendingamount - amt_paid;
+    if (amt_paid >= 0) {
+      this.due_paid = pendingamount - amt_paid;
+    } else if (amt_paid === 0 || amt_paid == null) {
+         this.due_paid = 0;
+    }
   }
-  //this logic for status payment pending
+
+  // this logic for status payment pending
   pay_due(pendingamount: number, amt_paid: number, aid: number) {
 
     this.due_paid = pendingamount - amt_paid;
 
     let strError = '';
 
-    if (!this.activity.paydue) {
-      strError += strError = '' ? '' : '<br/>';
-      strError += '- Please enter due amount';
-    }
+    // if (!this.activity.paydue) {
+    //   strError += strError = '' ? '' : '<br/>';
+    //   strError += '- Please enter due amount';
+    // }
+
+    // if (this.due_paid == null) {
+    //   strError += strError = '' ? '' : '<br/>';
+    //   strError += '- Please enter due amount';
+    // }
 
     if (!this.activity.payment_mode) {
       strError += strError = '' ? '' : '<br/>';

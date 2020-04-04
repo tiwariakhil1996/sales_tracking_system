@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ProductService {
 
   constructor(private http: HttpClient) { }
@@ -55,4 +56,5 @@ export class ProductService {
   price(id) {
     return this.http.get('/api/Product/ProductPrice/' + id);
   }
+  
 }

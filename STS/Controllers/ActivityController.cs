@@ -7,6 +7,8 @@ using STS.Common;
 using STS.Model;
 using Microsoft.AspNetCore.Mvc;
 
+
+
 namespace STS.Controllers
 {
     [Route("api/[controller]")]
@@ -19,6 +21,7 @@ namespace STS.Controllers
         {
             iactivity = activity;
         }
+
         //Add Activity
         [HttpPost]
         [Route("addActivity")]
@@ -44,7 +47,6 @@ namespace STS.Controllers
 
 
         //Display Actitivity
-
         [HttpGet]
         [Route("ActivityList")]
         public async Task<IActionResult> ActivityList()
@@ -65,6 +67,8 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
+
+
         // Display Products Added into activity
         [HttpGet]
         [Route("Activity_ProductList/{aid}")]
@@ -86,6 +90,9 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
+
+
+
         [HttpGet]
         [Route("activity_Details/{aid}")]
         public async Task<IActionResult> activity_Details(int aid)
@@ -106,6 +113,8 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
+
+
         //Display
 
         //[HttpGet]
@@ -176,6 +185,7 @@ namespace STS.Controllers
         //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         //}
 
+
         [HttpPost]
         [Route("each_admin_activityList")]
         public IActionResult each_admin_activityList([FromBody]admin_ActivityListModel model)
@@ -200,6 +210,7 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
+
 
         [HttpPost]
         [Route("each_sales_activityList")]
@@ -227,7 +238,6 @@ namespace STS.Controllers
         }
 
 
-
         [HttpPost]
         [Route("each_user_activityList")]
         public IActionResult each_user_activityList([FromBody]admin_ActivityListModel model)
@@ -253,8 +263,6 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
-
-  
 
         // Display Sales lat lng ..whom admin has added
 
