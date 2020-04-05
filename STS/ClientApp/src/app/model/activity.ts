@@ -17,9 +17,15 @@ export class addactivityModel {
     status: number;
     statusname: string;
     grand_total: number;
+    discount_amt: number;
+    subtotal: number;
     advance_payment: number;
     payment_mode: number;
     pending_amount: number;
+
+    pendingamount: number;
+    advancepay: number;
+    
     productList: addproductListingModel[];
 }
 

@@ -118,6 +118,14 @@ namespace STS.BLL.Service
             {
                 return await salesRepository.deleteSales(ID);
             }
+        } 
+        
+        public async Task<TranStatus> deleteProfilepic(int ID)
+        {
+            using (salesRepository = new SalesRepository())
+            {
+                return await salesRepository.deleteProfilepic(ID);
+            }
         }
 
         //Change Passoword
@@ -158,5 +166,15 @@ namespace STS.BLL.Service
             }
 
         }
+
+        public Task<Tuple<List<ChatModel>, TranStatus>> getsaleschats(ChatModel model)
+        {
+            using (salesRepository = new SalesRepository())
+            {
+                return salesRepository.getsaleschats(model);
+            }
+
+        }
+
     }
 }

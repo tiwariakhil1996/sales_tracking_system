@@ -3,48 +3,47 @@
     <div class="card">
       <div class="card-header color">
 
-        Sales Details
-      </div>
-      <!-- <div style="overflow-x:auto;"> -->
-      <div class="card-body table-responsive">
-        <div class="form-inline md-form mr-auto mb-4">
-          <input style="float: right;" (input)="onsearch()" class="form-control mr-sm-2" type="text"
-            [(ngModel)]="search_" placeholder="Search" aria-label="Search">
-        </div>
-        <table class="table table-bordered btn-center ">
-          <thead>
-            <tr class="table-success">
-              <th>Sr.no</th>
-              <!-- <th>ID</th> -->
-              <th>Image</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Contact</th>
-              <th>Adhar No.</th>
-              <th>Address</th>
-              <th style="width: 128px;">Password Reset</th>
-              <th>Action</th>
-              <th>IsActive</th>
-            </tr>
-          </thead>
-          <tbody>
+      Sales Details
+    </div>
+    <!-- <div style="overflow-x:auto;"> -->
+    <div class="card-body table-responsive">
+      <div class="form-inline md-form mr-auto mb-4">
+        <input style="float: right;" (input)="onsearch()" class="form-control mr-sm-2" type="text" [(ngModel)]="search_" placeholder="Search" aria-label="Search">
+       </div>
+      <table class="table table-bordered btn-center ">
+        <thead>
+          <tr class="table-success">
+            <!-- <th>Sr.no</th> -->
+            <!-- <th>ID</th> -->
+            <th>Image</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Contact</th>
+            <th>Adhar No.</th>
+            <th>Address</th>
+            <th style="width: 128px;">Password Reset</th>
+            <th>Action</th>
+            <th>IsActive</th>
+          </tr>
+        </thead>
+        <tbody>
 
-            <tr *ngFor="let item of salesDetails;let i=index;">
-              <td style="text-align: center">{{i+1}}</td>
-              <!-- <td>{{item.id}}</td> -->
-              <td style='text-align:center' class="sales-img">
-                <img style="max-width: 50px; max-height: 50px;" *ngIf="item.image"
-                  [src]="'http://localhost:55627/Documents/Avatars/Sales/Thumb/'+item.image">
-                <img style="max-width: 50px; max-height: 50px;" *ngIf="!item.image"
-                  [src]="'/assets/img/avatars/admin.png'">
-              </td>
-              <td>{{item.salesName}}</td>
-              <td>{{item.email}}</td>
-              <td>{{item.mobile}}</td>
-              <td>{{item.adharcard}}</td>
-              <td>{{item.address}}</td>
-              <td style="text-align: center">
-                <!-- <button class='btn btn-black' type="button" data-toggle="modal" (click)="openmodal(content)"><i
+          <tr *ngFor="let item of salesDetails;let i=index;">
+            <!-- <td style="text-align: center">{{i+1}}</td> -->
+            <!-- <td>{{item.id}}</td> -->
+            <td style='text-align:center' class="sales-img">
+              <img style="max-width: 50px; max-height: 50px;" *ngIf ="item.image"
+              [src]="'http://localhost:55627/Documents/Avatars/Sales/Thumb/'+item.image">
+             <img style="max-width: 50px; max-height: 50px;"  *ngIf ="!item.image"
+                [src]="'/assets/img/avatars/admin.png'">
+            </td>
+            <td>{{item.salesName}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.mobile}}</td>
+            <td>{{item.adharcard}}</td>
+            <td>{{item.address}}</td>
+            <td style="text-align: center">
+              <!-- <button class='btn btn-black' type="button" data-toggle="modal" (click)="openmodal(content)"><i
                 class="fa fa-key" aria-hidden="true"></i>
             </button> -->
                 <span class="fa-passwd-reset fa-stack" data-toggle="modal"

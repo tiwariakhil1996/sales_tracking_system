@@ -63,6 +63,8 @@ import { from } from 'rxjs';
 // import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password.component';
 import { ForgotPasswordSalesComponent } from './sales/forgot-password-sales/forgot-password-sales.component';
+import { AgmDirectionModule } from 'agm-direction';
+// import { ChatComponent } from './admin/chat/chat.component';
 import { ResetPasswordSalesComponent } from './sales/reset-password-sales/reset-password-sales.component';
 
 

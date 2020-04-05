@@ -45,6 +45,90 @@ namespace STS.DAL
         }
 
 
+        public async Task<TranStatus> sendmessage(ChatModel model)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@AdminId", model.AdminId);
+                parameter.Add("@SalesId", model.SalesId);
+                parameter.Add("@Msg", model.Msg);
+                parameter.Add("@Createdby", model.Createdby);
+
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                await connection.QueryAsync("sendmessage", parameter, commandType: CommandType.StoredProcedure);
+
+                transaction.returnMessage = parameter.Get<string>("@Message");
+                transaction.code = parameter.Get<int>("@Code");
+                return transaction;
+
+            }
+        }
+
+
+        //public async Task<List<ChatModel>> getchats(int Id)
+        //{
+        //    using (var connection = new SqlConnection(ConnectionString))
+        //    {
+        //        connection.Open();
+        //        TranStatus transaction = new TranStatus();
+        //        DynamicParameters parameter = new DynamicParameters();
+        //        parameter.Add("@SalesId", Id);
+
+        //        parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+        //        parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+        //        var result = await connection.QueryAsync<ChatModel>("getchat", parameter, commandType: CommandType.StoredProcedure);
+        //        return result.ToList();
+
+        //    }
+        //}
+
+        public List<ChatModel> getchats(ChatModel model)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@AdminID", model.AdminId);
+                parameter.Add("@SalesId", model.SalesId);
+
+                //parameter.Add("@RowCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                var result = connection.Query<ChatModel>("getchats", parameter, commandType: CommandType.StoredProcedure);
+                //RowCount = parameter.Get<int>("@RowCount");
+                return result.ToList();
+
+            }
+        }
+
+        //public async Task<TranStatus> getchat(int Id, ChatModel model)
+        //{
+        //    using (var connection = new SqlConnection(ConnectionString))
+        //    {
+        //        await connection.OpenAsync();
+        //        TranStatus transaction = new TranStatus();
+        //        DynamicParameters parameter = new DynamicParameters();
+        //        parameter.Add("@SalesId", Id);
+        //        parameter.Add("@AdminId", model.AdminId);
+        //        //parameter.Add("@SalesId", model.SalesId);
+        //        parameter.Add("@Msg", model.Msg);
+
+        //        parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+        //        parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+        //        await connection.QueryAsync("getchat", parameter, commandType: CommandType.StoredProcedure);
+
+        //        transaction.returnMessage = parameter.Get<string>("@Message");
+        //        transaction.code = parameter.Get<int>("@Code");
+        //        return transaction;
+
+        //    }
+        //}
 
         //Change Password
         public async Task<TranStatus> changeadminPassword(int Id, Changeadmin_passwordModel model)

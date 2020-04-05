@@ -39,6 +39,10 @@ export class SalesService {
     return this.http.delete('/api/Sales/deleteSales/' + id);
   }
 
+  delete_profile_pic(id: number) {
+    return this.http.delete('/api/Sales/deleteProfilepic/' + id);
+  }
+
   changeStatus(id: number) {
     return this.http.put('/api/Sales/ChangeStatusSales/' + id, null);
   }

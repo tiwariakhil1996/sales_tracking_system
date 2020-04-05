@@ -10,6 +10,9 @@ import { ActivityService } from '../../service/activity.service';
 import { activityModel, newactivityModel } from '../../model/activity';
 import { avatarModel, registerModel } from '../../model/admin';
 import { AgmMap } from '@agm/core';
+import { UpdateImageListModel } from '../../model/product';
+import { ChatService } from '../../service/chat.service';
+import { chatModel, userModel } from '../../model/chat';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,6 +23,13 @@ export class SalesLayoutComponent implements OnInit {
   public sidebarMinimized = false;
   public SalesnavItems = SalesnavItems;
 
+  // tempImageList: UpdateImageListModel[] = [];
+  isShow = false;
+
+  toggleDisplay() {
+    this.isShow = !this.isShow;
+  }
+
   imageSrc: string = '';
   modalRef: BsModalRef;
 
@@ -27,12 +37,23 @@ export class SalesLayoutComponent implements OnInit {
   newactivityDetails: newactivityModel[] = [];
 
   assignedActivity: any;
+  new_message: any;
 
   user = new salesregisterModel();
+
+  userchat = new userModel();
+  userchatDetails: userModel[] = [];
+
+  chat = new chatModel();
+  chatDetails: chatModel[] = [];
 
   profile_pic = new registerModel();
 
   salesavatar = new sales_avatarModel();
+
+  pro = new UpdateImageListModel();
+
+  tempImageList: UpdateImageListModel[] = [];
 
   username: string;
 
@@ -48,6 +69,7 @@ export class SalesLayoutComponent implements OnInit {
   changePassword = new changePasswordModel();
 
   item: any;
+  // updateProfile =  new profileModel();
   updateProfile: any;
 
 
@@ -78,6 +100,7 @@ export class SalesLayoutComponent implements OnInit {
 
   constructor(private router: Router,
     private salesService: SalesService,
+    private chatService: ChatService,
     private modalService: NgbModal,
     private modalServices: BsModalService,
     private toastr: ToastrService,
@@ -97,7 +120,7 @@ export class SalesLayoutComponent implements OnInit {
     this.checkRole(this.RoleJason);
 
     this.getuserProfile();
-
+    this.view_msg();
   }
 
 
@@ -138,7 +161,8 @@ export class SalesLayoutComponent implements OnInit {
     this.salesDetails = JSON.parse(localStorage.getItem('salesLogin')) || {};
     // console.log(this.salesDetails);
     this.updateProfile = this.salesDetails;
-    console.log(this.updateProfile);
+
+    // console.log(this.updateProfile);
 
   }
 
@@ -147,14 +171,38 @@ export class SalesLayoutComponent implements OnInit {
   }
 
   updatesalesProfile() {
+    // let strError = '';
+
+    //  if (!this.updateProfile.image) {
+    //   strError += strError = '' ? '' : '<br/>';
+    //   strError += '- Please select image';
+    // }
+
+    if (this.updateProfile.image === null) {
+      this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+      this.updateProfile.image = this.user.image;
+    }
+
+    //  if (strError !== '') {
+    //   this.toastr.warning(strError, 'Warning', {
+    //     disableTimeOut: false,
+    //     timeOut: 2000,
+    //     enableHtml: true,
+    //     progressBar: true,
+    //     closeButton: true,
+    //   });
+    //   return false;
+    // }
+
     // this.updateProfile.image = this.imageSrc;
     this.salesService.UpdateSalesProfile(this.updateProfile).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        // alert("Profile updated successfully");
         this.toastr.success('Profile updated successfully', 'Successful', {
           disableTimeOut: false
         });
         localStorage.setItem('salesLogin', JSON.stringify(data.loginDetail[0] || {}));
+        this.getuserProfile();
+        this.modalRef.hide();
       }
     }, (err) => {
     });
@@ -220,6 +268,34 @@ export class SalesLayoutComponent implements OnInit {
     return reg.test(passwordField) === false ? false : true;
   }
 
+  delete_profile_pic(id: number) {
+    this.updateProfile.image = null;
+    this.profile_pic.image = null;
+    this.pro.ImageData = null;
+    this.salesavatar.image = null;
+
+    this.salesService.delete_profile_pic(id).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        localStorage.setItem('salesLogin', JSON.stringify(data.loginDetail[0] || {}));
+
+        this.toastr.success('Profile pic deleted Successful', 'Successful', {
+          disableTimeOut: false,
+          timeOut: 2000
+        });
+      }
+    }, (err) => {
+    });
+
+    // this.salesService.delete_profile_pic(id).subscribe(data => {
+
+    // });
+
+    // this.toastr.success('Profile pic deleted Successful', 'Successful', {
+    //   disableTimeOut: false,
+    //   timeOut: 2000
+    // });
+
+  }
 
 
   handleFileInput(fileList: FileList) {
@@ -230,11 +306,16 @@ export class SalesLayoutComponent implements OnInit {
         const image = new Image();
         image.src = String(reader.result);
         const imageDetail = String(reader.result).split(';base64,');
+
+        this.pro.ImageData = String(reader.result);
+
         this.updateProfile.image = imageDetail[1];
         this.updateProfile.ImageExtn = '.' + imageDetail[0].replace('data:image/', '');
         image.height = 100;
         image.width = 100;
-        // preview.appendChild(image);
+        preview.appendChild(image);
+        console.log(this.updateProfile.image);
+
       };
       reader.readAsDataURL(file);
       // console.log(file);
@@ -242,6 +323,30 @@ export class SalesLayoutComponent implements OnInit {
     });
   }
 
+  // handleFileInput(fileList: FileList) {
+  //   this.imageList = [];
+  //   this.imageModel = [];
+  //   // const preview = document.getElementById('photos-preview');
+  //   Array.from(fileList).forEach((file: File) => {
+  //     const reader = new FileReader();
+  //     reader.onload = () => {
+  //       // const image = new Image();
+  //       // image.src = String(reader.result);
+  //       const imageDetail = String(reader.result).split(';base64,');
+  //       // this.product.imageList = imageDetail[1];
+  //       // this.image.ImageExtn = '.' + imageDetail[0].replace('data:image/', '');
+  //       // image.height = 100;
+  //       // image.width = 100;
+  //       // preview.appendChild(image);
+  //       this.tempImageList.push({ ImageId: 0, ImageData: String(reader.result) });
+  //       this.imageList.push({ ImageExtn: '.' + imageDetail[0].replace('data:image/', ''), Image: '', ImageData: imageDetail[1] });
+  //       this.imageModel.push({ Image: '' });
+
+  //     };
+  //     reader.readAsDataURL(file);
+  //     console.log(file);
+  //   });
+  // }
 
   // activityList() {
   //   this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
@@ -284,10 +389,57 @@ export class SalesLayoutComponent implements OnInit {
     });
   }
 
+  send_msg() {
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.chat.salesId = this.user.id;
+    this.chat.adminId = this.user.createdby;
+    this.chat.createdby = this.user.id
+      ;
+
+    if (this.chat.msg.length > 0) {
+      this.chatService.send_msg(this.chat).subscribe((data: any) => {
+        if (data.Status.code === 0) {
+          // if (data.getsaleschats) {
+          //   this.chatDetails = data.getsaleschats;
+
+          // }
+        }
+
+      }, (err) => {
+
+
+      });
+    }
+
+    this.view_msg()
+  }
+
+  view_msg() {
+    this.userchat = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.chat.salesId = this.userchat.id;
+    this.chat.adminId = this.userchat.createdby;
+
+    this.chatService.get_sales_chats(this.chat).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.getsaleschats) {
+          this.chatDetails = data.getsaleschats;
+          this.new_message = this.chatDetails.length;
+          console.log(this.new_message);
+
+        }
+      }
+    }, (err) => {
+
+    });
+
+  }
+
   getuserProfile() {
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.salesavatar.image = this.user.image;
 
+    // To display image in update profile modal
+    this.profile_pic.image = this.user.image;
   }
 
   logout() {

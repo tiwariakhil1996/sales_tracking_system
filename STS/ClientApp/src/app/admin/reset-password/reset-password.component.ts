@@ -125,7 +125,19 @@ export class ResetPasswordComponent implements OnInit {
             timeOut: 2000
           });
         }
-
+        else if (data.Status.code === 1) {
+          this.toastr.error('New password must be unique, it should not be same as old password', 'Error', {
+            disableTimeOut: false,
+            timeOut: 2000
+          });
+        }
+        else if (data.Status.code === 2) {
+          this.toastr.info('Link has been expired', 'Info', {
+            disableTimeOut: false
+          });
+          this.Resetpassword = new ResetPasswordAdmin();
+        }
+       
       }, (err) => {
 
       });

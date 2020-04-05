@@ -23,7 +23,9 @@
         public int code { get; set; }
         public string Token { get; set; }
         public int UserIdentity { get; set; }
-        
+        public string User { get; set; }
+
+        //public string Users { get; set; }
         public TranStatus()
         {
             returnMessage = "";

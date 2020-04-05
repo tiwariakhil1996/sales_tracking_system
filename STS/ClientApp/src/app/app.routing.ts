@@ -76,6 +76,14 @@ export const routes: Routes = [
       title: 'Register Page'
     }
   },
+  
+  // {
+  //   path: 'admin/chat',
+  //   component: ChatComponent,
+  //   data: {
+  //     title: 'Chat'
+  //   }
+  // },
 
   {
     path: 'admin/sales-register',
@@ -146,6 +154,10 @@ export const routes: Routes = [
       {
         path: 'map',
         loadChildren: () => import('./admin/map/map.module').then(m => m.MapModule)
+      },
+      {
+        path: 'chat',
+        loadChildren: () => import('./admin/chat/chat.module').then(m => m.ChatModule)
       },
       {
         path: 'category-subcategory',

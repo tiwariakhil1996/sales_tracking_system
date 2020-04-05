@@ -39,6 +39,12 @@ export const navItems: INavData[] = [
     icon: 'icon-map'
   },
   {
+    name: 'Chat',
+    url: '/admin/chat',
+    icon: 'icon-chat'
+  },
+
+  {
     name: 'Category',
     url: '/admin/category-subcategory/viewcategory',
     icon: 'icon-note',

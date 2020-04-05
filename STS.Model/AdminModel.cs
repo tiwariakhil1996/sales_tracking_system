@@ -65,15 +65,24 @@ namespace STS.Model
         public string Newpassword { get; set; }
         public string Confirmpassword { get; set; }
 
+    } 
+    
+    
+    public partial class ChatModel
+    {
+        public int AdminId { get; set; }
+        public string SalesId { get; set; }
+        public string Msg { get; set; }
+        public string Createdon { get; set; }
+        public int Createdby { get; set; }
+        public string Adminname { get; set; }
+        public string Salesname { get; set; }
+        public string Createddate { get; set; }
+        public string Createdtime { get; set; }
+
     }
 
-    //public class EmailSettingsModel
-    //{
-    //    public string EmailTo { get; set; }
-    //    public int Subject { get; set; }
-    //    public string EmailMessage { get; set; }
-     
-    //    public string UsernamePassword { get; set; }
-    //}
+
+    
 }
     

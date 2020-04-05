@@ -31,6 +31,7 @@
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
         public int UserType { get; set; }
+        public int Createdby { get; set; }
 
     }
 

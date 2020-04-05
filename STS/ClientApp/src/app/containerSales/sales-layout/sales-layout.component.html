@@ -8,7 +8,89 @@
       <a class="nav-link" href="/sales/dashboard">Home</a>
     </li>
   </ul> -->
+
   <ul class="nav navbar-nav ml-auto">
+    <li class="nav-item d-md-down-none nav-item dropdown" dropdown placement="bottom right">
+      <a class="nav-link"  (click) ="toggleDisplay()" data-toggle="dropdown" role="button" aria-haspopup="true"
+        aria-expanded="false" dropdownToggle (click)="false"><i class="icon-speech"></i>
+      </a>
+
+      <div class="dropdown-menu-right"  [hidden] = "!isShow" *dropdownMenu aria-labelledby="simple-dropdown"
+        style="background-color: azure; position: absolute;width: 250px; background-color: #9896f9;">
+        <div class="dropdown-header text-center" style="color: white;background-color: blueviolet;">
+          <strong>Chat</strong></div>
+
+        <div class="row" style="padding: 0;height: 400px; ">
+          <div class="col-lg-12">
+            <div class="card" style="height: 402px;margin-bottom: 0px;">
+              <div class="card-body table-responsive"  style="padding-left: 0px;
+              padding-right: 0px;">
+
+                <ul id="chat" style="height: 315px;"  >
+                  <!-- <h3>{{this.chat.createddate}}</h3> -->
+                  <li class="me"  *ngFor="let chat of chatDetails;let i=index;">
+                    <!-- <h3>{{chat.createdtime}}</h3> -->
+                    <div  *ngIf="chat.createdby==this.chat.adminId">
+                    <div class="entete">
+                      <!-- <h2 style="color: black;">{{this.chat.adminname}} (Admin) </h2> -->
+                      <h2 style="color: black;width: 42px;">Admin</h2>
+                      <!-- <span class="status blue"></span> -->
+                    </div> 
+                    <!-- <div class="triangle"></div> -->
+                    <div class="message" style="background-color: #ed6f6f;">
+                      {{this.chat.msg}}
+                    </div>
+                    <div>
+                      <!-- <h2 style="color: gray;">{{this.chat.createdtime}}</h2> -->
+                      <h2  style="width: 110px; color: gray;">{{this.chat.createdon}}</h2>
+
+                      <!-- <h2 style="color: gray;">{{this.chat.createdtime | date:'shortTime'}}</h2> -->
+                    </div>
+                    </div>
+                    
+                    <div *ngIf="chat.createdby==this.chat.salesId">
+                      <div class="entete">
+                        <!-- <h2 style="color: black;">{{this.chat.salesname}} </h2> -->
+                        <h2 style="color: black;">Me</h2>
+                        <!-- <span class="status green"></span> -->
+                      </div> 
+                      <!-- <div class="sales"></div> -->
+                      <div class="message" style=" background-color: #ffc107;">
+                        {{this.chat.msg}}
+                      </div>
+                      <div>
+                        <!-- <h2 style="color: gray;">{{this.chat.createdtime}}</h2> -->
+                      <h2 style="color: gray;">{{this.chat.createdon}}</h2>
+
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+
+              </div>
+
+              <div class="text text-r form-inline md-form mr-auto mb-4"
+                style="background:whitesmoke !important;margin-left: 7px; margin-bottom: 0rem !important;">
+
+                <input class="mytext" style="border-radius: 20px;" type="text" id="msg" name="msg" [(ngModel)]="chat.msg" (click)="view_msg()"
+                  placeholder="Type a message" />
+                <button style="margin-left: 32px; border-radius: 34px;" class='btn btn-success' type="button" (click)="send_msg()"><i
+                    class="fa fa-send" aria-hidden="true"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </li>
+
+
+
+
+
+
+
     <li class="nav-item d-md-down-none">
       <a class="nav-link " href="/sales/activity/currentactivity"><i class="icon-bell"></i>
         <span data-toggle="tooltip" data-placement="left" tooltip="{{assignedActivity}} Activities are assigned to you."
@@ -19,21 +101,11 @@
       Welcome {{username}}
     </li>
 
-    <!-- <li class="nav-item d-md-down-none">
-      <a class="nav-link" href="/sales/activity/currentactivity"><i class="icon-list"></i></a>
-    </li> -->
-    <!-- Location -->
-    <!-- <li class="nav-item d-md-down-none">
-      <a class="nav-link" href="/sales/map"><i class="icon-location-pin"></i></a>
-    </li> -->
-
     <!-- Profile -->
 
     <li class="nav-item dropdown" dropdown placement="bottom right">
       <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
         dropdownToggle (click)="false">
-        <!-- <img src="assets/img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com" /> -->
-        <!-- <img  class="img-avatar" *ngIf="imageSrc" [src]="imageSrc" alt="admin@bootstrapmaster.com"/ > -->
         <img [src]="'http://localhost:55627/Documents/Avatars/Sales/Thumb/'+ salesavatar.image"
           *ngIf="salesavatar.image" class="img-avatar" alt="admin@bootstrapmaster.com" />
         <img [src]="'/assets/img/avatars/admin.png'" *ngIf="!salesavatar.image" class="img-avatar"
@@ -47,27 +119,12 @@
         <a class="dropdown-item" data-toggle="modal" data-toggle="modal" (click)="openModal(template)"><i
             class="fa fa-user"></i> Profile</a>
 
-        <!-- <a class="dropdown-item" href="#"><i class="fa fa-bell-o"></i> Updates<span
-            class="badge badge-info">42</span></a>
-        <a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i> Messages<span
-            class="badge badge-success">42</span></a>
-        <a class="dropdown-item" href="#"><i class="fa fa-tasks"></i> Tasks<span
-            class="badge badge-danger">{{totalActivity}}</span></a>
-        <a class="dropdown-item" href="#"><i class="fa fa-comments"></i> Comment<span
-            class="badge badge-warning">42</span></a> -->
         <div class="dropdown-header text-center"><strong>Settings</strong></div>
-        <!-- <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a> -->
 
         <a class="dropdown-item" data-toggle="modal" data-toggle="modal" (click)="changePasswordModal(template1)"><i
             class="fa fa-user"></i>Change Password</a>
 
-
-        <!-- <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Setting</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-usd"></i> Payments<span class="badge badge-dark">42</span></a>
-        <a class="dropdown-item" href="#"><i class="fa fa-file"></i> Projects<span
-            class="badge badge-primary">42</span></a> -->
         <div class="divider"></div>
-        <!-- <a class="dropdown-item" href="#"><i class="fa fa-shield"></i> Lock account</a> -->
         <a class="dropdown-item" href="sales/login" (click)="logout()"><i class="fa fa-lock"></i> Logout</a>
       </div>
     </li>
@@ -122,23 +179,27 @@
   <div class="modal-body">
     <div class="form-row">
 
-      <!-- <div class="form-group col-md-6">
-        <label for="image">Profile Pic</label><br>
-        <input type="file" id="fileupload" name="image" multiple
-          (change)="handleFileInput($event.target.files)" [(ngModel)]="updateProfile.image" />
-      </div> -->
-
       <div class="form-group col-md-6">
         <label for="image">Profile Pic</label><br>
-        <img [src]="'http://localhost:55627/Documents/Avatars/Sales/Thumb/'+profile_pic.image" *ngIf="profile_pic.image"
-          class="profile-pic">
-        <!-- <img  [src]="'/assets/img/avatars/admin.png'" *ngIf="!profile_pic.image" class="profile-pic"/> -->
+        <!-- Profile pic-->
+        <img [src]="'http://localhost:55627/Documents/Avatars/Sales/Thumb/'+profile_pic.image"
+          *ngIf="(profile_pic.image && !pro.ImageData)" class="profile-pic">
+
+        <!-- Default image -->
+        <img [src]="'/assets/img/avatars/admin.png'" *ngIf="(!profile_pic.image && !pro.ImageData) " height="100px"
+          width="100px">
+
+        <!-- Display new selected pic to upload -->
+        <img height="100px" width="100px" [src]="pro.ImageData" *ngIf="pro.ImageData">
 
       </div>
 
       <div class="form-group">
-        <input type="file" id="fileupload" name="image" (change)="handleFileInput($event.target.files)"
-          [(ngModel)]="updateProfile.image" />
+        <button class="btn btn-danger" (click)="delete_profile_pic(user.id)">Remove</button>
+        <input class="btn btn-success" type="file" id="fileupload" name="image"
+          (change)="handleFileInput($event.target.files)" [(ngModel)]="updateProfile.image" />
+
+
       </div>
 
       <div class="form-group col-md-6">

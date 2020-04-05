@@ -275,6 +275,29 @@ namespace STS.Controllers
         }
 
 
+        [HttpDelete]
+        [Route("deleteProfilepic/{ID}")]
+        public async Task<IActionResult> deleteProfilepic(int ID)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+
+                transaction = await isales.deleteProfilepic(ID);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+
         //[HttpPost]
         //[Route("Refresh_Sales_Location")]
         //public async Task<IActionResult> Refresh_Sales_Location(Refresh_Sales_Location_Model model)
@@ -342,5 +365,30 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
+
+
+
+        [HttpPost]
+        [Route("getsaleschats")]
+        public async Task<IActionResult> getsaleschats([FromBody]ChatModel model)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                var result = await isales.getsaleschats(model);
+                var chatDetails = result.Item1;
+                transaction = result.Item2;
+                dctData.Add("getsaleschats", chatDetails);
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
     }
 }

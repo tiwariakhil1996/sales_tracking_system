@@ -24,18 +24,6 @@ namespace STS.BLL.Service
         }
 
 
-        // Login
-
-        //AdminRepository adminloginRepository = null;
-        //public Task<TranStatus> AdminLogin(AdminLoginModel model)
-        //{
-        //    using (adminloginRepository = new AdminRepository())
-        //    {
-        //        return adminloginRepository.AdminLogin(model);
-
-        //    }
-        //}
-
         public Task<Tuple<List<AdminLoginModel>, TranStatus>> AdminLogin(AdminLoginModel model)
         {
             using (adminRepository = new AdminRepository())
@@ -80,5 +68,42 @@ namespace STS.BLL.Service
                 return await adminRepository.changeadminPassword(Id, model);
             }
         }
+
+
+        public Task<TranStatus> sendmessage(ChatModel model)
+        {
+            using (adminRepository = new AdminRepository())
+            {
+                return adminRepository.sendmessage(model);
+
+            }
+        }
+
+        //public Task<List<TranStatus>> getchats(int Id, ChatModel model)
+        //{
+        //    using (adminRepository = new AdminRepository())
+        //    {
+        //        return adminRepository.getchats(Id, model);
+
+        //    }
+        //}
+
+        //public async Task<List<ChatModel>> getchats(int Id)
+        //{
+        //    using (adminRepository = new AdminRepository())
+        //    {
+        //        return await adminRepository.getchats(Id);
+        //    }
+        //}
+
+        public List<ChatModel> getchats(ChatModel model)
+        {
+            using (adminRepository = new AdminRepository())
+            {
+                return adminRepository.getchats(model);
+            }
+        }
+
+
     }
 }

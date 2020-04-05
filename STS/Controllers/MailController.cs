@@ -26,6 +26,7 @@ namespace STS.Controllers
         //Passed the Token and user id in urr.this is declare the token and userid variable as public 
         public string Token;
         public int UserId;
+        public string Username;
 
         // Send mail Admin with token  and user id
         [HttpPost]
@@ -42,13 +43,13 @@ namespace STS.Controllers
                 {
                     Token = transaction.Token;
                     UserId = transaction.UserIdentity;
-                    //Users = transaction.Users;
+                    Username = transaction.User;
                     var html = System.IO.File.ReadAllText(@"EmailTemplates/ResetPassword.html");
                     var link = "http://localhost:55627/admin/reset-password?Token=" + Token + "&UserId=" + UserId;
                     html = html.Replace("{{token}}", link);
-                    //var user = Users;
-                    //user = user.Replace("{{users}}", link);
-                    CommonHelper.SendEmail(
+                    html = html.Replace("{{username}}", Username);
+
+                    CommonHelper.SendMail(
                         model.UsernameEmail,
                          Subject: "Sales Tracking System-Forgot Password",
                          EmailMessage: html,
@@ -81,15 +82,14 @@ namespace STS.Controllers
                 {
                     Token = transaction.Token;
                     UserId = transaction.UserIdentity;
-
+                    Username = transaction.User;
                     var html = System.IO.File.ReadAllText(@"EmailTemplates/ResetPassword.html");
                     var link = "http://localhost:55627/sales/reset-password-sales?Token=" + Token + "&UserId=" + UserId;
 
 
                     html = html.Replace("{{token}}", link);
-                    //var user = Users;
-                    //user = user.Replace("{{users}}", link);
-                    CommonHelper.SendEmail(
+                    html = html.Replace("{{username}}", Username);
+                    CommonHelper.SendMail(
                         model.UsernameEmail,
                          Subject: "Sales Tracking System-Forgot Password",
                          EmailMessage: html,

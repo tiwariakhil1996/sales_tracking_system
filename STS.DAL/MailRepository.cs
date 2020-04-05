@@ -24,9 +24,8 @@ namespace STS.DAL
                 parameter.Add("@UserName", model.UsernameEmail);// USerName means:tiwariakhil052@gmail.com
 
                 parameter.Add("@Token", dbType: DbType.String, direction: ParameterDirection.Output, size: 50);
-                parameter.Add("@UserIdentity", dbType: DbType.Int32, direction: ParameterDirection.Output);//UserIdentity means:UserId
-               
-
+                parameter.Add("@UserIdentity", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                parameter.Add("@User", dbType: DbType.String, direction: ParameterDirection.Output, size: 50);
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
@@ -36,6 +35,7 @@ namespace STS.DAL
                 if (transaction.code == 0)
                 {
                     transaction.Token = parameter.Get<string>("@Token");
+                    transaction.User = parameter.Get<string>("@User");
                     transaction.UserIdentity = parameter.Get<int>("@UserIdentity");
                 }
                 return transaction;
@@ -53,7 +53,7 @@ namespace STS.DAL
                 parameter.Add("@UserName", model.UsernameEmail);
                 parameter.Add("@Token", dbType: DbType.String, direction: ParameterDirection.Output, size: 50);
                 parameter.Add("@UserIdentity", dbType: DbType.Int32, direction: ParameterDirection.Output);
-
+                parameter.Add("@User", dbType: DbType.String, direction: ParameterDirection.Output, size: 50);
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
@@ -63,7 +63,7 @@ namespace STS.DAL
                 if (transaction.code == 0)
                 {
                     transaction.Token = parameter.Get<string>("@Token");
-                    //transaction.Users = parameter.Get<string>("@Users");
+                    transaction.User = parameter.Get<string>("@User");
                     transaction.UserIdentity = parameter.Get<int>("@UserIdentity");
                 }
                 return transaction;

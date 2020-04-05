@@ -86,7 +86,7 @@ export class CurrentactivityComponent implements OnInit {
   currentDate = new Date();
   // For Map
 
-  
+
   //  latitude: number;
   //  longitude: number;
 
@@ -235,8 +235,17 @@ export class CurrentactivityComponent implements OnInit {
   }
 
   Total_pending_amt(adv_payment: number) {
-    this.pending_amount = 0;
-    this.pending_amount = this.final_total - adv_payment;
+    // this.pending_amount = 0;
+    // this.pending_amount = this.final_total - adv_payment;
+
+    // this.update_activity.pendingamount = 0;
+    // this.update_activity.pendingamount = this.final_total - adv_payment;
+
+    if (adv_payment > 0) {
+      this.update_activity.pendingamount = this.final_total - adv_payment;
+    } else {
+      this.update_activity.pendingamount = 0;
+    }
   }
 
   selectTab(tabId: number) {
@@ -589,8 +598,12 @@ export class CurrentactivityComponent implements OnInit {
 
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.update_activity.modifiedby = this.user.id;
-    this.update_activity.pending_amount = this.pending_amount;
+    // this.update_activity.pending_amount = this.pending_amount;
+    this.update_activity.pending_amount = this.update_activity.pendingamount;
+    this.update_activity.subtotal = this.total;
+    this.update_activity.discount_amt = this.total_dis_amount;
     this.update_activity.grand_total = this.final_total;
+    this.update_activity.advance_payment = this.update_activity.advancepay;
     // Sending product details in array
     // this.update_activity.productList = this.addproductlistDetails;
 
@@ -835,8 +848,8 @@ export class CurrentactivityComponent implements OnInit {
     this.activityInvoice = JSON.parse(sessionStorage.getItem('ProductInvoice')) || new activityDetailsModel();
 
     return {
-     
-        
+
+
       // Heading
       content: [
         {
@@ -947,7 +960,7 @@ export class CurrentactivityComponent implements OnInit {
           columns: [
             // Details to show in QR Code
             { qr: 'Company Name :' + this.user.companyname + ', Address :' + this.user.address + ',Contact :' + this.user.mobile + ',Bill No. :' + this.productInvoice.aid + ',Client Name :' + this.productInvoice.clientName + ',Clients Contact No : ' + this.productInvoice.contact, fit: 100 },
-         
+
             // Signature / Name of a person
             {
               // text: `(${this.productInvoice.clientName})`,

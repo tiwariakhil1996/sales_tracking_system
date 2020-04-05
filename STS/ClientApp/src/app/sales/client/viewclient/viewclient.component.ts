@@ -200,13 +200,13 @@ export class ViewclientComponent implements OnInit {
 
         }
         if (data.RowCount) {
-          this.RowCount = data.RowCount
+          this.RowCount = data.RowCount;
         }
         this.totalPageSize = Math.ceil(this.RowCount / this.pageSize);
         // console.log(totalPageSize);
 
         this.totalPageList = [];
-        for (var i = 0; i < this.totalPageSize; i++) {
+        for (let i = 0; i < this.totalPageSize; i++) {
           this.totalPageList.push({ pageSize: i + 1, pageIndex: i })
 
         }
@@ -315,10 +315,8 @@ export class ViewclientComponent implements OnInit {
           timeOut: 2000
         });
         this.modalService.dismissAll();
-      }
-      // this.client = new clientListModel();
-      else {
-        this.toastr.info('This email id is already registered', 'Info', {
+      } else {
+         this.toastr.info('This email id is already registered', 'Info', {
           disableTimeOut: false,
           timeOut: 2000
         });
