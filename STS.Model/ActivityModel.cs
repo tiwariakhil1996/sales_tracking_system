@@ -16,7 +16,14 @@ namespace STS.Model
         public string ClientID { get; set; }
        
         public string Contact { get; set; }
-       
+        public int Subtotal { get; set; }
+        public int Discount_amt { get; set; }
+
+        public int Advance_payment { get; set; }
+        public string Payment_mode { get; set; }
+        public int Pending_amount { get; set; }
+        public int Grand_total { get; set; }
+
         public string AppointmentDate { get; set; }
         public int Createdby { get; set; }
 
@@ -53,6 +60,8 @@ namespace STS.Model
         public int Advance_payment { get; set; }
         public string Payment_mode { get; set; }
         public int Pending_amount { get; set; }
+        public int Subtotal { get; set; }
+        public int Discount_amt { get; set; }
 
         public List<ProductListingModel> ProductList { get; set; }
 
@@ -206,6 +215,7 @@ namespace STS.Model
         public int userId { get; set; }
         public int status { get; set; }
         public int Pendingamount { get; set; }
+        public string Payment_mode { get; set; }
         public int Advancepay { get; set; }
         public string Statusname { get; set; }
         public string followup_description { get; set; }
@@ -299,6 +309,7 @@ namespace STS.Model
 
         public int Advancepay { get; set; }
         public int Pending_amount { get; set; }
+        public string Payment_mode { get; set; }
         public int Grandtotal { get; set; }
 
 

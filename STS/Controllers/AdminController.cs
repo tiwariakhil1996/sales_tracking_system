@@ -45,7 +45,7 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
-  
+    
 
 
         [HttpPost]
@@ -126,6 +126,98 @@ namespace STS.Controllers
         }
 
 
+        [HttpPost]
+        [Route("sendmessage")]
+        public async Task<IActionResult> sendmessage([FromBody] ChatModel model)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+
+                transaction = await iadmin.sendmessage(model);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+
+        //[HttpPost]
+        //[Route("getchats/{Id}")]
+        //public async Task<IActionResult> getchats(int Id, [FromBody] ChatModel model)
+        //{
+        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
+        //    HttpStatusCode statusCode = HttpStatusCode.OK;
+        //    TranStatus transaction = new TranStatus();
+        //    try
+        //    {
+
+        //        //transaction = await iadmin.getchats(Id, model);
+        //        var getchats = await iadmin.getchats(model);
+        //        dctData.Add("getchats", getchats);
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        transaction = CommonHelper.TransactionErrorHandler(ex);
+        //        statusCode = HttpStatusCode.BadRequest;
+        //    }
+        //    dctData.Add("Status", transaction);
+        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+
+        //}
+
+
+        //[HttpGet]
+        //[Route("getchats/{Id}")]
+        //public async Task<IActionResult> getchats(int Id)
+        //{
+        //    TranStatus transaction = new TranStatus();
+        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
+        //    HttpStatusCode statusCode = HttpStatusCode.OK;
+        //    try
+        //    {
+        //        var chatsList = await iadmin.getchats(Id);
+        //        dctData.Add("getchats", chatsList);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        transaction = CommonHelper.TransactionErrorHandler(ex);
+        //        statusCode = HttpStatusCode.BadRequest;
+        //    }
+        //    dctData.Add("Status", transaction);
+        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        //}
+
+        [HttpPost]
+        [Route("getchats")]
+        public IActionResult getchats([FromBody]ChatModel model)
+        {
+            TranStatus transaction = new TranStatus();
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                List<ChatModel> getchatLists = new List<ChatModel>();
+                getchatLists = iadmin.getchats(model);
+
+                dctData.Add("getchats", getchatLists);
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
 
     }
 }

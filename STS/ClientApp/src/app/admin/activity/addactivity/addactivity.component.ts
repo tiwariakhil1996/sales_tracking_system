@@ -50,6 +50,11 @@ export class AddactivityComponent implements OnInit {
   dis_amount: number;
 
 
+  total: any = 0;
+  final_total: any = 0;
+  total_dis_amount: any = 0;
+  total_dis_per: any;
+  pending_amount: number = 0;
 
   isShow = true;
 
@@ -75,7 +80,6 @@ export class AddactivityComponent implements OnInit {
     this.SalesList();
     // this.activityList_while_adding();
     // console.log(this.product_priceDetails);
-
   }
 
   ngOnInit() {
@@ -102,6 +106,39 @@ export class AddactivityComponent implements OnInit {
     this.addproductlistDetails[i].total_price =  Math.round(this.amount - this.dis_amount);
     // console.log(this.grand_total);
 
+    this.subtotal();
+    this.dis_amt();
+    this.grandtotal();
+  }
+
+  subtotal() {
+    this.total = 0;
+    for (let i = 0; i < this.addproductlistDetails.length; i++) {
+      this.total += this.addproductlistDetails[i].amount;
+    }
+  }
+
+  dis_amt() {
+    this.total_dis_amount = 0;
+    for (let i = 0; i < this.addproductlistDetails.length; i++) {
+      this.total_dis_amount += this.addproductlistDetails[i].discount_amt;
+    }
+  }
+
+  grandtotal() {
+    this.final_total = 0;
+    for (let i = 0; i < this.addproductlistDetails.length; i++) {
+      this.final_total += this.addproductlistDetails[i].total_price;
+
+    }
+  }
+
+  Total_pending_amt(adv_payment: number) {
+    if (adv_payment > 0) {
+      this.pending_amount = this.final_total - adv_payment;
+    } else {
+      this.pending_amount = 0;
+    }
   }
 
   // TotalAmount(price: number, quantity: number, i) {
@@ -256,12 +293,16 @@ export class AddactivityComponent implements OnInit {
     this.addproductlistDetails.push({
       productId: null,
       // productname: null,
-      price: null,
+      // price: null,
+      price: 0,
       quantity: null,
-      amount: null,
+      // amount: null,
+      amount: 0,
       discount_per: null,
-      discount_amt: null,
-      total_price: null,
+      // discount_amt: null,
+      // total_price: null,
+      discount_amt: 0,
+      total_price: 0,
     });
 
   }
@@ -311,6 +352,11 @@ export class AddactivityComponent implements OnInit {
       strError += '- Please enter appointment date';
     }
 
+    if (!this.activity.payment_mode) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please select payment mode';
+    }
+
     // if (!this.activity.productList) {
     //   strError += strError = '' ? '' : '<br/>';
     //   strError += '- Please enter product details';
@@ -330,6 +376,11 @@ export class AddactivityComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.activity.createdby = this.user.id;
     this.activity.productList = this.addproductlistDetails;
+    this.activity.subtotal = this.total;
+    this.activity.discount_amt = this.total_dis_amount;
+    
+    this.activity.pending_amount = this.pending_amount;
+    this.activity.grand_total = this.final_total;
 
     this.activityService.addActivity(this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {

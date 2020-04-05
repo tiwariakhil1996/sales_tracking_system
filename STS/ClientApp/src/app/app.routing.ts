@@ -65,6 +65,14 @@ export const routes: Routes = [
       title: 'Register Page'
     }
   },
+  
+  // {
+  //   path: 'admin/chat',
+  //   component: ChatComponent,
+  //   data: {
+  //     title: 'Chat'
+  //   }
+  // },
 
   {
     path: 'admin/sales-register',
@@ -140,29 +148,13 @@ export const routes: Routes = [
         loadChildren: () => import('./admin/map/map.module').then(m => m.MapModule)
       },
       {
+        path: 'chat',
+        loadChildren: () => import('./admin/chat/chat.module').then(m => m.ChatModule)
+      },
+      {
         path: 'category-subcategory',
         loadChildren: () => import('./admin/category-subcategory/category-subcategory.module').then(m => m.CategorySubcategoryModule)
       },
-      // {
-      //   path: 'base',
-      //   loadChildren: () => import('./admin/base/base.module').then(m => m.BaseModule)
-      // },
-      // {
-      //   path: 'icons',
-      //   loadChildren: () => import('./admin/icons/icons.module').then(m => m.IconsModule)
-      // },
-      // {
-      //   path: 'notifications',
-      //   loadChildren: () => import('./admin/notifications/notifications.module').then(m => m.NotificationsModule)
-      // },
-      // {
-      //   path: 'theme',
-      //   loadChildren: () => import('./admin/theme/theme.module').then(m => m.ThemeModule)
-      // },
-      // {
-      //   path: 'widgets',
-      //   loadChildren: () => import('./admin/widgets/widgets.module').then(m => m.WidgetsModule)
-      // }
     ]
   },
 

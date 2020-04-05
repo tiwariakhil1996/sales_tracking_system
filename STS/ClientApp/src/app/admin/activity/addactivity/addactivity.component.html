@@ -110,6 +110,41 @@
      
       </div>
 
+
+      <div class="form-group ">
+        <div class="col-sm-3" style="float: right;">
+          <div>
+            <label>Subtotal </label><label style="padding-left: 55px;">{{total | currency: "INR"}}</label>
+          </div>
+          <div>
+            <label>Dis. amt </label><label
+              style="padding-left: 59px;">{{total_dis_amount | currency: "INR"}}</label>
+          </div>
+          <div>
+            <label>Adv. Payment </label>
+            <input #adv_payment type="text" style="width: 104px; margin-left: 20px;" id="adv_payment"
+              name="adv_payment" [(ngModel)]="activity.advance_payment"
+              (keyup)=" Total_pending_amt(adv_payment.value)">
+          </div>
+          <div>
+            <label>Payment Mode </label>
+            <select style="padding-left: 0px; width: 105px; margin-left: 11px;" id="productname" name="productname"
+              [(ngModel)]="activity.payment_mode">
+              <option [ngValue]="undefined" selected>Select Payment Mode</option>
+              <option value="Cash">Cash </option>
+              <option value="Cheque">Cheque</option>
+            </select>
+          </div>
+          <div>
+            <label>Pending amt </label>
+            <label style="padding-left: 32px;">{{pending_amount | currency: "INR"}}</label>
+          </div>
+          <div>
+            <label>Grand Total </label><label style="padding-left: 39px;"> {{final_total | currency: "INR"}}</label>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
     
 
         <div class="card-footer">

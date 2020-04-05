@@ -64,6 +64,7 @@ import { SalesRegisterComponent } from './admin/sales-register/sales-register.co
 import { ResetPasswordSalesComponent } from './sales/reset-password-sales/reset-password-sales.component';
 import { ForgotPasswordSalesComponent } from './sales/forgot-password-sales/forgot-password-sales.component';
 import { AgmDirectionModule } from 'agm-direction';
+// import { ChatComponent } from './admin/chat/chat.component';
 
 @NgModule({
   imports: [
@@ -117,7 +118,7 @@ import { AgmDirectionModule } from 'agm-direction';
     ForgotPasswordComponent,
     ResetPasswordComponent,
     ResetPasswordSalesComponent,
-    ForgotPasswordSalesComponent
+    ForgotPasswordSalesComponent,
     ],
 
   // providers: [{

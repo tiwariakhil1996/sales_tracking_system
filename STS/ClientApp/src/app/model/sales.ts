@@ -57,3 +57,15 @@ export class paginationModel {
     pageSize: number;
     pageIndex: number;
 }
+
+
+// export class profileModel {
+//     image: any;
+//     salesName: string;
+//     gender: string;
+//     email:string;
+//     mobile: any;
+//     address: string;
+//     adharcard: string;
+//     ImageExtn: any;
+// }

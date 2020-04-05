@@ -29,5 +29,17 @@ namespace STS.BLL.Interface
 
         //Change Password
         Task<TranStatus> changeadminPassword(int Id, Changeadmin_passwordModel model);
+
+        Task<TranStatus> sendmessage(ChatModel model);
+
+        //Task<TranStatus> getchats(int Id, ChatModel model);
+
+        //Task<List<ChatModel>> getchats(int Id);
+
+        List<ChatModel> getchats(ChatModel model);
+
+
+
+
     }
 }

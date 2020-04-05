@@ -9,7 +9,8 @@ import { SalesService } from '../../service/sales.service';
 import { ProductService } from '../../service/product.service';
 import { registerModel, changePasswordModel, avatarModel, userModel } from '../../model/admin';
 import { salesregisterModel } from '../../model/sales';
-import { productModel } from '../../model/product';
+import { productModel, UpdateImageListModel } from '../../model/product';
+import { ChatComponent } from '../../admin/chat/chat.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,10 +27,12 @@ export class DefaultLayoutComponent implements OnInit {
   register = new registerModel();
   adminDetails: registerModel = new registerModel();
 
-
   profile_pic = new registerModel();
 
   username:string;
+
+  pro= new UpdateImageListModel();
+  tempImage: UpdateImageListModel[] = [];
 
   salesregister = new salesregisterModel();
   salesDetails: salesregisterModel[] = [];
@@ -54,6 +57,7 @@ export class DefaultLayoutComponent implements OnInit {
 
   constructor(private router: Router,
     private adminService: AdminService,
+    // private chatComponent: ChatComponent,
     private modalService: NgbModal,
     private productService: ProductService,
     private modalServices: BsModalService,
@@ -67,7 +71,8 @@ export class DefaultLayoutComponent implements OnInit {
     this.username=this.register.username;
   }
 
-  ngOnInit() {    
+  ngOnInit() {
+    // this.chatComponent.view_msg(i);
     this.checkRole(this.RoleJason);
   
     this.getuserProfile();
@@ -209,6 +214,8 @@ export class DefaultLayoutComponent implements OnInit {
         this.modalRef.hide();
         localStorage.setItem('adminLogin', JSON.stringify(data.loginDetail[0] || {}));
         this.getuserProfile();
+
+        this.modalRef.hide();
       }
     }, (err) => {
     });
@@ -288,6 +295,27 @@ export class DefaultLayoutComponent implements OnInit {
     return reg.test(mobileField) === false ? false : true;
   }
 
+
+  delete_profile_pic(id: number) {
+    this.updateProfile.image = null;
+    this.profile_pic.image = null;
+    this.pro.ImageData = null;
+    this.avatar.image = null;
+
+    this.salesService.delete_profile_pic(id).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        localStorage.setItem('adminLogin', JSON.stringify(data.loginDetail[0] || {}));
+
+        this.toastr.success('Profile pic deleted Successful', 'Successful', {
+          disableTimeOut: false,
+          timeOut: 2000
+        });
+
+      }
+    }, (err) => {
+    });
+  }
+
   handleFileInput(fileList: FileList) {
     const preview = document.getElementById('photos-preview');
     Array.from(fileList).forEach((file: File) => {
@@ -296,6 +324,10 @@ export class DefaultLayoutComponent implements OnInit {
         const image = new Image();
         image.src = String(reader.result);
         const imageDetail = String(reader.result).split(';base64,');
+
+        this.pro.ImageData = String(reader.result);
+        // this.tempImage.push({ ImageId: 0, ImageData: String(reader.result) });
+
         this.updateProfile.image = imageDetail[1];
 
         // this.tempImageList.push({ImageData: String(reader.result) });
@@ -415,6 +447,8 @@ export class DefaultLayoutComponent implements OnInit {
   getuserProfile() {
     this.register = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.avatar.image = this.register.image;
-    // console.log(this.product.image);
+
+      // To display image in update profile modal
+      this.profile_pic.image = this.register.image;
   }
 }

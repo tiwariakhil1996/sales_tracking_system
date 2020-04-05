@@ -28,6 +28,13 @@ namespace STS.DAL
                 parameter.Add("@ClientID", model.ClientID);
                 parameter.Add("@Contact", model.Contact);
 
+                parameter.Add("@Subtotal", model.Subtotal);
+                parameter.Add("@Dis_amt", model.Discount_amt);
+                parameter.Add("@Advance_payment", model.Advance_payment);
+                parameter.Add("@Pending_amount", model.Pending_amount);
+                parameter.Add("@Payment_mode", model.Payment_mode);
+                parameter.Add("@Grand_Total", model.Grand_total);
+
                 parameter.Add("@AppointmentDate", model.AppointmentDate);
                 parameter.Add("@Createdby", model.Createdby);
 
@@ -323,6 +330,8 @@ namespace STS.DAL
                 parameter.Add("@Advance_payment", model.Advance_payment);
                 parameter.Add("@Payment_mode", model.Payment_mode);
                 parameter.Add("@Pending_amount", model.Pending_amount);
+                parameter.Add("@Dis_amt", model.Discount_amt);
+                parameter.Add("@Subtotal", model.Subtotal);
 
                 //Data Table Type -- to insert multiple products 
                 //DataTable dataTable = model.ProductList.ToDataTable();

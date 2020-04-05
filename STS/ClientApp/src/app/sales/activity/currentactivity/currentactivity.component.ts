@@ -476,10 +476,19 @@ export class CurrentactivityComponent implements OnInit {
   //   this.update_InPending(this.activity.aid)
   // }
 
-  remain_to_pay(pendingamount: number, amt_paid: number){
-    this.due_paid = pendingamount - amt_paid;
-  }
+  // remain_to_pay(pendingamount: number, amt_paid: number){
+  //   this.due_paid = pendingamount - amt_paid;
+  // }
 
+  remain_to_pay(pendingamount: number, amt_paid: number) {
+    
+    if(amt_paid >= 0) {
+      this.due_paid = pendingamount - amt_paid;
+    } else if (amt_paid === 0 || amt_paid == null) {
+         this.due_paid = 0;
+    }
+  }
+  
   pay_due(pendingamount: number, amt_paid: number, aid: number) {
     this.due_paid = pendingamount - amt_paid;
   

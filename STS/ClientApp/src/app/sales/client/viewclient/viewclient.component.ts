@@ -35,32 +35,32 @@ export class ViewclientComponent implements OnInit {
 
   // totalClients: any ;
 
-  search_ : any;
+  search_: any;
 
   // Pagination
   RowCount: number;
   pageSize: number = 5;
   totalPageList: paginationModel[] = [];
-  totalPageSize:number;
-  pagesize:any;
+  totalPageSize: number;
+  pagesize: any;
   currentPageIndex: number = 0;
   pageOfItems: Array<any>;
 
-    // For map
-    location: Coordinates;
-    lat: number;
-    lng: number;
-    centerlat: number;
-    centerlng: number;
-    geocoder: any;
-  
-  
-    latitude: number;
-    longitude: number;
-    zoom: number;
-    address: string;
+  // For map
+  location: Coordinates;
+  lat: number;
+  lng: number;
+  centerlat: number;
+  centerlng: number;
+  geocoder: any;
 
-    // Authentication
+
+  latitude: number;
+  longitude: number;
+  zoom: number;
+  address: string;
+
+  // Authentication
   RoleJason = {
     ROle: [0, 1],
     Component: 'ViewClientComponent'
@@ -113,18 +113,18 @@ export class ViewclientComponent implements OnInit {
   }
 
   Refresh_Sales_Location() {
-   this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
-   this.saleslocation.userid = this.user.id;
-   this.saleslocation.latitude = this.lat;
-   this.saleslocation.longitude = this.lng;
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.saleslocation.userid = this.user.id;
+    this.saleslocation.latitude = this.lat;
+    this.saleslocation.longitude = this.lng;
 
-   this.salesService.Refresh_Sales_Location(this.saleslocation).subscribe((data: any) => {
-   }, (err) => {
+    this.salesService.Refresh_Sales_Location(this.saleslocation).subscribe((data: any) => {
+    }, (err) => {
 
-   });
- }
+    });
+  }
 
- 
+
   markerDragEnd($event: any) {
     // console.log($event);
     this.latitude = $event.coords.lat;
@@ -176,7 +176,7 @@ export class ViewclientComponent implements OnInit {
   //   });
   // }
 
-  
+
   onsearch() {
     const item = { pageIndex: 0 };
     this.clientList(item);
@@ -185,32 +185,32 @@ export class ViewclientComponent implements OnInit {
   clientList(item) {
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.client.userid = this.user.id;
- 
+
     this.client.pageIndex = item.pageIndex;
     this.client.pageSize = this.pageSize;
 
     this.client.search = this.search_;
-    
+
     this.clientService.each_sales_ClientList(this.client).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.each_sales_ClientList) {
           this.clientDetails = data.each_sales_ClientList;
           // this.totalClients = this.clientDetails.length;
           // console.log(this.totalClients );
-          
+
         }
         if (data.RowCount) {
-          this.RowCount = data.RowCount
+          this.RowCount = data.RowCount;
         }
         this.totalPageSize = Math.ceil(this.RowCount / this.pageSize);
         // console.log(totalPageSize);
-        
+
         this.totalPageList = [];
-        for (var i = 0; i < this.totalPageSize; i++) {
+        for (let i = 0; i < this.totalPageSize; i++) {
           this.totalPageList.push({ pageSize: i + 1, pageIndex: i })
 
         }
-        this.currentPageIndex=item.pageIndex;
+        this.currentPageIndex = item.pageIndex;
       }
     }, (err) => {
 
@@ -221,7 +221,7 @@ export class ViewclientComponent implements OnInit {
   openupdatemodal(content, item) {
     this.client = JSON.parse(JSON.stringify(item));
     // data show in model use this line and store the data in user and display in ui
-    this.modalService.open(content, {size:'xl', backdropClass: 'light-blue-backdrop' });
+    this.modalService.open(content, { size: 'xl', backdropClass: 'light-blue-backdrop' });
 
   }
 
@@ -231,10 +231,10 @@ export class ViewclientComponent implements OnInit {
     if (!this.client.clientName) {
       strError += strError = '- Please enter clientname';
     } else
-    if (!this.validateName(this.client.clientName)) {
-      strError += strError = '' ? '' : '<br/>';
-      strError += strError = '- Client name should only contain alphabets';
-    }
+      if (!this.validateName(this.client.clientName)) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += strError = '- Client name should only contain alphabets';
+      }
 
     if (!this.client.email) {
       strError += strError = '' ? '' : '<br/>';
@@ -263,11 +263,11 @@ export class ViewclientComponent implements OnInit {
     if (!this.client.address) {
       strError += strError = '' ? '' : '<br/>';
       strError += '- Please enter address';
-    }else
-    if (!this.validateAddress(this.client.address)) {
-      strError += strError = '' ? '' : '<br/>';
-      strError += strError = '-  Address should only contain alphabets, numbers, space and . ,';
-    }
+    } else
+      if (!this.validateAddress(this.client.address)) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += strError = '-  Address should only contain alphabets, numbers, space and . ,';
+      }
 
     if (!this.client.street) {
       strError += strError = '' ? '' : '<br/>';
@@ -278,14 +278,14 @@ export class ViewclientComponent implements OnInit {
       strError += strError = '' ? '' : '<br/>';
       strError += strError = '- Please select country';
     } else
-    if (!this.client.sid) {
-      strError += strError = '' ? '' : '<br/>';
-      strError += '- Please select state';
-    } else
-    if (!this.client.cityid) {
-      strError += strError = '' ? '' : '<br/>';
-      strError += '- Please select city';
-    }
+      if (!this.client.sid) {
+        strError += strError = '' ? '' : '<br/>';
+        strError += '- Please select state';
+      } else
+        if (!this.client.cityid) {
+          strError += strError = '' ? '' : '<br/>';
+          strError += '- Please select city';
+        }
 
     if (!this.client.postalCode) {
       strError += strError = '' ? '' : '<br/>';
@@ -315,18 +315,16 @@ export class ViewclientComponent implements OnInit {
           timeOut: 2000
         });
         this.modalService.dismissAll();
-      }
-      // this.client = new clientListModel();
-      else {
-        this.toastr.info('This email id is already registered', 'Info', {
+      } else {
+         this.toastr.info('This email id is already registered', 'Info', {
           disableTimeOut: false,
           timeOut: 2000
         });
       }
       // this.clientList();
-      
-    const item = { pageIndex: 0 };
-    this.clientList(item);
+
+      const item = { pageIndex: 0 };
+      this.clientList(item);
     }, (err) => {
     });
   }
@@ -347,7 +345,7 @@ export class ViewclientComponent implements OnInit {
 
   }
 
-  
+
 
   validateName(nameField) {
     const reg = /^[A-Za-z\s]+$/;
@@ -374,46 +372,46 @@ export class ViewclientComponent implements OnInit {
     return reg.test(addressField) === false ? false : true;
   }
 
-// Email Validation
+  // Email Validation
 
-checkEmailValidation() {
-  let isValid = false;
-  if (!this.validateEmail(this.client.email)) {
-    isValid = true;
+  checkEmailValidation() {
+    let isValid = false;
+    if (!this.validateEmail(this.client.email)) {
+      isValid = true;
+    }
+    if (isValid) {
+      this.toastr.warning('Please enter valid email id', 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
+
   }
-  if (isValid) {
-    this.toastr.warning('Please enter valid email id', 'Warning', {
-      disableTimeOut: false,
-      timeOut: 2000
-    });
+
+  validateEmail(emailField) {
+    const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+    return reg.test(emailField) === false ? false : true;
   }
 
-}
+  // Mobile no.  Validation
 
-validateEmail(emailField) {
-  const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-  return reg.test(emailField) === false ? false : true;
-}
-
-// Mobile no.  Validation
-
-mobValidation() {
-  let isValid = false;
-  if (!this.validateMobile(this.client.contact)) {
-    isValid = true;
+  mobValidation() {
+    let isValid = false;
+    if (!this.validateMobile(this.client.contact)) {
+      isValid = true;
+    }
+    if (isValid) {
+      this.toastr.warning('Please enter valid mobile number', 'Warning', {
+        disableTimeOut: false,
+        timeOut: 2000
+      });
+    }
   }
-  if (isValid) {
-    this.toastr.warning('Please enter valid mobile number', 'Warning', {
-      disableTimeOut: false,
-      timeOut: 2000
-    });
-  }
-}
 
-validateMobile(mobileField) {
-  const reg = /^\d{10}$/;
-  return reg.test(mobileField) === false ? false : true;
-}
+  validateMobile(mobileField) {
+    const reg = /^\d{10}$/;
+    return reg.test(mobileField) === false ? false : true;
+  }
 
   // Delete
   onDelete(id: number) {
@@ -421,9 +419,9 @@ validateMobile(mobileField) {
     this.clientService.deleteClient(id).subscribe(data => {
       this.clientService.clientList();
       // this.clientList();
-      
-    const item = { pageIndex: 0 };
-    this.clientList(item);
+
+      const item = { pageIndex: 0 };
+      this.clientList(item);
     });
     // }
     this.toastr.success('Client is deleted Successful', 'Successful', {
@@ -488,7 +486,7 @@ validateMobile(mobileField) {
     this.clientService.changeStatus(id).subscribe(data => {
       // this.clientList();
       const item = { pageIndex: 0 };
-    this.clientList(item);
+      this.clientList(item);
     });
   }
 

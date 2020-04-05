@@ -204,6 +204,26 @@ namespace STS.DAL
 
             }
         }
+        
+        public async Task<TranStatus> deleteProfilepic(int ID)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@ID", ID);
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                //await connection.QueryMultipleAsync(nameof(deleteClient), parameter, commandType: CommandType.StoredProcedure);
+                await connection.QueryAsync("deleteProfilepic", parameter, commandType: CommandType.StoredProcedure);
+                transaction.returnMessage = parameter.Get<string>("@Message");
+                transaction.code = parameter.Get<int>("@Code");
+                return transaction;
+
+            }
+        }
 
 
         //Change Password
@@ -265,5 +285,25 @@ namespace STS.DAL
 
             }
         }
+
+
+        public async Task<Tuple<List<ChatModel>, TranStatus>> getsaleschats(ChatModel model)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@AdminId", model.AdminId);
+                parameter.Add("@SalesId", model.SalesId);
+
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                var result = await connection.QueryAsync<ChatModel>("getsaleschats", parameter, commandType: CommandType.StoredProcedure);
+                transaction.returnMessage = parameter.Get<string>("@Message");
+                transaction.code = parameter.Get<int>("@Code");
+                return new Tuple<List<ChatModel>, TranStatus>(result.ToList(), transaction);
+            }
+        }
+
     }
 }

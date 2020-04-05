@@ -31,7 +31,7 @@
         <table class="table table-bordered  btn-center">
           <thead>
             <tr class="table-success">
-              <th>Sr.no</th>
+              <!-- <th>Sr.no</th> -->
               <th>Title</th>
               <th>Description</th>
               <th>Client</th>
@@ -46,7 +46,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let item of activityDetails;let i=index;">
-              <td style="text-align: center">{{i+1}}</td>
+              <!-- <td style="text-align: center">{{i+1}}</td> -->
               <td>{{item.title}}</td>
               <td>{{item.description}}</td>
               <td>{{item.clientName}}</td>
@@ -360,8 +360,11 @@
               <div>
                 <label>Adv. Payment </label>
                 <input #adv_payment type="text" style="width: 104px; margin-left: 20px;" id="adv_payment"
-                  name="adv_payment" [(ngModel)]="update_activity.advance_payment"
+                  name="adv_payment" [(ngModel)]="update_activity.advancepay"
                   (keyup)=" Total_pending_amt(adv_payment.value)">
+                  <!-- <input #adv_payment type="text" style="width: 104px; margin-left: 20px;" id="adv_payment"
+                  name="adv_payment" [(ngModel)]="update_activity.advance_payment"
+                  (keyup)=" Total_pending_amt(adv_payment.value)"> -->
               </div>
               <div>
                 <label>Payment Mode </label>
@@ -374,7 +377,9 @@
               </div>
               <div>
                 <label>Pending amt </label>
-                <label style="padding-left: 32px;">{{pending_amount | currency: "INR"}}</label>
+                <label style="padding-left: 32px;">{{update_activity.pendingamount | currency: "INR"}}</label>
+                <!-- <label style="padding-left: 32px;">{{pending_amount | currency: "INR"}}</label> -->
+
 
                 <!-- <label style="padding-left: 32px;">{{this.activityDetails[this.ind].pendingamount | currency: "INR"}}</label> -->
 
@@ -427,6 +432,7 @@
                 <table>
                   <thead>
                     <tr>
+                      <th>Sr.no</th>
                       <th class="service">Product</th>
                       <th>PRICE</th>
                       <th>QTY</th>
@@ -437,6 +443,7 @@
                   </thead>
                   <tbody>
                     <tr *ngFor="let products of activity_productDetails;let i=index;">
+                      <td>{{i+1}}</td>
                       <td class="service">{{products.productname}}</td>
                       <!-- <td class="desc">Creating a recognizable design solution based on the company's existing visual identity</td> -->
                       <td class="unit">{{products.price}}</td>

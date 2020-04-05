@@ -42,6 +42,8 @@ namespace STS.BLL.Interface
 
         //Delete
         Task<TranStatus> deleteSales(int ID);
+        Task<TranStatus> deleteProfilepic(int ID);
+
 
         //Change Password
         Task<TranStatus> changesalesPassword(int Id, ChangepasswordModel model);
@@ -56,6 +58,9 @@ namespace STS.BLL.Interface
 
         // Sales List in dropdown
         Task<List<SalesList_DropdownModel>> SalesList_dropdown(SalesList_DropdownModel model);
+
+        Task<Tuple<List<ChatModel>, TranStatus>> getsaleschats(ChatModel model);
+
     }
 }
 

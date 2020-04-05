@@ -1,15 +1,22 @@
 <app-header [navbarBrandRouterLink]="['/admin/dashboard']" [fixed]="true"
-[navbarBrandFull]="{src: 'assets/img/brand/purple.png',width: 200, height: 53, alt: 'Sales Tracking System'}"
-  [navbarBrandMinimized]="{src: 'assets/img/logo/NewLogo.jpg', width: 30, height: 30}" 
-  >
+  [navbarBrandFull]="{src: 'assets/img/brand/purple.png',width: 200, height: 53, alt: 'Sales Tracking System'}"
+  [navbarBrandMinimized]="{src: 'assets/img/logo/NewLogo.jpg', width: 30, height: 30}">
   <!-- [navbarBrandFull]="{src: 'assets/img/brand/purple.png',width: 200, height: 53, alt: 'Sales Tracking System'}" -->
   <!-- [navbarBrandFull]="{src: 'assets/img/logo/New_Logo.png',width: 60, height: 55, alt: 'Sales Tracking System'}" -->
 
   <!-- [sidebarToggler]="'lg'" [asideMenuToggler]="'lg'"> -->
-  
+
   <ul class="nav navbar-nav ml-auto">
+    <!-- <li class="nav-item d-md-down-none">
+      <a class="nav-link"  tooltip="New Message"  href="/admin/chat"><i class="icon-speech"></i>
+        <span data-toggle="tooltip" data-placement="left" tooltip="New Message"
+          *ngIf="assignedActivity > 0" class="badge badge-pill badge-danger blinking ">{{assignedActivity}}
+        </span>
+      </a>
+    </li> -->
+
     <li class="nav-item d-md-down-none">
-      <a tooltip="Activity"  class="nav-link" href="/admin/activity/currentactivity"><i class="icon-bell"></i><span
+      <a tooltip="Activity" class="nav-link" href="/admin/activity/currentactivity"><i class="icon-bell"></i><span
           class="badge badge-pill badge-danger"></span></a>
     </li>
     <!-- <li class="nav-item d-md-down-none">
@@ -17,14 +24,14 @@
     </li> -->
     <!-- Location -->
     <li class="nav-item d-md-down-none">
-      <a  tooltip="Map" class="nav-link" href="/admin/map"><i class="icon-location-pin"></i></a>
+      <a tooltip="Map" class="nav-link" href="/admin/map"><i class="icon-location-pin"></i></a>
     </li>
 
 
-      <li class="nav-item d-md-down-none">
+    <li class="nav-item d-md-down-none">
       Welcome {{username}}
     </li>
-    
+
     <!-- Profile -->
 
     <li class="nav-item dropdown" dropdown placement="bottom right">
@@ -33,8 +40,8 @@
         <!-- <img src="assets/img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com"/> -->
         <img [src]="'http://localhost:55627/Documents/Avatars/Admin/Thumb/'+avatar.image" *ngIf="avatar.image"
           class="img-avatar" />
-     
-        <img [src]="'/assets/img/avatars/admin.png'" *ngIf="!avatar.image" class="img-avatar"/>
+
+        <img [src]="'/assets/img/avatars/admin.png'" *ngIf="!avatar.image" class="img-avatar" />
       </a>
 
       <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
@@ -56,20 +63,31 @@
           </div>
           <div class="modal-body">
             <div class="form-row">
-           
+
               <div class="form-group col-md-6">
                 <label for="image">Profile Pic</label><br>
-                <img *ngIf="profile_pic.image" [src]="'http://localhost:55627/Documents/Avatars/Admin/Thumb/'+profile_pic.image" class="profile-pic">
-                <img  *ngIf="!profile_pic.image"  [src]="'/assets/img/avatars/Default_Images/No_image.png'" class="profile-pic">
+
+                <!-- Profile pic-->
+                <img [src]="'http://localhost:55627/Documents/Avatars/Admin/Thumb/'+profile_pic.image"
+                  *ngIf="(profile_pic.image && !pro.ImageData)" class="profile-pic">
+
+                <!-- Default image -->
+                <img [src]="'/assets/img/avatars/Default_Images/No_image.png'"
+                  *ngIf="(!profile_pic.image && !pro.ImageData) " height="100px" width="100px">
+
+                <!-- Display new selected pic to upload -->
+                <img height="100px" width="100px" [src]="pro.ImageData" *ngIf="pro.ImageData">
+
               </div>
 
               <div class="form-group">
-                <input type="file" id="fileupload" name="image" (change)="handleFileInput($event.target.files)"
-                [(ngModel)]="updateProfile.image" />
-                <!-- <input type="text" *ngIf="!updateProfile.image"  name="image" [(ngModel)]="updateProfile.image" /> -->
-            </div>
+                <button class="btn btn-danger" (click)="delete_profile_pic(register.id)">Remove</button>
 
- 
+                <input class="btn btn-success" type="file" id="fileupload" name="image"
+                  (change)="handleFileInput($event.target.files)" [(ngModel)]="updateProfile.image" />
+              </div>
+
+
               <div class="form-group col-md-6">
                 <label for="username">Username</label>
                 <input type="username" class="form-control" id="username" placeholder="Enter the Username"
@@ -111,7 +129,7 @@
                 <label>Company Name</label>
                 <input type="text" class="form-control" id="companyname" placeholder="Enter Companyname"
                   [(ngModel)]="updateProfile.companyname" name="companyname">
-              </div>   
+              </div>
               <div *ngIf="user == 2" class="form-group col-md-12">
                 <label>Address</label>
                 <textarea type="textarea" class="form-control" id="address" placeholder="Enter Company address"
@@ -119,8 +137,20 @@
                 </textarea>
               </div>
 
+              <!-- <div  class="form-group col-md-12">
+                <label>Company Name</label>
+                <input type="text" class="form-control" id="companyname" placeholder="Enter Companyname"
+                  [(ngModel)]="updateProfile.companyname" name="companyname">
+              </div>   
+              <div  class="form-group col-md-12">
+                <label>Address</label>
+                <textarea type="textarea" class="form-control" id="address" placeholder="Enter Company address"
+                  [(ngModel)]="updateProfile.address" name="address">
+                </textarea>
+              </div> -->
+
             </div>
-            
+
 
             <!-- <div class="form-row">
               <div class="form-group col-md-6">
@@ -145,7 +175,8 @@
             class="fa fa-key"></i>Change Password</a>
 
         <div class="divider"></div>
-        <a *ngIf="user == 1 || user == 2"  class="dropdown-item" href="/admin/register"><i  class="fa fa-user-plus"></i> Admin Register</a>
+        <a *ngIf="user == 1 || user == 2" class="dropdown-item" href="/admin/register"><i class="fa fa-user-plus"></i>
+          Admin Register</a>
         <a class="dropdown-item" href="/admin/sales-register"><i class="fa fa-user-plus"></i> Sales Register</a>
 
         <!-- <a class="dropdown-item" data-toggle="modal"  data-toggle="modal" (click)="openModal(template1)"><i class="fa fa-user"></i> Sales Register</a> -->

@@ -26,7 +26,7 @@ namespace STS.Controllers
 
         public string Token;
         public int UserId;
-        //public string Users;
+        public string Username;
 
         [HttpPost]
         [Route("SendMail")]
@@ -42,12 +42,12 @@ namespace STS.Controllers
                 {
                     Token = transaction.Token;
                     UserId = transaction.UserIdentity;
-                    //Users = transaction.Users;
+                    Username = transaction.User;
                     var html = System.IO.File.ReadAllText(@"EmailTemplates/ResetPassword.html");
                     var link = "http://localhost:55627/admin/reset-password?Token=" + Token + "&UserId=" + UserId;
                     html = html.Replace("{{token}}", link);
-                    //var user = Users;
-                    //user = user.Replace("{{users}}", link);
+                    html = html.Replace("{{username}}", Username);
+
                     CommonHelper.SendMail(
                         model.UsernameEmail,
                          Subject: "Sales Tracking System-Forgot Password",
@@ -84,12 +84,11 @@ namespace STS.Controllers
                 {
                     Token = transaction.Token;
                     UserId = transaction.UserIdentity;
-                    //Users = transaction.Users;
+                    Username = transaction.User;
                     var html = System.IO.File.ReadAllText(@"EmailTemplates/ResetPassword.html");
                     var link = "http://localhost:55627/sales/reset-password-sales?Token=" + Token + "&UserId=" + UserId;
                     html = html.Replace("{{token}}", link);
-                    //var user = Users;
-                    //user = user.Replace("{{users}}", link);
+                    html = html.Replace("{{username}}", Username);
                     CommonHelper.SendMail(
                         model.UsernameEmail,
                          Subject: "Sales Tracking System-Forgot Password",
