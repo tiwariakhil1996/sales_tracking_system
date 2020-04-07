@@ -50,7 +50,22 @@ export class LoginComponent implements OnInit {
   }
 
   logout() {
-    localStorage.removeItem('adminLogin');
+    // remove user from local storage to log user out
+    this.loginDetail = JSON.parse(localStorage.getItem('adminLogin')) || {};
+    let id = this.loginDetail.id;
+
+    this.adminService.AdminLogoutService(id).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        this.toastr.success('Logged out Successfully', 'Successful', {
+          disableTimeOut: false
+        });
+
+        localStorage.removeItem('adminLogin');
+      }
+    }
+    );
+
+
   }
 
   forgotPassword() {

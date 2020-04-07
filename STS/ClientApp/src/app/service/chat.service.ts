@@ -20,6 +20,10 @@ export class ChatService {
         return this.http.post('/api/Sales/getsaleschats', data);
       }
 
+      get_admin_status(data) {
+        return this.http.post('/api/Sales/getadminstatus', data);
+      }
+
       // get_chats(id: number) {
       //   return this.http.get('/api/Admin/getchats/' + id);
       // }

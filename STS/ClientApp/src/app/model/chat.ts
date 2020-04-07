@@ -9,6 +9,7 @@ export class chatModel {
     createdby: number;
     createddate: Date;
     createdtime: string;
+    isonline: boolean;
 }
 
 
@@ -20,4 +21,5 @@ export class userModel {
     msg: string;
     createdon: string;
     createdby: number;
+    isonline:boolean;
 }

@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ClientComponent } from './client.component';
 import { AddclientComponent } from './addclient/addclient.component';
 import { ViewclientComponent } from './viewclient/viewclient.component';
+import { ChattingComponent } from './chatting/chatting.component';
 
 const routes: Routes = [
   // {
@@ -33,6 +34,13 @@ const routes: Routes = [
         component: ViewclientComponent,
         data: {
           title: 'View Client'
+        }
+      },
+      {
+        path: 'chatting',
+        component: ChattingComponent,
+        data: {
+          title: 'Chatting'
         }
       }
     ]

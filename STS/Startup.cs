@@ -14,6 +14,7 @@ using System;
 using Newtonsoft.Json.Serialization;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using STS.Hubs;
 
 namespace STS
 {
@@ -40,6 +41,7 @@ namespace STS
             services.AddControllers()
                 .AddNewtonsoftJson();
 
+            services.AddSignalR();
 
             //Database Connectivity
             services.AddSpaStaticFiles(configuration =>
@@ -114,6 +116,14 @@ namespace STS
                         Path.Combine(Directory.GetCurrentDirectory(), "Documents")),
                         RequestPath = "/Documents"
             });
+
+            // ---------  For SinglR  ---------
+            app.UseSignalR(options =>
+            {
+                options.MapHub<MessageHub>("/MessageHub");
+            });
+             
+            // -------------------------------
 
             if (!env.IsDevelopment())
             {

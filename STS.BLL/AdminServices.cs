@@ -34,6 +34,16 @@ namespace STS.BLL.Service
         }
 
 
+        // AdminLogout
+
+        public async Task<TranStatus> AdminLogout(int id)
+        {
+            using (adminRepository = new AdminRepository())
+            {
+                return await adminRepository.AdminLogout(id);
+            }
+        }
+
         //UpdateAdminProfile
         //public Task<TranStatus> updateAdminProfile(updateProfileModel model)
         //{

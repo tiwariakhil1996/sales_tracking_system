@@ -100,8 +100,22 @@ export class SalesLoginComponent implements OnInit {
     }
 
     logout() {
-      localStorage.removeItem('salesLogin');
+      // remove user from local storage to log user out
+      this.loginDetail = JSON.parse(localStorage.getItem('salesLogin')) || {};
+      let id = this.loginDetail.id;
+  
+      this.salesService.SalesLogoutService(id).subscribe((data: any) => {
+        if (data.Status.code === 0) {
+          this.toastr.success('Logged out Successfully', 'Successful', {
+            disableTimeOut: false
+          });
+  
+          localStorage.removeItem('salesLogin');
+        }
+      }
+      );
     }
+
 
 
   registerForm() {

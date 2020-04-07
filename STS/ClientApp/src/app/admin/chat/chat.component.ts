@@ -21,6 +21,12 @@ export class ChatComponent implements OnInit {
 
   searchsalesname;
 
+  isShow = true;
+
+  toggleDisplay() {
+    this.isShow = !this.isShow;
+  }
+
 // salesid: number;
   sales_msg: string;
   admin_msg: string;

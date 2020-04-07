@@ -17,8 +17,21 @@
 
       <div class="dropdown-menu-right"  [hidden] = "!isShow" *dropdownMenu aria-labelledby="simple-dropdown"
         style="background-color: azure; position: absolute;width: 250px; background-color: #9896f9;">
-        <div class="dropdown-header text-center" style="color: white;background-color: blueviolet;">
-          <strong>Chat</strong></div>
+        <div class="dropdown-header text-center" style="color: white;background-color: blueviolet;" *ngFor="let item of status">
+          <!-- <strong>Chat</strong> -->
+        
+          <h6 *ngIf="!this.item.isonline">
+            <strong>Chat</strong>
+            <span class="status orange"></span>
+            <!-- offline -->
+          </h6>
+          <h6 *ngIf="this.item.isonline">
+            <strong>Chat</strong>
+            <span class="status green"></span>
+            <!-- online -->
+          </h6>
+
+        </div>
 
         <div class="row" style="padding: 0;height: 400px; ">
           <div class="col-lg-12">

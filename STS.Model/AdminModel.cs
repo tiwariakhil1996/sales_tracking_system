@@ -83,6 +83,15 @@ namespace STS.Model
         public string Createddate { get; set; }
         public string Createdtime { get; set; }
 
+        public bool Isonline { get; set; }
+    }
+
+    public partial class StatusModel
+    {
+        public int AdminId { get; set; }
+
+        public bool Isonline { get; set; }
+
     }
 
 

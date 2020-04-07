@@ -8,6 +8,8 @@ import { ViewclientComponent } from './viewclient/viewclient.component';
 import { AddclientComponent } from './addclient/addclient.component';
 import { TooltipModule } from 'ngx-bootstrap';
 import { AgmCoreModule } from '@agm/core';
+import { ChattingComponent } from './chatting/chatting.component';
+import { ChattingService } from '../../service/chatting.service';
 
 // Angular
 
@@ -25,7 +27,9 @@ import { AgmCoreModule } from '@agm/core';
   declarations: [
     ClientComponent,
     ViewclientComponent,
-    AddclientComponent
-  ]
+    AddclientComponent,
+    ChattingComponent
+  ],
+  providers: [ChattingService]
 })
 export class ClientModule { }

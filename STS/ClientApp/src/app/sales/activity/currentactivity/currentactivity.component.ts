@@ -494,10 +494,15 @@ export class CurrentactivityComponent implements OnInit {
   
     let strError = '';
 
-     if (!this.activity.paydue) {
-      strError += strError = '' ? '' : '<br/>';
-      strError += '- Please enter due amount';
-    }
+    //  if (!this.activity.paydue) {
+    //   strError += strError = '' ? '' : '<br/>';
+    //   strError += '- Please enter due amount';
+    // }
+
+    // if (this.due_paid = 0) {
+    //   strError += strError = '' ? '' : '<br/>';
+    //   strError += '- Please enter due amount';
+    // }
 
     if (!this.activity.payment_mode) {
       strError += strError = '' ? '' : '<br/>';

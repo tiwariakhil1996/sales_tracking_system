@@ -1,141 +1,129 @@
-<div id="container" style="margin-left: 0px; height: 550px;">
-	<aside>
-		<header>
-			<input style="height: 30px;" type="text" placeholder="search" (input)="onsearch()" [(ngModel)]="search_">
-			<!-- <input type="text" placeholder="search" [(ngModel)]="searchsalesname" > -->
-	
-		</header>
-		<ul>
-			<!-- <li *ngFor="let item of salesDetails  | filter:searchsalesname;let i=index;"> -->
-			<li *ngFor="let item of salesDetails ;let i=index;">
-				<img style="max-width: 50px; max-height: 50px;" *ngIf="item.image"
-					[src]="'http://localhost:55627/Documents/Avatars/Sales/Thumb/'+item.image">
-				<img style="max-width: 50px; max-height: 50px;" *ngIf="!item.image"
-					[src]="'/assets/img/avatars/admin.png'">
-				<div>
-					<h2 type="submit" (click)="view_msg(i)">{{item.salesName}}</h2>
-					<!-- <h3>
-						<span class="status orange"></span>
-						offline
-					</h3> -->
-				</div>
-			</li>
-		</ul>
-	</aside>
+<div class="row" style="padding: 0;">
+	<div class="col-lg-12" style="padding: 0;">
+		<div class="card-body table-responsive">
+
+			<div id="container" style="margin-left: 0px; height: 550px;">
+				<aside [hidden]="!isShow">
+					<header>
+						<input style="height: 30px;" type="text" placeholder="search" (input)="onsearch()"
+							[(ngModel)]="search_">
+						<!-- <input type="text" placeholder="search" [(ngModel)]="searchsalesname" > -->
+
+					</header>
+					<ul>
+						<!-- <li *ngFor="let item of salesDetails  | filter:searchsalesname;let i=index;"> -->
+						<li *ngFor="let item of salesDetails ;let i=index;">
+							<img style="max-width: 50px; max-height: 50px;" *ngIf="item.image"
+								[src]="'http://localhost:55627/Documents/Avatars/Sales/Thumb/'+item.image">
+							<img style="max-width: 50px; max-height: 50px;" *ngIf="!item.image"
+								[src]="'/assets/img/avatars/admin.png'">
+							<div>
+								<h2 type="submit" (click)="view_msg(i)">{{item.salesName}}</h2>
+								<h3 *ngIf="!item.isonline">
+									<span class="status orange"></span>
+									offline
+								</h3>
+								<h3 *ngIf="item.isonline">
+									<span class="status green"></span>
+									online
+								</h3>
+
+							</div>
+						</li>
+					</ul>
+				</aside>
 
 
+				<!-- <div class="animated fadeIn">
+					<div class="row">
+					  <div class="col-md-12">
+						<div class="card"> -->
 
-	<main>
-		<header style="height: 90px;">
-			<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="">
-			<div style="margin-top: 16px;">
-				<h2>{{this.salesDetails[this.ind].salesName}}</h2>
-				<!-- <h3>already 1902 messages</h3> -->
-			</div>
-			<!-- <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_star.png" alt=""> -->
-		</header>
+				<main>
 
-		<!-- <div  style="background-color: #000000cc;">
-			<h6  *ngIf="chat.createddate == currentDate | date: 'DD-MM-YYYY'" style="color: white; text-align: center;">Today</h6>
-			<h6  *ngIf="chat.createddate != currentDate | date: 'DD-MM-YYYY'" style="color: white; text-align: center;">Yesterday</h6>
-		</div> -->
+					<header style="height: 90px;padding-left: 24px;">
+						<i class="fa fa-arrow-left" style="margin-top: 14px; margin-right: 16px; " *ngIf="!isShow"
+							(click)="toggleDisplay()" aria-hidden="true"></i>
+						<i class="fa fa-arrow-right" style="margin-top: 14px; margin-right: 16px;" *ngIf="isShow"
+							(click)="toggleDisplay()" aria-hidden="true"></i>
 
-		  <!-- <div *ngIf="chat.createddate != currentDate">
-					Yesterday
-				 </div> -->
+						<img class="real-image" *ngIf="this.salesDetails[this.ind].image"
+							[src]="'http://localhost:55627/Documents/Avatars/Sales/Thumb/'+this.salesDetails[this.ind].image"
+							alt="">
+						<img class="no-image " *ngIf="!this.salesDetails[this.ind].image"
+							[src]="'/assets/img/avatars/admin.png'">
 
-		<ul id="chat" style="height: 315px;">
-			<!-- <li class="you"  *ngFor="let saleschat of saleschatDetails;let i=index;">
-				<div class="entete">
-					<span class="status green"></span>
-					<h2>{{this.salesDetails[this.ind].salesName}} </h2>
-				</div>
-				<div class="triangle"></div>
-				<div class="message">
-					{{this.saleschat.msg}}
-				</div>
-			</li> -->
-			<!-- <li class="you">
-				<div class="entete">
-					<span class="status green"></span>
-					<h2>{{this.salesDetails[this.ind].salesName}} </h2>
-				</div>
-				<div class="triangle"></div>
-				<div class="message">
-					{{this.saleschat.msg}}
-				</div>
-			</li> -->
-			<!-- <div *ngFor="let chat of chatDetails;">
-				<div *ngIf="chat.createddate == currentDate">
-                   Today
-				</div>
-				<div *ngIf="chat.createddate != currentDate">
-					Yesterday
-				 </div>
-			</div> -->
-			<!-- <h2>Today</h2> -->
-			<!-- {{this.chat.createddate}} -->
+						<div style="margin-top: 16px;">
+							<h2>{{this.salesDetails[this.ind].salesName}}</h2>
+							<!-- <h3>already 1902 messages</h3> -->
+						</div>
+						<!-- <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_star.png" alt=""> -->
+					</header>
 
-      <!-- <h6  *ngIf="chat.createddate == currentDate | date: 'DD-MM-YYYY'" style="color: black; text-align: center;">Today</h6> -->
+					<ul id="chat" style="height: 315px;">
+						<li class="me" *ngFor="let chat of chatDetails;let i=index;">
+							<div *ngIf="chat.createdby==this.chat.adminId">
+								<!-- <h2 hidden >{{this.chat.createddate}} </h2> -->
+								<div class="entete">
+									<h2>{{this.chat.adminname}} </h2>
+									<span class="status blue"></span>
+								</div>
+								<!-- <div class="triangle"></div> -->
+								<div class="message">
+									{{this.chat.msg}}
+								</div>
+								<div>
+									<!-- <h2 style="color: black;">{{this.chat.createdtime}}</h2> -->
+									<h2 style="color: black;">{{this.chat.createdon}}</h2>
+								</div>
+							</div>
 
-			<li class="me" *ngFor="let chat of chatDetails;let i=index;">
+							<div *ngIf="chat.createdby==this.chat.salesId" style="width: 119px;">
+								<div class="entete">
+									<span class="status green"></span>
+									<h2>{{this.chat.salesname}} </h2>
 
-				<!-- <div *ngIf="chat.createddate == currentDate | date: 'DD-MM-YYYY'">
-					Today
-				 </div> -->
-				 <!-- <div *ngIf="chat.createddate != currentDate">
-					Yesterday
-				 </div> -->
+								</div>
+								<div class="sales"></div>
+								<div class="message" style="background-color: #28a745;">
+									{{this.chat.msg}}
+								</div>
+								<div>
+									<!-- <h2 style="color: black;">{{this.chat.createdtime}}</h2> -->
+									<h2 style="color: black;">{{this.chat.createdon}}</h2>
+								</div>
+							</div>
 
-
-
-				<div *ngIf="chat.createdby==this.chat.adminId">
-					<!-- <h2 hidden >{{this.chat.createddate}} </h2> -->
-					<div class="entete">
-						<h2>{{this.chat.adminname}} </h2>
-						<span class="status blue"></span>
-					</div>
-					<div class="triangle"></div>
-					<div class="message">
-						{{this.chat.msg}}
-					</div>
-					<div>
-						<!-- <h2 style="color: black;">{{this.chat.createdtime}}</h2> -->
-						<h2 style="color: black;">{{this.chat.createdon}}</h2>
-					</div>
-				</div>
-
-				<div *ngIf="chat.createdby==this.chat.salesId" style="width: 119px;">
-					<div class="entete">
-						<span class="status green"></span>
-						<h2>{{this.chat.salesname}} </h2>
-						
-					</div>
-					<div class="sales"></div>
-					<div class="message" style="background-color: #28a745;">
-						{{this.chat.msg}}
-					</div>
-					<div>
-						<!-- <h2 style="color: black;">{{this.chat.createdtime}}</h2> -->
-						<h2 style="color: black;">{{this.chat.createdon}}</h2>
-					</div>
-				</div>
-
-			</li>
-		</ul>
-
-		<footer style="height: 121px; padding-bottom: 18px;">
-			<div class="form-inline md-form mr-auto mb-4">
-				<textarea id="msg" name="msg" [(ngModel)]="chat.msg" style="width: 366px;" class="form-control"
-					placeholder="Type your message"></textarea>
-				<button style="margin-left: 32px;" class='btn btn-success' type="button"
-					(click)="send_msg(this.salesDetails[this.ind].id)"><i class="fa fa-send"
-						aria-hidden="true"></i></button>
-			</div>
-			<!-- <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_picture.png" alt="">
+						</li>
+					</ul>
+					<!-- <div class="card-footer"> -->
+					<footer style="height: 121px; padding-bottom: 18px;">
+						<!-- <div class="card-body table-responsive"> -->
+						<div class="form-inline md-form mr-auto mb-4">
+							<textarea id="msg" name="msg" [(ngModel)]="chat.msg" style="width: 366px;"
+								class="form-control" placeholder="Type your message"></textarea>
+							<!-- <textarea id="msg" name="msg" [(ngModel)]="chat.msg" style="max-width: max-content;"
+								class="form-control" placeholder="Type your message"></textarea> -->
+							<button style="margin-left: 32px;" class='btn btn-success' type="button"
+								(click)="send_msg(this.salesDetails[this.ind].id)"><i class="fa fa-send"
+									aria-hidden="true"></i></button>
+						</div>
+						<!-- </div> -->
+						<!-- <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_picture.png" alt="">
 			<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_file.png" alt=""> -->
 
-		</footer>
+					</footer>
+					<!-- </div> -->
+				</main>
+				<!-- </div>
+</div>
+</div>
+</div> -->
 
-	</main>
+
+			</div>
+
+
+		</div>
+	</div>
 </div>

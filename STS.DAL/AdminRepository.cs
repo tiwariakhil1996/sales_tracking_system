@@ -179,6 +179,27 @@ namespace STS.DAL
         }
 
 
+        // AdminLogout
+
+        public async Task<TranStatus> AdminLogout(int id)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@Userid", id);
+
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                await connection.QueryAsync("AdminLogout", parameter, commandType: CommandType.StoredProcedure);
+                transaction.returnMessage = parameter.Get<string>("@Message");
+                transaction.code = parameter.Get<int>("@Code");
+                return transaction;
+
+            }
+        }
+
         //UpdateAdminProfiel
         public async Task<Tuple<List<updateProfileModel>, TranStatus>> updateAdminProfile(updateProfileModel model)
         {

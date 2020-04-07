@@ -17,6 +17,10 @@ namespace STS.BLL.Interface
         //Task<TranStatus> AdminLogin(AdminLoginModel model);
         Task<Tuple<List<AdminLoginModel>, TranStatus>> AdminLogin(AdminLoginModel model);
 
+        // AdminLogout
+        Task<TranStatus> AdminLogout(int id);
+
+
         //UpdateAdminProfile
 
         //Task<TranStatus> updateAdminProfile(updateProfileModel model);

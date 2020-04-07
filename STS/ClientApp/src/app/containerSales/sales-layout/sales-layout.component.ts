@@ -8,7 +8,7 @@ import { salesregisterModel, changePasswordModel, sales_avatarModel } from '../.
 import { ToastrService } from 'ngx-toastr';
 import { ActivityService } from '../../service/activity.service';
 import { activityModel, newactivityModel } from '../../model/activity';
-import { avatarModel, registerModel } from '../../model/admin';
+import { avatarModel, registerModel, statusModel } from '../../model/admin';
 import { AgmMap } from '@agm/core';
 import { UpdateImageListModel } from '../../model/product';
 import { ChatService } from '../../service/chat.service';
@@ -24,21 +24,16 @@ export class SalesLayoutComponent implements OnInit {
   public SalesnavItems = SalesnavItems;
 
   // tempImageList: UpdateImageListModel[] = [];
-  isShow = false;
 
-  toggleDisplay() {
-    this.isShow = !this.isShow;
-  }
 
-  imageSrc: string = '';
-  modalRef: BsModalRef;
-
+ 
   newactivity = new newactivityModel();
   newactivityDetails: newactivityModel[] = [];
 
   assignedActivity: any;
   new_message: any;
-
+  isonline:boolean;
+  
   user = new salesregisterModel();
 
   userchat = new userModel();
@@ -49,18 +44,19 @@ export class SalesLayoutComponent implements OnInit {
 
   profile_pic = new registerModel();
 
+  status = new statusModel();
+
+
   salesavatar = new sales_avatarModel();
 
   pro = new UpdateImageListModel();
 
   tempImageList: UpdateImageListModel[] = [];
 
-  username: string;
+ 
 
   activity = new activityModel();
   activityDetails: activityModel[] = [];
-
-  totalActivity: any;
 
   loginDetail = new salesregisterModel();
 
@@ -72,6 +68,10 @@ export class SalesLayoutComponent implements OnInit {
   // updateProfile =  new profileModel();
   updateProfile: any;
 
+  imageSrc: string = '';
+  modalRef: BsModalRef;
+  username: string;
+  totalActivity: any;
 
   latitude: number;
   longitude: number;
@@ -98,6 +98,12 @@ export class SalesLayoutComponent implements OnInit {
     Component: 'SalesLayoutComponent'
   };
 
+  isShow = false;
+
+  toggleDisplay() {
+    this.isShow = !this.isShow;
+  }
+
   constructor(private router: Router,
     private salesService: SalesService,
     private chatService: ChatService,
@@ -121,6 +127,7 @@ export class SalesLayoutComponent implements OnInit {
 
     this.getuserProfile();
     this.view_msg();
+    this.get_admin_IsOnline();
   }
 
 
@@ -418,6 +425,7 @@ export class SalesLayoutComponent implements OnInit {
     this.userchat = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.chat.salesId = this.userchat.id;
     this.chat.adminId = this.userchat.createdby;
+    // this.isonline= this.userchat.isonline;
 
     this.chatService.get_sales_chats(this.chat).subscribe((data: any) => {
       if (data.Status.code === 0) {
@@ -425,9 +433,9 @@ export class SalesLayoutComponent implements OnInit {
           this.chatDetails = data.getsaleschats;
           this.new_message = this.chatDetails.length;
           console.log(this.new_message);
-
+        
         }
-      }
+   }
     }, (err) => {
 
     });
@@ -442,8 +450,41 @@ export class SalesLayoutComponent implements OnInit {
     this.profile_pic.image = this.user.image;
   }
 
+  get_admin_IsOnline(){
+    this.userchat = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    // this.chat.salesId = this.userchat.id;
+    this.chat.adminId = this.userchat.createdby;
+
+    this.chatService.get_admin_status(this.chat).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.getadminstatus) {
+          this.status = data.getadminstatus;
+           console.log( this.status);
+           
+        }
+   }
+    }, (err) => {
+
+    });
+
+  }
+
   logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem('salesLogin');
+    this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    let id = this.user.id;
+
+    this.salesService.SalesLogoutService(id).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        this.toastr.success('Logged out Successfully', 'Successful', {
+          disableTimeOut: false
+        });
+
+        localStorage.removeItem('salesLogin');
+      }
+    }
+    );
+
+
   }
 }

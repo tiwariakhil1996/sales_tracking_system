@@ -43,6 +43,30 @@ namespace STS.DAL
             }
         }
 
+        // SalesLogout
+        //public async Task<TranStatus> SalesLogout(SalesModel model)
+        //{
+        //    using (var connection = new SqlConnection(ConnectionString))
+
+        //    {
+        //        await connection.OpenAsync();
+        //        TranStatus transaction = new TranStatus();
+        //        DynamicParameters parameter = new DynamicParameters();
+            
+        //        parameter.Add("@Userid", model.Userid);
+
+        //        parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+        //        parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+        //        await connection.QueryAsync("SalesLogout", parameter, commandType: CommandType.StoredProcedure);
+
+        //        transaction.returnMessage = parameter.Get<string>("@Message");
+        //        transaction.code = parameter.Get<int>("@Code");
+        //        return transaction;
+
+        //    }
+        //}
+
        
 
 
@@ -117,6 +141,27 @@ namespace STS.DAL
                 parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
                 parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
                 await connection.QueryAsync("ChangeStatusSales", parameter, commandType: CommandType.StoredProcedure);
+                transaction.returnMessage = parameter.Get<string>("@Message");
+                transaction.code = parameter.Get<int>("@Code");
+                return transaction;
+
+            }
+        }
+
+        // SalesLogout
+
+        public async Task<TranStatus> SalesLogout(int id)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@Userid", id);
+
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                await connection.QueryAsync("SalesLogout", parameter, commandType: CommandType.StoredProcedure);
                 transaction.returnMessage = parameter.Get<string>("@Message");
                 transaction.code = parameter.Get<int>("@Code");
                 return transaction;
@@ -302,6 +347,25 @@ namespace STS.DAL
                 transaction.returnMessage = parameter.Get<string>("@Message");
                 transaction.code = parameter.Get<int>("@Code");
                 return new Tuple<List<ChatModel>, TranStatus>(result.ToList(), transaction);
+            }
+        }      
+        
+        
+        public async Task<Tuple<List<StatusModel>, TranStatus>> getadminstatus(StatusModel model)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@AdminId", model.AdminId);
+                //parameter.Add("@SalesId", model.SalesId);
+
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                var result = await connection.QueryAsync<StatusModel>("getadminstatus", parameter, commandType: CommandType.StoredProcedure);
+                transaction.returnMessage = parameter.Get<string>("@Message");
+                transaction.code = parameter.Get<int>("@Code");
+                return new Tuple<List<StatusModel>, TranStatus>(result.ToList(), transaction);
             }
         }
 

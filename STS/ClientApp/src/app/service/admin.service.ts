@@ -17,6 +17,10 @@ export class AdminService {
 
   }
 
+  AdminLogoutService(id: number) {
+    return this.http.put('/api/Admin/AdminLogout/' + id, null);
+  }
+
   AdminLogin(data) {
     return this.http.post('/api/Admin/AdminLogin',data);
   }
