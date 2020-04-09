@@ -31,7 +31,7 @@ export class DefaultLayoutComponent implements OnInit {
 
   username: string;
 
-  pro= new UpdateImageListModel();
+  pro = new UpdateImageListModel();
   tempImage: UpdateImageListModel[] = [];
 
   salesregister = new salesregisterModel();
@@ -449,7 +449,7 @@ export class DefaultLayoutComponent implements OnInit {
     this.register = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.avatar.image = this.register.image;
 
-      // To display image in update profile modal
-      this.profile_pic.image = this.register.image;
+    // To display image in update profile modal
+    this.profile_pic.image = this.register.image;
   }
 }

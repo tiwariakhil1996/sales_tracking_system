@@ -1,6 +1,7 @@
 import { SalesRegisterComponent } from './admin/sales-register/sales-register.component';
 import { ResetPasswordComponent } from './admin/reset-password/reset-password.component';
-//this is Angular Google map Libraries Import this...
+
+// this is Angular Google map Libraries Import this...
 import { AgmCoreModule } from '@agm/core';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -63,16 +64,16 @@ import { from } from 'rxjs';
 // import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password.component';
 import { ForgotPasswordSalesComponent } from './sales/forgot-password-sales/forgot-password-sales.component';
-import { AgmDirectionModule } from 'agm-direction';
+// import { AgmDirectionModule } from 'agm-direction';
 // import { ChatComponent } from './admin/chat/chat.component';
 import { ResetPasswordSalesComponent } from './sales/reset-password-sales/reset-password-sales.component';
 
 
 @NgModule({
-  
+
   // This is google map libraries
-  schemas:  [ CUSTOM_ELEMENTS_SCHEMA ],
-  
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -87,7 +88,7 @@ import { ResetPasswordSalesComponent } from './sales/reset-password-sales/reset-
     // PaginationModule,
     HttpClientModule,
 
-    
+
 
     ModalModule.forRoot(),
     NgbModule,
@@ -109,7 +110,7 @@ import { ResetPasswordSalesComponent } from './sales/reset-password-sales/reset-
     RouterModule.forRoot(routes),
     ChartsModule,
     // AgmMarker,
-     TooltipModule.forRoot(),
+    TooltipModule.forRoot(),
     // AgmCoreModule.forRoot({apiKey: 'AIzaSyBFP65PChjDJ1qtdD9RgkseGbNA4YclE2g'})
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBaU6eEpioeuf9Nkzsd5N3OoJsDpVQdzEs'
@@ -131,7 +132,7 @@ import { ResetPasswordSalesComponent } from './sales/reset-password-sales/reset-
     SalesRegisterComponent,
     ForgotPasswordSalesComponent,
     ResetPasswordSalesComponent
-    ],
+  ],
 
   // providers: [{
   //   provide: LocationStrategy,
@@ -139,7 +140,7 @@ import { ResetPasswordSalesComponent } from './sales/reset-password-sales/reset-
   // }],
   // schemas:  [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [],
-  bootstrap: [ AppComponent ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
 

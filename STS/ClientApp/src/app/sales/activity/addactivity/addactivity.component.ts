@@ -21,7 +21,7 @@ export class AddactivityComponent implements OnInit {
 
   saleslocation = new LocationModel();
   saleslocationDetails: LocationModel[] = [];
-
+  
   activity = new activityModel();
   activityDetails: activityModel[] = [];
 
@@ -62,17 +62,17 @@ export class AddactivityComponent implements OnInit {
     private productService: ProductService,
     private toastr: ToastrService) {
 
-    // this.productList();
-    this.active_ProductList();
-    // this.clientList();
-    this.active_ClientList();
+   // this.productList();
+   this.active_ProductList();
+   // this.clientList();
+   this.active_ClientList();
     this.SalesList();
-  }
+   }
 
   ngOnInit() {
     this.checkRole(this.RoleJason);
 
-    this.Refresh_Location();
+    this. Refresh_Location();
   }
 
 
@@ -86,25 +86,25 @@ export class AddactivityComponent implements OnInit {
     }
   }
 
-  Refresh_Location() {
-    navigator.geolocation.getCurrentPosition(position => {
-      this.location = position.coords;
-      this.centerlat = this.location.latitude;
-      this.centerlng = this.location.longitude;
+ Refresh_Location() {
+     navigator.geolocation.getCurrentPosition(position => {
+       this.location = position.coords;
+       this.centerlat = this.location.latitude;
+       this.centerlng = this.location.longitude;
+ 
+       this.lat = this.location.latitude;
+       this.lng = this.location.longitude;
+ 
+       console.log(this.lat);
+       console.log(this.lng);
+ 
+       this.geocoder = new google.maps.Geocoder();
+       this.Refresh_Sales_Location();
+     });
 
-      this.lat = this.location.latitude;
-      this.lng = this.location.longitude;
+   }
 
-      console.log(this.lat);
-      console.log(this.lng);
-
-      this.geocoder = new google.maps.Geocoder();
-      this.Refresh_Sales_Location();
-    });
-
-  }
-
-  Refresh_Sales_Location() {
+   Refresh_Sales_Location() {
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.saleslocation.userid = this.user.id;
     this.saleslocation.latitude = this.lat;
@@ -194,7 +194,7 @@ export class AddactivityComponent implements OnInit {
       this.activity = new activityModel();
     }, (err) => {
 
-      console.log(err);
+       console.log(err);
 
     });
   }

@@ -294,6 +294,7 @@ export class CurrentactivityComponent implements OnInit {
 
   open_closeactivity(closeactivity) {
     if (this.activity.pendingamount > 0) {
+
       this.activityDetails[this.ind];
       this.modalService.open(closeactivity, { ariaLabelledBy: 'modal-basic-title' });
     } else {
@@ -481,29 +482,23 @@ export class CurrentactivityComponent implements OnInit {
   // }
 
   remain_to_pay(pendingamount: number, amt_paid: number) {
-    
-    if(amt_paid >= 0) {
+
+    if (amt_paid >= 0) {
       this.due_paid = pendingamount - amt_paid;
     } else if (amt_paid === 0 || amt_paid == null) {
-         this.due_paid = 0;
+      this.due_paid = 0;
     }
   }
-  
-  pay_due(pendingamount: number, amt_paid: number, aid: number) {
 
+  pay_due(pendingamount: number, amt_paid: number, aid: number) {
     this.due_paid = pendingamount - amt_paid;
 
     let strError = '';
 
-    // if (!this.activity.paydue) {
-    //   strError += strError = '' ? '' : '<br/>';
-    //   strError += '- Please enter due amount';
-    // }
-
-    // if (this.due_paid == null) {
-    //   strError += strError = '' ? '' : '<br/>';
-    //   strError += '- Please enter due amount';
-    // }
+    if (!this.activity.paydue) {
+      strError += strError = '' ? '' : '<br/>';
+      strError += '- Please enter due amount';
+    }
 
     if (!this.activity.payment_mode) {
       strError += strError = '' ? '' : '<br/>';
@@ -530,10 +525,9 @@ export class CurrentactivityComponent implements OnInit {
     this.activity.latitude = this.lat;
     this.activity.longitude = this.lng;
     this.activity.paydue = this.due_paid;
-
     this.activityService.updateToPending(aid, this.activity).subscribe((data: any) => {
       if (data.Status.code === 0) {
-        this.toastr.success('Activity is in Pending', 'Successfull', {
+        this.toastr.success('Activity is in Pending', 'Successful', {
           disableTimeOut: false,
           timeOut: 2000
         });

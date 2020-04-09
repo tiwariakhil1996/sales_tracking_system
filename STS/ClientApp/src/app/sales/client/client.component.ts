@@ -15,18 +15,18 @@ export class ClientComponent implements OnInit {
     Component: "ClientComponent"
   }
 
-  constructor(private router:Router,
-    ) {
+  constructor(private router: Router,
+  ) {
   }
 
   ngOnInit() {
     this.checkRole(this.RoleJason)
-    
+
   }
 
-  
+
   checkRole(RoleJason) {
-    var result = JSON.parse(localStorage.getItem('salesLogin')) || [];
+    const result = JSON.parse(localStorage.getItem('salesLogin')) || [];
     if (this.RoleJason.Component == RoleJason.Component) {
       console.log(result);
       if (!this.RoleJason.ROle.includes(result.userType)) {
@@ -34,5 +34,27 @@ export class ClientComponent implements OnInit {
       }
     }
   }
+
+  // client = new clientModel();
+
+  // clientDetails: clientModel[] = [];
+  // constructor(private router: Router, private clientService: CommonService){
+  //   // this.Login();
+
+
+  // }
+
+
+  // submitForm() {
+
+  //   this.clientService.addClient(this.client).subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       alert('Registered sucesfully');
+  //     }
+  //   }, (err) => {
+
+
+  //   });
+  // } 
 
 }

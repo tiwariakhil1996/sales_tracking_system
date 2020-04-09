@@ -207,7 +207,7 @@ export class ViewclientComponent implements OnInit {
 
         this.totalPageList = [];
         for (let i = 0; i < this.totalPageSize; i++) {
-          this.totalPageList.push({ pageSize: i + 1, pageIndex: i })
+          this.totalPageList.push({ pageSize: i + 1, pageIndex: i });
 
         }
         this.currentPageIndex = item.pageIndex;
@@ -316,7 +316,7 @@ export class ViewclientComponent implements OnInit {
         });
         this.modalService.dismissAll();
       } else {
-         this.toastr.info('This email id is already registered', 'Info', {
+        this.toastr.info('This email id is already registered', 'Info', {
           disableTimeOut: false,
           timeOut: 2000
         });

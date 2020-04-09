@@ -21,7 +21,7 @@ export class ChatComponent implements OnInit {
 
   searchsalesname;
 
-// salesid: number;
+  // salesid: number;
   sales_msg: string;
   admin_msg: string;
 
@@ -30,25 +30,25 @@ export class ChatComponent implements OnInit {
   sales = new salesregisterModel();
   salesDetails: salesregisterModel[] = [];
 
-createdby:number;
-currentDate = new Date();
+  createdby: number;
+  currentDate = new Date();
 
-// date: any;
+  // date: any;
 
 
   chat = new chatModel();
   chatDetails: chatModel[] = [];
   saleschatDetails: chatModel[] = [];
-   // Pagination
-   RowCount: number;
-   pageSize: number = 5;
+  // Pagination
+  RowCount: number;
+  pageSize: number = 5;
   //  totalPageList: paginationModel[] = [];
-   totalPageSize:number;
-   pagesize:any;
-   currentPageIndex: number = 0;
-   pageOfItems: Array<any>;
+  totalPageSize: number;
+  pagesize: any;
+  currentPageIndex: number = 0;
+  pageOfItems: Array<any>;
 
-   search_ : any;
+  search_: any;
 
   // RoleJason = {
   //   ROle: [0, 1],
@@ -69,7 +69,7 @@ currentDate = new Date();
     this.SalesList(item);
     // this.SalesList();
     // this.checkRole(this.RoleJason);
-  }  
+  }
 
 
   // checkRole(RoleJason) {
@@ -100,7 +100,7 @@ currentDate = new Date();
     const item = { pageIndex: 0 };
     this.SalesList(item);
   }
-  
+
   SalesList(item) {
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.sales.userid = this.user.id;
@@ -114,7 +114,7 @@ currentDate = new Date();
         if (data.RegisteredSalesList) {
           this.salesDetails = data.RegisteredSalesList;
 
-            // this. = this.salesDetails.filter(item => item.salesName == sname);
+          // this. = this.salesDetails.filter(item => item.salesName == sname);
 
 
         }
@@ -125,27 +125,27 @@ currentDate = new Date();
     });
   }
 
- 
 
-  send_msg(id: number,i) {
-    
+
+  send_msg(id: number, i) {
+
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.chat.adminId = this.user.id;
     this.chat.salesId = id;
     this.chat.createdby = this.user.id;
-     
-    if(this.chat.msg.length > 0) {
-    this.chatService.send_msg(this.chat).subscribe((data: any) => {
-      if (data.Status.code === 0) {
 
-      } 
+    if (this.chat.msg.length > 0) {
+      this.chatService.send_msg(this.chat).subscribe((data: any) => {
+        if (data.Status.code === 0) {
 
-    }, (err) => {
+        }
+
+      }, (err) => {
 
 
-    });
-  }
-    this.view_msg(i)
+      });
+    }
+    this.view_msg(i);
   }
 
   view_msg(i) {
@@ -159,19 +159,19 @@ currentDate = new Date();
       if (data.Status.code === 0) {
         if (data.getchats) {
           this.chatDetails = data.getchats;
-// console.log( this.chatDetails);
+          // console.log( this.chatDetails);
 
           // if(this.chat.createddate === this.currentDate) {
           //      console.log(this.chatDetails);
           // }
-    //   this.date = this.chat.createddate;
-    // console.log(this.currentDate | date: 'DD-MM-YYYY');
+          //   this.date = this.chat.createddate;
+          // console.log(this.currentDate | date: 'DD-MM-YYYY');
 
         }
       }
     });
   }
-  
+
   // view_msg(i) {
   //   this.ind = i;
   //   this.sales.id = this.salesDetails[this.ind].id;

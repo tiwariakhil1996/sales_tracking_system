@@ -14,7 +14,7 @@ namespace STS.Common
     public static class CommonHelper
     {
         //This funtion is used to send mail for forgot password both admin and sales.
-        public static void SendEmail(string EmailTo, string Subject, string EmailMessage, bool needCC, Dictionary<string, byte[]> attachment = null)
+        public static void SendMail(string EmailTo, string Subject, string EmailMessage, bool needCC, Dictionary<string, byte[]> attachment = null)
         {
             string liveOrProd = STSSetting.PrimaryDomain;
 

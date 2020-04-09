@@ -8,6 +8,7 @@ import { P404Component } from './admin/error/404.component';
 import { P500Component } from './admin/error/500.component';
 import { LoginComponent } from './admin/login/login.component';
 import { RegisterComponent } from './admin/register/register.component';
+import { ProductComponent } from './admin/product/product.component';
 
 
 
@@ -18,31 +19,17 @@ import { SalesLayoutComponent } from './containerSales';
 import { SalesLoginComponent } from './sales/login/login.component';
 
 import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password.component';
-import { AppComponent } from './app.component';
+
+import { SalesRegisterComponent } from './admin/sales-register/sales-register.component';
 import { ResetPasswordComponent } from './admin/reset-password/reset-password.component';
 import { ResetPasswordSalesComponent } from './sales/reset-password-sales/reset-password-sales.component';
 import { ForgotPasswordSalesComponent } from './sales/forgot-password-sales/forgot-password-sales.component';
-import { SalesRegisterComponent } from './admin/sales-register/sales-register.component';
 
 
 export const routes: Routes = [
-  // {
-  //   path: '',
-  //   redirectTo: '/sales/login',
-  //   pathMatch: 'full',
-  // },
-
-  // {
-  //   path: 'app',
-  //   component: AppComponent,
-  //   data: {
-  //     title: 'Map'
-  //   }
-  // },
-  
   {
     path: '',
-    redirectTo: '/admin/login',
+    redirectTo: '/sales/login',
     pathMatch: 'full',
   },
   {
@@ -60,6 +47,8 @@ export const routes: Routes = [
     }
   },
 
+
+
   // --------------------------------------- ADMIN ROUTING -----------------------
   {
     path: 'admin/login',
@@ -76,7 +65,7 @@ export const routes: Routes = [
       title: 'Register Page'
     }
   },
-  
+
   // {
   //   path: 'admin/chat',
   //   component: ChatComponent,
@@ -92,6 +81,8 @@ export const routes: Routes = [
       title: 'Register Page'
     }
   },
+
+
   {
     path: 'admin/forgot-password',
     component: ForgotPasswordComponent,
@@ -99,7 +90,6 @@ export const routes: Routes = [
       title: 'Forgot Password Page'
     }
   },
-
   {
     path: 'admin/reset-password',
     component: ResetPasswordComponent,
@@ -107,6 +97,8 @@ export const routes: Routes = [
       title: 'Forgot Password Page'
     }
   },
+
+
   {
     path: 'sales/forgot-password-sales',
     component: ForgotPasswordSalesComponent,
@@ -119,10 +111,10 @@ export const routes: Routes = [
     path: 'sales/reset-password-sales',
     component: ResetPasswordSalesComponent,
     data: {
-      title: 'Reset Password Page'
+      title: 'Forgot Password Page'
     }
   },
- 
+
   {
     path: 'admin',
     component: DefaultLayoutComponent,
@@ -163,10 +155,6 @@ export const routes: Routes = [
         path: 'category-subcategory',
         loadChildren: () => import('./admin/category-subcategory/category-subcategory.module').then(m => m.CategorySubcategoryModule)
       },
-      {
-        path: 'demoallapi',
-        loadChildren: () => import('./admin/demoallapi/demoallapi.module').then(m => m.DemoallapiModule)
-      }
     ]
   },
 
@@ -214,12 +202,14 @@ export const routes: Routes = [
         path: 'activity',
         loadChildren: () => import('./sales/activity/activity.module').then(m => m.ActivityModule)
       },
-      //  {
-      //   path: 'icons',
-      //   loadChildren: () => import('./sales/icons/icons.module').then(m => m.IconsModule)
-      // }
+
     ]
   },
+
+
+
+
+
 
   { path: '**', component: P404Component }
 ];
@@ -229,7 +219,3 @@ export const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-
-
-
-

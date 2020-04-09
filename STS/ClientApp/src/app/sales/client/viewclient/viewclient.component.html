@@ -12,7 +12,222 @@
         <div class="form-inline md-form mr-auto mb-4">
           <input style="float: right;" (input)="onsearch()" class="form-control mr-sm-2" type="text"
             [(ngModel)]="search_" placeholder="Search" aria-label="Search">
-        </div>
+            <div class="col-lg-12">
+              <div class="card">
+                <div class="card-header color">
+                  <!-- <i class="fa fa-align-justify"></i>  -->
+                  Client Details
+                  <button type="submit" tooltip=" Add new client" style="float: right;" class="btn btn-sm btn-success"
+                    (click)="addnewClient()"><i class="fa fa-plus"></i></button>
+                </div>
+                <div style="overflow-x:auto;">
+                  <div class="card-body">
+                    <!-- SEARCH -->
+                    <div class="form-inline md-form mr-auto mb-4">
+                      <input style="float: right;" (input)="onsearch()" class="form-control mr-sm-2" type="text"
+                        [(ngModel)]="search_" placeholder="Search" aria-label="Search">
+                    </div>
+            
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr class="table-success">
+                          <!-- <th>SR.no</th> -->
+                          <!-- <th>ID</th> -->
+                          <th>Client Name</th>
+                          <th>Email</th>
+                          <th>Contact</th>
+                          <th>Gender</th>
+                          <th>Address</th>
+                          <th>Street</th>
+                          <th>Country</th>
+                          <th>State</th>
+                          <th>City</th>
+                          <th>Postalcode</th>
+            
+                          <th>Action</th>
+                          <!-- <th>IsActive</th> -->
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let client of clientDetails;let i = index;">
+                          <!-- <td style="text-align: center">{{i+1}}</td> -->
+                          <!-- <td>{{client.id}}</td> -->
+                          <td>{{client.clientName}}</td>
+                          <td>{{client.email}}</td>
+                          <td>{{client.contact}}</td>
+                          <td>{{client.gender}}</td>
+                          <td>{{client.address}}</td>
+                          <td>{{client.street}}</td>
+                          <td>{{client.cname}}</td>
+                          <td>{{client.sname}}</td>
+                          <td>{{client.cityname}}</td>
+                          <td>{{client.postalCode}}</td>
+            
+            
+                          <td style="text-align: center">
+                            <button type="button" class="btn btn-info" data-toggle="modal"
+                              (click)="openupdatemodal(content,client)"><i class="fa fa-edit" aria-hidden="true"></i></button>
+            
+                            <button type="button" class='btn btn-danger' (click)="onDelete(client.id)"><i class="fa fa-trash"
+                                aria-hidden="true"></i></button>
+            
+                          </td>
+                          <!-- <td>
+                              <button *ngIf="client.isActive" class='btn btn-success' type="button" (click)="changeStatus(client.id)"><i
+                                  class="fa fa-check-circle"></i></button>
+                              <button *ngIf="!client.isActive" class='btn btn-danger' type="button" (click)="changeStatus(client.id)"><i
+                                  class="fa fa-times"></i></button>
+                            </td> -->
+                        </tr>
+            
+                      </tbody>
+                    </table>
+                    <div class="message" *ngIf="clientDetails.length <= 0">
+                      <p>No Record Found</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <ul class="pagination">
+            
+                    <li class="page-item" class="page-item first-item" [ngClass]="{disabled:currentPageIndex === 0}">
+                      <a class="page-link" (click)="clientList({ pageIndex: 0 })"><i class="fa fa-step-backward"></i></a>
+                    </li>
+                    <li class="page-item" [ngClass]="{disabled:currentPageIndex === 0}" class="page-item previous-item">
+                      <a (click)="clientList({pageIndex:currentPageIndex -1})" class="page-link"
+                        routerLink="/sales/client/viewclient"> <i class="fa fa-angle-double-left"></i></a>
+                    </li>
+                    <li class="page-item active" *ngFor="let item of totalPageList "
+                      [ngClass]="{active:currentPageIndex === item.pageIndex}" class="page-item number-item"
+                      (click)="clientList(item)">
+                      <a class="page-link" routerLink="/sales/client/viewclient">
+                        <span class="sr-only"></span>{{item.pageSize}}</a>
+                    </li>
+                    <li class="page-item" [ngClass]="{disabled:currentPageIndex === totalPageSize-1}" class="page-item next-item">
+                      <a (click)="clientList({pageIndex:currentPageIndex +1})" class="page-link"
+                        routerLink="/sales/client/viewclient"><i class="fa fa-angle-double-right"></i></a>
+                    </li>
+                    <li class="page-item" class="page-item last-item" [ngClass]="{disabled:currentPageIndex === totalPageSize-1}">
+                      <a class="page-link" (click)="clientList({pageIndex:totalPageSize-1})"><i class="fa fa-step-forward"></i></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            
+            
+            <ng-template #content let-modal>
+              <div class="modal-header">
+                <h4 id="dialog-sizes-name1" style="color: black;" class="modal-title pull-right">EDIT</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modalService.dismissAll()">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            
+              <div class="modal-body" style="color: black;">
+                <div>
+                  <div class="form-group row">
+                    <div class="col-sm-6">
+                      <label for="clientName">Client Name</label>
+                      <input type="text" class="form-control" [(ngModel)]="client.clientName" name="clientName">
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="email">Email</label>
+                      <input type="text" class="form-control" [(ngModel)]="client.email" name="email">
+                    </div>
+                  </div>
+            
+            
+            
+                  <div class="form-group row">
+                    <div class="col-sm-6">
+                      <label for="contact">Contact</label>
+                      <input type="text" class="form-control" [(ngModel)]="client.contact" name="contact">
+                    </div>
+            
+                    <div class="col-sm-6">
+                      <label class="col-md-3 col-form-label" for="inline-radios">Gender</label>
+                      <div class="col-md-9 col-form-label">
+                        <div class="form-check form-check-inline mr-1" id="inline-radios">
+                          <input class="form-check-input" type="radio" [(ngModel)]="client.gender" name="gender" id="Male"
+                            value="Male">
+                          <label class="form-check-label" for="Male">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline mr-1">
+                          <input class="form-check-input" type="radio" [(ngModel)]="client.gender" name="gender" id="Female"
+                            value="Female">
+                          <label class="form-check-label" for="Female">Female</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            
+                  <div class="form-group row">
+                    <div class="col-sm-6">
+                      <label for="address">Address</label>
+                      <input type="text" class="form-control" [(ngModel)]="client.address" name="address">
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="street">Street</label>
+                      <input type="text" class="form-control" [(ngModel)]="client.street" name="street">
+                    </div>
+                  </div>
+            
+            
+                <div class="form-group row">
+                  <div class="col-sm-3">
+                    <label for="country">Country</label>
+                    <select class="form-control" id="country" name="country" [(ngModel)]="client.cid"
+                      (change)="onCountryChange($event.target.value)">
+                      <option value="0" selected>Select Country</option>
+                      <option *ngFor="let country of countryDetails" value={{country.cid}}>{{country.cname}}</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-3">
+                    <label for="state">State</label>
+                    <select class="form-control" id="state" name="state" [(ngModel)]="client.sid"
+                      (change)="onStatechange($event.target.value)">
+                      <option value="0" selected>Select State</option>
+                      <option *ngFor="let state of stateDetails " value={{state.sid}}>{{state.sname}}</option>
+                    </select>
+                  </div>
+            
+            
+                  <div class="col-sm-3">
+                    <label for="city">City</label>
+                    <select class="form-control" [(ngModel)]="client.cityid">
+                      <option value="0" selected>Select City</option>
+                      <option *ngFor="let city of cityDetails " value={{city.cityid}}>{{city.cityname}}</option>
+                    </select>
+                  </div>
+            
+                  <div class="col-sm-3">
+                    <label for="postalCode">Postal Code</label>
+                    <input type="text" class="form-control" [(ngModel)]="client.postalCode" name="postalCode">
+                  </div>
+            
+                </div>
+            
+            
+            
+                <div class="agm-map">
+                  <agm-map #map [zoom]="16" [latitude]="centerlat" [longitude]="centerlng">
+                    <agm-marker [opacity]=0.8 [latitude]="centerlat" [longitude]="centerlng" (dragEnd)="markerDragEnd($event)"
+                      [markerDraggable]="true">
+                    </agm-marker>
+            
+                  </agm-map>
+                  <div>Latitude: {{latitude}}</div>
+                  <div>Longitude: {{longitude}}</div>
+                </div>
+            
+                <button type="submit" class="btn btn-success" (click)="onEdit(client.id)">Update</button>
+                <button type="button" class="btn btn-outline-info waves-effect ml-auto"
+                  (click)="modal.dismiss('Cross click')">Cancel</button>
+              </div>
+              </div>
+            </ng-template>     </div>
 
         <table class="table table-bordered">
           <thead>

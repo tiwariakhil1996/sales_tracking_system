@@ -6,7 +6,10 @@ export const navItems: INavData[] = [
     name: 'Dashboard',
     url: '/admin/dashboard',
     icon: 'icon-speedometer',
-
+    // badge: {
+    //   variant: 'info',
+    //   text: 'NEW'
+    // }
   },
 
   {
@@ -38,15 +41,16 @@ export const navItems: INavData[] = [
     url: '/admin/map',
     icon: 'icon-map'
   },
+
   {
     name: 'Chat',
     url: '/admin/chat',
-    icon: 'icon-chat'
+    icon: 'icon-notebook'
   },
 
   {
     name: 'Category',
-    url: '/admin/category-subcategory/viewcategory',
+    url: '/admin/categornotebooktegory/viewcategory',
     icon: 'icon-note',
   },
   {

@@ -18,17 +18,11 @@ export class ResetPasswordComponent implements OnInit {
 
   loginDetail = new registerModel();
   adminDetails: registerModel[] = [];
-
   Resetpass = new ResetPasswordAdmin();
   Resetpassword = new ResetPasswordAdmin();
-
   Token: any;
   UserId: any;
 
-  // RoleJason = {
-  //   ROle: [0, 1],
-  //   Component: 'ForgotPasswordComponent'
-  // };
 
   RoleJason = {
     ROle: [0, 1],
@@ -50,9 +44,9 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.checkRole(this.RoleJason);
+    // this.check_admin_Role(this.RoleJason);
+    // this.check_sales_Role(this.RoleJason);
 
-    // this is queryparam fetch the id and value from the url
     this.route.queryParams.subscribe(params => {
       if (params.Token) {
         this.Token = params.Token;
@@ -82,7 +76,6 @@ export class ResetPasswordComponent implements OnInit {
   //     }
   //   }
   // }
-
 
   ResetPassword() {
 
@@ -118,31 +111,23 @@ export class ResetPasswordComponent implements OnInit {
             disableTimeOut: false
           });
           this.Resetpassword = new ResetPasswordAdmin();
-
-        } else {
-          this.toastr.error('Old password and new Pasword matched please enter the different password', 'Error', {
-            disableTimeOut: false,
-            timeOut: 2000
-          });
-        }
-        else if (data.Status.code === 1) {
+        } else if (data.Status.code === 1) {
           this.toastr.error('New password must be unique, it should not be same as old password', 'Error', {
             disableTimeOut: false,
             timeOut: 2000
           });
-        }
-        else if (data.Status.code === 2) {
+        } else if (data.Status.code === 2) {
           this.toastr.info('Link has been expired', 'Info', {
             disableTimeOut: false
           });
           this.Resetpassword = new ResetPasswordAdmin();
         }
-       
+
       }, (err) => {
 
       });
     } else {
-      this.toastr.error('New Password and Confirm Passoword Not mached', 'Error', {
+      this.toastr.error('New Password & Confirm Password didnt match', 'Error', {
         disableTimeOut: false,
         timeOut: 2000
       });

@@ -1,4 +1,7 @@
+
+
 // admin register
+
 export class registerModel {
     id: number;
     image: string;
@@ -14,6 +17,9 @@ export class registerModel {
     userType: number;
     createdby: number;
 }
+
+
+
 export class avatarModel {
     image: string;
 
@@ -27,6 +33,8 @@ export class changePasswordModel {
     newpassword: string;
     confirmpassword: string;
 }
+
+
 export class userModel {
     id: number;
 }

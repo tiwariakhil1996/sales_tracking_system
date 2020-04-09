@@ -1,39 +1,40 @@
-.btn-center tr td:last-child{
-    text-align: center;
+.btn-center tr td:last-child {
+  text-align: center;
 }
-  
+
 .modal-header {
-    background-color: cadetblue;
+  background-color: cadetblue;
 }
 
 .badge-pill {
-    padding: 5px;
-    border-radius: 17px;
-    width: 120px;
-    font-size: medium;
-    font-weight: normal;
+  padding: 5px;
+  border-radius: 17px;
+  width: 120px;
+  font-size: medium;
+  font-weight: normal;
 }
 
-.followup{
-    left: 1050px;
-    width: 54px;
- }
+.followup {
+  left: 1050px;
+  width: 54px;
+}
 
 
- .activity_detail_header{
-    background-color: cadetblue;
- }
- .color {
-    background-color: lightskyblue;
- }
+.activity_detail_header {
+  background-color: cadetblue;
+}
 
- .message {
-    text-align: center;
+.color {
+  background-color: lightskyblue;
+}
+
+.message {
+  text-align: center;
 }
 
 
 
 
 .paydue {
-    background-color: gold;
+  background-color: gold;
 }

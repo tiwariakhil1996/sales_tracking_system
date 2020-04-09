@@ -1,4 +1,5 @@
 import { INavData } from '@coreui/angular';
+
 export const SalesnavItems: INavData[] = [
 
   {
@@ -19,13 +20,13 @@ export const SalesnavItems: INavData[] = [
     url: '/sales/client/viewclient',
     icon: 'icon-people',
   },
-  
+
   {
     name: 'Activity',
     url: '/sales/activity/currentactivity',
     icon: 'icon-notebook',
   },
-  
+
   // {
   //   name: 'Map',
   //   url: '/sales/map',
