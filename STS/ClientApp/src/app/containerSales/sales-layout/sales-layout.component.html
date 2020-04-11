@@ -10,98 +10,159 @@
   </ul> -->
 
   <ul class="nav navbar-nav ml-auto">
+
+
     <li class="nav-item d-md-down-none nav-item dropdown" dropdown placement="bottom right">
-      <a class="nav-link"  (click) ="toggleDisplay()" data-toggle="dropdown" role="button" aria-haspopup="true"
+      <a class="nav-link" (click)="toggleChat();msg_status()" data-toggle="dropdown" role="button" aria-haspopup="true"
         aria-expanded="false" dropdownToggle (click)="false"><i class="icon-speech"></i>
       </a>
 
-      <div class="dropdown-menu-right"  [hidden] = "!isShow" *dropdownMenu aria-labelledby="simple-dropdown"
-        style="background-color: azure; position: absolute;width: 250px; background-color: #9896f9;">
-        <div class="dropdown-header text-center" style="color: white;background-color: blueviolet;" *ngFor="let item of status">
-          <!-- <strong>Chat</strong> -->
+      <div class="dropdown-menu-right" [hidden]="!showchat" *dropdownMenu aria-labelledby="simple-dropdown"
+        style=" position: absolute;width: 250px;">
+
+        <div class="col-md-8 col-xl-6 chat">
+          <div class="card" style="width: 302px;">
+            <div class="card-header msg_head" style=" background-color: blueviolet;">
+              <div class="d-flex bd-highlight">
+                <div class="img_cont">
+                  <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
+                  <!-- <img [src]="'http://localhost:55627/Documents/Avatars/Admin/Thumb/'+avatar.image" *ngIf="avatar.image"
+                  class="rounded-circle user_img" />
         
-          <h6 *ngIf="!this.item.isonline">
-            <strong>Chat</strong>
-            <span class="status orange"></span>
-            <!-- offline -->
-          </h6>
-          <h6 *ngIf="this.item.isonline">
-            <strong>Chat</strong>
-            <span class="status green"></span>
-            <!-- online -->
-          </h6>
+                <img [src]="'/assets/img/avatars/admin.png'" *ngIf="!avatar.image" class="rounded-circle user_img" />
+									<span class="online_icon"></span> -->
+                </div>
+                <div class="user_info">
+                  <span>Admin</span>
+                </div>
+                <div *ngFor="let item of status ;let i=index;" style="margin-left: 56px;">
+                  <h6 *ngIf="!item.isonline">
+                    <span class="status orange"></span>
+                    Offline
+                  </h6>
+                  <h6 *ngIf="item.isonline">
+                    <span class="status green"></span>
+                    Online
+                  </h6>
+                </div>
+              </div>
 
-        </div>
+            </div>
+            <hr style="margin-top: 0px;
+            margin-bottom: 0px;">
+            <div style="overflow-y: auto;">
 
-        <div class="row" style="padding: 0;height: 400px; ">
-          <div class="col-lg-12">
-            <div class="card" style="height: 402px;margin-bottom: 0px;">
-              <div class="card-body table-responsive"  style="padding-left: 0px;
-              padding-right: 0px;">
+              <div class="card-body msg_card_body" *ngFor="let chats of chatDetails;"
+                style="background-color: slategray;">
 
-                <ul id="chat" style="height: 315px;"  >
-                  <!-- <h3>{{this.chat.createddate}}</h3> -->
-                  <li class="me"  *ngFor="let chat of chatDetails;let i=index;">
-                    <!-- <h3>{{chat.createdtime}}</h3> -->
-                    <div  *ngIf="chat.createdby==this.chat.adminId">
-                    <div class="entete">
-                      <!-- <h2 style="color: black;">{{this.chat.adminname}} (Admin) </h2> -->
-                      <h2 style="color: black;width: 42px;">Admin</h2>
-                      <!-- <span class="status blue"></span> -->
-                    </div> 
-                    <!-- <div class="triangle"></div> -->
-                    <div class="message" style="background-color: #ed6f6f;">
-                      {{this.chat.msg}}
-                    </div>
-                    <div>
-                      <!-- <h2 style="color: gray;">{{this.chat.createdtime}}</h2> -->
-                      <h2  style="width: 110px; color: gray;">{{this.chat.createdon}}</h2>
+                <div class="d-flex justify-content-start mb-4"
+                  *ngIf="(this.userchat.createdby == chats.senderId)  && (this.userchat.id == chats.receiverId ) && (this.userchat.createdby == chats.createdby)">
 
-                      <!-- <h2 style="color: gray;">{{this.chat.createdtime | date:'shortTime'}}</h2> -->
-                    </div>
-                    </div>
-                    
-                    <div *ngIf="chat.createdby==this.chat.salesId">
-                      <div class="entete">
-                        <!-- <h2 style="color: black;">{{this.chat.salesname}} </h2> -->
-                        <h2 style="color: black;">Me</h2>
-                        <!-- <span class="status green"></span> -->
-                      </div> 
-                      <!-- <div class="sales"></div> -->
-                      <div class="message" style=" background-color: #ffc107;">
-                        {{this.chat.msg}}
-                      </div>
-                      <div>
-                        <!-- <h2 style="color: gray;">{{this.chat.createdtime}}</h2> -->
-                      <h2 style="color: gray;">{{this.chat.createdon}}</h2>
+                  <div class="img_cont_msg" style="max-width: 100%;">
+                    <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+                      class="rounded-circle user_img_msg">
+                  </div>
+                   <button [hidden]="!isreceiveddelete" (click)="onDelete(chats.id)" class="close setdelete"
+						style="float: left;margin: 0;" type="button">
+						<i class="fa fa-trash" aria-hidden="true"> </i>
+					</button>
+                  <div class="msg_cotainer" style="max-width: 100%;" (click)="Delete_received()">
+                    <p> {{chats.msg}} 
+                  </p>
+                    <!-- <span class="msg_time">{{msg.date | date:'medium'}}</span> -->
+                    <!-- <span class="msg_time" style="font-size: smaller;	color: black;">{{chats.createdon.slice(11)}}</span> -->
+                    <span class="msg_time" style="font-size: smaller;	color: black;">{{chats.createdon}}</span>
+                  </div>
 
-                      </div>
-                    </div>
-                  </li>
-                </ul>
+                  <!-- <div>
+                    <h6 style="font-size: smaller;	color: black; margin-left: 38px;">{{chats.createdon.slice(11)}}</h6>
+                  </div> -->
+                </div>
+
+                <div class="d-flex justify-content-end mb-4"
+                  *ngIf="(this.userchat.id == chats.senderId) && (this.userchat.createdby == chats.receiverId) && (this.userchat.id == this.chats.createdby)">
+                
+                  <div class="msg_cotainer_send" style="max-width: 100%;" (click)="Delete_sent()">
+                    <p > {{chats.msg}} 
+                    	<!-- <i *ngIf="!chats.seen" class="fa fa-check" aria-hidden="true" style="color: #000000;"></i>
+				         		<i *ngIf="chats.seen" class="fa fa-check" aria-hidden="true" style="color: #000000;"></i>
+                     <i *ngIf="chats.seen" class="fa fa-check" aria-hidden="true" style="color: #000000;"></i> -->
+
+                      <!-- Sent  - Single tick gray-->
+						<i *ngIf="chats.status == 0 && !chats.seen" class="fa fa-check" aria-hidden="true" style="color: #6c757d;"></i>
+						<!-- Received - Double tick gray -->
+						<i *ngIf="chats.status == 1 && !chats.seen" class="fa fa-check" aria-hidden="true" style="color: #6c757d;"></i>
+						<i *ngIf="chats.status == 1 && !chats.seen " class="fa fa-check" aria-hidden="true" style="color: #6c757d;"></i>
+
+                         <!-- Read  Double - tick black-->
+						<i *ngIf="chats.seen" class="fa fa-check" aria-hidden="true" style="color: #000000;"></i>
+						<i *ngIf="chats.seen" class="fa fa-check" aria-hidden="true" style="color: #000000;"></i>
+                    </p>
+                    <!-- <span class="msg_time">{{msg.date | date:'medium'}}</span> -->
+                    <!-- <span class="msg_time" style="font-size: smaller;	color: black;">{{chats.createdon.slice(11)}}</span> -->
+                    <span class="msg_time" style="font-size: smaller;	color: black;">{{chats.createdon}}</span>
+                  </div>
+
+          <button [hidden]="!issentdelete" (click)="onDelete(chats.id)" class="close setdelete"
+						style="float: right; margin: 0;" type="button">
+						<i class="fa fa-trash" aria-hidden="true"> </i>
+					</button>
+
+                  <div class="img_cont_msg">
+                    <img [src]="'/assets/img/avatars/admin.png'" class="rounded-circle user_img_msg">
+                  </div>
+                  <!-- <div>
+                    <h6 style="font-size: smaller;	color: black; margin-left: 38px;">{{chats.createdon.slice(11)}}</h6>
+                  </div> -->
+
+                </div>
 
               </div>
 
-              <div class="text text-r form-inline md-form mr-auto mb-4"
-                style="background:whitesmoke !important;margin-left: 7px; margin-bottom: 0rem !important;">
+              <div class="card-body msg_card_body" *ngFor="let msg of messages;" style="background-color: slategray;">
+                <div class="d-flex justify-content-start mb-4" *ngIf="msg.type == 'received'">
+                  <div class="img_cont_msg">
+                    <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+                      class="rounded-circle user_img_msg">
+                  </div>
+                  <div class="msg_cotainer">
+                    <p> {{msg.message}} </p>
+                    <span class="msg_time">{{msg.date | date:'medium'}}</span>
+                  </div>
+                </div>
 
-                <input class="mytext" style="border-radius: 20px;" type="text" id="msg" name="msg" [(ngModel)]="chat.msg" (click)="view_msg()"
-                  placeholder="Type a message" />
-                <button style="margin-left: 32px; border-radius: 34px;" class='btn btn-success' type="button" (click)="send_msg()"><i
-                    class="fa fa-send" aria-hidden="true"></i></button>
+                <div class="d-flex justify-content-end mb-4" *ngIf="msg.type == 'sent'">
+                  <div class="msg_cotainer_send">
+                    <p> {{msg.message}} </p>
+                    <i class="fa fa-check" aria-hidden="true" style="color: #6c757d;"></i>
+                    <span class="msg_time">{{msg.date | date:'medium'}}</span>
+                  </div>
+                  <div class="img_cont_msg">
+                    <img [src]="'/assets/img/avatars/admin.png'" class="rounded-circle user_img_msg">
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="card-footer" style="background-color: slategray;">
+              <div class="input-group" style="background-color: white;">
+                <div class="input-group-append" style="background-color: slategray;">
+                  <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
+                </div>
+                <textarea name="" [value]="txtMessage" (input)="txtMessage=$event.target.value"
+                  (keydown.enter)="sendMessage()" class="form-control type_msg"
+                  placeholder="Type your message..."></textarea>
+                <div class="input-group-append" style="background-color: slategray;">
+                  <span class="input-group-text send_btn" (click)="sendMessage()"><i class="fas fa-location-arrow"
+                      style="color: #4dbb74;"></i></span>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-
       </div>
     </li>
-
-
-
-
-
 
 
     <li class="nav-item d-md-down-none">

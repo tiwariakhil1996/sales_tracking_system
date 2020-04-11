@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { SalesnavItems } from '../../_Salesnav';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
@@ -13,6 +13,8 @@ import { AgmMap } from '@agm/core';
 import { UpdateImageListModel } from '../../model/product';
 import { ChatService } from '../../service/chat.service';
 import { chatModel, userModel } from '../../model/chat';
+import { ChattingService } from '../../service/chatting.service';
+import { Message } from '../../model/message';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,14 +28,14 @@ export class SalesLayoutComponent implements OnInit {
   // tempImageList: UpdateImageListModel[] = [];
 
 
- 
+
   newactivity = new newactivityModel();
   newactivityDetails: newactivityModel[] = [];
 
   assignedActivity: any;
   new_message: any;
-  isonline:boolean;
-  
+  isonline: boolean;
+
   user = new salesregisterModel();
 
   userchat = new userModel();
@@ -41,7 +43,7 @@ export class SalesLayoutComponent implements OnInit {
 
   chat = new chatModel();
   chatDetails: chatModel[] = [];
-
+unreadChats: chatModel[] = [];
   profile_pic = new registerModel();
 
   status = new statusModel();
@@ -53,7 +55,7 @@ export class SalesLayoutComponent implements OnInit {
 
   tempImageList: UpdateImageListModel[] = [];
 
- 
+
 
   activity = new activityModel();
   activityDetails: activityModel[] = [];
@@ -71,6 +73,7 @@ export class SalesLayoutComponent implements OnInit {
   imageSrc: string = '';
   modalRef: BsModalRef;
   username: string;
+  adminname: string;
   totalActivity: any;
 
   latitude: number;
@@ -80,6 +83,7 @@ export class SalesLayoutComponent implements OnInit {
 
   private geoCoder;
 
+unreadmessages: any;
 
   location: Coordinates;
   lat: any;
@@ -98,11 +102,34 @@ export class SalesLayoutComponent implements OnInit {
     Component: 'SalesLayoutComponent'
   };
 
-  isShow = false;
+  // isShow = false;
 
-  toggleDisplay() {
-    this.isShow = !this.isShow;
+  // toggleDisplay() {
+  //   this.isShow = !this.isShow;
+  // }
+
+  showchat = false;
+
+  toggleChat() {
+    this.showchat = !this.showchat;
   }
+
+  isreceiveddelete = false;
+
+  Delete_received() {
+    this.isreceiveddelete = !this.isreceiveddelete;
+  }
+
+  issentdelete = false;
+
+  Delete_sent() {
+    this.issentdelete = !this.issentdelete;
+  }
+  title = 'ClientApp';
+  txtMessage: string = '';
+  uniqueID: string = new Date().getTime().toString();
+  messages = new Array<Message>();
+  message = new Message();
 
   constructor(private router: Router,
     private salesService: SalesService,
@@ -110,13 +137,18 @@ export class SalesLayoutComponent implements OnInit {
     private modalService: NgbModal,
     private modalServices: BsModalService,
     private toastr: ToastrService,
-    private activityService: ActivityService) {
+    private activityService: ActivityService,
+    // private chattingService: ChattingService,
+    private _ngZone: NgZone) {
+
+    this.subscribeToEvents();
 
     // this.activityList();
     this.newactivityList();
-
+this.view_unreadChats();
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.changePassword.id = this.user.id;
+    // this.adminname =this.user.createdby;
     // console.log(this.changePassword.id);
     this.profile_pic.image = this.user.image;
     this.username = this.user.salesName;
@@ -130,6 +162,141 @@ export class SalesLayoutComponent implements OnInit {
     this.get_admin_IsOnline();
   }
 
+
+  sendMessage(): void {
+    if (this.txtMessage) {
+      this.message = new Message();
+      this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
+      this.message.senderId = this.user.id;
+      this.message.senderType = this.user.userType;
+      this.message.receiverId = this.user.createdby;
+
+      this.message.clientuniqueid = this.uniqueID;
+      this.message.type = 'sent';
+      this.message.message = this.txtMessage;
+      this.message.date = new Date();
+      this.messages.push(this.message);
+      this.chatService.sendMessage(this.message);
+      this.txtMessage = '';
+
+      this.chatService.send_msg(this.message).subscribe((data: any) => {
+        if (data.Status.code === 0) {
+
+        }
+      }, (err) => {
+
+      });
+    }
+  }
+
+  private subscribeToEvents(): void {
+
+    this.chatService.messageReceived.subscribe((message: Message) => {
+      this._ngZone.run(() => {
+        // if (message.clientuniqueid !== this.uniqueID) {
+        if (message.receiverId === this.user.id && message.senderId === this.user.createdby) {
+          message.type = 'received';
+          this.messages.push(message);
+          this.toastr.info(message.message, 'New Message', {
+            // disableTimeOut: false,
+            timeOut: 10000,
+            positionClass: 'toast-bottom-right',
+            tapToDismiss: true,
+            progressBar: true
+            // newestOnTop: true  
+          });
+
+        }
+      });
+    });
+  }
+
+  view_msg() {
+   this.userchat = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.message.receiverId = this.userchat.id;
+    this.message.senderId = this.userchat.createdby;
+    this.message.status = 1;
+
+    this.chatService.get_chats(this.message).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.getchats) {
+          this.chatDetails = data.getchats;
+          // console.log(  this.chatDetails);
+          this.message = new Message();
+   
+
+        }
+      }
+    });     
+  }
+
+view_unreadChats() {
+  this.userchat = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.message.receiverId = this.userchat.createdby;
+    this.message.senderId = this.userchat.id;
+
+     this.chatService.unread_messages(this.message).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.unread_messages) {
+          this.unreadChats = data.unread_messages;
+        if(this.unreadChats.length > 0) {
+          this.unreadmessages=this.unreadChats.length ;
+             this.toastr.warning(this.unreadmessages, 'Unread Messages', {
+            timeOut: 50000,
+            positionClass: 'toast-bottom-right',
+              closeButton:true
+          });
+}
+        }
+      }
+     });
+}
+  msg_status() {
+    this.userchat = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    // this.chat.salesId = this.userchat.id;
+    // this.chat.adminId = this.userchat.createdby;
+
+    this.message.receiverId = this.userchat.id;
+    this.message.senderId = this.userchat.createdby;
+    // this.message.status = 1;
+    this.message.seen = 1;
+    this.chatService.get_chats(this.message).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        if (data.getchats) {
+          this.chatDetails = data.getchats;
+          // console.log(  this.chatDetails);
+          // this.message = new Message();
+          this.messages = new Array<Message>();
+        }
+      }
+    });
+  }
+
+   // view_msg() {
+  //   this.userchat = JSON.parse(localStorage.getItem('salesLogin')) || {};
+  //   this.chat.salesId = this.userchat.id;
+  //   this.chat.adminId = this.userchat.createdby;
+  //   // this.isonline= this.userchat.isonline;
+
+  //   this.chatService.get_sales_chats(this.chat).subscribe((data: any) => {
+  //     if (data.Status.code === 0) {
+  //       if (data.getsaleschats) {
+  //         this.chatDetails = data.getsaleschats;
+  //         this.new_message = this.chatDetails.length;
+  //       }
+  //     }
+  //   }, (err) => {
+
+  //   });
+  // }
+
+ onDelete(id: number) {
+    this.userchat = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.chat.modifiedby=this.userchat.id;
+    this.chatService.deleteMsg(id,this.chat).subscribe(data => {
+      this.view_msg();
+    });
+  }
 
   Location() {
 
@@ -418,29 +585,10 @@ export class SalesLayoutComponent implements OnInit {
       });
     }
 
-    this.view_msg()
+    // this.view_msg()
   }
 
-  view_msg() {
-    this.userchat = JSON.parse(localStorage.getItem('salesLogin')) || {};
-    this.chat.salesId = this.userchat.id;
-    this.chat.adminId = this.userchat.createdby;
-    // this.isonline= this.userchat.isonline;
-
-    this.chatService.get_sales_chats(this.chat).subscribe((data: any) => {
-      if (data.Status.code === 0) {
-        if (data.getsaleschats) {
-          this.chatDetails = data.getsaleschats;
-          this.new_message = this.chatDetails.length;
-          console.log(this.new_message);
-        
-        }
-   }
-    }, (err) => {
-
-    });
-
-  }
+ 
 
   getuserProfile() {
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
@@ -450,7 +598,7 @@ export class SalesLayoutComponent implements OnInit {
     this.profile_pic.image = this.user.image;
   }
 
-  get_admin_IsOnline(){
+  get_admin_IsOnline() {
     this.userchat = JSON.parse(localStorage.getItem('salesLogin')) || {};
     // this.chat.salesId = this.userchat.id;
     this.chat.adminId = this.userchat.createdby;
@@ -459,10 +607,10 @@ export class SalesLayoutComponent implements OnInit {
       if (data.Status.code === 0) {
         if (data.getadminstatus) {
           this.status = data.getadminstatus;
-           console.log( this.status);
-           
+          // console.log(this.status);
+
         }
-   }
+      }
     }, (err) => {
 
     });

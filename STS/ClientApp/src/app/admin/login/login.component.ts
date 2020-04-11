@@ -39,12 +39,23 @@ export class LoginComponent implements OnInit {
         });
 
         this.router.navigate(['/admin/dashboard']);
-      } else {
-        // alert('UnSuccessfully');
-        this.toastr.warning('Please enter valid username and password', 'Warning', {
-          disableTimeOut: false
+      }else if (data.Status.code === 1) {
+        this.toastr.warning('Either your username and password didnt matched', 'Warning', {
+          disableTimeOut: false,
+          timeOut: 2000
         });
       }
+      else if (data.Status.code === 2) {
+        this.toastr.warning('This account is temporarily blocked', 'Warning', {
+          disableTimeOut: false,
+          timeOut: 2000
+        });
+      }
+      //  else {
+      //   this.toastr.warning('Please enter valid username and password', 'Warning', {
+      //     disableTimeOut: false
+      //   });
+      // }
     }, (err) => {
     });
   }

@@ -11,6 +11,12 @@ namespace STS.Models
         public string type { get; set; }
         public string message { get; set; }
         public DateTime date { get; set; }
+
+
+
+        public int senderId { get; set; }
+        public int receiverId { get; set; }
+
     }
 }
 

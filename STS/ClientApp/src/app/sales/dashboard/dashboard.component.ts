@@ -11,12 +11,18 @@ import { ProductService } from '../../service/product.service';
 import { SalesService } from '../../service/sales.service';
 import { ActivityService } from '../../service/activity.service';
 
+import { NgZone } from '@angular/core';
+import { Message } from '../../model/message';
+import { ChattingService } from '../../service/chatting.service';
+// import { Message } from '../../../model/message';
+// import { ChattingService } from '../../../service/chatting.service';
 
 @Component({
-  templateUrl: 'dashboard.component.html'
+  templateUrl: 'dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
+   
   radioModel: string = 'Month';
 
   user = new salesregisterModel();
@@ -69,6 +75,8 @@ export class DashboardComponent implements OnInit {
     private salesService: SalesService,
     private activityService: ActivityService) {
  
+     
+      
   }
 
   ngOnInit() {
@@ -225,4 +233,12 @@ export class DashboardComponent implements OnInit {
   //     this.mainChartData3.push(65);
   //   }
   // }
+
+
+
+
+  
+
+
+
 }

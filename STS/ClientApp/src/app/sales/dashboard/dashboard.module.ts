@@ -6,6 +6,7 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
+import { ChattingService } from '../../service/chatting.service';
 
 @NgModule({
   imports: [
@@ -16,5 +17,6 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
     ButtonsModule.forRoot()
   ],
   declarations: [ DashboardComponent ]
+  
 })
 export class DashboardModule { }

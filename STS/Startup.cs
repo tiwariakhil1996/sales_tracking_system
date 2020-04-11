@@ -41,6 +41,7 @@ namespace STS
             services.AddControllers()
                 .AddNewtonsoftJson();
 
+            // ---------  For SinglR  ---------
             services.AddSignalR();
 
             //Database Connectivity
@@ -83,6 +84,7 @@ namespace STS
             services.AddSingleton<ICountry_State_City, Country_State_CityServices>();
             services.AddSingleton<IMail, MailServices>();
             services.AddSingleton<IResetPassword, ResetPasswordServices>();
+            services.AddSingleton<IChat, ChatServices>();
 
 
         }

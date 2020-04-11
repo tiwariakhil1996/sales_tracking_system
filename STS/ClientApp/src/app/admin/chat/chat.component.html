@@ -1,129 +1,235 @@
-<div class="row" style="padding: 0;">
-	<div class="col-lg-12" style="padding: 0;">
-		<div class="card-body table-responsive">
 
-			<div id="container" style="margin-left: 0px; height: 550px;">
-				<aside [hidden]="!isShow">
-					<header>
-						<input style="height: 30px;" type="text" placeholder="search" (input)="onsearch()"
-							[(ngModel)]="search_">
-						<!-- <input type="text" placeholder="search" [(ngModel)]="searchsalesname" > -->
+<div id="frame">
+	<div id="sidepanel">
+		<div id="profile">
+			<div class="wrap">
+				<img id="profile-img" [src]="'http://localhost:55627/Documents/Avatars/Admin/Thumb/'+avatar.image"
+					*ngIf="avatar.image" class="img-avatar online" />
 
-					</header>
+				<img id="profile-img" [src]="'/assets/img/avatars/admin.png'" *ngIf="!avatar.image"
+					class="img-avatar online" />
+
+				<p>{{this.username}}</p>
+				<!-- <i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
+				<div id="status-options">
 					<ul>
-						<!-- <li *ngFor="let item of salesDetails  | filter:searchsalesname;let i=index;"> -->
-						<li *ngFor="let item of salesDetails ;let i=index;">
-							<img style="max-width: 50px; max-height: 50px;" *ngIf="item.image"
-								[src]="'http://localhost:55627/Documents/Avatars/Sales/Thumb/'+item.image">
-							<img style="max-width: 50px; max-height: 50px;" *ngIf="!item.image"
-								[src]="'/assets/img/avatars/admin.png'">
-							<div>
-								<h2 type="submit" (click)="view_msg(i)">{{item.salesName}}</h2>
-								<h3 *ngIf="!item.isonline">
-									<span class="status orange"></span>
-									offline
-								</h3>
-								<h3 *ngIf="item.isonline">
-									<span class="status green"></span>
-									online
-								</h3>
-
-							</div>
-						</li>
+						<li id="status-online" class="active"><span class="status-circle"></span> <p>Online</p></li>
+						<li id="status-away"><span class="status-circle"></span> <p>Away</p></li>
+						<li id="status-busy"><span class="status-circle"></span> <p>Busy</p></li>
+						<li id="status-offline"><span class="status-circle"></span> <p>Offline</p></li>
 					</ul>
-				</aside>
-
-
-				<!-- <div class="animated fadeIn">
-					<div class="row">
-					  <div class="col-md-12">
-						<div class="card"> -->
-
-				<main>
-
-					<header style="height: 90px;padding-left: 24px;">
-						<i class="fa fa-arrow-left" style="margin-top: 14px; margin-right: 16px; " *ngIf="!isShow"
-							(click)="toggleDisplay()" aria-hidden="true"></i>
-						<i class="fa fa-arrow-right" style="margin-top: 14px; margin-right: 16px;" *ngIf="isShow"
-							(click)="toggleDisplay()" aria-hidden="true"></i>
-
-						<img class="real-image" *ngIf="this.salesDetails[this.ind].image"
-							[src]="'http://localhost:55627/Documents/Avatars/Sales/Thumb/'+this.salesDetails[this.ind].image"
-							alt="">
-						<img class="no-image " *ngIf="!this.salesDetails[this.ind].image"
-							[src]="'/assets/img/avatars/admin.png'">
-
-						<div style="margin-top: 16px;">
-							<h2>{{this.salesDetails[this.ind].salesName}}</h2>
-							<!-- <h3>already 1902 messages</h3> -->
-						</div>
-						<!-- <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_star.png" alt=""> -->
-					</header>
-
-					<ul id="chat" style="height: 315px;">
-						<li class="me" *ngFor="let chat of chatDetails;let i=index;">
-							<div *ngIf="chat.createdby==this.chat.adminId">
-								<!-- <h2 hidden >{{this.chat.createddate}} </h2> -->
-								<div class="entete">
-									<h2>{{this.chat.adminname}} </h2>
-									<span class="status blue"></span>
-								</div>
-								<!-- <div class="triangle"></div> -->
-								<div class="message">
-									{{this.chat.msg}}
-								</div>
-								<div>
-									<!-- <h2 style="color: black;">{{this.chat.createdtime}}</h2> -->
-									<h2 style="color: black;">{{this.chat.createdon}}</h2>
-								</div>
-							</div>
-
-							<div *ngIf="chat.createdby==this.chat.salesId" style="width: 119px;">
-								<div class="entete">
-									<span class="status green"></span>
-									<h2>{{this.chat.salesname}} </h2>
-
-								</div>
-								<div class="sales"></div>
-								<div class="message" style="background-color: #28a745;">
-									{{this.chat.msg}}
-								</div>
-								<div>
-									<!-- <h2 style="color: black;">{{this.chat.createdtime}}</h2> -->
-									<h2 style="color: black;">{{this.chat.createdon}}</h2>
-								</div>
-							</div>
-
-						</li>
-					</ul>
-					<!-- <div class="card-footer"> -->
-					<footer style="height: 121px; padding-bottom: 18px;">
-						<!-- <div class="card-body table-responsive"> -->
-						<div class="form-inline md-form mr-auto mb-4">
-							<textarea id="msg" name="msg" [(ngModel)]="chat.msg" style="width: 366px;"
-								class="form-control" placeholder="Type your message"></textarea>
-							<!-- <textarea id="msg" name="msg" [(ngModel)]="chat.msg" style="max-width: max-content;"
-								class="form-control" placeholder="Type your message"></textarea> -->
-							<button style="margin-left: 32px;" class='btn btn-success' type="button"
-								(click)="send_msg(this.salesDetails[this.ind].id)"><i class="fa fa-send"
-									aria-hidden="true"></i></button>
-						</div>
-						<!-- </div> -->
-						<!-- <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_picture.png" alt="">
-			<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_file.png" alt=""> -->
-
-					</footer>
-					<!-- </div> -->
-				</main>
-				<!-- </div>
-</div>
-</div>
-</div> -->
-
-
+				</div>
+				<div id="expanded">
+					<label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true"></i></label>
+					<input name="twitter" type="text" value="mikeross" />
+					<label for="twitter"><i class="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
+					<input name="twitter" type="text" value="ross81" />
+					<label for="twitter"><i class="fa fa-instagram fa-fw" aria-hidden="true"></i></label>
+					<input name="twitter" type="text" value="mike.ross" />
+				</div> -->
 			</div>
-
+		</div>
+		<div id="search">
+			<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
+			<input type="text" (input)="onsearch()" [(ngModel)]="search_" placeholder="Search contacts..." />
 
 		</div>
+		<div id="contacts">
+			<ul style="padding-left: 0px;">
+				<li class="contact" *ngFor="let item of salesDetails ;let i=index;">
+					<div class="wrap" (click)="msg_status();selected_sales_id(i);">
+						<!-- <span class="contact-status online"></span> -->
+						<h3 *ngIf="!item.isonline">
+							<span class="contact-status busy"></span>
+						</h3>
+						<h3 *ngIf="item.isonline">
+							<span class="contact-status online"></span>
+						</h3>
+
+						<img style="max-width: 50px; max-height: 50px;" *ngIf="item.image"
+							[src]="'http://localhost:55627/Documents/Avatars/Sales/Thumb/'+item.image">
+						<img style="max-width: 50px; max-height: 50px;" *ngIf="!item.image"
+							[src]="'/assets/img/avatars/admin.png'">
+
+						<div class="meta">
+							<p class="name">{{item.salesName}}</p>
+							<!-- <p class="preview">You just got LITT up, Mike.</p> -->
+						</div>
+					</div>
+				</li>
+
+
+
+
+
+			</ul>
+		</div>
+		<div id="bottom-bar">
+			<!-- <button id="addcontact"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Add
+					contact</span></button>
+			<button id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Settings</span></button> -->
+		</div>
 	</div>
+
+
+	<div class="content">
+		<div class="contact-profile">
+			<img class="real-image" *ngIf="this.salesDetails[this.ind].image"
+				[src]="'http://localhost:55627/Documents/Avatars/Sales/Thumb/'+this.salesDetails[this.ind].image"
+				alt="">
+			<img class="no-image " *ngIf="!this.salesDetails[this.ind].image" [src]="'/assets/img/avatars/admin.png'">
+
+			<p>{{this.salesDetails[this.ind].salesName}}</p>
+
+			<div class="social-media" (click)="Status_info(status_info)" data-toggle="modal" >
+				<i class="fa fa-info-circle" aria-hidden="true"></i>
+				<!-- <i class="fa fa-facebook" aria-hidden="true"></i>
+				<i class="fa fa-twitter" aria-hidden="true"></i>
+				<i class="fa fa-instagram" aria-hidden="true"></i> -->
+			</div>
+		</div>
+		
+
+		<div class="messages">
+			<ul *ngFor="let chats of chatDetails;let i of index;">
+				<!-- <span >{{chats.createdon}}  </span>  -->
+				<li class="replies"
+					*ngIf="(this.selected_salesid == chats.senderId)  && (this.senderId == chats.receiverId ) && (this.selected_salesid == chats.createdby)">
+					<img class="real-image" *ngIf="this.salesDetails[this.ind].image"
+						[src]="'http://localhost:55627/Documents/Avatars/Sales/Thumb/'+this.salesDetails[this.ind].image"
+						alt="">
+					<img class="no-image " *ngIf="!this.salesDetails[this.ind].image"
+						[src]="'/assets/img/avatars/admin.png'">
+
+					<button [hidden]="!isreceiveddelete" (click)="onDelete(chats.id)" class="close setdelete"
+						style="float: left;" type="button">
+						<i class="fa fa-trash" aria-hidden="true"> </i>
+					</button>
+					<div>
+						<p (click)="Delete_received()"> {{chats.msg}} 
+						<!-- <i class="fa fa-check-double" aria-hidden="true"></i> -->
+						</p>
+					</div>
+					<!-- <span style="font-size: 13px;float: left;color: black;margin-left: 40px;">{{chats.createdon.slice(11)}}</span> -->
+					<span style="font-size: 13px;float: left;color: black;margin-left: 40px;">{{chats.createdon}}</span>
+
+					<!-- <div>
+						<h6 style="font-size: smaller;	color: black; margin-left: 38px;">{{chats.createdon.slice(11)}}</h6>
+					</div> -->
+				</li>
+				<li class="sent"
+					*ngIf="(this.user.id == chats.senderId) && (this.selected_salesid == chats.receiverId) && (this.user.id == this.chats.createdby)">
+
+					<img id="profile-img" [src]="'http://localhost:55627/Documents/Avatars/Admin/Thumb/'+avatar.image"
+						*ngIf="avatar.image" class="img-avatar online" />
+					<img id="profile-img" [src]="'/assets/img/avatars/admin.png'" *ngIf="!avatar.image"
+						class="img-avatar online" />
+
+					<button [hidden]="!issentdelete" (click)="onDelete(chats.id)" class="close setdelete"
+						style="float: right;" type="button">
+						<i class="fa fa-trash" aria-hidden="true"> </i>
+					</button>
+					<div>
+						<p (click)="Delete_sent()">{{chats.msg}}
+
+                        <!-- Sent  - Single tick gray-->
+						<i *ngIf="chats.status == 0 && !chats.seen" class="fa fa-check" aria-hidden="true" style="color: #6c757d;"></i>
+						<!-- Received - Double tick gray -->
+						<i *ngIf="chats.status == 1 && !chats.seen" class="fa fa-check" aria-hidden="true" style="color: #6c757d;"></i>
+						<i *ngIf="chats.status == 1 && !chats.seen " class="fa fa-check" aria-hidden="true" style="color: #6c757d;"></i>
+                         <!-- Read  Double - tick black-->
+						<i *ngIf="chats.seen" class="fa fa-check" aria-hidden="true" style="color: #000000;"></i>
+						<i *ngIf="chats.seen" class="fa fa-check" aria-hidden="true" style="color: #000000;"></i>
+
+						 </p>
+					</div>
+					<!-- <span style="font-size: 13px;	float: right;	color: black;">{{chats.createdon.slice(11)}}</span> -->
+					<span style="font-size: 13px;float: left;color: black;margin-left: 40px;">{{chats.createdon}}</span>
+
+					<!-- <div>
+						<h6 style=" font-size: smaller;	color: black; margin-left: 38px;">{{chats.createdon.slice(11)}}</h6>
+					</div> -->
+				</li>
+			</ul>
+
+			<ul *ngFor="let msg of messages;">
+				<!-- <li class="replies" *ngIf="msg.type == 'received'"> -->
+				<li class="replies" *ngIf="msg.type == 'received' && msg.senderId == this.salesDetails[this.ind].id">
+					<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+					<p> {{msg.message}} </p>
+					<span class="time_date"> {{msg.date | date:'medium'}} </span>
+				</li>
+				<li class="sent"
+					*ngIf="msg.type == 'sent' && msg.senderId == this.senderId && msg.receiverId == this.salesDetails[this.ind].id">
+					<img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+					<p>{{msg.message}} </p>
+					<i class="fa fa-check" aria-hidden="true" style="color: #6c757d;"></i>
+					<span class="time_date"> {{msg.date | date:'medium'}}</span>
+				</li>
+			</ul>
+		</div>
+
+
+		<div class="message-input">
+			<div class="wrap">
+				<!-- <input type="text" [value]="txtMessage" (input)="txtMessage=$event.target.value"
+					(keydown.enter)="sendMessage(this.salesDetails[this.ind].id);view_msg(this.salesDetails[this.ind].id)"
+					placeholder="Write your message..." /> -->
+				<input type="text" [value]="txtMessage" (input)="txtMessage=$event.target.value"
+					(keydown.enter)="sendMessage(this.salesDetails[this.ind].id)" placeholder="Write your message..." />
+				<i class="fa fa-paperclip attachment" aria-hidden="true"></i>
+				<button class="submit" (click)="sendMessage(this.salesDetails[this.ind].id)"><i
+						class="fa fa-paper-plane" aria-hidden="true"></i></button>
+			</div>
+		</div>
+	</div>
+
+	
+
 </div>
+
+
+      <!-- <div class="dropdown-menu dropdown-menu-right" [hidden]="!status_info" aria-labelledby="simple-dropdown"> -->
+ <!-- <div id="status-options" [hidden]="!status_info" style="background-color:white;max-width: fit-content;">
+
+					<ul>
+						<li id="status-online" class="active"><i class="fa fa-check" aria-hidden="true" style="color: #6c757d;"></i> <p>Sent</p></li>
+						<li id="status-away"><i class="fa fa-check" aria-hidden="true" style="color: #6c757d;"></i>
+						<i class="fa fa-check" aria-hidden="true" style="color: #6c757d;"></i> <p>Delivered</p></li>
+						<li id="status-busy"><i class="fa fa-check" aria-hidden="true" style="color: #000000;"></i>
+						<i class="fa fa-check" aria-hidden="true" style="color: #000000;"></i> <p>Read</p></li>
+					</ul>
+  </div> -->
+
+
+
+
+
+<ng-template #status_info let-modal>
+          <div class="col-md-14">
+            <div class="card-group">
+              <div class=" p-2">
+                <div class="card-body">
+                  <div >
+					<!-- <ul> -->
+					<div  class="form-inline">
+					<i class="fa fa-check" aria-hidden="true" style="color: #6c757d;margin-right: 25px;"></i>
+					 <p>Sent</p>
+					</div>
+						
+						<div  class="form-inline">
+						<i class="fa fa-check" aria-hidden="true" style="color: #6c757d;"></i>
+						<i class="fa fa-check" aria-hidden="true" style="color: #6c757d;margin-right: 12px;"></i> <p>Delivered</p>
+						</div>
+						
+						<div  class="form-inline">
+						<i class="fa fa-check" aria-hidden="true" style="color: #000000;"></i>
+						<i class="fa fa-check" aria-hidden="true" style="color: #000000; margin-right: 12px;"></i> <p>Read</p>
+						</div>
+					<!-- </ul> -->
+                 </div>
+                </div>
+              </div>
+            </div>
+          </div>
+</ng-template>

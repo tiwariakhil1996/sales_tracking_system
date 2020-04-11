@@ -64,6 +64,7 @@ import { SalesRegisterComponent } from './admin/sales-register/sales-register.co
 import { ResetPasswordSalesComponent } from './sales/reset-password-sales/reset-password-sales.component';
 import { ForgotPasswordSalesComponent } from './sales/forgot-password-sales/forgot-password-sales.component';
 import { AgmDirectionModule } from 'agm-direction';
+import { ChattingService } from './service/chatting.service';
 // import { ChatComponent } from './admin/chat/chat.component';
 
 @NgModule({
@@ -126,7 +127,8 @@ import { AgmDirectionModule } from 'agm-direction';
   //   useClass: HashLocationStrategy
   // }],
   // schemas:  [ CUSTOM_ELEMENTS_SCHEMA ],
-  providers: [],
-  bootstrap: [ AppComponent ]
+  // providers: [],
+  bootstrap: [ AppComponent ],
+  providers: [ChattingService]
 })
 export class AppModule { }

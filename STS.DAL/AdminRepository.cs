@@ -88,23 +88,23 @@ namespace STS.DAL
         //    }
         //}
 
-        public List<ChatModel> getchats(ChatModel model)
-        {
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-                TranStatus transaction = new TranStatus();
-                DynamicParameters parameter = new DynamicParameters();
-                parameter.Add("@AdminID", model.AdminId);
-                parameter.Add("@SalesId", model.SalesId);
+        //public List<ChatModel> getchats(ChatModel model)
+        //{
+        //    using (var connection = new SqlConnection(ConnectionString))
+        //    {
+        //        connection.Open();
+        //        TranStatus transaction = new TranStatus();
+        //        DynamicParameters parameter = new DynamicParameters();
+        //        parameter.Add("@AdminID", model.AdminId);
+        //        parameter.Add("@SalesId", model.SalesId);
 
-                //parameter.Add("@RowCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
-                var result = connection.Query<ChatModel>("getchats", parameter, commandType: CommandType.StoredProcedure);
-                //RowCount = parameter.Get<int>("@RowCount");
-                return result.ToList();
+        //        //parameter.Add("@RowCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
+        //        var result = connection.Query<ChatModel>("getchats", parameter, commandType: CommandType.StoredProcedure);
+        //        //RowCount = parameter.Get<int>("@RowCount");
+        //        return result.ToList();
 
-            }
-        }
+        //    }
+        //}
 
         //public async Task<TranStatus> getchat(int Id, ChatModel model)
         //{

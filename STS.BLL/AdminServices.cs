@@ -81,14 +81,14 @@ namespace STS.BLL.Service
         }
 
 
-        public Task<TranStatus> sendmessage(ChatModel model)
-        {
-            using (adminRepository = new AdminRepository())
-            {
-                return adminRepository.sendmessage(model);
+        //public Task<TranStatus> sendmessage(ChatModel model)
+        //{
+        //    using (adminRepository = new AdminRepository())
+        //    {
+        //        return adminRepository.sendmessage(model);
 
-            }
-        }
+        //    }
+        //}
 
         //public Task<List<TranStatus>> getchats(int Id, ChatModel model)
         //{
@@ -107,13 +107,13 @@ namespace STS.BLL.Service
         //    }
         //}
 
-        public List<ChatModel> getchats(ChatModel model)
-        {
-            using (adminRepository = new AdminRepository())
-            {
-                return adminRepository.getchats(model);
-            }
-        }
+        //public List<ChatModel> getchats(ChatModel model)
+        //{
+        //    using (adminRepository = new AdminRepository())
+        //    {
+        //        return adminRepository.getchats(model);
+        //    }
+        //}
 
 
     }
