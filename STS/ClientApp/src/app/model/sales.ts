@@ -14,7 +14,7 @@ export class salesregisterModel {
     address: string;
     password: string;
     cpassword: string;
-
+    isonline: boolean;
     isActive: boolean;
     createdby: number;
 

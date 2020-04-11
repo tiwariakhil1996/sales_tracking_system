@@ -9,8 +9,10 @@ import { ChatRoutingModule } from './chat-routing.module';
 import { TabsModule } from 'ngx-bootstrap';
 import { AppComponent } from '../../app.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { ChattingService } from '../../service/chatting.service';
 // import { PipeModule }    from './tools/PipeModule';
 // import {Pipe,PipeTransform} from "@angular/core";
+// import { ToastrModule } from 'ngx-toastr';
 
 // Angular
 
@@ -23,11 +25,17 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     // PipeModule.forRoot(),
     // Pipe,
     // PipeTransform,
+  //   ToastrModule.forRoot({
+  //   timeOut: 10000,
+  //   positionClass: 'toast-bottom-right',
+  //   preventDuplicates: true
+  // }),
     ChatRoutingModule
   ],
   declarations: [
     ChatComponent
-  ]
+  ],
+  providers: [ChattingService]
 
 
 

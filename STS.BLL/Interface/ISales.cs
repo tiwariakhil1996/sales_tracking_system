@@ -10,6 +10,7 @@ namespace STS.BLL.Interface
     {
         //Register
         Task<TranStatus> RegisterSales(SalesModel model);
+        //Task<TranStatus> SalesLogout(SalesModel model);
 
 
         //Login
@@ -24,6 +25,9 @@ namespace STS.BLL.Interface
 
         //Change Status Sales
         Task<TranStatus> ChangeStatusSales(int id);
+
+        // SalesLogout
+        Task<TranStatus> SalesLogout(int id);
 
         //Display
        Task<List<SalesListModel>> RegisteredSalesList();
@@ -58,6 +62,7 @@ namespace STS.BLL.Interface
         Task<List<SalesList_DropdownModel>> SalesList_dropdown(SalesList_DropdownModel model);
 
         Task<Tuple<List<ChatModel>, TranStatus>> getsaleschats(ChatModel model);
+        Task<Tuple<List<StatusModel>, TranStatus>> getadminstatus(StatusModel model);
 
     }
 }

@@ -45,12 +45,7 @@ export const navItems: INavData[] = [
   {
     name: 'Chat',
     url: '/admin/chat',
-    icon: 'icon-notebook'
-  },
-  {
-    name: 'Chats',
-    url: '/admin/chats',
-    icon: 'icon-notebook'
+    icon: 'icon-screen-smartphone'
   },
 
   {

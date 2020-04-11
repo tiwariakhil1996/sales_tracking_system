@@ -88,23 +88,23 @@ namespace STS.DAL
         //    }
         //}
 
-        public List<ChatModel> getchats(ChatModel model)
-        {
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-                TranStatus transaction = new TranStatus();
-                DynamicParameters parameter = new DynamicParameters();
-                parameter.Add("@AdminID", model.AdminId);
-                parameter.Add("@SalesId", model.SalesId);
+        //public List<ChatModel> getchats(ChatModel model)
+        //{
+        //    using (var connection = new SqlConnection(ConnectionString))
+        //    {
+        //        connection.Open();
+        //        TranStatus transaction = new TranStatus();
+        //        DynamicParameters parameter = new DynamicParameters();
+        //        parameter.Add("@AdminID", model.AdminId);
+        //        parameter.Add("@SalesId", model.SalesId);
 
-                //parameter.Add("@RowCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
-                var result = connection.Query<ChatModel>("getchats", parameter, commandType: CommandType.StoredProcedure);
-                //RowCount = parameter.Get<int>("@RowCount");
-                return result.ToList();
+        //        //parameter.Add("@RowCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
+        //        var result = connection.Query<ChatModel>("getchats", parameter, commandType: CommandType.StoredProcedure);
+        //        //RowCount = parameter.Get<int>("@RowCount");
+        //        return result.ToList();
 
-            }
-        }
+        //    }
+        //}
 
         //public async Task<TranStatus> getchat(int Id, ChatModel model)
         //{
@@ -178,6 +178,27 @@ namespace STS.DAL
             }
         }
 
+
+        // AdminLogout
+
+        public async Task<TranStatus> AdminLogout(int id)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+                TranStatus transaction = new TranStatus();
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@Userid", id);
+
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 500);
+                parameter.Add("@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                await connection.QueryAsync("AdminLogout", parameter, commandType: CommandType.StoredProcedure);
+                transaction.returnMessage = parameter.Get<string>("@Message");
+                transaction.code = parameter.Get<int>("@Code");
+                return transaction;
+
+            }
+        }
 
         //UpdateAdminProfiel
         public async Task<Tuple<List<updateProfileModel>, TranStatus>> updateAdminProfile(updateProfileModel model)

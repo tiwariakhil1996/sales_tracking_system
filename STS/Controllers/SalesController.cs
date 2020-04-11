@@ -67,6 +67,26 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
+        //[HttpPost]
+        //[Route("SalesLogout")]
+        //public async Task<IActionResult> SalesLogout([FromBody]SalesModel model)
+        //{
+        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
+        //    HttpStatusCode statusCode = HttpStatusCode.OK;
+        //    TranStatus transaction = new TranStatus();
+        //    try
+        //    {
+        //        transaction = await isales.SalesLogout(model);
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        transaction = CommonHelper.TransactionErrorHandler(ex);
+        //        statusCode = HttpStatusCode.BadRequest;
+        //    }
+        //    dctData.Add("Status", transaction);
+        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        //}
 
         //UpdateSalesProfile
         [HttpPost]
@@ -126,6 +146,29 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
+        // SalesLogout
+
+        [HttpPut]
+        [Route("SalesLogout/{Id}")]
+        public async Task<IActionResult> SalesLogout(int Id)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+
+                transaction = await isales.SalesLogout(Id);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
 
         //Change Status 
 
@@ -380,6 +423,28 @@ namespace STS.Controllers
                 var chatDetails = result.Item1;
                 transaction = result.Item2;
                 dctData.Add("getsaleschats", chatDetails);
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
+
+        [HttpPost]
+        [Route("getadminstatus")]
+        public async Task<IActionResult> getadminstatus([FromBody]StatusModel model)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            try
+            {
+                var result = await isales.getadminstatus(model);
+                var chatDetails = result.Item1;
+                transaction = result.Item2;
+                dctData.Add("getadminstatus", chatDetails);
             }
             catch (Exception ex)
             {

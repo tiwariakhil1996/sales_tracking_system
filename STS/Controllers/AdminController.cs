@@ -91,7 +91,29 @@ namespace STS.Controllers
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
 
+        // AdminLogout
 
+        [HttpPut]
+        [Route("AdminLogout/{Id}")]
+        public async Task<IActionResult> AdminLogout(int Id)
+        {
+            Dictionary<String, Object> dctData = new Dictionary<string, object>();
+            HttpStatusCode statusCode = HttpStatusCode.OK;
+            TranStatus transaction = new TranStatus();
+            try
+            {
+
+                transaction = await iadmin.AdminLogout(Id);
+
+            }
+            catch (Exception ex)
+            {
+                transaction = CommonHelper.TransactionErrorHandler(ex);
+                statusCode = HttpStatusCode.BadRequest;
+            }
+            dctData.Add("Status", transaction);
+            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        }
 
         //UpdateAdminProfile
         [HttpPost]
@@ -147,27 +169,27 @@ namespace STS.Controllers
         }
 
 
-        [HttpPost]
-        [Route("sendmessage")]
-        public async Task<IActionResult> sendmessage([FromBody] ChatModel model)
-        {
-            Dictionary<String, Object> dctData = new Dictionary<string, object>();
-            HttpStatusCode statusCode = HttpStatusCode.OK;
-            TranStatus transaction = new TranStatus();
-            try
-            {
+        //[HttpPost]
+        //[Route("sendmessage")]
+        //public async Task<IActionResult> sendmessage([FromBody] ChatModel model)
+        //{
+        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
+        //    HttpStatusCode statusCode = HttpStatusCode.OK;
+        //    TranStatus transaction = new TranStatus();
+        //    try
+        //    {
 
-                transaction = await iadmin.sendmessage(model);
+        //        transaction = await iadmin.sendmessage(model);
 
-            }
-            catch (Exception ex)
-            {
-                transaction = CommonHelper.TransactionErrorHandler(ex);
-                statusCode = HttpStatusCode.BadRequest;
-            }
-            dctData.Add("Status", transaction);
-            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        transaction = CommonHelper.TransactionErrorHandler(ex);
+        //        statusCode = HttpStatusCode.BadRequest;
+        //    }
+        //    dctData.Add("Status", transaction);
+        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        //}
 
 
         //[HttpPost]
@@ -217,28 +239,28 @@ namespace STS.Controllers
         //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         //}
 
-        [HttpPost]
-        [Route("getchats")]
-        public IActionResult getchats([FromBody]ChatModel model)
-        {
-            TranStatus transaction = new TranStatus();
-            Dictionary<String, Object> dctData = new Dictionary<string, object>();
-            HttpStatusCode statusCode = HttpStatusCode.OK;
-            try
-            {
-                List<ChatModel> getchatLists = new List<ChatModel>();
-                getchatLists = iadmin.getchats(model);
+        //[HttpPost]
+        //[Route("getchats")]
+        //public IActionResult getchats([FromBody]ChatModel model)
+        //{
+        //    TranStatus transaction = new TranStatus();
+        //    Dictionary<String, Object> dctData = new Dictionary<string, object>();
+        //    HttpStatusCode statusCode = HttpStatusCode.OK;
+        //    try
+        //    {
+        //        List<ChatModel> getchatLists = new List<ChatModel>();
+        //        getchatLists = iadmin.getchats(model);
 
-                dctData.Add("getchats", getchatLists);
-            }
-            catch (Exception ex)
-            {
-                transaction = CommonHelper.TransactionErrorHandler(ex);
-                statusCode = HttpStatusCode.BadRequest;
-            }
-            dctData.Add("Status", transaction);
-            return this.StatusCode(Convert.ToInt32(statusCode), dctData);
-        }
+        //        dctData.Add("getchats", getchatLists);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        transaction = CommonHelper.TransactionErrorHandler(ex);
+        //        statusCode = HttpStatusCode.BadRequest;
+        //    }
+        //    dctData.Add("Status", transaction);
+        //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
+        //}
 
     }
 }

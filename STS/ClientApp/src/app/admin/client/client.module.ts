@@ -9,6 +9,7 @@ import { AddclientComponent } from './addclient/addclient.component';
 import { TooltipModule } from 'ngx-bootstrap';
 import { AgmCoreModule } from '@agm/core';
 
+
 // Angular
 
 @NgModule({
@@ -28,5 +29,6 @@ import { AgmCoreModule } from '@agm/core';
     ViewclientComponent,
     AddclientComponent
   ]
+  // providers: [ChattingService]
 })
 export class ClientModule { }

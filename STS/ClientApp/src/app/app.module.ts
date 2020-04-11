@@ -64,7 +64,8 @@ import { from } from 'rxjs';
 // import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password.component';
 import { ForgotPasswordSalesComponent } from './sales/forgot-password-sales/forgot-password-sales.component';
-// import { AgmDirectionModule } from 'agm-direction';
+import { AgmDirectionModule } from 'agm-direction';
+import { ChattingService } from './service/chatting.service';
 // import { ChatComponent } from './admin/chat/chat.component';
 import { ResetPasswordSalesComponent } from './sales/reset-password-sales/reset-password-sales.component';
 
@@ -139,8 +140,9 @@ import { ResetPasswordSalesComponent } from './sales/reset-password-sales/reset-
   //   useClass: HashLocationStrategy
   // }],
   // schemas:  [ CUSTOM_ELEMENTS_SCHEMA ],
-  providers: [],
-  bootstrap: [AppComponent]
+  // providers: [],
+  bootstrap: [ AppComponent ],
+  providers: [ChattingService]
 })
 export class AppModule { }
 

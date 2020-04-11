@@ -3,6 +3,7 @@
     //Register
     public partial class SalesModel
     {
+        public int Userid { get; set; }
         public string SalesName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
@@ -32,6 +33,7 @@
         public decimal Longitude { get; set; }
         public int UserType { get; set; }
         public int Createdby { get; set; }
+        public bool Isonline { get; set; }
 
     }
 
@@ -74,6 +76,7 @@
         public string Adharcard { get; set; }
         public string Address { get; set; }
         public bool IsActive { get; set; }
+        public bool Isonline { get; set; }
         public int UserId { get; set; }
 
 

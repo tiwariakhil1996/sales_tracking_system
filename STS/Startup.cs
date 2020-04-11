@@ -11,6 +11,7 @@ using STS.BLL.Service;
 
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using STS.Hubs;
 
 namespace STS
 {
@@ -65,7 +66,8 @@ namespace STS
             services.AddControllers()
                 .AddNewtonsoftJson();
 
- 
+            // ---------  For SinglR  ---------
+            services.AddSignalR();
 
             //Database Connectivity
             STSSetting.ConnectionString = Configuration.GetSection("ConnectionString:STS").Value;
@@ -104,6 +106,7 @@ namespace STS
             services.AddSingleton<ICountry_State_City, Country_State_CityServices>();
             services.AddSingleton<IMail, MailServices>();
             services.AddSingleton<IResetPassword, ResetPasswordServices>();
+            services.AddSingleton<IChat, ChatServices>();
 
         }
 
@@ -132,6 +135,14 @@ namespace STS
                         Path.Combine(Directory.GetCurrentDirectory(), "Documents")),
                         RequestPath = "/Documents"
             });
+
+            // ---------  For SinglR  ---------
+            app.UseSignalR(options =>
+            {
+                options.MapHub<MessageHub>("/MessageHub");
+            });
+             
+            // -------------------------------
 
             if (!env.IsDevelopment())
             {

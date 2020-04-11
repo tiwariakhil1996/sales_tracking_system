@@ -33,6 +33,16 @@ namespace STS.BLL.Service
         }
 
 
+        // AdminLogout
+
+        public async Task<TranStatus> AdminLogout(int id)
+        {
+            using (adminRepository = new AdminRepository())
+            {
+                return await adminRepository.AdminLogout(id);
+            }
+        }
+
         //UpdateAdminProfile
         //public Task<TranStatus> updateAdminProfile(updateProfileModel model)
         //{
@@ -70,14 +80,14 @@ namespace STS.BLL.Service
         }
 
 
-        public Task<TranStatus> sendmessage(ChatModel model)
-        {
-            using (adminRepository = new AdminRepository())
-            {
-                return adminRepository.sendmessage(model);
+        //public Task<TranStatus> sendmessage(ChatModel model)
+        //{
+        //    using (adminRepository = new AdminRepository())
+        //    {
+        //        return adminRepository.sendmessage(model);
 
-            }
-        }
+        //    }
+        //}
 
         //public Task<List<TranStatus>> getchats(int Id, ChatModel model)
         //{
@@ -96,13 +106,13 @@ namespace STS.BLL.Service
         //    }
         //}
 
-        public List<ChatModel> getchats(ChatModel model)
-        {
-            using (adminRepository = new AdminRepository())
-            {
-                return adminRepository.getchats(model);
-            }
-        }
+        //public List<ChatModel> getchats(ChatModel model)
+        //{
+        //    using (adminRepository = new AdminRepository())
+        //    {
+        //        return adminRepository.getchats(model);
+        //    }
+        //}
 
 
     }

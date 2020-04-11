@@ -18,6 +18,9 @@ export class registerModel {
     createdby: number;
 }
 
+export class statusModel {
+    isonline: boolean;
+}
 
 
 export class avatarModel {

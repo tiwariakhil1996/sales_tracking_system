@@ -15,6 +15,10 @@ namespace STS.BLL.Interface
         //Task<TranStatus> AdminLogin(AdminLoginModel model);
         Task<Tuple<List<AdminLoginModel>, TranStatus>> AdminLogin(AdminLoginModel model);
 
+        // AdminLogout
+        Task<TranStatus> AdminLogout(int id);
+
+
         //UpdateAdminProfile
 
         //Task<TranStatus> updateAdminProfile(updateProfileModel model);
@@ -28,13 +32,13 @@ namespace STS.BLL.Interface
         //Change Password
         Task<TranStatus> changeadminPassword(int Id, Changeadmin_passwordModel model);
 
-        Task<TranStatus> sendmessage(ChatModel model);
+        //Task<TranStatus> sendmessage(ChatModel model);
 
         //Task<TranStatus> getchats(int Id, ChatModel model);
 
         //Task<List<ChatModel>> getchats(int Id);
 
-        List<ChatModel> getchats(ChatModel model);
+        //List<ChatModel> getchats(ChatModel model);
 
 
 

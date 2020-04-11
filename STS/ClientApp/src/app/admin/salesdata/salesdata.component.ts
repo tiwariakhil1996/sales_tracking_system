@@ -139,6 +139,7 @@ export class SalesdataComponent implements OnInit {
   }
 
   SalesList(item) {
+    // this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
     this.sales.userid = this.user.id;
     // console.log(this.sales.userid);

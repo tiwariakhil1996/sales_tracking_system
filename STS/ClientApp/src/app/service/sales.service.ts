@@ -15,7 +15,10 @@ export class SalesService {
 
   SalesLoginService(data) {
     return this.http.post('/api/Sales/SalesLogin', data);
+  }
 
+  SalesLogoutService(id: number) {
+    return this.http.put('/api/Sales/SalesLogout/' + id, null);
   }
 
   UpdateSalesProfile(data) {

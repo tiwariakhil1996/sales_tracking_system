@@ -23,6 +23,16 @@ namespace STS.BLL.Service
             }
         }
 
+        // SalesLogout
+        //public Task<TranStatus> SalesLogout(SalesModel model)
+        //{
+        //    using (salesRepository = new SalesRepository())
+        //    {
+        //        return salesRepository.SalesLogout(model);
+
+        //    }
+        //}
+
 
         // Login
 
@@ -72,6 +82,15 @@ namespace STS.BLL.Service
             }
         }
 
+        // SalesLogout
+
+        public async Task<TranStatus> SalesLogout(int id)
+        {
+            using (salesRepository = new SalesRepository())
+            {
+                return await salesRepository.SalesLogout(id);
+            }
+        }
 
         //Display
         public async Task<List<SalesListModel>> RegisteredSalesList()
@@ -172,6 +191,15 @@ namespace STS.BLL.Service
             using (salesRepository = new SalesRepository())
             {
                 return salesRepository.getsaleschats(model);
+            }
+
+        }  
+        
+        public Task<Tuple<List<StatusModel>, TranStatus>> getadminstatus(StatusModel model)
+        {
+            using (salesRepository = new SalesRepository())
+            {
+                return salesRepository.getadminstatus(model);
             }
 
         }
