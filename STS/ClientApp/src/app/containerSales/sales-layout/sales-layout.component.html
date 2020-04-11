@@ -62,13 +62,13 @@
                     <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
                       class="rounded-circle user_img_msg">
                   </div>
-                   <button [hidden]="!isreceiveddelete" (click)="onDelete(chats.id)" class="close setdelete"
-						style="float: left;margin: 0;" type="button">
-						<i class="fa fa-trash" aria-hidden="true"> </i>
-					</button>
+                  <button [hidden]="!isreceiveddelete" (click)="onDelete(chats.id)" class="close setdelete"
+                    style="float: left;margin: 0;" type="button">
+                    <i class="fa fa-trash" aria-hidden="true"> </i>
+                  </button>
                   <div class="msg_cotainer" style="max-width: 100%;" (click)="Delete_received()">
-                    <p> {{chats.msg}} 
-                  </p>
+                    <p> {{chats.msg}}
+                    </p>
                     <!-- <span class="msg_time">{{msg.date | date:'medium'}}</span> -->
                     <!-- <span class="msg_time" style="font-size: smaller;	color: black;">{{chats.createdon.slice(11)}}</span> -->
                     <span class="msg_time" style="font-size: smaller;	color: black;">{{chats.createdon}}</span>
@@ -81,32 +81,35 @@
 
                 <div class="d-flex justify-content-end mb-4"
                   *ngIf="(this.userchat.id == chats.senderId) && (this.userchat.createdby == chats.receiverId) && (this.userchat.id == this.chats.createdby)">
-                
+
                   <div class="msg_cotainer_send" style="max-width: 100%;" (click)="Delete_sent()">
-                    <p > {{chats.msg}} 
-                    	<!-- <i *ngIf="!chats.seen" class="fa fa-check" aria-hidden="true" style="color: #000000;"></i>
+                    <p> {{chats.msg}}
+                      <!-- <i *ngIf="!chats.seen" class="fa fa-check" aria-hidden="true" style="color: #000000;"></i>
 				         		<i *ngIf="chats.seen" class="fa fa-check" aria-hidden="true" style="color: #000000;"></i>
                      <i *ngIf="chats.seen" class="fa fa-check" aria-hidden="true" style="color: #000000;"></i> -->
 
                       <!-- Sent  - Single tick gray-->
-						<i *ngIf="chats.status == 0 && !chats.seen" class="fa fa-check" aria-hidden="true" style="color: #6c757d;"></i>
-						<!-- Received - Double tick gray -->
-						<i *ngIf="chats.status == 1 && !chats.seen" class="fa fa-check" aria-hidden="true" style="color: #6c757d;"></i>
-						<i *ngIf="chats.status == 1 && !chats.seen " class="fa fa-check" aria-hidden="true" style="color: #6c757d;"></i>
+                      <i *ngIf="chats.status == 0 && !chats.seen" class="fa fa-check" aria-hidden="true"
+                        style="color: #6c757d;"></i>
+                      <!-- Received - Double tick gray -->
+                      <i *ngIf="chats.status == 1 && !chats.seen" class="fa fa-check" aria-hidden="true"
+                        style="color: #6c757d;"></i>
+                      <i *ngIf="chats.status == 1 && !chats.seen " class="fa fa-check" aria-hidden="true"
+                        style="color: #6c757d;"></i>
 
-                         <!-- Read  Double - tick black-->
-						<i *ngIf="chats.seen" class="fa fa-check" aria-hidden="true" style="color: #000000;"></i>
-						<i *ngIf="chats.seen" class="fa fa-check" aria-hidden="true" style="color: #000000;"></i>
+                      <!-- Read  Double - tick black-->
+                      <i *ngIf="chats.seen" class="fa fa-check" aria-hidden="true" style="color: #000000;"></i>
+                      <i *ngIf="chats.seen" class="fa fa-check" aria-hidden="true" style="color: #000000;"></i>
                     </p>
                     <!-- <span class="msg_time">{{msg.date | date:'medium'}}</span> -->
                     <!-- <span class="msg_time" style="font-size: smaller;	color: black;">{{chats.createdon.slice(11)}}</span> -->
                     <span class="msg_time" style="font-size: smaller;	color: black;">{{chats.createdon}}</span>
                   </div>
 
-          <button [hidden]="!issentdelete" (click)="onDelete(chats.id)" class="close setdelete"
-						style="float: right; margin: 0;" type="button">
-						<i class="fa fa-trash" aria-hidden="true"> </i>
-					</button>
+                  <button [hidden]="!issentdelete" (click)="onDelete(chats.id)" class="close setdelete"
+                    style="float: right; margin: 0;" type="button">
+                    <i class="fa fa-trash" aria-hidden="true"> </i>
+                  </button>
 
                   <div class="img_cont_msg">
                     <img [src]="'/assets/img/avatars/admin.png'" class="rounded-circle user_img_msg">

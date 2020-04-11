@@ -1,16 +1,11 @@
-import { SalesRegisterComponent } from './admin/sales-register/sales-register.component';
-import { ResetPasswordComponent } from './admin/reset-password/reset-password.component';
-
-// this is Angular Google map Libraries Import this...
-import { AgmCoreModule } from '@agm/core';
-
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -62,19 +57,16 @@ import { RouterModule } from '@angular/router';
 import { from } from 'rxjs';
 
 // import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { AgmCoreModule } from '@agm/core';
 import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './admin/reset-password/reset-password.component';
+import { SalesRegisterComponent } from './admin/sales-register/sales-register.component';
+import { ResetPasswordSalesComponent } from './sales/reset-password-sales/reset-password-sales.component';
 import { ForgotPasswordSalesComponent } from './sales/forgot-password-sales/forgot-password-sales.component';
-import { AgmDirectionModule } from 'agm-direction';
 import { ChattingService } from './service/chatting.service';
 // import { ChatComponent } from './admin/chat/chat.component';
-import { ResetPasswordSalesComponent } from './sales/reset-password-sales/reset-password-sales.component';
-
 
 @NgModule({
-
-  // This is google map libraries
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -88,22 +80,17 @@ import { ResetPasswordSalesComponent } from './sales/reset-password-sales/reset-
     AppSidebarModule,
     // PaginationModule,
     HttpClientModule,
-
-
-
     ModalModule.forRoot(),
     NgbModule,
-
     NgbAlertModule,
     // HttpModule,
     ReactiveFormsModule,
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-
     ToastrModule.forRoot(
       {
-        timeOut: 2000,
+        timeOut: 1000,
         positionClass: 'toast-top-right',
         preventDuplicates: false,
       }
@@ -114,11 +101,9 @@ import { ResetPasswordSalesComponent } from './sales/reset-password-sales/reset-
     TooltipModule.forRoot(),
     // AgmCoreModule.forRoot({apiKey: 'AIzaSyBFP65PChjDJ1qtdD9RgkseGbNA4YclE2g'})
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBaU6eEpioeuf9Nkzsd5N3OoJsDpVQdzEs'
+      apiKey: 'AIzaSyAgmJb337SljuWJnzPXRyMjiTSL1DWcBq8'
       // libraries: ['places']
     }),
-    // AgmMarker,
-    // TooltipModule.forRoot(),
   ],
   declarations: [
     AppComponent,
@@ -127,12 +112,12 @@ import { ResetPasswordSalesComponent } from './sales/reset-password-sales/reset-
     P500Component,
     LoginComponent,
     RegisterComponent,
+    SalesRegisterComponent,
     SalesLoginComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    SalesRegisterComponent,
+    ResetPasswordSalesComponent,
     ForgotPasswordSalesComponent,
-    ResetPasswordSalesComponent
   ],
 
   // providers: [{
@@ -141,8 +126,7 @@ import { ResetPasswordSalesComponent } from './sales/reset-password-sales/reset-
   // }],
   // schemas:  [ CUSTOM_ELEMENTS_SCHEMA ],
   // providers: [],
-  bootstrap: [ AppComponent ],
+  bootstrap: [AppComponent],
   providers: [ChattingService]
 })
 export class AppModule { }
-

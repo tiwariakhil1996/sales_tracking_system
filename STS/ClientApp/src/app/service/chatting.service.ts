@@ -23,7 +23,7 @@ export class ChattingService {
 
   private createConnection() {
     this._hubConnection = new HubConnectionBuilder()
-    .withUrl(location.origin + '/MessageHub')  
+      .withUrl(location.origin + '/MessageHub')
       .build();
   }
 

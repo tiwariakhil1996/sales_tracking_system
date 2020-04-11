@@ -1,5 +1,3 @@
-
-
 // sales register 
 export class salesregisterModel {
     id: number;
@@ -57,8 +55,6 @@ export class paginationModel {
     pageSize: number;
     pageIndex: number;
 }
-
-
 // export class profileModel {
 //     image: any;
 //     salesName: string;
