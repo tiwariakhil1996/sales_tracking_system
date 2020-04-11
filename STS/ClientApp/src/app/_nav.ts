@@ -47,10 +47,15 @@ export const navItems: INavData[] = [
     url: '/admin/chat',
     icon: 'icon-notebook'
   },
+  {
+    name: 'Chats',
+    url: '/admin/chats',
+    icon: 'icon-notebook'
+  },
 
   {
     name: 'Category',
-    url: '/admin/categornotebooktegory/viewcategory',
+    url: '/admin/category-subcategory/viewcategory',
     icon: 'icon-note',
   },
   {

@@ -8,7 +8,6 @@ using STS.Model;
 using Microsoft.AspNetCore.Mvc;
 
 
-
 namespace STS.Controllers
 {
     [Route("api/[controller]")]
@@ -92,7 +91,6 @@ namespace STS.Controllers
         }
 
 
-
         [HttpGet]
         [Route("activity_Details/{aid}")]
         public async Task<IActionResult> activity_Details(int aid)
@@ -140,7 +138,6 @@ namespace STS.Controllers
 
 
 
-
         // Display each sales List Individually
         //[HttpPost]
         //[Route("each_sales_activityList")]
@@ -163,6 +160,8 @@ namespace STS.Controllers
         //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         //}
 
+
+
         // Display each admin List Individually
         //[HttpPost]
         //[Route("each_admin_activityList")]
@@ -184,6 +183,7 @@ namespace STS.Controllers
         //    dctData.Add("Status", transaction);
         //    return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         //}
+
 
 
         [HttpPost]
@@ -212,6 +212,7 @@ namespace STS.Controllers
         }
 
 
+
         [HttpPost]
         [Route("each_sales_activityList")]
         public IActionResult each_sales_activityList([FromBody]ActivityListModel model)
@@ -236,6 +237,7 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
+
 
 
         [HttpPost]
@@ -576,6 +578,7 @@ namespace STS.Controllers
             dctData.Add("Status", transaction);
             return this.StatusCode(Convert.ToInt32(statusCode), dctData);
         }
+
 
 
         //Search Title

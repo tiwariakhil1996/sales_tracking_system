@@ -152,6 +152,10 @@ export const routes: Routes = [
         loadChildren: () => import('./admin/chat/chat.module').then(m => m.ChatModule)
       },
       {
+        path: 'chats',
+        loadChildren: () => import('./admin/chats/chats.module').then(m => m.ChatsModule)
+      },
+      {
         path: 'category-subcategory',
         loadChildren: () => import('./admin/category-subcategory/category-subcategory.module').then(m => m.CategorySubcategoryModule)
       },
@@ -205,10 +209,6 @@ export const routes: Routes = [
 
     ]
   },
-
-
-
-
 
 
   { path: '**', component: P404Component }
