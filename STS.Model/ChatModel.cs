@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace STS.Model
 {
@@ -21,7 +19,6 @@ namespace STS.Model
         public string Createdtime { get; set; }
 
         public bool Isonline { get; set; }
-
 
         public int SenderId { get; set; }
         public int SenderType { get; set; }

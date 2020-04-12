@@ -66,7 +66,7 @@ namespace STS
             services.AddControllers()
                 .AddNewtonsoftJson();
 
-            // ---------  For SinglR  ---------
+            // ---------  For SignalR Chating ---------
             services.AddSignalR();
 
             //Database Connectivity
@@ -136,7 +136,7 @@ namespace STS
                         RequestPath = "/Documents"
             });
 
-            // ---------  For SinglR  ---------
+            // ---------  For SignalR Chat ---------
             app.UseSignalR(options =>
             {
                 options.MapHub<MessageHub>("/MessageHub");
