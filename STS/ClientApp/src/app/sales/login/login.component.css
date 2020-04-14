@@ -1,14 +1,21 @@
-
-
 .bg {
-/* background-image: url("/assets/img/Images/1.jpg"); */
-background-image: url("/assets/img/wallpapers/5.jpg");
-/* background-color: darkslategrey; */
-background-size: 1536px 721px;
+  /* background-image: url("/assets/img/Images/1.jpg"); */
+  background-image: url("/assets/img/wallpapers/5.jpg");
+  /* background-color: darkslategrey; */
+  background-size: 1536px 721px;
 }
 
 
 .login-form {
-    /* background-color: lightblue; */
-    background-color: #ddc482;
+  /* background-color: lightblue; */
+  background-color: #ddc482;
 }
+
+.copyright {
+  text-align: center;
+  margin: 0 auto;
+  padding: 10px;
+  color: #999;
+  font-size: 13px;
+}
+
