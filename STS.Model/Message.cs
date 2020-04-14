@@ -15,6 +15,7 @@ namespace STS.Models
 
 
         public int senderId { get; set; }
+        public string sendername { get; set; }
         public int receiverId { get; set; }
 
     }

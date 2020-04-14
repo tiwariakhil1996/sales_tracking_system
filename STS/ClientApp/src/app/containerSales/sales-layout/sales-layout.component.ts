@@ -169,6 +169,7 @@ this.view_unreadChats();
       this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
       this.message.senderId = this.user.id;
       this.message.senderType = this.user.userType;
+      this.message.sendername = this.user.salesName;
       this.message.receiverId = this.user.createdby;
 
       this.message.clientuniqueid = this.uniqueID;
@@ -187,6 +188,7 @@ this.view_unreadChats();
 
       });
     }
+    // this.view_msg();
   }
 
   private subscribeToEvents(): void {
@@ -197,7 +199,7 @@ this.view_unreadChats();
         if (message.receiverId === this.user.id && message.senderId === this.user.createdby) {
           message.type = 'received';
           this.messages.push(message);
-          this.toastr.info(message.message, 'New Message', {
+          this.toastr.show(message.sendername + ' : '+ message.message, 'New Message', {
             // disableTimeOut: false,
             timeOut: 10000,
             positionClass: 'toast-bottom-right',
@@ -205,7 +207,7 @@ this.view_unreadChats();
             progressBar: true
             // newestOnTop: true  
           });
-
+                  // this. sendMessage();
         }
       });
     });
@@ -232,8 +234,8 @@ this.view_unreadChats();
 
 view_unreadChats() {
   this.userchat = JSON.parse(localStorage.getItem('salesLogin')) || {};
-    this.message.receiverId = this.userchat.createdby;
-    this.message.senderId = this.userchat.id;
+    this.message.receiverId = this.userchat.id;
+    this.message.senderId = this.userchat.createdby;
 
      this.chatService.unread_messages(this.message).subscribe((data: any) => {
       if (data.Status.code === 0) {

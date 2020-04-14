@@ -170,7 +170,6 @@
                 <th>Dis. (%)</th>
                 <th>Dis. Amt</th>
                 <th>Advance Paid</th>
-                <!-- <th>Pay due</th> -->
                 <th>Total</th>
               </tr>
             </thead>
@@ -178,45 +177,28 @@
               <tr *ngFor="let products of activity_productDetails;let i=index;">
                 <td>{{i+1}}</td>
                 <td>
-                  <!-- <select id="productname" name="productname" class="form-control" [(ngModel)]="products.productId">
-                    <option [ngValue]="undefined" selected>Select Product Name</option>
-                    <option *ngFor="let item of productDetails;" value={{item.id}}>{{item.productname}} </option>
-                  </select> -->
                   <label style="color: crimson;"> {{products.productname}}</label>
                 </td>
 
                 <td>
-                  <!-- <input type="text" class="form-control" id="price" name="price" [(ngModel)]="products.price"> -->
                   <label style="color: crimson;"> {{products.price}}</label>
                 </td>
                 <td>
-                  <!-- <input type="text" class="form-control" id="quantity" name="quantity"
-                    [(ngModel)]="products.quantity"> -->
                   <label style="color: crimson;"> {{products.quantity}}</label>
                 </td>
                 <td>
-                  <!-- <input type="text" class="form-control" id="amount" name="amount" [(ngModel)]="products.amount"> -->
                   <label style="color: crimson;"> {{products.amount}}</label>
                 </td>
                 <td>
-                  <!-- <input type="text" class="form-control" id="discount_per" name="discount_per"
-                    [(ngModel)]="products.discount_per"> -->
                   <label style="color: crimson;"> {{products.discount_per}}</label>
                 </td>
                 <td>
-                  <!-- <input type="text" class="form-control" id="discount_amt" name="discount_amt"
-                    [(ngModel)]="products.discount_amt"> -->
                   <label style="color: crimson;"> {{products.discount_amt}}</label>
                 </td>
                 <td>
                   <label style="color: crimson;"> {{products.advance_payment}}</label>
                 </td>
-                <!-- <td>
-                <label style="color: crimson;" #pending>  {{products.pending_amount}}</label>
-            </td> -->
                 <td>
-                  <!-- <input type="text" class="form-control" id="total_price" name="total_price"
-                    [(ngModel)]="products.total_price"> -->
                   <label style="color: crimson;"> {{products.total_price}}</label>
                 </td>
               </tr>

@@ -55,6 +55,7 @@
               <div class="card-body msg_card_body" *ngFor="let chats of chatDetails;"
                 style="background-color: slategray;">
 
+                <!-- <div class="d-flex justify-content-start mb-4" -->
                 <div class="d-flex justify-content-start mb-4"
                   *ngIf="(this.userchat.createdby == chats.senderId)  && (this.userchat.id == chats.receiverId ) && (this.userchat.createdby == chats.createdby)">
 
@@ -62,54 +63,69 @@
                     <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
                       class="rounded-circle user_img_msg">
                   </div>
-                   <button [hidden]="!isreceiveddelete" (click)="onDelete(chats.id)" class="close setdelete"
-						style="float: left;margin: 0;" type="button">
-						<i class="fa fa-trash" aria-hidden="true"> </i>
-					</button>
+                  <button [hidden]="!isreceiveddelete" (click)="onDelete(chats.id)" class="close setdelete"
+                    style="float: left;margin: 0;" type="button">
+                    <i class="fa fa-trash" aria-hidden="true"> </i>
+                  </button>
                   <div class="msg_cotainer" style="max-width: 100%;" (click)="Delete_received()">
-                    <p> {{chats.msg}} 
-                  </p>
+                    <p> {{chats.msg}}
+                    </p>
                     <!-- <span class="msg_time">{{msg.date | date:'medium'}}</span> -->
                     <!-- <span class="msg_time" style="font-size: smaller;	color: black;">{{chats.createdon.slice(11)}}</span> -->
-                    <span class="msg_time" style="font-size: smaller;	color: black;">{{chats.createdon}}</span>
+                    <!-- <span class="msg_time" style="font-size: smaller;	color: black;">{{chats.createdon}}</span> -->
+                    <div>
+                      <span
+                        *ngIf="(this.userchat.createdby == chats.senderId)  && (this.userchat.id == chats.receiverId ) && (this.userchat.createdby == chats.createdby)"
+                        class="msg_time" style="font-size: smaller;	color: black;">{{chats.createdon}}</span>
+                    </div>
+    
                   </div>
 
                   <!-- <div>
                     <h6 style="font-size: smaller;	color: black; margin-left: 38px;">{{chats.createdon.slice(11)}}</h6>
                   </div> -->
                 </div>
+               
 
                 <div class="d-flex justify-content-end mb-4"
                   *ngIf="(this.userchat.id == chats.senderId) && (this.userchat.createdby == chats.receiverId) && (this.userchat.id == this.chats.createdby)">
-                
+
                   <div class="msg_cotainer_send" style="max-width: 100%;" (click)="Delete_sent()">
-                    <p > {{chats.msg}} 
-                    	<!-- <i *ngIf="!chats.seen" class="fa fa-check" aria-hidden="true" style="color: #000000;"></i>
+                    <p> {{chats.msg}}
+                      <!-- <i *ngIf="!chats.seen" class="fa fa-check" aria-hidden="true" style="color: #000000;"></i>
 				         		<i *ngIf="chats.seen" class="fa fa-check" aria-hidden="true" style="color: #000000;"></i>
                      <i *ngIf="chats.seen" class="fa fa-check" aria-hidden="true" style="color: #000000;"></i> -->
 
-                      <!-- Sent  - Single tick gray-->
-						<i *ngIf="chats.status == 0 && !chats.seen" class="fa fa-check" aria-hidden="true" style="color: #6c757d;"></i>
-						<!-- Received - Double tick gray -->
-						<i *ngIf="chats.status == 1 && !chats.seen" class="fa fa-check" aria-hidden="true" style="color: #6c757d;"></i>
-						<i *ngIf="chats.status == 1 && !chats.seen " class="fa fa-check" aria-hidden="true" style="color: #6c757d;"></i>
 
-                         <!-- Read  Double - tick black-->
-						<i *ngIf="chats.seen" class="fa fa-check" aria-hidden="true" style="color: #000000;"></i>
-						<i *ngIf="chats.seen" class="fa fa-check" aria-hidden="true" style="color: #000000;"></i>
                     </p>
                     <!-- <span class="msg_time">{{msg.date | date:'medium'}}</span> -->
                     <!-- <span class="msg_time" style="font-size: smaller;	color: black;">{{chats.createdon.slice(11)}}</span> -->
-                    <span class="msg_time" style="font-size: smaller;	color: black;">{{chats.createdon}}</span>
+                    <div
+                      *ngIf="(this.userchat.id == chats.senderId) && (this.userchat.createdby == chats.receiverId) && (this.userchat.id == this.chats.createdby)">
+                      <span class="msg_time" style="font-size: smaller;	color: black;">{{chats.createdon}}</span>
+                      <!-- Sent  - Single tick gray-->
+                      <i *ngIf="chats.status == '0' && !chats.seen" class="fa fa-check" aria-hidden="true"
+                        style="color: #6c757d;"></i>
+                      <!-- Received - Double tick gray -->
+                      <i *ngIf="chats.status == '1' && !chats.seen" class="fa fa-check" aria-hidden="true"
+                        style="color: #6c757d;"></i>
+                      <i *ngIf="chats.status == '1' && !chats.seen " class="fa fa-check" aria-hidden="true"
+                        style="color: #6c757d;"></i>
+
+                      <!-- Read  Double - tick black-->
+                      <i *ngIf="chats.seen" class="fa fa-check" aria-hidden="true" style="color: #000000;"></i>
+                      <i *ngIf="chats.seen" class="fa fa-check" aria-hidden="true" style="color: #000000;"></i>
+                    </div>
+
                   </div>
 
-          <button [hidden]="!issentdelete" (click)="onDelete(chats.id)" class="close setdelete"
-						style="float: right; margin: 0;" type="button">
-						<i class="fa fa-trash" aria-hidden="true"> </i>
-					</button>
+                  <button [hidden]="!issentdelete" (click)="onDelete(chats.id)" class="close setdelete"
+                    style="float: right; margin: 0;" type="button">
+                    <i class="fa fa-trash" aria-hidden="true"> </i>
+                  </button>
 
                   <div class="img_cont_msg">
-                    <img [src]="'/assets/img/avatars/admin.png'" class="rounded-circle user_img_msg">
+                    <img [src]="'/assets/img/avatars/admin.png'"  class="rounded-circle user_img_msg">
                   </div>
                   <!-- <div>
                     <h6 style="font-size: smaller;	color: black; margin-left: 38px;">{{chats.createdon.slice(11)}}</h6>
@@ -127,7 +143,7 @@
                   </div>
                   <div class="msg_cotainer">
                     <p> {{msg.message}} </p>
-                    <span class="msg_time">{{msg.date | date:'medium'}}</span>
+                    <span class="msg_time" style="color: black;">{{msg.date | date:'medium'}}</span>
                   </div>
                 </div>
 
@@ -135,7 +151,7 @@
                   <div class="msg_cotainer_send">
                     <p> {{msg.message}} </p>
                     <i class="fa fa-check" aria-hidden="true" style="color: #6c757d;"></i>
-                    <span class="msg_time">{{msg.date | date:'medium'}}</span>
+                    <span class="msg_time" style="color: black;">{{msg.date | date:'medium'}}</span>
                   </div>
                   <div class="img_cont_msg">
                     <img [src]="'/assets/img/avatars/admin.png'" class="rounded-circle user_img_msg">
