@@ -67,6 +67,9 @@ export class ResetPasswordSalesComponent implements OnInit {
 
     if (this.Resetpassword.Newpassword === this.Resetpassword.Confirmpassword) {
 
+      this.Resetpassword.Newpassword= btoa(this.Resetpassword.Newpassword);
+      this.Resetpassword.Confirmpassword = btoa(this.Resetpassword.Confirmpassword);
+      
       this.resetpassword.ResetPasswordSales(this.Token, this.Resetpassword).subscribe((data: any) => {
         if (data.Status.code === 0) {
           this.toastr.success('Reset Password successfully', 'Successful', {

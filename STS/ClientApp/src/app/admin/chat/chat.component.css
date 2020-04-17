@@ -856,3 +856,15 @@ body {
     border-radius: 0.3rem;
     outline: 0;
 } */
+
+
+
+
+.badge-pill {
+  padding: 5px;
+  border-radius: 17px;
+  /* width: 120px; */
+  font-size: medium;
+  /* font-weight: normal; */
+}
+

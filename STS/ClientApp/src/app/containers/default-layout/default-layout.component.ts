@@ -135,26 +135,37 @@ export class DefaultLayoutComponent implements OnInit {
 
     if (this.changePassword.newpassword === this.changePassword.confirmpassword) {
 
+      // Encrypt Password
+      this.changePassword.oldpassword = btoa(this.changePassword.oldpassword);
+      this.changePassword.newpassword = btoa(this.changePassword.newpassword);
+      this.changePassword.confirmpassword = btoa(this.changePassword.confirmpassword);
+
       this.adminService.changePassword(id, this.changePassword).subscribe((data: any) => {
         if (data.Status.code === 0) {
           this.toastr.success('Password changed successfully', 'Successful', {
             disableTimeOut: false
           });
           this.changePassword = new changePasswordModel();
-          this.modalRef.hide();
-          // localStorage.removeItem('adminLogin');
-          // this.router.navigate(['admin/login']);
-        } else {
+        } else  
+        if (data.Status.code === 1) {
           this.toastr.warning('Old Password is incorrect', 'Warning', {
             disableTimeOut: false,
             timeOut: 2000
           });
           this.modalRef.hide();
         }
+         else
+        if (data.Status.code === 2) {
+          this.toastr.warning('Enter different password', 'Warning', {
+            disableTimeOut: false,
+            timeOut: 2000
+          });
+        }
       }, (err) => {
 
       });
-    } else {
+    } else 
+   {
       this.toastr.error('New Password & Confirm Password didnt match', 'Error', {
         disableTimeOut: false,
         timeOut: 2000

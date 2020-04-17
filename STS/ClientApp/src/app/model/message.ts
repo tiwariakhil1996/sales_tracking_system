@@ -1,6 +1,7 @@
 export class Message {
   senderId: number;
   senderType: number;
+  sendername: string;
   receiverId: number;
   clientuniqueid: string;
   type: string;

@@ -130,7 +130,10 @@ export class RegisterComponent implements OnInit {
 
       this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
       this.register.createdby = this.user.id;
-      console.log(this.register.createdby);
+
+      // Encrypt Password
+      this.register.password = btoa(this.register.password);
+      this.register.cpassword = btoa(this.register.cpassword);
 
       this.adminService.AdminRegisterService(this.register).subscribe((data: any) => {
         if (data.Status.code === 0) {

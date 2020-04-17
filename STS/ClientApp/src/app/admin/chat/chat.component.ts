@@ -41,7 +41,7 @@ export class ChatComponent implements OnInit {
   admin_msg: string;
 
   selected_salesid: number;
-unreadmessages: any;
+  unreadmessages: any;
   user = new registerModel();
 
   sales = new salesregisterModel();
@@ -49,6 +49,7 @@ unreadmessages: any;
 
   createdby: number;
   currentDate = new Date();
+// console.log(currentDate);
 
   // date: any;
 
@@ -99,11 +100,11 @@ unreadmessages: any;
     this.issentdelete = !this.issentdelete;
   }
 
-status_info = false;
+  status_info = false;
 
-// Status_info() {
-// this.status_info = !this.status_info;
-// }
+  // Status_info() {
+  // this.status_info = !this.status_info;
+  // }
 
   constructor(
     private router: Router,
@@ -129,15 +130,15 @@ status_info = false;
     // console.log( this.senderId );
     // this.selected_salesid;
     // console.log(this.selected_salesid);
-    this. view_msg();
+    this.view_msg();
   }
 
 
 
 
 
-    Status_info(status_info) {
-    this.modalService.open(status_info, {size: 'sm', backdropClass: 'light-blue-backdrop' });
+  Status_info(status_info) {
+    this.modalService.open(status_info, { size: 'sm', backdropClass: 'light-blue-backdrop' });
   }
 
 
@@ -188,7 +189,7 @@ status_info = false;
 
 
           this.selected_salesid = this.salesDetails[0].id;
-          console.log(this.selected_salesid);
+          // console.log(this.selected_salesid);
         }
 
       }
@@ -204,6 +205,7 @@ status_info = false;
 
       this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
       this.message.senderId = this.user.id;
+      this.message.sendername = this.user.username;
       this.message.senderType = this.user.userType;
       this.message.receiverId = i;
       // Transaction using singlR
@@ -241,19 +243,19 @@ status_info = false;
       this._ngZone.run(() => {
 
         // if (message.clientuniqueid !== this.uniqueID) {
-          if (message.receiverId === this.user.id) {
+        if (message.receiverId === this.user.id) {
           message.type = 'received';
           this.messages.push(message);
-
-          this.toastr.info(message.message, 'New Message', {
+           
+          this.toastr.show(message.sendername + ' : '+  message.message, 'New Message', {
             // disableTimeOut: false,
             timeOut: 10000,
             positionClass: 'toast-bottom-right',
             tapToDismiss: true,
-            closeButton:true,
-            progressBar: true    
-          }); 
+            closeButton: true,
+            progressBar: true
 
+          });
         }
       });
     });
@@ -285,21 +287,21 @@ status_info = false;
       }
     });
 
-       this.chatService.unread_messages(this.message).subscribe((data: any) => {
+    this.chatService.unread_messages(this.message).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.unread_messages) {
           this.unreadChats = data.unread_messages;
-          if(this.unreadChats.length > 0) {
-          this.unreadmessages=this.unreadChats.length;
-             this.toastr.warning(this.unreadmessages, 'Unread Messages', {
-            timeOut: 50000,
-            positionClass: 'toast-bottom-right',
-              closeButton:true
-          });
+          if (this.unreadChats.length > 0) {
+            this.unreadmessages = this.unreadChats.length;
+            this.toastr.warning(this.unreadmessages, 'Unread Messages', {
+              timeOut: 50000,
+              positionClass: 'toast-bottom-right',
+              closeButton: true
+            });
           }
         }
       }
-     });
+    });
 
   }
 
@@ -319,14 +321,14 @@ status_info = false;
       }
     });
   }
-  
+
 
   // Delete
 
   onDelete(id: number) {
     this.register = JSON.parse(localStorage.getItem('adminLogin')) || {};
-    this.chat.modifiedby=this.register.id;
-    this.chatService.deleteMsg(id,this.chat).subscribe(data => {
+    this.chat.modifiedby = this.register.id;
+    this.chatService.deleteMsg(id, this.chat).subscribe(data => {
       this.view_msg();
     });
   }

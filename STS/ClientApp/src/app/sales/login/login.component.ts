@@ -82,7 +82,14 @@ export class SalesLoginComponent implements OnInit {
     console.log(this.loginDetail.longitude);
 
 
+    // Encrypt Password
+    this.loginDetail.password = btoa(this.loginDetail.password);
+console.log(this.loginDetail.password );
+console.log(this.loginDetail.email );
+
+
     this.salesService.SalesLoginService(this.loginDetail).subscribe((data: any) => {
+
       if (data.Status.code === 0) {
         localStorage.setItem('salesLogin', JSON.stringify(data.loginDetail[0] || {}));
         // alert('Sales Login Successfully');
@@ -103,8 +110,8 @@ export class SalesLoginComponent implements OnInit {
           timeOut: 2000
         });
       }
-      
-      
+
+
       // else {
       //   this.toastr.warning('Either your username and password didnt matched or This account is temporarily blocked', 'Warning', {
       //     disableTimeOut: false,
@@ -113,30 +120,32 @@ export class SalesLoginComponent implements OnInit {
       // }
     }, (err) => {
     });
+    // this.loginDetail = new salesregisterModel();
   }
 
-    logout() {
-      // remove user from local storage to log user out
-      this.loginDetail = JSON.parse(localStorage.getItem('salesLogin')) || {};
-      let id = this.loginDetail.id;
-  
-      this.salesService.SalesLogoutService(id).subscribe((data: any) => {
-        if (data.Status.code === 0) {
-          this.toastr.success('Logged out Successfully', 'Successful', {
-            disableTimeOut: false
-          });
-  
-          localStorage.removeItem('salesLogin');
-        }
+  logout() {
+    // remove user from local storage to log user out
+    this.loginDetail = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    let id = this.loginDetail.id;
+
+    this.salesService.SalesLogoutService(id).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        this.toastr.success('Logged out Successfully', 'Successful', {
+          disableTimeOut: false
+        });
+
+        localStorage.removeItem('salesLogin');
       }
-      );
     }
+    );
+  }
 
 
 
   registerForm() {
     this.router.navigate(['/sales/register']);
   }
+
 
   forgotPassword() {
     this.router.navigate(['/sales/forgot-password-sales']);
