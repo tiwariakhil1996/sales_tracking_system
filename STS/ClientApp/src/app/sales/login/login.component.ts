@@ -84,8 +84,8 @@ export class SalesLoginComponent implements OnInit {
 
     // Encrypt Password
     this.loginDetail.password = btoa(this.loginDetail.password);
-console.log(this.loginDetail.password );
-console.log(this.loginDetail.email );
+    console.log(this.loginDetail.password);
+    console.log(this.loginDetail.email);
 
 
     this.salesService.SalesLoginService(this.loginDetail).subscribe((data: any) => {
