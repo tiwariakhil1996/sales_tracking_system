@@ -29,7 +29,9 @@ export class LoginComponent implements OnInit {
 
 
   submitLogin() {
-
+    
+    // Encrypt Password
+    this.loginDetail.password = btoa(this.loginDetail.password);
 
     this.adminService.AdminLogin(this.loginDetail).subscribe((data: any) => {
       if (data.Status.code === 0) {

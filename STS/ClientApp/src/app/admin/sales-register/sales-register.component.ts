@@ -96,9 +96,15 @@ export class SalesRegisterComponent implements OnInit {
 
     if (this.register.password === this.register.cpassword) {
 
+
+
       this.user = JSON.parse(localStorage.getItem('adminLogin')) || {};
       this.register.createdby = this.user.id;
       console.log(this.register.createdby);
+
+      // Encrypt Password
+      this.register.password = btoa(this.register.password);
+      this.register.cpassword = btoa(this.register.cpassword);
 
       this.salesService.SalesRegisterService(this.register).subscribe((data: any) => {
         if (data.Status.code === 0) {
@@ -221,5 +227,5 @@ export class SalesRegisterComponent implements OnInit {
     this.router.navigate(['/admin/dashboard'])
   }
 
-  
+
 }

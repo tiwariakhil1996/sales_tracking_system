@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { SalesService } from '../../service/sales.service';
 import { salesregisterModel } from '../../model/sales';
 
-import {ViewChild, ElementRef, NgZone } from '@angular/core';
+import { ViewChild, ElementRef, NgZone } from '@angular/core';
 import { MapsAPILoader, AgmMap } from '@agm/core';
 import { MouseEvent } from '@agm/core';
 import { google } from 'google-maps';
@@ -49,24 +49,24 @@ export class SalesLoginComponent implements OnInit {
 
     this.geocoder = new google.maps.Geocoder;
 
-     this.logout();
+    this.logout();
 
   }
   ngOnInit() {
 
     // setTimeout(() => {
-      navigator.geolocation.getCurrentPosition(position => {
-        console.log(position);
+    navigator.geolocation.getCurrentPosition(position => {
+      console.log(position);
 
-        this.location = position.coords;
-        this.centerlat = this.location.latitude;
-        this.centerlng = this.location.longitude;
-        this.lat = this.location.latitude;
-        this.lng = this.location.longitude;
-        this.geocoder = new google.maps.Geocoder();
+      this.location = position.coords;
+      this.centerlat = this.location.latitude;
+      this.centerlng = this.location.longitude;
+      this.lat = this.location.latitude;
+      this.lng = this.location.longitude;
+      this.geocoder = new google.maps.Geocoder();
 
-       
-      });
+
+    });
     // }, 2000);
 
   }
@@ -74,13 +74,20 @@ export class SalesLoginComponent implements OnInit {
 
   submitLogin() {
     this.loginDetail.latitude = this.lat;
-        this.loginDetail.longitude = this.lng;
+    this.loginDetail.longitude = this.lng;
 
     console.log(this.loginDetail.latitude);
     console.log(this.loginDetail.longitude);
-    
-    
+
+
+    // Encrypt Password
+    this.loginDetail.password = btoa(this.loginDetail.password);
+console.log(this.loginDetail.password );
+console.log(this.loginDetail.email );
+
+
     this.salesService.SalesLoginService(this.loginDetail).subscribe((data: any) => {
+
       if (data.Status.code === 0) {
         localStorage.setItem('salesLogin', JSON.stringify(data.loginDetail[0] || {}));
         // alert('Sales Login Successfully');
@@ -101,8 +108,8 @@ export class SalesLoginComponent implements OnInit {
           timeOut: 2000
         });
       }
-      
-      
+
+
       // else {
       //   this.toastr.warning('Either your username and password didnt matched or This account is temporarily blocked', 'Warning', {
       //     disableTimeOut: false,
@@ -111,24 +118,25 @@ export class SalesLoginComponent implements OnInit {
       // }
     }, (err) => {
     });
-    }
+    // this.loginDetail = new salesregisterModel();
+  }
 
-    logout() {
-      // remove user from local storage to log user out
-      this.loginDetail = JSON.parse(localStorage.getItem('salesLogin')) || {};
-      let id = this.loginDetail.id;
-  
-      this.salesService.SalesLogoutService(id).subscribe((data: any) => {
-        if (data.Status.code === 0) {
-          this.toastr.success('Logged out Successfully', 'Successful', {
-            disableTimeOut: false
-          });
-  
-          localStorage.removeItem('salesLogin');
-        }
+  logout() {
+    // remove user from local storage to log user out
+    this.loginDetail = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    let id = this.loginDetail.id;
+
+    this.salesService.SalesLogoutService(id).subscribe((data: any) => {
+      if (data.Status.code === 0) {
+        this.toastr.success('Logged out Successfully', 'Successful', {
+          disableTimeOut: false
+        });
+
+        localStorage.removeItem('salesLogin');
       }
-      );
     }
+    );
+  }
 
 
 
@@ -136,7 +144,7 @@ export class SalesLoginComponent implements OnInit {
     this.router.navigate(['/sales/register']);
   }
 
-  
+
   forgotPassword() {
     this.router.navigate(['/sales/forgot-password-sales']);
   }

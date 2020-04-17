@@ -25,7 +25,7 @@ namespace STS.DAL
                 TranStatus transaction = new TranStatus();
                 DynamicParameters parameter = new DynamicParameters();
             
-                parameter.Add("@SalesName", model.SalesName);
+                parameter.Add("@SalesName",model.SalesName);
                 parameter.Add("@Email", model.Email);
                 parameter.Add("@Password", model.Password);
                 parameter.Add("@Cpassword", model.Cpassword);
@@ -77,13 +77,6 @@ namespace STS.DAL
             {
                 await connection.OpenAsync();
                 DynamicParameters parameter = new DynamicParameters();
-                //parameter.Add("@ID", model.ID);
-                //parameter.Add("@Image", model.Image);
-                //parameter.Add("@SalesName", model.SalesName);
-                //parameter.Add("@Gender", model.Gender);
-                //parameter.Add("@Mobile", model.Mobile);
-                //parameter.Add("@Adharcard", model.Adharcard);
-                //parameter.Add("@Address", model.Address);
                 parameter.Add("@Email", model.Email);
                 parameter.Add("@Password", model.Password);
                 parameter.Add("@Latitude", model.Latitude);

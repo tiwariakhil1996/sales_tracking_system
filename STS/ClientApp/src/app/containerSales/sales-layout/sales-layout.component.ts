@@ -43,7 +43,7 @@ export class SalesLayoutComponent implements OnInit {
 
   chat = new chatModel();
   chatDetails: chatModel[] = [];
-unreadChats: chatModel[] = [];
+  unreadChats: chatModel[] = [];
   profile_pic = new registerModel();
 
   status = new statusModel();
@@ -83,7 +83,7 @@ unreadChats: chatModel[] = [];
 
   private geoCoder;
 
-unreadmessages: any;
+  unreadmessages: any;
 
   location: Coordinates;
   lat: any;
@@ -145,7 +145,7 @@ unreadmessages: any;
 
     // this.activityList();
     this.newactivityList();
-this.view_unreadChats();
+    this.view_unreadChats();
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.changePassword.id = this.user.id;
     // this.adminname =this.user.createdby;
@@ -199,7 +199,7 @@ this.view_unreadChats();
         if (message.receiverId === this.user.id && message.senderId === this.user.createdby) {
           message.type = 'received';
           this.messages.push(message);
-          this.toastr.show(message.sendername + ' : '+ message.message, 'New Message', {
+          this.toastr.show(message.sendername + ' : ' + message.message, 'New Message', {
             // disableTimeOut: false,
             timeOut: 10000,
             positionClass: 'toast-bottom-right',
@@ -207,14 +207,14 @@ this.view_unreadChats();
             progressBar: true
             // newestOnTop: true  
           });
-                  // this. sendMessage();
+          // this. sendMessage();
         }
       });
     });
   }
 
   view_msg() {
-   this.userchat = JSON.parse(localStorage.getItem('salesLogin')) || {};
+    this.userchat = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.message.receiverId = this.userchat.id;
     this.message.senderId = this.userchat.createdby;
     this.message.status = 1;
@@ -225,34 +225,34 @@ this.view_unreadChats();
           this.chatDetails = data.getchats;
           // console.log(  this.chatDetails);
           this.message = new Message();
-   
+
 
         }
       }
-    });     
+    });
   }
 
-view_unreadChats() {
-  this.userchat = JSON.parse(localStorage.getItem('salesLogin')) || {};
+  view_unreadChats() {
+    this.userchat = JSON.parse(localStorage.getItem('salesLogin')) || {};
     this.message.receiverId = this.userchat.id;
     this.message.senderId = this.userchat.createdby;
 
-     this.chatService.unread_messages(this.message).subscribe((data: any) => {
+    this.chatService.unread_messages(this.message).subscribe((data: any) => {
       if (data.Status.code === 0) {
         if (data.unread_messages) {
           this.unreadChats = data.unread_messages;
-        if(this.unreadChats.length > 0) {
-          this.unreadmessages=this.unreadChats.length ;
-             this.toastr.warning(this.unreadmessages, 'Unread Messages', {
-            timeOut: 50000,
-            positionClass: 'toast-bottom-right',
-              closeButton:true
-          });
-}
+          if (this.unreadChats.length > 0) {
+            this.unreadmessages = this.unreadChats.length;
+            this.toastr.warning(this.unreadmessages, 'Unread Messages', {
+              timeOut: 50000,
+              positionClass: 'toast-bottom-right',
+              closeButton: true
+            });
+          }
         }
       }
-     });
-}
+    });
+  }
   msg_status() {
     this.userchat = JSON.parse(localStorage.getItem('salesLogin')) || {};
     // this.chat.salesId = this.userchat.id;
@@ -274,7 +274,7 @@ view_unreadChats() {
     });
   }
 
-   // view_msg() {
+  // view_msg() {
   //   this.userchat = JSON.parse(localStorage.getItem('salesLogin')) || {};
   //   this.chat.salesId = this.userchat.id;
   //   this.chat.adminId = this.userchat.createdby;
@@ -292,10 +292,10 @@ view_unreadChats() {
   //   });
   // }
 
- onDelete(id: number) {
+  onDelete(id: number) {
     this.userchat = JSON.parse(localStorage.getItem('salesLogin')) || {};
-    this.chat.modifiedby=this.userchat.id;
-    this.chatService.deleteMsg(id,this.chat).subscribe(data => {
+    this.chat.modifiedby = this.userchat.id;
+    this.chatService.deleteMsg(id, this.chat).subscribe(data => {
       this.view_msg();
     });
   }
@@ -412,6 +412,11 @@ view_unreadChats() {
 
     if (this.changePassword.newpassword === this.changePassword.confirmpassword) {
 
+      // Encrypt Password
+      this.changePassword.oldpassword = btoa(this.changePassword.oldpassword);
+      this.changePassword.newpassword = btoa(this.changePassword.newpassword);
+      this.changePassword.confirmpassword = btoa(this.changePassword.confirmpassword);
+
       this.salesService.changePassword(id, this.changePassword).subscribe((data: any) => {
         if (data.Status.code === 0) {
           this.toastr.success('Password changed successfully', 'Successful', {
@@ -419,8 +424,15 @@ view_unreadChats() {
           });
           this.changePassword = new changePasswordModel();
 
-        } else {
+        } else  if (data.Status.code === 1) {
           this.toastr.warning('Old Password is incorrect', 'Warning', {
+            disableTimeOut: false,
+            timeOut: 2000
+          });
+        }
+        else
+        if (data.Status.code === 2) {
+          this.toastr.warning('Enter different password', 'Warning', {
             disableTimeOut: false,
             timeOut: 2000
           });
@@ -590,7 +602,7 @@ view_unreadChats() {
     // this.view_msg()
   }
 
- 
+
 
   getuserProfile() {
     this.user = JSON.parse(localStorage.getItem('salesLogin')) || {};
