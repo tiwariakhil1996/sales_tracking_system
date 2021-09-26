@@ -610,6 +610,7 @@ export class SalesLayoutComponent implements OnInit {
 
     // To display image in update profile modal
     this.profile_pic.image = this.user.image;
+    this.username = this.user.salesName;
   }
 
   get_admin_IsOnline() {

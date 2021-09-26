@@ -476,5 +476,7 @@ export class DefaultLayoutComponent implements OnInit {
 
     // To display image in update profile modal
     this.profile_pic.image = this.register.image;
+    this.username = this.register.username;
+
   }
 }
