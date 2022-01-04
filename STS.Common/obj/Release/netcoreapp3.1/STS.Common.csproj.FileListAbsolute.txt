@@ -1,0 +1,9 @@
+C:\sales_tracking_system\trainee_salestrackingsystem\STS.Common\bin\Release\netcoreapp3.1\STS.Common.deps.json
+C:\sales_tracking_system\trainee_salestrackingsystem\STS.Common\bin\Release\netcoreapp3.1\STS.Common.dll
+C:\sales_tracking_system\trainee_salestrackingsystem\STS.Common\bin\Release\netcoreapp3.1\STS.Common.pdb
+C:\sales_tracking_system\trainee_salestrackingsystem\STS.Common\obj\Release\netcoreapp3.1\STS.Common.csprojAssemblyReference.cache
+C:\sales_tracking_system\trainee_salestrackingsystem\STS.Common\obj\Release\netcoreapp3.1\STS.Common.AssemblyInfoInputs.cache
+C:\sales_tracking_system\trainee_salestrackingsystem\STS.Common\obj\Release\netcoreapp3.1\STS.Common.AssemblyInfo.cs
+C:\sales_tracking_system\trainee_salestrackingsystem\STS.Common\obj\Release\netcoreapp3.1\STS.Common.csproj.CoreCompileInputs.cache
+C:\sales_tracking_system\trainee_salestrackingsystem\STS.Common\obj\Release\netcoreapp3.1\STS.Common.dll
+C:\sales_tracking_system\trainee_salestrackingsystem\STS.Common\obj\Release\netcoreapp3.1\STS.Common.pdb

@@ -1,0 +1,342 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS\\STS.csproj": {}
+  },
+  "projects": {
+    "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.BLL\\STS.BLL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.BLL\\STS.BLL.csproj",
+        "projectName": "STS.BLL",
+        "projectPath": "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.BLL\\STS.BLL.csproj",
+        "packagesPath": "C:\\Users\\HP PC\\.nuget\\packages\\",
+        "outputPath": "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.BLL\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\HP PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.Common\\STS.Common.csproj": {
+                "projectPath": "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.Common\\STS.Common.csproj"
+              },
+              "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.DAL\\STS.DAL.csproj": {
+                "projectPath": "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.DAL\\STS.DAL.csproj"
+              },
+              "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.Model\\STS.Model.csproj": {
+                "projectPath": "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.Model\\STS.Model.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.Common\\STS.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.Common\\STS.Common.csproj",
+        "projectName": "STS.Common",
+        "projectPath": "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.Common\\STS.Common.csproj",
+        "packagesPath": "C:\\Users\\HP PC\\.nuget\\packages\\",
+        "outputPath": "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.Common\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\HP PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.DAL\\STS.DAL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.DAL\\STS.DAL.csproj",
+        "projectName": "STS.DAL",
+        "projectPath": "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.DAL\\STS.DAL.csproj",
+        "packagesPath": "C:\\Users\\HP PC\\.nuget\\packages\\",
+        "outputPath": "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.DAL\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\HP PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.Common\\STS.Common.csproj": {
+                "projectPath": "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.Common\\STS.Common.csproj"
+              },
+              "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.Model\\STS.Model.csproj": {
+                "projectPath": "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.Model\\STS.Model.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.0.30, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.Model\\STS.Model.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.Model\\STS.Model.csproj",
+        "projectName": "STS.Model",
+        "projectPath": "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.Model\\STS.Model.csproj",
+        "packagesPath": "C:\\Users\\HP PC\\.nuget\\packages\\",
+        "outputPath": "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.Model\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\HP PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.Common\\STS.Common.csproj": {
+                "projectPath": "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.Common\\STS.Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS\\STS.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS\\STS.csproj",
+        "projectName": "STS",
+        "projectPath": "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS\\STS.csproj",
+        "packagesPath": "C:\\Users\\HP PC\\.nuget\\packages\\",
+        "outputPath": "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\HP PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.BLL\\STS.BLL.csproj": {
+                "projectPath": "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.BLL\\STS.BLL.csproj"
+              },
+              "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.Common\\STS.Common.csproj": {
+                "projectPath": "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.Common\\STS.Common.csproj"
+              },
+              "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.Model\\STS.Model.csproj": {
+                "projectPath": "C:\\sales_tracking_system\\trainee_salestrackingsystem\\STS.Model\\STS.Model.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[3.1.3, )"
+            },
+            "Microsoft.AspNetCore.SpaServices.Extensions": {
+              "target": "Package",
+              "version": "[3.1.3, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[3.1.3, )"
+            },
+            "Microsoft.TypeScript.MSBuild": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.8.3, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
